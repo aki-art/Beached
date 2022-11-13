@@ -1,12 +1,12 @@
 elements:
-    - elementId: ZirconiumOre
+    - elementId: Zircon
       specificHeatCapacity: 0.129
       thermalConductivity: 7.97
       solidSurfaceAreaMultiplier: 1
       liquidSurfaceAreaMultiplier: 1
       gasSurfaceAreaMultiplier: 1
       strength: 0.7
-      highTemp: 544.7
+      highTemp: 2125 # 1852 °C
       highTempTransitionTarget: ZirconiumMolten
       defaultTemperature: 300
       defaultMass: 870
@@ -33,7 +33,7 @@ elements:
       liquidSurfaceAreaMultiplier: 1
       gasSurfaceAreaMultiplier: 1
       strength: 0.7
-      highTemp: 544.7
+      highTemp: 2125 # 1852 °C
       highTempTransitionTarget: ZirconiumMolten
       defaultTemperature: 300
       defaultMass: 870
@@ -43,10 +43,9 @@ elements:
       lightAbsorptionFactor: 1
       radiationAbsorptionFactor: 0.35
       radiationPer1000Mass: 0
-      materialCategory: Metal
+      materialCategory: RefinedMetal
       tags:
       - BuildableAny
-      - Ore
       buildMenuSort: 3
       isDisabled: false
       state: Solid
@@ -64,8 +63,8 @@ elements:
       solidSurfaceAreaMultiplier: 1
       liquidSurfaceAreaMultiplier: 25
       gasSurfaceAreaMultiplier: 1
-      lowTemp: 544.7
-      highTemp: 2743.15
+      lowTemp: 2125 # 1852 °C
+      highTemp: 4650 # 4377 °C
       lowTempTransitionTarget: Zirconium
       highTempTransitionTarget: ZirconiumGas
       defaultTemperature: 2000

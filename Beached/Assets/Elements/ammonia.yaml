@@ -35,7 +35,7 @@ elements:
       gasSurfaceAreaMultiplier: 1
       lowTemp: 195.42
       highTemp: 239.81
-      lowTempTransitionTarget: AmmoniaFrozen
+      lowTempTransitionTarget: FrozenAmmonia
       highTempTransitionTarget: Ammonia
       defaultTemperature: 210
       defaultMass: 300
@@ -50,7 +50,7 @@ elements:
       localizationID: STRINGS.ELEMENTS.AMMONIALIQUID.NAME
   
       dlcId: ""
-    - elementId: AmmoniaFrozen
+    - elementId: FrozenAmmonia
       specificHeatCapacity: 1.01
       thermalConductivity: 1
       solidSurfaceAreaMultiplier: 1

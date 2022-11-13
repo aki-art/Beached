@@ -1,5 +1,5 @@
 elements:
-    - elementId: BismuthOre
+    - elementId: Bismuthinite
       specificHeatCapacity: 0.129
       thermalConductivity: 7.97
       solidSurfaceAreaMultiplier: 1
@@ -43,10 +43,9 @@ elements:
       lightAbsorptionFactor: 1
       radiationAbsorptionFactor: 0.35
       radiationPer1000Mass: 0
-      materialCategory: Metal
+      materialCategory: RefinedMetal
       tags:
       - BuildableAny
-      - Ore
       buildMenuSort: 3
       isDisabled: false
       state: Solid

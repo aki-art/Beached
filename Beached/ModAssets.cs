@@ -42,8 +42,9 @@ namespace Beached
             public static Color mucusUi = new Color32(170, 205, 170, 255);
             public static Color murkyBrine = new Color32(60, 61, 55, 255);
             public static Color mycelium = Util.ColorFromHex("c9bda6");
+            public static Color pearl = Util.ColorFromHex("c9bda6");
             public static Color root = Util.ColorFromHex("3a3430");
-            public static Color saltyOxygen = new Color32(205, 170, 170, 45);
+            public static Color saltyOxygen = new Color32(205, 170, 170, 120);
             public static Color selenite = Util.ColorFromHex("ffd1dc");
             public static Color sulfurousWater = Util.ColorFromHex("d5ff2d");
             public static Color zinc = new Color32(30, 170, 170, 255);
@@ -58,6 +59,7 @@ namespace Beached
             public static Color limpetEggs = new Color32(255, 225, 185, 255);
 
             public static Color zirconSpecular = new Color(2f, 0, 0);
+            public static Color zincSpecular = new Color(0f, 1.2f, 1.7f);
 
             public class Zones
             {

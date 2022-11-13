@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Klei.AI;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -21,6 +22,12 @@ namespace Beached.Utils
         public static Substance CreateSubstance(string id, bool specular, string anim, Element.State state, Color color, Material material, Color uiColor, Color conduitColor, Color? specularColor, string normal)
         {
             var animFile = Assets.Anims.Find(a => a.name == anim);
+
+            if(animFile == null)
+            {
+                animFile = Assets.Anims.Find(a => a.name == "glass_kanim");
+            }
+
             var newMaterial = new Material(material);
 
             if (state == Element.State.Solid)
@@ -54,6 +61,19 @@ namespace Beached.Utils
             if (ModAssets.TryLoadTexture(path, out var tex))
             {
                 material.SetTexture(property, tex);
+            }
+        }
+
+        public static void AddModifier(Element element, float decor, float overHeat)
+        {
+            if (decor != 0)
+            {
+                element.attributeModifiers.Add(new AttributeModifier(Db.Get().BuildingAttributes.Decor.Id, decor, element.name, true));
+            }
+
+            if (overHeat != 0)
+            {
+                element.attributeModifiers.Add(new AttributeModifier(Db.Get().BuildingAttributes.OverheatTemperature.Id, overHeat, element.name, false));
             }
         }
     }

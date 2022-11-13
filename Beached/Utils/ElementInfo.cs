@@ -58,7 +58,9 @@ namespace Beached.Utils
 
         public static ElementInfo Solid(string id, Color color)
         {
-            return new ElementInfo(id, "glass_kanim", Element.State.Solid, color);
+            var anim = id.ToLowerInvariant() + "_kanim";
+            Log.Debug("ANIM NAME " + anim);
+            return new ElementInfo(id, anim, Element.State.Solid, color);
         }
 
         public static ElementInfo Liquid(string id, Color color)

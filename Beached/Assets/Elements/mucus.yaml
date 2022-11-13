@@ -12,7 +12,7 @@ elements:
       gasSurfaceAreaMultiplier: 1
       lowTemp: 252.5
       highTemp: 372.5
-      lowTempTransitionTarget: MucusFrozen
+      lowTempTransitionTarget: FrozenMucus
       highTempTransitionTarget: Steam
       highTempTransitionOreId: SlimeMold
       highTempTransitionOreMassConversion: 0.3
@@ -35,7 +35,7 @@ elements:
         - elementID: DirtyWater
           percentage: 0.2
   
-    - elementId: MucusFrozen
+    - elementId: FrozenMucus
       specificHeatCapacity: 3.05
       thermalConductivity: 1
       solidSurfaceAreaMultiplier: 1
