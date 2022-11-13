@@ -1,0 +1,27 @@
+elements:
+    - elementId: SiltStone
+      specificHeatCapacity: 0.8
+      thermalConductivity: 2.9
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 1
+      gasSurfaceAreaMultiplier: 1
+      strength: 0.5
+      highTemp: 1200
+      highTempTransitionTarget: Magma
+      defaultTemperature: 300
+      defaultMass: 1000
+      maxMass: 1840
+      hardness: 10
+      molarMass: 50
+      lightAbsorptionFactor: 1
+      radiationAbsorptionFactor: 0.7
+      radiationPer1000Mass: 0
+      materialCategory: BuildableRaw
+      tags:
+      - Plumbable
+      - BuildableAny
+      buildMenuSort: 1
+      isDisabled: false
+      state: Solid
+      localizationID: STRINGS.ELEMENTS.SILTSTONE.NAME
+      dlcId: ""

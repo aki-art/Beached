@@ -1,0 +1,26 @@
+elements:
+    - elementId: SaltyOxygen
+      specificHeatCapacity: 1.01
+      thermalConductivity: 0.024
+      solidSurfaceAreaMultiplier: 25
+      liquidSurfaceAreaMultiplier: 1
+      gasSurfaceAreaMultiplier: 1
+      flow: 0.12
+      lowTemp: 250.65 # -22.5C, same as Brine
+      lowTempTransitionTarget: Oxygen
+      lowTempTransitionOreId: BrineIce
+      lowTempTransitionOreMassConversion: 0.1
+      defaultTemperature: 300
+      defaultPressure: 101.3
+      molarMass: 15.9994
+      toxicity: 0
+      lightAbsorptionFactor: 0.1
+      radiationAbsorptionFactor: 0.08
+      radiationPer1000Mass: 0
+      materialCategory: Breathable
+      tags:
+      isDisabled: false
+      state: Gas
+      localizationID: Beached.STRINGS.ELEMENTS.SALTYOXYGEN.NAME
+      dlcId: ""
+    

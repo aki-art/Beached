@@ -1,0 +1,64 @@
+elements:
+    - elementId: Mucus
+      maxMass: 100
+      liquidCompression: 1.01
+      speed: 1
+      minHorizontalFlow: 10
+      minVerticalFlow: 10
+      specificHeatCapacity: 1.55
+      thermalConductivity: 0.45
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 25
+      gasSurfaceAreaMultiplier: 1
+      lowTemp: 252.5
+      highTemp: 372.5
+      lowTempTransitionTarget: MucusFrozen
+      highTempTransitionTarget: Steam
+      highTempTransitionOreId: SlimeMold
+      highTempTransitionOreMassConversion: 0.3
+      defaultTemperature: 300
+      defaultMass: 100
+      molarMass: 10
+      toxicity: 0
+      lightAbsorptionFactor: 0.1
+      radiationAbsorptionFactor: 0.6
+      radiationPer1000Mass: 0
+      isDisabled: false
+      state: Liquid
+      localizationID: Beached.STRINGS.ELEMENTS.MUCUS.NAME
+      dlcId: ""
+      composition:
+        - elementID: CrudeOil
+          percentage: 0.5
+        - elementID: SlimeMold
+          percentage: 0.3
+        - elementID: DirtyWater
+          percentage: 0.2
+  
+    - elementId: MucusFrozen
+      specificHeatCapacity: 3.05
+      thermalConductivity: 1
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 1
+      gasSurfaceAreaMultiplier: 1
+      strength: 1
+      highTemp: 252.5
+      highTempTransitionTarget: Mucus
+      defaultTemperature: 230
+      defaultMass: 500
+      maxMass: 800
+      hardness: 10
+      molarMass: 25
+      lightAbsorptionFactor: 0.8
+      radiationAbsorptionFactor: 0.75
+      radiationPer1000Mass: 0
+      materialCategory: Liquifiable
+      tags:
+      - IceOre
+      - Mixture
+      - BuildableAny
+      buildMenuSort: 5
+      isDisabled: false
+      state: Solid
+      localizationID: Beached.STRINGS.ELEMENTS.MUCUSFROZEN.NAME
+      dlcId: ""
