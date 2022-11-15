@@ -1,4 +1,5 @@
-﻿using Klei.AI;
+﻿using HarmonyLib;
+using Klei.AI;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Beached.Utils
     {
         public static readonly Dictionary<SimHashes, string> SimHashNameLookup = new Dictionary<SimHashes, string>();
         public static readonly Dictionary<string, object> ReverseSimHashNameLookup = new Dictionary<string, object>();
-
+        public static readonly List<ElementInfo> elements = new List<ElementInfo>();
         public static SimHashes RegisterSimHash(string name)
         {
             var simHash = (SimHashes)Hash.SDBMLower(name);
@@ -19,7 +20,7 @@ namespace Beached.Utils
             return simHash;
         }
 
-        public static Substance CreateSubstance(string id, bool specular, string anim, Element.State state, Color color, Material material, Color uiColor, Color conduitColor, Color? specularColor, string normal)
+        public static Substance CreateSubstance(SimHashes id, bool specular, string anim, Element.State state, Color color, Material material, Color uiColor, Color conduitColor, Color? specularColor, string normal)
         {
             var animFile = Assets.Anims.Find(a => a.name == anim);
 
@@ -32,11 +33,11 @@ namespace Beached.Utils
 
             if (state == Element.State.Solid)
             {
-                SetTexture(newMaterial, id.ToLowerInvariant(), "_MainTex");
+                SetTexture(newMaterial, id.ToString().ToLowerInvariant(), "_MainTex");
 
                 if (specular)
                 {
-                    SetTexture(newMaterial, id.ToLowerInvariant() + "_spec", "_ShineMask");
+                    SetTexture(newMaterial, id.ToString().ToLowerInvariant() + "_spec", "_ShineMask");
 
                     if (specularColor.HasValue)
                     {
@@ -50,7 +51,11 @@ namespace Beached.Utils
                 }
             }
 
-            return ModUtil.CreateSubstance(id.ToString(), state, animFile, newMaterial, color, uiColor, conduitColor);
+            var substance = ModUtil.CreateSubstance(id.ToString(), state, animFile, newMaterial, color, uiColor, conduitColor);
+
+            //Traverse.Create(substance).Field("nameTag").SetValue(TagManager.Create(id, id));
+
+            return substance;
         }
 
         // TODO: load from an assetbundle later
@@ -74,6 +79,20 @@ namespace Beached.Utils
             if (overHeat != 0)
             {
                 element.attributeModifiers.Add(new AttributeModifier(Db.Get().BuildingAttributes.OverheatTemperature.Id, overHeat, element.name, false));
+            }
+        }
+
+        // The game incorrectly assigns the display name to elements not in the original SimHashes table,
+        // so this needs to be changed to the actual ID. 
+        public static void FixTags()
+        {
+            var f_nameTag = AccessTools.Field(typeof(Substance), "nameTag");
+
+            foreach (var elem in elements)
+            {
+                var substance = elem.Get().substance;
+                Log.Debug(elem.SimHash.ToString());
+                f_nameTag.SetValue(substance, TagManager.Create(elem.SimHash.ToString()));
             }
         }
     }

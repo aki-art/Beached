@@ -1,6 +1,9 @@
 ﻿using Beached.Content;
 using Beached.Content.ModDb;
+using Beached.Content.Scripts;
 using HarmonyLib;
+using UnityEngine;
+
 namespace Beached.Patches
 {
     public class SteppedInMonitorPatch
@@ -25,6 +28,20 @@ namespace Beached.Patches
                 smi.effects.Remove(BEffects.MUCUS_SOAKED);
 
                 return true;
+            }
+        }
+
+        // TODO: possibly a transpiler for speed
+        [HarmonyPatch(typeof(SteppedInMonitor), "IsOnCarpet")]
+        public class SteppedInMonitor_IsOnCarpet_Patch
+        {
+            public static void Postfix(ref bool __result, SteppedInMonitor.Instance smi)
+            {
+                if(!__result)
+                {
+                    var cell = Grid.CellBelow(Grid.PosToCell(smi));
+                    __result = Grid.IsValidCell(cell) && Grid.Element[cell].id == Elements.Moss;
+                }
             }
         }
     }

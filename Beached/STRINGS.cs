@@ -511,6 +511,12 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
+            public class MOSS
+            {
+                public static LocString NAME = FormatAsLink("Moss");
+                public static LocString DESC = "TODO";
+            }
+
             public class MUCUS
             {
                 public static LocString NAME = FormatAsLink("Mucus");

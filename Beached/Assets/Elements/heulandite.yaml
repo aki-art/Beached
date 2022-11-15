@@ -1,30 +1,30 @@
 elements:
-# called Zeolite in game, Zeolite being the mineral group Heulandite belongs to,
-# but this allows for wiggleroom in uses, and it's eaiser to remember
-  - elementId: Heulandite 
-    specificHeatCapacity: 0.83
+# called Zeolite in game, which is the mineral group Heulandite belongs to,
+# but calling it Zeolite allows for wiggleroom in uses, and it's eaiser to remember
+  - elementId: Heulandite
+    specificHeatCapacity: 0.2
     thermalConductivity: 2
     solidSurfaceAreaMultiplier: 1
     liquidSurfaceAreaMultiplier: 1
     gasSurfaceAreaMultiplier: 1
     strength: 0.2
-    highTemp: 1115 # 842C
+    highTemp: 1200
     highTempTransitionTarget: Magma
-    highTempTransitionOreId: Calcium
-    highTempTransitionOreMassConversion: 0.3
     defaultTemperature: 300
-    defaultMass: 200
-    maxMass: 300
+    defaultMass: 1840
+    maxMass: 1840
     hardness: 2
     molarMass: 50
     lightAbsorptionFactor: 1
     radiationAbsorptionFactor: 0.7
     radiationPer1000Mass: 0
+    materialCategory: BuildableRaw
     tags:
-    - Oxidizer
-    materialCategory: Agriculture
-    buildMenuSort: 5
+    - Plumbable
+    - Crushable
+    - BuildableAny
+    buildMenuSort: 2
     isDisabled: false
     state: Solid
-    localizationID: Beached.STRINGS.ELEMENTS.HEULANDITE.NAME
+    localizationID: STRINGS.ELEMENTS.HEULANDITE.NAME
     dlcId: ""

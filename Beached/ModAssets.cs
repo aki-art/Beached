@@ -36,7 +36,9 @@ namespace Beached
             public static Color bismuthOre = new Color32(117, 166, 108, 255);
             public static Color calcium = Color.white;
             public static Color gravel = new Color32(100, 100, 100, 255);
+            public static Color iridium = Util.ColorFromHex("b6b2fb");
             public static Color moltenBismuth = new Color32(117, 166, 108, 255);
+            public static Color moss = Util.ColorFromHex("528b35");
             public static Color mucus = new Color32(170, 205, 170, 255);
             public static Color mucusConduit = new Color32(170, 205, 170, 255);
             public static Color mucusUi = new Color32(170, 205, 170, 255);
@@ -54,12 +56,12 @@ namespace Beached
             public static Color water = Util.ColorFromHex("39a0f7");
             public static Color saltWater = Util.ColorFromHex("7fe4ff");
 
+            public static Color zirconSpecular = new Color(2f, 0, 0);
+            public static Color zincSpecular = new Color(0f, 1.2f, 1.7f);
+
             // germs
             public static Color plankton = new Color32(0, 0, 255, 255);
             public static Color limpetEggs = new Color32(255, 225, 185, 255);
-
-            public static Color zirconSpecular = new Color(2f, 0, 0);
-            public static Color zincSpecular = new Color(0f, 1.2f, 1.7f);
 
             public class Zones
             {
@@ -121,6 +123,29 @@ namespace Beached
                 Log.Warning("Could not read file: " + e);
                 return null;
             }
+        }
+
+        public static void SaveImage(Texture textureToWrite, string name)
+        {
+            var texture2D = new Texture2D(textureToWrite.width, textureToWrite.height, TextureFormat.RGBA32, false);
+
+            var renderTexture = new RenderTexture(textureToWrite.width, textureToWrite.height, 32);
+            Graphics.Blit(textureToWrite, renderTexture);
+
+            texture2D.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+            texture2D.Apply();
+
+            var bytes = texture2D.EncodeToPNG();
+            var dirPath = Mod.folder;
+
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+
+            File.WriteAllBytes(Path.Combine(dirPath, name) + System.DateTime.Now + ".png", bytes);
+
+            Log.Debug("Saved to " + dirPath);
         }
     }
 }

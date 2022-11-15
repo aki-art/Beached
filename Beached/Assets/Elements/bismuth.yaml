@@ -15,7 +15,7 @@ elements:
       molarMass: 196.966569
       lightAbsorptionFactor: 1
       radiationAbsorptionFactor: 0.35
-      radiationPer1000Mass: 0
+      radiationPer1000Mass: 0.000001
       materialCategory: Metal
       tags:
       - BuildableAny
@@ -42,7 +42,7 @@ elements:
       molarMass: 196.966569
       lightAbsorptionFactor: 1
       radiationAbsorptionFactor: 0.35
-      radiationPer1000Mass: 0
+      radiationPer1000Mass: 0.01
       materialCategory: RefinedMetal
       tags:
       - BuildableAny

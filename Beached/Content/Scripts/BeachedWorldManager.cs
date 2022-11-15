@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Beached.Cmps;
+using Beached.Utils;
+using HarmonyLib;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
@@ -27,13 +32,22 @@ namespace Beached.Content.Scripts
         {
             IsBeachedContentActive = true; // TODO: actually detect world type
 
-            if(IsBeachedContentActive && !wasOnBeachedWorld)
+            if(IsBeachedContentActive)
             {
-                SetDbEntries(true);
+                if(!wasOnBeachedWorld)
+                {
+                    SetDbEntries(true);
+                }
+
                 wasOnBeachedWorld = true;
+                ElementInteractions.Instance.enabled = true;
+            }
+            else
+            {
+                ElementInteractions.Instance.enabled = false;
             }
 
-            Debug.Log("SAVEGAME READY");
+            Debug.Log("SAVEGAME READY " + IsBeachedContentActive);
         }
 
         private void SetDbEntries(bool isBeached)
