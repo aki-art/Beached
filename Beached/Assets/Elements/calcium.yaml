@@ -7,7 +7,7 @@ elements:
       gasSurfaceAreaMultiplier: 1
       strength: 0.7
       highTemp: 1115 # 842C
-      highTempTransitionTarget: CalciumMolten
+      highTempTransitionTarget: MoltenCalcium
       defaultTemperature: 300
       defaultMass: 870
       maxMass: 9970
@@ -25,7 +25,7 @@ elements:
       localizationID: Beached.STRINGS.ELEMENTS.CALCIUM.NAME
       dlcId: ""
       
-    - elementId: CalciumMolten
+    - elementId: MoltenCalcium
       maxMass: 7870
       liquidCompression: 1.01
       speed: 100
@@ -64,7 +64,7 @@ elements:
       gasSurfaceAreaMultiplier: 1
       flow: 0.1
       lowTemp: 2743.15
-      lowTempTransitionTarget: CalciumMolten
+      lowTempTransitionTarget: MoltenCalcium
       defaultTemperature: 3200
       defaultPressure: 202
       molarMass: 63.546

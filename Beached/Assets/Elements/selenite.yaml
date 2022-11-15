@@ -7,7 +7,7 @@ elements:
     gasSurfaceAreaMultiplier: 1
     strength: 2
     highTemp: 1560 # 2349C
-    highTempTransitionTarget: BerylliumMolten
+    highTempTransitionTarget: MoltenCalcium
     defaultTemperature: 300 # 26.85
     defaultMass: 700
     maxMass: 1840
