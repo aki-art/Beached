@@ -22,7 +22,6 @@ namespace Beached.Content
         public static ElementInfo Calcium = ElementInfo.Solid("Calcium", ModAssets.Colors.calcium);
         public static ElementInfo CalciumGas = ElementInfo.Gas("CalciumGas", ModAssets.Colors.calcium);
         public static ElementInfo CalciumMolten = ElementInfo.Liquid("CalciumMolten", ModAssets.Colors.calcium);
-        public static ElementInfo CalciumOre = ElementInfo.Solid("CalciumOre", ModAssets.Colors.calcium);
         public static ElementInfo Gravel = ElementInfo.Solid("Gravel", ModAssets.Colors.gravel);
         public static ElementInfo Heulandite = ElementInfo.Solid("Heulandite", ModAssets.Colors.zeolite);
         public static ElementInfo Iridium = ElementInfo.Solid("Iridium", ModAssets.Colors.iridium);
@@ -66,7 +65,6 @@ namespace Beached.Content
                 Bismuth.CreateSubstance(true, refined),
                 BismuthOre.CreateSubstance(true, ore),
                 Calcium.CreateSubstance(true, refined),
-                CalciumOre.CreateSubstance(true, ore),
                 Pearl.CreateSubstance(true, gem),
                 SaltyOxygen.CreateSubstance(ModAssets.Colors.mucusUi, ModAssets.Colors.mucusConduit),
                 Selenite.CreateSubstance(true, gem),

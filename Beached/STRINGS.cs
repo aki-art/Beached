@@ -477,7 +477,7 @@ namespace Beached
 
             public class CALCIUM
             {
-                public static LocString NAME = FormatAsLink("Calcium", Elements.CalciumOre.ToString());
+                public static LocString NAME = FormatAsLink("Calcium", Elements.Calcium.ToString());
                 public static LocString DESC = "TODO";
             }
 
@@ -490,12 +490,6 @@ namespace Beached
             public class CALCIUMMOLTEN
             {
                 public static LocString NAME = FormatAsLink("Molten Calcium", Elements.CalciumMolten.ToString());
-                public static LocString DESC = "TODO";
-            }
-
-            public class CALCIUMORE
-            {
-                public static LocString NAME = FormatAsLink("Calcium Ore", Elements.CalciumOre.ToString());
                 public static LocString DESC = "TODO";
             }
 
