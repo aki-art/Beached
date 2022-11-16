@@ -1,4 +1,5 @@
-﻿using KSerialization;
+﻿using Beached.Utils;
+using KSerialization;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +28,8 @@ namespace Beached.Content.Scripts
         [SerializeField]
         public bool drawDebugLines = true;
 
-        private LineRenderer debugLineRenderer;
+        private LineRenderer transformLineRenderer;
+        private LineRenderer checkLineRenderer;
 
         private static Vector3 leftOffset = new Vector3(-0.5f, 0.5f);
         private static Vector3 rightOffset = new Vector3(0.5f, 0.5f);
@@ -92,20 +94,25 @@ namespace Beached.Content.Scripts
         {
             if (drawDebugLines)
             {
-                if (debugLineRenderer == null)
+                if (transformLineRenderer == null)
                 {
                     SetupDebugLineRenderer();
                 }
 
-                debugLineRenderer.positionCount = 4;
-                debugLineRenderer.SetPositions(new[]
+                transformLineRenderer.positionCount = 2;
+                transformLineRenderer.SetPositions(new[]
                 {
-                    startPoint,
-                    new Vector3(testX, testY),
                     transform.position,
                     new Vector3(
                         startPoint.x + length * Mathf.Cos(rad),
                         startPoint.y + length * Mathf.Sin(rad))
+                });
+
+                checkLineRenderer.positionCount = 2;
+                checkLineRenderer.SetPositions(new[]
+                {
+                    startPoint,
+                    new Vector3(testX + 0.5f, testY + 0.5f),
                 });
             }
         }
@@ -119,31 +126,21 @@ namespace Beached.Content.Scripts
                 RotateRandomly();
             }
 
-            SetFoundation(foundation);
-
+            //SetFoundation(foundation);
             GrowToRandomLength(); // world spawn only
 
         }
 
         private void SetupDebugLineRenderer()
         {
-            debugLineRenderer = gameObject.AddComponent<LineRenderer>();
-
-            debugLineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-            debugLineRenderer.startColor = Color.green;
-            debugLineRenderer.endColor = Color.red;
-            debugLineRenderer.startWidth = debugLineRenderer.endWidth = 0.1f;
-            debugLineRenderer.positionCount = 2;
-
-            debugLineRenderer.GetComponent<LineRenderer>().material.renderQueue = RenderQueues.Liquid;
+            transformLineRenderer = ModDebug.AddSimpleLineRenderer(transform, Color.green, Color.red);
+            checkLineRenderer = ModDebug.AddSimpleLineRenderer(transform, Color.blue, Color.yellow);
 
             kbac.TintColour = new Color(1, 1, 1, 0.5f);
         }
 
         public void SetRotation(float angle)
         {
-            transform.Rotate(Vector3.forward, angle);
-            
             switch (foundation)
             {
                 case Direction.Down:
@@ -160,7 +157,10 @@ namespace Beached.Content.Scripts
                     break;
             }
 
-            kbac.Offset = originOffset;
+            transform.position += originOffset;
+            transform.Rotate(Vector3.forward, angle);
+
+            //kbac.Offset = originOffset;
             rotation = angle;
             rotationSet = true;
         }
@@ -193,6 +193,7 @@ namespace Beached.Content.Scripts
                     angle = 90f;
                     break;
             }
+
             angle += Random.Range(-45f, 45f);
             angle -= 90f;
 
@@ -211,7 +212,7 @@ namespace Beached.Content.Scripts
                 if(Grid.IsSolidCell(cell))
                 {
                     SetRotation(GetGrowthDirection(direction));
-                    SetFoundation(direction);
+                    //SetFoundation(direction);
 
                     return;
                 }
@@ -222,7 +223,7 @@ namespace Beached.Content.Scripts
 
         private void SetFoundation(Direction direction)
         {
-            foundation = direction;
+/*            foundation = direction;
             var offset = CellOffset.none;
 
             switch (direction)
@@ -241,7 +242,7 @@ namespace Beached.Content.Scripts
                     break;
             }
 
-            foundationMonitor.SetFoundationAndStartMonitoring(offset);
+            foundationMonitor.SetFoundationAndStartMonitoring(offset);*/
         }
     }
 }
