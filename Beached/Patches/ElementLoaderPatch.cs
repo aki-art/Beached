@@ -41,6 +41,14 @@ namespace Beached.Patches
                     {
                         elem.highTempTransitionTarget = SimHashes.Resin.ToString();
                     } 
+                    else if(elem.elementId == SimHashes.Diamond.ToString())
+                    {
+                        elem.materialCategory = BTags.MaterialCategories.Crystal.ToString();
+                    }
+                    else if (elem.elementId == SimHashes.Katairite.ToString())
+                    {
+                        elem.materialCategory = BTags.MaterialCategories.Crystal.ToString();
+                    }
                     // change Lime's transition target to Calcium
                     // TODO: user setting
                     else if(elem.elementId == SimHashes.Lime.ToString())

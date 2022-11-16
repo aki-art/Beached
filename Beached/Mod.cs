@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Beached.Content;
+using HarmonyLib;
 using KMod;
 using System.IO;
 using System.Reflection;
@@ -14,6 +15,8 @@ namespace Beached
         public override void OnLoad(Harmony harmony)
         {
             base.OnLoad(harmony);
+
+            BTags.OnModLoad();
         }
     }
 }

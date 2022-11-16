@@ -744,6 +744,7 @@ namespace Beached
             public class TAGS
             {
                 public static LocString BEACHED_CORAL = "Coral";
+                public static LocString BEACHED_CRYSTAL = "Crystal";
             }
         }
 

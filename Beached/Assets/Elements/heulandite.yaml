@@ -18,11 +18,12 @@ elements:
     lightAbsorptionFactor: 1
     radiationAbsorptionFactor: 0.7
     radiationPer1000Mass: 0
-    materialCategory: BuildableRaw
+    materialCategory: Beached_Crystal
     tags:
     - Plumbable
     - Crushable
     - BuildableAny
+    - BuildableRaw
     buildMenuSort: 2
     isDisabled: false
     state: Solid

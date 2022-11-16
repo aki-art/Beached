@@ -9,6 +9,9 @@ namespace Beached.Content.Scripts
         [MyCmpReq]
         private KBatchedAnimController kbac;
 
+        [MyCmpGet]
+        private CrystalFoundationMonitor foundationMonitor;
+
         [Serialize]
         public float rotation;
 
@@ -21,12 +24,22 @@ namespace Beached.Content.Scripts
         [SerializeField]
         public bool allowDiagonalGrowth;
 
+        [SerializeField]
+        public bool drawDebugLines = true;
+
+        private LineRenderer debugLineRenderer;
+
         private static Vector3 leftOffset = new Vector3(-0.5f, 0.5f);
         private static Vector3 rightOffset = new Vector3(0.5f, 0.5f);
 
+        private Vector3 originOffset;
+
         public void GrowToRandomLength()
         {
-            var length = Random.Range(1, 5);
+            startPoint = transform.position + new Vector3(0, 0.5f);
+
+            var length = 4f; //
+            Random.Range(1, 5);
 
             while(length > 0)
             {
@@ -40,19 +53,33 @@ namespace Beached.Content.Scripts
             }
         }
 
+        public static Vector3 RotateRadians(Vector3 vector, float radians)
+        {
+            var cos = Mathf.Cos(radians);
+            var sin = Mathf.Sin(radians);
+            return new Vector3(cos * vector.x - sin * vector.y, sin * vector.x + cos * vector.y);
+        }
+
+        private Vector3 startPoint;
+
+        public static Vector3 RadianToVector2(float radian) => new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+
         private bool TestLength(float length)
         {
+            length -= 0.6f;
+
             var rad = Mathf.Deg2Rad * rotation;
-            var testX = (int)(transform.position.x + length * Mathf.Cos(rad)); //radians!!
-            var testY = (int)(transform.position.y + length * Mathf.Sin(rad));
-            testX = (int)(testX + 0.5f);
-            testY = (int)(testY + 0.5f);
+
+            var testX = Mathf.FloorToInt(startPoint.x + length * Mathf.Cos(rad));
+            var testY = Mathf.FloorToInt(startPoint.y + length * Mathf.Sin(rad));
+
+            DrawDebugLines(length, rad, testX, testY);
 
             var cell = Grid.XYToCell(testX, testY);
 
             if (!Grid.Solid[cell])
             {
-                if (Grid.TestLineOfSight((int)transform.position.x, (int)transform.position.y, testX, testY, Grid.IsSolidCell))
+                if (Grid.TestLineOfSight((int)(transform.position.x), (int)(transform.position.y), testX, testY, Grid.IsSolidCell))
                 {
                     return true;
                 }
@@ -61,39 +88,79 @@ namespace Beached.Content.Scripts
             return false;
         }
 
+        private void DrawDebugLines(float length, float rad, int testX, int testY)
+        {
+            if (drawDebugLines)
+            {
+                if (debugLineRenderer == null)
+                {
+                    SetupDebugLineRenderer();
+                }
+
+                debugLineRenderer.positionCount = 4;
+                debugLineRenderer.SetPositions(new[]
+                {
+                    startPoint,
+                    new Vector3(testX, testY),
+                    transform.position,
+                    new Vector3(
+                        startPoint.x + length * Mathf.Cos(rad),
+                        startPoint.y + length * Mathf.Sin(rad))
+                });
+            }
+        }
+
         protected override void OnSpawn()
         {
             base.OnSpawn();
 
-            if(!rotationSet)
+            if (!rotationSet)
             {
                 RotateRandomly();
             }
 
-            GrowToRandomLength();
+            SetFoundation(foundation);
+
+            GrowToRandomLength(); // world spawn only
+
+        }
+
+        private void SetupDebugLineRenderer()
+        {
+            debugLineRenderer = gameObject.AddComponent<LineRenderer>();
+
+            debugLineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+            debugLineRenderer.startColor = Color.green;
+            debugLineRenderer.endColor = Color.red;
+            debugLineRenderer.startWidth = debugLineRenderer.endWidth = 0.1f;
+            debugLineRenderer.positionCount = 2;
+
+            debugLineRenderer.GetComponent<LineRenderer>().material.renderQueue = RenderQueues.Liquid;
+
+            kbac.TintColour = new Color(1, 1, 1, 0.5f);
         }
 
         public void SetRotation(float angle)
         {
-            //kbac.Rotation = angle;
             transform.Rotate(Vector3.forward, angle);
             
             switch (foundation)
             {
                 case Direction.Down:
-                    kbac.Offset = Vector3.zero;
+                    originOffset = Vector3.zero;
                     break;
                 case Direction.Up:
-                    kbac.Offset = Vector3.up;
+                    originOffset = Vector3.up;
                     break;
                 case Direction.Left:
-                    kbac.Offset = leftOffset;
+                    originOffset = leftOffset;
                     break;
                 case Direction.Right:
-                    kbac.Offset = rightOffset;
+                    originOffset = rightOffset;
                     break;
             }
 
+            kbac.Offset = originOffset;
             rotation = angle;
             rotationSet = true;
         }
@@ -143,13 +210,38 @@ namespace Beached.Content.Scripts
                 var cell = Grid.GetCellInDirection(originalCell, direction);
                 if(Grid.IsSolidCell(cell))
                 {
-                    foundation = direction;
                     SetRotation(GetGrowthDirection(direction));
+                    SetFoundation(direction);
+
                     return;
                 }
             }
 
             // TODO: shatter if none are valid
+        }
+
+        private void SetFoundation(Direction direction)
+        {
+            foundation = direction;
+            var offset = CellOffset.none;
+
+            switch (direction)
+            {
+                case Direction.Up:
+                    offset = new CellOffset(0, 1);
+                    break;
+                case Direction.Right:
+                    offset = new CellOffset(1, 0);
+                    break;
+                case Direction.Down:
+                    offset = new CellOffset(0, -1);
+                    break;
+                case Direction.Left:
+                    offset = new CellOffset(-1, 0);
+                    break;
+            }
+
+            foundationMonitor.SetFoundationAndStartMonitoring(offset);
         }
     }
 }
