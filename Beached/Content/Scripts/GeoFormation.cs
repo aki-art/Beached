@@ -40,20 +40,14 @@ namespace Beached.Content.Scripts
             }
         }
 
-        private bool TestLengthAsquared(float length)
-        {
-            var endPos = transform.position + length * (transform.eulerAngles.z * Vector3.up);
-            Grid.CellToXY(Grid.PosToCell(this), out var x1, out var y1);
-            Grid.CellToXY(Grid.PosToCell(endPos), out var x2, out var y2);
-
-            return Grid.TestLineOfSight(x1, y1, x2, y2, Grid.IsSolidCell);
-        }
-
         private bool TestLength(float length)
         {
             var rad = Mathf.Deg2Rad * rotation;
             var testX = (int)(transform.position.x + length * Mathf.Cos(rad)); //radians!!
             var testY = (int)(transform.position.y + length * Mathf.Sin(rad));
+            testX = (int)(testX + 0.5f);
+            testY = (int)(testY + 0.5f);
+
             var cell = Grid.XYToCell(testX, testY);
 
             if (!Grid.Solid[cell])
