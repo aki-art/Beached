@@ -10,10 +10,13 @@ namespace Beached.Content.Scripts
         private KBatchedAnimController kbac;
 
         [Serialize]
-        public EightDirection direction;
+        public float rotation;
 
         [Serialize]
         public Direction foundation;
+
+        [Serialize]
+        public bool rotationSet;
 
         [SerializeField]
         public bool allowDiagonalGrowth;
@@ -24,51 +27,81 @@ namespace Beached.Content.Scripts
         public void GrowToRandomLength()
         {
             var length = Random.Range(1, 5);
-            kbac.Play(length.ToString());
+
+            while(length > 0)
+            {
+                if(TestLength(length))
+                {
+                    kbac.Play(length.ToString());
+                    break;
+                }
+
+                length--;
+            }
+        }
+
+        private bool TestLengthAsquared(float length)
+        {
+            var endPos = transform.position + length * (transform.eulerAngles.z * Vector3.up);
+            Grid.CellToXY(Grid.PosToCell(this), out var x1, out var y1);
+            Grid.CellToXY(Grid.PosToCell(endPos), out var x2, out var y2);
+
+            return Grid.TestLineOfSight(x1, y1, x2, y2, Grid.IsSolidCell);
+        }
+
+        private bool TestLength(float length)
+        {
+            var rad = Mathf.Deg2Rad * rotation;
+            var testX = (int)(transform.position.x + length * Mathf.Cos(rad)); //radians!!
+            var testY = (int)(transform.position.y + length * Mathf.Sin(rad));
+            var cell = Grid.XYToCell(testX, testY);
+
+            if (!Grid.Solid[cell])
+            {
+                if (Grid.TestLineOfSight((int)transform.position.x, (int)transform.position.y, testX, testY, Grid.IsSolidCell))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         protected override void OnSpawn()
         {
             base.OnSpawn();
+
+            if(!rotationSet)
+            {
+                RotateRandomly();
+            }
+
             GrowToRandomLength();
         }
 
-        public void SetRotation(EightDirection direction)
+        public void SetRotation(float angle)
         {
-            var angle = EightDirectionUtil.GetAngle(direction);
-            Log.Debug("angle " + angle);
-
-            kbac.Rotation = angle;
-
-            switch (direction)
+            //kbac.Rotation = angle;
+            transform.Rotate(Vector3.forward, angle);
+            
+            switch (foundation)
             {
-                case EightDirection.Up:
+                case Direction.Down:
                     kbac.Offset = Vector3.zero;
                     break;
-                case EightDirection.UpLeft:
-                    kbac.Offset = foundation == Direction.Down ? Vector3.zero : rightOffset;
-                    break;
-                case EightDirection.UpRight:
-                    kbac.Offset = foundation == Direction.Down ? Vector3.zero : leftOffset;
-                    break;
-                case EightDirection.Down:
+                case Direction.Up:
                     kbac.Offset = Vector3.up;
                     break;
-                case EightDirection.DownLeft:
-                    kbac.Offset = foundation == Direction.Up ? Vector3.up : rightOffset;
-                    break;
-                case EightDirection.DownRight:
-                    kbac.Offset = foundation == Direction.Up ? Vector3.up : leftOffset;
-                    break;
-                case EightDirection.Right:
+                case Direction.Left:
                     kbac.Offset = leftOffset;
                     break;
-                case EightDirection.Left:
+                case Direction.Right:
                     kbac.Offset = rightOffset;
                     break;
             }
 
-            this.direction = direction;
+            rotation = angle;
+            rotationSet = true;
         }
 
         public List<Direction> validFoundationDirections = new List<Direction>()
@@ -79,69 +112,37 @@ namespace Beached.Content.Scripts
             Direction.Up
         };
 
-        private EightDirection GetGrowthDirection(Direction foundationDir)
+        private float GetGrowthDirection(Direction foundationDir)
         {
-            if(allowDiagonalGrowth)
-            {
-                return possibleRootings[foundationDir].GetRandom();
-            }
-            else
-            {
-                switch (foundationDir)
-                {
-                    case Direction.Up:
-                        return EightDirection.Down;
-                    case Direction.Right:
-                        return EightDirection.Left;
-                    case Direction.Down:
-                        return EightDirection.Up;
-                    case Direction.Left:
-                    default:
-                        return EightDirection.Right;
-                }
-            }
-        }
+            float angle;
 
-        private static Dictionary<Direction, EightDirection[]> possibleRootings = new Dictionary<Direction, EightDirection[]>()
-        {
+            switch (foundationDir)
             {
-                Direction.Up, new[]
-                {
-                    EightDirection.DownLeft,
-                    EightDirection.Down,
-                    EightDirection.DownRight
-                }
-            },
-            {
-                Direction.Down, new[]
-                {
-                    EightDirection.UpLeft,
-                    EightDirection.Up,
-                    EightDirection.UpRight
-                }
-            },
-            {
-                Direction.Left, new[]
-                {
-                    EightDirection.DownRight,
-                    EightDirection.Right,
-                    EightDirection.UpRight
-                }
-            },
-            {
-                Direction.Right, new[]
-                {
-                    EightDirection.DownLeft,
-                    EightDirection.Left,
-                    EightDirection.UpLeft
-                }
-            },
-        };
+                case Direction.Up:
+                    angle = 0f;
+                    break;
+                case Direction.Right:
+                    angle = 270f;
+                    break;
+                case Direction.Down:
+                    angle = 180f;
+                    break;
+                case Direction.Left:
+                default:
+                    angle = 90f;
+                    break;
+            }
+            angle += Random.Range(-45f, 45f);
+            angle -= 90f;
+
+            return angle;
+        }
 
         public void RotateRandomly()
         {
-            validFoundationDirections.Shuffle();
             var originalCell = Grid.PosToCell(this);
+
+            validFoundationDirections.Shuffle();
 
             foreach (var direction in validFoundationDirections)
             {
@@ -153,6 +154,8 @@ namespace Beached.Content.Scripts
                     return;
                 }
             }
+
+            // TODO: shatter if none are valid
         }
     }
 }

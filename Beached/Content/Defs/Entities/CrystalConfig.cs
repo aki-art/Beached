@@ -38,8 +38,7 @@ namespace Beached.Content.Defs.Entities
 
         public void OnSpawn(GameObject inst)
         {
-            inst.GetComponent<KBatchedAnimController>().animScale *= 0.5f; // temp
-            inst.GetComponent<GeoFormation>().RotateRandomly();
+            inst.GetComponent<GeoFormation>();
         }
     }
 }
