@@ -1,5 +1,4 @@
-﻿using Beached.Cmps;
-using Beached.Content.Scripts;
+﻿using Beached.Content.Scripts;
 using Beached.Utils;
 using HarmonyLib;
 using System;
@@ -12,16 +11,6 @@ namespace Beached.Patches
 {
     public class GamePatch
     {
-        [HarmonyPatch(typeof(Game), "OnSpawn")]
-        public class Game_OnSpawn_Patch
-        {
-            public static void Postfix(Game __instance)
-            {
-                var gameObject = __instance.gameObject;
-                gameObject.AddOrGet<ElementInteractions>();
-            }
-        }
-
         [HarmonyPatch(typeof(Game), "InitializeFXSpawners")]
         public class Game_InitializeFXSpawners_Patch
         {
@@ -43,7 +32,7 @@ namespace Beached.Patches
                     return;
                 }
 
-                var saltOffFx = new MockStructs.SpawnPoolData()
+                spawnData.Add(new MockStructs.SpawnPoolData()
                 {
                     id = ModAssets.Fx.saltOff,
                     initialCount = 4,
@@ -52,7 +41,18 @@ namespace Beached.Patches
                     colour = Color.white,
                     fxPrefab = GetNewPrefab(prefab, "beached_offsalt_kanim", 2f),
                     initialAnim = "bubble"
-                };
+                });
+
+                spawnData.Add(new MockStructs.SpawnPoolData()
+                {
+                    id = ModAssets.Fx.grimcapPoff,
+                    initialCount = 4,
+                    spawnOffset = Vector3.zero,
+                    spawnRandomOffset = new Vector2(0.5f, 0.2f),
+                    colour = Color.white,
+                    fxPrefab = GetNewPrefab(prefab, "beached_grimcap_poff_kanim", 1f),
+                    initialAnim = "poff"
+                });
 
                 ___fxSpawnData = spawnData.ToArray();
             }

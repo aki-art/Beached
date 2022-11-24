@@ -1,12 +1,21 @@
-﻿using Beached.Content;
+﻿using Beached.Content.ModDb.Germs;
+using Beached.Utils;
 using UnityEngine;
 
-namespace Beached.Cmps
+namespace Beached.Content.Scripts
 {
-    internal class ElementInteractions : KMonoBehaviour, ISim200ms
+    /* "Fake" sim extension. Rotates loaded chunks and randomly updates a few cells Minecraft style. 
+     * The game does these things in a separate C++ library, which cannot be modded, as is far superior in calculation speed.
+     * Lacking that, this is a compromise between custom element behavior and not tanking the player's FPS doing iz from C#. */
+
+    /* Loading Custom C++ extensions: ran into problems with Linux and Mac systems. 
+     * Linux is not as lenient with path searching as Windows is, and can't find the extra dll if it's not in the same folder as the main dll. 
+     * Problem with that is that the game tries to load every DLL as a mod, and crashes if a random c++ dll is in there. */
+    public class ElementInteractions : KMonoBehaviour, ISim200ms
     {
         private const int CHUNK_EDGE = 16;
-        private const int SALT_ATTEMPTS = 4;
+        private const int UPDATE_ATTEMPTS = 4;
+        private const float FUNGAL_LIGHT_KILL_RATE = 0.5f;
 
         private static int widthInChunks;
         private static int heightInChunks;
@@ -17,9 +26,12 @@ namespace Beached.Cmps
         private static byte oxygenIdx;
         private static byte saltWaterIdx;
         private static byte brineIdx;
+        private static byte grimSporeIdx;
         private static Element saltyOxygen;
 
         public CellElementEvent SaltOffing;
+
+        private PlantableSeed mushroomPlantable;
 
         private readonly SpawnFXHashes saltFx = ModAssets.Fx.saltOff;
 
@@ -27,6 +39,7 @@ namespace Beached.Cmps
         {
             base.OnPrefabInit();
             Instance = this;
+            mushroomPlantable = Assets.GetPrefab(MushroomPlantConfig.SEED_ID).GetComponent<PlantableSeed>();
         }
 
         protected override void OnCleanUp()
@@ -37,9 +50,9 @@ namespace Beached.Cmps
 
         public void Sim200ms(float dt)
         {
-            if(!enabled)
+            if (!enabled)
             {
-                //return;
+                return;
             }
 
             UpdateCells();
@@ -49,15 +62,15 @@ namespace Beached.Cmps
         {
             for (var c = 0; c < chunkCount; c++)
             {
-                for (var i = 0; i < SALT_ATTEMPTS; i++)
+                for (var i = 0; i < UPDATE_ATTEMPTS; i++)
                 {
                     var cell = GetRandomCellInChunk(c);
-                    UpdateSalt(cell);
+                    UpdateCell(cell);
                 }
             }
         }
 
-        private void UpdateSalt(int cell)
+        private void UpdateCell(int cell)
         {
             if (!Grid.IsValidCell(cell))
             {
@@ -66,7 +79,61 @@ namespace Beached.Cmps
 
             var element = Grid.Element[cell];
             var elementIdx = element.idx;
+            var diseaseCount = Grid.DiseaseCount[cell];
 
+            UpdateSaltWater(cell, element, elementIdx);
+            UpdateSpores(cell, diseaseCount);
+        }
+
+        private void UpdateSpores(int cell, int diseaseCount)
+        {
+            if (diseaseCount > 0)
+            {
+                var germIdx = Grid.DiseaseIdx[cell];
+
+                if (germIdx == grimSporeIdx)
+                {
+                    if (Grid.LightCount[cell] > 0)
+                    {
+                        SimMessages.ModifyDiseaseOnCell(cell, germIdx, -GermsToKill(diseaseCount, FUNGAL_LIGHT_KILL_RATE));
+                    }
+                    else
+                    {
+                        var roll = Random.value < 0.1f;
+                        if (roll)
+                        {
+                            if (MiscUtil.IsNaturalCell(Grid.CellBelow(cell)) &&
+                                !Grid.IsSolidCell(Grid.CellAbove(cell)) &&
+                                mushroomPlantable.TestSuitableGround(cell))
+                            {
+                                var seed = MiscUtil.Spawn(MushroomPlantConfig.SEED_ID, Grid.CellToPos(cell));
+                                seed.GetComponent<PlantableSeed>().TryPlant();
+
+                                Game.Instance.SpawnFX(ModAssets.Fx.grimcapPoff, cell, 0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public static float GetFungalGermAverageChangeRateInLight()
+        {
+            return 5f * (UPDATE_ATTEMPTS / (CHUNK_EDGE * CHUNK_EDGE) * FUNGAL_LIGHT_KILL_RATE);
+        }
+
+        private int GermsToKill(int count, float strength)
+        {
+            if (count == 1)
+            {
+                return 1;
+            }
+
+            return (int)Mathf.Clamp(count * strength, 0, count);
+        }
+
+        private void UpdateSaltWater(int cell, Element element, ushort elementIdx)
+        {
             if (elementIdx == saltWaterIdx || elementIdx == brineIdx)
             {
                 var liquidMass = Grid.Mass[cell];
@@ -114,6 +181,7 @@ namespace Beached.Cmps
 
             SetChunks();
             SetElements();
+            grimSporeIdx = Db.Get().Diseases.GetIndex(BDiseases.mushroomSpore.id);
 
             // TODO: only revealed areas
             // TODO: liauid change?

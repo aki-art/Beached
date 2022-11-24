@@ -9,8 +9,8 @@ namespace Beached.Patches
         {
             public static void Postfix(SaveGame __instance)
             {
-                __instance.gameObject.AddOrGet<BeachedWorldManager>();
                 __instance.gameObject.AddOrGet<IridescenceEffect>();
+                __instance.gameObject.AddOrGet<ElementInteractions>();
             }
         }
     }

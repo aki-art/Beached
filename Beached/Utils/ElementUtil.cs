@@ -1,8 +1,11 @@
-﻿using HarmonyLib;
+﻿using Beached.Settings;
+using HarmonyLib;
 using Klei.AI;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static Beached.STRINGS.ELEMENTS;
+using static STRINGS.ELEMENTS;
 
 namespace Beached.Utils
 {
@@ -94,6 +97,55 @@ namespace Beached.Utils
                 Log.Debug(elem.SimHash.ToString());
                 f_nameTag.SetValue(substance, TagManager.Create(elem.SimHash.ToString()));
             }
+        }
+
+        public static ElementsAudio.ElementAudioConfig GetCrystalAudioConfig(SimHashes id)
+        {
+            var crushedIce = ElementsAudio.Instance.GetConfigForElement(SimHashes.CrushedIce);
+
+            return new ElementsAudio.ElementAudioConfig()
+            {
+                elementID = id,
+                ambienceType = AmbienceType.None,
+                solidAmbienceType = SolidAmbienceType.CrushedIce,
+                miningSound = "PhosphateNodule", // kind of gritty glassy
+                miningBreakSound = crushedIce.miningBreakSound,
+                oreBumpSound = crushedIce.oreBumpSound,
+                floorEventAudioCategory = "tileglass", // proper glassy sound
+                creatureChewSound = crushedIce.creatureChewSound
+            };
+        }
+
+        public static ElementsAudio.ElementAudioConfig CopyElementAudioConfig(ElementsAudio.ElementAudioConfig reference, SimHashes id)
+        {
+            return new ElementsAudio.ElementAudioConfig()
+            {
+                elementID = reference.elementID,
+                ambienceType = reference.ambienceType,
+                solidAmbienceType = reference.solidAmbienceType,
+                miningSound = reference.miningSound,
+                miningBreakSound = reference.miningBreakSound,
+                oreBumpSound = reference.oreBumpSound,
+                floorEventAudioCategory = reference.floorEventAudioCategory,
+                creatureChewSound = reference.creatureChewSound,
+            };
+        }
+
+        public static ElementsAudio.ElementAudioConfig CopyElementAudioConfig(SimHashes referenceId, SimHashes id)
+        {
+            var reference = ElementsAudio.Instance.GetConfigForElement(referenceId);
+
+            return new ElementsAudio.ElementAudioConfig()
+            {
+                elementID = reference.elementID,
+                ambienceType = reference.ambienceType,
+                solidAmbienceType = reference.solidAmbienceType,
+                miningSound = reference.miningSound,
+                miningBreakSound = reference.miningBreakSound,
+                oreBumpSound = reference.oreBumpSound,
+                floorEventAudioCategory = reference.floorEventAudioCategory,
+                creatureChewSound = reference.creatureChewSound,
+            };
         }
     }
 }

@@ -13,5 +13,10 @@
             public const float VERY_IRRITATING = 1f;
             public const float OH_HECK_IT_BURNS = 3f;
         }
+
+        public static class SNAPONS
+        {
+            public const string CAP = "Beached_SnapOn_Cap";
+        }
     }
 }

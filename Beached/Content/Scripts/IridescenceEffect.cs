@@ -41,6 +41,14 @@ namespace Beached.Content.Scripts
             rainbowGradient.SetKeys(colorKey, alphaKey);
         }
 
+        private static Color pearl1 = Util.ColorFromHex("ca3b4c");
+        private static Color pearl2 = Util.ColorFromHex("005ebe");
+        private static Color pearl1t = Util.ColorFromHex("ffece0");
+        private static Color pearl2t = Util.ColorFromHex("d8ddff");
+
+        private static string pearl1str = "ca3b4c";
+        private static string pearl2str = "486083";
+
         private void Update()
         {
             if (groundRendererMaterials != null && groundRendererMaterials.Count > 0)
@@ -50,10 +58,16 @@ namespace Beached.Content.Scripts
 
                 var t = (Mathf.Cos(camera.x / scale) + Mathf.Sin(camera.y / scale)) / 4f + 0.5f;
 
-                var pearlColor = Color.Lerp(Color.yellow, Color.cyan, t);
+                var pearlColor = Color.Lerp(pearl1, pearl2, t);
+                var pearlColortest = Color.Lerp(pearl2, pearl1, t);
+                //var pearlColor2 = Color.Lerp(pearl1t, pearl2t, t);
                 var pearlMat = groundRendererMaterials[Elements.Pearl];
                 pearlMat.alpha.SetColor("_ShineColour", pearlColor);
-                pearlMat.opaque.SetColor("_ShineColour", pearlColor);
+                pearlMat.alpha.SetFloat("_SrcAlpha", 1f);
+                pearlMat.alpha.SetFloat("_DestAlpha", 0f);
+                pearlMat.opaque.SetColor("_ShineColour", pearlColortest);
+               // pearlMat.alpha.SetColor("_ColourTint", pearlColor2);
+                //pearlMat.opaque.SetColor("_ColourTint", pearlColor2);
 
                 var bismuthColor = Color.Lerp(Color.red, Color.green, t);
                 var bismuthMat = groundRendererMaterials[Elements.BismuthOre];
@@ -76,6 +90,22 @@ namespace Beached.Content.Scripts
         {
             base.OnCleanUp();
             Instance = null;
+        }
+
+        private void OnGUI()
+        {
+            GUILayout.BeginArea(new Rect(200, 200, 200, 200));
+
+            pearl1str = GUILayout.TextField(pearl1str);
+            pearl2str = GUILayout.TextField(pearl2str);
+
+            if(GUILayout.Button("Color"))
+            {
+                pearl1 = Util.ColorFromHex(pearl1str);
+                pearl2 = Util.ColorFromHex(pearl2str);
+            }
+
+            GUILayout.EndArea();
         }
     }
 }

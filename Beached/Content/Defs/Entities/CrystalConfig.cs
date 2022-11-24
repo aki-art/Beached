@@ -25,9 +25,11 @@ namespace Beached.Content.Defs.Entities
                 default,
                 Elements.Selenite);
 
-            prefab.AddOrGet<GeoFormation>().allowDiagonalGrowth = true;
+            //prefab.AddOrGet<GeoFormation>().allowDiagonalGrowth = true;
+            prefab.AddOrGet<Crystal>().growthDirection = Direction.None;
+            prefab.AddOrGet<CrystalDebug>();
             //prefab.AddOrGet<CrystalFoundationMonitor>().needsFoundation = false;
-            //prefab.AddOrGet<GrowingCrystal>();
+            prefab.AddOrGet<GrowingCrystal>();
 
             return prefab;
         }

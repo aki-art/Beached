@@ -1,4 +1,8 @@
 ﻿using Beached.Content;
+using Beached.Content.Defs.Buildings;
+using Beached.Content.ModDb;
+using Beached.Content.ModDb.Germs;
+using Beached.Content.ModDb.Sicknesses;
 
 namespace Beached
 {
@@ -8,6 +12,13 @@ namespace Beached
         {
             public class PREFABS
             {
+                public class BEACHED_AMMONIAGENERATOR
+                {
+                    public static LocString NAME = FormatAsLink("Ammonia Generator", AmmoniaGeneratorConfig.ID);
+                    public static LocString DESC = "...";
+                    public static LocString EFFECTS = global::STRINGS.BUILDINGS.PREFABS.HYDROGENGENERATOR.EFFECT;
+                }
+
                 public class BEACHED_SEASHELLCHIME
                 {
                     public static LocString NAME = "Seashell Chime";
@@ -151,10 +162,22 @@ namespace Beached
                 // no clue why these are counted as "creature", but this is where the game expects them
                 public class GEYSER
                 {
-                    public class MURKY_BRINE
+                    public class BEACHED_MURKYBRINE
                     {
                         public static LocString NAME = "Murky Brine Geyser";
                         public static LocString DESC = $"A geyser that periodically erupts with {FormatAsLink("Murky Brine", Elements.MurkyBrine.ToString())}.";
+                    }
+
+                    public class BEACHED_BISMUTHVOLCANO
+                    {
+                        public static LocString NAME = "Bismuth Volcano";
+                        public static LocString DESC = $"...";
+                    }
+
+                    public class BEACHED_AMMONIAVENT
+                    {
+                        public static LocString NAME = "Ammonia Vent";
+                        public static LocString DESC = $"...";
                     }
 
                     public class CORAL_REEF
@@ -319,12 +342,87 @@ namespace Beached
 
         public class DUPLICANTS
         {
+            public class ATTRIBUTES
+            {
+                public class BEACHED_PRECISION
+                {
+                    public static LocString NAME = "Precision";
+                    public static LocString DESC = "...";
+                }
+            }
+
+            public class CHOREGROUPS
+            {
+                public class BEACHED_CHOREGROUP_HANDYWORK
+                {
+                    public static LocString NAME = "Precision Work";
+                    public static LocString DESC = "...";
+                }
+            }
+
             public class PERSONALITIES
             {
                 public class MINNOW
                 {
                     public static LocString NAME = "Minnow";
                     public static LocString DESC = "Minnow's printing label actually says \"Experiment MRM8\", but she prefers to go by Minnow.";
+                }
+            }
+
+            public class ROLES
+            {
+                public class ANIMALHANDLING
+                {
+                    public static LocString NAME = FormatAsLink("Animal Handling Basics", BSkills.ANIMALHANDLING_ID);
+                    public static LocString DESCRIPTION = "";
+                }
+
+                public class ARCHEOLOGY
+                {
+                    public static LocString NAME = FormatAsLink("Careful Excavation", BSkills.ARCHEOLOGY_ID);
+                    public static LocString DESCRIPTION = "Allows a Duplicant to find hidden treasures while digging around in soft materials.";
+                }
+
+                public class ARCHEOLOGY2
+                {
+                    public static LocString NAME = FormatAsLink("Archeology", BSkills.ARCHEOLOGY2_ID);
+                    public static LocString DESCRIPTION = "Improves a Duplican't ability to find hidden treasures while digging around, and they can now find items in hard materials.";
+                }
+
+                public class AQUACULTURE1
+                {
+                    public static LocString NAME = FormatAsLink("Aquaculture I", BSkills.AQUACULTURE1_ID);
+                    public static LocString DESCRIPTION = "Better harvesting gof aquatic plants, such as corals or algaes.";
+                }
+
+                public class AQUACULTURE2
+                {
+                    public static LocString NAME = FormatAsLink("Aquaculture II", BSkills.AQUACULTURE1_ID);
+                    public static LocString DESCRIPTION = "Better harvesting gof aquatic plants, such as corals or algaes.";
+                }
+
+                public class MAKITRAINER1
+                {
+                    public static LocString NAME = FormatAsLink("Novice Maki Trainer", BSkills.MAKITRAINING1_ID);
+                    public static LocString DESCRIPTION = "Can train level 1 skills to Makis.";
+                }
+
+                public class MAKITRAINER2
+                {
+                    public static LocString NAME = FormatAsLink("Master Maki Trainer", BSkills.MAKITRAINING2_ID);
+                    public static LocString DESCRIPTION = "Can train level 2 skills to Makis.";
+                }
+
+                public class CRYSTALLOGRAPHY
+                {
+                    public static LocString NAME = FormatAsLink("Crystallography", BSkills.CRYSTALLOGRAPHY_ID);
+                    public static LocString DESCRIPTION = "Allows a Duplicant to harvest a Crystal Cluster without breaking it, allowing regrowth.";
+                }
+
+                public class GEOCHEMISTRY
+                {
+                    public static LocString NAME = FormatAsLink("Geo-Chemistry", BSkills.GEOCHEMISTRY_ID);
+                    public static LocString DESCRIPTION = "Enables a Duplicant to analyze crystals, allowing for synthesis of new Crystal Clusters.";
                 }
             }
 
@@ -337,6 +435,12 @@ namespace Beached
                     public static LocString SHORT_DESC_TOOLTIP = "This Duplicant can also breath in any kind of Water. Does not grant immunity to wet debuffs.";
                     public static LocString DESC = "This duplicant can live like a fish in the water... or at least breath like one.";
                     public static LocString WATERBREATHING = "• Amphibious";
+                }
+
+                public class PRECISIONUP
+                {
+                    public static LocString NAME = "Dexterous";
+                    public static LocString DESC = "This duplicant can live like a fish in the water... or at least breath like one.";
                 }
 
                 public class BEACHED_ASMRLOVER
@@ -356,18 +460,30 @@ namespace Beached
             {
                 public class BEACHED_PLANKTON
                 {
-                    public static LocString NAME = "Plankton";
+                    public static LocString NAME = FormatAsLink("Plankton", PlanktonGerms.ID);
                 }
 
                 public class BEACHED_LIMPETEGG
                 {
-                    public static LocString NAME = "NA"; //KUI.FormatAsLink("Limpet Eggs", LimpetEggGerms.ID);
+                    public static LocString NAME = FormatAsLink("Limpet Eggs", LimpetEggGerms.ID);
+                }
+
+                public class BEACHED_CAPSPORE
+                {
+                    public static LocString NAME = FormatAsLink("Grimcap Spores", CapSporeGerms.ID);
                 }
 
                 public class BEACHED_LIMPETS_DUPLICANT
                 {
                     public static LocString NAME = "NA"; //KUI.FormatAsLink("Limpets", LimpetsSickness.ID);
                 }
+
+                public class BEACHED_SICKNESS_CAPPED
+                {
+                    public static LocString NAME = FormatAsLink("Capped", CappedSickness.ID);
+                }
+
+                public static LocString LIGHTEXPOSURE = "Exposed to Light. Approximately {0} change per second.";
             }
         }
 
@@ -475,6 +591,12 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
+            public class BONE
+            {
+                public static LocString NAME = FormatAsLink("Bone");
+                public static LocString DESC = "TODO";
+            }
+
             public class CALCIUM
             {
                 public static LocString NAME = FormatAsLink("Calcium", Elements.Calcium.ToString());
@@ -535,9 +657,21 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
+            public class NITROGEN
+            {
+                public static LocString NAME = FormatAsLink("Nitrogen");
+                public static LocString DESC = "TODO";
+            }
+
             public class PEARL
             {
                 public static LocString NAME = FormatAsLink("Pearl");
+                public static LocString DESC = "TODO";
+            }
+
+            public class ROT
+            {
+                public static LocString NAME = FormatAsLink("Rot");
                 public static LocString DESC = "TODO";
             }
 
@@ -546,6 +680,7 @@ namespace Beached
                 public static LocString NAME = FormatAsLink("Root");
                 public static LocString DESC = "TODO";
             }
+
 
             public class SALTYOXYGEN
             {
@@ -659,6 +794,11 @@ namespace Beached
             public class BEACHED_LIMPETEGG
             {
                 public static LocString NAME = "Limpet Eggs";
+            }
+
+            public class BEACHED_CAPSPORE
+            {
+                public static LocString NAME = "Grimcap Spores";
             }
         }
 

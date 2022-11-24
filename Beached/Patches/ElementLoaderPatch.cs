@@ -43,18 +43,17 @@ namespace Beached.Patches
                     } 
                     else if(elem.elementId == SimHashes.Diamond.ToString())
                     {
-                        elem.materialCategory = BTags.MaterialCategories.Crystal.ToString();
+                        Mod.Settings.CrossWorld.Elements.originalDiamondCategory = elem.materialCategory;
                     }
                     else if (elem.elementId == SimHashes.Katairite.ToString())
                     {
-                        elem.materialCategory = BTags.MaterialCategories.Crystal.ToString();
+                        Mod.Settings.CrossWorld.Elements.originalAbyssaliteCategory = elem.materialCategory;
                     }
-                    // change Lime's transition target to Calcium
-                    // TODO: user setting
                     else if(elem.elementId == SimHashes.Lime.ToString())
                     {
-                        elem.highTempTransitionTarget = Elements.CalciumMolten.ToString();
-                        elem.highTemp = 1115f;
+                        Mod.Settings.CrossWorld.Elements.originalLimeHighTemp = elem.highTemp;
+                        Mod.Settings.CrossWorld.Elements.originalLimeHighTempTarget = elem.highTempTransitionTarget;
+
                     }
                     // reenable Helium
                     else if(elem.elementId == SimHashes.Helium.ToString())

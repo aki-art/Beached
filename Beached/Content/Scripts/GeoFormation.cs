@@ -75,7 +75,6 @@ namespace Beached.Content.Scripts
             var testX = Mathf.FloorToInt(startPoint.x + length * Mathf.Cos(rad));
             var testY = Mathf.FloorToInt(startPoint.y + length * Mathf.Sin(rad));
 
-            DrawDebugLines(length, rad, testX, testY);
 
             var cell = Grid.XYToCell(testX, testY);
 
@@ -83,6 +82,7 @@ namespace Beached.Content.Scripts
             {
                 if (Grid.TestLineOfSight((int)(transform.position.x), (int)(transform.position.y), testX, testY, Grid.IsSolidCell))
                 {
+                    DrawDebugLines(length, rad, testX, testY);
                     return true;
                 }
             }
@@ -126,7 +126,7 @@ namespace Beached.Content.Scripts
                 RotateRandomly();
             }
 
-            //SetFoundation(foundation);
+            SetFoundation(foundation);
             GrowToRandomLength(); // world spawn only
 
         }
@@ -144,7 +144,7 @@ namespace Beached.Content.Scripts
             switch (foundation)
             {
                 case Direction.Down:
-                    originOffset = Vector3.zero;
+                    originOffset = Vector3.down;
                     break;
                 case Direction.Up:
                     originOffset = Vector3.up;
@@ -157,6 +157,7 @@ namespace Beached.Content.Scripts
                     break;
             }
 
+            Log.Debug("POSITION CHANGE ");
             transform.position += originOffset;
             transform.Rotate(Vector3.forward, angle);
 
@@ -223,7 +224,7 @@ namespace Beached.Content.Scripts
 
         private void SetFoundation(Direction direction)
         {
-/*            foundation = direction;
+            foundation = direction;
             var offset = CellOffset.none;
 
             switch (direction)
@@ -242,7 +243,7 @@ namespace Beached.Content.Scripts
                     break;
             }
 
-            foundationMonitor.SetFoundationAndStartMonitoring(offset);*/
+            //foundationMonitor.SetFoundationAndStartMonitoring(offset);
         }
     }
 }

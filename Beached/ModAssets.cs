@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using UnityEngine;
 using static STRINGS.CREATURES.STATS;
 
@@ -10,11 +11,25 @@ namespace Beached
         public static class Textures
         {
             public static Texture2D LUTDay;
+            public static Texture2DArray germOverlays;
+        }
+
+        public static class Materials
+        {
+            public static Material germOverlayReplacer;
+        }
+
+        public static class Sprites
+        {
+            public const string MOD_MINERALOGIST = "beached_mod_mineralogist";
+            public const string ERRAND_MINERALOGY = "beached_errand_mineralogy";
+            public const string ARCHETYPE_MINERALOGY = "beached_archetype_mineralogy";
         }
 
         public static class Fx
         {
             public static SpawnFXHashes saltOff = (SpawnFXHashes)"saltOff".GetHashCode();
+            public static SpawnFXHashes grimcapPoff = (SpawnFXHashes)"grimCapPoff".GetHashCode();
 
             public static Material testMaterial;
             public static Material darkVeilPostFxMaterial;
@@ -34,6 +49,7 @@ namespace Beached
             public static Color bismuth = new Color32(117, 166, 108, 255);
             public static Color bismuthGas = new Color32(117, 166, 108, 255);
             public static Color bismuthOre = new Color32(117, 166, 108, 255);
+            public static Color bone = Util.ColorFromHex("d6cec2");
             public static Color calcium = Color.white;
             public static Color gravel = new Color32(100, 100, 100, 255);
             public static Color iridium = Util.ColorFromHex("b6b2fb");
@@ -44,7 +60,10 @@ namespace Beached
             public static Color mucusUi = new Color32(170, 205, 170, 255);
             public static Color murkyBrine = new Color32(60, 61, 55, 255);
             public static Color mycelium = Util.ColorFromHex("c9bda6");
+            public static Color nitrogen = new Color(0.65f, 0.65f, 0.65f, 0.2f);
+            public static Color nitrogenOpaque = new Color(0.8f, 0.8f, 0.8f);
             public static Color pearl = Util.ColorFromHex("c9bda6");
+            public static Color rot = Util.ColorFromHex("404930");
             public static Color root = Util.ColorFromHex("3a3430");
             public static Color saltyOxygen = new Color32(205, 170, 170, 120);
             public static Color selenite = Util.ColorFromHex("ffd1dc");
@@ -62,6 +81,7 @@ namespace Beached
             // germs
             public static Color plankton = new Color32(0, 0, 255, 255);
             public static Color limpetEggs = new Color32(255, 225, 185, 255);
+            public static Color capSpores = Color.red;
 
             public class Zones
             {
@@ -86,6 +106,19 @@ namespace Beached
             var assets = Path.Combine(Mod.folder, "Assets");
 
             Textures.LUTDay = LoadTexture(Path.Combine(assets, "cc_day_bright_and_saturated.png"));
+
+            Log.Debug("LOADING ASSETS");
+
+            var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
+            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/c_GermOverlay.shader"));
+            Textures.germOverlays = bundle.LoadAsset<Texture2DArray>("Assets/Beached/Images/combined.png");
+            foreach (var asset in bundle.GetAllAssetNames())
+            {
+                Log.Debug(asset);
+            }
+
+            Debug.Assert(Materials.germOverlayReplacer != null, "mat is null");
+            Debug.Assert(Materials.germOverlayReplacer.shader != null, "shader is null");
         }
 
         public static bool TryLoadTexture(string path, out Texture2D texture)
@@ -146,6 +179,50 @@ namespace Beached
             File.WriteAllBytes(Path.Combine(dirPath, name) + System.DateTime.Now + ".png", bytes);
 
             Log.Debug("Saved to " + dirPath);
+        }
+
+        public static AssetBundle LoadAssetBundle(string assetBundleName, string path = null, bool platformSpecific = false)
+        {
+            foreach (var bundle in AssetBundle.GetAllLoadedAssetBundles())
+            {
+                if (bundle.name == assetBundleName)
+                {
+                    return bundle;
+                }
+            }
+
+            if (path.IsNullOrWhiteSpace())
+            {
+                path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets");
+            }
+
+            if (platformSpecific)
+            {
+                switch (Application.platform)
+                {
+                    case RuntimePlatform.WindowsPlayer:
+                        path = Path.Combine(path, "windows");
+                        break;
+                    case RuntimePlatform.LinuxPlayer:
+                        path = Path.Combine(path, "linux");
+                        break;
+                    case RuntimePlatform.OSXPlayer:
+                        path = Path.Combine(path, "mac");
+                        break;
+                }
+            }
+
+            path = Path.Combine(path, assetBundleName);
+
+            var assetBundle = AssetBundle.LoadFromFile(path);
+
+            if (assetBundle == null)
+            {
+                Log.Warning($"Failed to load AssetBundle from path {path}");
+                return null;
+            }
+
+            return assetBundle;
         }
     }
 }

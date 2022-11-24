@@ -1,15 +1,19 @@
-﻿using Beached.Cmps;
-using Beached.Utils;
-using HarmonyLib;
-using System.Collections.Generic;
-using System.Reflection;
-using UnityEngine;
-
-namespace Beached.Content.Scripts
+﻿namespace Beached.Content.Scripts
 {
     public class BeachedWorldManager : KMonoBehaviour
     {
         public static BeachedWorldManager Instance { get; private set; }
+
+        public void WorldLoaded(string clusterId)
+        {
+            Log.Debug("WORLD HAS LOADED " + clusterId);
+
+            IsBeachedContentActive = clusterId == "expansion1::clusters/TinyStartCluster";
+
+            Elements.OnWorldReload(IsBeachedContentActive);
+            //ElementInteractions.Instance.enabled = IsBeachedContentActive || Mod.Settings.CrossWorld.Elements.ElementInteractions;
+            
+        }
 
         // TODO: mod settings content enable || beached world loaded
         public bool IsBeachedContentActive { get; private set; } = true;
@@ -25,33 +29,6 @@ namespace Beached.Content.Scripts
         protected override void OnSpawn()
         {
             base.OnSpawn();
-            Game.Instance.Subscribe((int)GameHashes.SaveGameReady, OnSaveGameReady);
-        }
-
-        private void OnSaveGameReady(object obj)
-        {
-            IsBeachedContentActive = true; // TODO: actually detect world type
-
-            if(IsBeachedContentActive)
-            {
-                if(!wasOnBeachedWorld)
-                {
-                    SetDbEntries(true);
-                }
-
-                wasOnBeachedWorld = true;
-                ElementInteractions.Instance.enabled = true;
-            }
-            else
-            {
-                ElementInteractions.Instance.enabled = false;
-            }
-
-            Debug.Log("SAVEGAME READY " + IsBeachedContentActive);
-        }
-
-        private void SetDbEntries(bool isBeached)
-        {
         }
 
         protected override void OnCleanUp()

@@ -1,0 +1,75 @@
+elements:
+    - elementId: Nitrogen
+      specificHeatCapacity: 1.01
+      thermalConductivity: 0.024
+      solidSurfaceAreaMultiplier: 25
+      liquidSurfaceAreaMultiplier: 1
+      gasSurfaceAreaMultiplier: 1
+      flow: 0.12
+      lowTemp:  77.355 # −195.795 C
+      lowTempTransitionTarget: LiquidNitrogen
+      defaultTemperature: 300
+      defaultPressure: 101.3
+      molarMass: 15.9994
+      toxicity: 1
+      lightAbsorptionFactor: 0.1
+      radiationAbsorptionFactor: 0.08
+      radiationPer1000Mass: 0
+      materialCategory: Unbreathable
+      tags:
+      isDisabled: false
+      state: Gas
+      localizationID: STRINGS.ELEMENTS.NITROGEN.NAME
+      dlcId: ""
+  
+    - elementId: LiquidNitrogen
+      maxMass: 500
+      liquidCompression: 1.01
+      speed: 200
+      minHorizontalFlow: 0.01
+      minVerticalFlow: 0.01
+      specificHeatCapacity: 1.01
+      thermalConductivity: 2
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 25
+      gasSurfaceAreaMultiplier: 1
+      lowTemp: 63.23 # −209.86 C
+      highTemp: 77.355 # −195.795 C
+      lowTempTransitionTarget: FrozenNitrogen
+      highTempTransitionTarget: Nitrogen
+      defaultTemperature: 210
+      defaultMass: 300
+      molarMass: 15.9994
+      toxicity: 0
+      lightAbsorptionFactor: 1
+      radiationAbsorptionFactor: 0.82
+      radiationPer1000Mass: 0
+      tags:
+      isDisabled: false
+      state: Liquid
+      localizationID: STRINGS.ELEMENTS.NITROGENLIQUID.NAME
+  
+      dlcId: ""
+    - elementId: FrozenNitrogen
+      specificHeatCapacity: 1.01
+      thermalConductivity: 1
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 1
+      gasSurfaceAreaMultiplier: 1
+      strength: 0.5
+      highTemp: 63.23 # −209.86 C
+      highTempTransitionTarget: LiquidNitrogen
+      defaultTemperature: 30
+      defaultMass: 500 # chosen such that it doesn't exceed LiquidNitrogen.maxMass
+      maxMass: 1000
+      hardness: 2
+      molarMass: 50
+      lightAbsorptionFactor: 0.75
+      radiationAbsorptionFactor: 0.82
+      radiationPer1000Mass: 0
+      materialCategory: Liquifiable
+      buildMenuSort: 1
+      isDisabled: false
+      state: Solid
+      localizationID: STRINGS.ELEMENTS.NITROGENFROZEN.NAME
+      dlcId: ""

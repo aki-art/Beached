@@ -1,0 +1,31 @@
+﻿using HarmonyLib;
+using static STRINGS.CREATURES.STATS;
+using UnityEngine;
+using System.IO;
+
+namespace Beached.Patches
+{
+    public class AssetsPatch
+    {
+        [HarmonyPatch(typeof(Assets), "OnPrefabInit")]
+        public class Assets_OnPrefabInit_Patch
+        {
+            public static void Prefix(Assets __instance)
+            {
+                __instance.SpriteAssets.Add(LoadSprite("mod_mineralogy", ModAssets.Sprites.MOD_MINERALOGIST));
+                __instance.SpriteAssets.Add(LoadSprite("icon_errand_mineralogy", ModAssets.Sprites.ERRAND_MINERALOGY));
+                __instance.SpriteAssets.Add(LoadSprite("icon_archetype_mineralogy", ModAssets.Sprites.ARCHETYPE_MINERALOGY));
+            }
+
+            private static Sprite LoadSprite(string fileName, string spriteName)
+            {
+                var path = Path.Combine(Mod.folder, "assets", "sprites", fileName + ".png");
+                var texture = ModAssets.LoadTexture(path, true);
+                var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector3.zero);
+                sprite.name = spriteName;
+
+                return sprite;
+            }
+        }
+    }
+}

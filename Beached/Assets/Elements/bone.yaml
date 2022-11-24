@@ -1,0 +1,24 @@
+elements:
+  - elementId: Bone
+    specificHeatCapacity: 0.834
+    thermalConductivity: 2
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.2
+    highTemp: 1330
+    highTempTransitionTarget: MoltenCalcium
+    defaultTemperature: 290
+    defaultMass: 1000
+    maxMass: 1840
+    hardness: 50
+    molarMass: 200
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.75
+    radiationPer1000Mass: 0
+    materialCategory: ConsumableOre
+    buildMenuSort: 4
+    isDisabled: false
+    state: Solid
+    localizationID: STRINGS.ELEMENTS.BONE.NAME
+    dlcId: ""

@@ -16,6 +16,9 @@ namespace Beached.Content.ModDb
         // no effect
         public const string LIMPETS_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery";
 
+        // no effect
+        public const string CAPPED_RECOVERY = "Beached_Capped_Recovery";
+
         // for critters, used for growing limpets
         public const string LIMPETHOST = "Beached_LimpetHost";
 
@@ -52,11 +55,16 @@ namespace Beached.Content.ModDb
                 .HideFloatingText()
                 .Add(set);
 
-/*            new EffectBuilder(LIMPETHOST, 0, false)
-                .Modifier(BAmounts.LimpetGrowth.maxAttribute.Id, 100f)
-                .Modifier(BAmounts.LimpetGrowth.deltaAttribute.Id, 5f / Consts.CYCLE_LENGTH * 100f)
-                .Modifier(Db.Get().Amounts.Calories.deltaAttribute.Id, -250000 / Consts.CYCLE_LENGTH)
-                .Add(set);*/
+            new EffectBuilder(CAPPED_RECOVERY, 160f, false)
+                .HideInUI()
+                .HideFloatingText()
+                .Add(set);
+
+            /*            new EffectBuilder(LIMPETHOST, 0, false)
+                            .Modifier(BAmounts.LimpetGrowth.maxAttribute.Id, 100f)
+                            .Modifier(BAmounts.LimpetGrowth.deltaAttribute.Id, 5f / Consts.CYCLE_LENGTH * 100f)
+                            .Modifier(Db.Get().Amounts.Calories.deltaAttribute.Id, -250000 / Consts.CYCLE_LENGTH)
+                            .Add(set);*/
         }
     }
 }

@@ -11,6 +11,7 @@
 	<ItemGroup>
 		<_Anim Include="$(ProjectDir)anim/**"/>
 		<_Elements Include="$(ProjectDir)Assets/Elements/**"/>
+		<_Elements2 Include="$(ProjectDir)Assets/Elements/"/>
 	</ItemGroup>
 	
   <ItemGroup>

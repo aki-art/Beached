@@ -1,4 +1,5 @@
 ﻿using Beached.Content;
+using Beached.Settings;
 using HarmonyLib;
 using KMod;
 using System.IO;
@@ -9,6 +10,8 @@ namespace Beached
     public class Mod : UserMod2
     {
         public static bool DebugMode = true;
+
+        public static Config Settings = new Config();
 
         public static string folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // path field does not seem reliable with Local installs
 

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<!-- Build Properties -->
 	<PropertyGroup>
@@ -22,7 +22,7 @@
 
 	<!-- Mod Info -->
 	<PropertyGroup>
-		<ModName>Beached</ModName>
+		<ModName>Beached &lt;color=#FF0000&gt;ALPHA&lt;/color&gt;</ModName>
 		<ModDescription>...</ModDescription>
 		<SupportedContent>ALL</SupportedContent>
 		<MinimumSupportedBuild>486499</MinimumSupportedBuild>
@@ -55,6 +55,11 @@
 			<Private>false</Private>
 		</Reference>
 
+		<Reference Include="UnityEngine.TextRenderingModule">
+			<HintPath>$(GameLibsFolder)\UnityEngine.TextRenderingModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
 		<Reference Include="UnityEngine.ImageConversionModule">
 			<HintPath>$(GameLibsFolder)\UnityEngine.ImageConversionModule.dll</HintPath>
 			<Private>false</Private>
@@ -65,10 +70,16 @@
 			<Private>false</Private>
 		</Reference>
 
+		<Reference Include="FMODUnity">
+			<HintPath>$(GameLibsFolder)\FMODUnity.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Settings\" />
+	  <Folder Include="Content\ModDb\Diseases\" />
+	  <Folder Include="Content\Scripts\NewFolder\" />
 	</ItemGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

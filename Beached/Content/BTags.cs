@@ -8,6 +8,8 @@ namespace Beached.Content
         public static class MaterialCategories
         {
             public static Tag Crystal = TagManager.Create("Beached_Crystal");
+            public static Tag Dim = TagManager.Create("Beached_Dim");
+            public static Tag Dark = TagManager.Create("Beached_Dark");
         }
 
         public static void OnModLoad()

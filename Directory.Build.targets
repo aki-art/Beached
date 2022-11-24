@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+	<!--
 	<Target Name="CopyOutput" AfterTargets="Build">
 		<Copy SourceFiles="$(TargetDir)$(TargetName).dll" DestinationFolder="$(ModFolder)\$(TargetName)\"/>
-		<Copy SourceFiles="@(_Elements)" DestinationFolder="$(ModFolder)\$(TargetName)\elements"/>
+		<Copy SourceFiles="@(_Elements)" DestinationFolder="$(ModFolder)\$(TargetName)\elements"/> ContinueOnError='true'
+	</Target> -->
+
+	<Target Name="CopyModFiles" AfterTargets="Build">
+		<Exec Command="xcopy /yqsr &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(ModFolder)\$(TargetName)\&quot;"/>
+		<!--<Exec  Command="xcopy /yqsr &quot;@(_Elements2)&quot; &quot;$(ModFolder)\$(TargetName)\elements\&quot;"/>-->
+		<Exec Command='xcopy "$(ProjectDir)Assets\Elements" "$(ModFolder)\$(TargetName)\elements" /s /i /y' ContinueOnError='true' />
 	</Target>
 	
 </Project>
