@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Beached.Utils
 {
@@ -32,7 +31,9 @@ namespace Beached.Utils
             var prefab = global::Assets.GetPrefab(tag);
 
             if (prefab == null)
+            {
                 return null;
+            }
 
             var go = GameUtil.KInstantiate(global::Assets.GetPrefab(tag), position, sceneLayer);
             go.SetActive(setActive);

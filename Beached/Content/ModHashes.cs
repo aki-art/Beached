@@ -24,12 +24,24 @@
             hash = (GameHashes)value;
         }
 
-        public static implicit operator GameHashes(ModHashes modHashes) => modHashes.hash;
+        public static implicit operator GameHashes(ModHashes modHashes)
+        {
+            return modHashes.hash;
+        }
 
-        public static implicit operator int(ModHashes modHashes) => modHashes.value;
+        public static implicit operator int(ModHashes modHashes)
+        {
+            return modHashes.value;
+        }
 
-        public static implicit operator string(ModHashes modHashes) => modHashes.name;
+        public static implicit operator string(ModHashes modHashes)
+        {
+            return modHashes.name;
+        }
 
-        public override string ToString() => name;
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

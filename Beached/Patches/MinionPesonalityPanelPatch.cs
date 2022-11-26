@@ -1,13 +1,11 @@
-﻿using HarmonyLib;
-using static Beached.Patches.PropertyTexturesPatch;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-using System.Linq;
-using System.Reflection;
-using Klei.AI;
-using UnityEngine;
-using Beached.Content.ModDb;
+﻿using Beached.Content.ModDb;
 using Beached.Content.Scripts;
+using HarmonyLib;
+using Klei.AI;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Emit;
+using UnityEngine;
 
 namespace Beached.Patches
 {

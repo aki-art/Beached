@@ -1,5 +1,4 @@
-﻿using Beached.Content;
-using Beached.Utils;
+﻿using Beached.Utils;
 using HarmonyLib;
 using System;
 

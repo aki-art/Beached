@@ -1,7 +1,6 @@
 ﻿using Beached.Utils;
 using UnityEngine;
 using UnityEngine.UI;
-using static STRINGS.ELEMENTS;
 
 namespace Beached.Content.Scripts
 {
@@ -13,7 +12,7 @@ namespace Beached.Content.Scripts
         private Text foundationText;
 
         [MyCmpReq]
-        Crystal crystal;
+        private Crystal crystal;
 
         protected override void OnSpawn()
         {
@@ -35,7 +34,7 @@ namespace Beached.Content.Scripts
             var foundationDir = MiscUtil.GetOpposite(crystal.growthDirection);
             var foundationPos = Grid.CellToPosCCC(Grid.GetCellInDirection(Grid.PosToCell(this), foundationDir), Grid.SceneLayer.Building);
 
-            if(foundationText == null)
+            if (foundationText == null)
             {
                 foundationText = ModDebug.AddText(foundationPos, Color.green, crystal.growthDirection.ToString());
             }

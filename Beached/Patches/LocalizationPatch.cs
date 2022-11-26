@@ -29,14 +29,14 @@ namespace Beached.Patches
             // Load user created translations
             private static void LoadStrings()
             {
-                string code = Localization.GetLocale()?.Code;
+                var code = Localization.GetLocale()?.Code;
 
                 if (code.IsNullOrWhiteSpace())
                 {
                     return;
                 }
 
-                string path = Path.Combine(Mod.folder, "translations", code + ".po");
+                var path = Path.Combine(Mod.folder, "translations", code + ".po");
 
                 if (File.Exists(path))
                 {

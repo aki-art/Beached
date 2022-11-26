@@ -2,7 +2,6 @@
 using System.IO;
 using System.Reflection;
 using UnityEngine;
-using static STRINGS.CREATURES.STATS;
 
 namespace Beached
 {

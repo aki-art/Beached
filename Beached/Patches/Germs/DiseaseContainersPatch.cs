@@ -1,19 +1,14 @@
 ﻿using HarmonyLib;
-using static Beached.Patches.PropertyTexturesPatch;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-using System.Linq;
 using Klei.AI;
-using System.Reflection;
 
 namespace Beached.Patches.Germs
 {
     public class DiseaseContainersPatch
     {
         [HarmonyPatch(
-            typeof(DiseaseContainers), 
-            "CalculateDelta", 
-            new[] 
+            typeof(DiseaseContainers),
+            "CalculateDelta",
+            new[]
             {
                 typeof(DiseaseHeader),
                 typeof(DiseaseContainer),
@@ -32,7 +27,7 @@ namespace Beached.Patches.Germs
         {
             public static void Postfix(ref DiseaseContainer container, ref float __result)
             {
-                if(container.autoDisinfectable == null)
+                if (container.autoDisinfectable == null)
                 {
                     return;
                 }

@@ -1,5 +1,4 @@
-﻿using Beached.Content;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Beached.Utils
 {
@@ -32,7 +31,10 @@ namespace Beached.Utils
         }
 
         // be able to reference this class without havng to cast to (SimHashes)
-        public static implicit operator SimHashes(ElementInfo info) => info.SimHash;
+        public static implicit operator SimHashes(ElementInfo info)
+        {
+            return info.SimHash;
+        }
 
         // GetElement(Tag) is the fastest way to fetch an element, but i can't remember that so here is a shortcut for it
         public Element Get()
@@ -78,6 +80,9 @@ namespace Beached.Utils
             return new ElementInfo(id, "gas_tank_kanim", Element.State.Gas, color);
         }
 
-        public override string ToString() => SimHash.ToString();
+        public override string ToString()
+        {
+            return SimHash.ToString();
+        }
     }
 }

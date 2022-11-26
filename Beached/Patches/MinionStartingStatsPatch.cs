@@ -14,7 +14,7 @@ namespace Beached.Patches
         {
             public static void Postfix(MinionStartingStats __instance)
             {
-                if(Mod.Settings.CrossWorld.LifeGoals || BeachedWorldManager.Instance.IsBeachedContentActive)
+                if (Mod.Settings.CrossWorld.LifeGoals || BeachedWorldManager.Instance.IsBeachedContentActive)
                 {
                     var trait = BTraits.GetGoalForPersonality(__instance.personality);
 
@@ -25,9 +25,9 @@ namespace Beached.Patches
                     ext.AddLifeGoalReward(Db.Get().Attributes.QualityOfLife.Id, CONSTS.DUPLICANTS.LIFEGOALS.MORALBONUS);
 
                     // Add 3-5 more of their already present aptitudes
-                    foreach(var aptitude in __instance.skillAptitudes)
+                    foreach (var aptitude in __instance.skillAptitudes)
                     {
-                        foreach(var skill in aptitude.Key.relevantAttributes)
+                        foreach (var skill in aptitude.Key.relevantAttributes)
                         {
                             ext.AddLifeGoalReward(skill.Id, Random.Range(3, 6));
                         }
@@ -44,7 +44,7 @@ namespace Beached.Patches
             {
                 var goalTrait = __instance.GetLifeGoalTrait();
 
-                if(goalTrait == null)
+                if (goalTrait == null)
                 {
                     return;
                 }

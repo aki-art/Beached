@@ -22,7 +22,7 @@ namespace Beached.Content.ModDb
 
             var index = skillGroups.resources.FindIndex(s => s.Id == skillGroups.Mining.Id);
 
-            if(index == -1)
+            if (index == -1)
             {
                 Log.Warning("Mining skill not found");
                 Precision = skillGroups.Add(Precision);

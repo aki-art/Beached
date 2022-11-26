@@ -23,7 +23,7 @@ namespace Beached
             BTags.OnModLoad();
 
             Log.Debug("DEVTOOL MNGR INSTANCE");
-            if(DevToolManager.Instance == null)
+            if (DevToolManager.Instance == null)
             {
                 Log.Warning("it null");
             }

@@ -1,11 +1,8 @@
-﻿using Beached.Settings;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Klei.AI;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using static Beached.STRINGS.ELEMENTS;
-using static STRINGS.ELEMENTS;
 
 namespace Beached.Utils
 {
@@ -27,7 +24,7 @@ namespace Beached.Utils
         {
             var animFile = Assets.Anims.Find(a => a.name == anim);
 
-            if(animFile == null)
+            if (animFile == null)
             {
                 animFile = Assets.Anims.Find(a => a.name == "glass_kanim");
             }
@@ -48,7 +45,7 @@ namespace Beached.Utils
                     }
                 }
 
-                if(!normal.IsNullOrWhiteSpace())
+                if (!normal.IsNullOrWhiteSpace())
                 {
                     SetTexture(newMaterial, normal, "_NormalNoise");
                 }

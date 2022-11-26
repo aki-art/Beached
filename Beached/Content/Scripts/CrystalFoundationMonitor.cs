@@ -19,7 +19,7 @@ namespace Beached.Content.Scripts
         public bool hasMatchingFoundation = true;
 
         [SerializeField]
-        public SimHashes myElement; 
+        public SimHashes myElement;
 
         [MyCmpGet]
         private KPrefabID kPrefabID;
@@ -73,7 +73,7 @@ namespace Beached.Content.Scripts
 
         public void OnGroundChanged(object _)
         {
-            if(!needsFoundation)
+            if (!needsFoundation)
             {
                 return;
             }

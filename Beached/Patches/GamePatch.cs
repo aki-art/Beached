@@ -1,11 +1,7 @@
-﻿using Beached.Content.Scripts;
-using Beached.Utils;
+﻿using Beached.Utils;
 using HarmonyLib;
-using System;
 using System.Collections.Generic;
-using TemplateClasses;
 using UnityEngine;
-using static STRINGS.BUILDINGS.PREFABS;
 
 namespace Beached.Patches
 {

@@ -29,7 +29,7 @@ namespace Beached.Patches
 
                 Grid.GetVisibleExtents(out var x0, out var minY, out var x1, out var maxY);
 
-                for (int y0 = minY; y0 <= maxY; y0 += 16)
+                for (var y0 = minY; y0 <= maxY; y0 += 16)
                 {
                     var y1 = Math.Min(y0 + 16 - 1, maxY);
 
@@ -49,14 +49,14 @@ namespace Beached.Patches
                 y0 = Mathf.Clamp(y0, 0, Grid.HeightInCells - 1);
                 y1 = Mathf.Clamp(y1, 0, Grid.HeightInCells - 1);
 
-                for (int i = y0; i <= y1; i++)
+                for (var i = y0; i <= y1; i++)
                 {
-                    int num = Grid.XYToCell(x0, i);
-                    int num2 = Grid.XYToCell(x1, i);
+                    var num = Grid.XYToCell(x0, i);
+                    var num2 = Grid.XYToCell(x1, i);
 
-                    for (int j = num; j <= num2; j++)
+                    for (var j = num; j <= num2; j++)
                     {
-                        int num3 = j * 4;
+                        var num3 = j * 4;
                         if (Grid.IsActiveWorld(j))
                         {
                             var color = GetDiseaseColor(j);
@@ -123,7 +123,7 @@ namespace Beached.Patches
         {
             public static void Postfix(SimDebugView __instance, GameObject ___plane)
             {
-                Renderer component = ___plane.GetComponent<Renderer>();
+                var component = ___plane.GetComponent<Renderer>();
                 // TODO: just for test
                 component.sharedMaterial.SetTexture("_GermTex", component.sharedMaterial.mainTexture);
             }
@@ -202,8 +202,8 @@ namespace Beached.Patches
                 if (__result && Capped.dupesWithCaps.TryGetValue(___proxyID, out var isCapped) && isCapped)
                 {
                     Grid.SuitMarker.Flags flags = 0;
-                    bool needsSuitCheck = path.HasFlag(PathFinder.PotentialPath.Flags.PerformSuitChecks) && Grid.TryGetSuitMarkerFlags(from_cell, out flags, out _) && (flags & Grid.SuitMarker.Flags.Operational) > 0;
-                    bool directionNeedsSuit = SuitMarker.DoesTraversalDirectionRequireSuit(from_cell, path.cell, flags);
+                    var needsSuitCheck = path.HasFlag(PathFinder.PotentialPath.Flags.PerformSuitChecks) && Grid.TryGetSuitMarkerFlags(from_cell, out flags, out _) && (flags & Grid.SuitMarker.Flags.Operational) > 0;
+                    var directionNeedsSuit = SuitMarker.DoesTraversalDirectionRequireSuit(from_cell, path.cell, flags);
 
                     if (directionNeedsSuit && needsSuitCheck)
                     {

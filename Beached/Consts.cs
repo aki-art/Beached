@@ -2,7 +2,7 @@
 {
     public class CONSTS
     {
-        public const float CYCLE_LENGTH = 600f; 
+        public const float CYCLE_LENGTH = 600f;
 
         public static class DUPLICANTS
         {

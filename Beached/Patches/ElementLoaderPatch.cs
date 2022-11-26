@@ -40,8 +40,8 @@ namespace Beached.Patches
                     if (elem.elementId == Elements.Amber.ToString() && DlcManager.FeatureRadiationEnabled())
                     {
                         elem.highTempTransitionTarget = SimHashes.Resin.ToString();
-                    } 
-                    else if(elem.elementId == SimHashes.Diamond.ToString())
+                    }
+                    else if (elem.elementId == SimHashes.Diamond.ToString())
                     {
                         Mod.Settings.CrossWorld.Elements.originalDiamondCategory = elem.materialCategory;
                     }
@@ -49,14 +49,14 @@ namespace Beached.Patches
                     {
                         Mod.Settings.CrossWorld.Elements.originalAbyssaliteCategory = elem.materialCategory;
                     }
-                    else if(elem.elementId == SimHashes.Lime.ToString())
+                    else if (elem.elementId == SimHashes.Lime.ToString())
                     {
                         Mod.Settings.CrossWorld.Elements.originalLimeHighTemp = elem.highTemp;
                         Mod.Settings.CrossWorld.Elements.originalLimeHighTempTarget = elem.highTempTransitionTarget;
 
                     }
                     // reenable Helium
-                    else if(elem.elementId == SimHashes.Helium.ToString())
+                    else if (elem.elementId == SimHashes.Helium.ToString())
                     {
                         elem.isDisabled = false;
                     }

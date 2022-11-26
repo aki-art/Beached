@@ -1,9 +1,5 @@
-﻿using Beached.Content;
-using HarmonyLib;
-using System.Collections.Generic;
-using TemplateClasses;
+﻿using HarmonyLib;
 using UnityEngine;
-using static STRINGS.CREATURES.FERTILITY_MODIFIERS;
 
 namespace Beached.Patches
 {

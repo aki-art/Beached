@@ -36,7 +36,7 @@ namespace Beached.Content.Scripts
         {
             base.OnSpawn();
 
-            if(growthDirection == Direction.None)
+            if (growthDirection == Direction.None)
             {
                 RandomizeDirection();
             }
@@ -81,10 +81,10 @@ namespace Beached.Content.Scripts
                     angle = GetRandomGrowthAngle(direction);
                     Rotate(angle);
 
-                    if(debugger != null)
+                    if (debugger != null)
                     {
                         debugger.UpdateVisualizers();
-                    } 
+                    }
 
                     return;
                 }

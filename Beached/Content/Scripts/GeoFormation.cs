@@ -43,9 +43,9 @@ namespace Beached.Content.Scripts
             var length = 4f; //
             Random.Range(1, 5);
 
-            while(length > 0)
+            while (length > 0)
             {
-                if(TestLength(length))
+                if (TestLength(length))
                 {
                     kbac.Play(length.ToString());
                     break;
@@ -64,7 +64,10 @@ namespace Beached.Content.Scripts
 
         private Vector3 startPoint;
 
-        public static Vector3 RadianToVector2(float radian) => new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+        public static Vector3 RadianToVector2(float radian)
+        {
+            return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+        }
 
         private bool TestLength(float length)
         {
@@ -210,7 +213,7 @@ namespace Beached.Content.Scripts
             foreach (var direction in validFoundationDirections)
             {
                 var cell = Grid.GetCellInDirection(originalCell, direction);
-                if(Grid.IsSolidCell(cell))
+                if (Grid.IsSolidCell(cell))
                 {
                     SetRotation(GetGrowthDirection(direction));
                     //SetFoundation(direction);

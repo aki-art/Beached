@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 
 namespace Beached.Patches
 {
-    public  class AssignableSideScreenRowPatch
+    public class AssignableSideScreenRowPatch
     {
         [HarmonyPatch(typeof(AssignableSideScreenRow), "GetTooltip")]
         public class AssignableSideScreenRow_GetTooltip_Patch
@@ -15,7 +15,7 @@ namespace Beached.Patches
             {
                 var codes = orig.ToList();
                 var f_DISABLED_TOOLTIP = typeof(global::STRINGS.UI.UISIDESCREENS.ASSIGNABLESIDESCREEN).GetField("DISABLED_TOOLTIP", BindingFlags.Static | BindingFlags.Public);
-                var index = codes.FindIndex(ci => ci.LoadsField(f_DISABLED_TOOLTIP)); 
+                var index = codes.FindIndex(ci => ci.LoadsField(f_DISABLED_TOOLTIP));
 
                 if (index == -1)
                 {

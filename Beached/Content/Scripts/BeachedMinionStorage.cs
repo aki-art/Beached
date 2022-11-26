@@ -1,6 +1,4 @@
-﻿using Klei.AI;
-using KSerialization;
-using System.Collections.Generic;
+﻿using KSerialization;
 
 namespace Beached.Content.Scripts
 {
@@ -11,10 +9,10 @@ namespace Beached.Content.Scripts
         public string hat;
 
         [MyCmpGet]
-        MinionResume resume;
+        private MinionResume resume;
 
         [MyCmpGet]
-        KBatchedAnimController kbac;
+        private KBatchedAnimController kbac;
 
 
         public void RestoreHat()
@@ -23,7 +21,7 @@ namespace Beached.Content.Scripts
             {
                 MinionResume.ApplyHat(hat, kbac);
                 hat = "";
-            } 
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Beached.Patches
             {
                 __instance.GetComponent<KPrefabID>().prefabSpawnFn += go =>
                 {
-                    if(go.TryGetComponent(out Assignable assignable)) 
+                    if (go.TryGetComponent(out Assignable assignable))
                     {
                         assignable.AddAssignPrecondition(IsNotCapped);
                         assignable.AddAutoassignPrecondition(IsNotCapped);

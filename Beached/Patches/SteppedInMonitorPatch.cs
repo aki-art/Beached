@@ -1,8 +1,6 @@
 ﻿using Beached.Content;
 using Beached.Content.ModDb;
-using Beached.Content.Scripts;
 using HarmonyLib;
-using UnityEngine;
 
 namespace Beached.Patches
 {
@@ -14,7 +12,7 @@ namespace Beached.Patches
         {
             public static bool Prefix(SteppedInMonitor.Instance smi)
             {
-                int num = Grid.CellAbove(Grid.PosToCell(smi));
+                var num = Grid.CellAbove(Grid.PosToCell(smi));
                 if (Grid.IsValidCell(num) && Grid.Element[num].id == Elements.Mucus)
                 {
                     smi.effects.Remove("CarpetFeet");
@@ -37,7 +35,7 @@ namespace Beached.Patches
         {
             public static void Postfix(ref bool __result, SteppedInMonitor.Instance smi)
             {
-                if(!__result)
+                if (!__result)
                 {
                     var cell = Grid.CellBelow(Grid.PosToCell(smi));
                     __result = Grid.IsValidCell(cell) && Grid.Element[cell].id == Elements.Moss;

@@ -1,7 +1,5 @@
 ﻿using Beached.Utils;
-using HarmonyLib;
 using System.Collections.Generic;
-using static STRINGS.ELEMENTS;
 
 namespace Beached.Content
 {
@@ -83,7 +81,7 @@ namespace Beached.Content
             };
 
             // Dump the rest in
-            foreach(var element in ElementUtil.elements)
+            foreach (var element in ElementUtil.elements)
             {
                 if (!element.isInitialized)
                 {
@@ -193,13 +191,13 @@ namespace Beached.Content
             configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, ZirconiumOre));
             configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, SiltStone));
 
-/*            var soundTable = Traverse.Create(GlobalAssets.Instance).Field<Dictionary<string, string>>("SoundTable").Value;
-            Log.Debug("&&&&&&&&&&&&&");
-            foreach(var asset in soundTable)
-            {
-                Log.Debug(asset.Key + " - " + asset.Value);
-            }
-            Log.Debug("&&&&&&&&&&&&&");*/
+            /*            var soundTable = Traverse.Create(GlobalAssets.Instance).Field<Dictionary<string, string>>("SoundTable").Value;
+                        Log.Debug("&&&&&&&&&&&&&");
+                        foreach(var asset in soundTable)
+                        {
+                            Log.Debug(asset.Key + " - " + asset.Value);
+                        }
+                        Log.Debug("&&&&&&&&&&&&&");*/
 
             return configs.ToArray();
         }

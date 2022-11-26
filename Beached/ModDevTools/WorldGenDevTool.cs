@@ -4,10 +4,10 @@ namespace Beached.ModDevTools
 {
     public class WorldGenDevTool : DevTool
     {
-        string testString = "test";
+        private string testString = "test";
 
         protected override void Render()
-{
+        {
             ImGui.Text("Settings here");
 
             ImGui.Text("text inside");

@@ -12,7 +12,7 @@ namespace Beached.Patches
         {
             public static void Postfix(GameObject target, ref bool __result)
             {
-                if(__result)
+                if (__result)
                 {
                     __result = !target.HasTag(AmmoniaGeneratorConfig.ID);
                 }

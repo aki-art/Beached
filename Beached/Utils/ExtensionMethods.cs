@@ -10,7 +10,7 @@ namespace Beached.Utils
 
         public static MinionStartingStatsExtension GetExtension(this MinionStartingStats stats)
         {
-            if(!minionStartingStatsExtensions.ContainsKey(stats))
+            if (!minionStartingStatsExtensions.ContainsKey(stats))
             {
                 minionStartingStatsExtensions.Add(stats, new MinionStartingStatsExtension(stats));
             }
@@ -18,8 +18,14 @@ namespace Beached.Utils
             return minionStartingStatsExtensions[stats];
         }
 
-        public static Trait GetLifeGoalTrait(this MinionStartingStats stats) => GetExtension(stats)?.lifeGoalTrait;
+        public static Trait GetLifeGoalTrait(this MinionStartingStats stats)
+        {
+            return GetExtension(stats)?.lifeGoalTrait;
+        }
 
-        public static Dictionary<string, int> GetLifeGoalAttributes(this MinionStartingStats stats) => GetExtension(stats).lifeGoalAttributes;
+        public static Dictionary<string, int> GetLifeGoalAttributes(this MinionStartingStats stats)
+        {
+            return GetExtension(stats).lifeGoalAttributes;
+        }
     }
 }

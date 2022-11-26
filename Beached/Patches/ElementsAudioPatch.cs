@@ -1,7 +1,5 @@
 ﻿using Beached.Content;
 using HarmonyLib;
-using static Beached.STRINGS.ELEMENTS;
-using static STRINGS.ELEMENTS;
 
 namespace Beached.Patches
 {
@@ -14,8 +12,8 @@ namespace Beached.Patches
             {
                 ___elementAudioConfigs = ___elementAudioConfigs.AddRangeToArray(Elements.CreateAudioConfigs(__instance));
 
-                foreach(var item in ___elementAudioConfigs)
-{
+                foreach (var item in ___elementAudioConfigs)
+                {
                     Log.Debug("ELEMENT AUDIO CONFIGS");
                     Log.Debug("elementID " + item.elementID);
                     Log.Debug("ambienceType " + item.ambienceType);

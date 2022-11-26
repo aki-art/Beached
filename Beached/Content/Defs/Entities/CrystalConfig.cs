@@ -34,7 +34,10 @@ namespace Beached.Content.Defs.Entities
             return prefab;
         }
 
-        public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+        public string[] GetDlcIds()
+        {
+            return DlcManager.AVAILABLE_ALL_VERSIONS;
+        }
 
         public void OnPrefabInit(GameObject inst)
         {

@@ -11,7 +11,7 @@ namespace Beached.Patches
         {
             public static void Postfix(UILineRenderer[] ___lines)
             {
-                foreach(var line in ___lines)
+                foreach (var line in ___lines)
                 {
                     line.BezierMode = UILineRenderer.BezierType.Basic;
                     line.BezierSegmentsPerCurve = 16;

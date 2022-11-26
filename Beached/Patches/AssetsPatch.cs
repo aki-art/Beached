@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
-using static STRINGS.CREATURES.STATS;
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 
 namespace Beached.Patches
 {

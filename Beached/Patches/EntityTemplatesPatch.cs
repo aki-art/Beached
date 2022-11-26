@@ -12,7 +12,7 @@ namespace Beached.Patches
         {
             public static void Prefix(ref SimHashes[] safe_elements)
             {
-                if(safe_elements != null)
+                if (safe_elements != null)
                 {
                     var elements = safe_elements.ToHashSet();
                     if (elements.Contains(SimHashes.Oxygen))

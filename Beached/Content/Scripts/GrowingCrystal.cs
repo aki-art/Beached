@@ -1,7 +1,4 @@
-﻿using System;
-using static TUNING.NOISE_POLLUTION;
-
-namespace Beached.Content.Scripts
+﻿namespace Beached.Content.Scripts
 {
     public class GrowingCrystal : KMonoBehaviour
     {
@@ -36,7 +33,7 @@ namespace Beached.Content.Scripts
             //if(!crystalFoundationMonitor.hasFoundation)
             //{
             //    // shatter
-                Util.KDestroyGameObject(this);
+            Util.KDestroyGameObject(this);
             //}
 
             //kSelectable.ToggleStatusItem(test, crystalFoundationMonitor.hasMatchingFoundation);

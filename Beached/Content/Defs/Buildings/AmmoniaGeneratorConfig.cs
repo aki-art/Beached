@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using TUNING;
+﻿using TUNING;
+using UnityEngine;
 
 namespace Beached.Content.Defs.Buildings
 {
@@ -59,11 +59,11 @@ namespace Beached.Content.Defs.Buildings
             var energyGenerator = go.AddOrGet<EnergyGenerator>();
             energyGenerator.formula = new EnergyGenerator.Formula
             {
-                inputs = new []
+                inputs = new[]
                 {
                     new EnergyGenerator.InputItem(Elements.Ammonia.Tag, 0.09f, 0.90000004f)
                 },
-                outputs = new []
+                outputs = new[]
                 {
                     new EnergyGenerator.OutputItem(SimHashes.Water, 0.0675f, true, new CellOffset(1, 1), 313.15f),
                     new EnergyGenerator.OutputItem(Elements.Nitrogen, 0.0225f, false, new CellOffset(0, 2), 383.15f)

@@ -66,7 +66,7 @@ namespace Beached.Content.Scripts
                 pearlMat.alpha.SetFloat("_SrcAlpha", 1f);
                 pearlMat.alpha.SetFloat("_DestAlpha", 0f);
                 pearlMat.opaque.SetColor("_ShineColour", pearlColortest);
-               // pearlMat.alpha.SetColor("_ColourTint", pearlColor2);
+                // pearlMat.alpha.SetColor("_ColourTint", pearlColor2);
                 //pearlMat.opaque.SetColor("_ColourTint", pearlColor2);
 
                 var bismuthColor = Color.Lerp(Color.red, Color.green, t);
@@ -99,7 +99,7 @@ namespace Beached.Content.Scripts
             pearl1str = GUILayout.TextField(pearl1str);
             pearl2str = GUILayout.TextField(pearl2str);
 
-            if(GUILayout.Button("Color"))
+            if (GUILayout.Button("Color"))
             {
                 pearl1 = Util.ColorFromHex(pearl1str);
                 pearl2 = Util.ColorFromHex(pearl2str);

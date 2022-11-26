@@ -12,7 +12,7 @@
 
             Elements.OnWorldReload(IsBeachedContentActive);
             //ElementInteractions.Instance.enabled = IsBeachedContentActive || Mod.Settings.CrossWorld.Elements.ElementInteractions;
-            
+
         }
 
         // TODO: mod settings content enable || beached world loaded

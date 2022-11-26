@@ -32,12 +32,15 @@ namespace Beached.Content.Defs.Items
                 });
 
             return equipmentDef;
-		}
+        }
 
         public void DoPostConfigure(GameObject go)
         {
         }
 
-        public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+        public string[] GetDlcIds()
+        {
+            return DlcManager.AVAILABLE_ALL_VERSIONS;
+        }
     }
 }

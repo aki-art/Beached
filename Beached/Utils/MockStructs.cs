@@ -18,35 +18,35 @@ namespace Beached.Utils
             }
         }
 
-		// Game
-		public enum SpawnRotationConfig
-		{
-			Normal,
-			StringName
-		}
+        // Game
+        public enum SpawnRotationConfig
+        {
+            Normal,
+            StringName
+        }
 
-		// Game
-		[Serializable]
-		public struct SpawnRotationData
-		{
-			public string animName;
-			public bool flip;
-		}
+        // Game
+        [Serializable]
+        public struct SpawnRotationData
+        {
+            public string animName;
+            public bool flip;
+        }
 
-		// Game
-		[Serializable]
-		public struct SpawnPoolData
-		{
-			[HashedEnum]
-			public SpawnFXHashes id;
-			public int initialCount;
-			public Color32 colour;
-			public GameObject fxPrefab;
-			public string initialAnim;
-			public Vector3 spawnOffset;
-			public Vector2 spawnRandomOffset;
-			public SpawnRotationConfig rotationConfig;
-			public SpawnRotationData[] rotationData;
-		}
-	}
+        // Game
+        [Serializable]
+        public struct SpawnPoolData
+        {
+            [HashedEnum]
+            public SpawnFXHashes id;
+            public int initialCount;
+            public Color32 colour;
+            public GameObject fxPrefab;
+            public string initialAnim;
+            public Vector3 spawnOffset;
+            public Vector2 spawnRandomOffset;
+            public SpawnRotationConfig rotationConfig;
+            public SpawnRotationData[] rotationData;
+        }
+    }
 }

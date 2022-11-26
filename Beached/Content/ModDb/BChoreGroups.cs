@@ -12,17 +12,17 @@ namespace Beached.Content.ModDb
 
         public static void Register(ChoreGroups parent)
         {
-/*            HandyWork = parent.Add(new ChoreGroup(
-                HANDYWORK_ID,
-                STRINGS.DUPLICANTS.CHOREGROUPS.BEACHED_CHOREGROUP_HANDYWORK.NAME,
-                BAttributes.handSteadiness,
-                ModAssets.Sprites.ERRAND_MINERALOGY, 
-                5));*/
+            /*            HandyWork = parent.Add(new ChoreGroup(
+                            HANDYWORK_ID,
+                            STRINGS.DUPLICANTS.CHOREGROUPS.BEACHED_CHOREGROUP_HANDYWORK.NAME,
+                            BAttributes.handSteadiness,
+                            ModAssets.Sprites.ERRAND_MINERALOGY, 
+                            5));*/
             AnimalKeeping = parent.Add(new ChoreGroup(
                 ANIMALKEEPING_ID,
                 STRINGS.DUPLICANTS.CHOREGROUPS.BEACHED_CHOREGROUP_HANDYWORK.NAME,
                 BAttributes.handSteadiness,
-                ModAssets.Sprites.ERRAND_MINERALOGY, 
+                ModAssets.Sprites.ERRAND_MINERALOGY,
                 5));
         }
     }

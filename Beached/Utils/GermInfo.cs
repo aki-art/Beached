@@ -54,7 +54,7 @@ namespace Beached.Utils
                 diffusionScale = new float?(1E-06f),
                 minDiffusionCount = new int?(1000000)
             };
-        } 
+        }
 
         public StateGrowthRule GrowOnSolid()
         {
@@ -63,7 +63,7 @@ namespace Beached.Utils
                 underPopulationDeathRate = new float?(0f),
                 populationHalfLife = new float?(-3000f),
                 overPopulationHalfLife = new float?(3000f),
-                maxCountPerKG = new float?((float)4500),
+                maxCountPerKG = new float?(4500),
                 diffusionScale = new float?(0.05f)
             };
         }
