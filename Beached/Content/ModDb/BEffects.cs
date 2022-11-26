@@ -34,12 +34,12 @@ namespace Beached.Content.ModDb
 
             new EffectBuilder(OCEAN_BREEZE, 180f, false)
                 .Modifier(airConsumptionRate, -0.01f)
-                .Modifier(stressDelta, -5f / Consts.CYCLE_LENGTH)
+                .Modifier(stressDelta, -5f / CONSTS.CYCLE_LENGTH)
                 .Add(set);
 
             new EffectBuilder(SCARED, 2f, true)
-                .Modifier(stressDelta, 10f / Consts.CYCLE_LENGTH)
-                .Modifier(peeDelta, 5f / Consts.CYCLE_LENGTH)
+                .Modifier(stressDelta, 10f / CONSTS.CYCLE_LENGTH)
+                .Modifier(peeDelta, 5f / CONSTS.CYCLE_LENGTH)
                 .Add(set);
 
             new EffectBuilder(MUCUS_SOAKED, 120f, true)

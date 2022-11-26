@@ -3,6 +3,7 @@
 	<!-- Build Properties -->
 	<PropertyGroup>
 		<TargetFramework>net48</TargetFramework>
+		<LangVersion>preview</LangVersion>
 		<Configurations>Debug</Configurations>
 		<AssemblyName>Beached</AssemblyName>
 		<RootNamespace>Beached</RootNamespace>
@@ -30,7 +31,17 @@
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 
+	<!-- dont forget to merge IMNODES -->
 	<ItemGroup>
+		<Reference Include="FMODUnity">
+		  <HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnity.dll</HintPath>
+		</Reference>
+		<Reference Include="ImGui">
+		  <HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\ImGui.dll</HintPath>
+		</Reference>
+		<Reference Include="ImGui.NET">
+		  <HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\ImGui.NET.dll</HintPath>
+		</Reference>
 		<Reference Include="LibNoiseDotNet">
 			<HintPath>$(GameLibsFolder)\LibNoiseDotNet.dll</HintPath>
 			<Private>false</Private>
@@ -70,16 +81,10 @@
 			<Private>false</Private>
 		</Reference>
 
-		<Reference Include="FMODUnity">
-			<HintPath>$(GameLibsFolder)\FMODUnity.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Content\ModDb\Diseases\" />
-	  <Folder Include="Content\Scripts\NewFolder\" />
 	</ItemGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

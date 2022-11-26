@@ -1,8 +1,16 @@
 ﻿namespace Beached
 {
-    public class Consts
+    public class CONSTS
     {
         public const float CYCLE_LENGTH = 600f; 
+
+        public static class DUPLICANTS
+        {
+            public static class LIFEGOALS
+            {
+                public const int MORALBONUS = 2;
+            }
+        }
 
         public static class EXPOSURE_EFFECT
         {

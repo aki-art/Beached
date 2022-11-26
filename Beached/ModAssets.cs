@@ -110,7 +110,7 @@ namespace Beached
             Log.Debug("LOADING ASSETS");
 
             var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
-            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/c_GermOverlay.shader"));
+            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
             Textures.germOverlays = bundle.LoadAsset<Texture2DArray>("Assets/Beached/Images/combined.png");
             foreach (var asset in bundle.GetAllAssetNames())
             {

@@ -428,6 +428,8 @@ namespace Beached
 
             public class TRAITS
             {
+                public static LocString GENETIC_TRAIT = "This is a genetic trait always paired with a {0}.";
+
                 public class BEACHED_GILLS
                 {
                     public static LocString NAME = "Gills";
@@ -485,6 +487,8 @@ namespace Beached
 
                 public static LocString LIGHTEXPOSURE = "Exposed to Light. Approximately {0} change per second.";
             }
+
+
         }
 
         public class EFFECTS
@@ -781,6 +785,12 @@ namespace Beached
                 {
                     public static LocString NAME = "Beach Shirt";
                 }
+
+                public class BEACHED_EQUIPMENT_MAXIXEPENDANT
+                {
+                    public static LocString NAME = "Maxixe Pendant";
+                    public static LocString DESCRIPTION = "...";
+                }
             }
         }
 
@@ -897,6 +907,11 @@ namespace Beached
                     public static LocString OCEANARIA = "Oca\nSalt\nMarin\nDeep\nBrin\nBlu\nSalin\nCoral\nAq\nPelag\nNaut\nNav\n";
                 }
             }
+        }
+
+        public class UI
+        {
+            public static LocString CHARACTERCONTAINER_LIFEGOAL_TRAIT = "<color=#e6d084>Life Goal: {0}</color>";
         }
 
         public static string FormatAsLink(string text, string id = null)

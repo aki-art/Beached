@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.Scripts;
+using HarmonyLib;
 using UnityEngine;
 
 namespace Beached.Patches
@@ -13,12 +14,15 @@ namespace Beached.Patches
                 var snapOn = __result.GetComponent<SnapOn>();
                 snapOn.snapPoints.Add(new SnapOn.SnapPoint
                 {
-                    pointName = Consts.SNAPONS.CAP,
+                    pointName = CONSTS.SNAPONS.CAP,
                     automatic = false,
                     context = "",
                     buildFile = Assets.GetAnim("beached_head_shroom_kanim"),
                     overrideSymbol = "snapTo_hat"
                 });
+
+                __result.AddOrGet<BeachedMinionStorage>();
+                __result.AddOrGet<LifeGoalTracker>();
             }
         }
     }

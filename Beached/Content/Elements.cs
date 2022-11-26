@@ -107,12 +107,12 @@ namespace Beached.Content
         // Eye irritation
         public static void SetExposureValues(Dictionary<SimHashes, float> customExposureRates)
         {
-            customExposureRates[SaltyOxygen] = Consts.EXPOSURE_EFFECT.COMFORTABLE;
-            customExposureRates[Nitrogen] = Consts.EXPOSURE_EFFECT.NEUTRAL;
-            customExposureRates[Mucus] = Consts.EXPOSURE_EFFECT.NEUTRAL;
-            customExposureRates[MurkyBrine] = Consts.EXPOSURE_EFFECT.NEUTRAL;
-            customExposureRates[Ammonia] = Consts.EXPOSURE_EFFECT.VERY_IRRITATING;
-            customExposureRates[SulfurousWater] = Consts.EXPOSURE_EFFECT.OH_HECK_IT_BURNS;
+            customExposureRates[SaltyOxygen] = CONSTS.EXPOSURE_EFFECT.COMFORTABLE;
+            customExposureRates[Nitrogen] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
+            customExposureRates[Mucus] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
+            customExposureRates[MurkyBrine] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
+            customExposureRates[Ammonia] = CONSTS.EXPOSURE_EFFECT.VERY_IRRITATING;
+            customExposureRates[SulfurousWater] = CONSTS.EXPOSURE_EFFECT.OH_HECK_IT_BURNS;
         }
 
         // Decor and Overheat modifiers

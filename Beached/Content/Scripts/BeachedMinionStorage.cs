@@ -1,18 +1,21 @@
-﻿using KSerialization;
+﻿using Klei.AI;
+using KSerialization;
+using System.Collections.Generic;
 
 namespace Beached.Content.Scripts
 {
-    // Extended Identity/resuma
+    [SerializationConfig(MemberSerialization.OptIn)]
     public class BeachedMinionStorage : KMonoBehaviour
     {
         [Serialize]
         public string hat;
 
-        [MyCmpReq]
+        [MyCmpGet]
         MinionResume resume;
 
-        [MyCmpReq]
+        [MyCmpGet]
         KBatchedAnimController kbac;
+
 
         public void RestoreHat()
         {

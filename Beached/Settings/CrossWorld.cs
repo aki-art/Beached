@@ -4,6 +4,8 @@ namespace Beached.Settings
 {
     public class CrossWorld
     {
+        public bool LifeGoals { get; set; } = false;
+
         public ElementSettings Elements { get; set; } = new ElementSettings();
 
         public class ElementSettings

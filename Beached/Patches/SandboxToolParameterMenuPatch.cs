@@ -1,5 +1,6 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Entities;
+using Beached.Content.Defs.Items;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,14 @@ namespace Beached.Patches
         private static readonly HashSet<Tag> tags = new HashSet<Tag>()
         {
             CrystalConfig.ID,
+
+            // Geysers
             "GeyserGeneric_" + GeyserConfigs.AMMONIA_VENT,
             "GeyserGeneric_" + GeyserConfigs.MURKY_BRINE_GEYSER,
             "GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO,
+
+            // Equipment
+            MaxixePendantConfig.ID
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]
