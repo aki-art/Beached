@@ -15,6 +15,7 @@ namespace Beached.Content.ModDb
         public class LifeGoals
         {
             public const string JEWELLERY_AQUAMARINE = "Beached_Trait_WantsJewellery";
+            public const string BEDROOM_SURFBOARD = "Beached_Trait_WantsSurfboardInBedroom";
         }
 
         public static List<string> LIFEGOALS = new();
@@ -41,6 +42,12 @@ namespace Beached.Content.ModDb
                 STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_MAXIXEPENDANT.NAME,
                 string.Format("This duplicant really wishes to express themselves by wearing a {0}.", STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_MAXIXEPENDANT.NAME),
                 MaxixePendantConfig.ID);
+
+            AddBedroomTrait(
+                LifeGoals.BEDROOM_SURFBOARD,
+                "Surfin' and Snoozin'",
+                string.Format("This duplicant sannot stop talking about how cool it would be to have a {0} in their bedroom.", global::STRINGS.BUILDINGS.PREFABS.MECHANICALSURFBOARD.NAME),
+                MechanicalSurfboardConfig.ID);
 
             DUPLICANTSTATS.GOODTRAITS.Add(new DUPLICANTSTATS.TraitVal()
             {
@@ -76,9 +83,28 @@ namespace Beached.Content.ModDb
             }
         }
 
+        private static void AddBedroomTrait(string id, string name, string desc, Tag targetTag, Func<string> extendedDescFn = null)
+        {
+            var trait = Db.Get().CreateTrait(id, name, desc, null, true, null, true, true);
+            trait.OnAddTrait = go =>
+            {
+                Log.Debug("on add traits");
+                go.AddOrGet<LifeGoalTracker>().wantTag = targetTag;
+                Log.Debug(targetTag);
+                go.FindOrAddUnityComponent<BedroomBuildingGoal>();
+            };
+
+
+            trait.ExtendedTooltip += () => "Complete this objective to motivate this duplicant.\n\n";
+
+            if (extendedDescFn != null)
+            {
+                trait.ExtendedTooltip += extendedDescFn;
+            }
+        }
         public static Trait GetGoalForPersonality(Personality personality)
         {
-            return Db.Get().traits.Get(LifeGoals.JEWELLERY_AQUAMARINE);
+            return Db.Get().traits.Get(LifeGoals.BEDROOM_SURFBOARD);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Sicknesses;
 using HarmonyLib;
+using System.Collections.Generic;
 
 namespace Beached.Patches.DatabasePatches
 {
@@ -26,6 +27,11 @@ namespace Beached.Patches.DatabasePatches
                 RegisterBuildings();
 
                 ModAssets.LoadAssets();
+
+                RoomConstraints.BED_SINGLE.stomp_in_conflict ??= new List<RoomConstraints.Constraint>();
+                RoomConstraints.BED_SINGLE.stomp_in_conflict.Add(RoomConstraints.REC_BUILDING);
+                RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict ??= new List<RoomConstraints.Constraint>();
+                RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict.Add(RoomConstraints.REC_BUILDING);
             }
 
             private static void RegisterBuildings()
