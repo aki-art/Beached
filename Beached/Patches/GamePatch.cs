@@ -50,6 +50,17 @@ namespace Beached.Patches
                     initialAnim = "poff"
                 });
 
+                spawnData.Add(new MockStructs.SpawnPoolData()
+                {
+                    id = ModAssets.Fx.mossplosion,
+                    initialCount = 4,
+                    spawnOffset = Vector3.zero,
+                    spawnRandomOffset = new Vector2(0f, 0f),
+                    colour = Color.white,
+                    fxPrefab = GetNewPrefab(prefab, "beached_mossplosion_kanim", 0.45f),
+                    initialAnim = "splode"
+                });
+
                 ___fxSpawnData = spawnData.ToArray();
             }
 

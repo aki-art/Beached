@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Beached.Content.ModDb.Germs;
+using Klei;
+using System.Collections.Generic;
 
 namespace Beached.Content
 {
@@ -7,6 +9,7 @@ namespace Beached.Content
         public const string AMMONIA_VENT = "Beached_Ammonia";
         public const string MURKY_BRINE_GEYSER = "Beached_MurkyBrine";
         public const string BISMUTH_VOLCANO = "Beached_Bismuth";
+        public const string CORAL_REEF = "Beached_CoralReef";
 
         public static void GenerateConfigs(List<GeyserGenericConfig.GeyserPrefabParams> list)
         {
@@ -17,6 +20,7 @@ namespace Beached.Content
                 new GeyserConfigurator.GeyserType(
                     MURKY_BRINE_GEYSER,
                     Elements.MurkyBrine,
+                    GeyserConfigurator.GeyserShape.Liquid,
                     263.15f,
                     1000f,
                     2000f,
@@ -32,6 +36,7 @@ namespace Beached.Content
                 new GeyserConfigurator.GeyserType(
                     AMMONIA_VENT,
                     Elements.Ammonia,
+                    GeyserConfigurator.GeyserShape.Gas,
                     333.15f,
                     70f,
                     140f,
@@ -46,6 +51,7 @@ namespace Beached.Content
                 new GeyserConfigurator.GeyserType(
                     BISMUTH_VOLCANO,
                     Elements.BismuthMolten,
+                    GeyserConfigurator.GeyserShape.Molten,
                     2900f,
                     200f,
                     400f,
@@ -55,6 +61,24 @@ namespace Beached.Content
                     0.016666668f,
                     0.1f),
                 true));
+
+            list.Add(new GeyserGenericConfig.GeyserPrefabParams(
+                "geyser_liquid_water_filthy_kanim",
+                4,
+                2,
+                new GeyserConfigurator.GeyserType(
+                    CORAL_REEF,
+                    SimHashes.SaltWater,
+                    GeyserConfigurator.GeyserShape.Liquid,
+                    GameUtil.GetTemperatureConvertedToKelvin(40, GameUtil.TemperatureUnit.Celsius),
+                    2000f,
+                    4000f,
+                    4000f)
+                .AddDisease(new SimUtil.DiseaseInfo
+                {
+                    idx = Db.Get().Diseases.GetIndex(BDiseases.plankton.id),
+                    count = 20000
+                }), true));
 
         }
     }

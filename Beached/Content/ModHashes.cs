@@ -3,15 +3,17 @@
     // Wrapper for GameHashes enum for convenience
     public class ModHashes
     {
-        public static readonly ModHashes OnBeachedWorldLoaded = new("Beached_OnBeachedWorldLoaded");
-        public static readonly ModHashes OnBeachedWorldUnLoaded = new("Beached_OnBeachedWorldUnLoaded");
-        public static readonly ModHashes GreatAirQuality = new("Beached_GreatAirQuality");
-        public static readonly ModHashes ProducedLubricant = new("Beached_ProducedLubricant");
-        public static readonly ModHashes Desiccated = new("Beached_Desiccated");
-        public static readonly ModHashes EnteredDarkness = new("Beached_EnteredDarkness");
-        public static readonly ModHashes StackableChanged = new("Beached_StackableChanged");
-        public static readonly ModHashes LifeGoalFulfilled = new("Beached_LifeGoalFulfilled");
-        public static readonly ModHashes LifeGoalLost = new("Beached_LifeGoalLost");
+        public static readonly ModHashes OnBeachedWorldLoaded = new("OnBeachedWorldLoaded");
+        public static readonly ModHashes OnBeachedWorldUnLoaded = new("OnBeachedWorldUnLoaded");
+        public static readonly ModHashes GreatAirQuality = new("GreatAirQuality");
+        public static readonly ModHashes ProducedLubricant = new("ProducedLubricant");
+        public static readonly ModHashes Desiccated = new("Desiccated");
+        public static readonly ModHashes EnteredDarkness = new("EnteredDarkness");
+        public static readonly ModHashes StackableChanged = new("StackableChanged");
+        public static readonly ModHashes LifeGoalFulfilled = new("LifeGoalFulfilled");
+        public static readonly ModHashes LifeGoalLost = new("LifeGoalLost");
+        public static readonly ModHashes LifeGoalTrackerUpdate = new("LifeGoalTrackerUpdate");
+        public static readonly ModHashes DebugDataChange = new("DebugDataChange");
 
         private readonly int value;
         private readonly string name;
@@ -19,6 +21,7 @@
 
         public ModHashes(string name)
         {
+            name = "Beached_" + name;
             this.name = name;
             value = Hash.SDBMLower(name);
             hash = (GameHashes)value;

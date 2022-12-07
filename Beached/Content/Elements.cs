@@ -1,4 +1,6 @@
-﻿using Beached.Utils;
+﻿using Beached.Content.Defs.Items;
+using Beached.Content.Scripts;
+using Beached.Utils;
 using System.Collections.Generic;
 
 namespace Beached.Content
@@ -92,6 +94,7 @@ namespace Beached.Content
             list.AddRange(newElements);
 
             SetAtmosphereModifiers();
+            SetTreasureChances();
         }
 
         // Food sterilization/rotting modifier
@@ -200,6 +203,24 @@ namespace Beached.Content
                         Log.Debug("&&&&&&&&&&&&&");*/
 
             return configs.ToArray();
+        }
+
+        public static void SetTreasureChances()
+        {
+            TreasureChances.AddTreasure(SimHashes.Diamond, 1f, new()
+            {
+                new TreasureChances.TreasureConfig(RareGemsConfig.FLAWLESS_DIAMOND, 1f, 1f, true)
+            });
+
+            TreasureChances.AddTreasure(Aquamarine, 1f, new()
+            {
+                new TreasureChances.TreasureConfig(RareGemsConfig.MAXIXE, 1f, 1f, true)
+            });
+
+            TreasureChances.AddTreasure(ZirconiumOre, 1f, new()
+            {
+                new TreasureChances.TreasureConfig(RareGemsConfig.HADEAN_ZIRCON, 1f, 1f, true)
+            });
         }
     }
 }

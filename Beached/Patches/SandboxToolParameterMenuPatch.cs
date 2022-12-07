@@ -1,5 +1,6 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Entities;
+using Beached.Content.Defs.Entities.Plants;
 using Beached.Content.Defs.Items;
 using HarmonyLib;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Beached.Patches
 {
     public class SandboxToolParameterMenuPatch
     {
-        private static readonly HashSet<Tag> tags = new HashSet<Tag>()
+        private static readonly HashSet<Tag> tags = new()
         {
             CrystalConfig.ID,
 
@@ -18,9 +19,20 @@ namespace Beached.Patches
             "GeyserGeneric_" + GeyserConfigs.AMMONIA_VENT,
             "GeyserGeneric_" + GeyserConfigs.MURKY_BRINE_GEYSER,
             "GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO,
+            "GeyserGeneric_" + GeyserConfigs.CORAL_REEF,
+
+            // Gems
+            RareGemsConfig.FLAWLESS_DIAMOND,
+            RareGemsConfig.HADEAN_ZIRCON,
+            RareGemsConfig.MAXIXE,
 
             // Equipment
-            MaxixePendantConfig.ID
+            MaxixePendantConfig.ID,
+
+            // Plants & Creatures
+            CellAlgaeConfig.ID,
+            WaterCupsConfig.ID,
+            MusselSproutConfig.ID
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]

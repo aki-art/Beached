@@ -11,6 +11,7 @@ namespace Beached
         {
             public static Texture2D LUTDay;
             public static Texture2DArray germOverlays;
+            public static Texture2DArray biomeBackgrounds;
         }
 
         public static class Materials
@@ -27,8 +28,9 @@ namespace Beached
 
         public static class Fx
         {
-            public static SpawnFXHashes saltOff = (SpawnFXHashes)"saltOff".GetHashCode();
-            public static SpawnFXHashes grimcapPoff = (SpawnFXHashes)"grimCapPoff".GetHashCode();
+            public static SpawnFXHashes saltOff = (SpawnFXHashes)"Beached_SaltOff".GetHashCode();
+            public static SpawnFXHashes grimcapPoff = (SpawnFXHashes)"Beached_GrimCapPoff".GetHashCode();
+            public static SpawnFXHashes mossplosion = (SpawnFXHashes)"Beached_Mossplosion".GetHashCode();
 
             public static Material testMaterial;
             public static Material darkVeilPostFxMaterial;
@@ -93,6 +95,12 @@ namespace Beached
                 public static Color reefs = Util.ColorFromHex("AB5DB0FF");
                 public static Color sea = Util.ColorFromHex("63D6DEFF");
                 public static Color pearly = Util.ColorFromHex("0E0906FF");
+            }
+
+            public class UI
+            {
+                public static Color beachedTutorialBG = Util.ColorFromHex("60cd5227");
+                public static Color beachedTutorialBGHover = Util.ColorFromHex("1adf0019");
             }
 
             public static string positiveColorHex = GameUtil.BreathableValues.positiveColor.ToHexString();

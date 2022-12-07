@@ -92,20 +92,20 @@ namespace Beached.Content.Scripts
             Instance = null;
         }
 
-        private void OnGUI()
-        {
-            GUILayout.BeginArea(new Rect(200, 200, 200, 200));
+        /* private void OnGUI()
+         {
+             GUILayout.BeginArea(new Rect(200, 200, 200, 200));
 
-            pearl1str = GUILayout.TextField(pearl1str);
-            pearl2str = GUILayout.TextField(pearl2str);
+             pearl1str = GUILayout.TextField(pearl1str);
+             pearl2str = GUILayout.TextField(pearl2str);
 
-            if (GUILayout.Button("Color"))
-            {
-                pearl1 = Util.ColorFromHex(pearl1str);
-                pearl2 = Util.ColorFromHex(pearl2str);
-            }
+             if (GUILayout.Button("Color"))
+             {
+                 pearl1 = Util.ColorFromHex(pearl1str);
+                 pearl2 = Util.ColorFromHex(pearl2str);
+             }
 
-            GUILayout.EndArea();
-        }
+             GUILayout.EndArea();
+         }*/
     }
 }

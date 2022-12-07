@@ -1,0 +1,16 @@
+name: STRINGS.WORLDS.TINYBEACHEDSTARTCLUSTER.NAME
+description: STRINGS.WORLDS.TINYBEACHEDSTARTCLUSTER.DESCRIPTION
+requiredDlcId: EXPANSION1_ID
+coordinatePrefix: BCH-T
+menuOrder: -999
+difficulty: 4
+disableStoryTraits: true
+clusterCategory: 2
+
+worldPlacements:
+- world: worlds/BeachedTinyDevTest
+  allowedRings:
+    max: 9999
+  buffer: 2
+  locationType: Startworld
+  startWorld: true

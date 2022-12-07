@@ -7,10 +7,27 @@
 		<Copy SourceFiles="@(_Elements)" DestinationFolder="$(ModFolder)\$(TargetName)\elements"/> ContinueOnError='true'
 	</Target> -->
 
-	<Target Name="CopyModFiles" AfterTargets="Build">
+	<Target Name="ILRepack" AfterTargets="Build" Condition="'$(IsPacked)' == 'true'">
+		<ItemGroup>
+			<InputAssemblies
+			  Include="$(TargetDir)\*.dll"
+			  Exclude="**/0Harmony.dll; **/System.*; **/Microsoft.*" />
+		</ItemGroup>
+
+		<ILRepack
+		  TargetPlatformVersion="v4"
+		  TargetKind="SameAsPrimaryAssembly"
+		  InputAssemblies="@(InputAssemblies)"
+		  Wildcards="true"
+		  LibraryPath="$(GameLibsFolder)"
+		  Parallel="true"
+		  OutputFile="$(TargetPath)"/>
+	</Target>
+
+	<Target Name="CopyModFiles" AfterTargets="ILRepack">
 		<Exec Command="xcopy /yqsr &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(ModFolder)\$(TargetName)\&quot;"/>
-		<!--<Exec  Command="xcopy /yqsr &quot;@(_Elements2)&quot; &quot;$(ModFolder)\$(TargetName)\elements\&quot;"/>-->
 		<Exec Command='xcopy "$(ProjectDir)Assets\Elements" "$(ModFolder)\$(TargetName)\elements" /s /i /y' ContinueOnError='true' />
+		<Exec Command='xcopy "$(ProjectDir)Assets\worldgen" "$(ModFolder)\$(TargetName)\worldgen" /s /i /y' ContinueOnError='true' />
 	</Target>
 	
 </Project>

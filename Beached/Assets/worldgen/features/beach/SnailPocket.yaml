@@ -1,0 +1,49 @@
+tags:
+  - AllowExceedNodeBorders
+  - Wet
+shape: Circle
+borders:
+  - 1
+  - 1
+blobSize:
+  min: 4
+  max: 5
+internalMobs:
+  # - type: Beached_SlickShell
+  #   count:
+  #     min: 2
+  #     max: 4
+  - type: Cylindrica
+    count:
+      min: 0
+      max: 2
+  - type: SaltPlant
+    count:
+      min: 2
+      max: 3
+ElementChoiceGroups:
+  RoomCenterElements:
+    selectionMethod: WeightedResample
+    choices:
+      - element: SaltyOxygen
+        weight: 1.0
+      - element: Mucus
+        weight: 0.05
+      - element: Sand
+        weight: 0.1
+  RoomBorderChoices0:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Salt
+        weight: 0.5
+      - element: Granite
+        weight: 1
+  RoomBorderChoices1:
+    selectionMethod: WeightedResample
+    choices:
+      - element: Salt
+        weight: 1
+      - element: Granite
+        weight: 2
+      - element: Obsidian
+        weight: 0.2

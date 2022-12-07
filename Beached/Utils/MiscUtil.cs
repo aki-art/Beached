@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using ProcGen;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Beached.Utils
 {
@@ -19,6 +22,11 @@ namespace Beached.Utils
             }
 
             return Direction.None;
+        }
+
+        public static float CelsiusToKelvin(float celsius)
+        {
+            return GameUtil.GetTemperatureConvertedToKelvin(celsius, GameUtil.TemperatureUnit.Celsius);
         }
 
         public static bool IsNaturalCell(int cell)
@@ -44,6 +52,31 @@ namespace Beached.Utils
         public static GameObject Spawn(Tag tag, GameObject atGO, Grid.SceneLayer sceneLayer = Grid.SceneLayer.Creatures, bool setActive = true)
         {
             return Spawn(tag, atGO.transform.position, sceneLayer, setActive);
+        }
+
+        public static T GetWeightedRandom<T>(IEnumerable<T> enumerator, SeededRandom rand = null) where T : IWeighted
+        {
+            if (enumerator == null || enumerator.Count() == 0)
+            {
+                return default;
+            }
+
+            var totalWeight = enumerator.Sum(n => n.weight);
+            var treshold = rand == null ? UnityEngine.Random.value : rand.RandomValue();
+            treshold *= totalWeight;
+
+            var num3 = 0.0f;
+
+            foreach (var item in enumerator)
+            {
+                num3 += item.weight;
+                if (num3 > treshold)
+                {
+                    return item;
+                }
+            }
+
+            return enumerator.GetEnumerator().Current;
         }
     }
 }

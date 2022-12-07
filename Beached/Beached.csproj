@@ -8,7 +8,6 @@
 		<AssemblyName>Beached</AssemblyName>
 		<RootNamespace>Beached</RootNamespace>
 		<IsMod>true</IsMod>
-		<GenerateMetadata>false</GenerateMetadata>
 		<IsPacked>true</IsPacked>
 	</PropertyGroup>
 
@@ -33,19 +32,27 @@
 
 	<!-- dont forget to merge IMNODES -->
 	<ItemGroup>
+		
 		<Reference Include="FMODUnity">
-		  <HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnity.dll</HintPath>
+			<HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnity.dll</HintPath>
+			<Private>false</Private>
 		</Reference>
+		
 		<Reference Include="ImGui">
-		  <HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\ImGui.dll</HintPath>
+			<HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\ImGui.dll</HintPath>
+			<Private>false</Private>
 		</Reference>
+		
 		<Reference Include="ImGui.NET">
-		  <HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\ImGui.NET.dll</HintPath>
+			<HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\ImGui.NET.dll</HintPath>
+			<Private>false</Private>
 		</Reference>
+		
 		<Reference Include="LibNoiseDotNet">
 			<HintPath>$(GameLibsFolder)\LibNoiseDotNet.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+		
 		<Reference Include="Unity.TextMeshPro">
 			<HintPath>$(GameLibsFolder)\Unity.TextMeshPro.dll</HintPath>
 			<Private>false</Private>
@@ -81,10 +88,20 @@
 			<Private>false</Private>
 		</Reference>
 
+		<Reference Include="ZoneTypeAPI">
+		  <HintPath>D:\Modding\OxygenNotIncluded\Lib\ZoneTypeAPI.dll</HintPath>
+		</Reference>
+
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Content\ModDb\Diseases\" />
+		<Folder Include="Assets\worldgen\clusters\" />
+		<Folder Include="Content\ModDb\Diseases\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.2" />
+		<PackageReference Include="PLib" Version="4.10.0" />
 	</ItemGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

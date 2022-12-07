@@ -19,6 +19,7 @@ elements:
     materialCategory: Other
     tags:
       - BuildableRaw
+      - PreciousRock
     buildMenuSort: 2
     isDisabled: false
     state: Solid

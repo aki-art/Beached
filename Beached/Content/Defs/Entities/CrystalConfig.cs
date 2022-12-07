@@ -29,7 +29,7 @@ namespace Beached.Content.Defs.Entities
             prefab.AddOrGet<Crystal>().growthDirection = Direction.None;
             prefab.AddOrGet<CrystalDebug>();
             //prefab.AddOrGet<CrystalFoundationMonitor>().needsFoundation = false;
-            prefab.AddOrGet<GrowingCrystal>();
+            //prefab.AddOrGet<GrowingCrystal>();
 
             return prefab;
         }

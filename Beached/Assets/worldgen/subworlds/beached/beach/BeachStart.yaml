@@ -1,0 +1,37 @@
+biomeNoise: noise/basaltshores
+temperatureRange: Room
+pdWeight: 8
+density:
+  min: 10
+  max: 20
+avoidRadius: 10.0
+extraBiomeChildren: 3
+doAvoidPoints: false
+dontRelaxChildren: true
+sampleBehaviour: PoissonDisk
+borderOverride: rocky
+biomes:
+  - name: biomes/Beach/Start
+    weight: 2
+    # tags:
+      # - Beached_MusselSprout
+  - name: biomes/Beach/Lakes
+    weight: 3
+    tags:
+      - Pacu
+      # - Beached_MusselSprout
+      # - Beached_SingleCell
+centralFeature:
+  type: features/generic/StartLocation
+features:
+  - type: features/beach/AirPocket
+  - type: features/beach/MetalCavern
+  - type: features/beach/AlgaePocket
+  - type: features/beach/MediumFreshwaterLake
+  - type: features/beach/TinyFreshWaterLake
+  - type: features/beach/SnailPocket
+tags:
+  - IgnoreCaveOverride
+  - NoGlobalFeatureSpawning
+  - StartWorld
+zoneType: Beach

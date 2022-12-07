@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts;
+﻿using Beached.Content;
+using Beached.Content.Scripts;
 using HarmonyLib;
 namespace Beached.Patches
 {
@@ -11,6 +12,7 @@ namespace Beached.Patches
             {
                 __instance.gameObject.AddOrGet<IridescenceEffect>();
                 __instance.gameObject.AddOrGet<ElementInteractions>();
+                __instance.gameObject.AddOrGet<BeachedTutorials>();
             }
         }
     }

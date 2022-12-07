@@ -36,7 +36,6 @@ namespace Beached.Patches
             }
         }
 
-
         [HarmonyPatch(typeof(MinionStartingStats), "Apply")]
         public class MinionStartingStats_Apply_Patch
         {

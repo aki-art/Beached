@@ -9,7 +9,6 @@ namespace Beached.Patches
 {
     public class SaveLoaderPatch
     {
-
         [HarmonyPatch(typeof(SaveLoader), "OnPrefabInit")]
         public class SaveLoader_OnPrefabInit_Patch
         {

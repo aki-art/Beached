@@ -1,5 +1,6 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Buildings;
+using Beached.Content.Defs.Entities.Plants;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
@@ -31,6 +32,13 @@ namespace Beached
                     public static LocString NAME = "Mini-Fridge";
                     public static LocString DESC = "A tiny fridge to store a tiny bit of food for the tiny dupes.";
                     public static LocString EFFECTS = global::STRINGS.BUILDINGS.PREFABS.REFRIGERATOR.EFFECT;
+                }
+
+                public class BEACHED_MOSSBED
+                {
+                    public static LocString NAME = "Moss Bed";
+                    public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a once time delivery of water; once grown the moss is converted to a natural tile.";
+                    public static LocString EFFECTS = "Natural tiles can be used as walls and floors or for wild planting.";
                 }
 
                 public class BEACHED_BAMBOOPLATFORM
@@ -65,14 +73,6 @@ namespace Beached
 
         public class CORALS
         {
-            public class SINGLE_CELL
-            {
-                public static LocString NAME = FormatAsLink("Cell", "SingleCellConfig.ID");
-                public static LocString DESCRIPTION = "\n" +
-                    "\n" +
-                    "Filters Polluted Water, producing Water and Slime.";
-            }
-
             public class BEACHED_LEAFLET_CORAL
             {
                 public static LocString NAME = "Leaflet Coral";
@@ -216,6 +216,12 @@ namespace Beached
                         public static LocString NAME = "Filament Seed";
                         public static LocString DESC = "...";
                     }
+                }
+
+                public class CELLALGAE
+                {
+                    public static LocString NAME = FormatAsLink("Cell", CellAlgaeConfig.ID);
+                    public static LocString DESCRIPTION = "...";
                 }
 
                 public class BEACHED_SLICKSHELL
@@ -825,6 +831,12 @@ namespace Beached
 
             public class FOOD
             {
+                public class ASTROBAR
+                {
+                    public static LocString NAME = "Astrobar";
+                    public static LocString DESC = "Delicious and nutritious candy bar, with a sticky and gooey filling that sticks to the roof of the mouth.";
+                }
+
                 public class NUTTYDELIGHT
                 {
                     public static LocString NAME = "Nutty Delight";
@@ -873,6 +885,57 @@ namespace Beached
                 }
             }
 
+            public class GEMS
+            {
+                public class AMBER_INCLUSION_BUG
+                {
+                    public static LocString NAME = "Bug Amber Inclusion";
+                    public static LocString DESCRIPTION = "...";
+                }
+
+                public class AMBER_INCLUSION_HATCH
+                {
+                    public static LocString NAME = "Hatch Amber Inclusion";
+                    public static LocString DESCRIPTION = "...";
+                }
+
+                public class AMBER_INCLUSION_MICRORAPTOR
+                {
+                    public static LocString NAME = "Microraptor Amber Inclusion";
+                    public static LocString DESCRIPTION = "...";
+                }
+
+                public class AMBER_INCLUSION_SCORPION
+                {
+                    public static LocString NAME = "Scorpion Amber Inclusion";
+                    public static LocString DESCRIPTION = "...";
+                }
+
+                public class FLAWLESS_DIAMOND
+                {
+                    public static LocString NAME = "Flawless Diamond";
+                    public static LocString DESCRIPTION = "...";
+                }
+
+                public class HADEAN_ZIRCON
+                {
+                    public static LocString NAME = "Hadean Zircon";
+                    public static LocString DESCRIPTION = "...";
+                }
+
+                public class MAXIXE
+                {
+                    public static LocString NAME = "Maxixe";
+                    public static LocString DESCRIPTION = "...";
+                }
+
+                public class MOTHER_PEARL
+                {
+                    public static LocString NAME = "Mother Pearl";
+                    public static LocString DESCRIPTION = "...";
+                }
+            }
+
             public class INDUSTRIAL_PRODUCTS
             {
                 public class BEACHED_SLICKSHELLSHELL
@@ -912,6 +975,49 @@ namespace Beached
         public class UI
         {
             public static LocString CHARACTERCONTAINER_LIFEGOAL_TRAIT = "<color=#e6d084>Life Goal: {0}</color>";
+
+            public class CODEX
+            {
+                public static LocString GUIDES = "Beached Guides";
+
+                public class CRITTER_HAPPINESS
+                {
+                    public static LocString TITLE = "Critter Happiness";
+                    public static LocString CONTENT = "Critter Happiness";
+                }
+
+                public class SPORES
+                {
+                    public static LocString TITLE = "So about those 'shrooms...";
+                    public static LocString CONTENT = "Mushrooms in this world seem to work a little differently. " +
+                        "Instead of a single, seed sized spore, mushrooms now emit a cloud of spores into the atmosphere. " +
+                        "The spores are too small to see by the naked eye, the Germ Overlay will reveal them instead. When the spores make contact " +
+                        "with soft ground, such as Sand or Dirt, a new fungus will eventually spawn there.\n" +
+                        "\n" +
+                        "If not managed, these mushrooms could easily take over my entire colony, I best be careful not to let that happen. " +
+                        "In any case, I should probably invest into medical equipment to deal with any new diseases, just in case.";
+
+                    public static LocString MUSHROOM_DEFENSE_TITLE = "Defenses";
+                    public static LocString MUSHROOM_DEFENSE = "Too stop the spread of unruly mushroom spores, I can light up any areas to protect it;" +
+                        "mushrooms cannot spawn in lit areas, and the light decimates any airborne spores as well. Covering the ground with built Tiles" +
+                        " is also an effective means to stop the spreading.";
+                }
+            }
+        }
+
+        public class WORLDS
+        {
+            public class TINYBEACHEDSTARTCLUSTER
+            {
+                public static LocString NAME = "Beached Dev Test";
+                public static LocString DESCRIPTION = "Small testing world. Not for gameplay.";
+            }
+
+            public class TINYBEACHEDSTART
+            {
+                public static LocString NAME = "Test World";
+                public static LocString DESCRIPTION = "";
+            }
         }
 
         public static string FormatAsLink(string text, string id = null)

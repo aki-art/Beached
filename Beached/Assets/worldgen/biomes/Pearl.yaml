@@ -1,0 +1,20 @@
+TerrainBiomeLookupTable:
+  # keys to remove from in-memory structure when this file is loaded
+  remove: [] 
+  # elements to add from in-memory structure when this file is loaded
+  add:
+    Default:
+    - content: Granite
+      bandSize: 0.07
+    - content: Gold
+      bandSize: 0.01
+    - content: GoldAmalgam
+      bandSize: 0.1
+    - content: Sand
+      bandSize: 0.14
+    - content: Lime
+      bandSize: 0.14
+    - content: BismuthOre
+      bandSize: 0.05
+    - content: Hydrogen
+      bandSize: 0.3

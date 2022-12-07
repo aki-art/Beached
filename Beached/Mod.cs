@@ -1,10 +1,13 @@
 ﻿using Beached.Content;
+using Beached.Content.BWorldGen;
+using Beached.Content.Defs.Entities.Plants;
 using Beached.ModDevTools;
 using Beached.Settings;
 using HarmonyLib;
 using KMod;
 using System.IO;
 using System.Reflection;
+using TUNING;
 
 namespace Beached
 {
@@ -21,20 +24,26 @@ namespace Beached
             base.OnLoad(harmony);
 
             BTags.OnModLoad();
+            ZoneTypes.Initialize();
+            RegisterDevTools();
 
-            Log.Debug("DEVTOOL MNGR INSTANCE");
-            if (DevToolManager.Instance == null)
+            CROPS.CROP_TYPES.Add(new Crop.CropVal(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
+        }
+
+        private static void RegisterDevTools()
+        {
+            var m_RegisterDevTool = AccessTools.DeclaredMethod(typeof(DevToolManager), "RegisterDevTool", new[]
             {
-                Log.Warning("it null");
-            }
-            var m_RegisterDevTool = AccessTools.Method(typeof(DevToolManager), "RegisterDevTool", new[] { typeof(DevTool), typeof(string) });
+                typeof(string)
+            },
+            new[]
+            {
+                typeof(WorldGenDevTool)
+            });
+
             if (m_RegisterDevTool != null)
             {
-                m_RegisterDevTool.Invoke(DevToolManager.Instance, new object[] { new WorldGenDevTool(), "Mods/Beached/Worldgen" });
-            }
-            else
-            {
-                Log.Warning("NULL METHOD");
+                m_RegisterDevTool.Invoke(DevToolManager.Instance, new object[] { "Mods/Beached/Worldgen" });
             }
         }
     }

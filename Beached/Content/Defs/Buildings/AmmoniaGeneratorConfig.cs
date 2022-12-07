@@ -11,9 +11,9 @@ namespace Beached.Content.Defs.Buildings
         {
             var def = BuildingTemplates.CreateBuildingDef(
                 ID,
-                4,
+                2,
                 3,
-                "generatormerc_kanim",
+                "beached_ammoniagenerator_kanim",
                 BUILDINGS.HITPOINTS.TIER2,
                 BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER3,
                 BUILDINGS.CONSTRUCTION_MASS_KG.TIER3,
@@ -30,11 +30,13 @@ namespace Beached.Content.Defs.Buildings
 
             def.ViewMode = OverlayModes.Power.ID;
             def.AudioCategory = AUDIO.CATEGORY.HOLLOW_METAL;
-            def.UtilityInputOffset = new CellOffset(-1, 0);
+            def.UtilityInputOffset = new CellOffset(0, 2);
+            def.UtilityOutputOffset = new CellOffset(0, 0);
             def.RequiresPowerOutput = true;
-            def.PowerOutputOffset = new CellOffset(1, 0);
+            def.PowerOutputOffset = new CellOffset(0, 0);
             def.InputConduitType = ConduitType.Gas;
-            def.LogicInputPorts = LogicOperationalController.CreateSingleInputPortList(new CellOffset(-1, 0));
+            def.OutputConduitType = ConduitType.Liquid;
+            def.LogicInputPorts = LogicOperationalController.CreateSingleInputPortList(new CellOffset(0, 2));
 
             return def;
         }
@@ -54,6 +56,9 @@ namespace Beached.Content.Defs.Buildings
             conduitConsumer.capacityKG = 2f;
             conduitConsumer.forceAlwaysSatisfied = true;
             conduitConsumer.wrongElementResult = ConduitConsumer.WrongElementResult.Dump;
+
+            var dispenser = go.AddOrGet<ConduitDispenser>();
+            dispenser.conduitType = ConduitType.Liquid;
 
             // TODO: configure proper values
             var energyGenerator = go.AddOrGet<EnergyGenerator>();
@@ -75,14 +80,7 @@ namespace Beached.Content.Defs.Buildings
             energyGenerator.meterOffset = Meter.Offset.Behind;
 
             Tinkerable.MakePowerTinkerable(go);
-
             go.AddOrGetDef<PoweredActiveController.Def>();
-
-            // TODO: remove when adding custom art
-            go.GetComponent<KPrefabID>().prefabSpawnFn += gameObject =>
-            {
-                gameObject.GetComponent<KBatchedAnimController>().SetSymbolTint("liquid_h", ModAssets.Colors.ammonia);
-            };
         }
     }
 }

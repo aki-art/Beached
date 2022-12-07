@@ -28,6 +28,7 @@ namespace Beached.Patches.DatabasePatches
 
                 ModAssets.LoadAssets();
 
+                // make bed room constraits stomp rec rooms, this allows rec buildings to be in bedrooms
                 RoomConstraints.BED_SINGLE.stomp_in_conflict ??= new List<RoomConstraints.Constraint>();
                 RoomConstraints.BED_SINGLE.stomp_in_conflict.Add(RoomConstraints.REC_BUILDING);
                 RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict ??= new List<RoomConstraints.Constraint>();
@@ -36,7 +37,9 @@ namespace Beached.Patches.DatabasePatches
 
             private static void RegisterBuildings()
             {
-                ModUtil.AddBuildingToPlanScreen("Power", AmmoniaGeneratorConfig.ID);
+                ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.POWER, AmmoniaGeneratorConfig.ID, "Default", MethaneGeneratorConfig.ID);
+                ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.UTILITIES, MossBedConfig.ID, "Default", ExteriorWallConfig.ID);
+                ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, MiniFridgeConfig.ID, "Default", ExteriorWallConfig.ID);
             }
         }
     }
