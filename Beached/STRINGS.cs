@@ -73,7 +73,7 @@ namespace Beached
 
         public class CORALS
         {
-            public class BEACHED_LEAFLET_CORAL
+            public class BEACHED_LEAFLETCORAL
             {
                 public static LocString NAME = "Leaflet Coral";
                 public static LocString DESCRIPTION = "A coral with green capitulum resembling cabbage leaves. This coral consumes Hydrogen directly from fresh Water, releasing the excess Oxygen in the process.\n" +
@@ -291,6 +291,12 @@ namespace Beached
                 public class MUSSEL_SPROUT
                 {
                     public static LocString NAME = "Mussel Sprout";
+                    public static LocString DESC = "...";
+                }
+
+                public class POFFSHROOM
+                {
+                    public static LocString NAME = "Poff Shroom";
                     public static LocString DESC = "...";
                 }
 

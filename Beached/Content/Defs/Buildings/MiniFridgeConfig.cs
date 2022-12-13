@@ -61,12 +61,6 @@ namespace Beached.Content.Defs.Buildings
             storage.fetchCategory = Storage.FetchCategory.GeneralStorage;
             storage.showCapacityStatusItem = true;
 
-            storage.SetDefaultStoredItemModifiers(new() 
-            { 
-                Storage.StoredItemModifier.Seal, 
-                Storage.StoredItemModifier.Preserve 
-            });
-
             Prioritizable.AddRef(go);
 
             go.AddOrGet<TreeFilterable>();

@@ -5,6 +5,20 @@ namespace Beached.Content
 {
     public class BTags
     {
+        public static readonly Tag Bamboo = TagManager.Create("Beached_Bamboo");
+        public static readonly Tag Amphibious = TagManager.Create("Beached_Amphibious");
+        public static readonly Tag Coral = TagManager.Create("Beached_Coral");
+        public static readonly Tag Blueprintable = TagManager.Create("Beached_Blueprintable");
+
+        public class Creatures
+        {
+            public static readonly Tag SecretingMucus = TagManager.Create("BeachedSecretingMucus");
+        }
+        public static class Species
+        {
+            public static readonly Tag Snail = TagManager.Create("BeachedSnailSpecies");
+        }
+
         public static class MaterialCategories
         {
             public static Tag Crystal = TagManager.Create("Beached_Crystal");

@@ -12,7 +12,7 @@ namespace Beached.Patches
             {
                 ___elementAudioConfigs = ___elementAudioConfigs.AddRangeToArray(Elements.CreateAudioConfigs(__instance));
 
-                foreach (var item in ___elementAudioConfigs)
+/*                foreach (var item in ___elementAudioConfigs)
                 {
                     Log.Debug("ELEMENT AUDIO CONFIGS");
                     Log.Debug("elementID " + item.elementID);
@@ -23,7 +23,7 @@ namespace Beached.Patches
                     Log.Debug("oreBumpSound " + item.oreBumpSound);
                     Log.Debug("floorEventAudioCategory " + item.floorEventAudioCategory);
                     Log.Debug("creatureChewSound " + item.creatureChewSound);
-                }
+                }*/
             }
         }
     }

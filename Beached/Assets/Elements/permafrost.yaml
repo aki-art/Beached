@@ -1,0 +1,29 @@
+elements:
+  - elementId: PermaFrost
+    specificHeatCapacity: 3.05
+    thermalConductivity: 1
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 1
+    highTemp: 252.5
+    highTempTransitionTarget: Water
+    highTempTransitionOreId: Fossil
+    highTempTransitionOreMassConversion: 0.7
+    defaultTemperature: 230
+    defaultMass: 500
+    maxMass: 1400
+    hardness: 50
+    molarMass: 25
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.8
+    radiationPer1000Mass: 0
+    materialCategory: Liquifiable
+    tags:
+    - Mixture
+    - BuildableAny
+    buildMenuSort: 5
+    isDisabled: false
+    state: Solid
+    localizationID: Beached.STRINGS.ELEMENTS.PERMAFROST.NAME
+    dlcId: ""

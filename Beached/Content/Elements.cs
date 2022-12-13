@@ -39,6 +39,7 @@ namespace Beached.Content
         public static ElementInfo NitrogenFrozen = ElementInfo.Solid("FrozenNitrogen", ModAssets.Colors.nitrogenOpaque);
         public static ElementInfo NitrogenLiquid = ElementInfo.Liquid("LiquidNitrogen", ModAssets.Colors.nitrogenOpaque);
         public static ElementInfo Pearl = ElementInfo.Solid("Pearl", ModAssets.Colors.pearl);
+        public static ElementInfo PermaFrost = ElementInfo.Solid("PermaFrost", ModAssets.Colors.pearl);
         public static ElementInfo Rot = ElementInfo.Solid("Rot", ModAssets.Colors.rot);
         public static ElementInfo Root = ElementInfo.Solid("Root", ModAssets.Colors.root);
         public static ElementInfo SaltyOxygen = ElementInfo.Gas("SaltyOxygen", ModAssets.Colors.saltyOxygen);
@@ -173,6 +174,7 @@ namespace Beached.Content
 
             configs.Add(ElementUtil.GetCrystalAudioConfig(Amber));
             configs.Add(ElementUtil.CopyElementAudioConfig(ice, AmmoniaFrozen));
+            configs.Add(ElementUtil.CopyElementAudioConfig(ice, PermaFrost));
             configs.Add(ElementUtil.GetCrystalAudioConfig(Aquamarine));
             configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Sand, Ash));
             configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, Basalt));

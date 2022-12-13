@@ -58,7 +58,6 @@
 
             private bool RecheckBedAndTarget(StatesInstance smi, float _)
             {
-                Log.Debug("checking bed and target");
                 if (smi.bed == null || smi.wantTarget == null)
                 {
                     Log.Debug("bed or target is null");

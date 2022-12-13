@@ -14,9 +14,7 @@ namespace Beached.ModDevTools
 
         protected override void RenderTo(DevPanel panel)
         {
-            ImGui.Text("Settings here");
-
-            ImGui.Text("text inside");
+            ImGui.Text("Notifications");
 
             if (ImGui.Button("Open test notification"))
             {
@@ -29,12 +27,15 @@ namespace Beached.ModDevTools
             ImGui.Spacing();
             ImGui.InputFloat("Shelf B X", ref MiniFridgeShelfDisplay.offsets[1].x);
             ImGui.InputFloat("Shelf B Y", ref MiniFridgeShelfDisplay.offsets[1].y);
+            ImGui.InputFloat("Shelf B Z", ref MiniFridgeShelfDisplay.offsets[1].z);
             ImGui.Spacing();
             ImGui.InputFloat("Shelf C X", ref MiniFridgeShelfDisplay.offsets[2].x);
             ImGui.InputFloat("Shelf C Y", ref MiniFridgeShelfDisplay.offsets[2].y);
+            ImGui.InputFloat("Shelf C Z", ref MiniFridgeShelfDisplay.offsets[2].z);
             ImGui.Spacing();
             ImGui.InputFloat("Shelf D X", ref MiniFridgeShelfDisplay.offsets[3].x);
             ImGui.InputFloat("Shelf D Y", ref MiniFridgeShelfDisplay.offsets[3].y);
+            ImGui.InputFloat("Shelf D Z", ref MiniFridgeShelfDisplay.offsets[3].z);
             ImGui.Spacing();
 
             if (ImGui.Button("Debug Data trigger"))

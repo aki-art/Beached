@@ -103,14 +103,14 @@ namespace Beached.Content.Scripts
         private void OnStorageChange(object obj)
         {
             var storedItems = storage.GetItems();
-            storedItems.OrderBy((i => i.GetComponent<PrimaryElement>().Mass));
+            storedItems.OrderBy(i => i.GetComponent<PrimaryElement>().Mass);
 
-            // if we have one type of food and a bunch of it, fill the fridge with it
+/*            // if we have one type of food and a bunch of it, fill the fridge with it
             if (storedItems.Count == 1)
             {
                 ShowSingleItem(storedItems);
                 return;
-            }
+            }*/
 
             for (var i = 0; i < 4; i++)
             {
@@ -160,6 +160,7 @@ namespace Beached.Content.Scripts
             {
                 if (itemKbac.AnimFiles == null || itemKbac.AnimFiles.Length == 0)
                 {
+                    Log.Debug("anim files null or empty " + item.PrefabID());
                     HideItem(index);
                     return;
                 }

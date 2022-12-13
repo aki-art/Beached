@@ -64,6 +64,7 @@ namespace Beached
             public static Color nitrogen = new Color(0.65f, 0.65f, 0.65f, 0.2f);
             public static Color nitrogenOpaque = new Color(0.8f, 0.8f, 0.8f);
             public static Color pearl = Util.ColorFromHex("c9bda6");
+            public static Color permaFrost = Util.ColorFromHex("68b9e2");
             public static Color rot = Util.ColorFromHex("404930");
             public static Color root = Util.ColorFromHex("3a3430");
             public static Color saltyOxygen = new Color32(205, 170, 170, 120);
