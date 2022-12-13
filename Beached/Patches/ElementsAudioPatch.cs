@@ -12,18 +12,18 @@ namespace Beached.Patches
             {
                 ___elementAudioConfigs = ___elementAudioConfigs.AddRangeToArray(Elements.CreateAudioConfigs(__instance));
 
-/*                foreach (var item in ___elementAudioConfigs)
-                {
-                    Log.Debug("ELEMENT AUDIO CONFIGS");
-                    Log.Debug("elementID " + item.elementID);
-                    Log.Debug("ambienceType " + item.ambienceType);
-                    Log.Debug("solidAmbienceType " + item.solidAmbienceType);
-                    Log.Debug("miningSound " + item.miningSound);
-                    Log.Debug("miningBreakSound " + item.miningBreakSound);
-                    Log.Debug("oreBumpSound " + item.oreBumpSound);
-                    Log.Debug("floorEventAudioCategory " + item.floorEventAudioCategory);
-                    Log.Debug("creatureChewSound " + item.creatureChewSound);
-                }*/
+                /*                foreach (var item in ___elementAudioConfigs)
+                                {
+                                    Log.Debug("ELEMENT AUDIO CONFIGS");
+                                    Log.Debug("elementID " + item.elementID);
+                                    Log.Debug("ambienceType " + item.ambienceType);
+                                    Log.Debug("solidAmbienceType " + item.solidAmbienceType);
+                                    Log.Debug("miningSound " + item.miningSound);
+                                    Log.Debug("miningBreakSound " + item.miningBreakSound);
+                                    Log.Debug("oreBumpSound " + item.oreBumpSound);
+                                    Log.Debug("floorEventAudioCategory " + item.floorEventAudioCategory);
+                                    Log.Debug("creatureChewSound " + item.creatureChewSound);
+                                }*/
             }
         }
     }

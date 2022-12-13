@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static STRINGS.UI.CLUSTERMAP;
 
 namespace Beached.Content.Scripts
 {
@@ -40,7 +38,7 @@ namespace Beached.Content.Scripts
         {
             for (var i = 0; i < 4; i++)
             {
-                if(shelfItems[i] != null)
+                if (shelfItems[i] != null)
                 {
                     shelfItems[i].transform.position = transform.position + offsets[i];
                 }
@@ -51,7 +49,7 @@ namespace Beached.Content.Scripts
 
         private KBatchedAnimController CreateShelfItem(int index, KAnimFile animFile, bool show)
         {
-            if(animFile == null)
+            if (animFile == null)
             {
                 Log.Warning("Mini-fridge: shelf item anim file is null");
                 return null;
@@ -62,11 +60,11 @@ namespace Beached.Content.Scripts
             if (item != null)
             {
                 item.enabled = show;
-                if(show)
+                if (show)
                 {
-                    item.SwapAnims(new[] 
-                    { 
-                        animFile 
+                    item.SwapAnims(new[]
+                    {
+                        animFile
                     });
                 }
 
@@ -79,7 +77,7 @@ namespace Beached.Content.Scripts
             go.SetActive(false);
 
             var result = go.AddComponent<KBatchedAnimController>();
-            result.AnimFiles = new[] 
+            result.AnimFiles = new[]
             {
                 animFile
             };
@@ -105,12 +103,12 @@ namespace Beached.Content.Scripts
             var storedItems = storage.GetItems();
             storedItems.OrderBy(i => i.GetComponent<PrimaryElement>().Mass);
 
-/*            // if we have one type of food and a bunch of it, fill the fridge with it
-            if (storedItems.Count == 1)
-            {
-                ShowSingleItem(storedItems);
-                return;
-            }*/
+            /*            // if we have one type of food and a bunch of it, fill the fridge with it
+                        if (storedItems.Count == 1)
+                        {
+                            ShowSingleItem(storedItems);
+                            return;
+                        }*/
 
             for (var i = 0; i < 4; i++)
             {

@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Beached.Content.Scripts;
 using TUNING;
-using Beached.Content.Scripts;
+using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Plants
 {
@@ -55,7 +55,10 @@ namespace Beached.Content.Defs.Entities.Plants
             return prefab;
         }
 
-        public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+        public string[] GetDlcIds()
+        {
+            return DlcManager.AVAILABLE_ALL_VERSIONS;
+        }
 
         public void OnPrefabInit(GameObject inst)
         {
