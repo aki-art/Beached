@@ -26,6 +26,8 @@ namespace Beached.Patches
                 var substanceTable = Assets.instance.substanceTable;
                 substanceTable.GetSubstance(SimHashes.Water).colour = ModAssets.Colors.water;
                 substanceTable.GetSubstance(SimHashes.SaltWater).colour = ModAssets.Colors.saltWater;
+
+                Elements.AfterLoad();
             }
         }
 

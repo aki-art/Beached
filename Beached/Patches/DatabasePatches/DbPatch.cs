@@ -8,7 +8,6 @@ namespace Beached.Patches.DatabasePatches
 {
     public class DbPatch
     {
-
         [HarmonyPatch(typeof(Db), "Initialize")]
         public class Db_Initialize_Patch
         {

@@ -14,6 +14,22 @@ namespace Beached
             }
         }
 
+        public static class ACID_VULNERABILITY
+        {
+            public const float IMMUNE = 0;
+            public const float MILDLY_ANNOYING = 0.01f;
+            public const float BAD = 0.05f;
+            public const float PRETTY_BAD = 0.1f;
+            public const float EXTREME = 0.2f;
+        }
+
+        public static class CORROSION_VULNERABILITY
+        {
+            public const float VERY_WEAK = 0.5f;
+            public const float WEAK = 0.33f;
+            public const float MEDIUM = 0.05f;
+            public const float STRONG = 0.01f;
+        }
         public static class EXPOSURE_EFFECT
         {
             public const float CLEANSING = -1f;

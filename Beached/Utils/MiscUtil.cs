@@ -24,6 +24,15 @@ namespace Beached.Utils
             return Direction.None;
         }
 
+        public static void Explode(int cell, int radius)
+        {
+            var pos = Grid.CellToPos(cell);
+            // just damages entities
+            GameUtil.CreateExplosion(pos);
+
+
+        }
+
         public static float CelsiusToKelvin(float celsius)
         {
             return GameUtil.GetTemperatureConvertedToKelvin(celsius, GameUtil.TemperatureUnit.Celsius);

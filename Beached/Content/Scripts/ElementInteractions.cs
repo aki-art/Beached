@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb.Germs;
+﻿using Beached.Content.Defs.Comets;
+using Beached.Content.ModDb.Germs;
 using Beached.Utils;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ namespace Beached.Content.Scripts
         private const int CHUNK_EDGE = 16;
         private const int UPDATE_ATTEMPTS = 4;
         private const float FUNGAL_LIGHT_KILL_RATE = 0.5f;
+        private const float SHRAPNEL_SPEED = 10f;
+        private const float ACID_LOSS = 0.25f;
 
         private static int widthInChunks;
         private static int heightInChunks;
@@ -23,9 +26,11 @@ namespace Beached.Content.Scripts
 
         public static ElementInteractions Instance;
 
-        private static byte oxygenIdx;
-        private static byte saltWaterIdx;
-        private static byte brineIdx;
+        private static ushort oxygenIdx;
+        private static ushort saltWaterIdx;
+        private static ushort brineIdx;
+        private static ushort acidIdx;
+        private static ushort hydrogenIdx;
         private static byte grimSporeIdx;
         private static Element saltyOxygen;
 
@@ -81,8 +86,65 @@ namespace Beached.Content.Scripts
             var elementIdx = element.idx;
             var diseaseCount = Grid.DiseaseCount[cell];
 
-            UpdateSaltWater(cell, element, elementIdx);
-            UpdateSpores(cell, diseaseCount);
+            if (Grid.IsLiquid(cell))
+            {
+                UpdateSaltWater(cell, element, elementIdx);
+                if (elementIdx == acidIdx)
+                {
+                    UpdateAcid(cell);
+                }
+            }
+            else if (Grid.IsGas(cell))
+            {
+                UpdateSpores(cell, diseaseCount);
+            }
+        }
+
+        private void UpdateAcid(int cell)
+        {
+            var cellBelow = Grid.CellBelow(cell);
+            var element = Grid.Element[cellBelow];
+
+            if (element.HasTag(GameTags.Metal))
+            {
+                var acidMass = Grid.Mass[cell];
+                var shrapnelCount = Random.Range(2, 4);
+                var mass = Grid.Mass[cellBelow] / shrapnelCount;
+                var position = Grid.CellToPos(cell);
+                var hydrogenAmount = acidMass * ACID_LOSS * 0.1f;
+
+                SimMessages.ReplaceElement(cellBelow, SimHashes.Hydrogen, CellEventLogger.Instance.DebugTool, hydrogenAmount, MiscUtil.CelsiusToKelvin(500), byte.MaxValue, 0);
+
+                for (var i = 0; i < shrapnelCount; i++)
+                {
+                    var go = Util.KInstantiate(Assets.GetPrefab(ShrapnelConfig.ID), position);
+                    go.SetActive(true);
+
+                    var angle = (float)Random.Range(-45, 315) % 360;
+                    var rads = angle * Mathf.PI / 180f;
+
+                    var shrapnel = go.GetComponent<Shrapnel>();
+                    shrapnel.Velocity = new Vector2(-Mathf.Cos(rads), Mathf.Sin(rads)) * SHRAPNEL_SPEED;
+                    shrapnel.SetExplosionMass(mass);
+
+                    var primaryElement = go.GetComponent<PrimaryElement>();
+                    primaryElement.SetElement(element.id);
+                    primaryElement.Mass = mass;
+
+                    var kbac = shrapnel.GetComponent<KBatchedAnimController>();
+                    kbac.Rotation = (float)(-(float)angle) - 90f;
+                }
+
+                SimMessages.ConsumeMass(cell, Elements.SulfurousWater, acidMass * ACID_LOSS, 1);
+                Game.Instance.SpawnFX(SpawnFXHashes.MeteorImpactMetal, cellBelow, 0);
+                // TODO: sound fx
+            }
+
+            else if (element.HasTag(BTags.Corrodable))
+            {
+                WorldDamage.Instance.ApplyDamage(cellBelow, Elements.corrosionData[element.id], cell);
+                Game.Instance.SpawnFX(SpawnFXHashes.BleachStoneEmissionBubbles, cellBelow, 0);
+            }
         }
 
         private void UpdateSpores(int cell, int diseaseCount)
@@ -189,10 +251,12 @@ namespace Beached.Content.Scripts
 
         public static void SetElements()
         {
-            oxygenIdx = (byte)ElementLoader.GetElementIndex(SimHashes.Oxygen);
-            saltWaterIdx = (byte)ElementLoader.GetElementIndex(SimHashes.SaltWater);
-            brineIdx = (byte)ElementLoader.GetElementIndex(SimHashes.Brine);
+            oxygenIdx = ElementLoader.GetElementIndex(SimHashes.Oxygen);
+            saltWaterIdx = ElementLoader.GetElementIndex(SimHashes.SaltWater);
+            brineIdx = ElementLoader.GetElementIndex(SimHashes.Brine);
             saltyOxygen = ElementLoader.FindElementByHash(Elements.SaltyOxygen);
+            acidIdx = ElementLoader.GetElementIndex(Elements.SulfurousWater);
+            hydrogenIdx = ElementLoader.GetElementIndex(SimHashes.Hydrogen);
         }
 
         private int GetRandomCellInChunk(int chunk)

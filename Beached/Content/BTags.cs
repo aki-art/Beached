@@ -9,6 +9,7 @@ namespace Beached.Content
         public static readonly Tag Amphibious = TagManager.Create("Beached_Amphibious");
         public static readonly Tag Coral = TagManager.Create("Beached_Coral");
         public static readonly Tag Blueprintable = TagManager.Create("Beached_Blueprintable");
+        public static readonly Tag Corrodable = TagManager.Create("Beached_Corrodable");
 
         public class Creatures
         {

@@ -13,6 +13,11 @@ namespace Beached.Content
 
         public static void GenerateConfigs(List<GeyserGenericConfig.GeyserPrefabParams> list)
         {
+            if (list == null)
+            {
+                Log.Warning("geyser configs list is null");
+            }
+
             list.Add(new GeyserGenericConfig.GeyserPrefabParams(
                 "beached_murkywater_geyser_kanim",
                 4,
@@ -62,8 +67,13 @@ namespace Beached.Content
                     0.1f),
                 true));
 
+            if (Db.Get().Diseases.TryGet(BDiseases.plankton.id) == null)
+            {
+                Log.Warning("no plankton germs");
+            }
+
             list.Add(new GeyserGenericConfig.GeyserPrefabParams(
-                "geyser_liquid_water_filthy_kanim",
+                "beached_bismuth_volcano_kanim",
                 4,
                 2,
                 new GeyserConfigurator.GeyserType(
@@ -76,7 +86,7 @@ namespace Beached.Content
                     4000f)
                 .AddDisease(new SimUtil.DiseaseInfo
                 {
-                    idx = Db.Get().Diseases.GetIndex(BDiseases.plankton.id),
+                    idx = Db.Get().Diseases.GetIndex(PlanktonGerms.ID),
                     count = 20000
                 }), true));
 

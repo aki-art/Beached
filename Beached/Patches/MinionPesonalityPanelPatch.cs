@@ -11,7 +11,6 @@ namespace Beached.Patches
 {
     public class MinionPesonalityPanelPatch
     {
-
         [HarmonyPatch(typeof(MinionPersonalityPanel), "RefreshTraits")]
         public class MinionPersonalityPanel_RefreshTraits_Patch
         {
@@ -20,7 +19,7 @@ namespace Beached.Patches
                 var codes = orig.ToList();
                 var m_GetTooltip = AccessTools.Method(typeof(Trait), "GetTooltip");
 
-                var index = codes.FindIndex(ci => ci.Calls(m_GetTooltip)); /// 34 ldc.i4 SimHashes.Oxygen
+                var index = codes.FindIndex(ci => ci.Calls(m_GetTooltip));
 
                 if (index == -1)
                 {
@@ -38,7 +37,7 @@ namespace Beached.Patches
 
                 codes.InsertRange(index + 1, new[]
                 {
-                    new CodeInstruction(OpCodes.Ldloc_3), // trait (iterator)
+                    new CodeInstruction(OpCodes.Ldloc_1), // trait (iterator)
                     new CodeInstruction(OpCodes.Ldarg_0), // this
                     new CodeInstruction(OpCodes.Ldfld, f_selectedTarget), // .selectedTarget
                     new CodeInstruction(OpCodes.Call, m_GetToolTip) // GetToolTip(str, trait, this.selectedTarget);

@@ -71,6 +71,15 @@ namespace Beached
             }
         }
 
+        public class COMETS
+        {
+            public class SHRAPNEL
+            {
+                public static LocString NAME = "Shrapnel";
+                public static LocString DESC = "Small piece of a metal violently flung from an explosion.";
+            }
+        }
+
         public class CORALS
         {
             public class BEACHED_LEAFLETCORAL

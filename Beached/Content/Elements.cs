@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Defs.Items;
 using Beached.Content.Scripts;
 using Beached.Utils;
+using HarmonyLib;
 using System.Collections.Generic;
 
 namespace Beached.Content
@@ -58,6 +59,8 @@ namespace Beached.Content
         // maybe Emerald
         // maybe Coquina
 
+        public static Dictionary<SimHashes, float> corrosionData;
+
         public static void RegisterSubstances(List<Substance> list)
         {
             var ore = list.Find(e => e.elementID == SimHashes.Cuprite).material;
@@ -96,6 +99,41 @@ namespace Beached.Content
 
             SetAtmosphereModifiers();
             SetTreasureChances();
+            SetCorrosionData();
+        }
+
+        internal static void AfterLoad()
+        {
+            foreach (var kvp in corrosionData)
+            {
+                var element = ElementLoader.FindElementByHash(kvp.Key);
+                if (element != null)
+                {
+                    if (element.oreTags == null)
+                    {
+                        element.oreTags = new Tag[] { BTags.Corrodable };
+                    }
+                    else
+                    {
+                        element.oreTags = element.oreTags.AddToArray(BTags.Corrodable);
+                    }
+                }
+            }
+        }
+
+
+        private static void SetCorrosionData()
+        {
+            corrosionData = new Dictionary<SimHashes, float>()
+            {
+                { SimHashes.Algae, CONSTS.CORROSION_VULNERABILITY.WEAK },
+                { SimHashes.Aluminum, CONSTS.CORROSION_VULNERABILITY.WEAK },
+                { SimHashes.AluminumOre, CONSTS.CORROSION_VULNERABILITY.WEAK },
+                { SimHashes.SandStone, CONSTS.CORROSION_VULNERABILITY.WEAK },
+                { SimHashes.Sand, CONSTS.CORROSION_VULNERABILITY.WEAK },
+                { SimHashes.Salt, CONSTS.CORROSION_VULNERABILITY.WEAK },
+                { SimHashes.Obsidian, CONSTS.CORROSION_VULNERABILITY.STRONG },
+            };
         }
 
         // Food sterilization/rotting modifier
