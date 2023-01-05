@@ -152,6 +152,12 @@ namespace Beached
 
             public class STATS
             {
+                public class ACIDVULNERABILITY
+                {
+                    public static LocString NAME = "Acid Vulnerability";
+                    public static LocString TOOLTIP = "";
+                }
+
                 public class MOISTURE
                 {
                     public static LocString NAME = "Moisture";
@@ -305,7 +311,13 @@ namespace Beached
 
                 public class POFFSHROOM
                 {
-                    public static LocString NAME = "Poff Shroom";
+                    public static LocString NAME = "Poff Ball";
+                    public static LocString DESC = "...";
+                }
+
+                public class GLOWCAP
+                {
+                    public static LocString NAME = "Gloom Shroom";
                     public static LocString DESC = "...";
                 }
 

@@ -1,6 +1,8 @@
-﻿using Beached.Content.Defs.Buildings;
+﻿using Beached.Content;
+using Beached.Content.Defs.Buildings;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Sicknesses;
+using Beached.Content.Scripts;
 using HarmonyLib;
 using System.Collections.Generic;
 
@@ -32,6 +34,7 @@ namespace Beached.Patches.DatabasePatches
                 RoomConstraints.BED_SINGLE.stomp_in_conflict.Add(RoomConstraints.REC_BUILDING);
                 RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict ??= new List<RoomConstraints.Constraint>();
                 RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict.Add(RoomConstraints.REC_BUILDING);
+
             }
 
             private static void RegisterBuildings()

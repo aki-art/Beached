@@ -27,21 +27,5 @@ namespace Beached.Patches
                 }
             }
         }
-
-        [HarmonyPatch(typeof(EntityTemplates), "ExtendEntityToBasicCreature")]
-        public class EntityTemplates_ExtendEntityToBasicCreature_Patch
-        {
-            public static void Postfix(GameObject template)
-            {
-                Log.Debug("extend to entity " + template.GetProperName());
-                var vulnerability = ModDb.GetAcidVulnerability(template);
-                Log.Debug("vulnerability " + vulnerability);
-                if (vulnerability > 0)
-                {
-                    Log.Debug("configured acid on " + template.PrefabID());
-                    template.AddOrGet<AcidVulnerable>().acidDamage = vulnerability;
-                }
-            }
-        }
     }
 }

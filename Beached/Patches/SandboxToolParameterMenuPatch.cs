@@ -32,10 +32,11 @@ namespace Beached.Patches
 
             // Plants & Creatures
             CellAlgaeConfig.ID,
-            WaterCupsConfig.ID,
+            GlowCapConfig.ID,
+            LeafletCoralConfig.ID,
             MusselSproutConfig.ID,
             PoffShroomConfig.ID,
-            LeafletCoralConfig.ID
+            WaterCupsConfig.ID,
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]

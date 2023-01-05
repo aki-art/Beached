@@ -1,8 +1,12 @@
-﻿namespace Beached.Content.Scripts
+﻿using System;
+using UnityEngine;
+
+namespace Beached.Content.Scripts
 {
     public class BeachedWorldManager : KMonoBehaviour
     {
         public static BeachedWorldManager Instance { get; private set; }
+        private GameObjectPool acidBubblesPool;
 
         public void WorldLoaded(string clusterId)
         {
@@ -24,6 +28,12 @@
         {
             base.OnPrefabInit();
             Instance = this;
+            //acidBubblesPool = new GameObjectPool(InstantiateAcidBubbles, 16);
+        }
+
+        private GameObject InstantiateAcidBubbles()
+        {
+            throw new NotImplementedException();
         }
 
         protected override void OnSpawn()

@@ -24,27 +24,11 @@ namespace Beached
             base.OnLoad(harmony);
 
             BTags.OnModLoad();
+
             ZoneTypes.Initialize();
-            RegisterDevTools();
+            BeachedDevTools.Initialize();
 
             CROPS.CROP_TYPES.Add(new Crop.CropVal(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
-        }
-
-        private static void RegisterDevTools()
-        {
-            var m_RegisterDevTool = AccessTools.DeclaredMethod(typeof(DevToolManager), "RegisterDevTool", new[]
-            {
-                typeof(string)
-            },
-            new[]
-            {
-                typeof(WorldGenDevTool)
-            });
-
-            if (m_RegisterDevTool != null)
-            {
-                m_RegisterDevTool.Invoke(DevToolManager.Instance, new object[] { "Mods/Beached/Worldgen" });
-            }
         }
     }
 }

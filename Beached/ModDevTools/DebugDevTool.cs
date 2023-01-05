@@ -4,11 +4,11 @@ using ImGuiNET;
 
 namespace Beached.ModDevTools
 {
-    public class WorldGenDevTool : DevTool
+    public class DebugDevTool : DevTool
     {
         private string testString = "test";
 
-        public WorldGenDevTool()
+        public DebugDevTool()
         {
         }
 

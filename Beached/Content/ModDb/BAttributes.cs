@@ -7,13 +7,37 @@ namespace Beached.Content.ModDb
 {
     public class BAttributes
     {
-        /// <summary>
-        /// <see cref=""/>
-        /// </summary>
-        public static Attribute handSteadiness;
         public static string PRECISION_ID = "Beached_Precision";
 
+        public static Attribute handSteadiness;
+
+        public static class Critters
+        {
+            public static Attribute acidVulnerability;
+        }
+
         public static void Register(Database.Attributes parent)
+        {
+            RegisterDuplicantAttributes(parent);
+            RegisterCritterAttributes(parent);
+
+        }
+
+        private static void RegisterCritterAttributes(Database.Attributes parent)
+        {
+            Critters.acidVulnerability = parent.Add(new Attribute(
+                "Beached_AcidVulnerability",
+                STRINGS.CREATURES.STATS.ACIDVULNERABILITY.NAME,
+                "",
+                STRINGS.CREATURES.STATS.ACIDVULNERABILITY.TOOLTIP,
+                0f,
+                Attribute.Display.General,
+                false));
+
+            Critters.acidVulnerability.SetFormatter(new StandardAttributeFormatter(GameUtil.UnitClass.SimpleFloat, GameUtil.TimeSlice.None));
+        }
+
+        private static void RegisterDuplicantAttributes(Database.Attributes parent)
         {
             handSteadiness = parent.Add(new Attribute(
                 PRECISION_ID,

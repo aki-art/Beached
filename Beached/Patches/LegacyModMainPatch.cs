@@ -1,4 +1,5 @@
 ﻿using Beached.Content;
+using Beached.Content.Scripts;
 using HarmonyLib;
 
 namespace Beached.Patches

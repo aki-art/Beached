@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.Scripts;
+using HarmonyLib;
 using System.IO;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace Beached.Patches
                 __instance.SpriteAssets.Add(LoadSprite("mod_mineralogy", ModAssets.Sprites.MOD_MINERALOGIST));
                 __instance.SpriteAssets.Add(LoadSprite("icon_errand_mineralogy", ModAssets.Sprites.ERRAND_MINERALOGY));
                 __instance.SpriteAssets.Add(LoadSprite("icon_archetype_mineralogy", ModAssets.Sprites.ARCHETYPE_MINERALOGY));
+
+                Assets.RegisterOnAddPrefab(AcidVulnerableCreature.OnAddPrefab);
             }
 
             private static Sprite LoadSprite(string fileName, string spriteName)
