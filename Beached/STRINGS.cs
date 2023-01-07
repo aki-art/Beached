@@ -999,6 +999,18 @@ namespace Beached
             }
         }
 
+        public class TRUETILES
+        {
+            public class TEXTUREPACKS
+            {
+                public class BEACHED
+                {
+                    public static LocString NAME = "Beached";
+                    public static LocString DESCRIPTION = "Additional tiles for Beached elements.";
+                }
+            }
+        }
+
         public class UI
         {
             public static LocString CHARACTERCONTAINER_LIFEGOAL_TRAIT = "<color=#e6d084>Life Goal: {0}</color>";

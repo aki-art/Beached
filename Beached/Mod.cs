@@ -5,6 +5,7 @@ using Beached.ModDevTools;
 using Beached.Settings;
 using HarmonyLib;
 using KMod;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using TUNING;
@@ -29,6 +30,24 @@ namespace Beached
             BeachedDevTools.Initialize();
 
             CROPS.CROP_TYPES.Add(new Crop.CropVal(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
+        }
+
+        public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods)
+        {
+            base.OnAllModsLoaded(harmony, mods);
+
+            foreach(var mod in mods)
+            {
+                if(mod.IsEnabledForActiveDlc())
+                {
+                    switch (mod.staticID)
+                    {
+                        case "TrueTiles":
+                            Integration.TrueTiles.OnAllModsLoaded();
+                            break;
+                    }
+                }
+            }
         }
     }
 }

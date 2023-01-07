@@ -121,7 +121,6 @@ namespace Beached.Content
             }
         }
 
-
         private static void SetCorrosionData()
         {
             corrosionData = new Dictionary<SimHashes, float>()
