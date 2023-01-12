@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
@@ -7,6 +8,11 @@ namespace Beached
 {
     public class ModAssets
     {
+        public static class Prefabs
+        {
+            public static Dictionary<string, GameObject> setpieces;
+        }
+
         public static class Textures
         {
             public static Texture2D LUTDay;
@@ -124,6 +130,24 @@ namespace Beached
             {
                 Log.Debug(asset);
             }
+
+
+            Prefabs.setpieces = new();
+
+            var testSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/test_setpiece.prefab");
+
+            foreach(var renderer in testSetPiece.GetComponents<SpriteRenderer>())
+            {
+                renderer.material.renderQueue = RenderQueues.Liquid;
+            }
+
+            var bg = testSetPiece.transform.Find("bg 1");
+            var bgRenderer = bg.GetComponent<SpriteRenderer>();
+            var sprite = bgRenderer.sprite;
+            bgRenderer.material = new Material(Shader.Find("Sprites/Default"));
+            bgRenderer.sprite = sprite;
+
+            Prefabs.setpieces.Add("test", testSetPiece);
 
             Debug.Assert(Materials.germOverlayReplacer != null, "mat is null");
             Debug.Assert(Materials.germOverlayReplacer.shader != null, "shader is null");

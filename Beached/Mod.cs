@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using TUNING;
+using UnityEngine.Rendering;
 
 namespace Beached
 {
@@ -30,6 +31,8 @@ namespace Beached
             BeachedDevTools.Initialize();
 
             CROPS.CROP_TYPES.Add(new Crop.CropVal(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
+
+          
         }
 
         public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods)

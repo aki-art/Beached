@@ -2,6 +2,7 @@
 using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Corals;
 using Beached.Content.Defs.Entities.Plants;
+using Beached.Content.Defs.Entities.SetPieces;
 using Beached.Content.Defs.Items;
 using HarmonyLib;
 using System.Collections.Generic;
@@ -37,6 +38,9 @@ namespace Beached.Patches
             MusselSproutConfig.ID,
             PoffShroomConfig.ID,
             WaterCupsConfig.ID,
+
+            // setpieces
+            TestSetPieceConfig.ID
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]

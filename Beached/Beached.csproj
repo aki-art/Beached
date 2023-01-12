@@ -30,21 +30,20 @@
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 
-	<!-- dont forget to merge IMNODES -->
 	<ItemGroup>
 		
 		<Reference Include="FMODUnity">
-			<HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnity.dll</HintPath>
+			<HintPath>$(GameLibsFolder)\FMODUnity.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		
 		<Reference Include="ImGui">
-			<HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\ImGui.dll</HintPath>
+			<HintPath>$(GameLibsFolder)\ImGui.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		
 		<Reference Include="ImGui.NET">
-			<HintPath>D:\Programs\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\ImGui.NET.dll</HintPath>
+			<HintPath>$(GameLibsFolder)\ImGui.NET.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		
