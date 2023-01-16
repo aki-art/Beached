@@ -18,7 +18,7 @@
             return 4;
         }
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
 

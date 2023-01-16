@@ -16,7 +16,6 @@ namespace Beached.Patches
             {
                 var codes = orig.ToList();
 
-                // var index = codes.FindIndex(ci => ci.operand is int i && i == (int)SimHashes.Oxygen); /// 34 ldc.i4 SimHashes.Oxygen
                 var index = codes.FindIndex(ci => ci.LoadsConstant((int)SimHashes.Oxygen)); /// 34 ldc.i4 SimHashes.Oxygen
 
                 if (index == -1)

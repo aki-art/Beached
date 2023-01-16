@@ -2,7 +2,7 @@
 {
     public class EquipmentGoal : StateMachineComponent<EquipmentGoal.StatesInstance>
     {
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             smi.StartSM();
         }

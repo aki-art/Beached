@@ -53,8 +53,6 @@ namespace Beached.Utils
 
             var substance = ModUtil.CreateSubstance(id.ToString(), state, animFile, newMaterial, color, uiColor, conduitColor);
 
-            //Traverse.Create(substance).Field("nameTag").SetValue(TagManager.Create(id, id));
-
             return substance;
         }
 
@@ -86,13 +84,9 @@ namespace Beached.Utils
         // so this needs to be changed to the actual ID. 
         public static void FixTags()
         {
-            var f_nameTag = AccessTools.Field(typeof(Substance), "nameTag");
-
             foreach (var elem in elements)
             {
-                var substance = elem.Get().substance;
-                Log.Debug(elem.SimHash.ToString());
-                f_nameTag.SetValue(substance, TagManager.Create(elem.SimHash.ToString()));
+                elem.Get().substance.nameTag = TagManager.Create(elem.SimHash.ToString());
             }
         }
 

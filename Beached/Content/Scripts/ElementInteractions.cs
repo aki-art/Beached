@@ -40,14 +40,14 @@ namespace Beached.Content.Scripts
 
         private readonly SpawnFXHashes saltFx = ModAssets.Fx.saltOff;
 
-        protected override void OnPrefabInit()
+        public override void OnPrefabInit()
         {
             base.OnPrefabInit();
             Instance = this;
             mushroomPlantable = Assets.GetPrefab(MushroomPlantConfig.SEED_ID).GetComponent<PlantableSeed>();
         }
 
-        protected override void OnCleanUp()
+        public override void OnCleanUp()
         {
             base.OnCleanUp();
             Instance = null;
@@ -237,7 +237,7 @@ namespace Beached.Content.Scripts
             }
         }
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
 

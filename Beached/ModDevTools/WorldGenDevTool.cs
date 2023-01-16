@@ -13,10 +13,6 @@ namespace Beached.ModDevTools
 {
     public class WorldGenDevTool : DevTool
     {
-        private string testString = "test";
-        private Traverse CancelTool_OnDragTool;
-        private Traverse CancelTool_OnDragComplete;
-        private Traverse World_zoneRenderData_OnShadersReloaded;
         private WorldContainer worldContainer;
         public static OfflineWorldGen offlineWorldGen;
         private static float progress = 0;
@@ -24,17 +20,14 @@ namespace Beached.ModDevTools
 
         public WorldGenDevTool()
         {
-            CancelTool_OnDragTool = Traverse.Create(CancelTool.Instance).Method("OnDragTool", new Type[] { typeof(int), typeof(int) });
-            CancelTool_OnDragComplete = Traverse.Create(CancelTool.Instance).Method("OnDragComplete", new Type[] { typeof(Vector3), typeof(Vector3) });
-            World_zoneRenderData_OnShadersReloaded = Traverse.Create(World.Instance.zoneRenderData).Method("OnShadersReloaded");
         }
 
-        protected override void RenderTo(DevPanel panel)
+        public override void RenderTo(DevPanel panel)
         {
             ImGui.TextColored(Color.red, "DESTRUCTIVE AND SLOW DEBUG TOOLS, DO NOT USE IN NORMAL GAMEPLAY");
             ImGui.Spacing();
 
-            ImGui.InputInt("Seed" , ref testingSeed);
+            ImGui.InputInt("Seed", ref testingSeed);
 
             if (ImGui.Button("Delete world contents"))
             {
@@ -49,7 +42,7 @@ namespace Beached.ModDevTools
 
             if (ImGui.Button("Offlineworldgen Generate"))
             {
-                if(offlineWorldGen == null)
+                if (offlineWorldGen == null)
                 {
                     ImGui.Text("null offlineWorldgen");
                     return;
@@ -70,7 +63,7 @@ namespace Beached.ModDevTools
                 worldGen.GenerateLayout(UpdateProgress);
 
                 var cells = worldGen.data.overworldCells;
-                if(cells != null)
+                if (cells != null)
                 {
 
                 }
@@ -138,7 +131,7 @@ namespace Beached.ModDevTools
 
         private void CancelOrders()
         {
-            CancelTool_OnDragComplete.GetValue((Vector3)worldContainer.minimumBounds, (Vector3)worldContainer.maximumBounds);
+            CancelTool.Instance.OnDragComplete(worldContainer.minimumBounds, worldContainer.maximumBounds);
         }
 
         private void RemoveCells(int minX, int maxX, int minY, int maxY)
@@ -152,7 +145,7 @@ namespace Beached.ModDevTools
                     int cell = Grid.XYToCell(x, y);
                     if (Grid.IsValidCellInWorld(cell, worldContainer.id))
                     {
-                        CancelTool_OnDragTool.GetValue(cell, 0);
+                        CancelTool.Instance.OnDragTool(cell, 0);
 
                         if (entombedItemVis.IsEntombedItem(cell))
                         {
@@ -176,7 +169,7 @@ namespace Beached.ModDevTools
             SaveLoader.Instance.clusterDetailSave.overworldCells.Add(overworldCell);
 
             worldContainer.ClearWorldZones();
-            World_zoneRenderData_OnShadersReloaded.GetValue();
+            World.Instance.zoneRenderData.OnShadersReloaded();
         }
 
         public void DestroyCell(int cell)
@@ -215,8 +208,7 @@ namespace Beached.ModDevTools
         {
             foreach (WarpPortal portal in UnityEngine.Object.FindObjectsOfType<WarpPortal>())
             {
-                int targetWorldId = Traverse.Create(portal).Method("GetTargetWorldID").GetValue<int>();
-                if (targetWorldId == worldContainer.id)
+                if (portal.GetTargetWorldID() == worldContainer.id)
                 {
                     portal.CancelAssignment();
                     UnityEngine.Object.Destroy(portal);

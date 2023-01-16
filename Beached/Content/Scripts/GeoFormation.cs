@@ -120,7 +120,7 @@ namespace Beached.Content.Scripts
             }
         }
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
 

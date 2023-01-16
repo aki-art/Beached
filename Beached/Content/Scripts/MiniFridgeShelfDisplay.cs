@@ -24,7 +24,7 @@ namespace Beached.Content.Scripts
             new Vector3(0.2f, 0.4f, 0.15f)  // tr
         };
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
 

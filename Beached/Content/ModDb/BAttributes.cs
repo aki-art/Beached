@@ -1,13 +1,12 @@
-﻿using HarmonyLib;
+﻿using Beached.Utils;
 using Klei.AI;
-using System.Collections.Generic;
 using TUNING;
 
 namespace Beached.Content.ModDb
 {
     public class BAttributes
     {
-        public static string PRECISION_ID = "Beached_Precision";
+        public const string PRECISION_ID = "Beached_Precision";
 
         public static Attribute handSteadiness;
 
@@ -20,7 +19,6 @@ namespace Beached.Content.ModDb
         {
             RegisterDuplicantAttributes(parent);
             RegisterCritterAttributes(parent);
-
         }
 
         private static void RegisterCritterAttributes(Database.Attributes parent)
@@ -51,13 +49,7 @@ namespace Beached.Content.ModDb
 
             handSteadiness.SetFormatter(new StandardAttributeFormatter(GameUtil.UnitClass.SimpleInteger, GameUtil.TimeSlice.None));
 
-            var ref_ALL_ATTRIBUTES = AccessTools.FieldRefAccess<string[]>(typeof(DUPLICANTSTATS), "ALL_ATTRIBUTES");
-            var existingValues = new List<string>(DUPLICANTSTATS.ALL_ATTRIBUTES)
-            {
-                PRECISION_ID
-            };
-
-            ref_ALL_ATTRIBUTES() = existingValues.ToArray();
+            MiscUtil.AddToStaticReadonlyArray<string, DUPLICANTSTATS>("ALL_ATTRIBUTES", PRECISION_ID);
         }
     }
 }

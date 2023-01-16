@@ -2,7 +2,7 @@
 {
     public class BedroomBuildingGoal : StateMachineComponent<BedroomBuildingGoal.StatesInstance>
     {
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             smi.StartSM();
         }

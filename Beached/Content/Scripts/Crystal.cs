@@ -32,7 +32,7 @@ namespace Beached.Content.Scripts
         private static Vector3 leftOffset = new Vector3(-0.5f, 0.5f);
         private static Vector3 rightOffset = new Vector3(0.5f, 0.5f);
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
 

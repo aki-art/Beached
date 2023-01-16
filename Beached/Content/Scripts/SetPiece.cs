@@ -9,7 +9,7 @@ namespace Beached.Content.Scripts
         [SerializeField]
         public string setPiecePrefabID;
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
 
@@ -24,7 +24,7 @@ namespace Beached.Content.Scripts
             }
         }
 
-        protected override void OnCleanUp()
+        public override void OnCleanUp()
         {
             base.OnCleanUp();
 

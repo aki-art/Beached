@@ -8,18 +8,9 @@ namespace Beached.Content.BWorldGen
         [MyCmpReq]
         private OfflineWorldGen offlineWorldGen;
 
-        private AccessTools.FieldRef<OfflineWorldGen, int> seed;
-
-        public int Seed
-        {
-            get => seed != null ? seed(offlineWorldGen) : 0;
-            set => seed(offlineWorldGen) = value;
-        }
-
-        protected override void OnPrefabInit()
+        public override void OnPrefabInit()
         {
             base.OnPrefabInit();
-            seed = AccessTools.FieldRefAccess<OfflineWorldGen, int>("seed");
         }
 
         public bool OnDoWorldGenInitialize()
@@ -40,7 +31,7 @@ namespace Beached.Content.BWorldGen
         private void InitializeMyWorldGen()
         {
             var seedSetting = CustomGameSettings.Instance.GetCurrentQualitySetting(CustomGameSettingConfigs.WorldgenSeed);
-            Seed = int.Parse(seedSetting.id);
+            offlineWorldGen.seed = int.Parse(seedSetting.id);
         }
     }
 }

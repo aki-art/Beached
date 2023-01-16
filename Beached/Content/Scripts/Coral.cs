@@ -19,7 +19,7 @@ namespace Beached.Content.Scripts
         [SerializeField]
         public Vector2 initialVelocity;
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
             smi.StartSM();

@@ -6,7 +6,6 @@ namespace Beached.Patches
 {
     public class SingleSliderSideScreenPatch
     {
-
         [HarmonyPatch(typeof(SingleSliderSideScreen), "IsValidForTarget")]
         public class SingleSliderSideScreen_IsValidForTarget_Patch
         {

@@ -28,7 +28,7 @@ namespace Beached.Content.Scripts
 
         private List<HandleVector<int>.Handle> partitionerEntries = new List<HandleVector<int>.Handle>();
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             position = Grid.PosToCell(gameObject);
 
@@ -41,7 +41,7 @@ namespace Beached.Content.Scripts
             OnGroundChanged(null);
         }
 
-        protected override void OnCleanUp()
+        public override void OnCleanUp()
         {
             for (var i = 0; i < partitionerEntries.Count; i++)
             {

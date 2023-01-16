@@ -20,7 +20,7 @@ namespace Beached.Content.Scripts
 
         public List<AttributeModifier> fulfilledLifegoalModifiers;
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
 

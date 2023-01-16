@@ -11,7 +11,7 @@ namespace Beached.Content.Scripts
 
         private static AccessTools.FieldRef<Comet, float> explosionMass;
 
-        protected override void OnPrefabInit()
+        public override void OnPrefabInit()
         {
             base.OnPrefabInit();
 
@@ -27,7 +27,7 @@ namespace Beached.Content.Scripts
             explosionMass(this) = value;
         }
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             StartLoopingSound();
         }

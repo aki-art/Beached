@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using TUNING;
-using UnityEngine.Rendering;
 
 namespace Beached
 {
@@ -17,7 +16,7 @@ namespace Beached
     {
         public static bool DebugMode = true;
 
-        public static Config Settings = new Config();
+        public static Config Settings = new();
 
         public static string folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // path field does not seem reliable with Local installs
 
@@ -31,8 +30,6 @@ namespace Beached
             BeachedDevTools.Initialize();
 
             CROPS.CROP_TYPES.Add(new Crop.CropVal(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
-
-          
         }
 
         public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods)

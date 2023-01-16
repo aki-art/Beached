@@ -106,7 +106,7 @@ namespace Beached.Content.Scripts
             yield return null;
         }
 
-        protected override void OnPrefabInit()
+        public override void OnPrefabInit()
         {
             base.OnPrefabInit();
             acidIdx = Elements.SulfurousWater.Get().idx;
@@ -131,7 +131,7 @@ namespace Beached.Content.Scripts
             flashGradient.SetKeys(colorKeys, alphaKeys);
         }
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
 

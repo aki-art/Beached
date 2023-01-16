@@ -26,7 +26,7 @@ namespace Beached.Content.Scripts
             "moss_2"
         };
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
             smi.StartSM();

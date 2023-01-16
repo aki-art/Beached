@@ -10,7 +10,7 @@ namespace Beached.Patches
         [HarmonyPatch(typeof(Game), "InitializeFXSpawners")]
         public class Game_InitializeFXSpawners_Patch
         {
-            public static void Prefix(ref MockStructs.SpawnPoolData[] ___fxSpawnData)
+            public static void Prefix(ref Game.SpawnPoolData[] ___fxSpawnData)
             {
                 if (___fxSpawnData == null)
                 {
@@ -18,7 +18,7 @@ namespace Beached.Patches
                     return;
                 }
 
-                var spawnData = new List<MockStructs.SpawnPoolData>(___fxSpawnData);
+                var spawnData = new List<Game.SpawnPoolData>(___fxSpawnData);
 
                 var prefab = spawnData.Find(d => d.id == SpawnFXHashes.OxygenEmissionBubbles).fxPrefab;
 
@@ -28,7 +28,7 @@ namespace Beached.Patches
                     return;
                 }
 
-                spawnData.Add(new MockStructs.SpawnPoolData()
+                spawnData.Add(new Game.SpawnPoolData()
                 {
                     id = ModAssets.Fx.saltOff,
                     initialCount = 4,
@@ -39,7 +39,7 @@ namespace Beached.Patches
                     initialAnim = "bubble"
                 });
 
-                spawnData.Add(new MockStructs.SpawnPoolData()
+                spawnData.Add(new Game.SpawnPoolData()
                 {
                     id = ModAssets.Fx.grimcapPoff,
                     initialCount = 4,
@@ -50,7 +50,7 @@ namespace Beached.Patches
                     initialAnim = "poff"
                 });
 
-                spawnData.Add(new MockStructs.SpawnPoolData()
+                spawnData.Add(new Game.SpawnPoolData()
                 {
                     id = ModAssets.Fx.mossplosion,
                     initialCount = 4,

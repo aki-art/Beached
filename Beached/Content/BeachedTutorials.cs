@@ -26,13 +26,13 @@ namespace Beached.Content
             };
         }
 
-        protected override void OnPrefabInit()
+        public override void OnPrefabInit()
         {
             base.OnPrefabInit();
             Instance = this;
         }
 
-        protected override void OnCleanUp()
+        public override void OnCleanUp()
         {
             base.OnCleanUp();
             Instance = null;

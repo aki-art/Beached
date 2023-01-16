@@ -12,7 +12,7 @@ namespace Beached.ModDevTools
         {
         }
 
-        protected override void RenderTo(DevPanel panel)
+        public override void RenderTo(DevPanel panel)
         {
             ImGui.Text("Notifications");
 

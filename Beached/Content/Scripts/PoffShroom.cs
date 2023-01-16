@@ -16,13 +16,13 @@ namespace Beached.Content.Scripts
             public Color color;
         }
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
             smi.StartSM();
         }
 
-        protected override void OnPrefabInit()
+        public override void OnPrefabInit()
         {
             base.OnPrefabInit();
             GetComponent<ElementConsumer>().EnableConsumption(false);

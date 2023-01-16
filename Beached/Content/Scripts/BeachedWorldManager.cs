@@ -24,7 +24,7 @@ namespace Beached.Content.Scripts
 
         private bool wasOnBeachedWorld;
 
-        protected override void OnPrefabInit()
+        public override void OnPrefabInit()
         {
             base.OnPrefabInit();
             Instance = this;
@@ -36,12 +36,12 @@ namespace Beached.Content.Scripts
             throw new NotImplementedException();
         }
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
         }
 
-        protected override void OnCleanUp()
+        public override void OnCleanUp()
         {
             base.OnCleanUp();
             Instance = null;

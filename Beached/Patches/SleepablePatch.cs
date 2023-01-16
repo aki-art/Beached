@@ -4,7 +4,6 @@ namespace Beached.Patches
 {
     public class SleepablePatch
     {
-
         [HarmonyPatch(typeof(Sleepable), "OnPrefabInit")]
         public class Sleepable_OnPrefabInit_Patch
         {

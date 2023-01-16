@@ -21,7 +21,7 @@ namespace Beached.Content.Scripts
         [Serialize]
         private Ref<KPrefabID> targetRef;
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             Subscribe((int)GameHashes.AssigneeChanged, OnAssigneeChanged);
 

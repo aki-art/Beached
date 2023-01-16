@@ -6,12 +6,11 @@ namespace Beached.Content.Scripts
 {
     public class IridescenceEffect : KMonoBehaviour
     {
-        public static Dictionary<SimHashes, MockStructs.Materials> groundRendererMaterials;
         public static IridescenceEffect Instance;
 
         private Gradient rainbowGradient;
 
-        protected override void OnPrefabInit()
+        public override void OnPrefabInit()
         {
             base.OnPrefabInit();
             Instance = this;
@@ -51,7 +50,14 @@ namespace Beached.Content.Scripts
 
         private void Update()
         {
-            if (groundRendererMaterials != null && groundRendererMaterials.Count > 0)
+            if(World.Instance == null)
+            {
+                return;
+            }
+
+            var materials = World.Instance.groundRenderer.elementMaterials;
+
+            if (materials != null && materials.Count > 0)
             {
                 var camera = Camera.main.transform.position;
                 var scale = CameraController.Instance.zoomFactor;
@@ -61,7 +67,7 @@ namespace Beached.Content.Scripts
                 var pearlColor = Color.Lerp(pearl1, pearl2, t);
                 var pearlColortest = Color.Lerp(pearl2, pearl1, t);
                 //var pearlColor2 = Color.Lerp(pearl1t, pearl2t, t);
-                var pearlMat = groundRendererMaterials[Elements.Pearl];
+                var pearlMat = materials[Elements.Pearl];
                 pearlMat.alpha.SetColor("_ShineColour", pearlColor);
                 pearlMat.alpha.SetFloat("_SrcAlpha", 1f);
                 pearlMat.alpha.SetFloat("_DestAlpha", 0f);
@@ -70,23 +76,23 @@ namespace Beached.Content.Scripts
                 //pearlMat.opaque.SetColor("_ColourTint", pearlColor2);
 
                 var bismuthColor = Color.Lerp(Color.red, Color.green, t);
-                var bismuthMat = groundRendererMaterials[Elements.BismuthOre];
+                var bismuthMat = materials[Elements.BismuthOre];
                 bismuthMat.alpha.SetColor("_ShineColour", bismuthColor);
                 bismuthMat.opaque.SetColor("_ShineColour", bismuthColor);
 
                 var rainbowColor = rainbowGradient.Evaluate(t);
 
-                var seleniteMat = groundRendererMaterials[Elements.Selenite];
+                var seleniteMat = materials[Elements.Selenite];
                 seleniteMat.alpha.SetColor("_ShineColour", rainbowColor);
                 seleniteMat.opaque.SetColor("_ShineColour", rainbowColor);
 
-                var diamondMat = groundRendererMaterials[SimHashes.Diamond];
+                var diamondMat = materials[SimHashes.Diamond];
                 diamondMat.alpha.SetColor("_ShineColour", rainbowColor);
                 diamondMat.opaque.SetColor("_ShineColour", rainbowColor);
             }
         }
 
-        protected override void OnCleanUp()
+        public override void OnCleanUp()
         {
             base.OnCleanUp();
             Instance = null;

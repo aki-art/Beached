@@ -1,6 +1,8 @@
-﻿using ProcGen;
+﻿using HarmonyLib;
+using ProcGen;
 using System.Collections.Generic;
 using System.Linq;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Utils
@@ -9,19 +11,34 @@ namespace Beached.Utils
     {
         public static Direction GetOpposite(Direction direction)
         {
-            switch (direction)
+            return direction switch
             {
-                case Direction.Up:
-                    return Direction.Down;
-                case Direction.Right:
-                    return Direction.Left;
-                case Direction.Down:
-                    return Direction.Up;
-                case Direction.Left:
-                    return Direction.Right;
-            }
+                Direction.Up => Direction.Down,
+                Direction.Right => Direction.Left,
+                Direction.Down => Direction.Up,
+                Direction.Left => Direction.Right,
+                _ => Direction.None,
+            };
+        }
 
-            return Direction.None;
+        public static void AddToStaticReadonlyArray<ElemType, InstanceType>(string fieldName, params ElemType[] items)
+        {
+            var ref_ALL_ATTRIBUTES = AccessTools.FieldRefAccess<ElemType[]>(typeof(InstanceType), fieldName);
+
+            var existingValues = new List<ElemType>(ref_ALL_ATTRIBUTES());
+            existingValues.AddRange(items);
+
+            ref_ALL_ATTRIBUTES() = existingValues.ToArray();
+        }
+
+        public static void AddToReadonlyArray<ElemType, InstanceType>(InstanceType instance, string fieldName, params ElemType[] items)
+        {
+            var ref_ALL_ATTRIBUTES = AccessTools.FieldRefAccess<ElemType[]>(typeof(InstanceType), fieldName);
+
+            var existingValues = new List<ElemType>(ref_ALL_ATTRIBUTES(instance));
+            existingValues.AddRange(items);
+
+            ref_ALL_ATTRIBUTES(instance) = existingValues.ToArray();
         }
 
         public static void Explode(int cell, int radius)

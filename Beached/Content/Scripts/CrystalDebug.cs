@@ -14,7 +14,7 @@ namespace Beached.Content.Scripts
         [MyCmpReq]
         private Crystal crystal;
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             originLineRenderer = ModDebug.AddSimpleLineRenderer(transform, Color.red, Color.red);
             foundationRenderer = ModDebug.AddSimpleLineRenderer(transform, Color.green, Color.green);

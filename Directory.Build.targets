@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-	<!--
-	<Target Name="CopyOutput" AfterTargets="Build">
-		<Copy SourceFiles="$(TargetDir)$(TargetName).dll" DestinationFolder="$(ModFolder)\$(TargetName)\"/>
-		<Copy SourceFiles="@(_Elements)" DestinationFolder="$(ModFolder)\$(TargetName)\elements"/> ContinueOnError='true'
-	</Target> -->
-
+	
 	<Target Name="ILRepack" AfterTargets="Build" Condition="'$(IsPacked)' == 'true'">
 		<ItemGroup>
 			<InputAssemblies
@@ -30,4 +24,18 @@
 		<Exec Command='xcopy "$(ProjectDir)Assets\worldgen" "$(ModFolder)\$(TargetName)\worldgen" /s /i /y' ContinueOnError='true' />
 	</Target>
 	
+	<Target Name="Publicise" AfterTargets="Clean">
+		<ItemGroup>
+			<PubliciseInputAssemblies
+			   Include="
+				$(GameLibsFolder)/Assembly-CSharp.dll;
+				$(GameLibsFolder)/Assembly-CSharp-firstpass.dll"/>
+		</ItemGroup>
+
+		<Publicise
+		   InputAssemblies="@(PubliciseInputAssemblies)"
+		   OutputPath="D:/Modding/OxygenNotIncluded/PublicisedLib"
+		   PubliciseCompilerGenerated="false"/>
+	</Target>
+
 </Project>

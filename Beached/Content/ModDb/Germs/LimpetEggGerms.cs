@@ -21,7 +21,7 @@ namespace Beached.Content.ModDb.Germs
             overlayColourName = ID;
         }
 
-        protected override void PopulateElemGrowthInfo()
+        public override void PopulateElemGrowthInfo()
         {
             InitializeElemGrowthArray(ref elemGrowthInfo, DEFAULT_GROWTH_INFO);
 

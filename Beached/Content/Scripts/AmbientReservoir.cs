@@ -11,7 +11,7 @@ namespace Beached.Content.Scripts
         [SerializeField]
         public int volumeCubicMeter;
 
-        protected override void OnSpawn()
+        public override void OnSpawn()
         {
             base.OnSpawn();
             Subscribe((int)GameHashes.OnStorageChange, OnStorageChange);
@@ -46,7 +46,7 @@ namespace Beached.Content.Scripts
             }
         }
 
-        protected override bool IsActive()
+        public override bool IsActive()
         {
             return true;
         }

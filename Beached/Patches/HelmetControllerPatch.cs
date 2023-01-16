@@ -11,7 +11,7 @@ namespace Beached.Patches
         {
             public static void Postfix(HelmetController __instance)
             {
-                __instance.GetComponent<KPrefabID>().prefabSpawnFn += go =>
+                __instance.GetComponent<KPrefabID>().prefabInitFn += go =>
                 {
                     if (go.TryGetComponent(out Assignable assignable))
                     {

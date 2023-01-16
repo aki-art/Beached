@@ -12,8 +12,8 @@ namespace Beached.Patches
         {
             public static bool Prefix(SteppedInMonitor.Instance smi)
             {
-                var num = Grid.CellAbove(Grid.PosToCell(smi));
-                if (Grid.IsValidCell(num) && Grid.Element[num].id == Elements.Mucus)
+                var cell = Grid.CellAbove(Grid.PosToCell(smi));
+                if (Grid.IsValidCell(cell) && Grid.Element[cell].id == Elements.Mucus)
                 {
                     smi.effects.Remove("CarpetFeet");
                     smi.effects.Remove("WetFeet");

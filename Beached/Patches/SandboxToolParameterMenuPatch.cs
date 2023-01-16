@@ -72,8 +72,6 @@ namespace Beached.Patches
                     return;
                 }
 
-                Log.Debug("Adding filters here");
-
                 var f = new List<SearchFilter>(filters);
                 f.AddRange(newFilters);
                 menu.entitySelector.filters = f.ToArray();

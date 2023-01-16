@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using UnityEngine;
 
 namespace Beached
@@ -225,7 +224,7 @@ namespace Beached
 
             if (path.IsNullOrWhiteSpace())
             {
-                path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets");
+                path = Path.Combine(Mod.folder, "assets");
             }
 
             if (platformSpecific)

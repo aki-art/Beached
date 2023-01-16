@@ -3,7 +3,6 @@ namespace Beached.Patches
 {
     public class SpeechMonitorPatch
     {
-
         [HarmonyPatch(typeof(SpeechMonitor), "BeginTalking")]
         public class SpeechMonitor_BeginTalking_Patch
         {

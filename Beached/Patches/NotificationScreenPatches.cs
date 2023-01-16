@@ -2,7 +2,6 @@
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,7 +43,6 @@ namespace Beached.Patches
             }
         }
 
-
         [HarmonyPatch(typeof(NotificationScreen), "GetNotificationIcon")]
         public class NotificationScreen_GetNotificationIcon_Patch
         {
@@ -54,16 +52,9 @@ namespace Beached.Patches
             }
         }
 
-
-        [HarmonyPatch]
+        [HarmonyPatch(typeof(NotificationScreen.Entry), "Add")]
         public class TargetType_TargetMethod_Patch
         {
-            public static MethodInfo TargetMethod()
-            {
-                var t_Entry = typeof(NotificationScreen).GetNestedType("Entry", BindingFlags.NonPublic | BindingFlags.Instance);
-                return AccessTools.Method(t_Entry, "Add", new[] { typeof(Notification) });
-            }
-
             public static void Postfix(GameObject ___label, Notification notification)
             {
                 if (notification.Type == ModDb.BeachedTutorialMessage)
