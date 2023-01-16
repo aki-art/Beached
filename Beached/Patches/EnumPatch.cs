@@ -7,7 +7,6 @@ namespace Beached.Patches
     // Credit: Heinermann (Blood mod)
     public static class EnumPatch
     {
-
         [HarmonyPatch(typeof(Enum), "ToString", new Type[] { })]
         private class SimHashes_ToString_Patch
         {

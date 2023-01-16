@@ -3,6 +3,7 @@ using HarmonyLib;
 using ImGuiNET;
 using Klei;
 using ProcGen;
+using ProcGenGame;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace Beached.ModDevTools
         private Traverse CancelTool_OnDragComplete;
         private Traverse World_zoneRenderData_OnShadersReloaded;
         private WorldContainer worldContainer;
+        public static OfflineWorldGen offlineWorldGen;
+        private static float progress = 0;
+        private static int testingSeed = 0;
 
         public WorldGenDevTool()
         {
@@ -30,6 +34,8 @@ namespace Beached.ModDevTools
             ImGui.TextColored(Color.red, "DESTRUCTIVE AND SLOW DEBUG TOOLS, DO NOT USE IN NORMAL GAMEPLAY");
             ImGui.Spacing();
 
+            ImGui.InputInt("Seed" , ref testingSeed);
+
             if (ImGui.Button("Delete world contents"))
             {
                 worldContainer = ClusterManager.Instance.activeWorld;
@@ -40,6 +46,41 @@ namespace Beached.ModDevTools
             {
                 GenerateNewWorld();
             }
+
+            if (ImGui.Button("Offlineworldgen Generate"))
+            {
+                if(offlineWorldGen == null)
+                {
+                    ImGui.Text("null offlineWorldgen");
+                    return;
+                }
+                else
+                {
+                    offlineWorldGen.debug = true;
+                    offlineWorldGen.Generate();
+                }
+            }
+
+            if (ImGui.Button("Layout Test"))
+            {
+                ImGui.Text("Progress: " + progress);
+                var worldGen = new WorldGen("worlds/BeachedTinyDevTest", new List<string>() { }, new List<string>() { }, false);
+
+                worldGen.Initialise(UpdateProgress, _ => { }, testingSeed, testingSeed, testingSeed, testingSeed, true);
+                worldGen.GenerateLayout(UpdateProgress);
+
+                var cells = worldGen.data.overworldCells;
+                if(cells != null)
+                {
+
+                }
+            }
+        }
+
+        private bool UpdateProgress(StringKey stringKeyRoot, float completePercent, WorldGenProgressStages.Stages stage)
+        {
+            progress = completePercent;
+            return true;
         }
 
         private void GenerateNewWorld()
