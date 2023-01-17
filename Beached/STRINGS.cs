@@ -1057,6 +1057,12 @@ namespace Beached
                 public static LocString NAME = "Test World";
                 public static LocString DESCRIPTION = "";
             }
+
+            public class BEACHEDSTART
+            {
+                public static LocString NAME = "Astropelagos"; // Nautica?
+                public static LocString DESCRIPTION = "";
+            }
         }
 
         public static string FormatAsLink(string text, string id = null)

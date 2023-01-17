@@ -4,7 +4,7 @@
     {
         public static class CLUSTERS
         {
-            public const string BEACHED = "clusters/Beached";
+            public const string BEACHED = "clusters/BeachedCluster";
         }
     }
 }
