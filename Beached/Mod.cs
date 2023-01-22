@@ -3,8 +3,10 @@ using Beached.Content.BWorldGen;
 using Beached.Content.Defs.Entities.Plants;
 using Beached.ModDevTools;
 using Beached.Settings;
+using Beached.Utils;
 using HarmonyLib;
 using KMod;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -30,6 +32,20 @@ namespace Beached
             BeachedDevTools.Initialize();
 
             CROPS.CROP_TYPES.Add(new Crop.CropVal(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
+
+/*            var types = Assembly.GetExecutingAssembly().GetTypes();
+            foreach(var type in types)
+            {
+                foreach (var methodInfo in type.GetMethods())
+                {
+                    foreach (Attribute attr in Attribute.GetCustomAttributes(methodInfo))
+                    {
+                        if (attr.GetType() == typeof(OverrideParentAttribute))
+                        {
+                        }
+                    }
+                }
+            }*/
         }
 
         public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods)

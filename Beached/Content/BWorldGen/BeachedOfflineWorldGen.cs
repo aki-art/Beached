@@ -9,6 +9,8 @@ namespace Beached.Content.BWorldGen
         [MyCmpReq]
         private OfflineWorldGen offlineWorldGen;
 
+        private BCluster cluster;
+
         public override void OnPrefabInit()
         {
             base.OnPrefabInit();
@@ -31,21 +33,20 @@ namespace Beached.Content.BWorldGen
         {
             Log.Debug("Initializing Beached worldgen");
 
+            offlineWorldGen.debug = true;
+
             var seedSetting = CustomGameSettings.Instance.GetCurrentQualitySetting(CustomGameSettingConfigs.WorldgenSeed);
             var clusterId = clusterLayout.id;
-            var storyTraits = new List<string>(CustomGameSettings.Instance.GetCurrentStories());
-            offlineWorldGen.seed = int.Parse(seedSetting.id);
+            offlineWorldGen.seed = 0; //            int.Parse(seedSetting.id);
 
             Log.Debug($"Set seed to {offlineWorldGen.seed}");
 
-            offlineWorldGen.clusterLayout = new Cluster(
+            offlineWorldGen.clusterLayout = cluster = new BCluster(
                 clusterId,
                 offlineWorldGen.seed,
-                storyTraits,
-                true,
-                false);
+                storyTraits);
 
-            offlineWorldGen.clusterLayout.Generate(
+            cluster.Generate(
                 new WorldGen.OfflineCallbackFunction(offlineWorldGen.UpdateProgress),
                 offlineWorldGen.OnError,
                 offlineWorldGen.seed,

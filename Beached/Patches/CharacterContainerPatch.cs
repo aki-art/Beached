@@ -21,11 +21,8 @@ namespace Beached.Patches
 
                     var tooltip = lifeGoal.GetTooltip();
 
-                    Log.Debug("tt");
-                    Log.Debug("tooltip: " + ___stats.GetLifeGoalAttributes()?.Count);
                     foreach (var item in ___stats.GetLifeGoalAttributes())
                     {
-                        Log.Debug("tooltip: " + item.Key);
                         var attribute = Db.Get().Attributes.Get(item.Key);
                         tooltip += "\n";
                         tooltip += string.Format(global::STRINGS.UI.CHARACTERCONTAINER_SKILL_VALUE, GameUtil.AddPositiveSign(item.Value.ToString(), true), attribute.Name);

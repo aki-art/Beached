@@ -5,7 +5,7 @@ namespace Beached.Patches.Worldgen
 {
     public class OfflineWorldGenPatch
     {
-        //[HarmonyPatch(typeof(OfflineWorldGen), "DoWorldGenInitialize")]
+        [HarmonyPatch(typeof(OfflineWorldGen), "DoWorldGenInitialize")]
         public class OfflineWorldGen_DoWorldGenInitialize_Patch
         {
             public static bool Prefix(OfflineWorldGen __instance)
