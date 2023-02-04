@@ -9,7 +9,10 @@ namespace Beached
             if (Mod.DebugMode)
             {
                 global::Debug.Log($"[Beached]: {msg}");
-                ConsoleDevTool.AddToLog(ConsoleDevTool.LogType.Debug, (string)msg);
+                if(msg != null)
+                {
+                    ConsoleDevTool.AddToLog(ConsoleDevTool.LogType.Debug, msg as string);
+                }
             }
         }
 

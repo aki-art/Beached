@@ -14,13 +14,21 @@ namespace Beached.Content.Scripts
         [MyCmpGet]
         private KBatchedAnimController kbac;
 
-
         public void RestoreHat()
         {
             if (!hat.IsNullOrWhiteSpace())
             {
                 MinionResume.ApplyHat(hat, kbac);
-                hat = "";
+                hat = null;
+            }
+        }
+
+        public override void OnSpawn()
+        {
+            base.OnSpawn();
+            if(resume.identity.nameStringKey == "VAHANO")
+            {
+                kbac.animScale *= 0.9f;
             }
         }
     }

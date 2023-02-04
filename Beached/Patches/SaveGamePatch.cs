@@ -1,6 +1,9 @@
 ﻿using Beached.Content;
 using Beached.Content.Scripts;
 using HarmonyLib;
+using UnityEngine;
+using static ResearchTypes;
+
 namespace Beached.Patches
 {
     public class SaveGamePatch
@@ -10,9 +13,8 @@ namespace Beached.Patches
         {
             public static void Postfix(SaveGame __instance)
             {
-                __instance.gameObject.AddOrGet<IridescenceEffect>();
-                __instance.gameObject.AddOrGet<ElementInteractions>();
-                __instance.gameObject.AddOrGet<BeachedTutorials>();
+                Log.Debug("SaveGame OnPrefabInit");
+                __instance.gameObject.AddOrGet<BeachedMod>();
             }
         }
     }

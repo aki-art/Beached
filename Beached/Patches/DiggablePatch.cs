@@ -23,7 +23,6 @@ namespace Beached.Patches
                         var resume = worker.GetComponent<MinionResume>();
                         if (resume != null && resume.HasPerk(BSkillPerks.CanFindTreasures))
                         {
-                            Log.Debug("CanFindTreasures");
                             treasureTable.OnExcavation(__instance, cell, ___originalDigElement, resume);
                         }
                     }

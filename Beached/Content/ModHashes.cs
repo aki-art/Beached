@@ -3,17 +3,18 @@
     // Wrapper for GameHashes enum for convenience
     public class ModHashes
     {
-        public static readonly ModHashes OnBeachedWorldLoaded = new("OnBeachedWorldLoaded");
-        public static readonly ModHashes OnBeachedWorldUnLoaded = new("OnBeachedWorldUnLoaded");
-        public static readonly ModHashes GreatAirQuality = new("GreatAirQuality");
-        public static readonly ModHashes ProducedLubricant = new("ProducedLubricant");
-        public static readonly ModHashes Desiccated = new("Desiccated");
-        public static readonly ModHashes EnteredDarkness = new("EnteredDarkness");
-        public static readonly ModHashes StackableChanged = new("StackableChanged");
-        public static readonly ModHashes LifeGoalFulfilled = new("LifeGoalFulfilled");
-        public static readonly ModHashes LifeGoalLost = new("LifeGoalLost");
-        public static readonly ModHashes LifeGoalTrackerUpdate = new("LifeGoalTrackerUpdate");
-        public static readonly ModHashes DebugDataChange = new("DebugDataChange");
+        public static readonly ModHashes
+            OnBeachedWorldLoaded = new("OnBeachedWorldLoaded"),
+            OnBeachedWorldUnLoaded = new("OnBeachedWorldUnLoaded"),
+            GreatAirQuality = new("GreatAirQuality"),
+            ProducedLubricant = new("ProducedLubricant"),
+            Desiccated = new("Desiccated"),
+            EnteredDarkness = new("EnteredDarkness"),
+            StackableChanged = new("StackableChanged"),
+            LifeGoalFulfilled = new("LifeGoalFulfilled"),
+            LifeGoalLost = new("LifeGoalLost"),
+            LifeGoalTrackerUpdate = new("LifeGoalTrackerUpdate"),
+            DebugDataChange = new("DebugDataChange");
 
         private readonly int value;
         private readonly string name;

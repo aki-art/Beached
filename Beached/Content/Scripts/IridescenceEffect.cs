@@ -1,20 +1,15 @@
-﻿using Beached.Utils;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
+    [SkipSaveFileSerialization]
     public class IridescenceEffect : KMonoBehaviour
     {
-        public static IridescenceEffect Instance;
-
         private Gradient rainbowGradient;
 
         public override void OnPrefabInit()
         {
-            base.OnPrefabInit();
-            Instance = this;
-
             rainbowGradient = new Gradient();
 
             var colors = new List<Color> {
@@ -50,7 +45,7 @@ namespace Beached.Content.Scripts
 
         private void Update()
         {
-            if(World.Instance == null)
+            if (World.Instance == null)
             {
                 return;
             }
@@ -91,27 +86,5 @@ namespace Beached.Content.Scripts
                 diamondMat.opaque.SetColor("_ShineColour", rainbowColor);
             }
         }
-
-        public override void OnCleanUp()
-        {
-            base.OnCleanUp();
-            Instance = null;
-        }
-
-        /* private void OnGUI()
-         {
-             GUILayout.BeginArea(new Rect(200, 200, 200, 200));
-
-             pearl1str = GUILayout.TextField(pearl1str);
-             pearl2str = GUILayout.TextField(pearl2str);
-
-             if (GUILayout.Button("Color"))
-             {
-                 pearl1 = Util.ColorFromHex(pearl1str);
-                 pearl2 = Util.ColorFromHex(pearl2str);
-             }
-
-             GUILayout.EndArea();
-         }*/
     }
 }

@@ -71,7 +71,7 @@ namespace Beached.Content.ModDb
                 Log.Debug("on add traits");
                 go.AddOrGet<LifeGoalTracker>().wantTag = targetTag;
                 Log.Debug(targetTag);
-                go.FindOrAddUnityComponent<EquipmentGoal>();
+                go.AddOrGet<EquipmentGoal>();
             };
 
 

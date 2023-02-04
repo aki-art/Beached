@@ -12,7 +12,7 @@ namespace Beached.Patches
             {
                 // TODO: check for LUT not incuded
                 // TODO: only in beached worlds
-                if (BeachedWorldManager.Instance.IsBeachedContentActive)
+                if (BeachedWorldLoader.Instance.IsBeachedContentActive)
                 {
                     __instance.dayColourCube = ModAssets.Textures.LUTDay;
                 }

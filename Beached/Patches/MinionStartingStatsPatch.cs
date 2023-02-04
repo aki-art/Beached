@@ -14,7 +14,7 @@ namespace Beached.Patches
         {
             public static void Postfix(MinionStartingStats __instance)
             {
-                if (Mod.Settings.CrossWorld.LifeGoals || BeachedWorldManager.Instance.IsBeachedContentActive)
+                if (Mod.Settings.CrossWorld.LifeGoals || BeachedWorldLoader.Instance.IsBeachedContentActive)
                 {
                     var trait = BTraits.GetGoalForPersonality(__instance.personality);
 

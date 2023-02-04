@@ -24,16 +24,12 @@ namespace Beached.Patches.DatabasePatches
                 BSkills.Register(__instance.Skills);
                 BSicknesses.Register(__instance.Sicknesses);
                 BTraits.Register();
+                BRoomTypes.Register(__instance.RoomTypes);
+                BRoomTypes.ModifyConstraintRules();
 
                 RegisterBuildings();
 
                 ModAssets.LoadAssets();
-
-                // make bed room constraits stomp rec rooms, this allows rec buildings to be in bedrooms
-                RoomConstraints.BED_SINGLE.stomp_in_conflict ??= new List<RoomConstraints.Constraint>();
-                RoomConstraints.BED_SINGLE.stomp_in_conflict.Add(RoomConstraints.REC_BUILDING);
-                RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict ??= new List<RoomConstraints.Constraint>();
-                RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict.Add(RoomConstraints.REC_BUILDING);
 
             }
 

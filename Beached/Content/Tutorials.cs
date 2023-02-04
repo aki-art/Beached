@@ -1,23 +1,22 @@
 ﻿using Beached.Content.Codex.Guides;
-using KSerialization;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content
 {
-    [SerializationConfig(MemberSerialization.OptIn)]
-    public class BeachedTutorials : KMonoBehaviour
+    [SkipSaveFileSerialization]
+    public class Tutorials : KMonoBehaviour
     {
         [MyCmpGet]
         private Notifier notifier;
 
-        public static BeachedTutorials Instance;
-
         [SerializeField]
         private Dictionary<Topic, TutorialInfo> tutorials;
 
-        public BeachedTutorials()
+        public static Tutorials Instance;
+
+        public Tutorials()
         {
             tutorials = new Dictionary<Topic, TutorialInfo>()
             {
@@ -26,17 +25,9 @@ namespace Beached.Content
             };
         }
 
-        public override void OnPrefabInit()
-        {
-            base.OnPrefabInit();
-            Instance = this;
-        }
+        public override void OnPrefabInit() => Instance = this;
 
-        public override void OnCleanUp()
-        {
-            base.OnCleanUp();
-            Instance = null;
-        }
+        public override void OnCleanUp() => Instance = null;
 
         public void Test()
         {
@@ -60,7 +51,7 @@ namespace Beached.Content
                 {
                     var notification = new Notification(
                         entry.name,
-                        ModDb.ModDb.BeachedTutorialMessage,
+                        ModDb.BDb.BeachedTutorialMessage,
                         custom_click_callback: obj => OnClick(tutorial.codexEntryID));
                     notifier.Add(notification);
                 }

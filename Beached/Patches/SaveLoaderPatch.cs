@@ -14,7 +14,7 @@ namespace Beached.Patches
         {
             public static void Postfix(SaveLoader __instance)
             {
-                __instance.gameObject.AddOrGet<BeachedWorldManager>();
+                __instance.gameObject.AddOrGet<BeachedWorldLoader>();
             }
         }
 
@@ -23,7 +23,7 @@ namespace Beached.Patches
         {
             public static void Postfix(SaveLoader __instance)
             {
-                BeachedWorldManager.Instance.WorldLoaded(__instance.GameInfo.clusterId);
+                BeachedWorldLoader.Instance.WorldLoaded(__instance.GameInfo.clusterId);
             }
         }
 
@@ -57,13 +57,13 @@ namespace Beached.Patches
 
             private static void PassWorldData(Cluster cluster)
             {
-                if (BeachedWorldManager.Instance == null || cluster == null)
+                if (BeachedWorldLoader.Instance == null || cluster == null)
                 {
                     Log.Warning("Could not update world loading changes.");
                     return;
                 }
 
-                BeachedWorldManager.Instance.WorldLoaded(cluster.Id);
+                BeachedWorldLoader.Instance.WorldLoaded(cluster.Id);
             }
         }
     }

@@ -18,12 +18,12 @@ namespace Beached.ModDevTools
 
             if (ImGui.Button("Open test notification"))
             {
-                BeachedTutorials.Instance.Test();
+                Tutorials.Instance.Test();
             }
 
             if (ImGui.Button("Debug Data trigger"))
             {
-                BeachedWorldManager.Instance.Trigger(ModHashes.DebugDataChange);
+                BeachedMod.Instance.Trigger(ModHashes.DebugDataChange);
             }
 
             ImGui.InputText("test input", ref testString, 64);

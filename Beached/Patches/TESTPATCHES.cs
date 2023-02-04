@@ -99,6 +99,17 @@ namespace Beached.Patches
             }
         }
 
+        [HarmonyPatch(typeof(GeneratedBuildings))]
+        [HarmonyPatch(nameof(GeneratedBuildings.LoadGeneratedBuildings))]
+        public static class GeneratedBuildings_LoadGeneratedBuildings_Patch
+        {
+
+            public static void Postfix()
+            {
+                Debug.Log("And now: Crash!");
+                Debug.Log("This should Crash:" + LogicWattageSensorConfig.kanim);
+            }
+        }
 
         [HarmonyPatch(typeof(SimDebugView), "OnPrefabInit")]
         public class SimDebugView_OnPrefabInit_Patch

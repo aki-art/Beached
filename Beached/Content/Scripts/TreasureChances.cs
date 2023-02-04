@@ -23,6 +23,28 @@ namespace Beached.Content.Scripts
             };
         }
 
+        public static TreasureChances AddSingle(SimHashes element, float chance, string tag, float amount, bool notifyPlayer = false, float weight = 1f, float minimumMass = 300f)
+        {
+            treasureChances[element] = new TreasureChances()
+            {
+                treasures = new List<TreasureConfig>() { new TreasureConfig(tag, amount, weight, notifyPlayer) },
+                extraLootChance = chance,
+                minimumMassKg = minimumMass
+            };
+
+            return treasureChances[element];
+        }
+
+        public TreasureChances AddSingle(string tag, float amount, float weight = 1f)
+        {
+            treasures = new List<TreasureConfig>()
+            {
+                new TreasureConfig(tag, amount, weight, true)
+            };
+
+            return this;
+        }
+
         public void OnExcavation(Diggable diggable, int cell, Element element, MinionResume minion)
         {
             var mass = Grid.Mass[cell];

@@ -15,7 +15,7 @@ namespace Beached.Patches
         {
             public static void Postfix(NotificationType type, ref Color __result)
             {
-                if (type == ModDb.BeachedTutorialMessage)
+                if (type == BDb.BeachedTutorialMessage)
                 {
                     __result = Color.green;
                 }
@@ -27,7 +27,7 @@ namespace Beached.Patches
         {
             public static void Postfix(NotificationType type, ref Color __result)
             {
-                if (type == ModDb.BeachedTutorialMessage)
+                if (type == BDb.BeachedTutorialMessage)
                 {
                     __result = Color.magenta;
                 }
@@ -39,7 +39,7 @@ namespace Beached.Patches
         {
             public static void Postfix(Dictionary<NotificationType, string> ___notificationSounds)
             {
-                ___notificationSounds[ModDb.BeachedTutorialMessage] = "Tutorial";
+                ___notificationSounds[BDb.BeachedTutorialMessage] = "Tutorial";
             }
         }
 
@@ -57,7 +57,7 @@ namespace Beached.Patches
         {
             public static void Postfix(GameObject ___label, Notification notification)
             {
-                if (notification.Type == ModDb.BeachedTutorialMessage)
+                if (notification.Type == BDb.BeachedTutorialMessage)
                 {
                     if (___label.TryGetComponent(out HierarchyReferences hierarchyReferences))
                     {
@@ -161,7 +161,7 @@ namespace Beached.Patches
 
             private static void GetColor(ColorBlock existingValue, Notification notification)
             {
-                if (notification.Type == ModDb.BeachedTutorialMessage)
+                if (notification.Type == BDb.BeachedTutorialMessage)
                 {
                     existingValue.normalColor = Color.red;
                 }
@@ -169,12 +169,12 @@ namespace Beached.Patches
 
             private static GameObject GetPrefab(GameObject existingValue, NotificationScreen screen, Notification notification)
             {
-                return notification.Type == ModDb.BeachedTutorialMessage ? screen.MessagesPrefab : existingValue;
+                return notification.Type == BDb.BeachedTutorialMessage ? screen.MessagesPrefab : existingValue;
             }
 
             private static GameObject GetParent(GameObject existingValue, NotificationScreen screen, Notification notification)
             {
-                return notification.Type == ModDb.BeachedTutorialMessage ? screen.MessagesFolder : existingValue;
+                return notification.Type == BDb.BeachedTutorialMessage ? screen.MessagesFolder : existingValue;
             }
         }
     }

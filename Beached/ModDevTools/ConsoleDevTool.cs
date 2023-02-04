@@ -19,6 +19,11 @@ namespace Beached.ModDevTools
 
         public static void AddToLog(LogType type, string msg)
         {
+            if(msg == null)
+            {
+                msg = "null";
+            }
+
             msg = $"[{System.DateTime.UtcNow:HH:mm:ss.fffffff}] {msg}";
             logEntries.Enqueue(new LogEntry()
             {

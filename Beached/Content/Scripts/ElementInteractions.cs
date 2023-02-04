@@ -1,6 +1,8 @@
 ﻿using Beached.Content.Defs.Comets;
+using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Utils;
+using KSerialization;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -12,6 +14,7 @@ namespace Beached.Content.Scripts
     /* Loading Custom C++ extensions: ran into problems with Linux and Mac systems. 
      * Linux is not as lenient with path searching as Windows is, and can't find the extra dll if it's not in the same folder as the main dll. 
      * Problem with that is that the game tries to load every DLL as a mod, and crashes if a random c++ dll is in there. */
+    [SkipSaveFileSerialization]
     public class ElementInteractions : KMonoBehaviour, ISim200ms
     {
         private const int CHUNK_EDGE = 16;
@@ -23,8 +26,6 @@ namespace Beached.Content.Scripts
         private static int widthInChunks;
         private static int heightInChunks;
         private static int chunkCount;
-
-        public static ElementInteractions Instance;
 
         private static ushort oxygenIdx;
         private static ushort saltWaterIdx;
@@ -42,15 +43,7 @@ namespace Beached.Content.Scripts
 
         public override void OnPrefabInit()
         {
-            base.OnPrefabInit();
-            Instance = this;
             mushroomPlantable = Assets.GetPrefab(MushroomPlantConfig.SEED_ID).GetComponent<PlantableSeed>();
-        }
-
-        public override void OnCleanUp()
-        {
-            base.OnCleanUp();
-            Instance = null;
         }
 
         public void Sim200ms(float dt)
