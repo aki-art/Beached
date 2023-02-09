@@ -43,6 +43,7 @@ namespace Beached
         public static class SNAPONS
         {
             public const string CAP = "Beached_SnapOn_Cap";
+            public const string RUBBER_BOOTS = "Beached_SnapOn_RubberBoots";
         }
 
         public class BATCH_TAGS
@@ -83,6 +84,14 @@ namespace Beached
             public const string SLICKSTER = "FloaterNavGrid";
             public const string SWIMMER = "SwimmerNavGrid";
             public const string PIP = "SquirrelNavGrid";
+        }
+
+        public static class WORLDGEN
+        {
+            public static class CLUSTERS
+            {
+                public const string BEACHED = "clusters/AstropelagosCluster";
+            }
         }
 
         public static class BUILD_CATEGORY

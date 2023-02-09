@@ -9,13 +9,21 @@ namespace Beached.Content.Scripts
         [SerializeField]
         public string setPiecePrefabID;
 
+        [SerializeField]
+        public Texture2D placeholderTexture;
+
         public override void OnSpawn()
         {
             base.OnSpawn();
 
-            if(ModAssets.Prefabs.setpieces.TryGetValue(setPiecePrefabID, out var prefab))
+            if (ModAssets.Prefabs.setpieces.TryGetValue(setPiecePrefabID, out var prefab))
             {
                 visualizer = Instantiate(prefab);
+
+                if (placeholderTexture != null)
+                {
+                    SetPlaceholder();
+                }
 
                 var position = new Vector3(transform.position.x, transform.position.y, Grid.GetLayerZ(Grid.SceneLayer.Backwall) - 0.1f);
                 visualizer.transform.position = position;
@@ -24,13 +32,33 @@ namespace Beached.Content.Scripts
             }
         }
 
+        private void SetPlaceholder()
+        {
+            Log.Warning($"{this.PrefabID()} is still using placeholder texture.");
+            var spriteRenderer = visualizer.transform.Find("bg 1").GetComponent<SpriteRenderer>();
+            var originalWidth = spriteRenderer.sprite.rect.width;
+            var originalHeight = spriteRenderer.sprite.rect.height;
+
+            spriteRenderer.sprite = Sprite.Create(placeholderTexture, new Rect(0, 0, placeholderTexture.width, placeholderTexture.height), Vector2.zero);
+
+            spriteRenderer.transform.localScale = new Vector3(placeholderTexture.width / originalWidth, placeholderTexture.height / originalHeight, 1) * 2f;
+
+            foreach (Transform child in visualizer.transform)
+            {
+                if (child.name != "bg 1")
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+        }
+
         public override void OnCleanUp()
         {
             base.OnCleanUp();
 
-            if(visualizer != null)
+            if (visualizer != null)
             {
-                Object.Destroy(visualizer);
+                Destroy(visualizer);
             }
         }
     }

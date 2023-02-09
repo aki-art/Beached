@@ -20,8 +20,6 @@ namespace Beached.Content.Scripts
             foundationRenderer = ModDebug.AddSimpleLineRenderer(transform, Color.green, Color.green);
             lineOfSightCheckRenderer = ModDebug.AddSimpleLineRenderer(transform, Color.magenta, Color.blue);
 
-
-
             ModDebug.Square(originLineRenderer, transform.position, 0.03f);
 
             UpdateVisualizers();

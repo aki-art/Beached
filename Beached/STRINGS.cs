@@ -664,6 +664,18 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
+            public class LATEX
+            {
+                public static LocString NAME = FormatAsLink("Latex");
+                public static LocString DESC = "TODO";
+            }
+
+            public class LITTER
+            {
+                public static LocString NAME = FormatAsLink("Litter");
+                public static LocString DESC = "TODO";
+            }
+
             public class MOSS
             {
                 public static LocString NAME = FormatAsLink("Moss");
@@ -718,6 +730,11 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
+            public class RUBBER
+            {
+                public static LocString NAME = FormatAsLink("Rubber");
+                public static LocString DESC = "TODO";
+            }
 
             public class SALTYOXYGEN
             {

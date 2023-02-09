@@ -1,0 +1,16 @@
+name: STRINGS.WORLDS.BEACHEDSTART.NAME
+description: STRINGS.WORLDS.BEACHEDSTART.DESCRIPTION
+requiredDlcId: EXPANSION1_ID
+coordinatePrefix: BCHD
+menuOrder: -999
+difficulty: 4
+disableStoryTraits: true
+clusterCategory: 2
+
+worldPlacements:
+- world: worlds/BeachedStart
+  allowedRings:
+    max: 9999
+  buffer: 2
+  locationType: Startworld
+  startWorld: true

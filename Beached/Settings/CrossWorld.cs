@@ -6,6 +6,8 @@ namespace Beached.Settings
     {
         public bool LifeGoals { get; set; } = false;
 
+        public bool UseVibrantLUTEverywhere { get; set; } = false;
+
         public ElementSettings Elements { get; set; } = new ElementSettings();
 
         public class ElementSettings

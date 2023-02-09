@@ -21,6 +21,15 @@ namespace Beached.Patches
                     overrideSymbol = "snapTo_hat"
                 });
 
+                snapOn.snapPoints.Add(new SnapOn.SnapPoint
+                {
+                    pointName = CONSTS.SNAPONS.RUBBER_BOOTS,
+                    automatic = false,
+                    context = "",
+                    buildFile = Assets.GetAnim("beached_rubberboots_kanim"),
+                    overrideSymbol = "foot"
+                });
+
                 __result.AddOrGet<BeachedMinionStorage>();
                 __result.AddOrGet<LifeGoalTracker>();
             }

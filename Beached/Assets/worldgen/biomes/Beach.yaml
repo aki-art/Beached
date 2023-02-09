@@ -3,6 +3,15 @@ TerrainBiomeLookupTable:
   remove: [] 
   # elements to add from in-memory structure when this file is loaded
   add:
+    Solid:
+    - content: SiltStone
+      bandSize: 0.5
+    - content: Lime
+      bandSize: 0.3
+    - content: SedimentaryRock
+      bandSize: 0.1
+    - content: SiltStone
+      bandSize: 0.6
     SnowyBase:
     - content: Ice
       bandSize: 0.7

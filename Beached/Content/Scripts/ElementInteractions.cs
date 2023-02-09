@@ -1,8 +1,5 @@
 ﻿using Beached.Content.Defs.Comets;
-using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
-using Beached.Utils;
-using KSerialization;
 using UnityEngine;
 
 namespace Beached.Content.Scripts

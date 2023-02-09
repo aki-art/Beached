@@ -1,0 +1,20 @@
+biomeNoise: noise/sea
+temperatureRange: HumanWarm
+density:
+  min: 0
+  max: 30
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+pdWeight: 1
+biomes:
+  - name: biomes/Sea/Basic
+    weight: 2
+    tags:
+      - Pacu
+      - Crab
+tags:
+  - IgnoreCaveOverride
+  - River
+  - NoGravitasFeatures
+zoneType: Sea

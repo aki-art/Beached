@@ -1,27 +1,31 @@
 biomeNoise: noise/beach_solid
 temperatureRange: Room
-pdWeight: 8
+pdWeight: 4
 density:
-  min: 10
-  max: 20
-avoidRadius: 10.0
-extraBiomeChildren: 3
-doAvoidPoints: false
-dontRelaxChildren: true
+  min: 5
+  max: 10
+avoidRadius: 5.0
+minChildCount: 4
 sampleBehaviour: PoissonDisk
 borderOverride: rocky
 biomes:
   - name: biomes/Beach/Solid
-    weight: 2
-centralFeature:
-  type: features/generic/StartLocation
+    weight: 3
+    tags:
+      - Pacu
+      - Beached_MusselSprout
+      - Beached_AlgaeCell
+      - Beached_WaterCups
+      - Beached_DewPalm
+      - Beached_LeafletCoral
 features:
   - type: features/beach/AirPocket
   - type: features/beach/MetalCavern
-  - type: features/beach/AlgaePocket
+  - type: features/beach/LimePocket
   - type: features/beach/MediumFreshwaterLake
   - type: features/beach/TinyFreshWaterLake
   - type: features/beach/SnailPocket
+  - type: features/beach/PalmyShore
 tags:
   - IgnoreCaveOverride
   - NoGlobalFeatureSpawning

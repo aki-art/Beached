@@ -1,4 +1,4 @@
-﻿using Beached.Content.Defs.Items;
+﻿using Beached.Content.Defs.Equipment;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.LifeGoals;
 using Klei.AI;

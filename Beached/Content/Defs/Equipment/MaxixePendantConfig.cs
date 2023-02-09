@@ -3,7 +3,7 @@ using Klei.AI;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Beached.Content.Defs.Items
+namespace Beached.Content.Defs.Equipment
 {
     public class MaxixePendantConfig : IEquipmentConfig
     {

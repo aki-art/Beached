@@ -1,4 +1,7 @@
-﻿namespace Beached.Content.Scripts
+﻿using UnityEngine;
+using UnityStandardAssets.ImageEffects;
+
+namespace Beached.Content.Scripts
 {
     public class BeachedWorldLoader : KMonoBehaviour
     {
@@ -10,9 +13,16 @@
 
         public bool IsBeachedContentActive { get; private set; } = true;
 
+
         public void WorldLoaded(string clusterId)
         {
-            IsBeachedContentActive = clusterId == "expansion1::clusters/TinyStartCluster";
+            IsBeachedContentActive = clusterId == CONSTS.WORLDGEN.CLUSTERS.BEACHED;
+
+            if (IsBeachedContentActive)
+            {
+                Log.Info("Loaded Astropelagos world, initializing Beached settings.");
+            }
+
             Elements.OnWorldReload(IsBeachedContentActive);
         }
     }

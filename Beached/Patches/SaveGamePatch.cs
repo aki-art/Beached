@@ -15,6 +15,7 @@ namespace Beached.Patches
             {
                 Log.Debug("SaveGame OnPrefabInit");
                 __instance.gameObject.AddOrGet<BeachedMod>();
+                __instance.gameObject.AddOrGet<BeachedGrid>();
             }
         }
     }

@@ -1,10 +1,7 @@
-﻿using Beached.Content;
-using Beached.Content.Defs.Buildings;
+﻿using Beached.Content.Defs.Buildings;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Sicknesses;
-using Beached.Content.Scripts;
 using HarmonyLib;
-using System.Collections.Generic;
 
 namespace Beached.Patches.DatabasePatches
 {
@@ -30,7 +27,6 @@ namespace Beached.Patches.DatabasePatches
                 RegisterBuildings();
 
                 ModAssets.LoadAssets();
-
             }
 
             private static void RegisterBuildings()

@@ -17,6 +17,11 @@ namespace Beached
             public static Texture2D LUTDay;
             public static Texture2DArray germOverlays;
             public static Texture2DArray biomeBackgrounds;
+
+            public static class Placeholders
+            {
+                public static Texture2D beachBg;
+            }
         }
 
         public static class Materials
@@ -59,6 +64,7 @@ namespace Beached
             public static Color calcium = Color.white;
             public static Color gravel = new Color32(100, 100, 100, 255);
             public static Color iridium = Util.ColorFromHex("b6b2fb");
+            public static Color latex = Util.ColorFromHex("e08a65");
             public static Color moltenBismuth = new Color32(117, 166, 108, 255);
             public static Color moss = Util.ColorFromHex("528b35");
             public static Color mucus = new Color32(170, 205, 170, 255);
@@ -66,8 +72,8 @@ namespace Beached
             public static Color mucusUi = new Color32(170, 205, 170, 255);
             public static Color murkyBrine = new Color32(60, 61, 55, 255);
             public static Color mycelium = Util.ColorFromHex("c9bda6");
-            public static Color nitrogen = new Color(0.65f, 0.65f, 0.65f, 0.2f);
-            public static Color nitrogenOpaque = new Color(0.8f, 0.8f, 0.8f);
+            public static Color nitrogen = new (0.65f, 0.65f, 0.65f, 0.2f);
+            public static Color nitrogenOpaque = new (0.8f, 0.8f, 0.8f);
             public static Color pearl = Util.ColorFromHex("c9bda6");
             public static Color permaFrost = Util.ColorFromHex("68b9e2");
             public static Color rot = Util.ColorFromHex("404930");
@@ -82,8 +88,8 @@ namespace Beached
             public static Color water = Util.ColorFromHex("39a0f7");
             public static Color saltWater = Util.ColorFromHex("7fe4ff");
 
-            public static Color zirconSpecular = new Color(2f, 0, 0);
-            public static Color zincSpecular = new Color(0f, 1.2f, 1.7f);
+            public static Color zirconSpecular = new(2f, 0, 0);
+            public static Color zincSpecular = new(0f, 1.2f, 1.7f);
 
             // germs
             public static Color plankton = new Color32(0, 0, 255, 255);
@@ -118,7 +124,8 @@ namespace Beached
         {
             var assets = Path.Combine(Mod.folder, "Assets");
 
-            Textures.LUTDay = LoadTexture(Path.Combine(assets, "cc_day_bright_and_saturated.png"));
+            Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
+            Textures.Placeholders.beachBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "beach.png"));
 
             Log.Debug("LOADING ASSETS");
 
@@ -150,6 +157,7 @@ namespace Beached
 
             Debug.Assert(Materials.germOverlayReplacer != null, "mat is null");
             Debug.Assert(Materials.germOverlayReplacer.shader != null, "shader is null");
+
         }
 
         public static bool TryLoadTexture(string path, out Texture2D texture)

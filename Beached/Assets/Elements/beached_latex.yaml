@@ -1,0 +1,30 @@
+elements:
+    - elementId: Latex
+      maxMass: 1200
+      liquidCompression: 1.01
+      speed: 10
+      minHorizontalFlow: 1
+      minVerticalFlow: 1
+      specificHeatCapacity: 3.4
+      thermalConductivity: 0.609
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 25
+      gasSurfaceAreaMultiplier: 1
+      lowTemp: 250.65
+      highTemp: 375.9
+      lowTempTransitionTarget: SulfurousIce
+      highTempTransitionTarget: Steam
+      highTempTransitionOreId: Sulfur
+      highTempTransitionOreMassConversion: 0.3
+      defaultTemperature: 282.15
+      defaultMass: 800
+      molarMass: 22
+      toxicity: 0
+      lightAbsorptionFactor: 0.8
+      radiationAbsorptionFactor: 0.8
+      radiationPer1000Mass: 0
+      tags:
+      isDisabled: false
+      state: Liquid
+      localizationID: Beached.STRINGS.ELEMENTS.LATEX.NAME
+      dlcId: ""

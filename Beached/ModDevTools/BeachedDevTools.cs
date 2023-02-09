@@ -10,6 +10,7 @@
             DevToolManager.Instance.RegisterDevTool<WorldGenDevTool>("Mods/Beached/Worldgen");
             DevToolManager.Instance.RegisterDevTool<DebugDevTool>("Mods/Beached/Debug");
             DevToolManager.Instance.RegisterDevTool<ConsoleDevTool>("Mods/Beached/Log");
+            DevToolManager.Instance.RegisterDevTool<NoisePreviewerDevTool>("Mods/Beached/Noise");
         }
     }
 }

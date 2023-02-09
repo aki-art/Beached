@@ -1,0 +1,52 @@
+MobLookupTable:
+  remove: [] 
+  add:
+    Beached_MusselSprout:
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.6
+      width: 1
+      height: 1
+    Beached_LeafletCoral:
+      location: LiquidFloor
+      selectMethod: Centroid
+      sampleBehaviour: UniformSpiral
+      blobSize:
+        min: 2
+        max: 5
+      density:
+        min: 0.1
+        max: 0.4
+      width: 1
+      height: 1
+    Beached_WaterCups:
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.6
+      width: 1
+      height: 2
+    Beached_AlgaeCell:
+      location: LiquidFloor
+      selectMethod: Centroid
+      sampleBehaviour: UniformSpiral
+      blobSize:
+        min: 2
+        max: 5
+      density:
+        min: 0.05
+        max: 0.1
+      width: 1
+      height: 1
+    Beached_DewPalm:
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.3
+      width: 2
+      height: 4
+

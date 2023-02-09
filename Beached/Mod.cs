@@ -32,63 +32,64 @@ namespace Beached
 
             ZoneTypes.Initialize();
             BeachedDevTools.Initialize();
+            BWorldGenTags.Initialize();
 
             CROPS.CROP_TYPES.Add(new Crop.CropVal(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
 
-/*            var types = Assembly.GetExecutingAssembly().GetTypes();
-            foreach (var type in types)
-            {
-                foreach (var methodInfo in type.GetMethods())
-                {
-                    foreach (Attribute attr in Attribute.GetCustomAttributes(methodInfo))
-                    {
-                        if (attr.GetType() == typeof(OverrideAttribute))
+            /*            var types = Assembly.GetExecutingAssembly().GetTypes();
+                        foreach (var type in types)
                         {
-                            var overrideAttr = (OverrideAttribute)attr;
-                            var parentType = overrideAttr.parentType ?? type.BaseType;
-
-                            var parameters = methodInfo.GetParameters();
-                            var originalParams = new List<Type>();
-                            foreach (var p in parameters)
+                            foreach (var methodInfo in type.GetMethods())
                             {
-                                Log.Debug(p.Name);
-                                if (p.Name != "__result" && p.Name != "__instance")
+                                foreach (Attribute attr in Attribute.GetCustomAttributes(methodInfo))
                                 {
-                                    originalParams.Add(p.ParameterType);
-                                }
-                            }
-
-                            Log.Debug(parentType.ToString());
-                            Log.Debug(methodInfo.Name.ToString());
-                            Log.Debug(string.Join(",", originalParams));
-                            var original = AccessTools.Method(parentType, methodInfo.Name, originalParams.ToArray());
-
-                            harmony.Patch(original, prefix: new HarmonyMethod(methodInfo));
-                        }
-                    }
-                }*/
-
-                /*                
-                            var m_AttachExtensions = AccessTools.Method(typeof(Mod), "AttachExtension");
-                Log.Debug(type.Name);
-                                foreach (Attribute attr in Attribute.GetCustomAttributes(type))
-                                {
-                                    if (attr.GetType() == typeof(ExtensionClassAttribute))
+                                    if (attr.GetType() == typeof(OverrideAttribute))
                                     {
-                                        var extension = (ExtensionClassAttribute)attr;
-                                        var originalType = extension.originalType;
+                                        var overrideAttr = (OverrideAttribute)attr;
+                                        var parentType = overrideAttr.parentType ?? type.BaseType;
 
-                                        var constructors = originalType.GetConstructors();
-                                        var m_AttachGeneric = m_AttachExtensions.MakeGenericMethod(type);
-
-                                        foreach (var constructor in constructors)
+                                        var parameters = methodInfo.GetParameters();
+                                        var originalParams = new List<Type>();
+                                        foreach (var p in parameters)
                                         {
-                                            harmony.Patch(constructor, postfix: new HarmonyMethod(m_AttachGeneric));
+                                            Log.Debug(p.Name);
+                                            if (p.Name != "__result" && p.Name != "__instance")
+                                            {
+                                                originalParams.Add(p.ParameterType);
+                                            }
                                         }
+
+                                        Log.Debug(parentType.ToString());
+                                        Log.Debug(methodInfo.Name.ToString());
+                                        Log.Debug(string.Join(",", originalParams));
+                                        var original = AccessTools.Method(parentType, methodInfo.Name, originalParams.ToArray());
+
+                                        harmony.Patch(original, prefix: new HarmonyMethod(methodInfo));
                                     }
                                 }
-                */
-            }
+                            }*/
+
+            /*                
+                        var m_AttachExtensions = AccessTools.Method(typeof(Mod), "AttachExtension");
+            Log.Debug(type.Name);
+                            foreach (Attribute attr in Attribute.GetCustomAttributes(type))
+                            {
+                                if (attr.GetType() == typeof(ExtensionClassAttribute))
+                                {
+                                    var extension = (ExtensionClassAttribute)attr;
+                                    var originalType = extension.originalType;
+
+                                    var constructors = originalType.GetConstructors();
+                                    var m_AttachGeneric = m_AttachExtensions.MakeGenericMethod(type);
+
+                                    foreach (var constructor in constructors)
+                                    {
+                                        harmony.Patch(constructor, postfix: new HarmonyMethod(m_AttachGeneric));
+                                    }
+                                }
+                            }
+        }
+            */
         }
 
 
