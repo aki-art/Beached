@@ -104,7 +104,7 @@ namespace Beached
                 public static Color bladder = Util.ColorFromHex("4DAD22FF"); // B5BBDBFF
                 public static Color depths = Util.ColorFromHex("1578FFFF");
                 public static Color icy = Util.ColorFromHex("90BFDBFF"); // B5BBDBFF
-                public static Color reefs = Util.ColorFromHex("AB5DB0FF");
+                public static Color reefs = Util.ColorFromHex("B8697E");
                 public static Color sea = Util.ColorFromHex("63D6DEFF");
                 public static Color pearly = Util.ColorFromHex("0E0906FF");
             }
