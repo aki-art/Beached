@@ -1,0 +1,15 @@
+name: Beached.STRINGS.WORLD_TRAITS.EXTRAREEF.NAME
+description: Beached.STRINGS.WORLD_TRAITS.EXTRAREEF.DESCRIPTION
+colorHex: B8697E
+
+additionalWorldTemplateRules:
+  - names:
+      - beached/worldgen/coralreefsmall1
+    listRule: GuaranteeOne
+    allowDuplicates: true
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes:
+          - Sea
+          - Ocean
+          - FrozenWastes

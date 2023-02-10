@@ -10,14 +10,15 @@ namespace Beached.Content.BWorldGen
         public static ZoneTypes2 zones;
         public static HashSet<ZoneType> values = new();
 
-        public static ZoneType basaltShore;
-        public static ZoneType beach;
-        public static ZoneType bamboo;
-        public static ZoneType depths;
-        public static ZoneType sea;
-        public static ZoneType coralReef;
-        public static ZoneType icy;
-        public static ZoneType pearly;
+        public static ZoneType 
+            basaltShore,
+            beach,
+            bamboo,
+            depths,
+            sea,
+            coralReef,
+            icy,
+            pearly;
 
         public static void Initialize()
         {

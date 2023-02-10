@@ -8,6 +8,8 @@ namespace Beached.Content.BWorldGen
         public static Tag AtSideBDepth = TagManager.Create("Beached_AtSideBDepth");
         public static Tag AtSideACorner = TagManager.Create("Beached_AtSideACorner");
         public static Tag AtSideBCorner = TagManager.Create("Beached_AtSideBCorner");
+
+        // if a template is tagged with this, it turns into a Reef Biome
         public static Tag Reefify = TagManager.Create("Beached_Reefify");
 
         // used to replace the noise generation with something that closer resembles raw noise data

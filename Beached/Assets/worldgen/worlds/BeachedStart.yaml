@@ -125,7 +125,7 @@ unknownCellsAllowedSubworlds:
     command: Replace
     subworldNames:
       - subworlds/beached/debug/EmptyMagma
-# space, 2 tell to fit the AFFG
+# space
   - tagcommand: DistanceFromTag
     tag: AtSurface
     minDistance: 0

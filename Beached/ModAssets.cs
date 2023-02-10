@@ -51,62 +51,64 @@ namespace Beached
         public static class Colors
         {
             // elements
-            public static Color amber = Util.ColorFromHex("f98f1e");
-            public static Color ammonia = Util.ColorFromHex("4d3b9b");
-            public static Color ash = Util.ColorFromHex("8a8e9d");
-            public static Color aquamarine = new Color32(74, 255, 231, 255);
-            public static Color basalt = new Color32(30, 30, 50, 255);
-            public static Color beryllium = Util.ColorFromHex("7da39a");
-            public static Color bismuth = new Color32(117, 166, 108, 255);
-            public static Color bismuthGas = new Color32(117, 166, 108, 255);
-            public static Color bismuthOre = new Color32(117, 166, 108, 255);
-            public static Color bone = Util.ColorFromHex("d6cec2");
-            public static Color calcium = Color.white;
-            public static Color gravel = new Color32(100, 100, 100, 255);
-            public static Color iridium = Util.ColorFromHex("b6b2fb");
-            public static Color latex = Util.ColorFromHex("e08a65");
-            public static Color moltenBismuth = new Color32(117, 166, 108, 255);
-            public static Color moss = Util.ColorFromHex("528b35");
-            public static Color mucus = new Color32(170, 205, 170, 255);
-            public static Color mucusConduit = new Color32(170, 205, 170, 255);
-            public static Color mucusUi = new Color32(170, 205, 170, 255);
-            public static Color murkyBrine = new Color32(60, 61, 55, 255);
-            public static Color mycelium = Util.ColorFromHex("c9bda6");
-            public static Color nitrogen = new (0.65f, 0.65f, 0.65f, 0.2f);
-            public static Color nitrogenOpaque = new (0.8f, 0.8f, 0.8f);
-            public static Color pearl = Util.ColorFromHex("c9bda6");
-            public static Color permaFrost = Util.ColorFromHex("68b9e2");
-            public static Color rot = Util.ColorFromHex("404930");
-            public static Color root = Util.ColorFromHex("3a3430");
-            public static Color saltyOxygen = new Color32(205, 170, 170, 120);
-            public static Color selenite = Util.ColorFromHex("ffd1dc");
-            public static Color sulfurousWater = Util.ColorFromHex("d5ff2d");
-            public static Color zinc = new Color32(30, 170, 170, 255);
-            public static Color zirconium = new Color32(205, 0, 0, 255);
-            public static Color zeolite = Util.ColorFromHex("2aa945");
+            public static Color
+                amber = Util.ColorFromHex("f98f1e"),
+                ammonia = Util.ColorFromHex("4d3b9b"),
+                ash = Util.ColorFromHex("8a8e9d"),
+                aquamarine = new Color32(74, 255, 231, 255),
+                basalt = new Color32(30, 30, 50, 255),
+                beryllium = Util.ColorFromHex("7da39a"),
+                bismuth = new Color32(117, 166, 108, 255),
+                bismuthGas = new Color32(117, 166, 108, 255),
+                bismuthOre = new Color32(117, 166, 108, 255),
+                bone = Util.ColorFromHex("d6cec2"),
+                calcium = Color.white,
+                gravel = new Color32(100, 100, 100, 255),
+                iridium = Util.ColorFromHex("b6b2fb"),
+                latex = Util.ColorFromHex("e08a65"),
+                moltenBismuth = new Color32(117, 166, 108, 255),
+                moss = Util.ColorFromHex("528b35"),
+                mucus = new Color32(170, 205, 170, 255),
+                mucusConduit = new Color32(170, 205, 170, 255),
+                mucusUi = new Color32(170, 205, 170, 255),
+                murkyBrine = new Color32(60, 61, 55, 255),
+                mycelium = Util.ColorFromHex("c9bda6"),
+                nitrogen = new(0.65f, 0.65f, 0.65f, 0.2f),
+                nitrogenOpaque = new(0.8f, 0.8f, 0.8f),
+                pearl = Util.ColorFromHex("c9bda6"),
+                permaFrost = Util.ColorFromHex("68b9e2"),
+                rot = Util.ColorFromHex("404930"),
+                root = Util.ColorFromHex("3a3430"),
+                saltyOxygen = new Color32(205, 170, 170, 120),
+                selenite = Util.ColorFromHex("ffd1dc"),
+                sulfurousWater = Util.ColorFromHex("d5ff2d"),
+                zinc = new Color32(30, 170, 170, 255),
+                zirconium = new Color32(205, 0, 0, 255),
+                zeolite = Util.ColorFromHex("2aa945"),
 
-            public static Color water = Util.ColorFromHex("39a0f7");
-            public static Color saltWater = Util.ColorFromHex("7fe4ff");
+                water = Util.ColorFromHex("39a0f7"),
+                saltWater = Util.ColorFromHex("7fe4ff"),
 
-            public static Color zirconSpecular = new(2f, 0, 0);
-            public static Color zincSpecular = new(0f, 1.2f, 1.7f);
+                zirconSpecular = new(2f, 0, 0),
+                zincSpecular = new(0f, 1.2f, 1.7f),
 
             // germs
-            public static Color plankton = new Color32(0, 0, 255, 255);
-            public static Color limpetEggs = new Color32(255, 225, 185, 255);
-            public static Color capSpores = Color.red;
+                plankton = new Color32(0, 0, 255, 255),
+                limpetEggs = new Color32(255, 225, 185, 255),
+                capSpores = Color.red;
 
             public class Zones
             {
-                public static Color bamboo = Util.ColorFromHex("809D17FF");
-                public static Color basaltShores = new Color32(211, 186, 157, 0);
-                public static Color beach = Util.ColorFromHex("C06410FF");
-                public static Color bladder = Util.ColorFromHex("4DAD22FF"); // B5BBDBFF
-                public static Color depths = Util.ColorFromHex("1578FFFF");
-                public static Color icy = Util.ColorFromHex("90BFDBFF"); // B5BBDBFF
-                public static Color reefs = Util.ColorFromHex("B8697E");
-                public static Color sea = Util.ColorFromHex("63D6DEFF");
-                public static Color pearly = Util.ColorFromHex("0E0906FF");
+                public static Color
+                    bamboo = Util.ColorFromHex("809D17FF"),
+                    basaltShores = new Color32(211, 186, 157, 0),
+                    beach = Util.ColorFromHex("C06410FF"),
+                    bladder = Util.ColorFromHex("4DAD22FF"), // B5BBDBF
+                    depths = Util.ColorFromHex("1578FFFF"),
+                    icy = Util.ColorFromHex("90BFDBFF"), // B5BBDBF
+                    reefs = Util.ColorFromHex("B8697E"),
+                    sea = Util.ColorFromHex("63D6DEFF"),
+                    pearly = Util.ColorFromHex("0E0906FF");
             }
 
             public class UI
@@ -142,7 +144,7 @@ namespace Beached
 
             var testSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/test_setpiece.prefab");
 
-            foreach(var renderer in testSetPiece.GetComponents<SpriteRenderer>())
+            foreach (var renderer in testSetPiece.GetComponents<SpriteRenderer>())
             {
                 renderer.material.renderQueue = RenderQueues.Liquid;
             }

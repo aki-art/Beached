@@ -1114,6 +1114,15 @@ namespace Beached
             }
         }
 
+        public class WORLD_TRAITS
+        {
+            public class EXTRAREEF
+            {
+                public static LocString NAME = "Coral Reef";
+                public static LocString DESCRIPTION = "";
+            }
+        }
+
         public static string FormatAsLink(string text, string id = null)
         {
             text = global::STRINGS.UI.StripLinkFormatting(text);

@@ -12,7 +12,9 @@ namespace Beached
         private Dictionary<int, NaturalTileInfo> naturalTiles = new();
 
         [Serialize]
-        public Dictionary<int, ProcGen.SubWorld.ZoneType> zoneTypeOverrides = new();
+        public Dictionary<int, ZoneType> zoneTypeOverrides = new();
+
+        public static Dictionary<Vector2I, ZoneType> worldgenZoneTypes;
 
         [Serialize]
         private bool initialized;
@@ -25,7 +27,20 @@ namespace Beached
 
         public override void OnSpawn()
         {
+            Log.Debug("BeachedGrid OnSpawn");
+            if (worldgenZoneTypes != null)
+            {
+                Log.Debug("beachedgrid has worldgen data " + worldgenZoneTypes.Count);
+                foreach (var cell in worldgenZoneTypes)
+                {
+                    zoneTypeOverrides[Grid.PosToCell(cell.Key)] = cell.Value;
+                }
+
+                //worldgenZoneTypes.Clear();
+            }
+
             RegenerateBackwallTexture();
+            World.Instance.zoneRenderData.OnActiveWorldChanged();
         }
 
         public void RegenerateBackwallTexture()

@@ -13,8 +13,13 @@ biomes:
     tags:
       - Pacu
       - Crab
+subworldTemplateRules:
+  - names:
+      - beached/worldgen/coralreefsmall1
+    listRule: GuaranteeOne
 tags:
   - IgnoreCaveOverride
   - River
   - NoGravitasFeatures
+  - Beached_Reefify # change zonetype to Reefs
 zoneType: Sea
