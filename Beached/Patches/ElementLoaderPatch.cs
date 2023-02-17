@@ -39,22 +39,22 @@ namespace Beached.Patches
                 foreach (var elem in __result)
                 {
                     // change Amber's melting target based on DLC
-                    if (elem.elementId == Elements.Amber.ToString() && DlcManager.FeatureRadiationEnabled())
+                    if (elem.elementId == Elements.amber.ToString() && DlcManager.FeatureRadiationEnabled())
                     {
                         elem.highTempTransitionTarget = SimHashes.Resin.ToString();
                     }
                     else if (elem.elementId == SimHashes.Diamond.ToString())
                     {
-                        Mod.Settings.CrossWorld.Elements.originalDiamondCategory = elem.materialCategory;
+                        Mod.settings.CrossWorld.Elements.originalDiamondCategory = elem.materialCategory;
                     }
                     else if (elem.elementId == SimHashes.Katairite.ToString())
                     {
-                        Mod.Settings.CrossWorld.Elements.originalAbyssaliteCategory = elem.materialCategory;
+                        Mod.settings.CrossWorld.Elements.originalAbyssaliteCategory = elem.materialCategory;
                     }
                     else if (elem.elementId == SimHashes.Lime.ToString())
                     {
-                        Mod.Settings.CrossWorld.Elements.originalLimeHighTemp = elem.highTemp;
-                        Mod.Settings.CrossWorld.Elements.originalLimeHighTempTarget = elem.highTempTransitionTarget;
+                        Mod.settings.CrossWorld.Elements.originalLimeHighTemp = elem.highTemp;
+                        Mod.settings.CrossWorld.Elements.originalLimeHighTempTarget = elem.highTempTransitionTarget;
 
                     }
                     // reenable Helium

@@ -16,7 +16,7 @@ namespace Beached.Patches
             [HarmonyPriority(Priority.High)]
             public static void Prefix(CameraController __instance)
             {
-                var useCustomLUT = BeachedWorldLoader.Instance.IsBeachedContentActive || Mod.Settings.CrossWorld.UseVibrantLUTEverywhere;
+                var useCustomLUT = BeachedWorldLoader.Instance.IsBeachedContentActive || Mod.settings.CrossWorld.UseVibrantLUTEverywhere;
 
                 if (Global.Instance.GetComponent("RomenHRegistry") is IDictionary<string, object> RomenHRegistry)
                 {

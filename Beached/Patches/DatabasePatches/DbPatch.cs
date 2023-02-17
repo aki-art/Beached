@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Buildings;
+﻿using Beached.Content;
+using Beached.Content.Defs.Buildings;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Sicknesses;
 using HarmonyLib;
@@ -12,10 +13,12 @@ namespace Beached.Patches.DatabasePatches
         {
             public static void Postfix(Db __instance)
             {
-                // do not reorder, loading order matters!
+                // do not reorder randomly, loading order matters!
                 BAttributes.Register(__instance.Attributes);
+                BAmounts.Register(__instance.Amounts);
                 BAssignableSlots.Register(__instance.AssignableSlots);
                 BChoreGroups.Register(__instance.ChoreGroups);
+                BStatusItems.Register();
                 BSkillGroups.Register(__instance.SkillGroups);
                 BSkillPerks.Register(__instance.SkillPerks);
                 BSkills.Register(__instance.Skills);

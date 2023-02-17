@@ -20,7 +20,7 @@ namespace Beached.Patches
                     var elements = safe_elements.ToHashSet();
                     if (elements.Contains(SimHashes.Oxygen))
                     {
-                        elements.Add(Elements.SaltyOxygen);
+                        elements.Add(Elements.saltyOxygen);
                     }
 
                     safe_elements = elements.ToArray();

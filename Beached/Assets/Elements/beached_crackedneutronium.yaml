@@ -1,0 +1,28 @@
+elements:
+  - elementId: CrackedNeutronium
+    specificHeatCapacity: 0.2
+    thermalConductivity: 2
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.2
+    highTemp: 1200
+    highTempTransitionTarget: Magma
+    defaultTemperature: 300
+    defaultMass: 1840
+    maxMass: 1840
+    hardness: 230
+    molarMass: 50
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.9
+    radiationPer1000Mass: 0
+    materialCategory: BuildableRaw
+    tags:
+    - Plumbable
+    - Crushable
+    - BuildableAny
+    buildMenuSort: 2
+    isDisabled: false
+    state: Solid
+    localizationID: STRINGS.ELEMENTS.CRACKEDNEUTRONIUM.NAME
+    dlcId: ""

@@ -1,4 +1,5 @@
 ﻿using Beached.Content.BWorldGen;
+using Beached.Content.Defs;
 using HarmonyLib;
 using ProcGenGame;
 using System.Collections.Generic;
@@ -53,16 +54,23 @@ namespace Beached.Patches
 
                     BeachedGrid.worldgenZoneTypes ??= new();
 
+                    var processor = template.otherEntities?.Find(e => e.id == TemplateProcessorConfig.ID);
+                    if(processor == null)
+                    {
+                        Log.Warning("Used Beached tag to process a template, but it has no template processor entity saved with it.");
+                        //return;
+                    }
+
                     foreach (var offset in template.cells)
                     {
                         //var cell = Grid.PosToCell(new Vector2(offset.location_x + position.x, offset.location_y + position.y));
                         var cell = Grid.OffsetCell(originCell, offset.location_x, offset.location_y);
                         Log.Debug(cell);
 
-                        //if (!claimedCells.ContainsKey(cell))
-                        //{
+                        if (!claimedCells.ContainsKey(cell))
+                        {
                             BeachedGrid.worldgenZoneTypes[Grid.CellToXY(cell)] = ZoneTypes.coralReef;
-                        //}
+                        }
                     }
                 }
             }

@@ -39,7 +39,7 @@ namespace Beached.Content.Defs.Entities.Plants
                     SimHashes.Water,
                     SimHashes.SaltWater,
                     SimHashes.Brine,
-                    Elements.MurkyBrine
+                    Elements.murkyBrine
                 },
                 false,
                 0f,

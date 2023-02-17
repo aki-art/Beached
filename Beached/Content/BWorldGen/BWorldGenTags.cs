@@ -11,10 +11,10 @@ namespace Beached.Content.BWorldGen
 
         // if a template is tagged with this, it turns into a Reef Biome
         public static Tag Reefify = TagManager.Create("Beached_Reefify");
-
-        // used to replace the noise generation with something that closer resembles raw noise data
-        // roughing up is done with post processors later
-        public static Tag SmoothNoise = TagManager.Create("Beached_SmoothNoise");
+        // spawns a layer of sand above all solids
+        public static Tag SandBeds = TagManager.Create("Beached_SandBeds");
+        // turns some tiles into their crushed variant
+        public static Tag Shattered = TagManager.Create("Beached_Shattered");
 
         public static void Initialize()
         {

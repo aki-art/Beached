@@ -1,6 +1,7 @@
-﻿using Beached.Content;
+﻿using Beached.Content.Defs;
 using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Corals;
+using Beached.Content.Defs.Entities.Critters;
 using Beached.Content.Defs.Entities.Plants;
 using Beached.Content.Defs.Entities.SetPieces;
 using Beached.Content.Defs.Equipment;
@@ -41,10 +42,15 @@ namespace Beached.Patches
             PoffShroomConfig.ID,
             WaterCupsConfig.ID,
             DewPalmConfig.ID,
+            SlickShellConfig.ID,
+            BabySlickShellConfig.ID,
+            BambooConfig.ID,
+            PurpleHangerConfig.ID,
 
             // setpieces
             SetPiecesConfig.TEST,
-            SetPiecesConfig.BEACH
+            SetPiecesConfig.BEACH,
+            SetPiecesConfig.ZEOLITE
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]
@@ -53,13 +59,9 @@ namespace Beached.Patches
             public static void Postfix(SandboxToolParameterMenu __instance)
             {
                 var sprite = Def.GetUISprite(Assets.GetPrefab(CrabConfig.ID));
-                var parent = __instance.entitySelector.filters.First(x => x.Name == global::STRINGS.UI.SANDBOXTOOLS.FILTERS.ENTITIES.SPECIAL);
-
-                if (parent == null)
-                {
-                    return;
-                }
-
+                var parent = __instance.entitySelector.filters.First(x =>
+                    x.Name == global::STRINGS.UI.SANDBOXTOOLS.FILTERS.ENTITIES.SPECIAL);
+                
                 var filter = new SearchFilter("Beached", obj => obj is KPrefabID id && tags.Contains(id.PrefabTag), parent, sprite);
 
                 AddFilters(__instance, filter);

@@ -29,8 +29,8 @@ namespace Beached.Content.Scripts
                 InitAttributes(attributesSerialized);
             }
 
-            Subscribe(ModHashes.LifeGoalFulfilled, OnLifegoalFulfilled);
-            Subscribe(ModHashes.LifeGoalLost, OnLifegoalLost);
+            Subscribe(ModHashes.lifeGoalFulfilled, OnLifegoalFulfilled);
+            Subscribe(ModHashes.lifeGoalLost, OnLifegoalLost);
         }
 
         private void OnLifegoalFulfilled(object obj)

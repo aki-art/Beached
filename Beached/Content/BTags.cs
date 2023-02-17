@@ -5,42 +5,43 @@ namespace Beached.Content
 {
     public class BTags
     {
-        public static readonly Tag Bamboo = TagManager.Create("Beached_Bamboo");
-        public static readonly Tag Amphibious = TagManager.Create("Beached_Amphibious");
-        public static readonly Tag Coral = TagManager.Create("Beached_Coral");
-        public static readonly Tag Blueprintable = TagManager.Create("Beached_Blueprintable");
-        public static readonly Tag Corrodable = TagManager.Create("Beached_Corrodable");
-        public static readonly Tag Vista = TagManager.Create("Beached_Vista");
+        public static readonly Tag amphibious = TagManager.Create("Beached_Amphibious");
+        public static readonly Tag bamboo = TagManager.Create("Beached_Bamboo");
+        public static readonly Tag blueprintable = TagManager.Create("Beached_Blueprintable");
+        public static readonly Tag lubricated = TagManager.Create("Beached_Lubricated");
+        public static readonly Tag coral = TagManager.Create("Beached_Coral");
+        public static readonly Tag corrodable = TagManager.Create("Beached_Corrodable");
+        public static readonly Tag vista = TagManager.Create("Beached_Vista");
 
         public static class FastTrack
         {
-            public static readonly Tag RegisterRoom = TagManager.Create("RegisterRoom");
+            public static readonly Tag registerRoom = TagManager.Create("RegisterRoom");
         }
 
         public class Creatures
         {
-            public static readonly Tag SecretingMucus = TagManager.Create("BeachedSecretingMucus");
+            public static readonly Tag secretingMucus = TagManager.Create("BeachedSecretingMucus");
         }
         public static class Species
         {
-            public static readonly Tag Snail = TagManager.Create("BeachedSnailSpecies");
+            public static readonly Tag snail = TagManager.Create("BeachedSnailSpecies");
         }
 
         public static class MaterialCategories
         {
-            public static Tag Crystal = TagManager.Create("Beached_Crystal");
-            public static Tag Dim = TagManager.Create("Beached_Dim");
-            public static Tag Dark = TagManager.Create("Beached_Dark");
+            public static Tag crystal = TagManager.Create("Beached_Crystal");
+            public static Tag dim = TagManager.Create("Beached_Dim");
+            public static Tag dark = TagManager.Create("Beached_Dark");
         }
 
         public static void OnModLoad()
         {
-            GameTags.MaterialCategories.Add(MaterialCategories.Crystal);
+            GameTags.MaterialCategories.Add(MaterialCategories.crystal);
 
             var index = STORAGEFILTERS.NOT_EDIBLE_SOLIDS.FindIndex(tag => tag == GameTags.BuildableProcessed);
             index = Mathf.Max(index, 0); // in case some other mod tweaked the filters and removed BuildableProcessed
 
-            STORAGEFILTERS.NOT_EDIBLE_SOLIDS.Insert(index, MaterialCategories.Crystal);
+            STORAGEFILTERS.NOT_EDIBLE_SOLIDS.Insert(index, MaterialCategories.crystal);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Beached.Content.Scripts;
+﻿using Beached.Content.Scripts.Entities;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities
@@ -23,7 +23,7 @@ namespace Beached.Content.Defs.Entities
                 1,
                 TUNING.DECOR.BONUS.TIER4,
                 default,
-                Elements.Selenite);
+                Elements.selenite);
 
             //prefab.AddOrGet<GeoFormation>().allowDiagonalGrowth = true;
             prefab.AddOrGet<Crystal>().growthDirection = Direction.None;

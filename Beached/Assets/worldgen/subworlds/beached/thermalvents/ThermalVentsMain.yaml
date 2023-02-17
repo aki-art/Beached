@@ -1,0 +1,16 @@
+biomeNoise: noise/thermalvents
+temperatureRange: VeryHot
+density:
+  min: 0
+  max: 30
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+borderOverride: hardToDig
+biomes:
+  - name: biomes/ThermalVents/Default
+tags:
+  - IgnoreCaveOverride
+zoneType: MagmaCore
+features:
+  - type: features/beach/SnowCavern

@@ -15,7 +15,7 @@ namespace Beached.Content.Defs.Equipment
             var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
                 ID,
                 BAssignableSlots.SHOES_ID,
-                Elements.Rubber,
+                Elements.rubber,
                 30f,
                 TUNING.EQUIPMENT.VESTS.COOL_VEST_ICON0,
                 CONSTS.SNAPONS.RUBBER_BOOTS,

@@ -1,4 +1,4 @@
-﻿using Beached.Content.Scripts;
+﻿using Beached.Content.Scripts.Entities;
 using TUNING;
 using UnityEngine;
 
@@ -25,7 +25,7 @@ namespace Beached.Content.Defs.Buildings
                 new[]
                 {
                     GameTags.Farmable.ToString(),
-                    Elements.Moss.ToString()
+                    Elements.moss.ToString()
                 },
                 BUILDINGS.MELTING_POINT_KELVIN.TIER1,
                 BuildLocationRule.NotInTiles,

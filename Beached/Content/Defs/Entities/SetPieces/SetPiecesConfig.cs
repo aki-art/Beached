@@ -1,4 +1,4 @@
-﻿using Beached.Content.Scripts;
+﻿using Beached.Content.Scripts.Entities;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +9,15 @@ namespace Beached.Content.Defs.Entities.SetPieces
     {
         public const string TEST = "Beached_TestSetPiece";
         public const string BEACH = "Beached_BeachSetPiece";
+        public const string ZEOLITE = "Beached_ZeoliteSetPiece";
 
         public List<GameObject> CreatePrefabs()
         {
             return new List<GameObject>()
             {
                 CreateSetPiece(TEST, 11, 8, "test"),
-                CreateTestPiece(BEACH, 13, 8, ModAssets.Textures.Placeholders.beachBg)
+                CreateTestPiece(BEACH, 13, 8, ModAssets.Textures.Placeholders.beachBg),
+                CreateTestPiece(ZEOLITE, 8, 8, ModAssets.Textures.Placeholders.zeoliteBg)
             };
         }
 
@@ -23,7 +25,7 @@ namespace Beached.Content.Defs.Entities.SetPieces
         {
             var prefab = EntityTemplates.CreatePlacedEntity(
                 ID,
-                "Set Piece",
+                ID,
                 "",
                 100f,
                 Assets.GetAnim("farmtile_kanim"),

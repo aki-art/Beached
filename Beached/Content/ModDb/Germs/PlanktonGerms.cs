@@ -45,7 +45,7 @@ namespace Beached.Content.ModDb.Germs
                 minDiffusionCount = new int?(1000000)
             });
 
-            AddGrowthRule(new ElementGrowthRule(Elements.Mucus)
+            AddGrowthRule(new ElementGrowthRule(Elements.mucus)
             {
                 underPopulationDeathRate = new float?(0f),
                 populationHalfLife = new float?(-3000f),

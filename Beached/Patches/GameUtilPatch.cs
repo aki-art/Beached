@@ -13,7 +13,7 @@ namespace Beached.Patches
         {
             public static bool Prefix(Element element, float Mass, ref string __result)
             {
-                if (element.id == Elements.SaltyOxygen)
+                if (element.id == Elements.saltyOxygen)
                 {
                     var color = ModAssets.Colors.positiveColorHex;
                     LocString legend;

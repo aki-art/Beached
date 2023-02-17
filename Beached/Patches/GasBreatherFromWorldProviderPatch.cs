@@ -13,11 +13,11 @@ namespace Beached.Patches
             public static void Postfix(Sim.MassConsumedCallback mass_cb_info, OxygenBreather ___oxygenBreather)
             {
                 var id = ElementLoader.elements[mass_cb_info.elemIdx].id;
-                if (id == Elements.SaltyOxygen || id == SimHashes.SaltWater)
+                if (id == Elements.saltyOxygen || id == SimHashes.SaltWater)
                 {
-                    ___oxygenBreather.Trigger((int)ModHashes.GreatAirQuality, mass_cb_info);
+                    ___oxygenBreather.Trigger((int)ModHashes.greatAirQuality, mass_cb_info);
                 }
-                else if (id == SimHashes.DirtyWater || id == Elements.MurkyBrine)
+                else if (id == SimHashes.DirtyWater || id == Elements.murkyBrine)
                 {
                     ___oxygenBreather.Trigger((int)GameHashes.PoorAirQuality, mass_cb_info);
                 }

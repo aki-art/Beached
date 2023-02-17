@@ -34,9 +34,9 @@
                     .EventHandlerTransition(GameHashes.EquippedItemEquipper, satisfied, IsWantedEquipment);
 
                 satisfied
-                    .TriggerOnEnter(ModHashes.LifeGoalFulfilled)
+                    .TriggerOnEnter(ModHashes.lifeGoalFulfilled)
                     .EventHandlerTransition(GameHashes.UnequippedItemEquipper, idle, IsWantedEquipment)
-                    .TriggerOnExit(ModHashes.LifeGoalLost);
+                    .TriggerOnExit(ModHashes.lifeGoalLost);
             }
 
             private bool IsWantedEquipment(StatesInstance smi, object data)

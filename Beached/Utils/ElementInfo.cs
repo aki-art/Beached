@@ -12,6 +12,7 @@ namespace Beached.Utils
         public Color uiColor;
         public Color conduitColor;
         public bool isInitialized;
+        private SimHashes referenceMaterial = SimHashes.SandStone;
 
         public SimHashes SimHash { get; private set; }
 

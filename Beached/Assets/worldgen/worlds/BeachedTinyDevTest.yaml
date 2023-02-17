@@ -5,7 +5,7 @@ disableWorldTraits: true
 worldTraitScale: 0.12 # Adjust with worldSize. Traits are tuned to base game world sizes.
 worldsize:
   X: 128
-  Y: 96
+  Y: 128
 layoutMethod: PowerTree
 
 defaultsOverrides:
@@ -20,56 +20,12 @@ defaultsOverrides:
     OverworldSampleBehaviour: PoissonDisk
     OverworldMinNodes: 1
 
-startSubworldName: subworlds/beached/beach/BeachStart
-startingBaseTemplate: bases/sandstoneBase
-startingBasePositionHorizontal:
-  min: 0.5
-  max: 0.5
-startingBasePositionVertical:
-  min: 0.6
-  max: 0.6
-
 # List all the subworld files to load
 subworldFiles:
-  - name: subworlds/beached/beach/BeachStart
-  - name: subworlds/sandstone/Sandstone
-  - name: subworlds/space/Space
-  - name: subworlds/space/SurfaceCrags
-  - name: subworlds/magma/Bottom
-  - name: subworlds/frozen/Frozen
-  - name: subworlds/marsh/HotMarsh
-  - name: subworlds/jungle/Jungle
+  - name: subworlds/beached/bamboo/BambooMain
   
 unknownCellsAllowedSubworlds: 
   - tagcommand: Default
     command: Replace
     subworldNames:
-      - subworlds/sandstone/Sandstone
-  - tagcommand: AtTag
-    tag: AtSurface
-    command: Replace
-    subworldNames:
-      - subworlds/space/Space
-  - tagcommand: DistanceFromTag
-    tag: AtSurface
-    minDistance: 1
-    maxDistance: 1
-    command: Replace
-    subworldNames:
-      - subworlds/space/SurfaceCrags
-  - tagcommand: DistanceFromTag
-    tag: AtSurface
-    minDistance: 2
-    maxDistance: 2
-    command: Replace
-    subworldNames:
-      - subworlds/frozen/Frozen
-      - subworlds/marsh/HotMarsh
-      - subworlds/jungle/Jungle
-  - tagcommand: DistanceFromTag
-    tag: AtSurface
-    minDistance: 3
-    maxDistance: 3
-    command: Replace
-    subworldNames:
-      - subworlds/magma/Bottom
+      - subworlds/beached/bamboo/BambooMain

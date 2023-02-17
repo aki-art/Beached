@@ -19,7 +19,7 @@ namespace Beached.Content.Defs.Equipment
             var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
                 ID,
                 BAssignableSlots.JEWELLERY_ID,
-                Elements.Aquamarine,
+                Elements.aquamarine,
                 30f,
                 TUNING.EQUIPMENT.VESTS.COOL_VEST_ICON0,
                 TUNING.EQUIPMENT.VESTS.SNAPON0,

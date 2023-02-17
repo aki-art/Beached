@@ -9,7 +9,7 @@ namespace Beached.Patches
     {
         // nesting doesnt work in base game, because they use Path methods, which are system dependent
         // so when on windows they try to aplit a path by /, nothing happens, because the path is separated by \-s.
-        [HarmonyPatch(typeof(DevToolMenuNodeList), "AddOrGetParentFor")]
+        //[HarmonyPatch(typeof(DevToolMenuNodeList), "AddOrGetParentFor")]
         public class DevToolMenuNodeList_AddOrGetParentFor_Patch
         {
             public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
@@ -41,6 +41,11 @@ namespace Beached.Patches
             private static string[] ReplacementMethod(string[] pathComponents, string childPath)
             {
                 Log.Debug("looking at path: " + childPath);
+
+                if (childPath.IsNullOrWhiteSpace())
+                {
+                    return pathComponents;
+                }
 
                 if (childPath.StartsWith("Mods/Beached/"))
                 {

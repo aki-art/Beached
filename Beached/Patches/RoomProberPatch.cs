@@ -1,5 +1,5 @@
 ﻿using Beached.Content;
-using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities;
 using Beached.Utils;
 using HarmonyLib;
 using System.Collections.Generic;
@@ -36,7 +36,7 @@ namespace Beached.Patches
 
                 codes.InsertRange(index + 1, new[]
                 {
-                    new CodeInstruction(OpCodes.Ldloc_S, 6), // kPrefabID
+                    new CodeInstruction(OpCodes.Ldloc_S, 9), // kPrefabID was 6
                     new CodeInstruction(OpCodes.Ldloc_S, 4), // cavityInfo
                     new CodeInstruction(OpCodes.Call, m_ReplacementMethod)
                 });

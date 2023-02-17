@@ -1,0 +1,23 @@
+biomeNoise: noise/snowybeach
+temperatureRange: VeryCold
+density:
+  min: 0
+  max: 30
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+borderOverride: hardToDig
+biomes:
+  - name: biomes/Beach/SnowyBase
+    weight: 2
+    tags:
+      - ColdBreather
+  - name: biomes/Beach/SnowyCarbon
+    weight: 1
+    tags:
+      - ColdBreather
+tags:
+  - IgnoreCaveOverride
+zoneType: Icy
+features:
+  - type: features/beach/SnowCavern

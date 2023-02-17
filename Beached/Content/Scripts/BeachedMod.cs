@@ -28,6 +28,7 @@ namespace Beached.Content.Scripts
             elementInteractions = childGo.AddOrGet<ElementInteractions>();
             tutorials = childGo.AddOrGet<Tutorials>();
             treasury = childGo.AddOrGet<Treasury>();
+            childGo.AddOrGet<TileUpdater>();
         }
 
         public override void OnCleanUp()

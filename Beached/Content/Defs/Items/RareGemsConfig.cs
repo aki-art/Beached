@@ -22,8 +22,8 @@ namespace Beached.Content.Defs.Items
             items = new()
             {
                 CreateGem(FLAWLESS_DIAMOND, STRINGS.ITEMS.GEMS.FLAWLESS_DIAMOND.NAME, STRINGS.ITEMS.GEMS.FLAWLESS_DIAMOND.DESCRIPTION, "beached_flawless_diamond_kanim", DECOR.BONUS.TIER2, SimHashes.Diamond),
-                CreateGem(HADEAN_ZIRCON, STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.NAME, STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.DESCRIPTION, "beached_hadean_zircon_kanim", DECOR.BONUS.TIER2, Elements.ZirconiumOre),
-                CreateGem(MAXIXE, STRINGS.ITEMS.GEMS.MAXIXE.NAME, STRINGS.ITEMS.GEMS.MAXIXE.DESCRIPTION, "beached_maxixe_kanim", DECOR.BONUS.TIER2, Elements.Aquamarine)
+                CreateGem(HADEAN_ZIRCON, STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.NAME, STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.DESCRIPTION, "beached_hadean_zircon_kanim", DECOR.BONUS.TIER2, Elements.zirconiumOre),
+                CreateGem(MAXIXE, STRINGS.ITEMS.GEMS.MAXIXE.NAME, STRINGS.ITEMS.GEMS.MAXIXE.DESCRIPTION, "beached_maxixe_kanim", DECOR.BONUS.TIER2, Elements.aquamarine)
             };
 
             return items;
@@ -48,7 +48,7 @@ namespace Beached.Content.Defs.Items
                 element,
                 additionalTags: new List<Tag>
                 {
-                    BTags.MaterialCategories.Crystal,
+                    BTags.MaterialCategories.crystal,
                     GameTags.PedestalDisplayable
                 });
 

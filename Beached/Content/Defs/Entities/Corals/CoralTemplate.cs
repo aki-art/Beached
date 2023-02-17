@@ -12,8 +12,8 @@ namespace Beached.Content.Defs.Entities.Corals
             SimHashes.SaltWater,
             SimHashes.Brine,
             SimHashes.DirtyWater,
-            Elements.MurkyBrine,
-            Elements.SulfurousWater
+            Elements.murkyBrine,
+            Elements.sulfurousWater
         };
 
         public static GameObject Create(string id, float mass, string anim, int width, int height, EffectorValues decor, float defaultTemperature = 293f, string initialAnim = "idle_loop", List<Tag> additionalTags = null, SimHashes[] safeElements = null)
@@ -59,7 +59,7 @@ namespace Beached.Content.Defs.Entities.Corals
             prefab.AddOrGet<Harvestable>();
             prefab.AddOrGet<HarvestDesignatable>();
 
-            prefab.AddTag(BTags.Coral);
+            prefab.AddTag(BTags.coral);
 
             return prefab;
         }

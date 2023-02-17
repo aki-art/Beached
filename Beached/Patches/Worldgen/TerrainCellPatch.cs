@@ -2,16 +2,20 @@
 using HarmonyLib;
 using ProcGen;
 using ProcGenGame;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Emit;
+using Beached.Content;
+using Beached.Content.Scripts;
 
 namespace Beached.Patches.Worldgen
 {
     internal class TerrainCellPatch
     {
-
-        //[HarmonyPatch(typeof(TerrainCell), "ApplyBackground")]
+        [HarmonyPatch(typeof(TerrainCell), "ApplyBackground")]
         public class TerrainCell_ApplyBackground_Patch
         {
-            public static bool Prefix(
+            public static void Postfix(
                 TerrainCell __instance,
                 WorldGen worldGen,
                 Chunk world,
@@ -21,54 +25,45 @@ namespace Beached.Patches.Worldgen
                 SeededRandom rnd)
             {
                 var leaf = worldGen.GetLeafForTerrainCell(__instance);
-
-                if (leaf.tags.Contains(BWorldGenTags.SmoothNoise))
+                
+                if (leaf.tags.Contains(BWorldGenTags.SandBeds))
                 {
                     var node = __instance.node;
-                    var availableTerrainPoints = __instance.availableTerrainPoints;
-                    bool ignoreCaveOverride = leaf.tags.Contains(WorldGenTags.IgnoreCaveOverride);
+                    
+/*                    var availableTerrainPoints = __instance.availableTerrainPoints;
 
-                    var elementBandForBiome1 = worldGen.Settings.GetElementBandForBiome(node.type);
-                    foreach (int availableTerrainPoint in availableTerrainPoints)
+                    foreach (var availableTerrainPoint in availableTerrainPoints)
                     {
-                        if(worldGen.HighPriorityClaimedCells.Contains(availableTerrainPoint))
+                        if (worldGen.HighPriorityClaimedCells.Contains(availableTerrainPoint))
                         {
                             continue;
                         }
+                    }*/
 
-                        if(ignoreCaveOverride && TrySetValuesWithCaveOverride(SetValues, availableTerrainPoint, world))
-                        {
-                            continue;
-                        }
-
-                        var xy = Grid.CellToXY(availableTerrainPoint);
-
-
-                    }
+                    //HandleSurfaceModifier(worldGen.Settings, __instance, BWorldGenTags.SandBeds, world, SetValues, rnd);
                 }
-
-                return true;
             }
 
-            private static bool TrySetValuesWithCaveOverride(TerrainCell.SetValuesFunction SetValues, int availableTerrainPoint, Chunk world)
+            private static void HandleSurfaceModifier(
+                WorldGenSettings settings,
+                TerrainCell terrainCell,
+                Tag targetTag,
+                Chunk world,
+                TerrainCell.SetValuesFunction SetValues,
+                SeededRandom rnd)
             {
-                var chunkOverride = world.overrides[availableTerrainPoint];
+/*                var element = ElementLoader.FindElementByName(settings.GetFeature(targetTag.Name)
+                    .GetOneWeightedSimHash("SurfaceChoices", rnd)
+                    .element);*/
 
-                if(chunkOverride < 100f)
+                var element = ElementLoader.FindElementByHash(SimHashes.Sand);
+                var defaultValues = element.defaultValues;
+                var invalid = Sim.DiseaseCell.Invalid;
+
+                foreach (var cell in terrainCell.availableTerrainPoints)
                 {
-                    return false;
+                    //Log.Debug(Grid.Element[cell].id);
                 }
-
-                var element = chunkOverride switch
-                {
-                    >= 300 => WorldGen.voidElement,
-                    >= 200 => WorldGen.unobtaniumElement,
-                    _ => WorldGen.katairiteElement
-                };
-
-                SetValues(availableTerrainPoint, element, WorldGen.voidElement.defaultValues, Sim.DiseaseCell.Invalid);
-
-                return true;
             }
         }
     }

@@ -12,13 +12,13 @@ namespace Beached.Patches.Germs
         {
             public static void Postfix(SlimeGerms __instance)
             {
-                __instance.growthRules.Add(new ElementGrowthRule(Elements.SaltyOxygen)
+                __instance.growthRules.Add(new ElementGrowthRule(Elements.saltyOxygen)
                 {
                     populationHalfLife = new float?(1200f),
                     overPopulationHalfLife = new float?(10f)
                 });
 
-                __instance.growthRules.Add(new ElementGrowthRule(Elements.Mucus)
+                __instance.growthRules.Add(new ElementGrowthRule(Elements.mucus)
                 {
                     underPopulationDeathRate = new float?(0f),
                     populationHalfLife = new float?(-3000f),
@@ -27,12 +27,12 @@ namespace Beached.Patches.Germs
                     diffusionScale = new float?(0.05f)
                 });
 
-                __instance.exposureRules.Add(new ElementExposureRule(Elements.SaltyOxygen)
+                __instance.exposureRules.Add(new ElementExposureRule(Elements.saltyOxygen)
                 {
                     populationHalfLife = new float?(3000f)
                 });
 
-                __instance.exposureRules.Add(new ElementExposureRule(Elements.Mucus)
+                __instance.exposureRules.Add(new ElementExposureRule(Elements.mucus)
                 {
                     populationHalfLife = new float?(-12000f)
                 });

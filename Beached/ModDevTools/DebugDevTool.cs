@@ -3,6 +3,7 @@ using Beached.Content.BWorldGen;
 using Beached.Content.Scripts;
 using ImGuiNET;
 using System.Linq;
+using Beached.Content.Scripts.Entities;
 using UnityEngine;
 
 namespace Beached.ModDevTools
@@ -23,9 +24,42 @@ namespace Beached.ModDevTools
 
         public override void RenderTo(DevPanel panel)
         {
-            if(zoneTypes == null || zoneTypes.Length == 0)
+            if (zoneTypes == null || zoneTypes.Length == 0)
             {
                 zoneTypes = ZoneTypes.values.Select(z => z.ToString()).ToArray();
+            }
+
+            if (SelectTool.Instance != null)
+            {
+                var selectedObject = SelectTool.Instance.selected;
+
+                if (selectedObject != null)
+                {
+                    if (selectedObject.TryGetComponent(out Bamboo bamboo))
+                    {
+                        if (ImGui.Button("Grow Bamboo to random length"))
+                        {
+                            bamboo.GrowToRandomLength();
+                        }
+                        else if (ImGui.Button(("Grow Bamboo by 1")))
+                        {
+                            bamboo.GrowOne();
+                        }
+                    }
+                    else if (selectedObject.TryGetComponent(out PurpleHanger hanger))
+                    {
+                        if (ImGui.Button("Grow Purpicle to random length"))
+                        {
+                            hanger.GrowToRandomLength();
+                        }
+                        else if (ImGui.Button(("Grow Bamboo by 1")))
+                        {
+                            hanger.GrowOne();
+                        }
+                    }
+
+                    ImGui.Spacing();
+                }
             }
 
             ImGui.Text("Notifications");
@@ -37,7 +71,7 @@ namespace Beached.ModDevTools
 
             if (ImGui.Button("Debug Data trigger"))
             {
-                BeachedMod.Instance.Trigger(ModHashes.DebugDataChange);
+                BeachedMod.Instance.Trigger(ModHashes.debugDataChange);
             }
 
             ImGui.InputText("test input", ref testString, 64);
@@ -49,7 +83,7 @@ namespace Beached.ModDevTools
             ImGui.ColorPicker4("Color", ref zoneTypeColor);
             ImGui.ListBox("ZoneType", ref selectedZoneType, zoneTypes, zoneTypes.Length);
 
-            if(zoneTypeColor != previousZoneTypeColor)
+            if (zoneTypeColor != previousZoneTypeColor)
             {
                 if (zoneTypeColor != null)
                 {
@@ -62,7 +96,7 @@ namespace Beached.ModDevTools
                 }
             }
 
-            if(ImGui.Button("Recolor Zone"))
+            if (ImGui.Button("Recolor Zone"))
             {
                 if (zoneTypeColor != null)
                 {

@@ -14,6 +14,11 @@ namespace Beached
             }
         }
 
+        public static class TEMPLATE_VALUES
+        {
+            public const string BIOME_OVERRIDE = "beached_biome_override";
+        }
+
         public static class ACID_VULNERABILITY
         {
             public const float IMMUNE = 0;

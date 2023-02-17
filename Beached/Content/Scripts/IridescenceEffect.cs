@@ -8,6 +8,9 @@ namespace Beached.Content.Scripts
     {
         private Gradient rainbowGradient;
 
+        private static Color pearl1 = Util.ColorFromHex("ca3b4c");
+        private static Color pearl2 = Util.ColorFromHex("005ebe");
+
         public override void OnPrefabInit()
         {
             rainbowGradient = new Gradient();
@@ -35,14 +38,6 @@ namespace Beached.Content.Scripts
             rainbowGradient.SetKeys(colorKey, alphaKey);
         }
 
-        private static Color pearl1 = Util.ColorFromHex("ca3b4c");
-        private static Color pearl2 = Util.ColorFromHex("005ebe");
-        private static Color pearl1t = Util.ColorFromHex("ffece0");
-        private static Color pearl2t = Util.ColorFromHex("d8ddff");
-
-        private static string pearl1str = "ca3b4c";
-        private static string pearl2str = "486083";
-
         private void Update()
         {
             if (World.Instance == null)
@@ -56,35 +51,45 @@ namespace Beached.Content.Scripts
             {
                 var camera = Camera.main.transform.position;
                 var scale = CameraController.Instance.zoomFactor;
-
                 var t = (Mathf.Cos(camera.x / scale) + Mathf.Sin(camera.y / scale)) / 4f + 0.5f;
-
-                var pearlColor = Color.Lerp(pearl1, pearl2, t);
-                var pearlColortest = Color.Lerp(pearl2, pearl1, t);
-                //var pearlColor2 = Color.Lerp(pearl1t, pearl2t, t);
-                var pearlMat = materials[Elements.Pearl];
-                pearlMat.alpha.SetColor("_ShineColour", pearlColor);
-                pearlMat.alpha.SetFloat("_SrcAlpha", 1f);
-                pearlMat.alpha.SetFloat("_DestAlpha", 0f);
-                pearlMat.opaque.SetColor("_ShineColour", pearlColortest);
-                // pearlMat.alpha.SetColor("_ColourTint", pearlColor2);
-                //pearlMat.opaque.SetColor("_ColourTint", pearlColor2);
-
-                var bismuthColor = Color.Lerp(Color.red, Color.green, t);
-                var bismuthMat = materials[Elements.BismuthOre];
-                bismuthMat.alpha.SetColor("_ShineColour", bismuthColor);
-                bismuthMat.opaque.SetColor("_ShineColour", bismuthColor);
-
                 var rainbowColor = rainbowGradient.Evaluate(t);
 
-                var seleniteMat = materials[Elements.Selenite];
-                seleniteMat.alpha.SetColor("_ShineColour", rainbowColor);
-                seleniteMat.opaque.SetColor("_ShineColour", rainbowColor);
-
-                var diamondMat = materials[SimHashes.Diamond];
-                diamondMat.alpha.SetColor("_ShineColour", rainbowColor);
-                diamondMat.opaque.SetColor("_ShineColour", rainbowColor);
+                UpdatePearl(materials, t);
+                UpdateBismuth(materials, t);
+                UpdateSelenite(materials, rainbowColor);
+                UpdateDiamond(materials, rainbowColor);
             }
+        }
+
+        private static void UpdatePearl(Dictionary<SimHashes, GroundRenderer.Materials> materials, float t)
+        {
+            var pearlEdgeColor = Color.Lerp(pearl1, pearl2, t);
+            var pearlCenterColor = Color.Lerp(pearl2, pearl1, t);
+            var pearlMat = materials[Elements.pearl];
+
+            pearlMat.alpha.SetColor("_ShineColour", pearlEdgeColor);
+            pearlMat.opaque.SetColor("_ShineColour", pearlCenterColor);
+        }
+        private static void UpdateBismuth(Dictionary<SimHashes, GroundRenderer.Materials> materials, float t)
+        {
+            var bismuthColor = Color.Lerp(Color.red, Color.green, t);
+            var bismuthMat = materials[Elements.bismuthOre];
+            bismuthMat.alpha.SetColor("_ShineColour", bismuthColor);
+            bismuthMat.opaque.SetColor("_ShineColour", bismuthColor);
+        }
+
+        private static void UpdateSelenite(Dictionary<SimHashes, GroundRenderer.Materials> materials, Color rainbowColor)
+        {
+            var seleniteMat = materials[Elements.selenite];
+            seleniteMat.alpha.SetColor("_ShineColour", rainbowColor);
+            seleniteMat.opaque.SetColor("_ShineColour", rainbowColor);
+        }
+
+        private static void UpdateDiamond(Dictionary<SimHashes, GroundRenderer.Materials> materials, Color rainbowColor)
+        {
+            var diamondMat = materials[SimHashes.Diamond];
+            diamondMat.alpha.SetColor("_ShineColour", rainbowColor);
+            diamondMat.opaque.SetColor("_ShineColour", rainbowColor);
         }
     }
 }

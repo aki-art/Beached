@@ -34,8 +34,7 @@ subworldTemplateRules:
       - beached/worldgen/beach/simplepalm3
       - beached/worldgen/beach/simplepalm4
       - beached/worldgen/beach/simplepalm5
-    listRule: GuaranteeSomeTryMore
-    someCount: 2
-    moreCount: 2
+    listRule: TrySome
+    someCount: 4
     allowDuplicates: false
 zoneType: Beach

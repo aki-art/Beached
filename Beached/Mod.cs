@@ -6,7 +6,6 @@ using Beached.ModDevTools;
 using Beached.Settings;
 using HarmonyLib;
 using KMod;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -14,11 +13,12 @@ using TUNING;
 
 namespace Beached
 {
+
     public class Mod : UserMod2
     {
-        public static bool DebugMode = true;
+        public static bool debugMode = true;
 
-        public static Config Settings = new();
+        public static Config settings = new();
 
         public static string folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // path field does not seem reliable with Local installs
 
@@ -97,11 +97,11 @@ namespace Beached
         {
             base.OnAllModsLoaded(harmony, mods);
 
-            foreach (var mod in mods)
+            foreach (var modEntry in mods)
             {
-                if (mod.IsEnabledForActiveDlc())
+                if (modEntry.IsEnabledForActiveDlc())
                 {
-                    switch (mod.staticID)
+                    switch (modEntry.staticID)
                     {
                         case "TrueTiles":
                             Integration.TrueTiles.OnAllModsLoaded();

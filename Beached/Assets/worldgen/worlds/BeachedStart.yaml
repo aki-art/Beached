@@ -2,7 +2,7 @@ name: STRINGS.WORLDS.BEACHEDSTART.NAME
 description: STRINGS.WORLDS.BEACHEDSTART.DESCRIPTION 
 disableWorldTraits: true
 
-worldTraitScale: 0.12 # Adjust with worldSize. Traits are tuned to base game world sizes.
+worldTraitScale: 1 # Adjust with worldSize. Traits are tuned to base game world sizes.
 worldsize:
   X: 224
   Y: 224
@@ -42,16 +42,16 @@ subworldFiles:
   - name: subworlds/beached/sea/SeaMain
     overridePower: 1.4
   - name: subworlds/beached/debug/EmptyBeach
-  - name: subworlds/beached/debug/EmptyBamboo
-    overridePower: 1.5
+  - name: subworlds/beached/bamboo/BambooMain
+    overridePower: 3
   - name: subworlds/beached/debug/EmptyPearl
     overridePower: 1.5
-  - name: subworlds/beached/debug/EmptyIcy
-    overridePower: 1.5
+  - name: subworlds/beached/snowy/SnowyBeach
+    overridePower: 3
     #maxCount: 3
   - name: subworlds/beached/debug/EmptyDepths
     overridePower: 3
-  - name: subworlds/beached/debug/EmptyMagma
+  - name: subworlds/beached/thermalvents/ThermalVentsMain
     overridePower: 2
   - name: subworlds/beached/debug/EmptyReef
   - name: subworlds/beached/debug/EmptySwamp
@@ -68,8 +68,8 @@ unknownCellsAllowedSubworlds:
   - tagcommand: Default
     command: Replace
     subworldNames:
-      - subworlds/beached/debug/EmptyBamboo
-      - subworlds/beached/debug/EmptyIcy
+      - subworlds/beached/bamboo/BambooMain
+      -  subworlds/beached/snowy/SnowyBeach
       - subworlds/beached/debug/EmptyPearl
 # start
   - tagcommand: AtTag
@@ -118,13 +118,13 @@ unknownCellsAllowedSubworlds:
     tag: Beached_AtSideBDepth
     command: Replace
     subworldNames:
-      - subworlds/beached/debug/EmptyMagma
-# corner side A
-  - tagcommand: AtTag
-    tag: Beached_AtSideACorner
-    command: Replace
-    subworldNames:
-      - subworlds/beached/debug/EmptyMagma
+      - subworlds/beached/thermalvents/ThermalVentsMain
+# # corner side A
+#   - tagcommand: AtTag
+#     tag: Beached_AtSideACorner
+#     command: Replace
+#     subworldNames:
+#       - subworlds/beached/debug/EmptyMagma
 # space
   - tagcommand: DistanceFromTag
     tag: AtSurface
@@ -141,3 +141,28 @@ unknownCellsAllowedSubworlds:
     command: Replace
     subworldNames:
       - subworlds/Empty
+      
+worldTemplateRules:
+  - names:
+      - beached/worldgen/coralreefsmall1
+    listRule: GuaranteeOne
+    priority: 999
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Sea]
+  - names:
+      - beached/worldgen/zeoliteGeode1
+    listRule: GuaranteeSomeTryMore
+    someCount: 1
+    moreCount: 1
+    priority: 999
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Bamboo]
+  - names: 
+      - beached/worldgen/bamboo_clgeyser3
+    listRule: GuaranteeOne
+    priority: 999
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Bamboo]

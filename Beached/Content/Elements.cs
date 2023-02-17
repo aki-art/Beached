@@ -1,67 +1,69 @@
 ﻿using Beached.Content.Defs.Items;
 using Beached.Content.Scripts;
-using Beached.Utils;
 using HarmonyLib;
+using JetBrains.Annotations;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Beached.Content
 {
     public class Elements
     {
+        [UsedImplicitly]
         public static ElementInfo
-            Amber = ElementInfo.Solid("Amber", ModAssets.Colors.amber),
-            Ammonia = ElementInfo.Gas("Ammonia", ModAssets.Colors.ammonia),
-            AmmoniaFrozen = ElementInfo.Solid("FrozenAmmonia", ModAssets.Colors.ammonia),
-            AmmoniaLiquid = ElementInfo.Liquid("AmmoniaLiquid", ModAssets.Colors.ammonia),
-            Ash = ElementInfo.Solid("Ash", ModAssets.Colors.ash),
-            Aquamarine = ElementInfo.Solid("Aquamarine", ModAssets.Colors.aquamarine),
-            Basalt = ElementInfo.Solid("Basalt", ModAssets.Colors.basalt),
-            Beryllium = ElementInfo.Solid("Beryllium", ModAssets.Colors.beryllium), // no ore, it comes from beryl,
-            BerylliumGas = ElementInfo.Gas("BerylliumGas", ModAssets.Colors.beryllium),
-            BerylliumMolten = ElementInfo.Liquid("BerylliumMolten", ModAssets.Colors.beryllium),
-            Bismuth = ElementInfo.Solid("Bismuth", ModAssets.Colors.bismuth),
-            BismuthGas = ElementInfo.Gas("BismuthGas", ModAssets.Colors.bismuth),
-            BismuthMolten = ElementInfo.Liquid("BismuthMolten", ModAssets.Colors.bismuth),
-            BismuthOre = ElementInfo.Solid("Bismuthinite", ModAssets.Colors.bismuth),
-            Bone = ElementInfo.Solid("Bone", ModAssets.Colors.bone),
-            Calcium = ElementInfo.Solid("Calcium", ModAssets.Colors.calcium),
-            CalciumGas = ElementInfo.Gas("CalciumGas", ModAssets.Colors.calcium),
-            CalciumMolten = ElementInfo.Liquid("MoltenCalcium", ModAssets.Colors.calcium),
-            Gravel = ElementInfo.Solid("Gravel", ModAssets.Colors.gravel),
-            Heulandite = ElementInfo.Solid("Heulandite", ModAssets.Colors.zeolite),
-            Iridium = ElementInfo.Solid("Iridium", ModAssets.Colors.iridium),
-            IridiumGas = ElementInfo.Gas("IridiumGas", ModAssets.Colors.iridium),
-            IridiumMolten = ElementInfo.Liquid("MoltenIridium", ModAssets.Colors.iridium),
-            Latex = ElementInfo.Liquid("Latex", ModAssets.Colors.latex),
-            Litter = ElementInfo.Solid("Litter", ModAssets.Colors.iridium),
-            Moss = ElementInfo.Solid("Moss", ModAssets.Colors.moss),
-            Mucus = ElementInfo.Liquid("Mucus", ModAssets.Colors.mucus),
-            MucusFrozen = ElementInfo.Solid("FrozenMucus", ModAssets.Colors.mucus),
-            MurkyBrine = ElementInfo.Liquid("MurkyBrine", ModAssets.Colors.murkyBrine),
-            Mycelium = ElementInfo.Solid("Mycelium", ModAssets.Colors.mycelium),
-            Nitrogen = ElementInfo.Gas("Nitrogen", ModAssets.Colors.nitrogen),
-            NitrogenFrozen = ElementInfo.Solid("FrozenNitrogen", ModAssets.Colors.nitrogenOpaque),
-            NitrogenLiquid = ElementInfo.Liquid("LiquidNitrogen", ModAssets.Colors.nitrogenOpaque),
-            Pearl = ElementInfo.Solid("Pearl", ModAssets.Colors.pearl),
-            PermaFrost = ElementInfo.Solid("PermaFrost", ModAssets.Colors.pearl),
-            Rot = ElementInfo.Solid("Rot", ModAssets.Colors.rot),
-            Root = ElementInfo.Solid("Root", ModAssets.Colors.root),
-            Rubber = ElementInfo.Solid("Rubber", ModAssets.Colors.root),
-            SaltyOxygen = ElementInfo.Gas("SaltyOxygen", ModAssets.Colors.saltyOxygen),
-            Selenite = ElementInfo.Gas("Selenite", ModAssets.Colors.selenite),
-            SiltStone = ElementInfo.Solid("SiltStone", ModAssets.Colors.ammonia),
-            SulfurousIce = ElementInfo.Solid("SulfurousIce", ModAssets.Colors.sulfurousWater),
-            SulfurousWater = ElementInfo.Liquid("SulfurousWater", ModAssets.Colors.sulfurousWater),
-            Zirconium = ElementInfo.Solid("Zirconium", ModAssets.Colors.zirconium),
-            ZirconiumGas = ElementInfo.Gas("ZirconiumGas", ModAssets.Colors.zirconium),
-            ZirconiumMolten = ElementInfo.Liquid("ZirconiumMolten", ModAssets.Colors.zirconium),
-            ZirconiumOre = ElementInfo.Solid("Zircon", ModAssets.Colors.zirconium),
-            Zinc = ElementInfo.Solid("Zinc", ModAssets.Colors.zinc),
-            ZincGas = ElementInfo.Gas("ZincGas", ModAssets.Colors.zinc),
-            ZincOre = ElementInfo.Solid("ZincOre", ModAssets.Colors.zinc),
-            ZincMolten = ElementInfo.Liquid("ZincMolten", ModAssets.Colors.zinc);
-        // maybe Emerald
-        // maybe Coquina
+            amber = ElementInfo.Solid("Amber", ModAssets.Colors.amber),
+            ammonia = ElementInfo.Gas("Ammonia", ModAssets.Colors.ammonia),
+            ammoniaFrozen = ElementInfo.Solid("FrozenAmmonia", ModAssets.Colors.ammonia),
+            ammoniaLiquid = ElementInfo.Liquid("AmmoniaLiquid", ModAssets.Colors.ammonia),
+            ash = ElementInfo.Solid("Ash", ModAssets.Colors.ash),
+            aquamarine = ElementInfo.Solid("Aquamarine", ModAssets.Colors.aquamarine),
+            basalt = ElementInfo.Solid("Basalt", ModAssets.Colors.basalt),
+            beryllium = ElementInfo.Solid("Beryllium", ModAssets.Colors.beryllium), // no ore, it comes from beryl,
+            berylliumGas = ElementInfo.Gas("BerylliumGas", ModAssets.Colors.beryllium),
+            berylliumMolten = ElementInfo.Liquid("BerylliumMolten", ModAssets.Colors.beryllium),
+            bismuth = ElementInfo.Solid("Bismuth", ModAssets.Colors.bismuth),
+            bismuthGas = ElementInfo.Gas("BismuthGas", ModAssets.Colors.bismuth),
+            bismuthMolten = ElementInfo.Liquid("BismuthMolten", ModAssets.Colors.bismuth),
+            bismuthOre = ElementInfo.Solid("Bismuthinite", ModAssets.Colors.bismuth),
+            bone = ElementInfo.Solid("Bone", ModAssets.Colors.bone),
+            calcium = ElementInfo.Solid("Calcium", ModAssets.Colors.calcium),
+            calciumGas = ElementInfo.Gas("CalciumGas", ModAssets.Colors.calcium),
+            calciumMolten = ElementInfo.Liquid("MoltenCalcium", ModAssets.Colors.calcium),
+            crackedNeutronium = ElementInfo.Solid("CrackedNeutronium", Color.black),
+            gravel = ElementInfo.Solid("Gravel", ModAssets.Colors.gravel),
+            heulandite = ElementInfo.Solid("Heulandite", ModAssets.Colors.zeolite),
+            iridium = ElementInfo.Solid("Iridium", ModAssets.Colors.iridium),
+            iridiumGas = ElementInfo.Gas("IridiumGas", ModAssets.Colors.iridium),
+            iridiumMolten = ElementInfo.Liquid("MoltenIridium", ModAssets.Colors.iridium),
+            latex = ElementInfo.Liquid("Latex", ModAssets.Colors.latex),
+            litter = ElementInfo.Solid("Litter", ModAssets.Colors.iridium),
+            metamorphicRock = ElementInfo.Solid("MetamorphicRock", ModAssets.Colors.moss),
+            moss = ElementInfo.Solid("Moss", ModAssets.Colors.moss),
+            mucus = ElementInfo.Liquid("Mucus", ModAssets.Colors.mucus),
+            mucusFrozen = ElementInfo.Solid("FrozenMucus", ModAssets.Colors.mucus),
+            murkyBrine = ElementInfo.Liquid("MurkyBrine", ModAssets.Colors.murkyBrine),
+            mycelium = ElementInfo.Solid("Mycelium", ModAssets.Colors.mycelium),
+            nitrogen = ElementInfo.Gas("Nitrogen", ModAssets.Colors.nitrogen),
+            nitrogenFrozen = ElementInfo.Solid("FrozenNitrogen", ModAssets.Colors.nitrogenOpaque),
+            nitrogenLiquid = ElementInfo.Liquid("LiquidNitrogen", ModAssets.Colors.nitrogenOpaque),
+            pearl = ElementInfo.Solid("Pearl", ModAssets.Colors.pearl),
+            permaFrost = ElementInfo.Solid("PermaFrost", ModAssets.Colors.pearl),
+            rot = ElementInfo.Solid("Rot", ModAssets.Colors.rot),
+            root = ElementInfo.Solid("Root", ModAssets.Colors.root),
+            rubber = ElementInfo.Solid("Rubber", ModAssets.Colors.root),
+            saltyOxygen = ElementInfo.Gas("SaltyOxygen", ModAssets.Colors.saltyOxygen),
+            selenite = ElementInfo.Gas("Selenite", ModAssets.Colors.selenite),
+            siltStone = ElementInfo.Solid("SiltStone", ModAssets.Colors.ammonia),
+            sulfurousIce = ElementInfo.Solid("SulfurousIce", ModAssets.Colors.sulfurousWater),
+            sulfurousWater = ElementInfo.Liquid("SulfurousWater", ModAssets.Colors.sulfurousWater),
+            zirconium = ElementInfo.Solid("Zirconium", ModAssets.Colors.zirconium),
+            zirconiumGas = ElementInfo.Gas("ZirconiumGas", ModAssets.Colors.zirconium),
+            zirconiumMolten = ElementInfo.Liquid("ZirconiumMolten", ModAssets.Colors.zirconium),
+            zirconiumOre = ElementInfo.Solid("Zircon", ModAssets.Colors.zirconium),
+            zinc = ElementInfo.Solid("Zinc", ModAssets.Colors.zinc),
+            zincGas = ElementInfo.Gas("ZincGas", ModAssets.Colors.zinc),
+            zincOre = ElementInfo.Solid("ZincOre", ModAssets.Colors.zinc),
+            zincMolten = ElementInfo.Liquid("ZincMolten", ModAssets.Colors.zinc);
 
         public static Dictionary<SimHashes, float> corrosionData;
 
@@ -71,23 +73,27 @@ namespace Beached.Content
             var refined = list.Find(e => e.elementID == SimHashes.Copper).material;
             var gem = list.Find(e => e.elementID == SimHashes.Diamond).material;
 
+            var iridiumSubstance = iridium.CreateSubstance(true, refined);
+            iridiumSubstance.material.SetFloat("_WorldUVScale", 10f);
+
             // Add the ones with some special attribute
             var newElements = new HashSet<Substance>()
             {
-                Amber.CreateSubstance(true, gem, specularColor: Util.ColorFromHex("ffc000"), normal: "amber_normal"),
-                Aquamarine.CreateSubstance(true, gem),
-                Beryllium.CreateSubstance(true, refined),
-                Bismuth.CreateSubstance(true, refined),
-                BismuthOre.CreateSubstance(true, ore),
-                Calcium.CreateSubstance(true, refined),
-                Nitrogen.CreateSubstance(ModAssets.Colors.nitrogenOpaque, ModAssets.Colors.nitrogenOpaque),
-                Pearl.CreateSubstance(true, gem, normal: "pearl_normal"),
-                SaltyOxygen.CreateSubstance(ModAssets.Colors.mucusUi, ModAssets.Colors.mucusConduit),
-                Selenite.CreateSubstance(true, gem),
-                Zirconium.CreateSubstance(true, refined, specularColor: ModAssets.Colors.zirconSpecular),
-                ZirconiumOre.CreateSubstance(true, ore, specularColor: ModAssets.Colors.zirconSpecular),
-                Zinc.CreateSubstance(true, refined, specularColor: ModAssets.Colors.zincSpecular),
-                ZincOre.CreateSubstance(true, ore, specularColor: ModAssets.Colors.zincSpecular),
+                amber.CreateSubstance(true, gem, specularColor: Util.ColorFromHex("ffc000"), normal: "amber_normal"),
+                aquamarine.CreateSubstance(true, gem),
+                beryllium.CreateSubstance(true, refined),
+                bismuth.CreateSubstance(true, refined),
+                bismuthOre.CreateSubstance(true, ore),
+                calcium.CreateSubstance(true, refined),
+                iridiumSubstance,
+                nitrogen.CreateSubstance(ModAssets.Colors.nitrogenOpaque, ModAssets.Colors.nitrogenOpaque),
+                pearl.CreateSubstance(true, gem, normal: "pearl_normal"),
+                saltyOxygen.CreateSubstance(ModAssets.Colors.mucusUi, ModAssets.Colors.mucusConduit),
+                selenite.CreateSubstance(true, gem),
+                zirconium.CreateSubstance(true, refined, specularColor: ModAssets.Colors.zirconSpecular),
+                zirconiumOre.CreateSubstance(true, ore, specularColor: ModAssets.Colors.zirconSpecular),
+                zinc.CreateSubstance(true, refined, specularColor: ModAssets.Colors.zincSpecular),
+                zincOre.CreateSubstance(true, ore, specularColor: ModAssets.Colors.zincSpecular),
             };
 
             // Dump the rest in
@@ -115,11 +121,11 @@ namespace Beached.Content
                 {
                     if (element.oreTags == null)
                     {
-                        element.oreTags = new Tag[] { BTags.Corrodable };
+                        element.oreTags = new Tag[] { BTags.corrodable };
                     }
                     else
                     {
-                        element.oreTags = element.oreTags.AddToArray(BTags.Corrodable);
+                        element.oreTags = element.oreTags.AddToArray(BTags.corrodable);
                     }
                 }
             }
@@ -142,35 +148,35 @@ namespace Beached.Content
         // Food sterilization/rotting modifier
         private static void SetAtmosphereModifiers()
         {
-            Rottable.AtmosphereModifier.Add((int)Ammonia.SimHash, Rottable.RotAtmosphereQuality.Sterilizing);
-            Rottable.AtmosphereModifier.Add((int)AmmoniaLiquid.SimHash, Rottable.RotAtmosphereQuality.Sterilizing);
-            Rottable.AtmosphereModifier.Add((int)Mucus.SimHash, Rottable.RotAtmosphereQuality.Contaminating);
+            Rottable.AtmosphereModifier.Add((int)ammonia.SimHash, Rottable.RotAtmosphereQuality.Sterilizing);
+            Rottable.AtmosphereModifier.Add((int)ammoniaLiquid.SimHash, Rottable.RotAtmosphereQuality.Sterilizing);
+            Rottable.AtmosphereModifier.Add((int)mucus.SimHash, Rottable.RotAtmosphereQuality.Contaminating);
         }
 
         // Eye irritation
         public static void SetExposureValues(Dictionary<SimHashes, float> customExposureRates)
         {
-            customExposureRates[SaltyOxygen] = CONSTS.EXPOSURE_EFFECT.COMFORTABLE;
-            customExposureRates[Nitrogen] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
-            customExposureRates[Mucus] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
-            customExposureRates[MurkyBrine] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
-            customExposureRates[Ammonia] = CONSTS.EXPOSURE_EFFECT.VERY_IRRITATING;
-            customExposureRates[SulfurousWater] = CONSTS.EXPOSURE_EFFECT.OH_HECK_IT_BURNS;
+            customExposureRates[saltyOxygen] = CONSTS.EXPOSURE_EFFECT.COMFORTABLE;
+            customExposureRates[nitrogen] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
+            customExposureRates[mucus] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
+            customExposureRates[murkyBrine] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
+            customExposureRates[ammonia] = CONSTS.EXPOSURE_EFFECT.VERY_IRRITATING;
+            customExposureRates[sulfurousWater] = CONSTS.EXPOSURE_EFFECT.OH_HECK_IT_BURNS;
         }
 
         // Decor and Overheat modifiers
         public static void AddAttributeModifiers()
         {
-            ElementUtil.AddModifier(Amber.Get(), 1f, -20f);
-            ElementUtil.AddModifier(Aquamarine.Get(), 1f, 0);
-            ElementUtil.AddModifier(Basalt.Get(), 0.1f, 50);
-            ElementUtil.AddModifier(Bismuth.Get(), 0.25f, -10);
-            ElementUtil.AddModifier(BismuthOre.Get(), 0.25f, -10);
-            ElementUtil.AddModifier(Heulandite.Get(), 0.25f, 0);
-            ElementUtil.AddModifier(Pearl.Get(), 1.5f, 0);
-            ElementUtil.AddModifier(Selenite.Get(), 1f, 400);
-            ElementUtil.AddModifier(Zirconium.Get(), 0.4f, 150);
-            ElementUtil.AddModifier(ZirconiumOre.Get(), 0.4f, 150);
+            ElementUtil.AddModifier(amber.Get(), 1f, -20f);
+            ElementUtil.AddModifier(aquamarine.Get(), 1f, 0);
+            ElementUtil.AddModifier(basalt.Get(), 0.1f, 50);
+            ElementUtil.AddModifier(bismuth.Get(), 0.25f, -10);
+            ElementUtil.AddModifier(bismuthOre.Get(), 0.25f, -10);
+            ElementUtil.AddModifier(heulandite.Get(), 0.25f, 0);
+            ElementUtil.AddModifier(pearl.Get(), 1.5f, 0);
+            ElementUtil.AddModifier(selenite.Get(), 1f, 400);
+            ElementUtil.AddModifier(zirconium.Get(), 0.4f, 150);
+            ElementUtil.AddModifier(zirconiumOre.Get(), 0.4f, 150);
         }
 
         public static void OnWorldReload(bool isBeachedWorld)
@@ -179,26 +185,26 @@ namespace Beached.Content
             var diamond = ElementLoader.GetElement(SimHashes.Diamond.CreateTag());
             var abyssalite = ElementLoader.GetElement(SimHashes.Katairite.CreateTag());
 
-            if (isBeachedWorld || Mod.Settings.CrossWorld.Elements.CrystalCategory)
+            if (isBeachedWorld || Mod.settings.CrossWorld.Elements.CrystalCategory)
             {
-                diamond.materialCategory = BTags.MaterialCategories.Crystal;
-                abyssalite.materialCategory = BTags.MaterialCategories.Crystal;
+                diamond.materialCategory = BTags.MaterialCategories.crystal;
+                abyssalite.materialCategory = BTags.MaterialCategories.crystal;
             }
             else
             {
-                diamond.materialCategory = Mod.Settings.CrossWorld.Elements.originalDiamondCategory;
-                abyssalite.materialCategory = Mod.Settings.CrossWorld.Elements.originalAbyssaliteCategory;
+                diamond.materialCategory = Mod.settings.CrossWorld.Elements.originalDiamondCategory;
+                abyssalite.materialCategory = Mod.settings.CrossWorld.Elements.originalAbyssaliteCategory;
             }
 
-            if (isBeachedWorld || Mod.Settings.CrossWorld.Elements.LimeToCalcium)
+            if (isBeachedWorld || Mod.settings.CrossWorld.Elements.LimeToCalcium)
             {
                 lime.highTemp = 1115f;
-                lime.highTempTransition = Calcium.Get();
+                lime.highTempTransition = calcium.Get();
             }
             else
             {
-                lime.highTemp = Mod.Settings.CrossWorld.Elements.originalLimeHighTemp;
-                lime.highTempTransition = ElementLoader.GetElement(Mod.Settings.CrossWorld.Elements.originalLimeHighTempTarget);
+                lime.highTemp = Mod.settings.CrossWorld.Elements.originalLimeHighTemp;
+                lime.highTempTransition = ElementLoader.GetElement(Mod.settings.CrossWorld.Elements.originalLimeHighTempTarget);
             }
         }
 
@@ -213,43 +219,43 @@ namespace Beached.Content
             var clay = instance.GetConfigForElement(SimHashes.Clay);
             var rawRock = instance.GetConfigForElement(SimHashes.SandStone);
 
-            configs.Add(ElementUtil.GetCrystalAudioConfig(Amber));
-            configs.Add(ElementUtil.CopyElementAudioConfig(ice, AmmoniaFrozen));
-            configs.Add(ElementUtil.CopyElementAudioConfig(ice, PermaFrost));
-            configs.Add(ElementUtil.GetCrystalAudioConfig(Aquamarine));
-            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Sand, Ash));
-            configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, Basalt));
-            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, Beryllium));
-            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, Bismuth));
-            configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, BismuthOre));
-            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, Calcium));
-            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.CrushedRock, Gravel));
-            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.OxyRock, Heulandite));
-            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, Iridium));
-            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Algae, Moss));
-            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.DirtyIce, MucusFrozen));
-            configs.Add(ElementUtil.CopyElementAudioConfig(clay, Mycelium));
-            configs.Add(ElementUtil.CopyElementAudioConfig(phosphate, Pearl));
-            configs.Add(ElementUtil.GetCrystalAudioConfig(Selenite));
-            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, Zinc));
-            configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, ZincOre));
-            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, Zirconium));
-            configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, ZirconiumOre));
-            configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, SiltStone));
+            configs.Add(ElementUtil.GetCrystalAudioConfig(amber));
+            configs.Add(ElementUtil.CopyElementAudioConfig(ice, ammoniaFrozen));
+            configs.Add(ElementUtil.CopyElementAudioConfig(ice, permaFrost));
+            configs.Add(ElementUtil.GetCrystalAudioConfig(aquamarine));
+            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Sand, ash));
+            configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, basalt));
+            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, beryllium));
+            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, bismuth));
+            configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, bismuthOre));
+            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, calcium));
+            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.CrushedRock, gravel));
+            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.OxyRock, heulandite));
+            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, iridium));
+            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Algae, moss));
+            configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.DirtyIce, mucusFrozen));
+            configs.Add(ElementUtil.CopyElementAudioConfig(clay, mycelium));
+            configs.Add(ElementUtil.CopyElementAudioConfig(phosphate, pearl));
+            configs.Add(ElementUtil.GetCrystalAudioConfig(selenite));
+            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, zinc));
+            configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, zincOre));
+            configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, zirconium));
+            configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, zirconiumOre));
+            configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, siltStone));
 
             return configs.ToArray();
         }
 
         public static void SetTreasureChances()
         {
-            TreasureChances.AddSingle(ZirconiumOre, 0.3f, RareGemsConfig.HADEAN_ZIRCON, 1f, true);
+            TreasureChances.AddSingle(zirconiumOre, 0.3f, RareGemsConfig.HADEAN_ZIRCON, 1f, true);
 
             TreasureChances.AddTreasure(SimHashes.Diamond, 1f, new()
             {
                 new TreasureChances.TreasureConfig(RareGemsConfig.FLAWLESS_DIAMOND, 1f, 1f, true)
             });
 
-            TreasureChances.AddTreasure(Aquamarine, 1f, new()
+            TreasureChances.AddTreasure(aquamarine, 1f, new()
             {
                 new TreasureChances.TreasureConfig(RareGemsConfig.MAXIXE, 1f, 1f, true)
             });

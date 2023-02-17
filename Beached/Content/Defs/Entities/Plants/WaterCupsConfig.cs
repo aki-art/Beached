@@ -34,7 +34,7 @@ namespace Beached.Content.Defs.Entities.Plants
             EntityTemplates.ExtendEntityToBasicPlant(gameObject, 288.15f, 293.15f, 323.15f, 373.15f, new SimHashes[]
             {
                 SimHashes.Oxygen,
-                Elements.SaltyOxygen,
+                Elements.saltyOxygen,
                 SimHashes.ContaminatedOxygen,
                 SimHashes.CarbonDioxide
             }, true, 0f, 0.15f, null, true, false, true, true, 2400f, 0f, 2200f, "CylindricaOriginal", STRINGS.CREATURES.SPECIES.WATERCUPS.NAME);

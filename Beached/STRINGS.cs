@@ -4,6 +4,7 @@ using Beached.Content.Defs.Entities.Plants;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
+using JetBrains.Annotations;
 
 namespace Beached
 {
@@ -43,7 +44,7 @@ namespace Beached
 
                 public class BEACHED_BAMBOOPLATFORM
                 {
-                    public static LocString NAME = "Bamboo Walkway";
+                    public static LocString NAME = "StackablePlant Walkway";
                     public static LocString DESC = "...";
                     public static LocString EFFECTS = "...";
                 }
@@ -67,6 +68,29 @@ namespace Beached
                     public static LocString NAME = "Tree Tap";
                     public static LocString DESC = "...";
                     public static LocString EFFECTS = "...";
+                }
+            }
+
+            public class STATUSITEMS
+            {
+                public class BEACHED_LUBRICATED
+                {
+                    public static LocString NAME = "Lubricated";
+
+                    public static LocString TOOLTIP =
+                        "This machine has been lubricated with Mucus, allowing it to perform better than ever.";
+                }
+            }
+        }
+
+        public class CODEX
+        {
+            public class STORY_TRAITS
+            {
+                public class AFFG
+                {
+                    public static LocString NAME = "Atmospheric Force-Field Generator";
+                    public static LocString DESCRIPTION = "TODO";
                 }
             }
         }
@@ -180,7 +204,7 @@ namespace Beached
                     public class BEACHED_MURKYBRINE
                     {
                         public static LocString NAME = "Murky Brine Geyser";
-                        public static LocString DESC = $"A geyser that periodically erupts with {FormatAsLink("Murky Brine", Elements.MurkyBrine.ToString())}.";
+                        public static LocString DESC = $"A geyser that periodically erupts with {FormatAsLink("Murky Brine", Elements.murkyBrine.ToString())}.";
                     }
 
                     public class BEACHED_BISMUTHVOLCANO
@@ -285,7 +309,7 @@ namespace Beached
 
                 public class BAMBOO
                 {
-                    public static LocString NAME = "Bamboo"; //Clickety Clack? Clack Cane?
+                    public static LocString NAME = "StackablePlant"; //Clickety Clack? Clack Cane?
                     public static LocString DESC = "...";
                 }
 
@@ -330,6 +354,12 @@ namespace Beached
                 public class DEEPGRASS
                 {
                     public static LocString NAME = "Deepgrass";
+                    public static LocString DESC = "...";
+                }
+
+                internal class PURPLEHANGER
+                {
+                    public static LocString NAME = "Purpicle";
                     public static LocString DESC = "...";
                 }
             }
@@ -558,13 +588,13 @@ namespace Beached
 
             public class AMMONIAFROZEN
             {
-                public static LocString NAME = FormatAsLink("Frozen Ammonia", Elements.AmmoniaFrozen.ToString());
+                public static LocString NAME = FormatAsLink("Frozen Ammonia", Elements.ammoniaFrozen.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class AMMONIALIQUID
             {
-                public static LocString NAME = FormatAsLink("Liquid Ammonia", Elements.AmmoniaLiquid.ToString());
+                public static LocString NAME = FormatAsLink("Liquid Ammonia", Elements.ammoniaLiquid.ToString());
                 public static LocString DESC = "TODO";
             }
 
@@ -594,13 +624,13 @@ namespace Beached
 
             public class BERYLLIUMGAS
             {
-                public static LocString NAME = FormatAsLink("Beryllium Gas", Elements.BerylliumGas.ToString());
+                public static LocString NAME = FormatAsLink("Beryllium Gas", Elements.berylliumGas.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class BERYLLIUMMOLTEN
             {
-                public static LocString NAME = FormatAsLink("Molten Beryllium", Elements.BerylliumMolten.ToString());
+                public static LocString NAME = FormatAsLink("Molten Beryllium", Elements.berylliumMolten.ToString());
                 public static LocString DESC = "TODO";
             }
 
@@ -612,19 +642,19 @@ namespace Beached
 
             public class BISMUTHGAS
             {
-                public static LocString NAME = FormatAsLink("Bismuth Gas", Elements.BismuthGas.ToString());
+                public static LocString NAME = FormatAsLink("Bismuth Gas", Elements.bismuthGas.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class BISMUTHMOLTEN
             {
-                public static LocString NAME = FormatAsLink("Molten Bismuth", Elements.BismuthMolten.ToString());
+                public static LocString NAME = FormatAsLink("Molten Bismuth", Elements.bismuthMolten.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class BISMUTHORE
             {
-                public static LocString NAME = FormatAsLink("Bismuth Ore", Elements.BismuthOre.ToString());
+                public static LocString NAME = FormatAsLink("Bismuth Ore", Elements.bismuthOre.ToString());
                 public static LocString DESC = "TODO";
             }
 
@@ -636,19 +666,25 @@ namespace Beached
 
             public class CALCIUM
             {
-                public static LocString NAME = FormatAsLink("Calcium", Elements.Calcium.ToString());
+                public static LocString NAME = FormatAsLink("Calcium", Elements.calcium.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class CALCIUMGAS
             {
-                public static LocString NAME = FormatAsLink("Calcium Gas", Elements.CalciumGas.ToString());
+                public static LocString NAME = FormatAsLink("Calcium Gas", Elements.calciumGas.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class CALCIUMMOLTEN
             {
-                public static LocString NAME = FormatAsLink("Molten Calcium", Elements.CalciumMolten.ToString());
+                public static LocString NAME = FormatAsLink("Molten Calcium", Elements.calciumMolten.ToString());
+                public static LocString DESC = "TODO";
+            }
+
+            public class CRACKEDNEUTRONIUM
+            {
+                public static LocString NAME = FormatAsLink("Cracked Neutronium");
                 public static LocString DESC = "TODO";
             }
 
@@ -675,6 +711,12 @@ namespace Beached
                 public static LocString NAME = FormatAsLink("Litter");
                 public static LocString DESC = "TODO";
             }
+            
+            public class METAMORPHICROCK
+            {
+                public static LocString NAME = FormatAsLink("Metamorphic Rock");
+                public static LocString DESC = "TODO";
+            }
 
             public class MOSS
             {
@@ -690,13 +732,13 @@ namespace Beached
 
             public class MUCUSFROZEN
             {
-                public static LocString NAME = FormatAsLink("Frozen Mucus", Elements.MucusFrozen.ToString());
+                public static LocString NAME = FormatAsLink("Frozen Mucus", Elements.mucusFrozen.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class MURKYBRINE
             {
-                public static LocString NAME = FormatAsLink("Murky Brine", Elements.MurkyBrine.ToString());
+                public static LocString NAME = FormatAsLink("Murky Brine", Elements.murkyBrine.ToString());
                 public static LocString DESC = "TODO";
             }
 
@@ -738,7 +780,7 @@ namespace Beached
 
             public class SALTYOXYGEN
             {
-                public static LocString NAME = FormatAsLink("Salty Oxygen", Elements.SaltyOxygen.ToString());
+                public static LocString NAME = FormatAsLink("Salty Oxygen", Elements.saltyOxygen.ToString());
                 public static LocString DESC = "TODO";
             }
 
@@ -768,13 +810,13 @@ namespace Beached
 
             public class SULFUROUS_ICE
             {
-                public static LocString NAME = FormatAsLink("Sulfurous Ice", Elements.SulfurousIce.ToString());
+                public static LocString NAME = FormatAsLink("Sulfurous Ice", Elements.sulfurousIce.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class SULFUROUS_WATER
             {
-                public static LocString NAME = FormatAsLink("Sulfurous Water", Elements.SulfurousWater.ToString());
+                public static LocString NAME = FormatAsLink("Sulfurous Water", Elements.sulfurousWater.ToString());
                 public static LocString DESC = "TODO";
             }
 
@@ -792,13 +834,13 @@ namespace Beached
 
             public class ZINCGAS
             {
-                public static LocString NAME = FormatAsLink("Zinc Gas", Elements.ZincGas.ToString());
+                public static LocString NAME = FormatAsLink("Zinc Gas", Elements.zincGas.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class ZINCMOLTEN
             {
-                public static LocString NAME = FormatAsLink("Molten Zinc", Elements.ZincMolten.ToString());
+                public static LocString NAME = FormatAsLink("Molten Zinc", Elements.zincMolten.ToString());
                 public static LocString DESC = "TODO";
             }
 
@@ -816,13 +858,13 @@ namespace Beached
 
             public class ZIRCONIUMGAS
             {
-                public static LocString NAME = FormatAsLink("Zirconium Gas", Elements.ZirconiumGas.ToString());
+                public static LocString NAME = FormatAsLink("Zirconium Gas", Elements.zirconiumGas.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class ZIRCONIUMMOLTEN
             {
-                public static LocString NAME = FormatAsLink("Molten Zirconium", Elements.ZirconiumMolten.ToString());
+                public static LocString NAME = FormatAsLink("Molten Zirconium", Elements.zirconiumMolten.ToString());
                 public static LocString DESC = "TODO";
             }
         }

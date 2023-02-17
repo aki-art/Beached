@@ -49,4 +49,22 @@ MobLookupTable:
         max: 0.3
       width: 2
       height: 4
+    Beached_Bamboo:
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.4
+        max: 0.8
+      width: 1
+      height: 2
+    Beached_BambooForest_Cylindrica:
+      prefabName: Cylindrica
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.2
+      width: 1
+      height: 1
+
 

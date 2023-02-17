@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Beached.Content.BWorldGen;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static ProcGen.SubWorld;
 
 namespace Beached
 {
@@ -12,6 +14,19 @@ namespace Beached
             public static Dictionary<string, GameObject> setpieces;
         }
 
+        // static hardcoded indices for my zonetypes
+        public static readonly Dictionary<int, ZoneType> biomeOverrideLookup = new()
+        {
+            { 1, ZoneTypes.coralReef }
+        };
+
+        public static readonly Direction[] cardinals = {
+            Direction.Down,
+            Direction.Up,
+            Direction.Left,
+            Direction.Right,
+        };
+
         public static class Textures
         {
             public static Texture2D LUTDay;
@@ -21,6 +36,7 @@ namespace Beached
             public static class Placeholders
             {
                 public static Texture2D beachBg;
+                public static Texture2D zeoliteBg;
             }
         }
 
@@ -90,7 +106,7 @@ namespace Beached
                 saltWater = Util.ColorFromHex("7fe4ff"),
 
                 zirconSpecular = new(2f, 0, 0),
-                zincSpecular = new(0f, 1.2f, 1.7f),
+                zincSpecular = Util.ColorFromHex("02b976"),
 
             // germs
                 plankton = new Color32(0, 0, 255, 255),
@@ -128,6 +144,7 @@ namespace Beached
 
             Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
             Textures.Placeholders.beachBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "beach.png"));
+            Textures.Placeholders.zeoliteBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "heulandite_geode.png"));
 
             Log.Debug("LOADING ASSETS");
 
@@ -138,8 +155,7 @@ namespace Beached
             {
                 Log.Debug(asset);
             }
-
-
+            
             Prefabs.setpieces = new();
 
             var testSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/test_setpiece.prefab");
@@ -164,7 +180,7 @@ namespace Beached
 
         public static bool TryLoadTexture(string path, out Texture2D texture)
         {
-            texture = LoadTexture(path, Mod.DebugMode);
+            texture = LoadTexture(path, Mod.debugMode);
             return texture != null;
         }
 

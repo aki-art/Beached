@@ -4,17 +4,19 @@
     public class ModHashes
     {
         public static readonly ModHashes
-            OnBeachedWorldLoaded = new("OnBeachedWorldLoaded"),
-            OnBeachedWorldUnLoaded = new("OnBeachedWorldUnLoaded"),
-            GreatAirQuality = new("GreatAirQuality"),
-            ProducedLubricant = new("ProducedLubricant"),
-            Desiccated = new("Desiccated"),
-            EnteredDarkness = new("EnteredDarkness"),
-            StackableChanged = new("StackableChanged"),
-            LifeGoalFulfilled = new("LifeGoalFulfilled"),
-            LifeGoalLost = new("LifeGoalLost"),
-            LifeGoalTrackerUpdate = new("LifeGoalTrackerUpdate"),
-            DebugDataChange = new("DebugDataChange");
+            onBeachedWorldLoaded = new("OnBeachedWorldLoaded"),
+            onBeachedWorldUnLoaded = new("OnBeachedWorldUnLoaded"),
+            greatAirQuality = new("GreatAirQuality"),
+            producedLubricant = new("ProducedLubricant"),
+            desiccated = new("Desiccated"),
+            enteredDarkness = new("EnteredDarkness"),
+            stackableChanged = new("StackableChanged"),
+            lifeGoalFulfilled = new("LifeGoalFulfilled"),
+            updateNeighbors = new("UpdateNeighbors"),
+            blockUpdate = new("BlockUpdate"),
+            lifeGoalLost = new("LifeGoalLost"),
+            lifeGoalTrackerUpdate = new("LifeGoalTrackerUpdate"),
+            debugDataChange = new("DebugDataChange");
 
         private readonly int value;
         private readonly string name;

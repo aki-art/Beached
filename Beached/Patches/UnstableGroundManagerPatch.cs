@@ -22,8 +22,8 @@ namespace Beached.Patches
                     return;
                 }
 
-                effects.Add(CreateEffect(Elements.Gravel, referenceEffect.prefab));
-                effects.Add(CreateEffect(Elements.Ash, referenceEffect.prefab));
+                effects.Add(CreateEffect(Elements.gravel, referenceEffect.prefab));
+                effects.Add(CreateEffect(Elements.ash, referenceEffect.prefab));
 
                 ___effects = effects.ToArray();
             }

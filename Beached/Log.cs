@@ -6,7 +6,7 @@ namespace Beached
     {
         public static void Debug(object msg)
         {
-            if (Mod.DebugMode)
+            if (Mod.debugMode)
             {
                 global::Debug.Log($"[Beached]: {msg}");
                 if(msg != null)

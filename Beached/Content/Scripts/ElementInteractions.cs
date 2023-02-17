@@ -1,5 +1,6 @@
 ﻿using Beached.Content.Defs.Comets;
 using Beached.Content.ModDb.Germs;
+using Beached.Content.Scripts.Entities;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -125,12 +126,12 @@ namespace Beached.Content.Scripts
                     kbac.Rotation = (float)(-(float)angle) - 90f;
                 }
 
-                SimMessages.ConsumeMass(cell, Elements.SulfurousWater, acidMass * ACID_LOSS, 1);
+                SimMessages.ConsumeMass(cell, Elements.sulfurousWater, acidMass * ACID_LOSS, 1);
                 Game.Instance.SpawnFX(SpawnFXHashes.MeteorImpactMetal, cellBelow, 0);
                 // TODO: sound fx
             }
 
-            else if (element.HasTag(BTags.Corrodable))
+            else if (element.HasTag(BTags.corrodable))
             {
                 WorldDamage.Instance.ApplyDamage(cellBelow, Elements.corrosionData[element.id], cell);
                 Game.Instance.SpawnFX(SpawnFXHashes.BleachStoneEmissionBubbles, cellBelow, 0);
@@ -206,7 +207,7 @@ namespace Beached.Content.Scripts
                 {
                     if (saltyOxygen == null)
                     {
-                        saltyOxygen = ElementLoader.FindElementByHash(Elements.SaltyOxygen);
+                        saltyOxygen = ElementLoader.FindElementByHash(Elements.saltyOxygen);
                     }
 
                     Game.Instance.SpawnFX(saltFx, Grid.CellToPosCTC(cell, Grid.SceneLayer.FXFront), 0f);
@@ -215,7 +216,7 @@ namespace Beached.Content.Scripts
 
                     SimMessages.ReplaceElement(
                         cellAbove,
-                        Elements.SaltyOxygen,
+                        Elements.saltyOxygen,
                         CellEventLogger.Instance.DebugTool,
                         Grid.Mass[cellAbove] + mass,
                         Grid.Temperature[cellAbove],
@@ -244,8 +245,8 @@ namespace Beached.Content.Scripts
             oxygenIdx = ElementLoader.GetElementIndex(SimHashes.Oxygen);
             saltWaterIdx = ElementLoader.GetElementIndex(SimHashes.SaltWater);
             brineIdx = ElementLoader.GetElementIndex(SimHashes.Brine);
-            saltyOxygen = ElementLoader.FindElementByHash(Elements.SaltyOxygen);
-            acidIdx = ElementLoader.GetElementIndex(Elements.SulfurousWater);
+            saltyOxygen = ElementLoader.FindElementByHash(Elements.saltyOxygen);
+            acidIdx = ElementLoader.GetElementIndex(Elements.sulfurousWater);
             hydrogenIdx = ElementLoader.GetElementIndex(SimHashes.Hydrogen);
         }
 

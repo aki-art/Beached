@@ -13,7 +13,7 @@ namespace Beached.Patches
             public static bool Prefix(SteppedInMonitor.Instance smi)
             {
                 var cell = Grid.CellAbove(Grid.PosToCell(smi));
-                if (Grid.IsValidCell(cell) && Grid.Element[cell].id == Elements.Mucus)
+                if (Grid.IsValidCell(cell) && Grid.Element[cell].id == Elements.mucus)
                 {
                     smi.effects.Remove("CarpetFeet");
                     smi.effects.Remove("WetFeet");
@@ -38,7 +38,7 @@ namespace Beached.Patches
                 if (!__result)
                 {
                     var cell = Grid.CellBelow(Grid.PosToCell(smi));
-                    __result = Grid.IsValidCell(cell) && Grid.Element[cell].id == Elements.Moss;
+                    __result = Grid.IsValidCell(cell) && Grid.Element[cell].id == Elements.moss;
                 }
             }
         }

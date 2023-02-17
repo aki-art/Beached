@@ -49,8 +49,8 @@ namespace Beached.Patches.Worldgen
 
                 MarkTags(voronoiTree, bottomRightEdge, BWorldGenTags.AtSideADepth);
                 MarkTags(voronoiTree, bottomLeftEdge, BWorldGenTags.AtSideBDepth);
-                MarkTags(voronoiTree, bottomRightCorner, BWorldGenTags.AtSideACorner);
-                MarkTags(voronoiTree, bottomLeftCorner, BWorldGenTags.AtSideBCorner);
+                //MarkTags(voronoiTree, bottomRightCorner, BWorldGenTags.AtSideACorner);
+                //MarkTags(voronoiTree, bottomLeftCorner, BWorldGenTags.AtSideBCorner);
             }
 
             private static void MarkTags(Tree voronoiTree, LineSegment edge, Tag tag)

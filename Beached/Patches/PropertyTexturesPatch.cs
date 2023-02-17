@@ -38,7 +38,7 @@ namespace Beached.Patches
             // Calling with existing value so there is a possibility for other mods to also add their own values
             private static byte GetDangerForElement(int existingValue, int cell)
             {
-                return (Grid.Element[cell].id == Elements.SaltyOxygen) ? (byte)0 : (byte)existingValue;
+                return (Grid.Element[cell].id == Elements.saltyOxygen) ? (byte)0 : (byte)existingValue;
             }
         }
     }

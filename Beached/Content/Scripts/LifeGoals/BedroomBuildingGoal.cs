@@ -51,9 +51,9 @@
 
                 hasWanted.satisfied
                     .ToggleStatusItem("hasWanted.satisfied", "")
-                    .TriggerOnEnter(ModHashes.LifeGoalFulfilled)
+                    .TriggerOnEnter(ModHashes.lifeGoalFulfilled)
                     .EventHandlerTransition(GameHashes.OperationalChanged, smi => smi.wantTarget, hasWanted.unoperational, (smi, data) => !IsTargetOperational(smi, data))
-                    .TriggerOnExit(ModHashes.LifeGoalLost);
+                    .TriggerOnExit(ModHashes.lifeGoalLost);
             }
 
             private bool RecheckBedAndTarget(StatesInstance smi, float _)

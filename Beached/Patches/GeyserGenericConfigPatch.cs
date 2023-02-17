@@ -1,5 +1,5 @@
-﻿using Beached.Content;
-using Beached.Content.Scripts;
+﻿using Beached.Content.Defs;
+using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;

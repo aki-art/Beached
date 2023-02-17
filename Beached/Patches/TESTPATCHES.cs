@@ -5,6 +5,7 @@ using Beached.Content.Scripts;
 using HarmonyLib;
 using Klei;
 using Klei.AI;
+using Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using UnityEngine;
 
 namespace Beached.Patches
 {
+
     public class TestPatches
     {
         public static Texture2D testMask;
