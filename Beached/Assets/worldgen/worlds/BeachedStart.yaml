@@ -36,16 +36,15 @@ startingBasePositionVertical:
 # root and reefs are added from features
 subworldFiles:
   - name: subworlds/beached/beach/BeachStart
-    overridePower: 3
+    overridePower: 8
   - name: subworlds/beached/beach/BeachMini
   - name: subworlds/beached/beach/BeachPalmyShores
   - name: subworlds/beached/sea/SeaMain
     overridePower: 1.4
-  - name: subworlds/beached/debug/EmptyBeach
   - name: subworlds/beached/bamboo/BambooMain
     overridePower: 3
-  - name: subworlds/beached/debug/EmptyPearl
-    overridePower: 1.5
+  - name: subworlds/beached/rot/RotMain
+    overridePower: 3
   - name: subworlds/beached/snowy/SnowyBeach
     overridePower: 3
     #maxCount: 3
@@ -53,11 +52,8 @@ subworldFiles:
     overridePower: 3
   - name: subworlds/beached/thermalvents/ThermalVentsMain
     overridePower: 2
-  - name: subworlds/beached/debug/EmptyReef
   - name: subworlds/beached/debug/EmptySwamp
     overridePower: 3.5
-  - name: subworlds/beached/debug/EmptyOcean
-    overridePower: 1.5
   - name: subworlds/Empty
     overridePower: 1.2
   - name: subworlds/space/Space
@@ -70,7 +66,7 @@ unknownCellsAllowedSubworlds:
     subworldNames:
       - subworlds/beached/bamboo/BambooMain
       -  subworlds/beached/snowy/SnowyBeach
-      - subworlds/beached/debug/EmptyPearl
+      - subworlds/beached/rot/RotMain
 # start
   - tagcommand: AtTag
     tag: AtStart
@@ -159,6 +155,7 @@ worldTemplateRules:
     allowedCellsFilter:
       - command: Replace
         zoneTypes: [Bamboo]
+# Chlorine vent in bamboos        
   - names: 
       - beached/worldgen/bamboo_clgeyser3
     listRule: GuaranteeOne
@@ -166,3 +163,12 @@ worldTemplateRules:
     allowedCellsFilter:
       - command: Replace
         zoneTypes: [Bamboo]
+# Ammonia vent in rot        
+  - names: 
+      - beached/worldgen/ammoniavent
+    listRule: GuaranteeOne
+    priority: 999
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Bone]
+        

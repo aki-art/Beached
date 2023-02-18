@@ -124,7 +124,9 @@ namespace Beached
                     icy = Util.ColorFromHex("90BFDBFF"), // B5BBDBF
                     reefs = Util.ColorFromHex("B8697E"),
                     sea = Util.ColorFromHex("63D6DEFF"),
-                    pearly = Util.ColorFromHex("0E0906FF");
+                    pearly = Util.ColorFromHex("0E0906FF"),
+                    bone = Util.ColorFromHex("D3BCD0"),
+                    sulfur = Util.ColorFromHex("ffff00");
             }
 
             public class UI
@@ -244,29 +246,22 @@ namespace Beached
             {
                 if (bundle.name == assetBundleName)
                 {
+                    Log.Warning("trying to load duplicate asset bundle " + bundle.name);
                     return bundle;
                 }
             }
 
-            if (path.IsNullOrWhiteSpace())
-            {
-                path = Path.Combine(Mod.folder, "assets");
-            }
+            path ??= Path.Combine(Mod.folder, "assets");
 
             if (platformSpecific)
             {
-                switch (Application.platform)
+                path = Application.platform switch
                 {
-                    case RuntimePlatform.WindowsPlayer:
-                        path = Path.Combine(path, "windows");
-                        break;
-                    case RuntimePlatform.LinuxPlayer:
-                        path = Path.Combine(path, "linux");
-                        break;
-                    case RuntimePlatform.OSXPlayer:
-                        path = Path.Combine(path, "mac");
-                        break;
-                }
+                    RuntimePlatform.WindowsPlayer => Path.Combine(path, "windows"),
+                    RuntimePlatform.LinuxPlayer => Path.Combine(path, "linux"),
+                    RuntimePlatform.OSXPlayer => Path.Combine(path, "mac"),
+                    _ => path
+                };
             }
 
             path = Path.Combine(path, assetBundleName);

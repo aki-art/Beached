@@ -14,6 +14,8 @@ namespace Beached.Content.BWorldGen
             basaltShore,
             beach,
             bamboo,
+            bone,
+            sulfur,
             depths,
             sea,
             coralReef,
@@ -33,6 +35,8 @@ namespace Beached.Content.BWorldGen
             Add("CoralReef", ModAssets.Colors.Zones.reefs, 5, ZoneType.MagmaCore);
             Add("Icy", ModAssets.Colors.Zones.icy, 6, ZoneType.MagmaCore);
             Add("Pearly", ModAssets.Colors.Zones.pearly, 5, ZoneType.BoggyMarsh);
+            Add("Bone", ModAssets.Colors.Zones.bone, 0, ZoneType.BoggyMarsh);
+            Add("Sulfur", ModAssets.Colors.Zones.sulfur, 8, ZoneType.BoggyMarsh);
 
             zones.OnZonetypesRegistered += () =>
             {
@@ -44,6 +48,8 @@ namespace Beached.Content.BWorldGen
                 coralReef = zones.Get("CoralReef");
                 icy = zones.Get("Icy");
                 pearly = zones.Get("Pearly");
+                bone = zones.Get("Bone");
+                sulfur = zones.Get("Sulfur");
 
                 values.Add(basaltShore);
                 values.Add(beach);
@@ -53,6 +59,8 @@ namespace Beached.Content.BWorldGen
                 values.Add(coralReef);
                 values.Add(icy);
                 values.Add(pearly);
+                values.Add(bone);
+                values.Add(sulfur);
             };
         }
 

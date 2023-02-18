@@ -24,4 +24,5 @@ tags:
   - IgnoreCaveOverride
   - NoGlobalFeatureSpawning
   - Beached_SmoothNoise
+  - Beached_AllowCritterManipulator
 zoneType: Bamboo
