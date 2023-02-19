@@ -32,6 +32,7 @@ namespace Beached
             public static Texture2D LUTDay;
             public static Texture2DArray germOverlays;
             public static Texture2DArray biomeBackgrounds;
+            public static Texture2D forceFieldGrid;
 
             public static class Placeholders
             {
@@ -43,6 +44,7 @@ namespace Beached
         public static class Materials
         {
             public static Material germOverlayReplacer;
+            public static Material forceField;
         }
 
         public static class Sprites
@@ -152,7 +154,11 @@ namespace Beached
 
             var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
             Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
+            Materials.forceField = new Material(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"));
+            Materials.forceField.renderQueue = RenderQueues.Liquid;
+
             Textures.germOverlays = bundle.LoadAsset<Texture2DArray>("Assets/Beached/Images/combined.png");
+            Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid.png");
             foreach (var asset in bundle.GetAllAssetNames())
             {
                 Log.Debug(asset);

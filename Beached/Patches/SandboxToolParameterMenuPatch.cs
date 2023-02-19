@@ -50,7 +50,10 @@ namespace Beached.Patches
             // setpieces
             SetPiecesConfig.TEST,
             SetPiecesConfig.BEACH,
-            SetPiecesConfig.ZEOLITE
+            SetPiecesConfig.ZEOLITE,
+
+            // misc
+            ForceFieldConfig.ID
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]
