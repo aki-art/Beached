@@ -1,11 +1,13 @@
 ﻿using Beached.Content.Defs.Entities.Plants;
+using ImGuiNET;
 using KSerialization;
 using UnityEngine;
+using static Beached.STRINGS.CREATURES.SPECIES;
 using Random = UnityEngine.Random;
 
 namespace Beached.Content.Scripts.Entities;
 
-public class Bamboo : KMonoBehaviour
+public class Bamboo : KMonoBehaviour, IImguiDebug
 {
     [Serialize] public bool isBottomPiece;
     [Serialize] public bool isTopPiece;
@@ -77,5 +79,17 @@ public class Bamboo : KMonoBehaviour
     private void OnUpdate(object o)
     {
         isBottomPiece = IsSolidGround(Grid.CellBelow(Grid.PosToCell(this)));
+    }
+
+    public void OnImguiDraw()
+    {
+        if (ImGui.Button("Grow Bamboo to random length"))
+        {
+            GrowToRandomLength();
+        }
+        else if (ImGui.Button(("Grow Bamboo by 1")))
+        {
+            GrowOne();
+        }
     }
 }

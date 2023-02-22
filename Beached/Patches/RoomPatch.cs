@@ -1,6 +1,7 @@
 ﻿using Beached.Content.ModDb;
 using HarmonyLib;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Beached.Patches
 {
@@ -22,7 +23,7 @@ namespace Beached.Patches
                         return true;
                     }
 
-                    __instance.primary_buildings ??= new List<KPrefabID>();
+                    __instance.primary_buildings ??= new();
 
                     foreach (var poi in pois)
                     {

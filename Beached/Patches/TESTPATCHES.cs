@@ -10,14 +10,49 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using ProcGen;
 using UnityEngine;
 
 namespace Beached.Patches
 {
-
     public class TestPatches
     {
         public static Texture2D testMask;
+
+        // modify story traits
+        //[HarmonyPatch(typeof(SettingsCache), "LoadStoryTraits")]
+        public class SettingsCache_LoadStoryTraits_Patch
+        {
+            public static void Postfix()
+            {
+                var storyTraits = Traverse.Create(typeof(SettingsCache)).Field<Dictionary<string, WorldTrait>>("storyTraits").Value;
+
+                foreach (var trait in storyTraits)
+                {
+                    Log.Debug("Loaded trait: " + trait.Key);
+
+                    if (trait.Value.additionalWorldTemplateRules == null) continue;
+
+                    foreach (var templateRule in trait.Value.additionalWorldTemplateRules)
+                    {
+                        if (templateRule.allowedCellsFilter == null) continue;
+
+                        foreach (var filter in templateRule.allowedCellsFilter)
+                        {
+                            if (filter.temperatureRanges != null &&
+                                filter.temperatureRanges.Contains(Temperature.Range.ExtremelyHot) &&
+                                !filter.temperatureRanges.Contains(Temperature.Range.Chilly))
+                            {
+                                filter.temperatureRanges.Add(Temperature.Range.Chilly);
+                            }
+
+                            Log.Debug("  - " + filter.command);
+                            Log.Debug("  - " + filter.temperatureRanges?.Join());
+                        }
+                    }
+                }
+            }
+        }
 
         [HarmonyPatch(typeof(SimDebugView), "UpdateData")]
         public class SimDebugView_UpdateData_Patch
@@ -258,7 +293,7 @@ namespace Beached.Patches
             public static void Postfix(CollapsibleDetailContentPanel ___currentGermsPanel)
             {
                 var changeRate = ElementInteractions.GetFungalGermAverageChangeRateInLight();
-                var str = string.Format("    • Exposed to Light: ~{0}/s", changeRate);
+                var str = $"    • Exposed to Light: ~{changeRate}/s";
                 ___currentGermsPanel.SetLabel("beached_light", str, "test");
             }
         }

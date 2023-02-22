@@ -6,10 +6,13 @@ using Beached.ModDevTools;
 using Beached.Settings;
 using HarmonyLib;
 using KMod;
+using Neutronium.PostProcessing.LUT;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using TUNING;
+using UnityEngine;
+using static Beached.ModAssets;
 
 namespace Beached
 {
@@ -23,6 +26,7 @@ namespace Beached
         public static string folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // path field does not seem reliable with Local installs
 
         public static bool isFastTrackHere;
+        public static LUT_API lutAPI;
 
         public override void OnLoad(Harmony harmony)
         {
@@ -33,6 +37,13 @@ namespace Beached
             ZoneTypes.Initialize();
             BeachedDevTools.Initialize();
             BWorldGenTags.Initialize();
+
+            lutAPI = LUT_API.Setup(harmony, true);
+            var assets = Path.Combine(Mod.folder, "Assets");
+            Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
+
+
+            Mod.lutAPI.RegisterLUT("Beached_VibrantDayLUT", LUTSlot.Day, 300, Textures.LUTDay);
 
             CROPS.CROP_TYPES.Add(new Crop.CropVal(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
 

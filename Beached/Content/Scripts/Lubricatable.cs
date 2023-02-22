@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Beached.Content.ModDb;
+using ImGuiNET;
 using KSerialization;
 using rail;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
-    public class Lubricatable : KMonoBehaviour
+    public class Lubricatable : KMonoBehaviour, IImguiDebug
     {
         [MyCmpGet] public KPrefabID kPrefabID;
         [MyCmpGet] public KSelectable kSelectable;
@@ -33,7 +34,7 @@ namespace Beached.Content.Scripts
             OnStorageChange(null);
             UpdateDelivery();
         }
-
+        
         private void OnStorageChange(object o)
         {
             var lubricated = mucusStorage.GetMassAvailable(Elements.mucus) >= massUsedEachTime;
@@ -117,5 +118,10 @@ namespace Beached.Content.Scripts
         }
 
         public int GetUsesRemaining() => Mathf.FloorToInt(mucusStorage.capacityKg / massUsedEachTime);
+
+        public void OnImguiDraw()
+        {
+            ImGui.Text("Imgui from interface");
+        }
     }
 }

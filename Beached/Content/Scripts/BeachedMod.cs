@@ -1,4 +1,5 @@
-﻿using KSerialization;
+﻿using FMODUnity;
+using KSerialization;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -16,7 +17,7 @@ namespace Beached.Content.Scripts
         public override void OnPrefabInit()
         {
             Instance = this;
-
+            
             // a bunch of singleton components i don't want to spam on SaveGame
             // these do not serialize, put serialialized data here
             var childGo = new GameObject("BeachedStuff");
@@ -29,6 +30,11 @@ namespace Beached.Content.Scripts
             tutorials = childGo.AddOrGet<Tutorials>();
             treasury = childGo.AddOrGet<Treasury>();
             childGo.AddOrGet<TileUpdater>();
+/*
+            var runTimeManager = FindObjectOfType(typeof(RuntimeManager)) as RuntimeManager;
+
+            gameObject.AddComponent<FMODRuntimeManagerOnGUIHelper>().TargetRuntimeManager = runTimeManager;*/
+
         }
 
         public override void OnCleanUp()

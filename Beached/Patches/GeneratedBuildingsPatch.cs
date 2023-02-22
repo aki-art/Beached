@@ -1,4 +1,6 @@
-﻿using Beached.Content.Scripts;
+﻿using Beached.Content.Defs.Buildings;
+using Beached.Content.ModDb;
+using Beached.Content.Scripts;
 using HarmonyLib;
 
 namespace Beached.Patches
@@ -17,6 +19,16 @@ namespace Beached.Patches
                         Lubricatable.ConfigurePrefab(buildingDef.BuildingComplete, 10, 10f / 36f);
                     }
                 }
+
+                var planInfo = new PlanScreen.PlanInfo(
+                    BDb.poisBuildCategory,
+                    false,
+                    new()
+                    {
+                        ForceFieldGeneratorConfig.ID
+                    });
+
+                TUNING.BUILDINGS.PLANORDER.Add(planInfo);
             }
         }
     }

@@ -8,7 +8,7 @@ namespace Beached.Patches
     public class CameraControllerPatch
     {
         // replaces the LUT with a more vibrant, colorful overlay
-        [HarmonyPatch(typeof(CameraController), "OnPrefabInit")]
+        //[HarmonyPatch(typeof(CameraController), "OnPrefabInit")]
         public class CameraController_OnPrefabInit_Patch
         {
             private static Texture2D defaultDayColorCube;

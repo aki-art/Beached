@@ -15,6 +15,7 @@ namespace Beached.Patches
                 __instance.SpriteAssets.Add(LoadSprite("mod_mineralogy", ModAssets.Sprites.MOD_MINERALOGIST));
                 __instance.SpriteAssets.Add(LoadSprite("icon_errand_mineralogy", ModAssets.Sprites.ERRAND_MINERALOGY));
                 __instance.SpriteAssets.Add(LoadSprite("icon_archetype_mineralogy", ModAssets.Sprites.ARCHETYPE_MINERALOGY));
+                __instance.SpriteAssets.Add(LoadSprite("icon_category_beachedpois", ModAssets.Sprites.BUILDCATEGORY_POIS));
 
                 Assets.RegisterOnAddPrefab(AcidVulnerableCreature.OnAddPrefab);
             }

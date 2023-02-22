@@ -29,6 +29,7 @@ namespace Beached.Patches
             RareGemsConfig.FLAWLESS_DIAMOND,
             RareGemsConfig.HADEAN_ZIRCON,
             RareGemsConfig.MAXIXE,
+            RareGemsConfig.STRANGE_MATTER,
 
             // Equipment
             MaxixePendantConfig.ID,

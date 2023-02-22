@@ -8,6 +8,8 @@ namespace Beached
     [SerializationConfig(MemberSerialization.OptIn)]
     public class BeachedGrid : KMonoBehaviour
     {
+        public const int INVALID_FORCEFIELD_OFFSET = -1;
+
         [Serialize]
         private Dictionary<int, NaturalTileInfo> naturalTiles = new();
 
@@ -15,6 +17,7 @@ namespace Beached
         public Dictionary<int, ZoneType> zoneTypeOverrides = new();
 
         public static Dictionary<Vector2I, ZoneType> worldgenZoneTypes;
+        public static Dictionary<int, int> forceFieldLevelPerWorld = new();
 
         [Serialize]
         private bool initialized;

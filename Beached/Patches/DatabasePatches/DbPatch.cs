@@ -3,6 +3,7 @@ using Beached.Content.Defs.Buildings;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Sicknesses;
 using HarmonyLib;
+using System.Collections.Generic;
 
 namespace Beached.Patches.DatabasePatches
 {
@@ -30,6 +31,8 @@ namespace Beached.Patches.DatabasePatches
                 RegisterBuildings();
 
                 ModAssets.LoadAssets();
+                
+                PlanScreen.iconNameMap.Add(HashCache.Get().Add(BDb.poisBuildCategory), ModAssets.Sprites.BUILDCATEGORY_POIS);
             }
 
             private static void RegisterBuildings()

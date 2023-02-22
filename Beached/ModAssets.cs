@@ -2,8 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using JetBrains.Annotations;
 using UnityEngine;
 using static ProcGen.SubWorld;
+using UnityEngine.Assertions;
+using HarmonyLib;
+using Neutronium.PostProcessing.LUT;
 
 namespace Beached
 {
@@ -33,6 +37,7 @@ namespace Beached
             public static Texture2DArray germOverlays;
             public static Texture2DArray biomeBackgrounds;
             public static Texture2D forceFieldGrid;
+            public static Texture2D forceFieldBlurMap;
 
             public static class Placeholders
             {
@@ -52,6 +57,7 @@ namespace Beached
             public const string MOD_MINERALOGIST = "beached_mod_mineralogist";
             public const string ERRAND_MINERALOGY = "beached_errand_mineralogy";
             public const string ARCHETYPE_MINERALOGY = "beached_archetype_mineralogy";
+            public const string BUILDCATEGORY_POIS = "beached_buildcategory_pois";
         }
 
         public static class Fx
@@ -142,11 +148,14 @@ namespace Beached
             public static string negativeColorHex = GameUtil.BreathableValues.negativeColor.ToHexString();
         }
 
+        public static void SetLUTs()
+        {
+        }
+
         public static void LoadAssets()
         {
             var assets = Path.Combine(Mod.folder, "Assets");
 
-            Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
             Textures.Placeholders.beachBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "beach.png"));
             Textures.Placeholders.zeoliteBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "heulandite_geode.png"));
 
@@ -154,16 +163,19 @@ namespace Beached
 
             var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
             Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
-            Materials.forceField = new Material(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"));
-            Materials.forceField.renderQueue = RenderQueues.Liquid;
+            Materials.forceField = new(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"))
+            {
+                renderQueue = RenderQueues.Liquid
+            };
 
             Textures.germOverlays = bundle.LoadAsset<Texture2DArray>("Assets/Beached/Images/combined.png");
-            Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid.png");
+            Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid_b.png");
+            Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
             foreach (var asset in bundle.GetAllAssetNames())
             {
                 Log.Debug(asset);
             }
-            
+
             Prefabs.setpieces = new();
 
             var testSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/test_setpiece.prefab");

@@ -53,14 +53,7 @@ namespace Beached.Patches
                     var originCell = Grid.XYToCell(position.X, position.Y);
 
                     BeachedGrid.worldgenZoneTypes ??= new();
-
-                    var processor = template.otherEntities?.Find(e => e.id == TemplateProcessorConfig.ID);
-                    if(processor == null)
-                    {
-                        Log.Warning("Used Beached tag to process a template, but it has no template processor entity saved with it.");
-                        //return;
-                    }
-
+                    
                     foreach (var offset in template.cells)
                     {
                         //var cell = Grid.PosToCell(new Vector2(offset.location_x + position.x, offset.location_y + position.y));

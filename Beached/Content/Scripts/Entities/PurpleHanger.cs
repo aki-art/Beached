@@ -1,11 +1,12 @@
 ﻿using Beached.Content.Defs.Entities.Plants;
+using ImGuiNET;
 using KSerialization;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Beached.Content.Scripts.Entities;
 
-public class PurpleHanger : KMonoBehaviour, ISim4000ms
+public class PurpleHanger : KMonoBehaviour, ISim4000ms, IImguiDebug
 {
     [Serialize] public bool isBottomPiece;
     [Serialize] public bool isTopPiece;
@@ -101,5 +102,17 @@ public class PurpleHanger : KMonoBehaviour, ISim4000ms
     public void Sim4000ms(float dt)
     {
         OnUpdate(null);
+    }
+
+    public void OnImguiDraw()
+    {
+        if (ImGui.Button("Grow Purpicle to random length"))
+        {
+            GrowToRandomLength();
+        }
+        else if (ImGui.Button(("Grow Bamboo by 1")))
+        {
+            GrowOne();
+        }
     }
 }

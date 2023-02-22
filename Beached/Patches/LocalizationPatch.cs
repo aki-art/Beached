@@ -2,6 +2,7 @@
 using KMod;
 using System;
 using System.IO;
+using Beached.Content.Defs.Buildings;
 
 namespace Beached.Patches
 {
@@ -16,6 +17,8 @@ namespace Beached.Patches
 
                 Strings.Add("STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES", STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES);
                 Strings.Add("STRINGS.DUPLICANTS.TRAITS.GILLS.SHORT_DESC", STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.SHORT_DESC);
+                Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MiniFridgeConfig.ID.ToUpperInvariant()}.EFFECT", global::STRINGS.BUILDINGS.PREFABS.REFRIGERATOR.EFFECT);
+                Strings.Add($"STRINGS.BUILDINGS.PREFABS.{AmmoniaGeneratorConfig.ID.ToUpperInvariant()}.EFFECT", global::STRINGS.BUILDINGS.PREFABS.HYDROGENGENERATOR.EFFECT);
             }
 
             public static void Translate(Type root)

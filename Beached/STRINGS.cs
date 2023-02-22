@@ -1,4 +1,5 @@
-﻿using Beached.Content;
+﻿using System.Diagnostics.CodeAnalysis;
+using Beached.Content;
 using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Entities.Plants;
 using Beached.Content.ModDb;
@@ -8,8 +9,19 @@ using JetBrains.Annotations;
 
 namespace Beached
 {
+    [SuppressMessage("ReSharper", "MemberHidesStaticFromOuterClass")]
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class STRINGS
     {
+        public class BUILDCATEGORIES
+        {
+            public class BEACHED_POIS
+            {
+                public static LocString NAME = "Beache POIs";
+                public static LocString TOOLTIP = "debug mode";
+            }
+        }
+
         public class BUILDINGS
         {
             public class PREFABS
@@ -18,56 +30,70 @@ namespace Beached
                 {
                     public static LocString NAME = FormatAsLink("Ammonia Generator", AmmoniaGeneratorConfig.ID);
                     public static LocString DESC = "...";
-                    public static LocString EFFECTS = global::STRINGS.BUILDINGS.PREFABS.HYDROGENGENERATOR.EFFECT;
+                    public static LocString EFFECT = "TRANSLATION NOT NEEDED - gets copied from hydrogen generator";
                 }
 
-                public class BEACHED_SEASHELLCHIME
+                public class BEACHED_ATMOSPHERICFORCEFIELDGENERATOR
                 {
-                    public static LocString NAME = "Seashell Chime";
-                    public static LocString DESC = "Pretty sea shells suspended in air, creating music.";
-                    public static LocString EFFECTS = "Emits a soothing sound when stimulated by changing air pressure, decreasing Stress of nearby Duplicants.";
-                }
-
-                public class BEACHED_MINIFRIDGE
-                {
-                    public static LocString NAME = "Mini-Fridge";
-                    public static LocString DESC = "A tiny fridge to store a tiny bit of food for the tiny dupes.";
-                    public static LocString EFFECTS = global::STRINGS.BUILDINGS.PREFABS.REFRIGERATOR.EFFECT;
-                }
-
-                public class BEACHED_MOSSBED
-                {
-                    public static LocString NAME = "Moss Bed";
-                    public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a once time delivery of water; once grown the moss is converted to a natural tile.";
-                    public static LocString EFFECTS = "Natural tiles can be used as walls and floors or for wild planting.";
+                    public static LocString NAME = FormatAsLink("Atmospheric Forcefield Generator", ForceFieldGeneratorConfig.ID);
+                    public static LocString DESC = "...";
+                    public static LocString EFFECTS = "Shields the surface of an asteroud from incoming Meteors. Does not allow rockets to pass.";
                 }
 
                 public class BEACHED_BAMBOOPLATFORM
                 {
                     public static LocString NAME = "StackablePlant Walkway";
                     public static LocString DESC = "...";
-                    public static LocString EFFECTS = "...";
+                    public static LocString EFFECT = "...";
                 }
 
-                public class BEACHED_MAKITRAININGGROUND
+                public class BEACHED_LABORATORY_TILES
                 {
-                    public static LocString NAME = "Maki Training Ground";
+                    public static LocString NAME = "Laboratory Tiles";
                     public static LocString DESC = "...";
-                    public static LocString EFFECTS = "...";
+                    public static LocString EFFECT = "...";
                 }
 
                 public class BEACHED_MAKIHUT
                 {
                     public static LocString NAME = "Maki Hut";
                     public static LocString DESC = "...";
-                    public static LocString EFFECTS = "...";
+                    public static LocString EFFECT = "...";
                 }
 
-                public class BEACHED_BLADDERTREETAP
+                public class BEACHED_MAKITRAININGGROUND
+                {
+                    public static LocString NAME = "Maki Training Ground";
+                    public static LocString DESC = "...";
+                    public static LocString EFFECT = "...";
+                }
+
+                public class BEACHED_MINIFRIDGE
+                {
+                    public static LocString NAME = "Mini-Fridge";
+                    public static LocString DESC = "A tiny fridge to store a tiny bit of food for the tiny dupes.";
+                    public static LocString EFFECT = "TRANSLATION NOT NEEDED - gets copied from regular fridge";
+                }
+                
+                public class BEACHED_MOSSBED
+                {
+                    public static LocString NAME = "Moss Bed";
+                    public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a once time delivery of water; once grown the moss is converted to a natural tile.";
+                    public static LocString EFFECT = "Natural tiles can be used as walls and floors or for wild planting.";
+                }
+
+                public class BEACHED_TREETAP
                 {
                     public static LocString NAME = "Tree Tap";
                     public static LocString DESC = "...";
-                    public static LocString EFFECTS = "...";
+                    public static LocString EFFECT = "Collects Sap from a tree it is attached to.";
+                }
+
+                public class BEACHED_SEASHELLCHIME
+                {
+                    public static LocString NAME = "Seashell Chime";
+                    public static LocString DESC = "Pretty sea shells suspended in air, creating music.";
+                    public static LocString EFFECT = "Emits a soothing sound when stimulated by changing air pressure, decreasing Stress of nearby Duplicants.";
                 }
             }
 
@@ -1019,6 +1045,12 @@ namespace Beached
                 {
                     public static LocString NAME = "Mother Pearl";
                     public static LocString DESCRIPTION = "...";
+                }
+
+                public class STRANGE_MATTER
+                {
+                    public static LocString NAME = "Strange Matter";
+                    public static LocString DESCRIPTION = "A droplet of strange quark matter.";
                 }
             }
 

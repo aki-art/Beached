@@ -16,6 +16,7 @@ namespace Beached.Content.Defs.Items
         public const string HADEAN_ZIRCON = "Beached_Item_HadeanZircon";
         public const string MAXIXE = "Beached_Item_Maxixe";
         public const string MOTHER_PEARL = "Beached_Item_MotherPearl";
+        public const string STRANGE_MATTER = "Beached_Item_StrangeMatter";
 
         public List<GameObject> CreatePrefabs()
         {
@@ -23,13 +24,14 @@ namespace Beached.Content.Defs.Items
             {
                 CreateGem(FLAWLESS_DIAMOND, STRINGS.ITEMS.GEMS.FLAWLESS_DIAMOND.NAME, STRINGS.ITEMS.GEMS.FLAWLESS_DIAMOND.DESCRIPTION, "beached_flawless_diamond_kanim", DECOR.BONUS.TIER2, SimHashes.Diamond),
                 CreateGem(HADEAN_ZIRCON, STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.NAME, STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.DESCRIPTION, "beached_hadean_zircon_kanim", DECOR.BONUS.TIER2, Elements.zirconiumOre),
-                CreateGem(MAXIXE, STRINGS.ITEMS.GEMS.MAXIXE.NAME, STRINGS.ITEMS.GEMS.MAXIXE.DESCRIPTION, "beached_maxixe_kanim", DECOR.BONUS.TIER2, Elements.aquamarine)
+                CreateGem(MAXIXE, STRINGS.ITEMS.GEMS.MAXIXE.NAME, STRINGS.ITEMS.GEMS.MAXIXE.DESCRIPTION, "beached_maxixe_kanim", DECOR.BONUS.TIER2, Elements.aquamarine),
+                CreateGem(STRANGE_MATTER, STRINGS.ITEMS.GEMS.STRANGE_MATTER.NAME, STRINGS.ITEMS.GEMS.STRANGE_MATTER.DESCRIPTION, "beached_strange_matter_kanim", DECOR.BONUS.TIER2, SimHashes.Unobtanium)
             };
 
             return items;
         }
 
-        public static GameObject CreateGem(string ID, string name, string description, string anim, EffectorValues decor, SimHashes element)
+        public static GameObject CreateGem(string ID, string name, string description, string anim, EffectorValues decor, SimHashes element, bool loop = false)
         {
             var prefab = EntityTemplates.CreateLooseEntity(
                 ID,
@@ -56,6 +58,11 @@ namespace Beached.Content.Defs.Items
             prefab.AddOrGet<SimpleMassStatusItem>();
             prefab.AddOrGet<OccupyArea>().OccupiedCellsOffsets = EntityTemplates.GenerateOffsets(1, 1);
             prefab.AddOrGet<DecorProvider>().SetValues(decor);
+
+            if (loop)
+            {
+                prefab.GetComponent<KBatchedAnimController>().PlayMode = KAnim.PlayMode.Loop;
+            }
 
             return prefab;
         }
