@@ -18,8 +18,7 @@ namespace Beached.Content.ModDb
                 StatusItem.IconType.Exclamation,
                 NotificationType.Bad,
                 false,
-                OverlayModes.None.ID,
-                true);
+                OverlayModes.None.ID);
 
             desiccation.SetResolveStringCallback((str, data) => data is MoistureMonitor.Instance moistureMonitor ? string.Format(str, moistureMonitor.timeUntilDeath) : str);
 

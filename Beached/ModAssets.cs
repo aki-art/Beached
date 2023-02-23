@@ -2,17 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using JetBrains.Annotations;
 using UnityEngine;
 using static ProcGen.SubWorld;
-using UnityEngine.Assertions;
-using HarmonyLib;
-using Neutronium.PostProcessing.LUT;
+using Object = UnityEngine.Object;
 
 namespace Beached
 {
     public class ModAssets
     {
+        public const string BASE_FOLDER = "assets/textures";
         public static class Prefabs
         {
             public static Dictionary<string, GameObject> setpieces;
@@ -148,16 +146,13 @@ namespace Beached
             public static string negativeColorHex = GameUtil.BreathableValues.negativeColor.ToHexString();
         }
 
-        public static void SetLUTs()
-        {
-        }
-
         public static void LoadAssets()
         {
             var assets = Path.Combine(Mod.folder, "Assets");
 
             Textures.Placeholders.beachBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "beach.png"));
             Textures.Placeholders.zeoliteBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "heulandite_geode.png"));
+            Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
 
             Log.Debug("LOADING ASSETS");
 
@@ -242,7 +237,7 @@ namespace Beached
             var renderTexture = new RenderTexture(textureToWrite.width, textureToWrite.height, 32);
             Graphics.Blit(textureToWrite, renderTexture);
 
-            texture2D.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+            texture2D.ReadPixels(new(0, 0, renderTexture.width, renderTexture.height), 0, 0);
             texture2D.Apply();
 
             var bytes = texture2D.EncodeToPNG();
@@ -293,6 +288,70 @@ namespace Beached
             }
 
             return assetBundle;
+        }
+        
+        public static TextureAtlas GetCustomAtlas(string fileName, string folder, TextureAtlas tileAtlas)
+        {
+            var path = Mod.folder;
+
+            if (folder != null)
+            {
+                path = Path.Combine(path, folder);
+            }
+
+            var tex = LoadTexture(Path.Combine(path, fileName + ".png"));
+
+            if (tex == null)
+            {
+                return null;
+            }
+
+            var atlas = ScriptableObject.CreateInstance<TextureAtlas>();
+            atlas.texture = tex;
+            atlas.scaleFactor = tileAtlas.scaleFactor;
+            atlas.items = tileAtlas.items;
+
+            return atlas;
+        }
+
+        public static void AddCustomTileAtlas(BuildingDef def, string textureName, bool shiny = false, string referenceAtlas = "tiles_metal")
+        {
+            var reference = Assets.GetTextureAtlas(referenceAtlas);
+            def.BlockTileAtlas = GetCustomAtlas($"{textureName}_main", BASE_FOLDER, reference);
+            def.BlockTilePlaceAtlas = GetCustomAtlas($"{textureName}_place", BASE_FOLDER, reference);
+
+            if (shiny)
+            {
+                def.BlockTileShineAtlas = GetCustomAtlas($"{textureName}_spec", BASE_FOLDER, reference);
+            }
+        }
+
+        public static void AddCustomTileTops(BuildingDef def, string name, bool shiny = false, string decorInfo = "tiles_glass_tops_decor_info", string existingPlaceID = null, string existingSpecID = null)
+        {
+            var info = Object.Instantiate(Assets.GetBlockTileDecorInfo(decorInfo));
+
+            if (info != null)
+            {
+                info.atlas = GetCustomAtlas($"{name}_tops", BASE_FOLDER, info.atlas);
+                def.DecorBlockTileInfo = info;
+
+                if (shiny)
+                {
+                    var id = existingSpecID.IsNullOrWhiteSpace() ? $"{name}_tops_spec" : existingSpecID;
+                    info.atlasSpec = GetCustomAtlas(id, BASE_FOLDER, info.atlasSpec);
+                }
+            }
+
+            if (existingPlaceID.IsNullOrWhiteSpace())
+            {
+                var placeInfo = Object.Instantiate(Assets.GetBlockTileDecorInfo(decorInfo));
+                placeInfo.atlas = GetCustomAtlas($"{name}_tops_place", BASE_FOLDER, placeInfo.atlas);
+                def.DecorPlaceBlockTileInfo = placeInfo;
+            }
+            else
+            {
+                def.DecorPlaceBlockTileInfo = Assets.GetBlockTileDecorInfo(existingPlaceID);
+            }
         }
     }
 }

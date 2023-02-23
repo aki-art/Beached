@@ -1,9 +1,11 @@
 ﻿using Beached.Content.Scripts;
 using HarmonyLib;
+using Klei.CustomSettings;
 using ProcGenGame;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using static SaveGame;
 
 namespace Beached.Patches
 {

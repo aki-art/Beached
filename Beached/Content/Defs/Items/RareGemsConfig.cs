@@ -61,7 +61,7 @@ namespace Beached.Content.Defs.Items
 
             if (loop)
             {
-                prefab.GetComponent<KBatchedAnimController>().PlayMode = KAnim.PlayMode.Loop;
+                prefab.GetComponent<KBatchedAnimController>().initialMode = KAnim.PlayMode.Loop;
             }
 
             return prefab;

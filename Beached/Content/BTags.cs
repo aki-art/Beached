@@ -22,6 +22,7 @@ namespace Beached.Content
         {
             public static readonly Tag secretingMucus = TagManager.Create("BeachedSecretingMucus");
         }
+
         public static class Species
         {
             public static readonly Tag snail = TagManager.Create("BeachedSnailSpecies");

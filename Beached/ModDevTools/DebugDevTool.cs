@@ -58,6 +58,47 @@ namespace Beached.ModDevTools
                 }
             }
 
+            if (ImGui.TreeNode("Basic"))
+            {
+                if (ImGui.BeginTabBar("MyTabBar", ImGuiTabBarFlags.None))
+                {
+                    if (ImGui.BeginTabItem("Avocado"))
+                    {
+                        ImGui.Text("This is the Avocado tab!\nblah blah blah blah blah");
+                        ImGui.EndTabItem();
+                    }
+                    if (ImGui.BeginTabItem("Broccoli"))
+                    {
+                        ImGui.Text("This is the Broccoli tab!\nblah blah blah blah blah");
+                        ImGui.EndTabItem();
+                    }
+                    if (ImGui.BeginTabItem("Cucumber"))
+                    {
+                        ImGui.Text("This is the Cucumber tab!\nblah blah blah blah blah");
+                        ImGui.EndTabItem();
+                    }
+                    ImGui.EndTabBar();
+                }
+                ImGui.Separator();
+                ImGui.TreePop();
+            }
+
+            if (ImGui.CollapsingHeader("Diggers"))
+            {
+                foreach (var digger in Treasury.diggers)
+                {
+                    ImGui.Text($"{digger.Key}\t{digger.Value?.GetProperName()}");
+                    var element = Grid.Element[digger.Key];
+                    if (BeachedMod.Instance.treasury.chances.TryGetValue(element.id, out var treasures))
+                    {
+                        foreach (var treasure in treasures.treasures)
+                        {
+                            ImGui.Text($"\t\t{treasure.tag} {treasure.weight}");
+                        }
+                    }
+                }
+            }
+
             if (ImGui.CollapsingHeader("Audio Player"))
             {
                 if (ImGui.Button("Dump audio names"))

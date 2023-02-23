@@ -47,9 +47,9 @@ namespace Beached
                     public static LocString EFFECT = "...";
                 }
 
-                public class BEACHED_LABORATORY_TILES
+                public class BEACHED_LABORATORYTILES
                 {
-                    public static LocString NAME = "Laboratory Tiles";
+                    public static LocString NAME = "Laboratory Tile";
                     public static LocString DESC = "...";
                     public static LocString EFFECT = "...";
                 }

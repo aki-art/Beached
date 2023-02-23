@@ -12,9 +12,9 @@ namespace Beached.Content.Defs.Buildings
         {
             var def = BuildingTemplates.CreateBuildingDef(
                 ID,
+                5,
                 3,
-                3,
-                "farmtile_kanim",
+                "beached_forcefieldgenerator_kanim",
                 BUILDINGS.HITPOINTS.TIER3,
                 BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER4,
                 BUILDINGS.CONSTRUCTION_MASS_KG.TIER5,
@@ -32,7 +32,7 @@ namespace Beached.Content.Defs.Buildings
 
         public override void DoPostConfigureComplete(GameObject go)
         {
-            go.AddComponent<ForceField>();
+            go.AddComponent<ForceField>().offset = new Vector3(2.5f, 2.75f);
         }
     }
 }

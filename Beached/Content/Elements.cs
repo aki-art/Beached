@@ -108,7 +108,6 @@ namespace Beached.Content
             list.AddRange(newElements);
 
             SetAtmosphereModifiers();
-            SetTreasureChances();
             SetCorrosionData();
         }
 
@@ -244,21 +243,6 @@ namespace Beached.Content
             configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, siltStone));
 
             return configs.ToArray();
-        }
-
-        public static void SetTreasureChances()
-        {
-            TreasureChances.AddSingle(zirconiumOre, 0.3f, RareGemsConfig.HADEAN_ZIRCON, 1f, true);
-
-            TreasureChances.AddTreasure(SimHashes.Diamond, 1f, new()
-            {
-                new TreasureChances.TreasureConfig(RareGemsConfig.FLAWLESS_DIAMOND, 1f, 1f, true)
-            });
-
-            TreasureChances.AddTreasure(aquamarine, 1f, new()
-            {
-                new TreasureChances.TreasureConfig(RareGemsConfig.MAXIXE, 1f, 1f, true)
-            });
         }
     }
 }

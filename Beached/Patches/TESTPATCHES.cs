@@ -18,7 +18,7 @@ namespace Beached.Patches
     public class TestPatches
     {
         public static Texture2D testMask;
-
+        
         // modify story traits
         //[HarmonyPatch(typeof(SettingsCache), "LoadStoryTraits")]
         public class SettingsCache_LoadStoryTraits_Patch

@@ -3,7 +3,6 @@ using Beached.Content.Defs.Buildings;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Sicknesses;
 using HarmonyLib;
-using System.Collections.Generic;
 
 namespace Beached.Patches.DatabasePatches
 {
@@ -40,6 +39,7 @@ namespace Beached.Patches.DatabasePatches
                 ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.POWER, AmmoniaGeneratorConfig.ID, "Default", MethaneGeneratorConfig.ID);
                 ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.UTILITIES, MossBedConfig.ID, "Default", ExteriorWallConfig.ID);
                 ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, MiniFridgeConfig.ID, "Default", ExteriorWallConfig.ID);
+                ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.BASE, LaboratoryTileConfig.ID, "Tiles", PlasticTileConfig.ID);
             }
         }
     }

@@ -1,10 +1,9 @@
 ﻿using ImGuiNET;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
-    internal class ForceFieldVisualizer : KMonoBehaviour
+    public class ForceFieldVisualizer : KMonoBehaviour
     {
         [MyCmpAdd] private MeshFilter meshFilter;
         [MyCmpAdd] public MeshRenderer meshRenderer;

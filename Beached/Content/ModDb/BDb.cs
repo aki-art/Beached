@@ -1,4 +1,6 @@
-﻿using KSerialization;
+﻿using Beached.Content.Defs.Items;
+using Beached.Content.Scripts;
+using KSerialization;
 
 namespace Beached.Content.ModDb
 {

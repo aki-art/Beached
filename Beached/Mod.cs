@@ -11,8 +11,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using TUNING;
-using UnityEngine;
-using static Beached.ModAssets;
 
 namespace Beached
 {
@@ -37,70 +35,10 @@ namespace Beached
             ZoneTypes.Initialize();
             BeachedDevTools.Initialize();
             BWorldGenTags.Initialize();
-
+            
             lutAPI = LUT_API.Setup(harmony, true);
-            var assets = Path.Combine(Mod.folder, "Assets");
-            Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
-
-
-            Mod.lutAPI.RegisterLUT("Beached_VibrantDayLUT", LUTSlot.Day, 300, Textures.LUTDay);
-
-            CROPS.CROP_TYPES.Add(new Crop.CropVal(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
-
-            /*            var types = Assembly.GetExecutingAssembly().GetTypes();
-                        foreach (var type in types)
-                        {
-                            foreach (var methodInfo in type.GetMethods())
-                            {
-                                foreach (Attribute attr in Attribute.GetCustomAttributes(methodInfo))
-                                {
-                                    if (attr.GetType() == typeof(OverrideAttribute))
-                                    {
-                                        var overrideAttr = (OverrideAttribute)attr;
-                                        var parentType = overrideAttr.parentType ?? type.BaseType;
-
-                                        var parameters = methodInfo.GetParameters();
-                                        var originalParams = new List<Type>();
-                                        foreach (var p in parameters)
-                                        {
-                                            Log.Debug(p.Name);
-                                            if (p.Name != "__result" && p.Name != "__instance")
-                                            {
-                                                originalParams.Add(p.ParameterType);
-                                            }
-                                        }
-
-                                        Log.Debug(parentType.ToString());
-                                        Log.Debug(methodInfo.Name.ToString());
-                                        Log.Debug(string.Join(",", originalParams));
-                                        var original = AccessTools.Method(parentType, methodInfo.Name, originalParams.ToArray());
-
-                                        harmony.Patch(original, prefix: new HarmonyMethod(methodInfo));
-                                    }
-                                }
-                            }*/
-
-            /*                
-                        var m_AttachExtensions = AccessTools.Method(typeof(Mod), "AttachExtension");
-            Log.Debug(type.Name);
-                            foreach (Attribute attr in Attribute.GetCustomAttributes(type))
-                            {
-                                if (attr.GetType() == typeof(ExtensionClassAttribute))
-                                {
-                                    var extension = (ExtensionClassAttribute)attr;
-                                    var originalType = extension.originalType;
-
-                                    var constructors = originalType.GetConstructors();
-                                    var m_AttachGeneric = m_AttachExtensions.MakeGenericMethod(type);
-
-                                    foreach (var constructor in constructors)
-                                    {
-                                        harmony.Patch(constructor, postfix: new HarmonyMethod(m_AttachGeneric));
-                                    }
-                                }
-                            }
-        }
-            */
+            
+            CROPS.CROP_TYPES.Add(new(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
         }
 
 
