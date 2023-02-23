@@ -33,6 +33,11 @@ namespace Beached.ModDevTools
                 BeachedMod.Instance.Trigger(ModHashes.debugDataChange);
             }
 
+            if (ImGui.Button("Infrared Disease"))
+            {
+                Infrared.Instance.SetMode(Infrared.Mode.Disease);
+            }
+
             var selectedObject = SelectTool.Instance?.selected;
 
             if (selectedObject != null)

@@ -19,25 +19,7 @@ namespace Beached.Content.Scripts
             base.OnPrefabInit();
             diggers = new();
         }
-
-        public void StartDig(Diggable diggable)
-        {
-            if (diggable.worker != null)
-            {
-                diggers[diggable.GetCell()] = diggable.worker;
-            }
-        }
-
-        public void EndDig(Diggable diggable)
-        {
-            var cell = diggable.GetCell();
-
-            if (diggers.ContainsKey(cell))
-            {
-                diggers.Remove(cell);
-            }
-        }
-
+        
         public void Configure()
         {
             chances = new();

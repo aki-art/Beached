@@ -46,10 +46,10 @@ namespace Beached.Content.Defs.Entities.Critters
                 EGG_ID,
                 BEACHED_SLICKSHELL.EGG_NAME,
                 BEACHED_SLICKSHELL.DESC,
-                "egg_pincher_kanim",
+                "beached_egg_slickshell_kanim",
                 CrabTuning.EGG_MASS,
                 BabySlickShellConfig.ID,
-                60.000004f,
+                60f,
                 20f,
                 SlickShellTuning.EGG_CHANCES_BASE,
                 CrabConfig.EGG_SORT_ORDER);

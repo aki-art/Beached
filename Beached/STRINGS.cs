@@ -1090,6 +1090,14 @@ namespace Beached
             }
         }
 
+        public class RESEARCH
+        {
+            public class TREES
+            {
+                public static LocString TITLE_UNKNOWN = "Unknown";
+            }
+        }
+
         public class ROOMS
         {
             public class CRITERIA

@@ -18,7 +18,8 @@ namespace Beached.Patches
     public class TestPatches
     {
         public static Texture2D testMask;
-        
+
+
         // modify story traits
         //[HarmonyPatch(typeof(SettingsCache), "LoadStoryTraits")]
         public class SettingsCache_LoadStoryTraits_Patch
@@ -54,7 +55,7 @@ namespace Beached.Patches
             }
         }
 
-        [HarmonyPatch(typeof(SimDebugView), "UpdateData")]
+        //[HarmonyPatch(typeof(SimDebugView), "UpdateData")]
         public class SimDebugView_UpdateData_Patch
         {
             public static void Postfix(Texture2D texture, HashedString viewMode, byte[] ___texBytes, SimDebugView __instance)
@@ -148,7 +149,7 @@ namespace Beached.Patches
             }
         }
 
-        [HarmonyPatch(typeof(SimDebugView), "OnPrefabInit")]
+        //[HarmonyPatch(typeof(SimDebugView), "OnPrefabInit")]
         public class SimDebugView_OnPrefabInit_Patch
         {
             public static void Postfix(SimDebugView __instance)
@@ -166,7 +167,7 @@ namespace Beached.Patches
         }
 
 
-        [HarmonyPatch(typeof(SimDebugView), "SetDisease")]
+        //[HarmonyPatch(typeof(SimDebugView), "SetDisease")]
         public class SimDebugView_SetDisease_Patch
         {
             public static void Postfix(SimDebugView __instance, GameObject ___plane)

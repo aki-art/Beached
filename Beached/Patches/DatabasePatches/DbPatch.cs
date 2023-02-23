@@ -26,6 +26,8 @@ namespace Beached.Patches.DatabasePatches
                 BTraits.Register();
                 BRoomTypes.Register(__instance.RoomTypes);
                 BRoomTypes.ModifyConstraintRules();
+                // TechTreeTitles has to be patched on class
+                //BTechs.Register(__instance.Techs);
 
                 RegisterBuildings();
 

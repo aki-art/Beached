@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace Beached.Content.Scripts
+﻿namespace Beached.Content.Scripts
 {
+    // companion to Diggable, assisting Mineralogy leveled dupes to gain extra treasures when digging
     public class TreasureHolder : KMonoBehaviour
     {
         [MyCmpGet] public Diggable diggable;
         private float mass;
-        
+
         public override void OnSpawn()
         {
             diggable.OnWorkableEventCB += OnDiggableEvent;
