@@ -8,6 +8,7 @@ namespace Beached.Content.ModDb
         public static StatusItem desiccation;
         public static StatusItem secretingMucus;
         public static StatusItem lubricated;
+        public static StatusItem smoking;
 
         public static void Register()
         {
@@ -43,6 +44,17 @@ namespace Beached.Content.ModDb
                 false);
 
             lubricated.SetResolveStringCallback(GetLubricantString);
+
+            smoking = new(
+                "Beached_Smoking",
+                "CREATURES",
+                string.Empty,
+                StatusItem.IconType.Info,
+                NotificationType.Neutral,
+                false,
+                OverlayModes.None.ID);
+
+            smoking.SetResolveStringCallback((str, data) => data is Smokable smokable ? smokable.GetStatusItemTooltip(str) : str);
 
         }
 

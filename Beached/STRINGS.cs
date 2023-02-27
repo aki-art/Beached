@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Beached.Content;
 using Beached.Content.Defs.Buildings;
+using Beached.Content.Defs.Entities.Critters;
 using Beached.Content.Defs.Entities.Plants;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
 using JetBrains.Annotations;
+using Microsoft.SqlServer.Server;
+using KLEISTRINGS = STRINGS;
 
 namespace Beached
 {
@@ -29,24 +32,56 @@ namespace Beached
                 public class BEACHED_AMMONIAGENERATOR
                 {
                     public static LocString NAME = FormatAsLink("Ammonia Generator", AmmoniaGeneratorConfig.ID);
-                    public static LocString DESC = "...";
-                    public static LocString EFFECT = "TRANSLATION NOT NEEDED - gets copied from hydrogen generator";
+                    public static LocString DESC = "Ammonia generators are not very efficient, and emit a lot of waste materials.";
+                    public static LocString EFFECT = $"Converts {ELEMENTS.AMMONIA.NAME} into electrical {FormatAsLink("Power", "POWER")}, " +
+                                                     $"{KLEISTRINGS.ELEMENTS.WATER.NAME} and {ELEMENTS.NITROGEN.NAME}.";
                 }
 
                 public class BEACHED_ATMOSPHERICFORCEFIELDGENERATOR
                 {
                     public static LocString NAME = FormatAsLink("Atmospheric Forcefield Generator", ForceFieldGeneratorConfig.ID);
                     public static LocString DESC = "...";
-                    public static LocString EFFECTS = "Shields the surface of an asteroud from incoming Meteors. Does not allow rockets to pass.";
+                    public static LocString EFFECTS = "Shields the surface of an asteroid from incoming Meteors. Does not allow rockets to pass.";
                 }
+
+                public class BEACHED_AQUARIUM
+                {
+                    public static LocString NAME = "Aquarium";
+                    public static LocString DESC = "";
+                    public static LocString EFFECT = "Houses several aquatic critters, plants or corals. Varying effects.";
+                }
+
 
                 public class BEACHED_BAMBOOPLATFORM
                 {
-                    public static LocString NAME = "StackablePlant Walkway";
+                    public static LocString NAME = "Bamboo Walkway";
                     public static LocString DESC = "...";
                     public static LocString EFFECT = "...";
                 }
 
+                public class BEACHED_CONDUITAQUARIUM
+                {
+                    public static LocString NAME = "Conduit Coral Bed";
+                    public static LocString DESC = "...";
+                    public static LocString EFFECT = "Houses a single coral, connected to a liquid conduit.";
+                }
+
+                public class BEACHED_INTERPLANETARYPOWEROUTLET
+                {
+                    public static LocString NAME = "Interplanetary Power Outlet";
+                    public static LocString DESC = "Ranged power!";
+                    public static LocString EFFECT = "Provides wireless power transmission between two remote locations. The outlet is highly volatile" +
+                                                     "and will electrute and super-heat it's nearby area.";
+                }
+
+                public class BEACHED_INTERPLANETARYPOWERINLET
+                {
+                    public static LocString NAME = "Interplanetary Power Inlet";
+                    public static LocString DESC = "Ranged power!";
+                    public static LocString EFFECT = "Receives wireless power transmission between two remote locations. The inlet is highly volatile" +
+                                                     "and will electrute and super-heat it's nearby area.";
+                }
+                
                 public class BEACHED_LABORATORYTILES
                 {
                     public static LocString NAME = "Laboratory Tile";
@@ -74,12 +109,20 @@ namespace Beached
                     public static LocString DESC = "A tiny fridge to store a tiny bit of food for the tiny dupes.";
                     public static LocString EFFECT = "TRANSLATION NOT NEEDED - gets copied from regular fridge";
                 }
-                
+
                 public class BEACHED_MOSSBED
                 {
+                    // a bed for moss. it's a wooden frame moss grows on.
                     public static LocString NAME = "Moss Bed";
                     public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a once time delivery of water; once grown the moss is converted to a natural tile.";
                     public static LocString EFFECT = "Natural tiles can be used as walls and floors or for wild planting.";
+                }
+
+                public class BEACHED_TERRARIUM
+                {
+                    public static LocString NAME = "Terrarium";
+                    public static LocString DESC = "...";
+                    public static LocString EFFECT = "";
                 }
 
                 public class BEACHED_TREETAP
@@ -95,6 +138,29 @@ namespace Beached
                     public static LocString DESC = "Pretty sea shells suspended in air, creating music.";
                     public static LocString EFFECT = "Emits a soothing sound when stimulated by changing air pressure, decreasing Stress of nearby Duplicants.";
                 }
+
+                public class BEACHED_SALTLICK
+                {
+                    // visible in UI or codex 
+                    public static LocString NAME = "Critter Lick";
+                    // the name that appears on the actual building. ie. Salt-Lick, or Sulfur-Lick
+                    public static LocString FORMATTED_NAME = "{Element}-Lick";
+                    public static LocString DESC = "A block of lickable material. Delicious!";
+                    public static LocString EFFECT = "Allows critters to consume additional materials, boosting production. \n" +
+                                                     $"{FormatAsLink("Slickshells", SlickShellConfig.ID)} can be fully sustained on appropiate licks.\n\n" +
+                                                     "Requires refilling once depleted.";
+                }
+
+                public class BEACHED_SMOKINGRACK
+                {
+                    public static LocString NAME = "Smoking Rack";
+                    public static LocString DESC = "";
+
+                    public static LocString EFFECT =
+                        "Uses Salt and Carbon Dioxide to smoke food, extending their shelf life and improving quality.\n\n" +
+                        $"Can also use ambient Carbon Dioxide if it'a already hot enough (at least {GameUtil.GetFormattedTemperature(343.15f)}).";
+                }
+
             }
 
             public class STATUSITEMS
@@ -179,6 +245,12 @@ namespace Beached
                         "Submerge in any liquid to rejuvenate.\n" +
                         "\n" +
                         "Death in {0}s";
+                }
+
+                public class BEACHED_SMOKING
+                {
+                    public static LocString NAME = "Smoking ({0})";
+                    public static LocString TOOLTIP = "This item is getting smoked in this atmosphere. Change: {0}.";
                 }
             }
 
@@ -711,13 +783,14 @@ namespace Beached
             public class CRACKEDNEUTRONIUM
             {
                 public static LocString NAME = FormatAsLink("Cracked Neutronium");
-                public static LocString DESC = "TODO";
+                public static LocString DESC = "This Neutronium has been shattered loose by unknown forces. It is highly unstable, and attempting to mine it" +
+                                               "will yield nothing.";
             }
 
             public class GRAVEL
             {
                 public static LocString NAME = FormatAsLink("Gravel");
-                public static LocString DESC = "TODO";
+                public static LocString DESC = "Coarse loose material full of pebbles and dirt.";
             }
 
             public class HEULANDITE
@@ -737,7 +810,7 @@ namespace Beached
                 public static LocString NAME = FormatAsLink("Litter");
                 public static LocString DESC = "TODO";
             }
-            
+
             public class METAMORPHICROCK
             {
                 public static LocString NAME = FormatAsLink("Metamorphic Rock");
@@ -943,56 +1016,94 @@ namespace Beached
 
             public class FOOD
             {
-                public class ASTROBAR
+                public class BEACHED_ASTROBAR
                 {
                     public static LocString NAME = "Astrobar";
-                    public static LocString DESC = "Delicious and nutritious candy bar, with a sticky and gooey filling that sticks to the roof of the mouth.";
+                    public static LocString DESC = "Delicious and nutritious candy bar, with a sticky and gooey filling that " +
+                                                   "sticks to the roof of the mouth.";
                 }
 
-                public class NUTTYDELIGHT
+                public class BEACHED_NUTTYDELIGHT
                 {
                     public static LocString NAME = "Nutty Delight";
                     public static LocString DESC = "...";
                 }
 
-                public class STUFFEDSNAIL
+                public class BEACHED_STUFFEDSNAIL
                 {
                     public static LocString NAME = "Stuffed Snail";
                     public static LocString DESC = "...";
                 }
 
-                public class RAWSNAIL
+                public class BEACHED_RAWSNAIL
                 {
                     public static LocString NAME = "Raw Snail";
                     public static LocString DESC = "...";
                 }
-
-                public class CRABMEAT
-                {
-                    public static LocString NAME = "Crab Meat";
-                    public static LocString DESC = "...";
-                }
-
-                public class CRABCAKE
+                
+                public class BEACHED_CRABCAKE
                 {
                     public static LocString NAME = "Crabcake";
                     public static LocString DESC = "...";
                 }
 
-                public class LIMPET
+                public class BEACHED_JELLY
+                {
+                    public static LocString NAME = "Jelly";
+                    public static LocString DESC = "See-through edible blob, it tastes like water.";
+                }
+
+                public class BEACHED_LIMPET
                 {
                     public static LocString NAME = "Limpet";
                     public static LocString DESC = "...";
                 }
-                public class TONGUE
+
+                public class BEACHED_MUSSELTONGUE
                 {
-                    public static LocString NAME = "Tongue";
+                    public static LocString NAME = "Mussel Tongue";
                     public static LocString DESC = "Edible tongue of a Mussel Sprout. Best eaten raw.";
                 }
 
-                public class GLAZEDDEWNUT
+                public class BEACHED_GLAZEDDEWNUT
                 {
                     public static LocString NAME = "Glazed Dewnut";
+                    public static LocString DESC = "...";
+                }
+
+                public class BEACHED_SMOKEDMEAT
+                {
+                    public static LocString NAME = "Smoked Meat";
+                    public static LocString DESC = "...";
+                }
+
+                public class BEACHED_SMOKEDFISH
+                {
+                    public static LocString NAME = "Smoked Fish";
+                    public static LocString DESC = "...";
+                }
+                
+                public class BEACHED_SMOKEDMEALLICE
+                {
+                    public static LocString NAME = "Smoked Lice";
+                    public static LocString DESC = "...";
+                }
+
+                public class BEACHED_SMOKEDPLANTMEAT
+                {
+                    public static LocString NAME = "Smoked PLant Meat";
+                    public static LocString DESC = "...";
+                }
+
+                public class BEACHED_SMOKED_SNAIL
+                {
+                    public static LocString NAME = "Smoked Snail";
+                    public static LocString DESC = "...";
+                }
+
+                public class BEACHED_SMOKED_TOFU
+                {
+                    public static LocString NAME = "Smoked Tofu";
                     public static LocString DESC = "...";
                 }
             }
@@ -1044,13 +1155,13 @@ namespace Beached
                 public class MOTHER_PEARL
                 {
                     public static LocString NAME = "Mother Pearl";
-                    public static LocString DESCRIPTION = "...";
+                    public static LocString DESCRIPTION = "An enormous, perfectly round pearl with a pearlescent sheen.";
                 }
 
                 public class STRANGE_MATTER
                 {
                     public static LocString NAME = "Strange Matter";
-                    public static LocString DESCRIPTION = "A droplet of strange quark matter.";
+                    public static LocString DESCRIPTION = "A droplet of strange quark matter, safely contained.";
                 }
             }
 

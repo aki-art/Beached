@@ -27,5 +27,20 @@ namespace Beached.Patches
                 }
             }
         }
+
+
+        [HarmonyPatch(typeof(EntityTemplates), "ExtendEntityToFood")]
+        public class EntityTemplates_ExtendEntityToFood_Patch
+        {
+            public static void Postfix(GameObject template)
+            {
+                if (Smokable.smokables.TryGetValue(template.PrefabID(), out var config))
+                {
+                    var smokable = template.AddOrGet<Smokable>();
+                    smokable.cyclesToSmoke = config.time;
+                    smokable.smokedItemTag = config.smokedItem;
+                }
+            }
+        }
     }
 }

@@ -5,27 +5,27 @@ using static EdiblesManager;
 
 namespace Beached.Content.Defs.Items.Foods
 {
-    public class AstrobarConfig : IEntityConfig
+    public class SmokedMeatConfig : IEntityConfig
     {
-        public const string ID = "Beached_Astrobar";
+        public const string ID = "Beached_SmokedMeat";
 
         public GameObject CreatePrefab()
         {
             var foodInfo = new FoodInfo(
                 ID,
                 DlcManager.VANILLA_ID,
-                1_000_000f,
-                FOOD.FOOD_QUALITY_AMAZING,
+                1_400_000f,
+                FOOD.FOOD_QUALITY_GOOD,
                 FOOD.DEFAULT_PRESERVE_TEMPERATURE,
                 FOOD.DEFAULT_ROT_TEMPERATURE,
                 FOOD.SPOIL_TIME.VERYSLOW,
-                false);
+                true);
 
             var prefab = BEntityTemplates.CreateFood(
                 ID,
-                "beached_astrobar_kanim",
-          0.8f,
-                0.5f,
+                "beached_smoked_meat_kanim",
+                0.8f,
+                0.8f,
                 foodInfo);
             
             return prefab;

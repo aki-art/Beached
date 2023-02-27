@@ -6,7 +6,7 @@ namespace Beached.Patches
 {
     public class ColonyDestinationSelectScreenPatch
     {
-        [HarmonyPatch(typeof(ColonyDestinationSelectScreen), "OnAsteroidClicked")]
+        //[HarmonyPatch(typeof(ColonyDestinationSelectScreen), "OnAsteroidClicked")]
         public class ColonyDestinationSelectScreen_OnAsteroidClicked_Patch
         {
             public static void Postfix(ColonyDestinationSelectScreen __instance, ColonyDestinationAsteroidBeltData cluster)

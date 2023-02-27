@@ -54,7 +54,8 @@ namespace Beached.Patches
             SetPiecesConfig.ZEOLITE,
 
             // misc
-            ForceFieldConfig.ID
+            ForceFieldConfig.ID,
+            SmokerConfig.ID
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]

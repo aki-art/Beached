@@ -36,7 +36,7 @@ namespace Beached.Patches
 
                 codes.InsertRange(index + 1, new[]
                 {
-                    new CodeInstruction(OpCodes.Ldloc_S, 9), // kPrefabID was 6
+                    new CodeInstruction(OpCodes.Ldloc_S, 6), // kPrefabID was 6
                     new CodeInstruction(OpCodes.Ldloc_S, 4), // cavityInfo
                     new CodeInstruction(OpCodes.Call, m_ReplacementMethod)
                 });

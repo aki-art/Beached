@@ -20,6 +20,34 @@ namespace Beached.Patches
         public static Texture2D testMask;
 
 
+/*        [HarmonyPatch(typeof(SettingsCache), "LoadFiles", typeof(string), typeof(string), typeof(List<YamlIO.Error>))]
+        public class SettingsCache_LoadFiles_Patch
+        {
+            public static void Postfix()
+            {
+                foreach (var world in SettingsCache.worlds.worldCache)
+                {
+                    Debug.Log(world.Key);
+
+                    world.Value.worldTemplateRules.Add(new ProcGen.World.TemplateSpawnRules()
+                    {
+                        names = new() { "test/test"},
+                        listRule = ProcGen.World.TemplateSpawnRules.ListRule.GuaranteeOne,
+
+                        allowedCellsFilter = new List<ProcGen.World.AllowedCellsFilter>()
+                        {
+                            new ProcGen.World.AllowedCellsFilter()
+                            {
+                                tag = WorldGenTags.AtEdge.ToString(),
+                                command = ProcGen.World.AllowedCellsFilter.Command.Replace,
+                                tagcommand = ProcGen.World.AllowedCellsFilter.TagCommand.AtTag
+                            }
+                        }
+                    });
+                }
+            }
+        }*/
+
         // modify story traits
         //[HarmonyPatch(typeof(SettingsCache), "LoadStoryTraits")]
         public class SettingsCache_LoadStoryTraits_Patch
