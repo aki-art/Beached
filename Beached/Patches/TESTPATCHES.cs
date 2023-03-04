@@ -20,6 +20,30 @@ namespace Beached.Patches
         public static Texture2D testMask;
 
 
+        //[HarmonyPatch(typeof(WearableAccessorizer), "ApplyEquipment")]
+        public class WearableAccessorizer_ApplyEquipment_Patch
+        {
+            public static void Postfix(WearableAccessorizer __instance, Equippable equippable, KAnimFile animFile)
+            {
+                if(equippable.def.Slot == BAssignableSlots.JEWELLERY_ID)
+                {
+                    if(__instance.wearables.TryGetValue(BDb.WearableTypes.jewellery, out var wearable))
+                    {
+                        __instance.RemoveAnimBuild(
+                            wearable.buildAnims[0], 
+                            wearable.buildOverridePriority);
+                    }
+
+                    __instance.wearables[BDb.WearableTypes.jewellery] = new (
+                        animFile, 
+                        equippable.def.BuildOverridePriority);
+                    __instance.ApplyWearable();
+                    __instance.wearables.Remove(BDb.WearableTypes.jewellery);
+
+                }
+            }
+        }
+
 /*        [HarmonyPatch(typeof(SettingsCache), "LoadFiles", typeof(string), typeof(string), typeof(List<YamlIO.Error>))]
         public class SettingsCache_LoadFiles_Patch
         {

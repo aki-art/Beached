@@ -5,26 +5,25 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Equipment
 {
-    public class MaxixePendantConfig : IEquipmentConfig
+    public class StrangeMatterAmuletConfig : IEquipmentConfig
     {
-        public const string ID = "Beached_Equipment_MaxixePendant";
+        public const string ID = "Beached_Equipment_StrangeMatterAmulet";
 
         public EquipmentDef CreateEquipmentDef()
         {
             var attributeModifiers = new List<AttributeModifier>
             {
-                new AttributeModifier(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20),
-                new AttributeModifier(Db.Get().Attributes.AirConsumptionRate.Id, -0.05f),
+                new AttributeModifier(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME),
             };
 
             var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
                 ID,
                 BAssignableSlots.JEWELLERY_ID,
-                Elements.pearl,
+                Elements.aquamarine,
                 30f,
                 TUNING.EQUIPMENT.VESTS.COOL_VEST_ICON0,
-                CONSTS.SNAPONS.JEWELLERIES.MAXIXE,
-                "beached_maxixe_necklace_kanim",
+                CONSTS.SNAPONS.JEWELLERIES.STRANGE_MATTER,
+                "beached_strange_matter_necklace_kanim",
                 4,
                 attributeModifiers,
                 additional_tags: new Tag[]

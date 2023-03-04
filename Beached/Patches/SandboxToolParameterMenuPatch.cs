@@ -34,6 +34,11 @@ namespace Beached.Patches
             // Equipment
             MaxixePendantConfig.ID,
             RubberBootsConfig.ID,
+            HematiteNecklaceConfig.ID,
+            HadeanZirconAmuletConfig.ID,
+            PearlNecklaceConfig.ID,
+            ZeolitePendantConfig.ID,
+            StrangeMatterAmuletConfig.ID,
 
             // Plants & Creatures
             CellAlgaeConfig.ID,
@@ -55,7 +60,10 @@ namespace Beached.Patches
 
             // misc
             ForceFieldConfig.ID,
-            SmokerConfig.ID
+            SmokerConfig.ID,
+            SandySeashellsConfig.SEASHELL,
+            SandySeashellsConfig.SLICKSHELL,
+            SeaShellConfig.ID
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]

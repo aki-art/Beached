@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Beached.Content.Scripts
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    public class LifeGoalTracker : KMonoBehaviour
+    public class BeachedLifeGoalTracker : KMonoBehaviour
     {
         [MyCmpReq]
         private ChoreProvider choreProvider;

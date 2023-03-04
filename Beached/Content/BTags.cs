@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using Beached.Content.Defs.Items;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Content
@@ -37,10 +38,11 @@ namespace Beached.Content
 
         public static void OnModLoad()
         {
+            GameTags.MaterialBuildingElements.Add(SeaShellConfig.ID);
             GameTags.MaterialCategories.Add(MaterialCategories.crystal);
 
             var index = STORAGEFILTERS.NOT_EDIBLE_SOLIDS.FindIndex(tag => tag == GameTags.BuildableProcessed);
-            index = Mathf.Max(index, 0); // in case some other mod tweaked the filters and removed BuildableProcessed
+            if (index == -1) index = 0; // in case some other mod tweaked the filters and removed BuildableProcessed
 
             STORAGEFILTERS.NOT_EDIBLE_SOLIDS.Insert(index, MaterialCategories.crystal);
         }

@@ -45,10 +45,22 @@ namespace Beached
             public const float OH_HECK_IT_BURNS = 3f;
         }
 
+        /// <see cref="Patches.MinionConfigPatch.MinionConfig_CreatePrefab_Patch />
         public static class SNAPONS
         {
             public const string CAP = "Beached_SnapOn_Cap";
             public const string RUBBER_BOOTS = "Beached_SnapOn_RubberBoots";
+
+            public static class JEWELLERIES
+            {
+                public const string MAXIXE = "Beached_SnapOn_Maxixe";
+                public const string ZIRCON = "Beached_SnapOn_HadeanZircon";
+                public const string PEARL = "Beached_SnapOn_Pearl";
+                public const string HEMATITE = "Beached_SnapOn_Hematite";
+                public const string ZEOLITE = "Beached_SnapOn_Zeolite";
+                public const string STRANGE_MATTER = "Beached_SnapOn_StrangeMatter";
+                public const string FLAWLESS_DIAMOND = "Beached_SnapOn_FlawlessDiamond"; // TODO
+            }
         }
 
         public class BATCH_TAGS

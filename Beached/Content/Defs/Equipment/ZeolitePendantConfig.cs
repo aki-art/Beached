@@ -5,26 +5,26 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Equipment
 {
-    public class MaxixePendantConfig : IEquipmentConfig
+    public class ZeolitePendantConfig : IEquipmentConfig
     {
-        public const string ID = "Beached_Equipment_MaxixePendant";
+        public const string ID = "Beached_Equipment_ZeolitePendant";
 
         public EquipmentDef CreateEquipmentDef()
         {
             var attributeModifiers = new List<AttributeModifier>
             {
                 new AttributeModifier(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20),
-                new AttributeModifier(Db.Get().Attributes.AirConsumptionRate.Id, -0.05f),
+                new AttributeModifier(Db.Get().Amounts.Stress.deltaAttribute.Id, -2f / CONSTS.CYCLE_LENGTH),
             };
 
             var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
                 ID,
                 BAssignableSlots.JEWELLERY_ID,
-                Elements.pearl,
+                Elements.heulandite,
                 30f,
                 TUNING.EQUIPMENT.VESTS.COOL_VEST_ICON0,
-                CONSTS.SNAPONS.JEWELLERIES.MAXIXE,
-                "beached_maxixe_necklace_kanim",
+                CONSTS.SNAPONS.JEWELLERIES.ZEOLITE,
+                "beached_zeolite_necklace_kanim",
                 4,
                 attributeModifiers,
                 additional_tags: new Tag[]

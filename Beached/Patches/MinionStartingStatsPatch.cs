@@ -52,9 +52,9 @@ namespace Beached.Patches
                 if (go.TryGetComponent(out Traits traits))
                 {
                     Log.Debug("Added traits ");
-                    Debug.Assert(go.GetComponent<LifeGoalTracker>() != null, "go.GetComponent<BeachedMinionStorage>()");
+                    Debug.Assert(go.GetComponent<BeachedLifeGoalTracker>() != null, "go.GetComponent<BeachedMinionStorage>()");
                     Debug.Assert(__instance.GetLifeGoalAttributes() != null, "__instance.GetLifeGoalAttributes()");
-                    go.GetComponent<LifeGoalTracker>().AddAttributes(__instance.GetLifeGoalAttributes());
+                    go.GetComponent<BeachedLifeGoalTracker>().AddAttributes(__instance.GetLifeGoalAttributes());
                     traits.Add(goalTrait);
                 }
                 else

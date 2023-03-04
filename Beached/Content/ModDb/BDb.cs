@@ -8,5 +8,10 @@ namespace Beached.Content.ModDb
     {
         public const NotificationType BeachedTutorialMessage = (NotificationType)351;
         public const string poisBuildCategory = "Beached_POIs";
+
+        public class WearableTypes
+        {
+            public static readonly WearableAccessorizer.WearableType jewellery = (WearableAccessorizer.WearableType)Hash.SDBMLower("Beached_jewellery");
+        }
     }
 }

@@ -980,7 +980,43 @@ namespace Beached
                 public class BEACHED_EQUIPMENT_MAXIXEPENDANT
                 {
                     public static LocString NAME = "Maxixe Pendant";
+                    public static LocString GENERICNAME = "Maxixe Pendant";
                     public static LocString DESCRIPTION = "...";
+                }
+
+                public class BEACHED_EQUIPMENT_PEARLNECKLACE
+                {
+                    public static LocString NAME = "Pearl Necklace";
+                    public static LocString GENERICNAME = "Pearl Necklace";
+                    public static LocString DESCRIPTION = "This pearlescent shine would swoon anyone!";
+                }
+
+                public class BEACHED_EQUIPMENT_HADEANZIRCONAMULET
+                {
+                    public static LocString NAME = "Hadean Zircon Amulet";
+                    public static LocString GENERICNAME = "Hadean Zircon Amulet";
+                    public static LocString DESCRIPTION = "The bright red sparkle of this gem reminds Duplicants of the importance of working hard.";
+                }
+
+                public class BEACHED_EQUIPMENT_HEMATITENECKLACE
+                {
+                    public static LocString NAME = "Hematite Necklace";
+                    public static LocString GENERICNAME = "Hematite Necklace";
+                    public static LocString DESCRIPTION = "Heavy and stylish.";
+                }
+
+                public class BEACHED_EQUIPMENT_ZEOLITEPENDANT
+                {
+                    public static LocString NAME = "Zeolite Pendant";
+                    public static LocString GENERICNAME = "Zeolite Pendant";
+                    public static LocString DESCRIPTION = "This gemstone has a particularly soothing color. When duplicants look at it, they feel at ease.";
+                }
+
+                public class BEACHED_EQUIPMENT_STRANGEMATTERAMULET
+                {
+                    public static LocString NAME = "Strange Amulet";
+                    public static LocString GENERICNAME = "Strange Amulet";
+                    public static LocString DESCRIPTION = "A piece of material with Universe-defying qualities; safely contained.";
                 }
             }
         }
@@ -1010,6 +1046,12 @@ namespace Beached
                 public class BEACHED_BLUEPRINT
                 {
                     public static LocString NAME = "Blueprint: {0}";
+                    public static LocString DESC = "...";
+                }
+
+                public class BEACHED_SEASHELL
+                {
+                    public static LocString NAME = "Seashell";
                     public static LocString DESC = "...";
                 }
             }
@@ -1177,6 +1219,18 @@ namespace Beached
 
         public class MISC
         {
+            public class BEACHED_SANDY_SEASHELL
+            {
+                public static LocString NAME = "Seashell";
+                public static LocString DESCRIPTION = "";
+            }
+
+            public class BEACHED_SANDY_SLICKSHELL
+            {
+                public static LocString NAME = "Slickshell Shell";
+                public static LocString DESCRIPTION = "No one's home.";
+            }
+
             public class BEACHED_MAKIBED
             {
                 public static LocString NAME = "Maki Bed";

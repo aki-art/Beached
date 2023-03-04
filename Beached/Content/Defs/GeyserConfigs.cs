@@ -16,6 +16,7 @@ namespace Beached.Content.Defs
             if (list == null)
             {
                 Log.Warning("geyser configs list is null");
+                return;
             }
 
             list.Add(new GeyserGenericConfig.GeyserPrefabParams(
@@ -63,7 +64,7 @@ namespace Beached.Content.Defs
                     150f,
                     480f,
                     1080f,
-                    0.016666668f,
+                    1 / 60f,
                     0.1f),
                 true));
 

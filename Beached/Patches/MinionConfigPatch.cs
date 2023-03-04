@@ -11,6 +11,14 @@ namespace Beached.Patches
         {
             public static void Postfix(GameObject __result)
             {
+                ConfigureSnapons(__result);
+
+                __result.AddOrGet<BeachedMinionStorage>();
+                __result.AddOrGet<BeachedLifeGoalTracker>();
+            }
+
+            private static void ConfigureSnapons(GameObject __result)
+            {
                 var snapOn = __result.GetComponent<SnapOn>();
                 snapOn.snapPoints.Add(new SnapOn.SnapPoint
                 {
@@ -30,8 +38,24 @@ namespace Beached.Patches
                     overrideSymbol = "foot"
                 });
 
-                __result.AddOrGet<BeachedMinionStorage>();
-                __result.AddOrGet<LifeGoalTracker>();
+                AddNecklaceSnapon(snapOn, CONSTS.SNAPONS.JEWELLERIES.MAXIXE, "beached_maxixe_necklace_kanim");
+                AddNecklaceSnapon(snapOn, CONSTS.SNAPONS.JEWELLERIES.ZIRCON, "beached_zircon_necklace_kanim");
+                AddNecklaceSnapon(snapOn, CONSTS.SNAPONS.JEWELLERIES.ZEOLITE, "beached_zeolite_necklace_kanim");
+                AddNecklaceSnapon(snapOn, CONSTS.SNAPONS.JEWELLERIES.HEMATITE, "beached_hematite_necklace_kanim");
+                AddNecklaceSnapon(snapOn, CONSTS.SNAPONS.JEWELLERIES.PEARL, "beached_pearl_necklace_kanim");
+                AddNecklaceSnapon(snapOn, CONSTS.SNAPONS.JEWELLERIES.STRANGE_MATTER, "beached_strange_matter_necklace_kanim");
+            }
+
+            private static void AddNecklaceSnapon(SnapOn snapOn, string snaponId, string anim)
+            {
+                snapOn.snapPoints.Add(new SnapOn.SnapPoint
+                {
+                    pointName = snaponId,
+                    automatic = false,
+                    context = "",
+                    buildFile = Assets.GetAnim(anim),
+                    overrideSymbol = "necklace"
+                });
             }
         }
     }

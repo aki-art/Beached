@@ -50,7 +50,7 @@ namespace Beached.Patches
             {
                 if (BTraits.LIFEGOALS.Contains(trait.Id))
                 {
-                    if (target.TryGetComponent(out LifeGoalTracker storage))
+                    if (target.TryGetComponent(out BeachedLifeGoalTracker storage))
                     {
                         foreach (var item in storage.fulfilledLifegoalModifiers)
                         {

@@ -18,8 +18,8 @@ namespace Beached.Content.Defs.Entities.Corals
 
         public static GameObject Create(string id, float mass, string anim, int width, int height, EffectorValues decor, float defaultTemperature = 293f, string initialAnim = "idle_loop", List<Tag> additionalTags = null, SimHashes[] safeElements = null)
         {
-            var name = Strings.TryGet("STRINGS.CORALS." + id.ToUpperInvariant() + ".NAME", out var n) ? n.String : "no name";
-            var desc = Strings.TryGet("STRINGS.CORALS." + id.ToUpperInvariant() + ".DESCRIPTION", out var d) ? d.String : "no desc";
+            var name = Strings.Get("STRINGS.CORALS." + id.ToUpperInvariant() + ".NAME");
+            var desc = Strings.Get("STRINGS.CORALS." + id.ToUpperInvariant() + ".DESCRIPTION");
 
             var prefab = EntityTemplates.CreatePlacedEntity(
                 id,
