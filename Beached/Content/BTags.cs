@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Items;
+using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
@@ -6,13 +7,18 @@ namespace Beached.Content
 {
     public class BTags
     {
+        // relevant to other mods
+        public static readonly Tag meat = TagManager.Create("Beached_Meat"); // any food from animals. Va'Hano eats these
+        public static readonly Tag corrodable = TagManager.Create("Beached_Corrodable"); // get damaged in acid
+        public static readonly Tag vista = TagManager.Create("Beached_Vista"); // allows Vista rooms
+
+        public static readonly Tag lubricated = TagManager.Create("Beached_Lubricated");
         public static readonly Tag amphibious = TagManager.Create("Beached_Amphibious");
         public static readonly Tag bamboo = TagManager.Create("Beached_Bamboo");
         public static readonly Tag blueprintable = TagManager.Create("Beached_Blueprintable");
-        public static readonly Tag lubricated = TagManager.Create("Beached_Lubricated");
         public static readonly Tag coral = TagManager.Create("Beached_Coral");
-        public static readonly Tag corrodable = TagManager.Create("Beached_Corrodable");
-        public static readonly Tag vista = TagManager.Create("Beached_Vista");
+        public static readonly Tag noPaint = TagManager.Create("NoPaint"); // MaterialColor mod uses this
+        public static readonly Tag noBackwall = TagManager.Create("NoBackwall"); // Background Tiles mod uses this
 
         public static class FastTrack
         {

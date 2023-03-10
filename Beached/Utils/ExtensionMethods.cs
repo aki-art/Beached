@@ -1,7 +1,9 @@
-﻿using Beached.Content.Scripts.ClassExtensions;
+﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.ClassExtensions;
 using Klei.AI;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Beached.Utils
 {
@@ -57,6 +59,30 @@ namespace Beached.Utils
             {
                 cavityInfoExtension.pois.Remove(kPrefabID);
             }
+        }
+
+        public static void AddBTag(this GameObject gameObject, Tag tag)
+        {
+            var beachedPrefabId = gameObject.TryGetComponent(out BeachedPrefabID result) ? result : gameObject.AddComponent<BeachedPrefabID>();
+            beachedPrefabId.AddTag(tag);
+        }
+
+        public static void RemoveBTag(this GameObject gameObject, Tag tag)
+        {
+            if(gameObject.TryGetComponent(out BeachedPrefabID beachedPrefabId))
+            {
+                beachedPrefabId.RemoveTag(tag);
+            }
+        }
+
+        public static bool HasBTag(this GameObject gameObject, Tag tag)
+        {
+            if (gameObject.TryGetComponent(out BeachedPrefabID beachedPrefabId))
+            {
+                return beachedPrefabId.HasTag(tag);
+            }
+
+            return false;
         }
     }
 }

@@ -13,6 +13,15 @@ borderOverride: rocky
 biomes:
   - name: biomes/Beach/Solid
     weight: 2
+    tags:
+      - Pacu
+      - Beached_MusselSprout
+      - Beached_AlgaeCell
+      - Beached_WaterCups
+      - Beached_DewPalm
+      - Beached_LeafletCoral
+      - Beached_SandySeashell
+      - Beached_SandySlickshell
 centralFeature:
   type: features/generic/StartLocation
 features:

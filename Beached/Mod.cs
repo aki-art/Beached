@@ -7,6 +7,7 @@ using Beached.Settings;
 using HarmonyLib;
 using KMod;
 using Neutronium.PostProcessing.LUT;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -35,12 +36,24 @@ namespace Beached
             ZoneTypes.Initialize();
             BeachedDevTools.Initialize();
             BWorldGenTags.Initialize();
-            
-            lutAPI = LUT_API.Setup(harmony, true);
-            
-            CROPS.CROP_TYPES.Add(new(CellAlgaeConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
-        }
 
+            lutAPI = LUT_API.Setup(harmony, true);
+
+            var types = Assembly.GetExecutingAssembly().GetTypes();
+            foreach (var type in types)
+            {
+                foreach (var methodInfo in type.GetMethods())
+                {
+                    foreach (Attribute attr in Attribute.GetCustomAttributes(methodInfo))
+                    {
+                        if (attr.GetType() == typeof(OnModLoadedAttribute))
+                        {
+                            methodInfo.Invoke(null, null);
+                        }
+                    }
+                }
+            }
+        }
 
         public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods)
         {
@@ -50,6 +63,7 @@ namespace Beached
             {
                 if (modEntry.IsEnabledForActiveDlc())
                 {
+                    Log.Debug(modEntry.staticID);
                     switch (modEntry.staticID)
                     {
                         case "TrueTiles":
@@ -57,6 +71,9 @@ namespace Beached
                             break;
                         case "PeterHan.FastTrack":
                             isFastTrackHere = true;
+                            break;
+                        case "DecorPackA":
+                            Integration.DecorPackI.RegisterTiles();
                             break;
                     }
                 }

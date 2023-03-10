@@ -1,4 +1,4 @@
-﻿using Beached.Utils;
+﻿using Beached.Content.Defs.Items.Foods;
 using TUNING;
 using UnityEngine;
 
@@ -8,11 +8,6 @@ namespace Beached.Content.Defs.Entities.Plants
     {
         public const string ID = "Beached_AlgaeCell";
         public const float WATER_RATE = 5f / CONSTS.CYCLE_LENGTH;
-
-        public string[] GetDlcIds()
-        {
-            return DlcManager.AVAILABLE_ALL_VERSIONS;
-        }
 
         public GameObject CreatePrefab()
         {
@@ -44,7 +39,7 @@ namespace Beached.Content.Defs.Entities.Plants
                 false,
                 0f,
                 0.15f,
-                ID,
+                JellyConfig.ID,
                 false,
                 true,
                 false,
@@ -55,22 +50,27 @@ namespace Beached.Content.Defs.Entities.Plants
                 ID + "Original",
                 STRINGS.CREATURES.SPECIES.CELLALGAE.NAME);
 
+
             var drowningMonitor = prefab.AddOrGet<DrowningMonitor>();
             drowningMonitor.canDrownToDeath = false;
             drowningMonitor.livesUnderWater = true;
 
+            prefab.AddOrGet<StandardCropPlant>();
+
+            EntityTemplates.ExtendPlantToIrrigated(prefab, new[]
+            {
+                new PlantElementAbsorber.ConsumeInfo(GameTags.Water,  WATER_RATE)
+            });
+
             prefab.AddOrGet<LoopingSounds>();
-            // TODO: sounds
 
             return prefab;
         }
 
-        public void OnPrefabInit(GameObject inst)
-        {
-        }
+        public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
-        public void OnSpawn(GameObject inst)
-        {
-        }
+        public void OnPrefabInit(GameObject inst) { }
+
+        public void OnSpawn(GameObject inst) { }
     }
 }

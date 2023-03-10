@@ -3,6 +3,7 @@ using Beached.Content;
 using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Entities.Critters;
 using Beached.Content.Defs.Entities.Plants;
+using Beached.Content.Defs.Items.Foods;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
@@ -81,7 +82,7 @@ namespace Beached
                     public static LocString EFFECT = "Receives wireless power transmission between two remote locations. The inlet is highly volatile" +
                                                      "and will electrute and super-heat it's nearby area.";
                 }
-                
+
                 public class BEACHED_LABORATORYTILES
                 {
                     public static LocString NAME = "Laboratory Tile";
@@ -161,6 +162,27 @@ namespace Beached
                         $"Can also use ambient Carbon Dioxide if it'a already hot enough (at least {GameUtil.GetFormattedTemperature(343.15f)}).";
                 }
 
+                public class BEACHED_WOODCARVING
+                {
+                    public static LocString NAME = "Wood Carving";
+                    public static LocString DESC = "";
+                    public static LocString EFFECT = "";
+
+                    public class FACADES
+                    {
+                        public class OWL
+                        {
+                            public static LocString NAME = "Wood Owl";
+                            public static LocString DESC = "";
+                        }
+
+                        public class PIGTOTEM
+                        {
+                            public static LocString NAME = "Pig Totem";
+                            public static LocString DESC = "";
+                        }
+                    }
+                }
             }
 
             public class STATUSITEMS
@@ -1058,11 +1080,23 @@ namespace Beached
 
             public class FOOD
             {
+                public class BEACHED_ASPIC_LICE
+                {
+                    public static LocString NAME = FormatAsLink("Aspic Lice", JellyConfig.ID);
+                    public static LocString DESC = "Lice suspended in jello.";
+                }
+
                 public class BEACHED_ASTROBAR
                 {
-                    public static LocString NAME = "Astrobar";
+                    public static LocString NAME = FormatAsLink("Astrobar", AstrobarConfig.ID);
                     public static LocString DESC = "Delicious and nutritious candy bar, with a sticky and gooey filling that " +
                                                    "sticks to the roof of the mouth.";
+                }
+
+                public class BEACHED_BERRY_JELLY
+                {
+                    public static LocString NAME = FormatAsLink("Berry-Jelly", JellyConfig.ID);
+                    public static LocString DESC = "A jiggly treat hiding tasty berries within.";
                 }
 
                 public class BEACHED_NUTTYDELIGHT
@@ -1082,29 +1116,35 @@ namespace Beached
                     public static LocString NAME = "Raw Snail";
                     public static LocString DESC = "...";
                 }
-                
+
                 public class BEACHED_CRABCAKE
                 {
                     public static LocString NAME = "Crabcake";
                     public static LocString DESC = "...";
                 }
 
+                public class BEACHED_LEGENDARY_STEAK
+                {
+                    public static LocString NAME = "Legendary Steak";
+                    public static LocString DESC = "It is so rare, it has been classified as legendary! A truly wonderful cut of meat that melts in the mouth.";
+                }
+
                 public class BEACHED_JELLY
                 {
-                    public static LocString NAME = "Jelly";
-                    public static LocString DESC = "See-through edible blob, it tastes like water.";
+                    public static LocString NAME = FormatAsLink("Jelly", JellyConfig.ID);
+                    public static LocString DESC = "See-through edible blob. It tastes like solidified water.";
                 }
 
                 public class BEACHED_LIMPET
                 {
-                    public static LocString NAME = "Limpet";
+                    public static LocString NAME = "Raw Limpet";
                     public static LocString DESC = "...";
                 }
 
                 public class BEACHED_MUSSELTONGUE
                 {
-                    public static LocString NAME = "Mussel Tongue";
-                    public static LocString DESC = "Edible tongue of a Mussel Sprout. Best eaten raw.";
+                    public static LocString NAME = FormatAsLink("Mussel Tongue", TongueConfig.ID);
+                    public static LocString DESC = "Edible tongue of a Mussel Sprout. It has a somewhat bitter, green flavour, and the consistency of fresh clam.";
                 }
 
                 public class BEACHED_GLAZEDDEWNUT
@@ -1115,8 +1155,8 @@ namespace Beached
 
                 public class BEACHED_SMOKEDMEAT
                 {
-                    public static LocString NAME = "Smoked Meat";
-                    public static LocString DESC = "...";
+                    public static LocString NAME = FormatAsLink("Smoked Meat", SmokedMeatConfig.ID);
+                    public static LocString DESC = "Meat imbued with the wonderful aroma of smoke.";
                 }
 
                 public class BEACHED_SMOKEDFISH
@@ -1124,7 +1164,7 @@ namespace Beached
                     public static LocString NAME = "Smoked Fish";
                     public static LocString DESC = "...";
                 }
-                
+
                 public class BEACHED_SMOKEDMEALLICE
                 {
                     public static LocString NAME = "Smoked Lice";

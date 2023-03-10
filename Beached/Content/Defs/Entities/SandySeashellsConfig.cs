@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Items;
+using Beached.Content.Scripts.Entities;
 using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
@@ -51,7 +52,7 @@ namespace Beached.Content.Defs.Entities
                 ObjectLayer.Building
             };
             prefab.AddOrGet<Prioritizable>();
-            prefab.AddOrGet<Uprootable>();
+            prefab.AddOrGet<SandySeaShell>();
             prefab.AddOrGet<UprootedMonitor>();
             prefab.AddComponent<HarvestDesignatable>();
             prefab.AddComponent<Harvestable>();

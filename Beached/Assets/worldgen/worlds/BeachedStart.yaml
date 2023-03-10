@@ -24,7 +24,7 @@ defaultsOverrides:
     OverworldMinNodes: 1
 
 startSubworldName: subworlds/beached/beach/BeachStart
-startingBaseTemplate: beached/bases/starterBaseB
+startingBaseTemplate: beached/bases/beach_startingbaseB
 startingBasePositionHorizontal:
   min: 0.5
   max: 0.5

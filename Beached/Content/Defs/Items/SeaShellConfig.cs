@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Beached.Content.Defs.Items
 {
@@ -18,13 +17,13 @@ namespace Beached.Content.Defs.Items
                 Assets.GetAnim("beached_seashell_kanim"),
                 "object",
                 Grid.SceneLayer.Creatures,
-                EntityTemplates.CollisionShape.CIRCLE,
+                EntityTemplates.CollisionShape.RECTANGLE,
                 0.6f,
-                0.6f,
+                0.4f,
                 true,
                 0,
                 SimHashes.Lime,
-                new List<Tag>()
+                new ()
                 {
                     GameTags.Organics
                 });

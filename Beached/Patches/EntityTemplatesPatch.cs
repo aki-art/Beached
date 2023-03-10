@@ -2,6 +2,7 @@
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using HarmonyLib;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -28,10 +29,16 @@ namespace Beached.Patches
             }
         }
 
-
         [HarmonyPatch(typeof(EntityTemplates), "ExtendEntityToFood")]
         public class EntityTemplates_ExtendEntityToFood_Patch
         {
+            public static HashSet<Tag> additionalMeats = new()
+            {
+                MeatConfig.ID,
+                FishMeatConfig.ID,
+                ShellfishMeatConfig.ID
+            };
+
             public static void Postfix(GameObject template)
             {
                 if (Smokable.smokables.TryGetValue(template.PrefabID(), out var config))
@@ -40,6 +47,23 @@ namespace Beached.Patches
                     smokable.cyclesToSmoke = config.time;
                     smokable.smokedItemTag = config.smokedItem;
                 }
+
+                if (additionalMeats.Contains(template.PrefabID()))
+                {
+                    template.AddBTag(BTags.meat);
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(EntityTemplates), "CreateTemplates")]
+        public class EntityTemplates_CreateTemplates_Patch
+        {
+            public static void Postfix()
+            {
+                EntityTemplates.unselectableEntityTemplate.AddOrGet<BeachedPrefabID>();
+                EntityTemplates.selectableEntityTemplate.AddOrGet<BeachedPrefabID>();
+                EntityTemplates.baseEntityTemplate.AddOrGet<BeachedPrefabID>();
+                EntityTemplates.placedEntityTemplate.AddOrGet<BeachedPrefabID>();
             }
         }
     }

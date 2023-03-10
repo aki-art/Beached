@@ -24,6 +24,8 @@ namespace Beached.Content.Defs.Entities.Critters
             moistureMonitor.lubricantMassKg = 0.1f;
             moistureMonitor.lubricantTemperatureKelvin = 300;
 
+            prefab.AddTag(GameTags.OriginalCreature); // gravitas critter manipulator
+
             return prefab;
         }
 
