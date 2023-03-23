@@ -3,13 +3,61 @@ description: Beached.STRINGS.WORLD_TRAITS.EXTRAREEF.DESCRIPTION
 colorHex: B8697E
 
 additionalWorldTemplateRules:
+  # Try in Oceans or Seas first
+  - names:
+      - beached/worldgen/coralreefsmall1
+    listRule: TryOne
+    priority: 200
+    allowDuplicates: true
+    useRelaxedFiltering: true
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Sea, Ocean]
+      - command: UnionWith
+        tagCommand: AtTag
+        tag: River
+        ignoreIfMissingTag: true
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGlobalFeatureSpawning # this also excludes Space
+      - command: ExceptWith  # too close to start
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 0
+        maxDistance: 2
+        ignoreIfMissingTag: true
+
+  # Fallback
   - names:
       - beached/worldgen/coralreefsmall1
     listRule: GuaranteeOne
-    allowDuplicates: true
+    priority: 150
+    useRelaxedFiltering: true
     allowedCellsFilter:
-      - command: Replace
-        zoneTypes:
-          - Sea
-          - Ocean
-          - FrozenWastes
+      - command: All
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGlobalFeatureSpawning # this also excludes Space
+      - command: ExceptWith  # too close to start
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 0
+        maxDistance: 2
+        ignoreIfMissingTag: true
+      - command: ExceptWith  # too far from start
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 5
+        maxDistance: 99
+        ignoreIfMissingTag: true 
+      - command: ExceptWith # too close to surface
+        tagcommand: DistanceFromTag
+        tag: AtSurface
+        minDistance: 0
+        maxDistance: 1
+      - command: ExceptWith
+        temperatureRanges:
+          - VeryHot
+          - ExtremelyHot
+      - command: ExceptWith
+        zoneTypes: [OilField]

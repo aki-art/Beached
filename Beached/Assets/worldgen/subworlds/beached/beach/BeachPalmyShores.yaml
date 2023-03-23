@@ -18,6 +18,8 @@ biomes:
       - Beached_WaterCups
       - Beached_DewPalm
       - Beached_LeafletCoral
+      - Beached_SandySeashell
+      - Beached_SandySlickshell
 features:
   - type: features/beach/AirPocket
   - type: features/beach/MetalCavern

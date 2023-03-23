@@ -1,6 +1,8 @@
 name: STRINGS.WORLDS.BEACHEDSTART.NAME
 description: STRINGS.WORLDS.BEACHEDSTART.DESCRIPTION 
 disableWorldTraits: true
+asteroidIcon: beached_asteroid_astropelagos_kanim
+iconScale: 1
 
 worldTraitScale: 1 # Adjust with worldSize. Traits are tuned to base game world sizes.
 worldsize:
@@ -22,6 +24,7 @@ defaultsOverrides:
     OverworldAvoidRadius: 5
     OverworldSampleBehaviour: PoissonDisk
     OverworldMinNodes: 1
+    TestValue: "Hello There"
 
 startSubworldName: subworlds/beached/beach/BeachStart
 startingBaseTemplate: beached/bases/beach_startingbaseB
