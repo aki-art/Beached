@@ -1,8 +1,7 @@
-﻿using Beached.Content.Scripts;
-using TUNING;
+﻿using TUNING;
 using UnityEngine;
 
-namespace Beached.Content.Defs.Entities.Plants
+namespace Beached.Content.Defs.Flora
 {
     public class GlowCapConfig : IEntityConfig
     {

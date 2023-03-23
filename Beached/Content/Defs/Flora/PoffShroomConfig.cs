@@ -2,21 +2,25 @@
 using TUNING;
 using UnityEngine;
 
-namespace Beached.Content.Defs.Entities.Plants
+namespace Beached.Content.Defs.Flora
 {
     public class PoffShroomConfig : IEntityConfig
     {
         public const string ID = "Beached_PoffShroom";
+        public const string PREVIEW_ID = "Beached_PoffShroomPreview";
+        public const string SEED_ID = "Beached_PoffShroomSeed"; // only for replanting
         public const string BASE_TRAIT_ID = "Beached_PoffShroomOriginal";
 
         public GameObject CreatePrefab()
         {
+            var anim = Assets.GetAnim("beached_poffshroom_kanim");
+
             var prefab = EntityTemplates.CreatePlacedEntity(
                 ID,
                 STRINGS.CREATURES.SPECIES.POFFSHROOM.NAME,
                 STRINGS.CREATURES.SPECIES.POFFSHROOM.DESC,
                 40f,
-                Assets.GetAnim("beached_poffshroom_kanim"),
+                anim,
                 "idle_full",
                 Grid.SceneLayer.Building,
                 1,
@@ -28,7 +32,7 @@ namespace Beached.Content.Defs.Entities.Plants
                 baseTraitId: BASE_TRAIT_ID,
                 baseTraitName: STRINGS.CREATURES.SPECIES.POFFSHROOM.NAME);
 
-            //prefab.AddOrGet<StandardCropPlant>();
+            prefab.AddOrGet<StandardCropPlant>();
 
             prefab.AddOrGet<IlluminationVulnerable>().SetPrefersDarkness(true);
             prefab.AddOrGet<WiltCondition>();
@@ -48,7 +52,23 @@ namespace Beached.Content.Defs.Entities.Plants
             elementConsumer.storage = storage;
             elementConsumer.showInStatusPanel = true;
             elementConsumer.showDescriptor = true;
-            //EntityTemplates.CreateAndRegisterPreviewForPlant(seed, "MushroomPlant_preview", Assets.GetAnim("fungusplant_kanim"), "place", 1, 2);
+
+            var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
+                prefab,
+                SeedProducer.ProductionType.DigOnly,
+                SEED_ID,
+                "Poffshroom Spore",
+                "",
+                Assets.GetAnim("beached_poffshroom_seed_kanim"),
+                additionalTags: new() { GameTags.CropSeed });
+
+            EntityTemplates.CreateAndRegisterPreviewForPlant(
+                seed,
+                PREVIEW_ID,
+                anim,
+                "place",
+                1,
+                1);
 
             prefab.AddOrGet<PoffShroom>();
 

@@ -1,8 +1,8 @@
-﻿using Beached.Content.Defs.Items.Foods;
+﻿using Beached.Content.Defs.Foods;
 using TUNING;
 using UnityEngine;
 
-namespace Beached.Content.Defs.Entities.Plants
+namespace Beached.Content.Defs.Flora
 {
     public class MusselSproutConfig : IEntityConfig
     {

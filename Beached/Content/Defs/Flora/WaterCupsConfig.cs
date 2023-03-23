@@ -2,7 +2,7 @@
 using TUNING;
 using UnityEngine;
 
-namespace Beached.Content.Defs.Entities.Plants
+namespace Beached.Content.Defs.Flora
 {
     internal class WaterCupsConfig : IEntityConfig
     {

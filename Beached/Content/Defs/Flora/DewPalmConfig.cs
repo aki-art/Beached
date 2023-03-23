@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using TUNING;
 
-namespace Beached.Content.Defs.Entities.Plants
+namespace Beached.Content.Defs.Flora
 {
     internal class DewPalmConfig : IEntityConfig
     {
