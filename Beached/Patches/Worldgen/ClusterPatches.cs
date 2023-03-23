@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using ProcGen;
 using ProcGenGame;
 
 namespace Beached.Patches.Worldgen
@@ -13,27 +14,27 @@ namespace Beached.Patches.Worldgen
             {
                 foreach(var world in __result.worlds)
                 {
-                    var noiseType = world.Settings.GetStringSetting("NoiseType");
-                    Log.Debug("NOISE TYPE: " + noiseType);
-                }
+                    var test = world.Settings.GetStringSetting("TestValue");
+                    Log.Debug($"{world.Settings.mutatedWorldData.world.name}: {test}");
 
-/*                var data = SettingsCache.worlds.GetWorldData(Consts.CLUSTERS.BEACHED);
+                    /*
+                    foreach (var item in data.defaultsOverrides.data)
+                    {
+                        var value = item.Value ?? "null";
+                        Log.Debug($"{item.Key}: {value}");
+                    }
+                                    }
 
-                foreach(var item in data.defaultsOverrides.data)
-                {
-                    var value = item.Value ?? "null";
-                    Log.Debug($"{item.Key}: {value}");
+                                    if(data.defaultsOverrides.data.TryGetValue("TestData", out object testData))
+                                    {
+                                        var testDictionary = testData as Dictionary<string, object>;
+                                        Log.Debug("TEST DATA: " + testDictionary["SomeKey"] as string);
+                                    }
+                                    else
+                                    {
+                                        Log.Debug("no test data");
+                                    }*/
                 }
-
-                if(data.defaultsOverrides.data.TryGetValue("TestData", out object testData))
-                {
-                    var testDictionary = testData as Dictionary<string, object>;
-                    Log.Debug("TEST DATA: " + testDictionary["SomeKey"] as string);
-                }
-                else
-                {
-                    Log.Debug("no test data");
-                }*/
             }
         }
     }

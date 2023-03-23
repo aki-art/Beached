@@ -13,8 +13,13 @@ namespace Beached.Content.Scripts.Entities.AI
         {
             default_state = secretePre;
 
+            Log.Debug("MucusSecretionStates.InitializeStates ------------------------------------");
+            Log.Debug("IS BStatusItems.secretingMucus null");
+            Log.Debug(BStatusItems.secretingMucus == null);
+/*            Log.Debug(BStatusItems.secretingMucus.Id);
+
             root
-                .ToggleStatusItem(BStatusItems.secretingMucus);
+                .ToggleStatusItem(BStatusItems.secretingMucus);*/
 
             secretePre
                 .Enter(Secrete)

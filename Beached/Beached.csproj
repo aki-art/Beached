@@ -31,7 +31,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		
+
 		<Reference Include="FMODUnity">
 			<HintPath>$(GameLibsFolder)\FMODUnity.dll</HintPath>
 			<Private>false</Private>
@@ -95,7 +95,6 @@
 
 	<ItemGroup>
 		<Folder Include="Assets\worldgen\clusters\" />
-		<Folder Include="Content\ModDb\Diseases\" />
 	</ItemGroup>
 
 	<ItemGroup>

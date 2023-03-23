@@ -1,4 +1,4 @@
-﻿using Beached.Content.Scripts;
+﻿using Beached.Content.Scripts.Buildings;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities

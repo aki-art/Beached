@@ -1,9 +1,11 @@
 ﻿using Beached.Content;
 using Beached.Content.BWorldGen;
+using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using FMOD.Studio;
 using FMODUnity;
 using ImGuiNET;
+using Klei.AI;
 using System.Linq;
 using UnityEngine;
 using static ResearchTypes;
@@ -51,6 +53,33 @@ namespace Beached.ModDevTools
                         ImGui.Spacing();
                         ImGui.Text($"{imguiDebug.GetType()}");
                         imguiDebug.OnImguiDraw();
+                    }
+                }
+
+                if(selectedObject.TryGetComponent(out CreatureBrain brain) && brain.TryGetComponent(out Traits traits))
+                {
+                    if(!traits.HasTrait(BGMOTraits.MEATY))
+                    {
+                        if (ImGui.Button("Meaty"))
+                        {
+                            traits.Add(Db.Get().traits.Get(BGMOTraits.MEATY));
+                        }
+                    }
+                    else
+                    {
+                        ImGui.Text("Has Meaty");
+                    }
+
+                    if (!traits.HasTrait(BGMOTraits.EVERLASTING))
+                    {
+                        if (ImGui.Button("Everlasting"))
+                        {
+                            traits.Add(Db.Get().traits.Get(BGMOTraits.EVERLASTING));
+                        }
+                    }
+                    else
+                    {
+                        ImGui.Text("Has Everlasting");
                     }
                 }
             }

@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities.AI;
 
 namespace Beached.Content.ModDb
@@ -10,8 +11,9 @@ namespace Beached.Content.ModDb
         public static StatusItem lubricated;
         public static StatusItem smoking;
 
-        public static void Register()
+        public static void Register(Db db)
         {
+            Log.Debug("STATUSITEMS ------------------------------------");
             desiccation = new(
                 "Beached_Desiccation",
                 "CREATURES",
@@ -54,8 +56,11 @@ namespace Beached.Content.ModDb
                 false,
                 OverlayModes.None.ID);
 
-            smoking.SetResolveStringCallback((str, data) => data is Smokable smokable ? smokable.GetStatusItemTooltip(str) : str);
+            smoking.SetResolveStringCallback((str, data) => data is SmokeCookable smokable ? smokable.GetStatusItemTooltip(str) : str);
 
+            db.CreatureStatusItems.Add(desiccation);
+            db.CreatureStatusItems.Add(lubricated);
+            db.CreatureStatusItems.Add(smoking);
         }
 
         private static string GetLubricantString(string str, object data)

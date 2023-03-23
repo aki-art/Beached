@@ -1,6 +1,8 @@
 ﻿using Beached.Content.Defs.Comets;
+using Beached.Content.Defs.Flora;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.Scripts.Entities;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -30,18 +32,35 @@ namespace Beached.Content.Scripts
         private static ushort brineIdx;
         private static ushort acidIdx;
         private static ushort hydrogenIdx;
-        private static byte grimSporeIdx;
         private static Element saltyOxygen;
 
         public CellElementEvent SaltOffing;
 
-        private PlantableSeed mushroomPlantable;
-
         private readonly SpawnFXHashes saltFx = ModAssets.Fx.saltOff;
 
-        public override void OnPrefabInit()
+        private static Dictionary<byte, FungusInfo> fungusInfos = new();
+
+        public struct FungusInfo
         {
-            mushroomPlantable = Assets.GetPrefab(MushroomPlantConfig.SEED_ID).GetComponent<PlantableSeed>();
+            public PlantableSeed plantableSeed;
+            public Tag seedTag;
+            public SpawnFXHashes spawnFXHashes;
+
+            public FungusInfo(Tag seedTag, SpawnFXHashes spawnFXHashes)
+            {
+                this.seedTag = seedTag;
+                this.spawnFXHashes = spawnFXHashes;
+                var seedPrefab = Assets.TryGetPrefab(seedTag);
+                if(seedPrefab != null)
+                {
+                    plantableSeed = seedPrefab.GetComponent<PlantableSeed>();
+                }
+            }
+
+            public bool IsValid()
+            {
+                return plantableSeed != null;
+            }
         }
 
         public void Sim200ms(float dt)
@@ -144,7 +163,7 @@ namespace Beached.Content.Scripts
             {
                 var germIdx = Grid.DiseaseIdx[cell];
 
-                if (germIdx == grimSporeIdx)
+                if (fungusInfos.TryGetValue(germIdx, out var info))
                 {
                     if (Grid.LightCount[cell] > 0)
                     {
@@ -157,12 +176,12 @@ namespace Beached.Content.Scripts
                         {
                             if (MiscUtil.IsNaturalCell(Grid.CellBelow(cell)) &&
                                 !Grid.IsSolidCell(Grid.CellAbove(cell)) &&
-                                mushroomPlantable.TestSuitableGround(cell))
+                                info.plantableSeed.TestSuitableGround(cell))
                             {
-                                var seed = MiscUtil.Spawn(MushroomPlantConfig.SEED_ID, Grid.CellToPos(cell));
+                                var seed = MiscUtil.Spawn(info.seedTag, Grid.CellToPos(cell));
                                 seed.GetComponent<PlantableSeed>().TryPlant();
 
-                                Game.Instance.SpawnFX(ModAssets.Fx.grimcapPoff, cell, 0);
+                                Game.Instance.SpawnFX(info.spawnFXHashes, cell, 0);
                             }
                         }
                     }
@@ -234,7 +253,18 @@ namespace Beached.Content.Scripts
 
             SetChunks();
             SetElements();
-            grimSporeIdx = Db.Get().Diseases.GetIndex(BDiseases.mushroomSpore.id);
+
+            fungusInfos = new()
+            {
+                {
+                    Db.Get().Diseases.GetIndex(BDiseases.mushroomSpore.id),
+                    new FungusInfo(MushroomPlantConfig.SEED_ID, ModAssets.Fx.grimcapPoff)
+                },
+                {
+                    Db.Get().Diseases.GetIndex(BDiseases.poffSpore.id),
+                    new FungusInfo(PoffShroomConfig.SEED_ID, ModAssets.Fx.grimcapPoff)
+                },
+            };
 
             // TODO: only revealed areas
             // TODO: liauid change?

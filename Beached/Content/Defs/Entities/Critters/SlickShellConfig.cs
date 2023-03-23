@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Scripts.Entities.AI;
 using Klei.AI;
 using UnityEngine;
+using UnityEngine.Assertions;
 using static Beached.STRINGS.CREATURES.SPECIES;
 
 namespace Beached.Content.Defs.Entities.Critters
@@ -13,6 +14,7 @@ namespace Beached.Content.Defs.Entities.Critters
 
         public GameObject CreatePrefab()
         {
+            Log.Debug("CREATE SNAIL PREFAB -----------------------------");
             var prefab = CreateBasePrefab();
 
             EntityTemplates.ExtendEntityToWildCreature(prefab, CrabTuning.PEN_SIZE_PER_CREATURE);
@@ -59,12 +61,19 @@ namespace Beached.Content.Defs.Entities.Critters
 
         private void ConfigureBaseTrait(string name)
         {
-            var trait = Db.Get().CreateTrait(BASE_TRAIT_ID, name, name, null, false, null, true, true);
+            var db = Db.Get();
 
-            trait.Add(new AttributeModifier(Db.Get().Amounts.Calories.maxAttribute.Id, CrabTuning.STANDARD_STOMACH_SIZE, name));
-            trait.Add(new AttributeModifier(Db.Get().Amounts.Calories.deltaAttribute.Id, -CrabTuning.STANDARD_CALORIES_PER_CYCLE / 600f, name));
-            trait.Add(new AttributeModifier(Db.Get().Amounts.HitPoints.maxAttribute.Id, 25f, name));
-            trait.Add(new AttributeModifier(Db.Get().Amounts.Age.maxAttribute.Id, 100f, name));
+            Assert.IsNotNull(db, "db is null");
+            Assert.IsNotNull(db.traits, "traits is null");
+            Assert.IsNotNull(db.Amounts, "amounts is null");
+            Assert.IsNotNull(BAmounts.Moisture, "bamounts is null");
+
+            var trait = db.CreateTrait(BASE_TRAIT_ID, name, name, null, false, null, true, true);
+
+            trait.Add(new AttributeModifier(db.Amounts.Calories.maxAttribute.Id, CrabTuning.STANDARD_STOMACH_SIZE, name));
+            trait.Add(new AttributeModifier(db.Amounts.Calories.deltaAttribute.Id, -CrabTuning.STANDARD_CALORIES_PER_CYCLE / 600f, name));
+            trait.Add(new AttributeModifier(db.Amounts.HitPoints.maxAttribute.Id, 25f, name));
+            trait.Add(new AttributeModifier(db.Amounts.Age.maxAttribute.Id, 100f, name));
             trait.Add(new AttributeModifier(BAmounts.Moisture.maxAttribute.Id, 100f, name));
             trait.Add(new AttributeModifier(BAmounts.Moisture.deltaAttribute.Id, -1000f / 600f, name));
         }

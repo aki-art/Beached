@@ -9,6 +9,7 @@ namespace Beached.Patches
     public class PropertyTexturesPatch
     {
         // Makes the Salty Oxygen texture the lighter texture Oxygen uses
+        // TODO transpiler
         [HarmonyPatch(typeof(PropertyTextures), "UpdateDanger")]
         public static class PropertyTextures_UpdateDanger_Patch
         {

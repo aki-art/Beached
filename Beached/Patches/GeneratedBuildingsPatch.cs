@@ -1,6 +1,6 @@
 ﻿using Beached.Content.Defs.Buildings;
 using Beached.Content.ModDb;
-using Beached.Content.Scripts;
+using Beached.Content.Scripts.Buildings;
 using HarmonyLib;
 
 namespace Beached.Patches

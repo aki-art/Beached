@@ -18,6 +18,7 @@ namespace Beached.Content.ModDb
 
         // no effect
         public const string CAPPED_RECOVERY = "Beached_Capped_Recovery";
+        public const string POFFMOUTH_RECOVERY = "Beached_PoffMouth_Recovery";
 
         // for critters, used for growing limpets
         public const string LIMPETHOST = "Beached_LimpetHost";
@@ -56,6 +57,11 @@ namespace Beached.Content.ModDb
                 .Add(set);
 
             new EffectBuilder(CAPPED_RECOVERY, 160f, false)
+                .HideInUI()
+                .HideFloatingText()
+                .Add(set);
+
+            new EffectBuilder(POFFMOUTH_RECOVERY, 160f, false)
                 .HideInUI()
                 .HideFloatingText()
                 .Add(set);

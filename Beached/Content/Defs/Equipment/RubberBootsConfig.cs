@@ -8,7 +8,7 @@ namespace Beached.Content.Defs.Equipment
 {
     internal class RubberBootsConfig : IEquipmentConfig
     {
-        public const string ID = "Beached_RubberBoots";
+        public const string ID = "Beached_Equipment_RubberBoots";
 
         public EquipmentDef CreateEquipmentDef()
         {
@@ -17,7 +17,7 @@ namespace Beached.Content.Defs.Equipment
                 BAssignableSlots.SHOES_ID,
                 Elements.rubber,
                 30f,
-                TUNING.EQUIPMENT.VESTS.COOL_VEST_ICON0,
+                "beached_rubberboots_kanim",
                 CONSTS.SNAPONS.RUBBER_BOOTS,
                 "beached_rubberboots_kanim",
                 4,

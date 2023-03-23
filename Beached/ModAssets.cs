@@ -1,7 +1,10 @@
 ﻿using Beached.Content.BWorldGen;
+using Beached.Content.Scripts.Buildings;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using static ProcGen.SubWorld;
 using Object = UnityEngine.Object;
@@ -39,9 +42,13 @@ namespace Beached
 
             public static class Placeholders
             {
-                public static Texture2D beachBg;
                 public static Texture2D zeoliteBg;
             }
+        }
+
+        public static class Sounds
+        {
+            public const string SHELL_CHIME_LOUD = "Beached_Chimes_Loud";
         }
 
         public static class Materials
@@ -56,6 +63,7 @@ namespace Beached
             public const string ERRAND_MINERALOGY = "beached_errand_mineralogy";
             public const string ARCHETYPE_MINERALOGY = "beached_archetype_mineralogy";
             public const string BUILDCATEGORY_POIS = "beached_buildcategory_pois";
+            public const string STATUSITEM_DRIEDOUT = "beached_statusitem_driedout";
         }
 
         public static class Fx
@@ -72,8 +80,8 @@ namespace Beached
 
         public static class Colors
         {
-            // elements
             public static Color
+                // elements
                 amber = Util.ColorFromHex("f98f1e"),
                 ammonia = Util.ColorFromHex("4d3b9b"),
                 ash = Util.ColorFromHex("8a8e9d"),
@@ -114,10 +122,11 @@ namespace Beached
                 zirconSpecular = new(2f, 0, 0),
                 zincSpecular = Util.ColorFromHex("02b976"),
 
-            // germs
+                // germs
                 plankton = new Color32(0, 0, 255, 255),
                 limpetEggs = new Color32(255, 225, 185, 255),
-                capSpores = Color.red;
+                capSpores = Color.red,
+                poffSpores = Color.white;
 
             public class Zones
             {
@@ -148,15 +157,24 @@ namespace Beached
 
         public static void LoadAssets()
         {
-            var assets = Path.Combine(Mod.folder, "Assets");
+            var assets = Path.Combine(Mod.folder, "assets");
+            LoadSounds(Path.Combine(assets, "sounds"));
 
-            Textures.Placeholders.beachBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "beach.png"));
             Textures.Placeholders.zeoliteBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "heulandite_geode.png"));
             Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
 
             Log.Debug("LOADING ASSETS");
 
             var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
+
+            foreach (var asset in bundle.GetAllAssetNames())
+            {
+                Log.Debug(asset);
+            }
+
+            var test = bundle.LoadAsset<GameObject>("Assets/Beached/test.prefab");
+            Log.Debug("LOADED TEST");
+            Log.Debug(test.GetComponent<TextMeshProUGUI>().text);
             Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
             Materials.forceField = new(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"))
             {
@@ -166,15 +184,21 @@ namespace Beached
             Textures.germOverlays = bundle.LoadAsset<Texture2DArray>("Assets/Beached/Images/combined.png");
             Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid_b.png");
             Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
-            foreach (var asset in bundle.GetAllAssetNames())
-            {
-                Log.Debug(asset);
-            }
-
             Prefabs.setpieces = new();
 
             var testSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/test_setpiece.prefab");
 
+            SetupSetPiece(testSetPiece);
+
+            Prefabs.setpieces.Add("test", testSetPiece);
+
+            Debug.Assert(Materials.germOverlayReplacer != null, "mat is null");
+            Debug.Assert(Materials.germOverlayReplacer.shader != null, "shader is null");
+
+        }
+
+        private static void SetupSetPiece(GameObject testSetPiece)
+        {
             foreach (var renderer in testSetPiece.GetComponents<SpriteRenderer>())
             {
                 renderer.material.renderQueue = RenderQueues.Liquid;
@@ -185,12 +209,12 @@ namespace Beached
             var sprite = bgRenderer.sprite;
             bgRenderer.material = new Material(Shader.Find("Sprites/Default"));
             bgRenderer.sprite = sprite;
+        }
 
-            Prefabs.setpieces.Add("test", testSetPiece);
-
-            Debug.Assert(Materials.germOverlayReplacer != null, "mat is null");
-            Debug.Assert(Materials.germOverlayReplacer.shader != null, "shader is null");
-
+        private static void LoadSounds(string path)
+        {
+            Log.Debug(Path.Combine(path, "511636__aslipasli__chimes.wav"));
+            AudioUtil.LoadSound(Sounds.SHELL_CHIME_LOUD, Path.Combine(path, "511636__aslipasli__chimes.wav"));
         }
 
         public static bool TryLoadTexture(string path, out Texture2D texture)
@@ -289,7 +313,7 @@ namespace Beached
 
             return assetBundle;
         }
-        
+
         public static TextureAtlas GetCustomAtlas(string fileName, string folder, TextureAtlas tileAtlas)
         {
             var path = Mod.folder;
@@ -352,6 +376,21 @@ namespace Beached
             {
                 def.DecorPlaceBlockTileInfo = Assets.GetBlockTileDecorInfo(existingPlaceID);
             }
+        }
+
+        internal static void LoadKAnims()
+        {
+            Log.Debug("Loading KAnims");
+            Stopwatch stopWatch = new();
+            stopWatch.Start();
+
+
+            var bundle = LoadAssetBundle("beached_kanim_assets", platformSpecific: false);
+
+
+
+            stopWatch.Stop();
+            Log.Info($"Finished loading Beached animations. It took {stopWatch.ElapsedMilliseconds} ms");
         }
     }
 }

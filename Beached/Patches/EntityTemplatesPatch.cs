@@ -41,16 +41,17 @@ namespace Beached.Patches
 
             public static void Postfix(GameObject template)
             {
-                if (Smokable.smokables.TryGetValue(template.PrefabID(), out var config))
+                if (SmokeCookable.smokables.TryGetValue(template.PrefabID(), out var config))
                 {
-                    var smokable = template.AddOrGet<Smokable>();
-                    smokable.cyclesToSmoke = config.time;
+                    var smokable = template.AddOrGet<SmokeCookable>();
+                    smokable.cyclesToSmoke = config.timeToSmokeInCycles;
                     smokable.smokedItemTag = config.smokedItem;
+                    smokable.requiredTemperature = config.requiredTemperature;
                 }
 
                 if (additionalMeats.Contains(template.PrefabID()))
                 {
-                    template.AddBTag(BTags.meat);
+                    template.AddTag(BTags.meat);
                 }
             }
         }

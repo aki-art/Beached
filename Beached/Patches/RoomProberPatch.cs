@@ -13,7 +13,8 @@ namespace Beached.Patches
     {
         // tracks vista pois and which rooms contain them
         // Fast Track skips this method!!
-        [HarmonyPatch(typeof(RoomProber), "RebuildDirtyCavities")]
+        // TODO: transpiler
+        //[HarmonyPatch(typeof(RoomProber), "RebuildDirtyCavities")]
         public class RoomProber_RebuildDirtyCavities_Patch
         {
             public static IEnumerable<CodeInstruction> Transpiler(ILGenerator generator, IEnumerable<CodeInstruction> orig)

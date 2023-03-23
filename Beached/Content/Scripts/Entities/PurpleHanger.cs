@@ -1,4 +1,4 @@
-﻿using Beached.Content.Defs.Entities.Plants;
+﻿using Beached.Content.Defs.Flora;
 using ImGuiNET;
 using KSerialization;
 using UnityEngine;

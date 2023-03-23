@@ -11,7 +11,8 @@ namespace Beached.Patches
     public class SubWorldZoneRenderDataPatch
     {
         // override zonetype renderdata
-        [HarmonyPatch(typeof(SubworldZoneRenderData), "OnActiveWorldChanged")]
+        // TODO: transpiler
+        //[HarmonyPatch(typeof(SubworldZoneRenderData), "OnActiveWorldChanged")]
         public class SubworldZoneRenderData_OnActiveWorldChanged_Patch
         {
             public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)

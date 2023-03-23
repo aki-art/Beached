@@ -1,7 +1,6 @@
 ﻿global using Beached.Utils;
 using Beached.Content;
 using Beached.Content.BWorldGen;
-using Beached.Content.Defs.Entities.Plants;
 using Beached.ModDevTools;
 using Beached.Settings;
 using HarmonyLib;
@@ -11,13 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using TUNING;
 
 namespace Beached
 {
 
     public class Mod : UserMod2
     {
+        public const string STATIC_ID = "Beached";
+
         public static bool debugMode = true;
 
         public static Config settings = new();
@@ -63,7 +63,6 @@ namespace Beached
             {
                 if (modEntry.IsEnabledForActiveDlc())
                 {
-                    Log.Debug(modEntry.staticID);
                     switch (modEntry.staticID)
                     {
                         case "TrueTiles":

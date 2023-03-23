@@ -19,6 +19,7 @@ namespace Beached.Content
         public static readonly Tag coral = TagManager.Create("Beached_Coral");
         public static readonly Tag noPaint = TagManager.Create("NoPaint"); // MaterialColor mod uses this
         public static readonly Tag noBackwall = TagManager.Create("NoBackwall"); // Background Tiles mod uses this
+        public static readonly Tag aquatic = TagManager.Create("Beached_Aquatic"); // Background Tiles mod uses this
 
         public static class FastTrack
         {
@@ -40,6 +41,11 @@ namespace Beached.Content
             public static Tag crystal = TagManager.Create("Beached_Crystal");
             public static Tag dim = TagManager.Create("Beached_Dim");
             public static Tag dark = TagManager.Create("Beached_Dark");
+        }
+
+        public static class BuildingMaterials
+        {
+            public static Tag chime = TagManager.Create("Beached_ChimeMaterial");
         }
 
         public static void OnModLoad()

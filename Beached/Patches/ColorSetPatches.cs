@@ -22,6 +22,7 @@ namespace Beached.Patches
                     ___namedLookup[PlanktonGerms.ID] = ModAssets.Colors.plankton;
                     ___namedLookup[LimpetEggGerms.ID] = ModAssets.Colors.limpetEggs;
                     ___namedLookup[CapSporeGerms.ID] = ModAssets.Colors.capSpores;
+                    ___namedLookup[PoffSporeGerms.ID] = ModAssets.Colors.poffSpores;
                 }
             }
         }

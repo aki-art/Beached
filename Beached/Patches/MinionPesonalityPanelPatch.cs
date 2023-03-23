@@ -11,7 +11,8 @@ namespace Beached.Patches
 {
     public class MinionPesonalityPanelPatch
     {
-        [HarmonyPatch(typeof(MinionPersonalityPanel), "RefreshTraits")]
+        // TODO
+        //[HarmonyPatch(typeof(MinionPersonalityPanel), "RefreshTraits")]
         public class MinionPersonalityPanel_RefreshTraits_Patch
         {
             public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)

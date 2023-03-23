@@ -1,20 +1,15 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Beached.Content;
+﻿using Beached.Content;
 using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Entities.Critters;
-using Beached.Content.Defs.Entities.Plants;
-using Beached.Content.Defs.Items.Foods;
+using Beached.Content.Defs.Flora;
+using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
-using JetBrains.Annotations;
-using Microsoft.SqlServer.Server;
 using KLEISTRINGS = STRINGS;
 
 namespace Beached
 {
-    [SuppressMessage("ReSharper", "MemberHidesStaticFromOuterClass")]
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class STRINGS
     {
         public class BUILDCATEGORIES
@@ -294,6 +289,21 @@ namespace Beached
                 }
             }
 
+            public class TRAITS
+            {
+                public class BEACHED_GMOTRAIT_EVERLASTING
+                {
+                    public static LocString NAME = "Everlasting";
+                    public static LocString DESC = "This critter does not seem to age.";
+                }
+
+                public class BEACHED_GMOTRAIT_MEATY
+                {
+                    public static LocString NAME = "Meaty";
+                    public static LocString DESC = "This critter looks exceptionally tasty.";
+                }
+            }
+
             public class STATS
             {
                 public class ACIDVULNERABILITY
@@ -375,12 +385,32 @@ namespace Beached
                         public static LocString NAME = "Filament Seed";
                         public static LocString DESC = "...";
                     }
+
+                    public class BEACHED_CELLALGAE
+                    {
+                        public static LocString NAME = FormatAsLink("Small Cell", CellAlgaeConfig.ID);
+                        public static LocString DESC = "...";
+                    }
+
+                    public class BEACHED_PIPTAIL
+                    {
+                        public static LocString NAME = FormatAsLink("PipTail", PipTailConfig.ID);
+                        public static LocString DESC = (LocString)("The " + FormatAsLink("Seed", "PLANTS") + " of a " + NAME + ".");
+                    }
                 }
 
-                public class CELLALGAE
+                public class BEACHED_CELLALGAE
                 {
-                    public static LocString NAME = FormatAsLink("Cell", CellAlgaeConfig.ID);
+                    public static LocString NAME = FormatAsLink("Bubble Algae", CellAlgaeConfig.ID);
                     public static LocString DESCRIPTION = "...";
+                    public static LocString DOMESTICATEDDESC = "...";
+                }
+
+                public class BEACHED_PIPTAIL
+                {
+                    public static LocString NAME = FormatAsLink("Piptail", PipTailConfig.ID);
+                    public static LocString DESCRIPTION = "...";
+                    public static LocString DOMESTICATEDDESC = "...";
                 }
 
                 public class BEACHED_SLICKSHELL
@@ -658,6 +688,11 @@ namespace Beached
                     public static LocString NAME = FormatAsLink("Grimcap Spores", CapSporeGerms.ID);
                 }
 
+                public class BEACHED_POFFSPORE
+                {
+                    public static LocString NAME = FormatAsLink("Poffshroom Spores", PoffSporeGerms.ID);
+                }
+
                 public class BEACHED_LIMPETS_DUPLICANT
                 {
                     public static LocString NAME = "NA"; //KUI.FormatAsLink("Limpets", LimpetsSickness.ID);
@@ -666,6 +701,11 @@ namespace Beached
                 public class BEACHED_SICKNESS_CAPPED
                 {
                     public static LocString NAME = FormatAsLink("Capped", CappedSickness.ID);
+                }
+
+                public class BEACHED_SICKNESS_POFFMOUTH
+                {
+                    public static LocString NAME = FormatAsLink("Poffmouth", PoffSporeGerms.ID);
                 }
 
                 public static LocString LIGHTEXPOSURE = "Exposed to Light. Approximately {0} change per second.";
@@ -833,6 +873,24 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
+            public class IRIDIUM
+            {
+                public static LocString NAME = FormatAsLink("Iridium");
+                public static LocString DESC = "TODO";
+            }
+
+            public class IRIDIUMGAS
+            {
+                public static LocString NAME = FormatAsLink("Iridium Gas");
+                public static LocString DESC = "TODO";
+            }
+
+            public class IRIDIUMMOLTEN
+            {
+                public static LocString NAME = FormatAsLink("Iridium");
+                public static LocString DESC = "TODO";
+            }
+
             public class METAMORPHICROCK
             {
                 public static LocString NAME = FormatAsLink("Metamorphic Rock");
@@ -878,6 +936,12 @@ namespace Beached
             public class PEARL
             {
                 public static LocString NAME = FormatAsLink("Pearl");
+                public static LocString DESC = "TODO";
+            }
+
+            public class PERMAFROST
+            {
+                public static LocString NAME = FormatAsLink("Permafrost");
                 public static LocString DESC = "TODO";
             }
 
@@ -999,6 +1063,13 @@ namespace Beached
                     public static LocString NAME = "Beach Shirt";
                 }
 
+                public class BEACHED_EQUIPMENT_RUBBERBOOTS
+                {
+                    public static LocString NAME = "Rubber Boots";
+                    public static LocString GENERICNAME = "Rubber Boots";
+                    public static LocString DESCRIPTION = "Protects the feet of Duplicants from being wet.";
+                }
+
                 public class BEACHED_EQUIPMENT_MAXIXEPENDANT
                 {
                     public static LocString NAME = "Maxixe Pendant";
@@ -1080,7 +1151,7 @@ namespace Beached
 
             public class FOOD
             {
-                public class BEACHED_ASPIC_LICE
+                public class BEACHED_ASPICLICE
                 {
                     public static LocString NAME = FormatAsLink("Aspic Lice", JellyConfig.ID);
                     public static LocString DESC = "Lice suspended in jello.";
@@ -1093,7 +1164,13 @@ namespace Beached
                                                    "sticks to the roof of the mouth.";
                 }
 
-                public class BEACHED_BERRY_JELLY
+                public class BEACHED_LEGENDARYSTEAK
+                {
+                    public static LocString NAME = FormatAsLink("Legendary Steak", LegendarySteakConfig.ID);
+                    public static LocString DESC = "Truly, the rarest steak of them all. A wonderful cut of meat that melts in the mouth.";
+                }
+
+                public class BEACHED_BERRYJELLY
                 {
                     public static LocString NAME = FormatAsLink("Berry-Jelly", JellyConfig.ID);
                     public static LocString DESC = "A jiggly treat hiding tasty berries within.";
@@ -1123,12 +1200,6 @@ namespace Beached
                     public static LocString DESC = "...";
                 }
 
-                public class BEACHED_LEGENDARY_STEAK
-                {
-                    public static LocString NAME = "Legendary Steak";
-                    public static LocString DESC = "It is so rare, it has been classified as legendary! A truly wonderful cut of meat that melts in the mouth.";
-                }
-
                 public class BEACHED_JELLY
                 {
                     public static LocString NAME = FormatAsLink("Jelly", JellyConfig.ID);
@@ -1153,6 +1224,12 @@ namespace Beached
                     public static LocString DESC = "...";
                 }
 
+                public class BEACHED_HIGHQUALITYMEAT
+                {
+                    public static LocString NAME = FormatAsLink("High Quality Meat", HighQualityMeatConfig.ID);
+                    public static LocString DESC = "...";
+                }
+
                 public class BEACHED_SMOKEDMEAT
                 {
                     public static LocString NAME = FormatAsLink("Smoked Meat", SmokedMeatConfig.ID);
@@ -1161,13 +1238,13 @@ namespace Beached
 
                 public class BEACHED_SMOKEDFISH
                 {
-                    public static LocString NAME = "Smoked Fish";
+                    public static LocString NAME = FormatAsLink("Smoked Fish", SmokedFishConfig.ID);
                     public static LocString DESC = "...";
                 }
 
-                public class BEACHED_SMOKEDMEALLICE
+                public class BEACHED_SMOKEDLICE
                 {
-                    public static LocString NAME = "Smoked Lice";
+                    public static LocString NAME = FormatAsLink("Smoked Lice", SmokedLiceConfig.ID);
                     public static LocString DESC = "...";
                 }
 
@@ -1177,15 +1254,15 @@ namespace Beached
                     public static LocString DESC = "...";
                 }
 
-                public class BEACHED_SMOKED_SNAIL
+                public class BEACHED_SMOKEDSNAIL
                 {
                     public static LocString NAME = "Smoked Snail";
                     public static LocString DESC = "...";
                 }
 
-                public class BEACHED_SMOKED_TOFU
+                public class BEACHED_SMOKEDTOFU
                 {
-                    public static LocString NAME = "Smoked Tofu";
+                    public static LocString NAME = FormatAsLink("Smoked Tofu", SmokedTofuConfig.ID);
                     public static LocString DESC = "...";
                 }
             }
@@ -1332,6 +1409,70 @@ namespace Beached
                     public static LocString EFFECT = "- Increased Motivation";
                     public static LocString TOOLTIP = "A Nature Vista will inspire Duplicants to achieve greater things in life.";
                 }
+            }
+        }
+
+        public class SUBWORLDS
+        {
+            public class BAMBOO
+            {
+                public static LocString NAME = "Bamboo Forest";
+                public static LocString DESC = "TODO";
+            }
+
+            public class BEACH
+            {
+                public static LocString NAME = "Beach";
+                public static LocString DESC = "These sandy shoreslines are bountiful with useful resources, providing great supplies for a colony, " +
+                    "although the large amount of water and sand may make excavation challenging.";
+                public static LocString UTILITY = "The layers of Siltstone, Salt and Sand suggest this area was once fully submerged under an ocean, " +
+                    "luckily for us it is now mostly dry land. The Bismuth Ore deposites will serve as my colonys valuable metal source.";
+            }
+
+            public class DEPTHS
+            {
+                public static LocString NAME = "Depths";
+                public static LocString DESC = "An unusual darkness veils the Depths, hiding dangerous creatures and traps, and scaring Duplicants. " +
+                    "Illumination of the area is neccessary to explore, but there may be something of great value hidden deep within.";
+                public static LocString UTILITY = "TODO";
+            }
+
+            public class FUNGALJUNGLE
+            {
+                public static LocString NAME = "Fungal Jungle";
+                public static LocString DESC = "A bioluminescent world of mushrooms.";
+                public static LocString UTILITY = "TODO";
+            }
+
+            public class SEA
+            {
+                public static LocString NAME = "Sea";
+                public static LocString DESC = "TODO";
+                public static LocString UTILITY = "TODO";
+            }
+
+            public class REEF
+            {
+                public static LocString NAME = "Coral Reef";
+                public static LocString DESC = "TODO";
+                public static LocString UTILITY = "TODO";
+            }
+
+            public class ROT
+            {
+                public static LocString NAME = "Rot";
+                public static LocString DESC = "Strange twisting cavers lines with supple amounts of Bone, Lime and Rot. The local lifeforms appear" +
+                    "to have adaped to scavenging these resources.";
+                public static LocString UTILITY = "TODO";
+            }
+
+            public class SNOWYBEACH
+            {
+                public static LocString NAME = "Snowy Beach";
+                public static LocString DESC = "Once warm and inviting sandy beached, now frozen over and covered in Snow. This place seems largely inhabitable, but" +
+                    " there are many treasures hidden withing the Ice. I must be careful, there also seems to be a lot of ancient viruses and other danges wairing beneath" +
+                    " the Ice.";
+                public static LocString UTILITY = "TODO";
             }
         }
 
