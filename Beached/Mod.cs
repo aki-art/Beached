@@ -25,6 +25,8 @@ namespace Beached
         public static string folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // path field does not seem reliable with Local installs
 
         public static bool isFastTrackHere;
+        public static bool isCritterTraitsRebornHere;
+
         public static LUT_API lutAPI;
 
         public override void OnLoad(Harmony harmony)
@@ -74,8 +76,17 @@ namespace Beached
                         case "DecorPackA":
                             Integration.DecorPackI.RegisterTiles();
                             break;
+                        case "CritterTraitsReborn":
+                            isCritterTraitsRebornHere = true;
+                            Integration.CritterTraitsReborn.Initialize();
+                            break;
                     }
                 }
+            }
+
+            if(!isCritterTraitsRebornHere)
+            {
+                Patches.SimpleInfoScreenPatch.Patch(harmony);
             }
         }
     }

@@ -58,11 +58,11 @@ namespace Beached.ModDevTools
 
                 if(selectedObject.TryGetComponent(out CreatureBrain brain) && brain.TryGetComponent(out Traits traits))
                 {
-                    if(!traits.HasTrait(BGMOTraits.MEATY))
+                    if(!traits.HasTrait(CritterTraits.MEATY))
                     {
                         if (ImGui.Button("Meaty"))
                         {
-                            traits.Add(Db.Get().traits.Get(BGMOTraits.MEATY));
+                            traits.Add(Db.Get().traits.Get(CritterTraits.MEATY));
                         }
                     }
                     else
@@ -70,11 +70,11 @@ namespace Beached.ModDevTools
                         ImGui.Text("Has Meaty");
                     }
 
-                    if (!traits.HasTrait(BGMOTraits.EVERLASTING))
+                    if (!traits.HasTrait(CritterTraits.EVERLASTING))
                     {
                         if (ImGui.Button("Everlasting"))
                         {
-                            traits.Add(Db.Get().traits.Get(BGMOTraits.EVERLASTING));
+                            traits.Add(Db.Get().traits.Get(CritterTraits.EVERLASTING));
                         }
                     }
                     else

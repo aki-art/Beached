@@ -23,7 +23,7 @@ namespace Beached.Content.Defs.Equipment
                 Elements.heulandite,
                 30f,
                 TUNING.EQUIPMENT.VESTS.COOL_VEST_ICON0,
-                CONSTS.SNAPONS.JEWELLERIES.ZEOLITE,
+                "necklace",
                 "beached_zeolite_necklace_kanim",
                 4,
                 attributeModifiers,

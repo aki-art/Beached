@@ -40,6 +40,11 @@ namespace Beached.Content.ModDb
                 .Input(Elements.rubber.Tag, 30f)
                 .Output(RubberBootsConfig.ID, 1f)
                 .Build();
+
+            RecipeBuilder.Create(CraftingTableConfig.ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_ZEOLITEPENDANT.DESCRIPTION, 60f)
+                .Input(Elements.heulandite.Tag, 30f)
+                .Output(ZeolitePendantConfig.ID, 1f)
+                .Build();
         }
 
         private static void CreateFoodRecipes()

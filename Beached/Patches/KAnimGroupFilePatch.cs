@@ -14,7 +14,9 @@ namespace Beached.Patches
 
                 var swaps = new HashSet<HashedString>()
                 {
-                    "beached_poffmouth_mouth_kanim"
+                    "beached_poffmouth_mouth_kanim",
+                    "beached_rubberboots_kanim",
+                    "beached_zeolite_necklace_kanim",
                 };
 
                 var swapAnimsGroup = KAnimGroupFile.GetGroup(new HashedString(CONSTS.BATCH_TAGS.SWAPS));

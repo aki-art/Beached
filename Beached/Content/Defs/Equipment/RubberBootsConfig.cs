@@ -17,7 +17,7 @@ namespace Beached.Content.Defs.Equipment
                 BAssignableSlots.SHOES_ID,
                 Elements.rubber,
                 30f,
-                "beached_rubberboots_kanim",
+                "beached_rubberboots_item_kanim",
                 CONSTS.SNAPONS.RUBBER_BOOTS,
                 "beached_rubberboots_kanim",
                 4,

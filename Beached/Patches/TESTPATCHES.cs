@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using ProcGen;
 using UnityEngine;
+using System.Reflection.Emit;
 
 namespace Beached.Patches
 {
@@ -20,11 +21,13 @@ namespace Beached.Patches
         public static Texture2D testMask;
 
 
-        //[HarmonyPatch(typeof(WearableAccessorizer), "ApplyEquipment")]
+        [HarmonyPatch(typeof(WearableAccessorizer), "ApplyEquipment")]
         public class WearableAccessorizer_ApplyEquipment_Patch
         {
             public static void Postfix(WearableAccessorizer __instance, Equippable equippable, KAnimFile animFile)
             {
+                Log.Debug("Apply equipment");
+
                 if(equippable.def.Slot == BAssignableSlots.JEWELLERY_ID)
                 {
                     if(__instance.wearables.TryGetValue(BDb.WearableTypes.jewellery, out var wearable))
@@ -37,12 +40,15 @@ namespace Beached.Patches
                     __instance.wearables[BDb.WearableTypes.jewellery] = new (
                         animFile, 
                         equippable.def.BuildOverridePriority);
+
                     __instance.ApplyWearable();
                     __instance.wearables.Remove(BDb.WearableTypes.jewellery);
 
                 }
             }
         }
+
+
 
 /*        [HarmonyPatch(typeof(SettingsCache), "LoadFiles", typeof(string), typeof(string), typeof(List<YamlIO.Error>))]
         public class SettingsCache_LoadFiles_Patch

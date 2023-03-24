@@ -57,7 +57,7 @@ namespace Beached.Content.UI
 
             if (target.TryGetComponent(out Traits traits) && target.TryGetComponent(out CreatureBrain _))
             {
-                var group = Db.Get().traitGroups.TryGet(BGMOTraits.GMO_GROUP);
+                var group = Db.Get().traitGroups.TryGet(CritterTraits.GMO_GROUP);
 
                 traitsPanel.gameObject.SetActive(true);
                 traitsPanel.HeaderLabel.text = (string)global::STRINGS.UI.DETAILTABS.STATS.GROUPNAME_TRAITS;

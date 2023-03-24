@@ -31,7 +31,7 @@ namespace Beached.Patches.DatabasePatches
                 BSkills.Register(__instance.Skills);
                 BSicknesses.Register(__instance.Sicknesses);
                 BTraits.Register();
-                BGMOTraits.Register();
+                CritterTraits.Register();
                 BRoomTypes.Register(__instance.RoomTypes);
                 BRoomTypes.ModifyConstraintRules();
                 // TechTreeTitles has to be patched on class
