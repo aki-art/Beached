@@ -1,10 +1,11 @@
 ﻿using Beached.Content.BWorldGen;
-using Beached.Content.Scripts.Buildings;
+using Beached.Content.Scripts;
+using FUtility.FUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using TMPro;
+using TemplateClasses;
 using UnityEngine;
 using static ProcGen.SubWorld;
 using Object = UnityEngine.Object;
@@ -17,6 +18,7 @@ namespace Beached
         public static class Prefabs
         {
             public static Dictionary<string, GameObject> setpieces;
+            public static GameObject universalSidescreen; // prefab with commonly used controls ready to go
         }
 
         // static hardcoded indices for my zonetypes
@@ -94,7 +96,7 @@ namespace Beached
                 bone = Util.ColorFromHex("d6cec2"),
                 calcium = Color.white,
                 gravel = new Color32(100, 100, 100, 255),
-                iridium = Util.ColorFromHex("b6b2fb"),
+                iridium = Util.ColorFromHex("b6b2fb") * 2f,
                 latex = Util.ColorFromHex("e08a65"),
                 moltenBismuth = new Color32(117, 166, 108, 255),
                 moss = Util.ColorFromHex("528b35"),
@@ -172,9 +174,11 @@ namespace Beached
                 Log.Debug(asset);
             }
 
-            var test = bundle.LoadAsset<GameObject>("Assets/Beached/test.prefab");
-            Log.Debug("LOADED TEST");
-            Log.Debug(test.GetComponent<TextMeshProUGUI>().text);
+            Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
+
+            var tmpConverter = new TMPConverter();
+            tmpConverter.ReplaceAllText(Prefabs.universalSidescreen);
+
             Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
             Materials.forceField = new(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"))
             {
@@ -184,19 +188,48 @@ namespace Beached
             Textures.germOverlays = bundle.LoadAsset<Texture2DArray>("Assets/Beached/Images/combined.png");
             Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid_b.png");
             Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
+            LoadSetpieces(bundle);
+        }
+
+        private static void LoadSetpieces(AssetBundle bundle)
+        {
             Prefabs.setpieces = new();
 
             var testSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/test_setpiece.prefab");
 
             SetupSetPiece(testSetPiece);
-
             Prefabs.setpieces.Add("test", testSetPiece);
 
-            Debug.Assert(Materials.germOverlayReplacer != null, "mat is null");
-            Debug.Assert(Materials.germOverlayReplacer.shader != null, "shader is null");
+            var beachSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/parallax/Beach/beach_setpiece.prefab");
+            var setPieceMaterial = new Material(bundle.LoadAsset<Shader>("Assets/Beached/fx/parallax/BeachedParallax.shader"));
+            foreach (var renderer in beachSetPiece.GetComponents<SpriteRenderer>())
+            {
+                renderer.material = setPieceMaterial;
+                renderer.material.renderQueue = RenderQueues.Liquid;
+            }
 
+            beachSetPiece.AddComponent<ParallaxBg>().DeserializeFromJson();
+
+            Prefabs.setpieces.Add("beach", beachSetPiece);
         }
 
+        /*
+                private static void ProcessTMP(GameObject gameObject)
+                {
+                    var textComponents = gameObject.GetComponentsInChildren(typeof(TextMeshProUGUI), true);
+
+                    foreach (var text in textComponents.Cast<TextMeshProUGUI>())
+                    {
+                        text.font = text.font.name.Contains("GRAYSTROKE") ? GrayStroke : NotoSans;
+                        var newText = TMPFixer.ConvertToLocText(text);
+                        //f_m_isAlignmentEnumConverted.SetValue(text, true);
+
+                        Log.Debug("alignment: " + text.alignment);
+
+                        //newText.text = STRINGS.FormatAsLink("读写汉字 - 学中文", "DECOR");
+                    }
+                }
+        */
         private static void SetupSetPiece(GameObject testSetPiece)
         {
             foreach (var renderer in testSetPiece.GetComponents<SpriteRenderer>())

@@ -8,10 +8,7 @@ namespace Beached.Patches
         [HarmonyPatch(typeof(DevToolManager), "UpdateShouldShowTools")]
         public class DevToolManager_UpdateShouldShowTools_Patch
         {
-            public static void Postfix(ref bool ___showImGui)
-            {
-                ___showImGui = true;
-            }
+            public static void Postfix(ref bool ___showImGui) => ___showImGui = true;
         }
     }
 }

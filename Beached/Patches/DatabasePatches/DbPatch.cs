@@ -31,9 +31,11 @@ namespace Beached.Patches.DatabasePatches
                 BSkills.Register(__instance.Skills);
                 BSicknesses.Register(__instance.Sicknesses);
                 BTraits.Register();
-                CritterTraits.Register();
+                BCritterTraits.Register();
                 BRoomTypes.Register(__instance.RoomTypes);
                 BRoomTypes.ModifyConstraintRules();
+                BGameplayEvents.Register(__instance.GameplayEvents);
+                BGameplaySeasons.Register(__instance.GameplaySeasons);
                 // TechTreeTitles has to be patched on class
                 //BTechs.Register(__instance.Techs);
 
@@ -47,6 +49,8 @@ namespace Beached.Patches.DatabasePatches
                         {
                             SmokedMeatConfig.ID,
                             SmokedFishConfig.ID,
+                            HighQualityMeatConfig.ID,
+                            LegendarySteakConfig.ID,
                         });
 
                         break;
@@ -78,6 +82,7 @@ namespace Beached.Patches.DatabasePatches
                 ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.POWER, AmmoniaGeneratorConfig.ID, "Default", MethaneGeneratorConfig.ID);
                 ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.UTILITIES, MossBedConfig.ID, "Default", ExteriorWallConfig.ID);
                 ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, MiniFridgeConfig.ID, "Default", ExteriorWallConfig.ID);
+                ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, DNAInjectorConfig.ID, "Default", EggIncubatorConfig.ID);
                 ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.BASE, LaboratoryTileConfig.ID, "Tiles", PlasticTileConfig.ID);
                 ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, WoodCarvingConfig.ID, "decor", MarbleSculptureConfig.ID);
                 ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, ChimeConfig.ID, "decor", FlowerVaseConfig.ID);

@@ -58,6 +58,10 @@ namespace Beached.Patches
             SetPiecesConfig.BEACH,
             SetPiecesConfig.ZEOLITE,
 
+            // genetic samples
+            GeneticSamplesConfig.EVERLASTING,
+            GeneticSamplesConfig.MEATY,
+
             // misc
             ForceFieldConfig.ID,
             SmokerConfig.ID,

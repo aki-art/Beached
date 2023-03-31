@@ -3,7 +3,7 @@ using Klei.AI;
 using System;
 using UnityEngine;
 
-namespace Beached.Content.UI
+namespace Beached.Content.Scripts.UI
 {
     public class Beached_CritterTraitsScreen : KMonoBehaviour
     {
@@ -35,7 +35,7 @@ namespace Beached.Content.UI
 
         public void Hide()
         {
-            if(traitsPanel != null)
+            if (traitsPanel != null)
             {
                 traitsPanel.gameObject.SetActive(false);
             }
@@ -57,11 +57,11 @@ namespace Beached.Content.UI
 
             if (target.TryGetComponent(out Traits traits) && target.TryGetComponent(out CreatureBrain _))
             {
-                var group = Db.Get().traitGroups.TryGet(CritterTraits.GMO_GROUP);
+                var group = Db.Get().traitGroups.TryGet(BCritterTraits.GMO_GROUP);
 
                 traitsPanel.gameObject.SetActive(true);
                 traitsPanel.HeaderLabel.text = (string)global::STRINGS.UI.DETAILTABS.STATS.GROUPNAME_TRAITS;
-                
+
                 traitsDrawer.BeginDrawing();
 
                 foreach (var trait in traits.TraitList)
@@ -76,7 +76,7 @@ namespace Beached.Content.UI
                 traitsDrawer.EndDrawing();
             }
 
-            if(!hasAnyTraits)
+            if (!hasAnyTraits)
             {
                 traitsPanel.gameObject.SetActive(false);
             }

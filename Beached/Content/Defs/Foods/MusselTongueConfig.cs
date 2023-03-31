@@ -5,7 +5,7 @@ using static EdiblesManager;
 
 namespace Beached.Content.Defs.Foods
 {
-    internal class TongueConfig : IEntityConfig
+    internal class MusselTongueConfig : IEntityConfig
     {
         public static string ID = "Beached_MusselTongue";
 
@@ -18,16 +18,15 @@ namespace Beached.Content.Defs.Foods
                 FOOD.FOOD_QUALITY_AWFUL,
                 FOOD.DEFAULT_PRESERVE_TEMPERATURE,
                 FOOD.DEFAULT_ROT_TEMPERATURE,
-                FOOD.SPOIL_TIME.DEFAULT,
-                false);
+                FOOD.SPOIL_TIME.VERYSLOW,
+                true);
 
             var prefab = BEntityTemplates.CreateFood(
                 ID,
-                "meallicegrain_kanim",
+                "beached_musseltongue_kanim",
                 0.8f,
-                0.6f,
+                0.25f,
                 foodInfo);
-
 
             return prefab;
         }
@@ -36,9 +35,6 @@ namespace Beached.Content.Defs.Foods
 
         public void OnPrefabInit(GameObject inst) { }
 
-        public void OnSpawn(GameObject inst)
-        {
-            inst.GetComponent<KBatchedAnimController>().TintColour = new Color(1f, 0.6f, 0f);
-        }
+        public void OnSpawn(GameObject inst) { }
     }
 }

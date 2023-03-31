@@ -19,7 +19,13 @@ namespace Beached.Content
         public static readonly Tag coral = TagManager.Create("Beached_Coral");
         public static readonly Tag noPaint = TagManager.Create("NoPaint"); // MaterialColor mod uses this
         public static readonly Tag noBackwall = TagManager.Create("NoBackwall"); // Background Tiles mod uses this
-        public static readonly Tag aquatic = TagManager.Create("Beached_Aquatic"); // Background Tiles mod uses this
+        public static readonly Tag aquatic = TagManager.Create("Beached_Aquatic"); 
+        public static readonly Tag geneticallyModified = TagManager.Create("Beached_GeneticallyModified");
+
+        public static TagSet eggs = new()
+        {
+            GameTags.IncubatableEgg
+        };
 
         public static class FastTrack
         {
@@ -57,6 +63,10 @@ namespace Beached.Content
             if (index == -1) index = 0; // in case some other mod tweaked the filters and removed BuildableProcessed
 
             STORAGEFILTERS.NOT_EDIBLE_SOLIDS.Insert(index, MaterialCategories.crystal);
+
+            Filterable.filterableCategories.Add(GameTags.Egg);
+            GameTags.AllCategories.Add(GameTags.Egg);
+            GameTags.IgnoredMaterialCategories.Remove(GameTags.Egg);
         }
     }
 }

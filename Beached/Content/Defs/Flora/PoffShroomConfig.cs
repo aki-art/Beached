@@ -29,6 +29,7 @@ namespace Beached.Content.Defs.Flora
 
             EntityTemplates.ExtendEntityToBasicPlant(
                 prefab,
+                crop_id: MushroomConfig.ID, // TODO
                 baseTraitId: BASE_TRAIT_ID,
                 baseTraitName: STRINGS.CREATURES.SPECIES.POFFSHROOM.NAME);
 

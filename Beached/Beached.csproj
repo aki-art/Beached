@@ -36,6 +36,10 @@
 			<HintPath>$(GameLibsFolder)\FMODUnity.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+
+		<Reference Include="FUtility">
+		  <HintPath>D:\Modding\OxygenNotIncluded\Lib\FUtility.dll</HintPath>
+		</Reference>
 		
 		<Reference Include="ImGui">
 			<HintPath>$(GameLibsFolder)\ImGui.dll</HintPath>

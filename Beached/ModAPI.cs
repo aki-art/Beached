@@ -1,6 +1,7 @@
 ﻿using Beached.Content;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
+using System;
 using UnityEngine;
 
 namespace Beached
@@ -21,6 +22,21 @@ namespace Beached
 
     public class ModAPI
     {
+        /// <summary>
+        /// Add a new filter rule for genetics samplers and the DNA injector building.
+        /// </summary>
+        /// <param name="ruleID">An ID, needs to be unique.</param>
+        /// <param name="testFn">Applies to the adult critter the egg comes from.</param>
+        public static void AddGeneticsEggRule(string ruleID, Func<GameObject, bool> testFn)
+        {
+            Content.Tuning.Genetics.rules.Add(ruleID, testFn);
+        }
+
+        public static void AddGeneticsSamplerConfig(string traitId, Color color, string largeIcon, string ruleID)
+        {
+
+        }
+
         /// <summary>
         /// Make this prefab accept Mucus upgrading. (Doors are automatically recognized, no need to add them separately here,
         /// unless you want to override the values.)

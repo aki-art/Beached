@@ -6,8 +6,10 @@ using FMOD.Studio;
 using FMODUnity;
 using ImGuiNET;
 using Klei.AI;
+using ProcGen.Noise;
 using System.Linq;
 using UnityEngine;
+using static BrainScheduler;
 using static ResearchTypes;
 using static STRINGS.UI.CLUSTERMAP;
 
@@ -58,28 +60,22 @@ namespace Beached.ModDevTools
 
                 if(selectedObject.TryGetComponent(out CreatureBrain brain) && brain.TryGetComponent(out Traits traits))
                 {
-                    if(!traits.HasTrait(CritterTraits.MEATY))
+                    ImGui.Spacing();
+                    ImGui.Text("GMO Traits");
+                    var allTraits = Db.Get().traitGroups.Get(BCritterTraits.GMO_GROUP).modifiers;
+                    foreach(var trait in allTraits)
                     {
-                        if (ImGui.Button("Meaty"))
+                        if (!traits.HasTrait(trait))
                         {
-                            traits.Add(Db.Get().traits.Get(CritterTraits.MEATY));
+                            if (ImGui.Button(trait.Name))
+                            {
+                                traits.Add(trait);
+                            }
                         }
-                    }
-                    else
-                    {
-                        ImGui.Text("Has Meaty");
-                    }
-
-                    if (!traits.HasTrait(CritterTraits.EVERLASTING))
-                    {
-                        if (ImGui.Button("Everlasting"))
+                        else
                         {
-                            traits.Add(Db.Get().traits.Get(CritterTraits.EVERLASTING));
+                            ImGui.Text(trait.Name);
                         }
-                    }
-                    else
-                    {
-                        ImGui.Text("Has Everlasting");
                     }
                 }
             }

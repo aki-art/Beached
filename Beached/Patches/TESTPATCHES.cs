@@ -5,21 +5,18 @@ using Beached.Content.Scripts;
 using HarmonyLib;
 using Klei;
 using Klei.AI;
-using Rendering;
+using ProcGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ProcGen;
 using UnityEngine;
-using System.Reflection.Emit;
 
 namespace Beached.Patches
 {
     public class TestPatches
     {
         public static Texture2D testMask;
-
 
         [HarmonyPatch(typeof(WearableAccessorizer), "ApplyEquipment")]
         public class WearableAccessorizer_ApplyEquipment_Patch
@@ -47,8 +44,6 @@ namespace Beached.Patches
                 }
             }
         }
-
-
 
 /*        [HarmonyPatch(typeof(SettingsCache), "LoadFiles", typeof(string), typeof(string), typeof(List<YamlIO.Error>))]
         public class SettingsCache_LoadFiles_Patch

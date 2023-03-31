@@ -34,7 +34,7 @@ namespace Beached.Content.Defs.Flora
             prefab.AddOrGet<UprootedMonitor>();
             prefab.AddOrGet<Harvestable>();
             prefab.AddOrGet<HarvestDesignatable>();
-            prefab.AddOrGet<SeedProducer>().Configure(TongueConfig.ID, SeedProducer.ProductionType.DigOnly, 1);
+            prefab.AddOrGet<SeedProducer>().Configure(MusselTongueConfig.ID, SeedProducer.ProductionType.DigOnly, 1);
             prefab.AddOrGet<BasicForagePlantPlanted>();
             prefab.AddOrGet<KBatchedAnimController>().randomiseLoopedOffset = true;
 
@@ -46,13 +46,8 @@ namespace Beached.Content.Defs.Flora
             return DlcManager.AVAILABLE_ALL_VERSIONS;
         }
 
-        public void OnPrefabInit(GameObject inst)
-        {
-        }
+        public void OnPrefabInit(GameObject inst) {  }
 
-        public void OnSpawn(GameObject inst)
-        {
-            inst.GetComponent<KBatchedAnimController>().animScale *= 0.66f;
-        }
+        public void OnSpawn(GameObject inst) => inst.GetComponent<KBatchedAnimController>().animScale *= 0.75f;
     }
 }

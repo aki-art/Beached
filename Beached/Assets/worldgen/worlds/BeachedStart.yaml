@@ -11,7 +11,7 @@ worldsize:
 layoutMethod: PowerTree
 
 seasons:
-  - MeteorShowers
+  - Beached_AstropelagosMoonletMeteorShowers
 
 defaultsOverrides:
   data:
@@ -174,4 +174,13 @@ worldTemplateRules:
     allowedCellsFilter:
       - command: Replace
         zoneTypes: [Bone]
+# Murky Brine in Depths   
+  - names: 
+      - beached/worldgen/murkybrine1
+      - beached/worldgen/murkybrine2
+    listRule: GuaranteeOne
+    priority: 999
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Depths]
         

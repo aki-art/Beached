@@ -16,7 +16,7 @@ namespace Beached.Content.Defs.Entities.SetPieces
             return new List<GameObject>()
             {
                 CreateSetPiece(TEST, 11, 8, "test"),
-                CreateTestPiece(BEACH, 13, 8, ModAssets.Textures.Placeholders.zeoliteBg),
+                CreateSetPiece(BEACH, 13, 8, "beach"),
                 CreateTestPiece(ZEOLITE, 8, 8, ModAssets.Textures.Placeholders.zeoliteBg)
             };
         }

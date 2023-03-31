@@ -1,4 +1,5 @@
 ﻿using Beached.Content.ModDb;
+using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using Newtonsoft.Json;
@@ -27,6 +28,7 @@ namespace Beached.Patches
             public static void LatePostfix()
             {
                 BDb.AddRecipes();
+                DNAInjector.InitializeOptions();
             }
 
             private static void LoadSprites(Assets __instance, string path)

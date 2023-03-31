@@ -62,6 +62,13 @@ namespace Beached
                     public static LocString EFFECT = "Houses a single coral, connected to a liquid conduit.";
                 }
 
+                public class BEACHED_DNAINJECTOR
+                {
+                    public static LocString NAME = FormatAsLink("DNA Injector", ForceFieldGeneratorConfig.ID);
+                    public static LocString DESC = "...";
+                    public static LocString EFFECTS = "Allows administering DNA samples to Eggs, applying traits to newborn critters.";
+                }
+
                 public class BEACHED_INTERPLANETARYPOWEROUTLET
                 {
                     public static LocString NAME = "Interplanetary Power Outlet";
@@ -204,12 +211,25 @@ namespace Beached
             }
         }
 
+        public class COLONY_ACHIEVEMENTS
+        {
+            public class MISC_REQUIREMENTS
+            {
+            }
+        }
+
         public class COMETS
         {
             public class SHRAPNEL
             {
                 public static LocString NAME = "Shrapnel";
                 public static LocString DESC = "Small piece of a metal violently flung from an explosion.";
+            }
+
+            public class BEACHED_DIAMONDCOMET
+            {
+                public static LocString NAME = "Diamond Comet";
+                public static LocString DESC = "TODO";
             }
         }
 
@@ -264,6 +284,15 @@ namespace Beached
                         "Death in {0}s";
                 }
 
+                public class BEACHED_GENETICALLYMODIFIED
+                {
+                    public static LocString NAME = "Genetically Altered";
+                    public static LocString TOOLTIP = "This egg has been genetically modified: \n" +
+                        "{0}\n\n" +
+                        "It cannot receive any more modifications.";
+                }
+
+
                 public class BEACHED_SMOKING
                 {
                     public static LocString NAME = "Smoking ({0})";
@@ -291,16 +320,59 @@ namespace Beached
 
             public class TRAITS
             {
-                public class BEACHED_GMOTRAIT_EVERLASTING
+
+                public class BEACHED_GMOTRAITS_BLAND
                 {
-                    public static LocString NAME = "Everlasting";
-                    public static LocString DESC = "This critter does not seem to age.";
+                    public static LocString NAME = "Bland";
+                    public static LocString DESC = "This critter is a bit easier on the eyes, it provides no decor.";
                 }
 
-                public class BEACHED_GMOTRAIT_MEATY
+                public class BEACHED_GMOTRAITS_PRODUCTIVE1
+                {
+                    public static LocString NAME = "Productive I";
+                    public static LocString DESC = "This critter has doubled metabolism and production.";
+                }
+
+                public class BEACHED_GMOTRAITS_PRODUCTIVE2
+                {
+                    public static LocString NAME = "Productive II";
+                    public static LocString DESC = "This critter has quadropled metabolism and production.";
+                }
+
+                public class BEACHED_GMOTRAITS_PRODUCTIVE3
+                {
+                    public static LocString NAME = "Productive III";
+                    public static LocString DESC = "This critter has octupled metabolism and production.";
+                }
+
+                public class BEACHED_GMOTRAITS_MEATY
                 {
                     public static LocString NAME = "Meaty";
                     public static LocString DESC = "This critter looks exceptionally tasty.";
+                }
+
+                public class BEACHED_GMOTRAITS_FABULOUS
+                {
+                    public static LocString NAME = "Fabulous";
+                    public static LocString DESC = "My duplicants find this critter the most beautiful creature they have ever laid eyes upon.";
+                }
+
+                public class BEACHED_GMOTRAITS_LASTING
+                {
+                    public static LocString NAME = "Lasting";
+                    public static LocString DESC = "This critter will far outlive it's friends.";
+                }
+
+                public class BEACHED_GMOTRAITS_HYPOALLERGENIC
+                {
+                    public static LocString NAME = "Hypoallergenic";
+                    public static LocString DESC = "Even the worst of fur allergics can safely pet this critter.";
+                }
+
+                public class BEACHED_GMOTRAITS_EVERLASTING
+                {
+                    public static LocString NAME = "Everlasting";
+                    public static LocString DESC = "This critter does not seem to age.";
                 }
             }
 
@@ -343,7 +415,7 @@ namespace Beached
                         public static LocString DESC = $"...";
                     }
 
-                    public class BEACHED_AMMONIAVENT
+                    public class BEACHED_AMMONIA
                     {
                         public static LocString NAME = "Ammonia Vent";
                         public static LocString DESC = $"...";
@@ -415,11 +487,11 @@ namespace Beached
 
                 public class BEACHED_SLICKSHELL
                 {
-                    public static LocString NAME = "Slickshell";
+                    public static LocString NAME = FormatAsLink("Slickshell", SlickShellConfig.ID);
                     public static LocString DESC = "...";
-                    public static LocString BABY_NAME = "Slick Shellitle";
+                    public static LocString BABY_NAME = FormatAsLink("Slickshelly", SlickShellConfig.ID);
                     public static LocString BABY_DESC = "...";
-                    public static LocString EGG_NAME = "Slickshell Egg";
+                    public static LocString EGG_NAME = FormatAsLink("Slickshell Egg", SlickShellConfig.ID);
                 }
 
                 public class BEACHED_ANGULARFISH
@@ -1136,6 +1208,12 @@ namespace Beached
         {
             public class MISC
             {
+                public class BEACHED_GENETIC_SAMPLE
+                {
+                    public static LocString NAME = "{0} Genetic Sample";
+                    public static LocString DESC = "...";
+                }
+
                 public class BEACHED_BLUEPRINT
                 {
                     public static LocString NAME = "Blueprint: {0}";
@@ -1214,7 +1292,7 @@ namespace Beached
 
                 public class BEACHED_MUSSELTONGUE
                 {
-                    public static LocString NAME = FormatAsLink("Mussel Tongue", TongueConfig.ID);
+                    public static LocString NAME = FormatAsLink("Mussel Tongue", MusselTongueConfig.ID);
                     public static LocString DESC = "Edible tongue of a Mussel Sprout. It has a somewhat bitter, green flavour, and the consistency of fresh clam.";
                 }
 
@@ -1492,6 +1570,18 @@ namespace Beached
         {
             public static LocString CHARACTERCONTAINER_LIFEGOAL_TRAIT = "<color=#e6d084>Life Goal: {0}</color>";
 
+            public class SPACEDESTINATIONS
+            {
+                public class CLUSTERMAPMETEORSHOWERS
+                {
+                    public class BEACHED_DIAMOND
+                    {
+                        public static LocString NAME = "Shooting Stars";
+                        public static LocString DESCRIPTION = "TODO";
+                    }
+                }
+            }
+
             public class CODEX
             {
                 public static LocString GUIDES = "Beached Guides";
@@ -1547,7 +1637,19 @@ namespace Beached
             public class EXTRAREEF
             {
                 public static LocString NAME = "Coral Reef";
-                public static LocString DESCRIPTION = "";
+                public static LocString DESCRIPTION = "A submerged cave of corals, pearls and a plankton providing underwater geyser.";
+            }
+
+            public class SULFUROUS_CORE
+            {
+                public static LocString NAME = "Sulfurous Core";
+                public static LocString DESCRIPTION = "This world has a core of molten Sulfur. And snails.";
+            }
+
+            public class CRYSTAL_GEODES
+            {
+                public static LocString NAME = "Crystal Geodes";
+                public static LocString DESCRIPTION = "Geodes of crystal clusters spawn in this world";
             }
         }
 

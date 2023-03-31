@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities.AI;
+using Beached.Content.Scripts.Items;
 
 namespace Beached.Content.ModDb
 {
@@ -10,10 +11,10 @@ namespace Beached.Content.ModDb
         public static StatusItem secretingMucus;
         public static StatusItem lubricated;
         public static StatusItem smoking;
+        public static StatusItem geneticallyMofidied;
 
         public static void Register(Db db)
         {
-            Log.Debug("STATUSITEMS ------------------------------------");
             desiccation = new(
                 "Beached_Desiccation",
                 "CREATURES",
@@ -24,6 +25,20 @@ namespace Beached.Content.ModDb
                 OverlayModes.None.ID);
 
             desiccation.SetResolveStringCallback((str, data) => data is MoistureMonitor.Instance moistureMonitor ? string.Format(str, moistureMonitor.timeUntilDeath) : str);
+
+            geneticallyMofidied = new(
+                "Beached_GeneticallyModified",
+                "CREATURES",
+                "status_item_unknown_mutation",
+                StatusItem.IconType.Custom,
+                NotificationType.Neutral,
+                false,
+                OverlayModes.None.ID);
+
+            geneticallyMofidied.SetResolveStringCallback((str, data) =>
+            {
+                return data is Beached_GeneticallyModifiableEgg egg ? egg.GetStatusItemString(str) : str;
+            });
 
             secretingMucus = new(
                 "Beached_SecretingMucus",

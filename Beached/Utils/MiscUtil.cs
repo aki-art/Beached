@@ -20,7 +20,7 @@ namespace Beached.Utils
                 _ => Direction.None,
             };
         }
-
+        
         public static void AddToStaticReadonlyArray<ElemType, InstanceType>(string fieldName, params ElemType[] items)
         {
             var ref_ALL_ATTRIBUTES = AccessTools.FieldRefAccess<ElemType[]>(typeof(InstanceType), fieldName);

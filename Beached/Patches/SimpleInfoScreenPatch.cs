@@ -1,4 +1,4 @@
-﻿using Beached.Content.UI;
+﻿using Beached.Content.Scripts.UI;
 using HarmonyLib;
 using UnityEngine;
 
