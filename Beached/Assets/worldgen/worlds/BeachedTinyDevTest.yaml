@@ -4,8 +4,8 @@ disableWorldTraits: true
 
 worldTraitScale: 0.12 # Adjust with worldSize. Traits are tuned to base game world sizes.
 worldsize:
-  X: 128
-  Y: 128
+  X: 224
+  Y: 224
 layoutMethod: PowerTree
 
 defaultsOverrides:

@@ -19,6 +19,7 @@ namespace Beached
         {
             public static Dictionary<string, GameObject> setpieces;
             public static GameObject universalSidescreen; // prefab with commonly used controls ready to go
+            public static GameObject cometTrailFx;
         }
 
         // static hardcoded indices for my zonetypes
@@ -189,6 +190,15 @@ namespace Beached
             Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid_b.png");
             Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
             LoadSetpieces(bundle);
+
+            Prefabs.cometTrailFx = bundle.LoadAsset<GameObject>("Assets/Beached/fx/CometSparkles.prefab");
+            var renderer = Prefabs.cometTrailFx.GetComponent<ParticleSystemRenderer>();
+            var texture = renderer.material.mainTexture;
+            renderer.material = new Material(Shader.Find("Klei/BloomedParticleShader"))
+            {
+                renderQueue = RenderQueues.Liquid,
+                mainTexture = texture
+            };
         }
 
         private static void LoadSetpieces(AssetBundle bundle)
@@ -305,7 +315,7 @@ namespace Beached
                 Directory.CreateDirectory(dirPath);
             }
 
-            File.WriteAllBytes(Path.Combine(dirPath, name) + System.DateTime.Now + ".png", bytes);
+            File.WriteAllBytes(Path.Combine(dirPath, name) + System.DateTime.Now.Millisecond + ".png", bytes);
 
             Log.Debug("Saved to " + dirPath);
         }

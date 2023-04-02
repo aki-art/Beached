@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace Beached.Content.Scripts.Entities
+namespace Beached.Content.Scripts.Entities.Comets
 {
     public class Shrapnel : Comet
     {

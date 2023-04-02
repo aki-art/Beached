@@ -23,10 +23,9 @@ namespace Beached.Content.ModDb
                 float.PositiveInfinity,
                 1,
                 true,
-                600f)
-                //.AddEvent(Db.Get().GameplayEvents.ClusterIceShower)
+                300f)
                 .AddEvent(BGameplayEvents.ClusterDiamondShower));
-                //.AddEvent(Db.Get().GameplayEvents.ClusterSnowShower));
+                //.AddEvent(BGameplayEvents.ClusterAbyssaliteShower);
         }
     }
 }

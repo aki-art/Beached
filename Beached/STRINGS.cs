@@ -231,6 +231,30 @@ namespace Beached
                 public static LocString NAME = "Diamond Comet";
                 public static LocString DESC = "TODO";
             }
+
+            public class BEACHED_SPARKLINGZIRCONCOMET
+            {
+                public static LocString NAME = "Sparkling Zircon Comet";
+                public static LocString DESC = "TODO";
+            }
+
+            public class BEACHED_SPARKLINGAQUAMARINECOMET
+            {
+                public static LocString NAME = "Sparkling Aquamarine Comet";
+                public static LocString DESC = "TODO";
+            }
+
+            public class BEACHED_SPARKLINGDIAMONDCOMET
+            {
+                public static LocString NAME = "Sparkling Diamond Comet";
+                public static LocString DESC = "TODO";
+            }
+
+            public class BEACHED_SPARKLINGVOIDCOMET
+            {
+                public static LocString NAME = "Sparkling Void Comet";
+                public static LocString DESC = "TODO";
+            }
         }
 
         public class CORALS
@@ -1577,6 +1601,12 @@ namespace Beached
                     public class BEACHED_DIAMOND
                     {
                         public static LocString NAME = "Shooting Stars";
+                        public static LocString DESCRIPTION = "TODO";
+                    }
+
+                    public class BEACHED_ABYSSALITE
+                    {
+                        public static LocString NAME = "Abyssalite Meteors";
                         public static LocString DESCRIPTION = "TODO";
                     }
                 }

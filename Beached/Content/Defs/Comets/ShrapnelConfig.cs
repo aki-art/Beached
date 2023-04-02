@@ -1,4 +1,4 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿using Beached.Content.Scripts.Entities.Comets;
 using Beached.Utils;
 using UnityEngine;
 

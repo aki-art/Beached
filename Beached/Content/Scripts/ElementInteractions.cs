@@ -1,7 +1,7 @@
 ﻿using Beached.Content.Defs.Comets;
 using Beached.Content.Defs.Flora;
 using Beached.Content.ModDb.Germs;
-using Beached.Content.Scripts.Entities;
+using Beached.Content.Scripts.Entities.Comets;
 using System.Collections.Generic;
 using UnityEngine;
 

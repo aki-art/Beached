@@ -24,7 +24,6 @@ defaultsOverrides:
     OverworldAvoidRadius: 5
     OverworldSampleBehaviour: PoissonDisk
     OverworldMinNodes: 1
-    TestValue: "Hello There"
 
 startSubworldName: subworlds/beached/beach/BeachStart
 startingBaseTemplate: beached/bases/beach_startingbaseB

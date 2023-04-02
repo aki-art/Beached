@@ -7,6 +7,7 @@ using ProcGenGame;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Beached.ModDevTools
@@ -17,6 +18,10 @@ namespace Beached.ModDevTools
         public static OfflineWorldGen offlineWorldGen;
         private static float progress = 0;
         private static int testingSeed = 0;
+        private static Cluster cluster;
+        private WorldLayoutHelper layoutHelper;
+        private WorldGen layoutPreviewWorldgen;
+        public unsafe static Vector2* testPoints;
 
         public WorldGenDevTool()
         {
@@ -54,20 +59,101 @@ namespace Beached.ModDevTools
                 }
             }
 
-            if (ImGui.Button("Layout Test"))
+            if (ImGui.Button("Reload Worldgen"))
             {
-                ImGui.Text("Progress: " + progress);
-                var worldGen = new WorldGen("worlds/BeachedTinyDevTest", new List<string>() { }, new List<string>() { }, false);
+                WorldGen.LoadSettings(false);
 
-                worldGen.Initialise(UpdateProgress, _ => { }, testingSeed, testingSeed, testingSeed, testingSeed, true);
-                worldGen.GenerateLayout(UpdateProgress);
+                cluster = Cluster.Load();
+                SettingsCache.LoadFiles(new List<YamlIO.Error>());
+            }
 
-                var cells = worldGen.data.overworldCells;
-                if (cells != null)
+            else ImGui.Text("Layout cache is null");
+
+            if (ImGui.Button("Generate Layout"))
+            {
+                layoutHelper ??= new WorldLayoutHelper();
+                layoutPreviewWorldgen = layoutHelper.Generate(testingSeed);
+            }
+
+            //ImDrawListPtr drawList = ImGui.GetWindowDrawList();
+            var p = ImGui.GetCursorScreenPos();
+            var testPoints = new[]
+            {
+                new Vector2(0, 0) + p,
+                new Vector2(0, 100) + p,
+                new Vector2(100, 100) + p,
+                new Vector2(100, 0) + p
+            };
+
+            ImGui.GetWindowDrawList().AddConvexPolyFilled(ref testPoints[0], 4, ToUint(Color.red));
+            /*
+                        for (int i = 0; i < testPoints.Length; i++)
+                        {
+                            drawList.AddConvexPolyFilled(ref testPoints[i], 5, ToUint(Color.red));
+                        }
+            */
+/*
+            ImGui.GetWindowDrawList().AddTriangleFilled(
+                new Vector2(0, 0),
+                new Vector2(100, 0),
+                new Vector2(100, 100),
+                ToUint(Color.blue));*/
+
+            if (layoutPreviewWorldgen != null && ImGui.Button("Save Image"))
+            {
+                DisplayLayout();
+
+            }
+        }
+
+        private unsafe static ImDrawListPtr draw()
+        {
+            var drawList = ImGui.GetWindowDrawList();
+            //IntPtr mem = Marshal.AllocCoTaskMem(4);
+            //testPoints = (Vector2*)mem;
+
+            var c = (Color32)Color.red;
+            var colori = (uint)(((c.a << 24) | (c.r << 16) | (c.g << 8) | c.b) & 0xffffffffL); ;
+            return drawList;
+        }
+
+        private void DisplayLayout()
+        {
+            var image = new Texture2D(224, 224, TextureFormat.ARGB32, false);
+
+            Log.Debug(layoutPreviewWorldgen.TerrainCells.Count);
+
+            foreach (var terrainCell in layoutPreviewWorldgen.TerrainCells)
+            {
+                Log.Debug("drawing terraincell: " + terrainCell.GetSubWorldType(layoutPreviewWorldgen));
+                for (int x = 0; x < 224; x++)
                 {
+                    for (int y = 0; y < 224; y++)
+                    {
+                        if (terrainCell.poly.Contains(new Vector2(x, y)))
+                        {
+                            var subworld = terrainCell.GetSubWorldType(layoutPreviewWorldgen);
+                            var subworldData = SettingsCache.subworlds[subworld];
+                            if (subworldData == null)
+                            {
+                                Debug.Log("no zonetype for " + subworld);
+                                continue;
+                            }
 
+                            var color = World.Instance.zoneRenderData.zoneColours[(int)subworldData.zoneType];
+                            image.SetPixel(x, y, color);
+                        }
+                    }
                 }
             }
+
+            image.Apply();
+            ModAssets.SaveImage(image, "layout");
+        }
+
+        private static uint ToUint(Color32 c)
+        {
+            return (uint)(((c.a << 24) | (c.r << 16) | (c.g << 8) | c.b) & 0xffffffffL);
         }
 
         private bool UpdateProgress(StringKey stringKeyRoot, float completePercent, WorldGenProgressStages.Stages stage)

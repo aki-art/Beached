@@ -66,6 +66,12 @@
 			<Private>false</Private>
 		</Reference>
 
+		<Reference Include="UnityEngine.ParticleSystemModule">
+			<HintPath>$(GameLibsFolder)\UnityEngine.ParticleSystemModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+
 		<Reference Include="UnityEngine.UIModule">
 			<HintPath>$(GameLibsFolder)\UnityEngine.UIModule.dll</HintPath>
 			<Private>false</Private>
