@@ -23,8 +23,7 @@ namespace Beached.Content.ModDb
         // for critters, used for growing limpets
         public const string LIMPETHOST = "Beached_LimpetHost";
 
-        // for critters, used for growing limpets
-        public const string MUCUS_SOAKED = "Beached_MucusSoaked";
+        public const string STEPPED_IN_MUCUS = "Beached_SteppedInMucus";
 
         // applied when they see shooting stars
         public const string WISHING_STAR = "Beached_WishingStar";
@@ -46,7 +45,7 @@ namespace Beached.Content.ModDb
                 .Modifier(peeDelta, 5f / CONSTS.CYCLE_LENGTH)
                 .Add(set);
 
-            new EffectBuilder(MUCUS_SOAKED, 120f, true)
+            new EffectBuilder(STEPPED_IN_MUCUS, 120f, true)
                 .Modifier(carryCapacity, -0.5f, true)
                 .Add(set);
 

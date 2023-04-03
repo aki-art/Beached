@@ -18,12 +18,12 @@ namespace Beached.Patches
                     smi.effects.Remove("CarpetFeet");
                     smi.effects.Remove("WetFeet");
 
-                    smi.effects.Add(BEffects.MUCUS_SOAKED, true);
+                    smi.effects.Add(BEffects.STEPPED_IN_MUCUS, true);
 
                     return false;
                 }
 
-                smi.effects.Remove(BEffects.MUCUS_SOAKED);
+                smi.effects.Remove(BEffects.STEPPED_IN_MUCUS);
 
                 return true;
             }

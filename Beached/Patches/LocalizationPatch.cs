@@ -26,7 +26,7 @@ namespace Beached.Patches
                 Localization.RegisterForTranslation(root);
                 LoadStrings();
                 LocString.CreateLocStringKeys(root, null);
-                Localization.GenerateStringsTemplate(root, Path.Combine(Manager.GetDirectory(), "strings_templates"));
+                LocUtil.GenerateStringsTemplate(root, Path.Combine(Manager.GetDirectory(), "strings_templates"));
             }
 
             // Load user created translations

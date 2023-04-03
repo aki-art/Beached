@@ -115,7 +115,7 @@ namespace Beached
 
                 public class BEACHED_MOSSBED
                 {
-                    // a bed for moss. it's a wooden frame moss grows on.
+                    [Note("A bed for moss. It's a wooden frame moss grows on.")]
                     public static LocString NAME = "Moss Bed";
                     public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a once time delivery of water; once grown the moss is converted to a natural tile.";
                     public static LocString EFFECT = "Natural tiles can be used as walls and floors or for wild planting.";
@@ -146,7 +146,7 @@ namespace Beached
                 {
                     // visible in UI or codex 
                     public static LocString NAME = "Critter Lick";
-                    // the name that appears on the actual building. ie. Salt-Lick, or Sulfur-Lick
+                    [Note("The name that appears on the actual building. ie. Salt-Lick, or Sulfur-Lick")]
                     public static LocString FORMATTED_NAME = "{Element}-Lick";
                     public static LocString DESC = "A block of lickable material. Delicious!";
                     public static LocString EFFECT = "Allows critters to consume additional materials, boosting production. \n" +
@@ -456,7 +456,7 @@ namespace Beached
                     public class BISMUTH_VOLCANO
                     {
                         public static LocString NAME = "Bismuth Volcano";
-                        public static LocString DESC = "A large volcano that periodically erupts with " + "NA"; //KUI.FormatAsLink("molten Bismuth", BElements.MoltenBismuth.ToString().ToUpperInvariant()) + ".";
+                        public static LocString DESC = $"A large volcano that periodically erupts with {ELEMENTS.BISMUTHMOLTEN.NAME}";
                     }
 
                     public class PACU_GEYSER
@@ -555,7 +555,7 @@ namespace Beached
 
                 public class BAMBOO
                 {
-                    public static LocString NAME = "StackablePlant"; //Clickety Clack? Clack Cane?
+                    public static LocString NAME = "Bamboo"; //Clickety Clack? Clack Cane?
                     public static LocString DESC = "...";
                 }
 
@@ -812,11 +812,22 @@ namespace Beached
 
         public class EFFECTS
         {
+            public class BEACHED_STEPPEDINMUCUS
+            {
+                public static LocString NAME = "Slippery Feet";
+                public static LocString DESC = $"This duplicant has stepped in {ELEMENTS.MUCUS.NAME}.";
+            }
+
+            public class BEACHED_MUCUS_SOAKED
+            {
+                public static LocString NAME = "Slimy";
+                public static LocString DESC = $"This duplicant has recently submerged in {ELEMENTS.MUCUS.NAME}.";
+            }
+
             public class BEACHED_OCEANBREEZE
             {
                 public static LocString NAME = "Ocean Breeze";
-
-                public static LocString DESC = "...";
+                public static LocString DESC = $"Breathing in fresh {ELEMENTS.SALTYOXYGEN.NAME} is improving this duplicants mood and respiration.";
             }
 
             public class BEACHED_LIMPETHOST
@@ -826,25 +837,12 @@ namespace Beached
                 public static LocString DESC = "This critter is being overgrown by Limpets. \n" +
                         "Once fully grown, they can be sheared off for resources.";
             }
+
             public class BEACHED_WISHINGSTAR
             {
                 public static LocString NAME = "Wishing Star";
-
-                public static LocString DESC = "{Name} has wished upon a star: {Wish}";
-                public static LocString WISH1 = "\"9 Lives!\"";
-                public static LocString WISH2 = "\"Eternal peace and happiness.\"";
-                public static LocString WISH3 = "\"CHAOS! CHAOS! CHAOS!\"";
-                public static LocString WISH4 = "\"Astrobars every day, forever!\"";
-                public static LocString WISH5 = "\"20% fluffier pufts.\"";
-                public static LocString WISH6 = "\"Glommers in this world!\"";
-                public static LocString WISH7 = "\"Free Dr. Peppernut for everyone!\"";
-                public static LocString WISH8 = "\"A Pocket Dimension full of Gold.\"";
-
-                // just a helper array, ignore for translations
-                public static LocString[] WISH_OPTIONS = new[]
-                {
-                    WISH1, WISH2, WISH3, WISH4, WISH5, WISH6, WISH7, WISH8
-                };
+                public static LocString DESC = "This Duplicant has wished upon a star. What did they wish for? " +
+                    "Can't tell, birthday-wish rules, if they say it won't come true!";
             }
         }
 
@@ -992,6 +990,13 @@ namespace Beached
             public class IRIDIUM
             {
                 public static LocString NAME = FormatAsLink("Iridium");
+                public static LocString DESC = "TODO";
+            }
+
+            [Note("Iridium + Radiation/Radium. Radioactive high end material.")]
+            public class IRRADIUM
+            {
+                public static LocString NAME = FormatAsLink("Irradium");
                 public static LocString DESC = "TODO";
             }
 
