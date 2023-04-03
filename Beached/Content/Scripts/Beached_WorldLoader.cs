@@ -1,15 +1,8 @@
-﻿using Beached.Content.BWorldGen;
-using Klei.CustomSettings;
-using Neutronium.PostProcessing.LUT;
-using System.Collections.Generic;
-using System.IO;
-using static Beached.ModAssets;
-
-namespace Beached.Content.Scripts
+﻿namespace Beached.Content.Scripts
 {
-    public class BeachedWorldLoader : KMonoBehaviour
+    public class Beached_WorldLoader : KMonoBehaviour
     {
-        public static BeachedWorldLoader Instance;
+        public static Beached_WorldLoader Instance;
         
         public override void OnPrefabInit() => Instance = this;
 

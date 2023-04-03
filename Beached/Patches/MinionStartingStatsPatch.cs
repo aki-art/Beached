@@ -14,7 +14,7 @@ namespace Beached.Patches
         {
             public static void Postfix(MinionStartingStats __instance)
             {
-                if (Mod.settings.CrossWorld.LifeGoals || BeachedWorldLoader.Instance.IsBeachedContentActive)
+                if (Mod.settings.CrossWorld.LifeGoals || Beached_WorldLoader.Instance.IsBeachedContentActive)
                 {
                     var trait = BTraits.GetGoalForPersonality(__instance.personality);
 
@@ -52,9 +52,9 @@ namespace Beached.Patches
                 if (go.TryGetComponent(out Traits traits))
                 {
                     Log.Debug("Added traits ");
-                    Debug.Assert(go.GetComponent<BeachedLifeGoalTracker>() != null, "go.GetComponent<BeachedMinionStorage>()");
+                    Debug.Assert(go.GetComponent<Beached_LifeGoalTracker>() != null, "go.GetComponent<BeachedMinionStorage>()");
                     Debug.Assert(__instance.GetLifeGoalAttributes() != null, "__instance.GetLifeGoalAttributes()");
-                    go.GetComponent<BeachedLifeGoalTracker>().AddAttributes(__instance.GetLifeGoalAttributes());
+                    go.GetComponent<Beached_LifeGoalTracker>().AddAttributes(__instance.GetLifeGoalAttributes());
                     traits.Add(goalTrait);
                 }
                 else

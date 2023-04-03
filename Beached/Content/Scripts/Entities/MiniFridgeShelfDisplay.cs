@@ -30,7 +30,7 @@ namespace Beached.Content.Scripts.Entities
 
             shelfItems = new KBatchedAnimController[4];
             Subscribe((int)GameHashes.OnStorageChange, OnStorageChange);
-            BeachedMod.Instance.Subscribe(ModHashes.debugDataChange, OnDebugDataChange);
+            Beached_Mod.Instance.Subscribe(ModHashes.debugDataChange, OnDebugDataChange);
             OnStorageChange(null);
         }
 

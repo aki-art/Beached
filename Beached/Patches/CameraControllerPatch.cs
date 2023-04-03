@@ -18,7 +18,7 @@ namespace Beached.Patches
             [HarmonyPriority(Priority.High)]
             public static void Prefix(CameraController __instance)
             {
-                var useCustomLUT = BeachedWorldLoader.Instance.IsBeachedContentActive || Mod.settings.CrossWorld.UseVibrantLUTEverywhere;
+                var useCustomLUT = Beached_WorldLoader.Instance.IsBeachedContentActive || Mod.settings.CrossWorld.UseVibrantLUTEverywhere;
                 
                 if (useCustomLUT)
                 {

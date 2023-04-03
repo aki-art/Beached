@@ -13,8 +13,9 @@ namespace Beached.Patches
             {
                 ConfigureSnapons(__result);
 
-                __result.AddOrGet<BeachedMinionStorage>();
-                __result.AddOrGet<BeachedLifeGoalTracker>();
+                __result.AddOrGet<Beached_MinionStorage>();
+                __result.AddOrGet<Beached_LifeGoalTracker>();
+                __result.AddOrGet<Beached_MinionEvents>();
             }
 
             private static void ConfigureSnapons(GameObject __result)

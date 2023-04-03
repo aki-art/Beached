@@ -3,7 +3,7 @@
 namespace Beached.Content.Scripts
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    public class BeachedMinionStorage : KMonoBehaviour
+    public class Beached_MinionStorage : KMonoBehaviour
     {
         [Serialize]
         public string hat;

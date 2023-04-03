@@ -69,7 +69,7 @@ namespace Beached.Content.ModDb
             trait.OnAddTrait = go =>
             {
                 Log.Debug("on add traits");
-                go.AddOrGet<BeachedLifeGoalTracker>().wantTag = targetTag;
+                go.AddOrGet<Beached_LifeGoalTracker>().wantTag = targetTag;
                 Log.Debug(targetTag);
                 go.AddOrGet<EquipmentGoal>();
             };
@@ -89,7 +89,7 @@ namespace Beached.Content.ModDb
             trait.OnAddTrait = go =>
             {
                 Log.Debug("on add traits");
-                go.AddOrGet<BeachedLifeGoalTracker>().wantTag = targetTag;
+                go.AddOrGet<Beached_LifeGoalTracker>().wantTag = targetTag;
                 Log.Debug(targetTag);
                 go.FindOrAddUnityComponent<BedroomBuildingGoal>();
             };

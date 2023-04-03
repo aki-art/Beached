@@ -47,7 +47,7 @@
         {
             if (diggable.isDigComplete)
             {
-                BeachedMod.Instance.treasury.TrySpawnTreasure(diggable, diggable.originalDigElement, diggable.worker);
+                Beached_Mod.Instance.treasury.TrySpawnTreasure(diggable, diggable.originalDigElement, diggable.worker);
             }
 
             Treasury.diggers.Remove(diggable.GetCell());

@@ -10,7 +10,7 @@
         public class StatesInstance : GameStateMachine<States, StatesInstance, BedroomBuildingGoal, object>.GameInstance
         {
             [MyCmpGet]
-            public BeachedLifeGoalTracker lifeGoals;
+            public Beached_LifeGoalTracker lifeGoals;
 
             [MyCmpGet]
             public MinionIdentity minionIdentity;

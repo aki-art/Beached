@@ -74,6 +74,7 @@ namespace Beached.Utils
 
             return this;
         }
+
         public EffectBuilder HideInUI()
         {
             showInUI = false;
@@ -81,7 +82,7 @@ namespace Beached.Utils
             return this;
         }
 
-        public void Add(ModifierSet set)
+        public Effect Add(ModifierSet set)
         {
             var effect = new Effect(ID, name, description, duration, showInUI, triggerFloatingText, isBad, emote, emoteCooldown, custom_icon: customIcon);
 
@@ -96,6 +97,8 @@ namespace Beached.Utils
             }
 
             set.effects.Add(effect);
+
+            return effect;
         }
     }
 }

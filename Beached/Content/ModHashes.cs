@@ -16,6 +16,7 @@
             blockUpdate = new("BlockUpdate"),
             lifeGoalLost = new("LifeGoalLost"),
             lifeGoalTrackerUpdate = new("LifeGoalTrackerUpdate"),
+            wishingStarEvent = new("WishingStarEvent"),
             debugDataChange = new("DebugDataChange");
 
         private readonly int value;

@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Defs.Comets;
 using Database;
 using Klei.AI;
+using System.Collections.Generic;
 using TUNING;
 
 namespace Beached.Content.ModDb
@@ -26,6 +27,8 @@ namespace Beached.Content.ModDb
                 .AddMeteor(SparklingZirconCometConfig.ID, 0.001f)
                 .AddMeteor(SparklingAquamarineCometConfig.ID, 0.001f)
                 .AddMeteor(SparklingVoidCometConfig.ID, 0.001f));
+
+            ClusterDiamondShower.tags.Add(BTags.wishingStars);
 
             ClusterAbyssaliteShower = gameplayEvents.Add(new MeteorShowerEvent(
                 ABYSSALITE_SHOWER,

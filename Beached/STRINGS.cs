@@ -826,6 +826,26 @@ namespace Beached
                 public static LocString DESC = "This critter is being overgrown by Limpets. \n" +
                         "Once fully grown, they can be sheared off for resources.";
             }
+            public class BEACHED_WISHINGSTAR
+            {
+                public static LocString NAME = "Wishing Star";
+
+                public static LocString DESC = "{Name} has wished upon a star: {Wish}";
+                public static LocString WISH1 = "\"9 Lives!\"";
+                public static LocString WISH2 = "\"Eternal peace and happiness.\"";
+                public static LocString WISH3 = "\"CHAOS! CHAOS! CHAOS!\"";
+                public static LocString WISH4 = "\"Astrobars every day, forever!\"";
+                public static LocString WISH5 = "\"20% fluffier pufts.\"";
+                public static LocString WISH6 = "\"Glommers in this world!\"";
+                public static LocString WISH7 = "\"Free Dr. Peppernut for everyone!\"";
+                public static LocString WISH8 = "\"A Pocket Dimension full of Gold.\"";
+
+                // just a helper array, ignore for translations
+                public static LocString[] WISH_OPTIONS = new[]
+                {
+                    WISH1, WISH2, WISH3, WISH4, WISH5, WISH6, WISH7, WISH8
+                };
+            }
         }
 
         public class ELEMENTS

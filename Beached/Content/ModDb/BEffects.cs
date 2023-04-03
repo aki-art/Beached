@@ -26,6 +26,9 @@ namespace Beached.Content.ModDb
         // for critters, used for growing limpets
         public const string MUCUS_SOAKED = "Beached_MucusSoaked";
 
+        // applied when they see shooting stars
+        public const string WISHING_STAR = "Beached_WishingStar";
+
         public static void Register(ModifierSet set)
         {
             var stressDelta = Db.Get().Amounts.Stress.deltaAttribute.Id;
@@ -64,6 +67,10 @@ namespace Beached.Content.ModDb
             new EffectBuilder(POFFMOUTH_RECOVERY, 160f, false)
                 .HideInUI()
                 .HideFloatingText()
+                .Add(set);
+
+            new EffectBuilder(WISHING_STAR, 600f, false)
+                .Modifier(Db.Get().Attributes.QualityOfLife.Id, 4)
                 .Add(set);
 
             /*            new EffectBuilder(LIMPETHOST, 0, false)

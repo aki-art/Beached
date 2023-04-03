@@ -14,7 +14,7 @@ namespace Beached.Patches
             public static void Postfix(SaveGame __instance)
             {
                 Log.Debug("SaveGame OnPrefabInit");
-                __instance.gameObject.AddOrGet<BeachedMod>();
+                __instance.gameObject.AddOrGet<Beached_Mod>();
                 __instance.gameObject.AddOrGet<BeachedGrid>();
             }
         }

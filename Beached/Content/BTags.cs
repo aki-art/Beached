@@ -21,6 +21,7 @@ namespace Beached.Content
         public static readonly Tag noBackwall = TagManager.Create("NoBackwall"); // Background Tiles mod uses this
         public static readonly Tag aquatic = TagManager.Create("Beached_Aquatic"); 
         public static readonly Tag geneticallyModified = TagManager.Create("Beached_GeneticallyModified");
+        public static readonly Tag wishingStars = TagManager.Create("Beached_WishingStars"); // used on events that should trigger the wishing star effect on dupes
 
         public static TagSet eggs = new()
         {

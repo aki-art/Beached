@@ -34,7 +34,7 @@ namespace Beached.ModDevTools
         {
             if (ImGui.Button("Debug Data trigger"))
             {
-                BeachedMod.Instance.Trigger(ModHashes.debugDataChange);
+                Beached_Mod.Instance.Trigger(ModHashes.debugDataChange);
             }
 
             if (ImGui.Button("Infrared Disease"))
@@ -80,6 +80,16 @@ namespace Beached.ModDevTools
                 }
             }
 
+            if (ImGui.CollapsingHeader("Seasons"))
+            {
+                if (ImGui.Button("Start meteor season"))
+                {
+                    ClusterManager.Instance.activeWorld
+                        .GetSMI<GameplaySeasonManager.Instance>()
+                        .StartNewSeason(BGameplaySeasons.astropelagosMoonletMeteorShowers);
+                }
+            }
+
             if (ImGui.CollapsingHeader("Notifications"))
             {
                 if (ImGui.Button("Open test notification"))
@@ -119,7 +129,7 @@ namespace Beached.ModDevTools
                 {
                     ImGui.Text($"{digger.Key}\t{digger.Value?.GetProperName()}");
                     var element = Grid.Element[digger.Key];
-                    if (BeachedMod.Instance.treasury.chances.TryGetValue(element.id, out var treasures))
+                    if (Beached_Mod.Instance.treasury.chances.TryGetValue(element.id, out var treasures))
                     {
                         foreach (var treasure in treasures.treasures)
                         {

@@ -88,7 +88,7 @@ namespace Beached
                 amber = Util.ColorFromHex("f98f1e"),
                 ammonia = Util.ColorFromHex("4d3b9b"),
                 ash = Util.ColorFromHex("8a8e9d"),
-                aquamarine = new Color32(74, 255, 231, 255),
+                aquamarine = new(0.05f, 1.2f, 2.51f),
                 basalt = new Color32(30, 30, 50, 255),
                 beryllium = Util.ColorFromHex("7da39a"),
                 bismuth = new Color32(117, 166, 108, 255),
