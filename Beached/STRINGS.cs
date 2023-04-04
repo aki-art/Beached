@@ -1,8 +1,10 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Entities.Critters;
+using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
+using Beached.Content.Defs.Items;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
@@ -108,7 +110,7 @@ namespace Beached
 
                 public class BEACHED_MINIFRIDGE
                 {
-                    public static LocString NAME = "Mini-Fridge";
+                    public static LocString NAME = FormatAsLink("Mini-Fridge", MiniFridgeConfig.ID);
                     public static LocString DESC = "A tiny fridge to store a tiny bit of food for the tiny dupes.";
                     public static LocString EFFECT = "TRANSLATION NOT NEEDED - gets copied from regular fridge";
                 }
@@ -116,7 +118,7 @@ namespace Beached
                 public class BEACHED_MOSSBED
                 {
                     [Note("A bed for moss. It's a wooden frame moss grows on.")]
-                    public static LocString NAME = "Moss Bed";
+                    public static LocString NAME = FormatAsLink("Moss Bed", MossBedConfig.ID);
                     public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a once time delivery of water; once grown the moss is converted to a natural tile.";
                     public static LocString EFFECT = "Natural tiles can be used as walls and floors or for wild planting.";
                 }
@@ -135,10 +137,10 @@ namespace Beached
                     public static LocString EFFECT = "Collects Sap from a tree it is attached to.";
                 }
 
-                public class BEACHED_SEASHELLCHIME
+                public class BEACHED_CHIME
                 {
-                    public static LocString NAME = "Seashell Chime";
-                    public static LocString DESC = "Pretty sea shells suspended in air, creating music.";
+                    public static LocString NAME = FormatAsLink("Chime", ChimeConfig.ID);
+                    public static LocString DESC = "Pretty things suspended in air, creating music.";
                     public static LocString EFFECT = "Emits a soothing sound when stimulated by changing air pressure, decreasing Stress of nearby Duplicants.";
                 }
 
@@ -150,7 +152,7 @@ namespace Beached
                     public static LocString FORMATTED_NAME = "{Element}-Lick";
                     public static LocString DESC = "A block of lickable material. Delicious!";
                     public static LocString EFFECT = "Allows critters to consume additional materials, boosting production. \n" +
-                                                     $"{FormatAsLink("Slickshells", SlickShellConfig.ID)} can be fully sustained on appropiate licks.\n\n" +
+                                                     $"{CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES} can be fully sustained on appropiate licks.\n\n" +
                                                      "Requires refilling once depleted.";
                 }
 
@@ -166,7 +168,7 @@ namespace Beached
 
                 public class BEACHED_WOODCARVING
                 {
-                    public static LocString NAME = "Wood Carving";
+                    public static LocString NAME = FormatAsLink("Wood Carving", WoodCarvingConfig.ID);
                     public static LocString DESC = "";
                     public static LocString EFFECT = "";
 
@@ -181,6 +183,18 @@ namespace Beached
                         public class PIGTOTEM
                         {
                             public static LocString NAME = "Pig Totem";
+                            public static LocString DESC = "";
+                        }
+
+                        public class MAJORAMASK
+                        {
+                            public static LocString NAME = "Odd Mask";
+                            public static LocString DESC = "";
+                        }
+
+                        public class TERRIER
+                        {
+                            public static LocString NAME = "The Good Terrier";
                             public static LocString DESC = "";
                         }
                     }
@@ -612,15 +626,21 @@ namespace Beached
 
             public class FAMILY
             {
+                [Note("A slickster in a shell, also \"slick\" as in oily/slimy. It looks like a snail.")]
                 public static LocString BEACHEDSLICKSHELL = "Slickshell";
+                [Note("Angler fish with angular patterns.")]
                 public static LocString BEACHEDANGULARFISH = "Angular Fish";
+                [Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]
                 public static LocString BEACHEDMAKI = "Maki";
             }
 
             public class FAMILY_PLURAL
             {
+                [Note("A slickster in a shell, also \"slick\" as in oily/slimy. It looks like a snail.")]
                 public static LocString BEACHEDSNAILSPECIES = "Slickshells";
+                [Note("Angler fish with angular patterns.")]
                 public static LocString BEACHEDANGULARFISHSPECIES = "Angular Fish";
+                [Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]
                 public static LocString BEACHEDMAKISPECIES = "Makis";
             }
         }
@@ -993,13 +1013,6 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
-            [Note("Iridium + Radiation/Radium. Radioactive high end material.")]
-            public class IRRADIUM
-            {
-                public static LocString NAME = FormatAsLink("Irradium");
-                public static LocString DESC = "TODO";
-            }
-
             public class IRIDIUMGAS
             {
                 public static LocString NAME = FormatAsLink("Iridium Gas");
@@ -1009,6 +1022,13 @@ namespace Beached
             public class IRIDIUMMOLTEN
             {
                 public static LocString NAME = FormatAsLink("Iridium");
+                public static LocString DESC = "TODO";
+            }
+
+            [Note("Made up element, Radioactive high end material upgraded from Iridium.")]
+            public class IRRADIUM
+            {
+                public static LocString NAME = FormatAsLink("Irradium");
                 public static LocString DESC = "TODO";
             }
 
@@ -1026,18 +1046,21 @@ namespace Beached
 
             public class MUCUS
             {
+                [Note("Snail mucus")]
                 public static LocString NAME = FormatAsLink("Mucus");
                 public static LocString DESC = "TODO";
             }
 
             public class MUCUSFROZEN
             {
+                [Note("Snail mucus")]
                 public static LocString NAME = FormatAsLink("Frozen Mucus", Elements.mucusFrozen.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class MURKYBRINE
             {
+                [Note("basically Polluted Brine")]
                 public static LocString NAME = FormatAsLink("Murky Brine", Elements.murkyBrine.ToString());
                 public static LocString DESC = "TODO";
             }
@@ -1056,6 +1079,7 @@ namespace Beached
 
             public class PEARL
             {
+                [Note("Solidified mass of pearls stuck together")]
                 public static LocString NAME = FormatAsLink("Pearl");
                 public static LocString DESC = "TODO";
             }
@@ -1080,18 +1104,21 @@ namespace Beached
 
             public class RUBBER
             {
+                [Note("Natural rubber made from tree latex.")]
                 public static LocString NAME = FormatAsLink("Rubber");
                 public static LocString DESC = "TODO";
             }
 
             public class SALTYOXYGEN
             {
+                [Note("Air with salty water vapour suspended in it, like near seas and oceans.")]
                 public static LocString NAME = FormatAsLink("Salty Oxygen", Elements.saltyOxygen.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class SALTYOXYGENFROZEN
             {
+                [Note("Air with salty water vapour suspended in it, like near seas and oceans.")]
                 public static LocString NAME = FormatAsLink("Frozen Salty Oxygen");
                 public static LocString DESC = "TODO";
             }
@@ -1116,13 +1143,13 @@ namespace Beached
 
             public class SULFUROUS_ICE
             {
-                public static LocString NAME = FormatAsLink("Sulfurous Ice", Elements.sulfurousIce.ToString());
+                public static LocString NAME = FormatAsLink("Frozen Sulfuric Acid", Elements.sulfurousIce.ToString());
                 public static LocString DESC = "TODO";
             }
 
             public class SULFUROUS_WATER
             {
-                public static LocString NAME = FormatAsLink("Sulfurous Water", Elements.sulfurousWater.ToString());
+                public static LocString NAME = FormatAsLink("Sulfuric Acid", Elements.sulfurousWater.ToString());
                 public static LocString DESC = "TODO";
             }
 
@@ -1186,49 +1213,50 @@ namespace Beached
 
                 public class BEACHED_EQUIPMENT_RUBBERBOOTS
                 {
-                    public static LocString NAME = "Rubber Boots";
+                    public static LocString NAME = FormatAsLink("Rubber Boots", RubberBootsConfig.ID);
                     public static LocString GENERICNAME = "Rubber Boots";
                     public static LocString DESCRIPTION = "Protects the feet of Duplicants from being wet.";
                 }
 
                 public class BEACHED_EQUIPMENT_MAXIXEPENDANT
                 {
-                    public static LocString NAME = "Maxixe Pendant";
+                    public static LocString NAME = FormatAsLink("Maxixe Pendant", MaxixePendantConfig.ID);
                     public static LocString GENERICNAME = "Maxixe Pendant";
                     public static LocString DESCRIPTION = "...";
                 }
 
                 public class BEACHED_EQUIPMENT_PEARLNECKLACE
                 {
-                    public static LocString NAME = "Pearl Necklace";
+                    public static LocString NAME = FormatAsLink("Pearl Necklace", PearlNecklaceConfig.ID);
                     public static LocString GENERICNAME = "Pearl Necklace";
                     public static LocString DESCRIPTION = "This pearlescent shine would swoon anyone!";
                 }
 
                 public class BEACHED_EQUIPMENT_HADEANZIRCONAMULET
                 {
-                    public static LocString NAME = "Hadean Zircon Amulet";
+                    public static LocString NAME = FormatAsLink("Hadean Zircon Amulet", HadeanZirconAmuletConfig.ID);
                     public static LocString GENERICNAME = "Hadean Zircon Amulet";
                     public static LocString DESCRIPTION = "The bright red sparkle of this gem reminds Duplicants of the importance of working hard.";
                 }
 
                 public class BEACHED_EQUIPMENT_HEMATITENECKLACE
                 {
-                    public static LocString NAME = "Hematite Necklace";
+                    public static LocString NAME = FormatAsLink("Hematite Necklace", HematiteNecklaceConfig.ID);
                     public static LocString GENERICNAME = "Hematite Necklace";
                     public static LocString DESCRIPTION = "Heavy and stylish.";
                 }
 
                 public class BEACHED_EQUIPMENT_ZEOLITEPENDANT
                 {
-                    public static LocString NAME = "Zeolite Pendant";
+                    public static LocString NAME = FormatAsLink("Zeolite Pendant", ZeolitePendantConfig.ID);
                     public static LocString GENERICNAME = "Zeolite Pendant";
                     public static LocString DESCRIPTION = "This gemstone has a particularly soothing color. When duplicants look at it, they feel at ease.";
                 }
 
                 public class BEACHED_EQUIPMENT_STRANGEMATTERAMULET
                 {
-                    public static LocString NAME = "Strange Amulet";
+                    [Note("https://en.wikipedia.org/wiki/Strange_matter")]
+                    public static LocString NAME = FormatAsLink("Strange Amulet", StrangeMatterAmuletConfig.ID);
                     public static LocString GENERICNAME = "Strange Amulet";
                     public static LocString DESCRIPTION = "A piece of material with Universe-defying qualities; safely contained.";
                 }
@@ -1396,6 +1424,9 @@ namespace Beached
 
             public class GEMS
             {
+                [Note("Attached to the descriptions of each gems.")]
+                public static LocString CUTTING = "Can be cut in a Gem Cutter.";
+
                 public class AMBER_INCLUSION_BUG
                 {
                     public static LocString NAME = "Bug Amber Inclusion";
@@ -1420,6 +1451,13 @@ namespace Beached
                     public static LocString DESCRIPTION = "...";
                 }
 
+                public class AMBER_INCLUSION_ANCIENT_FOSSIL_FRAGMENT
+                {
+                    public static LocString NAME = "Ancient Fossil Fragment Inclusion";
+                    public static LocString DESCRIPTION = "...";
+                }
+
+
                 public class FLAWLESS_DIAMOND
                 {
                     public static LocString NAME = "Flawless Diamond";
@@ -1428,14 +1466,16 @@ namespace Beached
 
                 public class HADEAN_ZIRCON
                 {
+                    [Note("Hadean Zircon is a specific type of real life Zircon, from the Hadean period from 4 billion years ago.")]
                     public static LocString NAME = "Hadean Zircon";
-                    public static LocString DESCRIPTION = "...";
+                    public static LocString DESCRIPTION = "The estimated age of this gemstone is 4 billion years old.";
                 }
 
                 public class MAXIXE
                 {
+                    [Note("Maxixe beryl is a real gemstone, but probably has little direct translations. \"Blue Beryl\" works too. https://en.wikipedia.org/wiki/Beryl")]
                     public static LocString NAME = "Maxixe";
-                    public static LocString DESCRIPTION = "...";
+                    public static LocString DESCRIPTION = "A beryl gemstone with a captivatingly dark blue shade.";
                 }
 
                 public class MOTHER_PEARL
@@ -1446,7 +1486,8 @@ namespace Beached
 
                 public class STRANGE_MATTER
                 {
-                    public static LocString NAME = "Strange Matter";
+                    [Note("https://en.wikipedia.org/wiki/Strange_matter")]
+                    public static LocString NAME = FormatAsLink("Strange Matter", RareGemsConfig.STRANGE_MATTER);
                     public static LocString DESCRIPTION = "A droplet of strange quark matter, safely contained.";
                 }
             }
@@ -1553,7 +1594,7 @@ namespace Beached
                 public static LocString DESC = "These sandy shoreslines are bountiful with useful resources, providing great supplies for a colony, " +
                     "although the large amount of water and sand may make excavation challenging.";
                 public static LocString UTILITY = "The layers of Siltstone, Salt and Sand suggest this area was once fully submerged under an ocean, " +
-                    "luckily for us it is now mostly dry land. The Bismuth Ore deposites will serve as my colonys valuable metal source.";
+                    "luckily for it is now mostly dry land. The Bismuth Ore deposits will serve as a valuable metal source for my colony.";
             }
 
             public class DEPTHS
@@ -1588,7 +1629,7 @@ namespace Beached
             public class ROT
             {
                 public static LocString NAME = "Rot";
-                public static LocString DESC = "Strange twisting cavers lines with supple amounts of Bone, Lime and Rot. The local lifeforms appear" +
+                public static LocString DESC = "Strange twisting cavers lined with supple amounts of Bone, Lime and Rot. The local lifeforms appear" +
                     "to have adaped to scavenging these resources.";
                 public static LocString UTILITY = "TODO";
             }
@@ -1633,6 +1674,22 @@ namespace Beached
                     {
                         public static LocString NAME = "Abyssalite Meteors";
                         public static LocString DESCRIPTION = "TODO";
+                    }
+                }
+
+                public class HARVESTABLE_POI
+                {
+                    public class BEACHED_HARVESTABLESPACEPOI_PEARLESCENTASTEROIDFIELD
+                    {
+                        public static LocString NAME = "Pearlescent Asteroid Field";
+                        public static LocString DESC = "TODO";
+                    }
+
+                    public class BEACHED_HARVESTABLESPACEPOI_AMMONITE
+                    {
+                        public static LocString NAME = "Ancient Ammonite Shell";
+                        public static LocString DESC = "A long perished remains of an abnormally large Ammonite. I hope nothing this " +
+                            "large exists alive elsewhere.";
                     }
                 }
             }
@@ -1682,7 +1739,8 @@ namespace Beached
 
             public class BEACHEDSTART
             {
-                public static LocString NAME = "Astropelagos"; // Nautica?
+                [Note("Based on Pelagic layer naming system of planets. Astropelagos = Ocean layer of the stars.")]
+                public static LocString NAME = "Astropelagos";
                 public static LocString DESCRIPTION = "";
             }
         }
@@ -1703,6 +1761,7 @@ namespace Beached
 
             public class CRYSTAL_GEODES
             {
+                [Note("Caves with crystal blocks, and growing crystal clusters inside.")]
                 public static LocString NAME = "Crystal Geodes";
                 public static LocString DESCRIPTION = "Geodes of crystal clusters spawn in this world";
             }
@@ -1710,7 +1769,7 @@ namespace Beached
 
         public static string FormatAsLink(string text, string id = null)
         {
-            text = global::STRINGS.UI.StripLinkFormatting(text);
+            text = KLEISTRINGS.UI.StripLinkFormatting(text);
 
             if (id.IsNullOrWhiteSpace())
             {

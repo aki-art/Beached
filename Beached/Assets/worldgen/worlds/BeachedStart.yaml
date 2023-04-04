@@ -3,6 +3,7 @@ description: STRINGS.WORLDS.BEACHEDSTART.DESCRIPTION
 disableWorldTraits: true
 asteroidIcon: beached_asteroid_astropelagos_kanim
 iconScale: 1
+nameTables: [ OCEANARIA ]
 
 worldTraitScale: 1 # Adjust with worldSize. Traits are tuned to base game world sizes.
 worldsize:
