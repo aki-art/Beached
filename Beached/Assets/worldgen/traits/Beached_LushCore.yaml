@@ -1,0 +1,23 @@
+# meant to look identical to Lush  Core, but this one is specific to Astropelagos
+name: STRINGS.WORLD_TRAITS.LUSH_CORE.NAME
+description: STRINGS.WORLD_TRAITS.LUSH_CORE.DESCRIPTION
+colorHex: 52A247
+
+exclusiveWithTags:
+  - CoreTrait
+
+traitTags:
+  - VeryCold
+  - Beached_Traits
+
+additionalSubworldFiles:
+  - name: subworlds/beached/thermalvents/ThermalVentsLush
+
+additionalUnknownCellFilters:
+  - tagcommand: DistanceFromTag
+    command: Replace
+    minDistance: 0
+    maxDistance: 1
+    tag: Beached_AtSideBDepth
+    subworldNames:
+      - subworlds/beached/thermalvents/ThermalVentsLush

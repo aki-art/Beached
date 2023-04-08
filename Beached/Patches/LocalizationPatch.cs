@@ -19,6 +19,13 @@ namespace Beached.Patches
                 Strings.Add("STRINGS.DUPLICANTS.TRAITS.GILLS.SHORT_DESC", STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.SHORT_DESC);
                 Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MiniFridgeConfig.ID.ToUpperInvariant()}.EFFECT", global::STRINGS.BUILDINGS.PREFABS.REFRIGERATOR.EFFECT);
                 Strings.Add($"STRINGS.BUILDINGS.PREFABS.{AmmoniaGeneratorConfig.ID.ToUpperInvariant()}.EFFECT", global::STRINGS.BUILDINGS.PREFABS.HYDROGENGENERATOR.EFFECT);
+
+                if (Strings.TryGet(new StringKey("STRINGS.UI.SPACEDESTINATIONS.HARVESTABLE_POI.BEACHED_HARVESTABLESPACEPOI_PEARLESCENTASTEROIDFIELD.NAME"), out var name))
+                    Log.Debug("Found not namespaced: " + name);
+                if (Strings.TryGet("STRINGS.UI.SPACEDESTINATIONS.HARVESTABLE_POI.BEACHED_HARVESTABLESPACEPOI_PEARLESCENTASTEROIDFIELD.NAME", out var name2))
+                    Log.Debug("Found not namespaced: " + name2);
+                if (Strings.TryGet("Beached.STRINGS.UI.SPACEDESTINATIONS.HARVESTABLE_POI.BEACHED_HARVESTABLESPACEPOI_PEARLESCENTASTEROIDFIELD.NAME", out var name3))
+                    Log.Debug("Found namespaced: " + name3);
             }
 
             public static void Translate(Type root)

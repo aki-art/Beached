@@ -7,7 +7,7 @@ exclusiveWithTags:
 
 traitTags:
   - VeryHot
-  - CoreTrait
+  - Core
 
 additionalSubworldFiles:
   - name: subworlds/beached/thermalvents/ThermalVentsMain

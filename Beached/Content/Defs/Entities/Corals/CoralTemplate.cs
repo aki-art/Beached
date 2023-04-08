@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Beached.Content.Defs.Foods;
+using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
+using static ResearchTypes;
+using static SeedProducer;
 
 namespace Beached.Content.Defs.Entities.Corals
 {
@@ -15,6 +18,7 @@ namespace Beached.Content.Defs.Entities.Corals
             Elements.murkyBrine,
             Elements.sulfurousWater
         };
+
 
         public static GameObject Create(string id, float mass, string anim, int width, int height, EffectorValues decor, float defaultTemperature = 293f, string initialAnim = "idle_loop", List<Tag> additionalTags = null, SimHashes[] safeElements = null)
         {
@@ -60,6 +64,49 @@ namespace Beached.Content.Defs.Entities.Corals
             prefab.AddOrGet<HarvestDesignatable>();
 
             prefab.AddTag(BTags.coral);
+            return prefab;
+        }
+
+        public static GameObject AddDriedCoral(string id, GameObject coral, string anim, float width, float height, 
+            SingleEntityReceptacle.ReceptacleDirection direction = SingleEntityReceptacle.ReceptacleDirection.Top)
+        {
+            var name = Strings.Get("STRINGS.CORALS.SEED." + id.ToUpperInvariant() + ".NAME");
+            var desc = Strings.Get("STRINGS.CORALS.SEED." + id.ToUpperInvariant() + ".DESCRIPTION");
+            var domesticatedDesc = Strings.Get("STRINGS.CORALS." + id.ToUpperInvariant() + ".DOMESTICATED_DESCRIPTION");
+
+            var prefab = EntityTemplates.CreateLooseEntity(
+                id,
+                name,
+                desc,
+                1f,
+                true,
+                Assets.GetAnim(anim),
+                "object",
+                Grid.SceneLayer.Front,
+                EntityTemplates.CollisionShape.CIRCLE,
+                width,
+                height,
+                true,
+                SORTORDER.SEEDS);
+
+            prefab.AddOrGet<EntitySplitter>();
+
+            EntityTemplates.CreateAndRegisterCompostableFromPrefab(prefab);
+
+            var plantableSeed = prefab.AddOrGet<PlantableSeed>();
+            plantableSeed.PlantID = new Tag(prefab.name);
+            plantableSeed.domesticatedDescription = domesticatedDesc;
+            plantableSeed.direction = direction;
+
+            var kPrefabId = prefab.AddOrGet<KPrefabID>();
+            kPrefabId.AddTag(BTags.coralFrag);
+            kPrefabId.AddTag(GameTags.PedestalDisplayable);
+
+            Assets.AddPrefab(kPrefabId);
+
+            coral
+                .AddOrGet<SeedProducer>()
+                .Configure(id, ProductionType.DigOnly, 1);
 
             return prefab;
         }

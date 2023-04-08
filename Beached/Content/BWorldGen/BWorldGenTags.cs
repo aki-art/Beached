@@ -15,6 +15,8 @@ namespace Beached.Content.BWorldGen
         public static Tag SandBeds = TagManager.Create("Beached_SandBeds");
         // turns some tiles into their crushed variant
         public static Tag Shattered = TagManager.Create("Beached_Shattered");
+        // used to distinguish between the mimic frozen core and lush core traits
+        public static Tag BeachedTraits = TagManager.Create("Beached_Traits");
 
         public static void Initialize()
         {

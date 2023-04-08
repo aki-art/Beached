@@ -1,0 +1,15 @@
+biomeNoise: noise/thermalvents
+temperatureRange: VeryCold
+pdWeight: 2
+density:
+  min: 0
+  max: 30
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+borderOverride: hardToDig
+biomes:
+  - name: biomes/ThermalVents/Frozen
+tags:
+  - IgnoreCaveOverride
+zoneType: Sulfur

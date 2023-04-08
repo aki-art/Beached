@@ -2,6 +2,9 @@ name: Beached.STRINGS.WORLD_TRAITS.CRYSTAL_GEODES.NAME
 description: Beached.STRINGS.WORLD_TRAITS.CRYSTAL_GEODES.DESCRIPTION
 colorHex: ffb3ec
 
+traitTags:
+  - LargeWorld
+  
 additionalWorldTemplateRules:
   - names:
       - beached/worldgen/zeoliteGeode1

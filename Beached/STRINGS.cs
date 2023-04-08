@@ -273,13 +273,6 @@ namespace Beached
 
         public class CORALS
         {
-            public class BEACHED_LEAFLETCORAL
-            {
-                public static LocString NAME = "Leaflet Coral";
-                public static LocString DESCRIPTION = "A coral with green capitulum resembling cabbage leaves. This coral consumes Hydrogen directly from fresh Water, releasing the excess Oxygen in the process.\n" +
-                    "\n" +
-                    "Inefficiently converts Water into Oxygen.";
-            }
 
             public class BEACHED_WOSHU_CORAL
             {
@@ -505,8 +498,23 @@ namespace Beached
                     public class BEACHED_PIPTAIL
                     {
                         public static LocString NAME = FormatAsLink("PipTail", PipTailConfig.ID);
-                        public static LocString DESC = (LocString)("The " + FormatAsLink("Seed", "PLANTS") + " of a " + NAME + ".");
+                        public static LocString DESC = ($"The {FormatAsLink("Seed", "PLANTS")} of a {NAME}.");
                     }
+
+                    public class BEACHED_LEAFLETCORAL
+                    {
+                        public static LocString NAME = "Leaflet Coral Frag";
+                        public static LocString DESC = ($"The {FormatAsLink("Frag", "CORALS")} of a {NAME}.");
+                    }
+                }
+
+                public class BEACHED_LEAFLETCORAL
+                {
+                    public static LocString NAME = "Leaflet Coral";
+                    public static LocString DESCRIPTION = "A coral with green capitulum resembling cabbage leaves. This coral consumes Hydrogen directly from fresh Water, releasing the excess Oxygen in the process.\n" +
+                        "\n" +
+                        "Inefficiently converts Water into Oxygen.";
+                    public static LocString DOMESTICATEDDESC = "...";
                 }
 
                 public class BEACHED_CELLALGAE
@@ -1679,13 +1687,13 @@ namespace Beached
 
                 public class HARVESTABLE_POI
                 {
-                    public class BEACHED_HARVESTABLESPACEPOI_PEARLESCENTASTEROIDFIELD
+                    public class BEACHED_PEARLESCENTASTEROIDFIELD
                     {
                         public static LocString NAME = "Pearlescent Asteroid Field";
                         public static LocString DESC = "TODO";
                     }
 
-                    public class BEACHED_HARVESTABLESPACEPOI_AMMONITE
+                    public class BEACHED_AMMONITE
                     {
                         public static LocString NAME = "Ancient Ammonite Shell";
                         public static LocString DESC = "A long perished remains of an abnormally large Ammonite. I hope nothing this " +
