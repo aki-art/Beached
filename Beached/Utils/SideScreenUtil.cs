@@ -44,11 +44,6 @@ namespace Beached.Utils
 
         private static SideScreenContent FindOriginal(Type type, List<DetailsScreen.SideScreenRef> screens)
         {
-            foreach (var screen in screens)
-            {
-                Log.Debug($"{screen?.screenPrefab.GetType()}");
-            }
-
             var result = screens.Find(s => s?.screenPrefab.GetType() == type)?.screenPrefab;
 
             if (result == null)

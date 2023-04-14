@@ -26,6 +26,7 @@ worldTraitRules:
       - Core # my world has a unique core generation, incompatible with these
       - GenericGeysers
       - StartChange
+      - Geodes # i add my own variety
 
 defaultsOverrides:
   data:

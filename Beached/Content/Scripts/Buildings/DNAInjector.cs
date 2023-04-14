@@ -257,10 +257,8 @@ namespace Beached.Content.Scripts.Buildings
 
             public void UpdateEggSymbol()
             {
-                Beached.Log.Debug("UpdateEggSymbol");
                 if (eggKbac == null)
                 {
-                    Beached.Log.Debug("  eggkbac null");
                     return;
                 }
 
@@ -269,7 +267,6 @@ namespace Beached.Content.Scripts.Buildings
 
                 if (!hasEgg)
                 {
-                    Beached.Log.Debug("  no egg");
                     return;
                 }
 
@@ -326,21 +323,16 @@ namespace Beached.Content.Scripts.Buildings
 
             internal void UpdateEgg()
             {
-                Beached.Log.Debug("Updating egg");
                 if(currentEgg != null)
                 {
-                    Beached.Log.Debug("not null");
                     if (master.eggStorage.items.Contains(currentEgg))
                     {
-                        Beached.Log.Debug("still here");
                         return;
                     }
                     else if(tracker != null)
                     {
                         Destroy(tracker);
                     }
-
-                    Beached.Log.Debug("not here");
                 }
 
                 currentEgg = master.eggStorage.FindFirst(GameTags.Egg);

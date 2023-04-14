@@ -6,6 +6,7 @@ using Beached.Content.Defs.Entities.SetPieces;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Items;
+using Beached.Content.ModDb.Germs;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +68,9 @@ namespace Beached.Patches
             SmokerConfig.ID,
             SandySeashellsConfig.SEASHELL,
             SandySeashellsConfig.SLICKSHELL,
-            SeaShellConfig.ID
+            SeaShellConfig.ID,
+            JellyfishStrobilaConfig.ID,
+            PlanktonGerms.ID /// <see cref="UIOnlyPlankton"/>
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]

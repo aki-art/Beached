@@ -13,7 +13,6 @@ using System.Reflection;
 
 namespace Beached
 {
-
     public class Mod : UserMod2
     {
         public const string STATIC_ID = "Beached";
@@ -26,6 +25,7 @@ namespace Beached
 
         public static bool isFastTrackHere;
         public static bool isCritterTraitsRebornHere;
+        public static bool isTwitchHere;
 
         public static LUT_API lutAPI;
 

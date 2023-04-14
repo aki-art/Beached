@@ -3,14 +3,15 @@ using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities
 {
-    internal class BambooStalkPiece : KMonoBehaviour
+    internal class StemPiece : KMonoBehaviour
     {
         [MyCmpGet] private KBatchedAnimController kbac;
 
         [Serialize] public int stemIndex;
         [SerializeField] public int leafVariationCount;
+        [SerializeField] public string prefix;
 
-        public BambooStalkPiece()
+        public StemPiece()
         {
             stemIndex = -1;
         }
@@ -19,10 +20,10 @@ namespace Beached.Content.Scripts.Entities
         {
             if (stemIndex == -1)
             {
-                stemIndex = Random.Range(0, leafVariationCount + 1);
+                stemIndex = Random.Range(0, leafVariationCount);
             }
 
-            kbac.Play("idle0_" + stemIndex, KAnim.PlayMode.Paused);
+            kbac.Play(prefix + stemIndex, KAnim.PlayMode.Paused);
         }
     }
 }

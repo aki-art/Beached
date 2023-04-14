@@ -6,11 +6,17 @@ TerrainBiomeLookupTable:
     Solid:
     - content: SiltStone
       bandSize: 0.5
-    - content: Lime
-      bandSize: 0.3
-    - content: SedimentaryRock
-      bandSize: 0.1
+    - content: Salt
+      bandSize: 0.2
     - content: SiltStone
+      bandSize: 0.5
+    - content: SedimentaryRock
+      bandSize: 0.3
+    - content: ZincOre
+      bandSize: 0.1
+    - content: Sand
+      bandSize: 0.5
+    - content: SaltyOxygen
       bandSize: 0.6
     SnowyBase:
     - content: Ice

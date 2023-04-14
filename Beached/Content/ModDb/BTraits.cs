@@ -68,9 +68,7 @@ namespace Beached.Content.ModDb
             var trait = Db.Get().CreateTrait(id, name, desc, null, true, null, true, true);
             trait.OnAddTrait = go =>
             {
-                Log.Debug("on add traits");
                 go.AddOrGet<Beached_LifeGoalTracker>().wantTag = targetTag;
-                Log.Debug(targetTag);
                 go.AddOrGet<EquipmentGoal>();
             };
 

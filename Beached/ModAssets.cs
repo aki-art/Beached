@@ -20,6 +20,7 @@ namespace Beached
             public static Dictionary<string, GameObject> setpieces;
             public static GameObject universalSidescreen; // prefab with commonly used controls ready to go
             public static GameObject cometTrailFx;
+            public static GameObject testQuad;
         }
 
         // static hardcoded indices for my zonetypes
@@ -141,7 +142,8 @@ namespace Beached
                     depths = Util.ColorFromHex("1578FFFF"),
                     icy = Util.ColorFromHex("90BFDBFF"), // B5BBDBF
                     reefs = Util.ColorFromHex("B8697E"),
-                    sea = Util.ColorFromHex("63D6DEFF"),
+                    //sea = Util.ColorFromHex("63D6DEFF"),
+                    sea = Util.ColorFromHex("C7CDDEFF"),
                     pearly = Util.ColorFromHex("0E0906FF"),
                     bone = Util.ColorFromHex("D3BCD0"),
                     sulfur = Util.ColorFromHex("ffff00");
@@ -199,6 +201,10 @@ namespace Beached
                 renderQueue = RenderQueues.Liquid,
                 mainTexture = texture
             };
+
+            var testBundle = LoadAssetBundle("testshader", platformSpecific: false);
+            Prefabs.testQuad = testBundle.LoadAsset<GameObject>("Assets/Quad 1.prefab");
+            //Prefabs.testQuad.GetComponent<MeshRenderer>().material = new Material(testBundle.LoadAsset<>)
         }
 
         private static void LoadSetpieces(AssetBundle bundle)
@@ -211,6 +217,7 @@ namespace Beached
             Prefabs.setpieces.Add("test", testSetPiece);
 
             var beachSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/parallax/Beach/beach_setpiece.prefab");
+            beachSetPiece.GetComponent<Transform>().localScale *= 2f;
             var setPieceMaterial = new Material(bundle.LoadAsset<Shader>("Assets/Beached/fx/parallax/BeachedParallax.shader"));
             foreach (var renderer in beachSetPiece.GetComponents<SpriteRenderer>())
             {

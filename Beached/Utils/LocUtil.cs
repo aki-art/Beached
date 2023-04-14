@@ -131,7 +131,6 @@ namespace Beached.Utils
                 if (tree == null) Log.Warning("tree is null");
                 var type = tree.GetType();
 
-                Log.Debug("type of tree is " + type.Name);
                 if (type != typeof(string) && type != typeof(TextInfo))
                 {
                     WriteStringsTemplate(path1, writer, tree as Dictionary<string, object>);

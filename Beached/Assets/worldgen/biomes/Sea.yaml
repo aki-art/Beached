@@ -5,12 +5,12 @@ TerrainBiomeLookupTable:
   add:
     Basic:
     - content: SaltWater
-      bandSize: 0.2
+      bandSize: 0.4
     - content: Salt
       bandSize: 0.3
     - content: Cobaltite
       bandSize: 0.6
-    - content: IgneousRock
+    - content: Sand
       bandSize: 0.9
     - content: Obsidian
       bandSize: 1.2

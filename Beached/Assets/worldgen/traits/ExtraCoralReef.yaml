@@ -2,6 +2,9 @@ name: Beached.STRINGS.WORLD_TRAITS.EXTRAREEF.NAME
 description: Beached.STRINGS.WORLD_TRAITS.EXTRAREEF.DESCRIPTION
 colorHex: B8697E
 
+traitTags:
+  - LargeWorld
+  
 additionalWorldTemplateRules:
   # Try in Oceans or Seas first
   - names:

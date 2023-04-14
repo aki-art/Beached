@@ -4,19 +4,19 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-    internal class BambooConfig : IEntityConfig
+    internal class KelpConfig : IEntityConfig
     {
-        public const string ID = "Beached_Bamboo";
+        public const string ID = "Beached_Kelp";
 
         public GameObject CreatePrefab()
         {
             var prefab = EntityTemplates.CreatePlacedEntity(
                 ID,
-                STRINGS.CREATURES.SPECIES.BAMBOO.NAME,
-                STRINGS.CREATURES.SPECIES.BAMBOO.DESC,
+                STRINGS.CREATURES.SPECIES.KELP.NAME,
+                STRINGS.CREATURES.SPECIES.KELP.DESC,
                 100f,
-                Assets.GetAnim("beached_bamboo_kanim"),
-                "idle",
+                Assets.GetAnim("beached_kelp_kanim"),
+                "idle_0",
                 Grid.SceneLayer.BuildingBack,
                 1,
                 1,
@@ -29,7 +29,7 @@ namespace Beached.Content.Defs.Flora
             };
 
             prefab.AddOrGet<EntombVulnerable>();
-            prefab.AddOrGet<DrowningMonitor>();
+            prefab.AddOrGet<SubmersionMonitor>();
             prefab.AddOrGet<Prioritizable>();
             prefab.AddOrGet<Uprootable>();
 
@@ -45,20 +45,20 @@ namespace Beached.Content.Defs.Flora
 
             //prefab.AddOrGet<StackablePlant>().validFoundationTag = ID;
 
-            var segmented = prefab.AddOrGet<SegmentedBamboo>();
-            segmented.maxLength = 32;
-            segmented.segmentAnimFile = "beached_bamboo_kanim";
+            //prefab.AddOrGet<Bamboo>().maxInitialLength = 32;
+            /*            var stemPiece = prefab.AddOrGet<StemPiece>();
+                        stemPiece.leafVariationCount = 4;
+                        stemPiece.prefix = "idle";*/
+
+            var segmented = prefab.AddOrGet<SegmentedKelp>();
+            segmented.segmentAnimFile = "beached_kelp_kanim";
+            segmented.maxLength = 16;
+            segmented.segmentDeathFx = SpawnFXHashes.BuildingSpark;
+
+            prefab.AddOrGet<KelpSubmersionMonitor>();
 
             var kbac = prefab.AddOrGet<KBatchedAnimController>();
             kbac.randomiseLoopedOffset = true;
-            //kbac.animWidth = 0.75f;
-/*
-            var ladder = prefab.AddOrGet<Ladder>();
-            ladder.isPole = true;
-            ladder.downwardsMovementSpeedMultiplier = 1.5f;
-            ladder.upwardsMovementSpeedMultiplier = 0.5f;*/
-            
-            prefab.AddTag(BTags.bamboo);
 
             return prefab;
         }

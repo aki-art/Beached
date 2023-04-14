@@ -10,7 +10,7 @@ namespace Beached.Patches
         {
             public static void Postfix(WaterCubes __instance)
             {
-                __instance.material.SetFloat("_BlendScreen", 0.67f);
+                __instance.material.SetFloat("_BlendScreen", 0.5f);
             }
         }
     }

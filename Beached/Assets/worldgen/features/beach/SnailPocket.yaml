@@ -9,18 +9,14 @@ blobSize:
   min: 4
   max: 5
 internalMobs:
-  # - type: Beached_SlickShell
-  #   count:
-  #     min: 2
-  #     max: 4
+  - type: Beached_SlickShell
+    count:
+      min: 2
+      max: 4
   - type: Cylindrica
     count:
       min: 0
       max: 2
-  - type: SaltPlant
-    count:
-      min: 2
-      max: 3
 ElementChoiceGroups:
   RoomCenterElements:
     selectionMethod: WeightedResample
@@ -36,14 +32,14 @@ ElementChoiceGroups:
     choices:
       - element: Salt
         weight: 0.5
-      - element: Granite
+      - element: ZincOre
         weight: 1
   RoomBorderChoices1:
     selectionMethod: WeightedResample
     choices:
       - element: Salt
         weight: 1
-      - element: Granite
+      - element: ZincOre
         weight: 2
-      - element: Obsidian
+      - element: Fertilizer
         weight: 0.2

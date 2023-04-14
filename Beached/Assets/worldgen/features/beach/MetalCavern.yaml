@@ -20,6 +20,8 @@ ElementChoiceGroups:
     choices:
       - element: Bismuthinite
         weight: 0.7
+      - element: ZincOre
+        weight: 0.3
 #        overrides:
 #          massOverride: 900
       - element: SaltyOxygen
@@ -29,6 +31,8 @@ ElementChoiceGroups:
     choices:
       - element: Bismuthinite
         weight: 0.55
+      - element: ZincOre
+        weight: 0.1
       - element: SiltStone
         weight: 0.55
       - element: Algae

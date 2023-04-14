@@ -1,4 +1,5 @@
-﻿using KSerialization;
+﻿using Beached.Content.Scripts.Entities;
+using KSerialization;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -32,6 +33,8 @@ namespace Beached.Content.Scripts
 
             treasury = childGo.AddOrGet<Treasury>();
             treasury.Configure();
+
+            childGo.AddOrGet<KelpSubmersionMonitorUpdater>();
 
             childGo.AddOrGet<TileUpdater>();
         }

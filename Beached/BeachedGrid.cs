@@ -30,7 +30,6 @@ namespace Beached
 
         public override void OnSpawn()
         {
-            Log.Debug("BeachedGrid OnSpawn");
             if (worldgenZoneTypes != null)
             {
                 Log.Debug("beachedgrid has worldgen data " + worldgenZoneTypes.Count);

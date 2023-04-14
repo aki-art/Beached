@@ -88,26 +88,26 @@ filters:
     filter: Billow
     frequency: 1
     lacunarity: 2
-    octaves: 2
+    octaves: 3
     offset: 1
     gain: 0
     exponent: 1
     name: Billow_03HSfNJ8
     pos:
-      X: 1306.2528766294986
-      Y: 650.38659061101998
+      X: 1390.1071943502973
+      Y: 612.15888694418527
 transformers: {}
 selectors: {}
 modifiers:
   Scale2D_kiVypYrw:
     modifyType: Scale2d
     scale2d:
-      X: 0.100000001
+      X: 0.0599999987
       Y: 0.300000012
     name: Scale2D_kiVypYrw
     pos:
-      X: 227.71515326115815
-      Y: 289.54503554170009
+      X: 277.07848779088158
+      Y: 152.42466184802311
   Invert_gP5f7/Rm:
     modifyType: Invert
     scale2d:

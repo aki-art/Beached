@@ -73,6 +73,14 @@ MobLookupTable:
         max: 0.8
       width: 1
       height: 2
+    Beached_Kelp:
+      location: LiquidFloor
+      selectMethod: Centroid
+      density:
+        min: 0.4
+        max: 0.8
+      width: 1
+      height: 2
     Beached_BambooForest_Cylindrica:
       prefabName: Cylindrica
       location: Floor

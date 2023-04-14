@@ -1,0 +1,42 @@
+﻿using Beached.Content.ModDb.Germs;
+using Beached.Content.Scripts.Entities.AI;
+using UnityEngine;
+
+namespace Beached.Content.Defs.Entities.Critters
+{
+    public class JellyfishBrain
+    {
+        public static void ConfigureAI(GameObject gameObject, string symbolOverridePrefix, Tag species)
+        {
+            var germSuckDef = new GermSuckStates.Def()
+            {
+            };
+
+            var choreTable = new ChoreTable.Builder()
+                .Add(new DeathStates.Def())
+                .Add(new AnimInterruptStates.Def())
+                //.Add(new GrowUpStates.Def())
+                .Add(new TrappedStates.Def())
+                //.Add(new IncubatingStates.Def())
+                .Add(new BaggedStates.Def())
+                //.Add(new FallStates.Def())
+                //.Add(new StunnedStates.Def())
+                .Add(new DebugGoToStates.Def())
+                .Add(new FleeStates.Def())
+                //.Add(new DefendStates.Def())
+                //.Add(new AttackStates.Def("eat_pre", "eat_pst", null))
+                .PushInterruptGroup()
+                //.Add(new CreatureSleepStates.Def())
+                .Add(new FixedCaptureStates.Def())
+                //.Add(new RanchedStates.Def())
+                //.Add(new LayEggStates.Def())
+                .Add(germSuckDef)
+                //.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
+                .Add(new CallAdultStates.Def())
+                .PopInterruptGroup()
+                .Add(new IdleStates.Def());
+
+            EntityTemplates.AddCreatureBrain(gameObject, choreTable, species, symbolOverridePrefix);
+        }
+    }
+}

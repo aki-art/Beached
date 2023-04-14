@@ -9,7 +9,6 @@ namespace Beached.Content
 {
     public class Elements
     {
-        [UsedImplicitly]
         public static ElementInfo
             amber = ElementInfo.Solid("Amber", ModAssets.Colors.amber),
             ammonia = ElementInfo.Gas("Ammonia", ModAssets.Colors.ammonia),
@@ -66,6 +65,20 @@ namespace Beached.Content
             zincMolten = ElementInfo.Liquid("ZincMolten", ModAssets.Colors.zinc);
 
         public static Dictionary<SimHashes, float> corrosionData;
+
+        public static List<SimHashes> GetMetals()
+        {
+            return new List<SimHashes>() {
+                bismuth,
+                bismuthOre,
+                zincOre,
+                zinc,
+                iridium,
+                beryllium,
+                calcium,
+                zirconium,
+                zirconiumOre };
+        }
 
         public static void RegisterSubstances(List<Substance> list)
         {

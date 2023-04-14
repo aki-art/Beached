@@ -517,6 +517,12 @@ namespace Beached
                     public static LocString DOMESTICATEDDESC = "...";
                 }
 
+                public class BEACHED_JELLYFISHSTROBILA
+                {
+                    public static LocString NAME = "Jellyfish Strobila";
+                    public static LocString DESCRIPTION = "A bunch of neatly stacked Jellyfish babies waiting to be released and drift away.";
+                }
+
                 public class BEACHED_CELLALGAE
                 {
                     public static LocString NAME = FormatAsLink("Bubble Algae", CellAlgaeConfig.ID);
@@ -538,6 +544,15 @@ namespace Beached
                     public static LocString BABY_NAME = FormatAsLink("Slickshelly", SlickShellConfig.ID);
                     public static LocString BABY_DESC = "...";
                     public static LocString EGG_NAME = FormatAsLink("Slickshell Egg", SlickShellConfig.ID);
+                }
+
+                public class BEACHED_JELLYFISH
+                {
+                    public static LocString NAME = FormatAsLink("Jellyfish", JellyfishConfig.ID);
+                    public static LocString DESC = "...";
+                    public static LocString BABY_NAME = FormatAsLink("Jelly Ephyra", JellyfishConfig.ID);
+                    public static LocString BABY_DESC = "...";
+                    public static LocString EGG_NAME = FormatAsLink("Jellyfish Egg", JellyfishConfig.ID);
                 }
 
                 public class BEACHED_ANGULARFISH
@@ -580,6 +595,13 @@ namespace Beached
                     public static LocString NAME = "Bamboo"; //Clickety Clack? Clack Cane?
                     public static LocString DESC = "...";
                 }
+
+                public class KELP
+                {
+                    public static LocString NAME = "Kelp"; 
+                    public static LocString DESC = "...";
+                }
+
 
                 public class WATERCUPS
                 {
@@ -640,6 +662,7 @@ namespace Beached
                 public static LocString BEACHEDANGULARFISH = "Angular Fish";
                 [Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]
                 public static LocString BEACHEDMAKI = "Maki";
+                public static LocString BEACHEDJELLYFISH = "Jellyfish";
             }
 
             public class FAMILY_PLURAL
@@ -650,6 +673,7 @@ namespace Beached
                 public static LocString BEACHEDANGULARFISHSPECIES = "Angular Fish";
                 [Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]
                 public static LocString BEACHEDMAKISPECIES = "Makis";
+                public static LocString BEACHEDJELLYFISHSPECIS = "Jellyfish";
             }
         }
 
@@ -800,6 +824,9 @@ namespace Beached
                 public class BEACHED_PLANKTON
                 {
                     public static LocString NAME = FormatAsLink("Plankton", PlanktonGerms.ID);
+                    public static LocString DESCRIPTION = FormatAsLink("Tiny organisms floating in water. These microscopic " +
+                        "creatures are harmless to Duplicants. " +
+                        "They are too small to see by the naked eye, the Germ Overlay will reveal them instead.");
                 }
 
                 public class BEACHED_LIMPETEGG
@@ -1687,13 +1714,13 @@ namespace Beached
 
                 public class HARVESTABLE_POI
                 {
-                    public class BEACHED_PEARLESCENTASTEROIDFIELD
+                    public class BEACHED_HARVESTABLESPACEPOI_PEARLESCENTASTEROIDFIELD
                     {
                         public static LocString NAME = "Pearlescent Asteroid Field";
                         public static LocString DESC = "TODO";
                     }
 
-                    public class BEACHED_AMMONITE
+                    public class BEACHED_HARVESTABLESPACEPOI_AMMONITE
                     {
                         public static LocString NAME = "Ancient Ammonite Shell";
                         public static LocString DESC = "A long perished remains of an abnormally large Ammonite. I hope nothing this " +
@@ -1755,6 +1782,18 @@ namespace Beached
 
         public class WORLD_TRAITS
         {
+            public class DAMP
+            {
+                public static LocString NAME = "Damp";
+                public static LocString DESCRIPTION = "This world is unusually humid, aiding plant growth and germ .";
+            }
+
+            public class ARID
+            {
+                public static LocString NAME = "Arid";
+                public static LocString DESCRIPTION = "This world is unusually dry, plants have difficulty growing in this environment.";
+            }
+
             public class EXTRAREEF
             {
                 public static LocString NAME = "Coral Reef";
