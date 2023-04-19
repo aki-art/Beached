@@ -2,6 +2,7 @@
 using Beached.Utils;
 using HarmonyLib;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Beached.Patches
 {
@@ -26,8 +27,24 @@ namespace Beached.Patches
                 var substanceTable = Assets.instance.substanceTable;
                 substanceTable.GetSubstance(SimHashes.Water).colour = ModAssets.Colors.water;
                 substanceTable.GetSubstance(SimHashes.SaltWater).colour = ModAssets.Colors.saltWater;
-
+                
                 Elements.AfterLoad();
+            }
+
+            [HarmonyPostfix]
+            [HarmonyPriority(Priority.Last)]
+            public static void LatePostfix()
+            {
+                var almostBlack = (Color)new Color32(0, 0, 1, 255);
+
+                foreach (var substance in Assets.instance.substanceTable.list)
+                {
+                    if(substance.colour == Color.black)
+                    {
+                        substance.colour = almostBlack with { a = substance.colour.a };
+                        Log.Debug("Set color of " + substance.name + " to ever so slightly lighter.");
+                    }
+                }
             }
         }
 

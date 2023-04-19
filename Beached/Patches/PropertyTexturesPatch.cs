@@ -3,11 +3,22 @@ using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using UnityEngine;
 
 namespace Beached.Patches
 {
     public class PropertyTexturesPatch
     {
+
+        [HarmonyPatch(typeof(PropertyTextures), "OnReset")]
+        public class PropertyTextures_OnReset_Patch
+        {
+            public static void Postfix(PropertyTextures __instance)
+            {
+                ModAssets.Materials.liquidRefractionMat.SetTexture("_LiquidTex", __instance.externallyUpdatedTextures[(int)PropertyTextures.Property.Liquid]);
+            }
+        }
+
         // Makes the Salty Oxygen texture the lighter texture Oxygen uses
         // TODO transpiler
         [HarmonyPatch(typeof(PropertyTextures), "UpdateDanger")]

@@ -2,11 +2,14 @@
 using Beached.Content.BWorldGen;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
+using Delaunay;
 using FMOD.Studio;
 using FMODUnity;
 using ImGuiNET;
 using Klei.AI;
+using Rendering.World;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -21,7 +24,10 @@ namespace Beached.ModDevTools
         private static float previousWaterCube = waterCube;
         private static string audioFile = "";
         private static Dictionary<string, ShaderPropertyInfo> liquidShaderProperties;
-        private static Material waterCubesMaterial;
+        private static Dictionary<string, ShaderPropertyInfo> refractionShaderProperties;
+        private static Material mat;
+        public static bool renderLiquidTexture;
+        private static string liquidCullingMaskLayer = "Water";
 
         private string[] zoneTypes;
         EventInstance instance;
@@ -37,13 +43,15 @@ namespace Beached.ModDevTools
             public float maxValue;
             public T newValue;
             public T value;
+            private Material material;
 
-            public ShaderPropertyInfo(string propertyKey, T defaultValue, float minValue = -1, float maxValue = -1)
+            public ShaderPropertyInfo(Material material, string propertyKey, T defaultValue, float minValue = -1, float maxValue = -1)
             {
                 this.propertyKey = propertyKey;
                 this.minValue = minValue;
                 this.maxValue = maxValue;
                 value = newValue = defaultValue;
+                this.material = material;
             }
 
             internal void RefreshValue()
@@ -51,11 +59,11 @@ namespace Beached.ModDevTools
                 if (!value.Equals(newValue))
                 {
                     if (value is int i)
-                        waterCubesMaterial.SetInt(propertyKey, i);
+                        material.SetInt(propertyKey, i);
                     else if (value is float f)
-                        waterCubesMaterial.SetFloat(propertyKey, f);
+                        material.SetFloat(propertyKey, f);
                     else if (value is Color c)
-                        waterCubesMaterial.SetColor(propertyKey, c);
+                        material.SetColor(propertyKey, c);
 
                     value = newValue;
                 }
@@ -305,9 +313,84 @@ namespace Beached.ModDevTools
 
             if (ImGui.CollapsingHeader("Shader"))
             {
+                ImGui.InputText("Mask: ", ref liquidCullingMaskLayer, 256);
+
+                if(ImGui.Button("Save Liquid renderer snapshot"))
+                {
+                    Beached_Mod.Instance.SetCullingMask(liquidCullingMaskLayer);
+
+                    Beached_Mod.Instance.RenderDebugWater();
+                    renderLiquidTexture = true;
+
+                    var tileRenderers = Object.FindObjectsOfType<TileRenderer>();
+                    if(tileRenderers == null)
+                    {
+                        Log.Debug("no tile renderers");
+                    }
+                    else
+                    {
+                        Log.Debug("tile renderers: " + tileRenderers.Length);
+                        foreach(TileRenderer tileRenderer in tileRenderers)
+                        {
+                            Log.Debug("r: " + tileRenderer.name);
+                        }
+
+                    }
+                }
+
                 if(ImGui.Button("Save liquid plane"))
                 {
-                    ModAssets.SaveImage(WaterCubes.Instance.cubes.GetComponent<MeshRenderer>().sharedMaterial.GetTexture("_MainTex2"), "watercubes");
+                    Log.Debug(WaterCubes.Instance.material.shader.name);
+                    foreach (var prop in WaterCubes.Instance.material.GetTexturePropertyNames())
+                    {
+                        Log.Debug(prop);
+
+                    }
+
+                    Material mat = null;
+
+                    foreach(var renderer in Object.FindObjectsOfType<MeshRenderer>())
+                    {
+                        Log.Debug($"{renderer.gameObject.name} - {renderer.material?.shader?.name}");
+                        if(renderer.gameObject.name == "WaterCubesMesh")
+                        {
+                            mat = renderer.material;
+                        }
+                    }
+
+                    //ModAssets.SaveImage(WaterCubes.Instance.material.GetTexture("_MainTex2"), "watercubes");
+
+                    int mult = 50;
+
+                    var size = new Vector2(Grid.WidthInCells, Grid.HeightInCells);
+                    size.Normalize();
+
+                    size *= 16384 / Mathf.Max(size.x, size.y);
+                    size *= 0.1f;
+
+                    var width = (int)size.x;
+                    var height = (int)size.y;
+
+                    var texture2D = new Texture2D(width, height, TextureFormat.RGBA32, false);
+
+                    var renderTexture = new RenderTexture(width, height, 32);
+                    Graphics.Blit(texture2D, renderTexture, mat);
+
+                    texture2D.ReadPixels(new(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+                    texture2D.Apply();
+
+                    var bytes = texture2D.EncodeToPNG();
+                    var dirPath = Mod.folder;
+
+                    if (!Directory.Exists(dirPath))
+                    {
+                        Directory.CreateDirectory(dirPath);
+                    }
+
+                    File.WriteAllBytes(Path.Combine(dirPath, "water") + System.DateTime.Now.Millisecond + ".png", bytes);
+
+                    ModAssets.SaveImage(PropertyTextures.instance.externallyUpdatedTextures[(int)PropertyTextures.Property.Liquid], "externalliquid");
+                    ModAssets.SaveImage(PropertyTextures.instance.externallyUpdatedTextures[(int)PropertyTextures.Property.SolidLiquidGasMass], "solid");
                 }
 
                 var rendererGo = WaterCubes.Instance.cubes.transform.Find("WaterCubesMesh");
@@ -344,13 +427,30 @@ namespace Beached.ModDevTools
                 if (liquidShaderProperties == null)
                 {
                     InitializeLiquidShaderProperties();
+                    InitializeRefracionShaderProperties();
                 }
 
                 foreach(var prop in liquidShaderProperties.Values)
                 {
                     if(prop is ShaderPropertyInfo<float> floatProperty)
                     {
-                        ImGui.DragFloat(floatProperty.propertyKey, ref floatProperty.newValue, (floatProperty.maxValue - floatProperty.minValue) / 1000f, floatProperty.minValue, floatProperty.maxValue);
+                        ImGui.DragFloat("L:" + floatProperty.propertyKey, ref floatProperty.newValue, (floatProperty.maxValue - floatProperty.minValue) / 1000f, floatProperty.minValue, floatProperty.maxValue);
+                        floatProperty.RefreshValue();
+                    }
+                }
+
+                if(mat != null && ImGui.Button("toggle heat haze"))
+                {
+                    mat.EnableKeyword("ENABLE_HEAT_HAZE");
+                }
+
+                ImGui.Spacing();
+
+                foreach (var prop in refractionShaderProperties.Values)
+                {
+                    if (prop is ShaderPropertyInfo<float> floatProperty)
+                    {
+                        ImGui.DragFloat("R:" + floatProperty.propertyKey, ref floatProperty.newValue, (floatProperty.maxValue - floatProperty.minValue) / 1000f, floatProperty.minValue, floatProperty.maxValue);
                         floatProperty.RefreshValue();
                     }
                 }
@@ -359,36 +459,53 @@ namespace Beached.ModDevTools
 
         private void InitializeLiquidShaderProperties()
         {
-            waterCubesMaterial = WaterCubes.Instance.material;
+            mat = WaterCubes.Instance.material;
             liquidShaderProperties = new Dictionary<string, ShaderPropertyInfo>();
 
-            RegisterWaterShaderProperty("_BlendScreen", 0.5f, 0, 1);
-            RegisterWaterShaderProperty("_LiquidSelectStart", 0.438f, 0, 1);
-            RegisterWaterShaderProperty("_LiquidSelectRangeNear", 0.438f, 0, 1);
-            RegisterWaterShaderProperty("_LiquidSelectRangeFar", 0.438f, 0, 1);
-            RegisterWaterShaderProperty("_LiquidSelectRangeNearOrthoSize", 0.438f, 0, 200);
-            RegisterWaterShaderProperty("_LiquidSelectRangeFarOrthoSize", 0.438f, 0, 200);
-            RegisterWaterShaderProperty("_SampleFiltering", 0f);
-            RegisterWaterShaderProperty("_EnableCaustics", 1f);
-            RegisterWaterShaderProperty("_CausticSpeed, 1.21f", 0f, 10);
-            RegisterWaterShaderProperty("_CausticFrequency", 0.5f, 0, 1);
-            RegisterWaterShaderProperty("_CausticCount", 5f, 2, 10);
-            RegisterWaterShaderProperty("_CausticScale", 1.4f, 0, 10);
-            RegisterWaterShaderProperty("_HeatOctaves", 5f, 1, 5);
-            RegisterWaterShaderProperty("_HeatSpeed", 3.8f, 0, 10);
-            RegisterWaterShaderProperty("_HeatFrequency", 0.45f, 0, 2);
-            RegisterWaterShaderProperty("_HeatScale", 2f, 0, 2);
-            RegisterWaterShaderProperty("_HeatColour", new Color(1, 0.913725f, 0.5529411f, 1f));
-            RegisterWaterShaderProperty("_EnableWaves", 1f);
-            RegisterWaterShaderProperty("_WaveSpeed", 1f, 0, 10);
-            RegisterWaterShaderProperty("_WaveFrequency", 1f, 0, 10);
-            RegisterWaterShaderProperty("_WaveCount", 5f, 2, 10);
-            RegisterWaterShaderProperty("_WaveHeight", 5f, 0, 20);
+            RegisterWaterShaderProperty(mat, "_BlendScreen", 0.5f, 0, 1);
+            RegisterWaterShaderProperty(mat, "_LiquidSelectStart", 0.438f, 0, 1);
+            RegisterWaterShaderProperty(mat, "_LiquidSelectRangeNear", 0.438f, 0, 1);
+            RegisterWaterShaderProperty(mat, "_LiquidSelectRangeFar", 0.438f, 0, 1);
+            RegisterWaterShaderProperty(mat, "_LiquidSelectRangeNearOrthoSize", 0.438f, 0, 200);
+            RegisterWaterShaderProperty(mat, "_LiquidSelectRangeFarOrthoSize", 0.438f, 0, 200);
+            RegisterWaterShaderProperty(mat, "_SampleFiltering", 0f);
+            RegisterWaterShaderProperty(mat, "_EnableCaustics", 1f);
+            RegisterWaterShaderProperty(mat, "_CausticSpeed, 1.21f", 0f, 10);
+            RegisterWaterShaderProperty(mat, "_CausticFrequency", 0.5f, 0, 1);
+            RegisterWaterShaderProperty(mat, "_CausticCount", 5f, 2, 10);
+            RegisterWaterShaderProperty(mat, "_CausticScale", 1.4f, 0, 10);
+            RegisterWaterShaderProperty(mat, "_HeatOctaves", 5f, 1, 5);
+            RegisterWaterShaderProperty(mat, "_HeatSpeed", 3.8f, 0, 10);
+            RegisterWaterShaderProperty(mat, "_HeatFrequency", 0.45f, 0, 2);
+            RegisterWaterShaderProperty(mat, "_HeatScale", 2f, 0, 2);
+            RegisterWaterShaderProperty(mat, "_HeatColour", new Color(1, 0.913725f, 0.5529411f, 1f));
+            RegisterWaterShaderProperty(mat, "_EnableWaves", 1f);
+            RegisterWaterShaderProperty(mat, "_WaveSpeed", 1f, 0, 10);
+            RegisterWaterShaderProperty(mat, "_WaveFrequency", 1f, 0, 10);
+            RegisterWaterShaderProperty(mat, "_WaveCount", 5f, 2, 10);
+            RegisterWaterShaderProperty(mat, "_WaveHeight", 5f, 0, 20);
         }
 
-        private void RegisterWaterShaderProperty<T>(string propertyKey, T value, float minValue = -1, float maxValue = -1)
+        private void InitializeRefracionShaderProperties()
         {
-            liquidShaderProperties.Add(propertyKey, new ShaderPropertyInfo<T>(propertyKey, value, minValue, maxValue));
+            mat = ModAssets.Materials.liquidRefractionMat;
+            refractionShaderProperties = new Dictionary<string, ShaderPropertyInfo>();
+
+            RegisterRefractionShaderProperty(mat, "_WaveSpeed", 61.1f);
+            RegisterRefractionShaderProperty(mat, "_BlendAlpha", 15.5f);
+            RegisterRefractionShaderProperty(mat, "_WaveFrequency", 1f);
+            RegisterRefractionShaderProperty(mat, "_WaveAmplitude", 0.015f);
         }
+
+        private void RegisterWaterShaderProperty<T>(Material material, string propertyKey, T value, float minValue = -1, float maxValue = -1)
+        {
+            liquidShaderProperties.Add(propertyKey, new ShaderPropertyInfo<T>(material, propertyKey, value, minValue, maxValue));
+        }
+
+        private void RegisterRefractionShaderProperty<T>(Material material, string propertyKey, T value, float minValue = -1, float maxValue = -1)
+        {
+            refractionShaderProperties.Add(propertyKey, new ShaderPropertyInfo<T>(material, propertyKey, value, minValue, maxValue));
+        }
+
     }
 }

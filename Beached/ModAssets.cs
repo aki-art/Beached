@@ -59,6 +59,10 @@ namespace Beached
         {
             public static Material germOverlayReplacer;
             public static Material forceField;
+            public static Material waterWaveMat;
+            public static Material liquidRefractionMat;
+            public static Material depthBufferTest;
+            public static Material waterPostFx;
         }
 
         public static class Sprites
@@ -202,9 +206,22 @@ namespace Beached
                 mainTexture = texture
             };
 
+            Materials.waterWaveMat = new Material(bundle.LoadAsset<Shader>("Assets/Beached/fx/shaders/Wobbly.shader"))
+            {
+                renderQueue = RenderQueues.Liquid
+            };
+
+            Materials.liquidRefractionMat = bundle.LoadAsset<Material>("Assets/Beached/fx/shaders/water/Beached_LiquidRefraction B.mat");
+            Materials.liquidRefractionMat.renderQueue = RenderQueues.Liquid;
+
+            Materials.waterWaveMat.SetFloat("_WaveStrength", 0.0007f);
+
+            Materials.depthBufferTest = bundle.LoadAsset<Material>("Assets/Beached/fx/shaders/water/DepthBufferTestMat.mat");
+
             var testBundle = LoadAssetBundle("testshader", platformSpecific: false);
             Prefabs.testQuad = testBundle.LoadAsset<GameObject>("Assets/Quad 1.prefab");
             //Prefabs.testQuad.GetComponent<MeshRenderer>().material = new Material(testBundle.LoadAsset<>)
+
         }
 
         private static void LoadSetpieces(AssetBundle bundle)
@@ -322,7 +339,7 @@ namespace Beached
                 Directory.CreateDirectory(dirPath);
             }
 
-            File.WriteAllBytes(Path.Combine(dirPath, name) + System.DateTime.Now.Millisecond + ".png", bytes);
+            File.WriteAllBytes(Path.Combine(dirPath, name) + System.DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".png", bytes);
 
             Log.Debug("Saved to " + dirPath);
         }

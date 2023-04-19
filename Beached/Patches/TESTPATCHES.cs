@@ -2,21 +2,67 @@
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
 using Beached.Content.Scripts;
+using Beached.ModDevTools;
 using HarmonyLib;
 using Klei;
 using Klei.AI;
 using ProcGen;
+using Rendering.World;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using static STRINGS.DUPLICANTS.ATTRIBUTES;
 
 namespace Beached.Patches
 {
     public class TestPatches
     {
         public static Texture2D testMask;
+
+
+        [HarmonyPatch(typeof(TileRenderer), "LateUpdate")]
+        public class TileRenderer_LateUpdate_Patch
+        {
+            public static void Postfix(TileRenderer __instance)
+            {
+                if(!DebugDevTool.renderLiquidTexture)
+                {
+                    return;
+                }
+
+                Log.Debug("active brush count: " + __instance.ActiveBrushes.Count);
+                Log.Debug("brush count: " + __instance.Brushes.Length);
+                foreach (var brush in __instance.ActiveBrushes)
+                {
+                    Log.Debug("rendering " + brush.Id);
+
+                    int mWidth = Screen.width;
+                    int mHeight = Screen.height;
+
+                    Rect rect = new Rect(0, 0, mWidth, mHeight);
+                    RenderTexture renderTexture = new RenderTexture(mWidth, mHeight, 24);
+                    Texture2D screenShot = new Texture2D(mWidth, mHeight, TextureFormat.RGBA32, false);
+
+                    Camera.main.targetTexture = renderTexture;
+                    Camera.main.Render();
+
+                    screenShot.ReadPixels(rect, 0, 0);
+                    screenShot.Apply();
+
+                    ModAssets.SaveImage(screenShot, brush.layer.ToString() + "_" + brush.Id.ToString());
+
+                    RenderTexture.active = renderTexture;
+
+                }
+
+                Camera.main.targetTexture = null;
+                RenderTexture.active = null;
+
+                DebugDevTool.renderLiquidTexture = false;
+            }
+        }
 
         [HarmonyPatch(typeof(WearableAccessorizer), "ApplyEquipment")]
         public class WearableAccessorizer_ApplyEquipment_Patch

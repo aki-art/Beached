@@ -45,12 +45,12 @@ namespace Beached.Content.Defs.Flora
 
             //prefab.AddOrGet<StackablePlant>().validFoundationTag = ID;
 
-            var segmented = prefab.AddOrGet<SegmentedBamboo>();
+/*            var segmented = prefab.AddOrGet<SegmentedBamboo>();
             segmented.maxLength = 32;
             segmented.segmentAnimFile = "beached_bamboo_kanim";
 
             var kbac = prefab.AddOrGet<KBatchedAnimController>();
-            kbac.randomiseLoopedOffset = true;
+            kbac.randomiseLoopedOffset = true;*/
             //kbac.animWidth = 0.75f;
 /*
             var ladder = prefab.AddOrGet<Ladder>();
