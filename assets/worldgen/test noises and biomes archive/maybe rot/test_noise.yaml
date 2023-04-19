@@ -1,0 +1,149 @@
+settings:
+  zoom: 0.100000001
+  normalise: false
+  seamless: false
+  lowerBound:
+    X: 2
+    Y: 2
+  upperBound:
+    X: 4
+    Y: 4
+  name: Untitled
+  pos:
+    X: 0
+    Y: 0
+links:
+- target:
+    type: Combiner
+    name: Add_P2KMKqxd
+  source0:
+    type: Primitive
+    name: ImprovedPerlin_Me/oZvp2
+  source1:
+    type: Primitive
+    name: Constant_+MzNpiBp
+- target:
+    type: Modifier
+    name: Scale2D_+boZV03A
+  source0:
+    type: Combiner
+    name: Add_P2KMKqxd
+- target:
+    type: Modifier
+    name: Abs_Z+bEYAHV
+  source0:
+    type: Modifier
+    name: Scale2D_+boZV03A
+- target:
+    type: Transformer
+    name: Displace_1azRdIBE
+  source0:
+    type: Modifier
+    name: Abs_Z+bEYAHV
+  source1:
+    type: Primitive
+    name: Cylinders_OEyzhc+N
+- target:
+    type: Terminator
+    name: TERMINATOR
+  source0:
+    type: Transformer
+    name: Displace_1azRdIBE
+primitives:
+  ImprovedPerlin_Me/oZvp2:
+    primative: ImprovedPerlin
+    quality: Fast
+    seed: 0
+    offset: 1
+    name: ImprovedPerlin_Me/oZvp2
+    pos:
+      X: -205.33333333333348
+      Y: 219.03999999999999
+  Cylinders_jg0MWSCL:
+    primative: Cylinders
+    quality: Fast
+    seed: 0
+    offset: 0.200000003
+    name: Cylinders_jg0MWSCL
+    pos:
+      X: -349.33333333333348
+      Y: 635.03999999999996
+  Constant_+MzNpiBp:
+    primative: Constant
+    quality: Fast
+    seed: 0
+    offset: 0.5
+    name: Constant_+MzNpiBp
+    pos:
+      X: 316.66666666666652
+      Y: 827.03999999999996
+  Cylinders_OEyzhc+N:
+    primative: Cylinders
+    quality: Fast
+    seed: 0
+    offset: 1
+    name: Cylinders_OEyzhc+N
+    pos:
+      X: 728.32422676980809
+      Y: 997.07213988898673
+  Constant_gA+4mCHQ:
+    primative: Constant
+    quality: Fast
+    seed: 0
+    offset: 20
+    name: Constant_gA+4mCHQ
+    pos:
+      X: 674.91415764467285
+      Y: 1296.5603226935873
+filters:
+  SumFractal_FXM3UA3/:
+    filter: SumFractal
+    frequency: 1
+    lacunarity: 3
+    octaves: 10
+    offset: 1
+    gain: 0
+    exponent: 1
+    name: SumFractal_FXM3UA3/
+    pos:
+      X: 215.66666666666652
+      Y: 374.03999999999996
+transformers:
+  Displace_1azRdIBE:
+    transformerType: Displace
+    rotation:
+      X: 0
+      Y: 0
+    name: Displace_1azRdIBE
+    pos:
+      X: 1484.9123778408884
+      Y: 963.22150817413137
+selectors: {}
+modifiers:
+  Scale2D_+boZV03A:
+    modifyType: Scale2d
+    scale2d:
+      X: 1
+      Y: 1
+    name: Scale2D_+boZV03A
+    pos:
+      X: 922.66666666666652
+      Y: 636.03999999999996
+  Abs_Z+bEYAHV:
+    modifyType: Abs
+    scale2d:
+      X: 0
+      Y: 0
+    name: Abs_Z+bEYAHV
+    pos:
+      X: 1208.6666666666665
+      Y: 686.03999999999996
+combiners:
+  Add_P2KMKqxd:
+    combineType: Add
+    name: Add_P2KMKqxd
+    pos:
+      X: 605.82435148493778
+      Y: 501.92805364795379
+floats: {}
+controlpoints: {}

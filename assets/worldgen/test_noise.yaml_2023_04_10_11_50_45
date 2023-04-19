@@ -1,0 +1,128 @@
+settings:
+  zoom: 0.100000001
+  normalise: false
+  seamless: false
+  lowerBound:
+    X: 2
+    Y: 2
+  upperBound:
+    X: 4
+    Y: 4
+  name: Untitled
+  pos:
+    X: 0
+    Y: 0
+links:
+- target:
+    type: Filter
+    name: RidgedMultiFractal_CWi8cO/f
+  source0:
+    type: Primitive
+    name: ImprovedPerlin_yFZfEK0V
+- target:
+    type: Filter
+    name: Billow_03HSfNJ8
+  source0:
+    type: Modifier
+    name: Invert_gP5f7/Rm
+- target:
+    type: Modifier
+    name: Scale2D_kiVypYrw
+  source0:
+    type: Filter
+    name: RidgedMultiFractal_CWi8cO/f
+- target:
+    type: Modifier
+    name: Invert_gP5f7/Rm
+  source0:
+    type: Combiner
+    name: Add_3jDe9R2E
+- target:
+    type: Combiner
+    name: Add_3jDe9R2E
+  source0:
+    type: Modifier
+    name: Scale2D_kiVypYrw
+  source1:
+    type: Primitive
+    name: Constant_MMRd8qfj
+- target:
+    type: Terminator
+    name: TERMINATOR
+  source0:
+    type: Filter
+    name: Billow_03HSfNJ8
+primitives:
+  ImprovedPerlin_yFZfEK0V:
+    primative: ImprovedPerlin
+    quality: Fast
+    seed: 0
+    offset: 1
+    name: ImprovedPerlin_yFZfEK0V
+    pos:
+      X: -483.75926677163932
+      Y: 322.81282272417883
+  Constant_MMRd8qfj:
+    primative: Constant
+    quality: Fast
+    seed: 0
+    offset: -1
+    name: Constant_MMRd8qfj
+    pos:
+      X: 215.59662550601132
+      Y: 659.66262243829726
+filters:
+  RidgedMultiFractal_CWi8cO/f:
+    filter: RidgedMultiFractal
+    frequency: 5
+    lacunarity: 5
+    octaves: 10
+    offset: 1
+    gain: 0
+    exponent: 1
+    name: RidgedMultiFractal_CWi8cO/f
+    pos:
+      X: -144.99179442118714
+      Y: 208.73225399966884
+  Billow_03HSfNJ8:
+    filter: Billow
+    frequency: 1
+    lacunarity: 2
+    octaves: 2
+    offset: 1
+    gain: 0
+    exponent: 1
+    name: Billow_03HSfNJ8
+    pos:
+      X: 1306.2528766294986
+      Y: 650.38659061101998
+transformers: {}
+selectors: {}
+modifiers:
+  Scale2D_kiVypYrw:
+    modifyType: Scale2d
+    scale2d:
+      X: 0.100000001
+      Y: 0.300000012
+    name: Scale2D_kiVypYrw
+    pos:
+      X: 277.07848779088158
+      Y: 152.42466184802311
+  Invert_gP5f7/Rm:
+    modifyType: Invert
+    scale2d:
+      X: 0
+      Y: 0
+    name: Invert_gP5f7/Rm
+    pos:
+      X: 939.28189132520174
+      Y: 424.87356289120879
+combiners:
+  Add_3jDe9R2E:
+    combineType: Add
+    name: Add_3jDe9R2E
+    pos:
+      X: 640.59454342036133
+      Y: 329.76913370757796
+floats: {}
+controlpoints: {}

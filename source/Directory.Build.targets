@@ -20,8 +20,7 @@
 
 	<Target Name="CopyModFiles" AfterTargets="ILRepack">
 		<Exec Command="xcopy /yqsr &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(ModFolder)\$(TargetName)\&quot;"/>
-		<Exec Command='xcopy "$(ProjectDir)Assets\Elements" "$(ModFolder)\$(TargetName)\elements" /s /i /y' ContinueOnError='true' />
-		<Exec Command='xcopy "$(ProjectDir)Assets\worldgen" "$(ModFolder)\$(TargetName)\worldgen" /s /i /y' ContinueOnError='true' />
+		<Exec Command='xcopy "$(SolutionDir)..\assets" "$(ModFolder)\$(TargetName)" /s /i /y' ContinueOnError='true' />
 	</Target>
 	
 	<Target Name="Publicise" AfterTargets="Clean">

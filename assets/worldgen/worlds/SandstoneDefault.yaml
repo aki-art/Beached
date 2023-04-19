@@ -1,0 +1,11 @@
+additionalWorldTemplateRules:
+  # Oil
+  - names:
+    - test/test
+    listRule: GuaranteeOne
+    times: 3
+    allowDuplicates: true # be more flexible due to high temperature borders
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [OilField]

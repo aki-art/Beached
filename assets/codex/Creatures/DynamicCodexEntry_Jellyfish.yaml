@@ -1,0 +1,43 @@
+id: "BeachedSnailSpecies"
+title: Beached.STRINGS.CODEX.JELLYFISH.TITLE
+iconPrefabID: "Crab"
+
+contentContainers:
+#-----------------------------
+  - contentLayout: Vertical
+    content:
+      - !CodexText
+          stringKey: Beached.STRINGS.CODEX.JELLYFISH.TITLE
+          style: Title
+      - !CodexText
+          stringKey: Beached.STRINGS.CODEX.JELLYFISH.SUBTITLE
+          style: Subtitle
+      - !CodexDividerLine
+          preferredWidth: -1
+#-----------------------------
+  - contentLayout: Vertical
+    content:
+      - !CodexText
+          stringKey: Beached.STRINGS.CODEX.JELLYFISH.BODY.CONTAINER1
+          style: Body
+
+#-----------------------------
+  - contentLayout: Vertical
+    content:
+      - !CodexText
+          stringKey: Beached.STRINGS.CODEX.JELLYFISH.BODY.CONTAINER2
+          style: Body
+#-----------------------------
+  - contentLayout: Vertical
+    #lockID: studyable_crab
+    content:
+      - !CodexText
+          stringKey: Beached.STRINGS.CODEX.JELLYFISH.BODY.CONTAINER3
+          style: Body
+#-----------------------------
+  - contentLayout: Vertical
+    #lockID: studyable_crab
+    content:
+      - !CodexText
+          stringKey: Beached.STRINGS.CODEX.JELLYFISH.BODY.CONTAINER4
+          style: Body
