@@ -22,7 +22,8 @@
 		<Exec Command="xcopy /yqsr &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(ModFolder)\$(TargetName)\&quot;"/>
 		<Exec Command='xcopy "$(SolutionDir)..\assets" "$(ModFolder)\$(TargetName)" /s /i /y' ContinueOnError='true' />
 	</Target>
-	
+
+	<!-- Publiciser makes fields public, super handy for large mods like this one. https://github.com/AzeTheGreat/Publicise -->
 	<Target Name="Publicise" AfterTargets="Clean">
 		<ItemGroup>
 			<PubliciseInputAssemblies
