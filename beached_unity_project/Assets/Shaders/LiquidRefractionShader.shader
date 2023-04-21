@@ -76,7 +76,7 @@ Shader "Beached/LiquidRefraction" {
                 
                 float4 liquid = tex2D(_LiquidTex, i.uv0);
 
-				fixed2 disPos;
+                fixed2 disPos;
                 disPos.x = cos(_Time * _WaveSpeed + (i.uv0.x + i.uv0.y) * _WaveFrequency);
                 disPos.y = sin(_Time * _WaveSpeed + (i.uv0.x + i.uv0.y) * _WaveFrequency);
 

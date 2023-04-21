@@ -1,7 +1,4 @@
-﻿using Beached.Content.Defs.Items;
-using Beached.Content.Scripts;
-using HarmonyLib;
-using JetBrains.Annotations;
+﻿using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +25,7 @@ namespace Beached.Content
             calcium = ElementInfo.Solid("Calcium", ModAssets.Colors.calcium),
             calciumGas = ElementInfo.Gas("CalciumGas", ModAssets.Colors.calcium),
             calciumMolten = ElementInfo.Liquid("MoltenCalcium", ModAssets.Colors.calcium),
+            coquina = ElementInfo.Solid("Coquina", ModAssets.Colors.coquina),
             crackedNeutronium = ElementInfo.Solid("CrackedNeutronium", Color.black),
             gravel = ElementInfo.Solid("Gravel", ModAssets.Colors.gravel),
             heulandite = ElementInfo.Solid("Heulandite", ModAssets.Colors.zeolite),

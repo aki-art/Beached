@@ -59,10 +59,7 @@ namespace Beached
         {
             public static Material germOverlayReplacer;
             public static Material forceField;
-            public static Material waterWaveMat;
             public static Material liquidRefractionMat;
-            public static Material depthBufferTest;
-            public static Material waterPostFx;
         }
 
         public static class Sprites
@@ -101,6 +98,7 @@ namespace Beached
                 bismuthOre = new Color32(117, 166, 108, 255),
                 bone = Util.ColorFromHex("d6cec2"),
                 calcium = Color.white,
+                coquina = Util.ColorFromHex("b49b8a"),
                 gravel = new Color32(100, 100, 100, 255),
                 iridium = Util.ColorFromHex("b6b2fb") * 2f,
                 latex = Util.ColorFromHex("e08a65"),
@@ -166,37 +164,43 @@ namespace Beached
 
         public static void LoadAssets()
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            Log.Debug("Loading Assets...");
+
             var assets = Path.Combine(Mod.folder, "assets");
             LoadSounds(Path.Combine(assets, "sounds"));
 
             Textures.Placeholders.zeoliteBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "heulandite_geode.png"));
             Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
 
-            Log.Debug("LOADING ASSETS");
-
             var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
+            var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
 
             foreach (var asset in bundle.GetAllAssetNames())
             {
                 Log.Debug(asset);
             }
 
-            Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
+            Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/generated assets/tmp converted ui/UniversalSidescreen_tmpconverted.prefab");
 
             var tmpConverter = new TMPConverter();
             tmpConverter.ReplaceAllText(Prefabs.universalSidescreen);
 
-            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
-            Materials.forceField = new(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"))
-            {
-                renderQueue = RenderQueues.Liquid
-            };
+            /*            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
+                        Materials.forceField = new(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"))
+                        {
+                            renderQueue = RenderQueues.Liquid
+                        };*/
 
-            Textures.germOverlays = bundle.LoadAsset<Texture2DArray>("Assets/Beached/Images/combined.png");
-            Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid_b.png");
-            Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
-            LoadSetpieces(bundle);
+            Materials.forceField = new(Shader.Find("Klei/BloomedParticleShader"));
 
+            //Textures.germOverlays = bundle.LoadAsset<Texture2DArray>("Assets/Beached/Images/combined.png");
+
+            //Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid_b.png");
+            // Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
+            // LoadSetpieces(bundle);
+/*
             Prefabs.cometTrailFx = bundle.LoadAsset<GameObject>("Assets/Beached/fx/CometSparkles.prefab");
             var renderer = Prefabs.cometTrailFx.GetComponent<ParticleSystemRenderer>();
             var texture = renderer.material.mainTexture;
@@ -204,24 +208,12 @@ namespace Beached
             {
                 renderQueue = RenderQueues.Liquid,
                 mainTexture = texture
-            };
+            };*/
 
-            Materials.waterWaveMat = new Material(bundle.LoadAsset<Shader>("Assets/Beached/fx/shaders/Wobbly.shader"))
-            {
-                renderQueue = RenderQueues.Liquid
-            };
+            Materials.liquidRefractionMat = shadersBundle.LoadAsset<Material>("Assets/Materials/Beached_LiquidRefraction.mat");
 
-            Materials.liquidRefractionMat = bundle.LoadAsset<Material>("Assets/Beached/fx/shaders/water/Beached_LiquidRefraction B.mat");
-            Materials.liquidRefractionMat.renderQueue = RenderQueues.Liquid;
-
-            Materials.waterWaveMat.SetFloat("_WaveStrength", 0.0007f);
-
-            Materials.depthBufferTest = bundle.LoadAsset<Material>("Assets/Beached/fx/shaders/water/DepthBufferTestMat.mat");
-
-            var testBundle = LoadAssetBundle("testshader", platformSpecific: false);
-            Prefabs.testQuad = testBundle.LoadAsset<GameObject>("Assets/Quad 1.prefab");
-            //Prefabs.testQuad.GetComponent<MeshRenderer>().material = new Material(testBundle.LoadAsset<>)
-
+            sw.Stop();
+            Log.Info($"Finished loading assets. It took {sw.ElapsedMilliseconds} ms");
         }
 
         private static void LoadSetpieces(AssetBundle bundle)
@@ -355,7 +347,7 @@ namespace Beached
                 }
             }
 
-            path ??= Path.Combine(Mod.folder, "assets");
+            path ??= Path.Combine(Mod.folder, "assetbundles");
 
             if (platformSpecific)
             {

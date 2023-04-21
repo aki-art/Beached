@@ -29,6 +29,11 @@
 		<APIVersion>2</APIVersion>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Assets\**" />
+	  <EmbeddedResource Remove="Assets\**" />
+	  <None Remove="Assets\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 
@@ -101,10 +106,6 @@
 		  <HintPath>D:\Modding\OxygenNotIncluded\Lib\ZoneTypeAPI.dll</HintPath>
 		</Reference>
 
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Assets\worldgen\clusters\" />
 	</ItemGroup>
 
 	<ItemGroup>

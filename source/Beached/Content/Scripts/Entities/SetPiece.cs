@@ -16,7 +16,7 @@ namespace Beached.Content.Scripts.Entities
         {
             base.OnSpawn();
 
-            if (ModAssets.Prefabs.setpieces.TryGetValue(setPiecePrefabID, out var prefab))
+/*            if (ModAssets.Prefabs.setpieces.TryGetValue(setPiecePrefabID, out var prefab))
             {
                 visualizer = Instantiate(prefab);
 
@@ -35,7 +35,7 @@ namespace Beached.Content.Scripts.Entities
                 visualizer.transform.position = position;
                 visualizer.transform.SetParent(transform);
                 visualizer.SetActive(true);
-            }
+            }*/
         }
 
         private void SetPlaceholder()

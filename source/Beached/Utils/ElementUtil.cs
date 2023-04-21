@@ -59,7 +59,7 @@ namespace Beached.Utils
         // TODO: load from an assetbundle later
         private static void SetTexture(Material material, string texture, string property)
         {
-            var path = Path.Combine(Mod.folder, "assets", "textures", texture + ".png");
+            var path = Path.Combine(Mod.folder, "textures", texture + ".png");
 
             if (ModAssets.TryLoadTexture(path, out var tex))
             {

@@ -1,5 +1,6 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Buildings;
+using Beached.Content.Defs.Comets;
 using Beached.Content.Defs.Entities.Critters;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Flora;
@@ -18,7 +19,7 @@ namespace Beached
         {
             public class BEACHED_POIS
             {
-                public static LocString NAME = "Beache POIs";
+                public static LocString NAME = "Beached POIs";
                 public static LocString TOOLTIP = "debug mode";
             }
         }
@@ -117,8 +118,7 @@ namespace Beached
 
                 public class BEACHED_MOSSBED
                 {
-                    [Note("A bed for moss. It's a wooden frame moss grows on.")]
-                    public static LocString NAME = FormatAsLink("Moss Bed", MossBedConfig.ID);
+                    public static LocString NAME = FormatAsLink("Moss Frame", MossBedConfig.ID);
                     public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a once time delivery of water; once grown the moss is converted to a natural tile.";
                     public static LocString EFFECT = "Natural tiles can be used as walls and floors or for wild planting.";
                 }
@@ -146,7 +146,7 @@ namespace Beached
 
                 public class BEACHED_SALTLICK
                 {
-                    // visible in UI or codex 
+                    [Note("Visible in UI or codex.")]
                     public static LocString NAME = "Critter Lick";
                     [Note("The name that appears on the actual building. ie. Salt-Lick, or Sulfur-Lick")]
                     public static LocString FORMATTED_NAME = "{Element}-Lick";
@@ -242,31 +242,31 @@ namespace Beached
 
             public class BEACHED_DIAMONDCOMET
             {
-                public static LocString NAME = "Diamond Comet";
+                public static LocString NAME = FormatAsLink("Diamond Comet", DiamondCometConfig.ID);
                 public static LocString DESC = "TODO";
             }
 
             public class BEACHED_SPARKLINGZIRCONCOMET
             {
-                public static LocString NAME = "Sparkling Zircon Comet";
+                public static LocString NAME = FormatAsLink("Sparkling Zircon Comet", SparklingZirconCometConfig.ID);
                 public static LocString DESC = "TODO";
             }
 
             public class BEACHED_SPARKLINGAQUAMARINECOMET
             {
-                public static LocString NAME = "Sparkling Aquamarine Comet";
+                public static LocString NAME = FormatAsLink("Sparkling Aquamarine Comet", SparklingAquamarineCometConfig.ID);
                 public static LocString DESC = "TODO";
             }
 
             public class BEACHED_SPARKLINGDIAMONDCOMET
             {
-                public static LocString NAME = "Sparkling Diamond Comet";
+                public static LocString NAME = FormatAsLink("Sparkling Diamond Comet", "");
                 public static LocString DESC = "TODO";
             }
 
             public class BEACHED_SPARKLINGVOIDCOMET
             {
-                public static LocString NAME = "Sparkling Void Comet";
+                public static LocString NAME = FormatAsLink("Sparkling Void Comet", SparklingVoidCometConfig.ID);
                 public static LocString DESC = "TODO";
             }
         }
@@ -360,19 +360,19 @@ namespace Beached
 
                 public class BEACHED_GMOTRAITS_PRODUCTIVE1
                 {
-                    public static LocString NAME = "Productive I";
+                    public static LocString NAME = "Kinda Productive";
                     public static LocString DESC = "This critter has doubled metabolism and production.";
                 }
 
                 public class BEACHED_GMOTRAITS_PRODUCTIVE2
                 {
-                    public static LocString NAME = "Productive II";
+                    public static LocString NAME = "Moderately Productive";
                     public static LocString DESC = "This critter has quadropled metabolism and production.";
                 }
 
                 public class BEACHED_GMOTRAITS_PRODUCTIVE3
                 {
-                    public static LocString NAME = "Productive III";
+                    public static LocString NAME = "Super Productive";
                     public static LocString DESC = "This critter has octupled metabolism and production.";
                 }
 
@@ -404,6 +404,18 @@ namespace Beached
                 {
                     public static LocString NAME = "Everlasting";
                     public static LocString DESC = "This critter does not seem to age.";
+                }
+
+                public class BEACHED_GMOTRAITS_FLUFFY
+                {
+                    public static LocString NAME = "Fluffy";
+                    public static LocString DESC = "This critter can withstand much colder environments than normal.";
+                }
+
+                public class BEACHED_GMOTRAITS_BREEZY
+                {
+                    public static LocString NAME = "Breezy";
+                    public static LocString DESC = "This critter can withstand much hotter environments than normal.";
                 }
             }
 
@@ -598,7 +610,7 @@ namespace Beached
 
                 public class KELP
                 {
-                    public static LocString NAME = "Kelp"; 
+                    public static LocString NAME = "Kelp";
                     public static LocString DESC = "...";
                 }
 
@@ -859,6 +871,11 @@ namespace Beached
                     public static LocString NAME = FormatAsLink("Poffmouth", PoffSporeGerms.ID);
                 }
 
+                public class BEACHED_SICKNESS_TELEPORTITS
+                {
+                    public static LocString NAME = FormatAsLink("Teleportitis", "");
+                }
+
                 public static LocString LIGHTEXPOSURE = "Exposed to Light. Approximately {0} change per second.";
             }
 
@@ -897,7 +914,7 @@ namespace Beached
             {
                 public static LocString NAME = "Wishing Star";
                 public static LocString DESC = "This Duplicant has wished upon a star. What did they wish for? " +
-                    "Can't tell, birthday-wish rules, if they say it won't come true!";
+                    "Can't tell, it's birthday wish rules, if they say it won't come true!";
             }
         }
 
@@ -1011,6 +1028,12 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
+            public class COQUINA
+            {
+                public static LocString NAME = FormatAsLink("Coquina");
+                public static LocString DESC = "TODO";
+            }
+
             public class CRACKEDNEUTRONIUM
             {
                 public static LocString NAME = FormatAsLink("Cracked Neutronium");
@@ -1060,7 +1083,7 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
-            [Note("Made up element, Radioactive high end material upgraded from Iridium.")]
+            [Note("Made up element, Radioactive high end material upgraded from Iridium and Radium.")]
             public class IRRADIUM
             {
                 public static LocString NAME = FormatAsLink("Irradium");
