@@ -64,12 +64,7 @@ namespace Beached.Content.Defs.Entities.Corals
                 STRINGS.CREATURES.SPECIES.BEACHED_LEAFLETCORAL.NAME);
 
             prefab.AddOrGet<SubmersionMonitor>();
-/*
-            EntityTemplates.ExtendPlantToIrrigated(prefab, new[]
-            {
-                new PlantElementAbsorber.ConsumeInfo(GameTags.Water, SUCC_RATE)
-            });
-*/
+
             prefab.AddOrGet<LoopingSounds>();
 
             var seed = EntityTemplates.CreateAndRegisterSeedForPlant(

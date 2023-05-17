@@ -1,6 +1,7 @@
 ﻿using Beached.Content;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
+using Beached.Content.Tuning;
 using System;
 using UnityEngine;
 
@@ -87,5 +88,11 @@ namespace Beached
         /// </summary>
         /// <param name="tag"></param>
         public static void RemoveSmokeableFood(string tag) => SmokeCookable.smokables.Remove(tag);
+
+        /// <summary>
+        /// Add a fur emitter component to this critter
+        /// </summary>
+        /// <param name="prefabID"></param>
+        public static void RegisterFurEmitter(string prefabID) => FurSource.furries.Add(prefabID);
     }
 }

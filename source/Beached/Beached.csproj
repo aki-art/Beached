@@ -117,6 +117,11 @@
 		<PackageReference Include="PLib" Version="4.12.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Content\Scripts\Traits\" />
+	  <Folder Include="Utils\WaveFunctionCollapse\" />
+	</ItemGroup>
+
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<OutDir>bin</OutDir>
 	</PropertyGroup>

@@ -21,15 +21,6 @@ defaultsOverrides:
     OverworldMinNodes: 1
     IsBeachedWorld: true
 
-startSubworldName: subworlds/beached/debug/EmptyBeach
-startingBaseTemplate: beached/bases/beach_startingbaseB
-startingBasePositionHorizontal:
-  min: 0.5
-  max: 0.5
-startingBasePositionVertical:
-  min: 0.45
-  max: 0.45
-
 subworldFiles:
   - name: subworlds/beached/debug/EmptyDepths
   - name: subworlds/beached/debug/EmptyBamboo
@@ -44,60 +35,7 @@ subworldFiles:
 unknownCellsAllowedSubworlds: 
 
 # start
-  - tagcommand: AtTag
-    tag: AtStart
+  - tagcommand: Default
     command: Replace
     subworldNames:
-      - subworlds/beached/beach/BeachStart
-# start
-  - tagcommand: DistanceFromTag
-    tag: AtStart
-    minDistance: 1
-    maxDistance: 1
-    command: Replace
-    subworldNames:
-      - subworlds/beached/beach/BeachStart
-# ring 2 - 3
-  - tagcommand: DistanceFromTag
-    tag: AtStart
-    minDistance: 2
-    maxDistance: 3
-    command: Replace
-    subworldNames:
-      - subworlds/beached/debug/EmptyBamboo
-      - subworlds/beached/debug/EmptyRot
-      - subworlds/beached/debug/EmptyIcy
-  - tagcommand: DistanceFromTag
-# above core
-  - tagcommand: DistanceFromTag
-    tag: AtDepths
-    minDistance: 1
-    maxDistance: 2
-    command: Replace
-    subworldNames:
-      - subworlds/beached/debug/EmptySwamp
-# sides
-  - tagcommand: DistanceFromTag
-    tag: AtEdge
-    minDistance: 0
-    maxDistance: 2
-    command: Replace
-    subworldNames:
-      - subworlds/beached/debug/EmptySea
-# sida A and B are randomized for each world
-# core side A
-  - tagcommand: DistanceFromTag
-    minDistance: 0
-    maxDistance: 1
-    tag: Beached_AtSideADepth
-    command: Replace
-    subworldNames:
-      - subworlds/beached/debug/EmptyDepths
-# core side B
-  - tagcommand: DistanceFromTag
-    minDistance: 0
-    maxDistance: 1
-    tag: Beached_AtSideBDepth
-    command: Replace
-    subworldNames:
-      - subworlds/beached/debug/EmptySulfur
+      - subworlds/beached/debug/EmptyBeach

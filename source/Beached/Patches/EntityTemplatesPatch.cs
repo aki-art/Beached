@@ -1,6 +1,7 @@
 ﻿using Beached.Content;
-using Beached.Content.ModDb;
+using Beached.Content.ModDb.Germs;
 using Beached.Content.Scripts;
+using Beached.Content.Tuning;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,19 @@ namespace Beached.Patches
 {
     public class EntityTemplatesPatch
     {
+
+        [HarmonyPatch(typeof(EntityTemplates), "ExtendEntityToBasicCreature")]
+        public class EntityTemplates_ExtendEntityToBasicCreature_Patch
+        {
+            public static void Postfix(GameObject template)
+            {
+                if(FurSource.furries.Contains(template.PrefabID().ToString())) 
+                {
+                    template.AddOrGet<FurSource>();
+                }
+            }
+        }
+
         // if a plant can survive in oxygen, allow it to live in salty oxygen as well
         [HarmonyPatch(typeof(EntityTemplates), "ExtendEntityToBasicPlant")]
         public class EntityTemplates_ExtendEntityToBasicPlant_Patch

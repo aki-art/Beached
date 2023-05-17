@@ -51,6 +51,8 @@ namespace Beached.Content
             saltyOxygen = ElementInfo.Gas("SaltyOxygen", ModAssets.Colors.saltyOxygen),
             selenite = ElementInfo.Gas("Selenite", ModAssets.Colors.selenite),
             siltStone = ElementInfo.Solid("SiltStone", ModAssets.Colors.ammonia),
+            sourBrine = ElementInfo.Liquid("SourBrine", ModAssets.Colors.sourBrine),
+            sourBrineIce = ElementInfo.Solid("SourBrineIce", ModAssets.Colors.sourBrine),
             sulfurousIce = ElementInfo.Solid("SulfurousIce", ModAssets.Colors.sulfurousWater),
             sulfurousWater = ElementInfo.Liquid("SulfurousWater", ModAssets.Colors.sulfurousWater),
             zirconium = ElementInfo.Solid("Zirconium", ModAssets.Colors.zirconium),

@@ -11,6 +11,7 @@ namespace Beached.Content.ModDb
     public class BTraits
     {
         public const string DEXTEROUS = "Beached_Dexterous";
+        public const string FUR_ALLERGY = "Beached_FurAllergy";
 
         public class LifeGoals
         {
@@ -22,7 +23,9 @@ namespace Beached.Content.ModDb
 
         public static void Register()
         {
-            var dexterousTrait = Db.Get().CreateTrait(
+            var db = Db.Get();
+
+            var dexterousTrait = db.CreateTrait(
                 DEXTEROUS,
                 STRINGS.DUPLICANTS.TRAITS.PRECISIONUP.NAME,
                 STRINGS.DUPLICANTS.TRAITS.PRECISIONUP.DESC,
@@ -36,6 +39,18 @@ namespace Beached.Content.ModDb
                 BAttributes.PRECISION_ID,
                 TRAITS.GOOD_ATTRIBUTE_BONUS,
                 STRINGS.DUPLICANTS.TRAITS.PRECISIONUP.NAME));
+
+            var furAllergyTrait = db.CreateTrait(
+                FUR_ALLERGY,
+                STRINGS.DUPLICANTS.TRAITS.BEACHED_FURALLERGY.NAME,
+                STRINGS.DUPLICANTS.TRAITS.BEACHED_FURALLERGY.DESC,
+                null,
+                true,
+                null,
+                false,
+                true);
+
+            furAllergyTrait.OnAddTrait +=go => go.AddTag(BTags.furAllergic);
 
             AddJewelleryTrait(
                 LifeGoals.JEWELLERY_AQUAMARINE,
@@ -57,6 +72,17 @@ namespace Beached.Content.ModDb
                 mutuallyExclusiveTraits = new List<string>
                 {
                     //"Anemic"
+                }
+            });
+
+            DUPLICANTSTATS.BADTRAITS.Add(new DUPLICANTSTATS.TraitVal()
+            {
+                id = FUR_ALLERGY,
+                rarity = DUPLICANTSTATS.RARITY_COMMON,
+                dlcId = "",
+                mutuallyExclusiveTraits = new List<string>
+                {
+                    "Allergies"
                 }
             });
 

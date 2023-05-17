@@ -12,6 +12,7 @@
             DevToolManager.Instance.RegisterDevTool<ConsoleDevTool>("Mods/Beached/Log");
             DevToolManager.Instance.RegisterDevTool<NoisePreviewerDevTool>("Mods/Beached/Noise");
             DevToolManager.Instance.RegisterDevTool<BlueprintDevtool>("Mods/Beached/Blueprints");
+            DevToolManager.Instance.RegisterDevTool<WFCDevTool>("Mods/Beached/WFC");
         }
     }
 }

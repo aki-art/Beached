@@ -17,7 +17,8 @@
             lifeGoalLost = new("LifeGoalLost"),
             lifeGoalTrackerUpdate = new("LifeGoalTrackerUpdate"),
             wishingStarEvent = new("WishingStarEvent"),
-            debugDataChange = new("DebugDataChange");
+            debugDataChange = new("DebugDataChange"),
+            critterTraitAdded = new("CritterTraitAdded");
 
         private readonly int value;
         private readonly string name;

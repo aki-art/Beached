@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TUNING;
 using UnityEngine;
+using static Klei.AI.Disease;
 
 namespace Beached.Utils
 {
@@ -19,6 +20,15 @@ namespace Beached.Utils
                 Direction.Left => Direction.Right,
                 _ => Direction.None,
             };
+        }
+
+        public static RangeInfo RangeInfoCelsius(float minViable, float minGrowth, float maxGrowth, float maxViable)
+        {
+            return new RangeInfo(
+                CelsiusToKelvin(minViable),
+                CelsiusToKelvin(minGrowth),
+                CelsiusToKelvin(maxGrowth),
+                CelsiusToKelvin(maxViable));
         }
         
         public static void AddToStaticReadonlyArray<ElemType, InstanceType>(string fieldName, params ElemType[] items)

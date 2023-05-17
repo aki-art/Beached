@@ -1,5 +1,4 @@
-﻿using HarmonyLib;
-using Klei.AI;
+﻿using Klei.AI;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -8,9 +7,10 @@ namespace Beached.Utils
 {
     public class ElementUtil
     {
-        public static readonly Dictionary<SimHashes, string> SimHashNameLookup = new Dictionary<SimHashes, string>();
-        public static readonly Dictionary<string, object> ReverseSimHashNameLookup = new Dictionary<string, object>();
-        public static readonly List<ElementInfo> elements = new List<ElementInfo>();
+        public static readonly Dictionary<SimHashes, string> SimHashNameLookup = new();
+        public static readonly Dictionary<string, object> ReverseSimHashNameLookup = new();
+        public static readonly List<ElementInfo> elements = new();
+
         public static SimHashes RegisterSimHash(string name)
         {
             var simHash = (SimHashes)Hash.SDBMLower(name);

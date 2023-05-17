@@ -1,5 +1,8 @@
 ﻿using Database;
 using Klei.AI;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Beached.Content.ModDb.Germs
 {
@@ -16,6 +19,14 @@ namespace Beached.Content.ModDb.Germs
             limpetEggs = RegisterGerm(diseases, LimpetEggGerms.ID, new LimpetEggGerms(statsOnly));
             mushroomSpore = RegisterGerm(diseases, CapSporeGerms.ID, new CapSporeGerms(statsOnly));
             poffSpore = RegisterGerm(diseases, PoffSporeGerms.ID, new PoffSporeGerms(statsOnly));
+        }
+
+        public static void AddGermColors(Dictionary<string, Color32> namedLookup)
+        {
+            namedLookup[PlanktonGerms.ID] = ModAssets.Colors.plankton;
+            namedLookup[LimpetEggGerms.ID] = ModAssets.Colors.limpetEggs;
+            namedLookup[CapSporeGerms.ID] = ModAssets.Colors.capSpores;
+            namedLookup[PoffSporeGerms.ID] = ModAssets.Colors.poffSpores;
         }
 
         private static Disease RegisterGerm<T>(Diseases diseases, string ID, T germInstance) where T : Disease

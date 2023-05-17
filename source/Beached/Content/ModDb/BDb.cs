@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Equipment;
+﻿using Beached.Content.Defs.Entities.Corals;
+using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Foods;
 using System.Collections.Generic;
 
@@ -69,6 +70,27 @@ namespace Beached.Content.ModDb
                 .Output(LegendarySteakConfig.ID, 1f)
                 .NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
                 .Build();
+
+            if(DlcManager.IsExpansion1Active())
+            {
+                RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPONGECAKE.DESC, 40f)
+                    .Input(WashuSpongeConfig.SEED_ID, 3f)
+                    .Input(SimHashes.Sucrose.CreateTag(), 50f)
+                    .Output(SpongeCakeConfig.ID, 1f)
+                    .NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+                    .Visualizer()
+                    .Build();
+            }
+            else
+            {
+                RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPONGECAKE.DESC, 40f)
+                    .Input(WashuSpongeConfig.SEED_ID, 3f)
+                    // TODO
+                    .Output(SpongeCakeConfig.ID, 1f)
+                    .NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+                    .Visualizer()
+                    .Build();
+            }
         }
 
         // Tries to find all recipes that use "starter metals", and then inserts Bismuth

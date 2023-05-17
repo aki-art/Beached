@@ -14,6 +14,7 @@ namespace Beached.Utils
         private string description;
         private string requiredTech;
         private int sortOrder;
+        private int visualizerIdx = -1;
 
         private List<RecipeElement> inputs;
         private List<RecipeElement> outputs;
@@ -31,6 +32,12 @@ namespace Beached.Utils
             };
 
             return builder;
+        }
+
+        public RecipeBuilder Visualizer(int idx = 0)
+        {
+            visualizerIdx = idx;
+            return this;
         }
 
         public RecipeBuilder NameDisplay(RecipeNameDisplay nameDisplay)
@@ -65,7 +72,7 @@ namespace Beached.Utils
 
         public RecipeBuilder SortOrder(int sortOrder)
         {
-            this.sortOrder = sortOrder; 
+            this.sortOrder = sortOrder;
             return this;
         }
 
@@ -79,7 +86,7 @@ namespace Beached.Utils
             var obsoleteId = ComplexRecipeManager.MakeObsoleteRecipeID(fabricator, inputs[0].material);
             ComplexRecipeManager.Get().AddObsoleteIDMapping(obsoleteId, recipeID);
 
-            return new ComplexRecipe(recipeID, i, o)
+            var recipe = new ComplexRecipe(recipeID, i, o)
             {
                 time = time,
                 description = description,
@@ -87,6 +94,23 @@ namespace Beached.Utils
                 fabricators = new List<Tag> { fabricator },
                 requiredTech = requiredTech,
             };
+
+            if (visualizerIdx > -1)
+            {
+                if (o.Length >= visualizerIdx)
+                    Log.Warning($"Cannot set visualizer to idx {visualizerIdx}, there is only {o.Length} items.");
+                else
+                {
+                    var prefab = Assets.GetPrefab(o[visualizerIdx].material);
+
+                    if (prefab != null)
+                        recipe.FabricationVisualizer = MushBarConfig.CreateFabricationVisualizer(prefab);
+                    else
+                        Log.Debug($"No prefab with id {o[visualizerIdx].material}");
+                }
+            }
+
+            return recipe;
         }
     }
 }

@@ -1,12 +1,8 @@
-﻿using Beached.Content.BWorldGen;
+﻿using Beached.Content;
+using Beached.Content.BWorldGen;
 using HarmonyLib;
 using ProcGen;
 using ProcGenGame;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using Beached.Content;
-using Beached.Content.Scripts;
 
 namespace Beached.Patches.Worldgen
 {
@@ -15,7 +11,7 @@ namespace Beached.Patches.Worldgen
         [HarmonyPatch(typeof(TerrainCell), "ApplyBackground")]
         public class TerrainCell_ApplyBackground_Patch
         {
-            public static void Postfix(
+            public static bool Prefix(
                 TerrainCell __instance,
                 WorldGen worldGen,
                 Chunk world,
@@ -25,12 +21,13 @@ namespace Beached.Patches.Worldgen
                 SeededRandom rnd)
             {
                 var leaf = worldGen.GetLeafForTerrainCell(__instance);
-                
-                if (leaf.tags.Contains(BWorldGenTags.SandBeds))
+
+                if (leaf.tags.Contains(BWorldGenTags.WaveFunctionCollapse))
                 {
+                    var rubber = Elements.rubber.Get();
                     var node = __instance.node;
                     
-/*                    var availableTerrainPoints = __instance.availableTerrainPoints;
+                    var availableTerrainPoints = __instance.availableTerrainPoints;
 
                     foreach (var availableTerrainPoint in availableTerrainPoints)
                     {
@@ -38,10 +35,16 @@ namespace Beached.Patches.Worldgen
                         {
                             continue;
                         }
-                    }*/
+
+                        SetValues(availableTerrainPoint, rubber, rubber.defaultValues, Sim.DiseaseCell.Invalid);
+                    }
 
                     //HandleSurfaceModifier(worldGen.Settings, __instance, BWorldGenTags.SandBeds, world, SetValues, rnd);
+
+                    return false;
                 }
+
+                return true;
             }
 
             private static void HandleSurfaceModifier(

@@ -1,8 +1,6 @@
 ﻿using Beached.Content;
-using Beached.Utils;
 using HarmonyLib;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Beached.Patches
 {
@@ -30,22 +28,6 @@ namespace Beached.Patches
                 
                 Elements.AfterLoad();
             }
-
-            [HarmonyPostfix]
-            [HarmonyPriority(Priority.Last)]
-            public static void LatePostfix()
-            {
-                var almostBlack = (Color)new Color32(0, 0, 1, 255);
-
-                foreach (var substance in Assets.instance.substanceTable.list)
-                {
-                    if(substance.colour == Color.black)
-                    {
-                        substance.colour = almostBlack with { a = substance.colour.a };
-                        Log.Debug("Set color of " + substance.name + " to ever so slightly lighter.");
-                    }
-                }
-            }
         }
 
         [HarmonyPatch(typeof(ElementLoader), "CollectElementsFromYAML")]
@@ -56,31 +38,32 @@ namespace Beached.Patches
                 foreach (var elem in __result)
                 {
                     // change Amber's melting target based on DLC
-                    if (elem.elementId == Elements.amber.ToString() && DlcManager.FeatureRadiationEnabled())
+                    string elementId = elem.elementId;
+
+                    if (elementId == Elements.amber.ToString() && DlcManager.IsDlcListValidForCurrentContent(DlcManager.AVAILABLE_EXPANSION1_ONLY))
                     {
                         elem.highTempTransitionTarget = SimHashes.Resin.ToString();
                     }
-                    else if (elem.elementId == SimHashes.Diamond.ToString())
+                    else if (elementId == SimHashes.Diamond.ToString())
                     {
                         Mod.settings.CrossWorld.Elements.originalDiamondCategory = elem.materialCategory;
                     }
-                    else if (elem.elementId == SimHashes.Katairite.ToString())
+                    else if (elementId == SimHashes.Katairite.ToString())
                     {
                         Mod.settings.CrossWorld.Elements.originalAbyssaliteCategory = elem.materialCategory;
                     }
-                    else if (elem.elementId == SimHashes.Lime.ToString())
+                    else if (elementId == SimHashes.Lime.ToString())
                     {
                         Mod.settings.CrossWorld.Elements.originalLimeHighTemp = elem.highTemp;
                         Mod.settings.CrossWorld.Elements.originalLimeHighTempTarget = elem.highTempTransitionTarget;
-
                     }
                     // reenable Helium
-                    else if (elem.elementId == SimHashes.Helium.ToString())
+                    else if (elementId == SimHashes.Helium.ToString())
                     {
                         elem.isDisabled = false;
                     }
                     // reenable Helium
-                    else if (elem.elementId == SimHashes.LiquidHelium.ToString())
+                    else if (elementId == SimHashes.LiquidHelium.ToString())
                     {
                         elem.isDisabled = false;
                     }

@@ -1,6 +1,7 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Comets;
+using Beached.Content.Defs.Entities.Corals;
 using Beached.Content.Defs.Entities.Critters;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Flora;
@@ -273,13 +274,12 @@ namespace Beached
 
         public class CORALS
         {
-
-            public class BEACHED_WOSHU_CORAL
+            public class BEACHED_CORAL_WASHUSPONGE
             {
-                public static LocString NAME = "Woshu Sponge";
+                public static LocString NAME = "Washu Sponge";
                 public static LocString DESCRIPTION = "Woshu Sponge can sustain itself by consuming germs. This happens to be very useful for those wishing to keep their liquid reservoirs clean.\n" +
                     "\n" +
-                    "Removes germs from liquids.";
+                    "Removes germs from liquids, and produces edible frags.";
             }
 
             public class BEACHED_SALTY_STICK_CORAL
@@ -489,6 +489,18 @@ namespace Beached
 
                 public class SEEDS
                 {
+                    public class BEACHED_CORAL_WASHUSPONGE
+                    {
+                        public static LocString NAME = "Washu Sponge Frag";
+                        public static LocString DESC = "...";
+                    }
+
+                    public class BEACHED_CORAL_SALTYSTICK
+                    {
+                        public static LocString NAME = "Salty Sticks Frag";
+                        public static LocString DESC = "...";
+                    }
+
                     public class WATERCUPS
                     {
                         public static LocString NAME = "Watercups Seed";
@@ -533,6 +545,13 @@ namespace Beached
                 {
                     public static LocString NAME = "Jellyfish Strobila";
                     public static LocString DESCRIPTION = "A bunch of neatly stacked Jellyfish babies waiting to be released and drift away.";
+                }
+
+                public class BEACHED_CORAL_SALTYSTICK
+                {
+                    public static LocString NAME = FormatAsLink("Salty Sticks", SaltyStickConfig.ID);
+                    public static LocString DESC = "...";
+                    public static LocString DOMESTICATEDDESC = "...";
                 }
 
                 public class BEACHED_CELLALGAE
@@ -833,6 +852,11 @@ namespace Beached
 
             public class DISEASES
             {
+                public class BEACHED_FUR_ALLERGY
+                {
+                    public static LocString SOURCE = "Contact with {Critter}";
+                }
+
                 public class BEACHED_PLANKTON
                 {
                     public static LocString NAME = FormatAsLink("Plankton", PlanktonGerms.ID);
@@ -1181,6 +1205,20 @@ namespace Beached
                 public static LocString DESC = "TODO";
             }
 
+            public class SOURBRINE
+            {
+                [Note("Brine with high concentration of Hydrogen sulfide & Methane (aka Sour Gas)")]
+                public static LocString NAME = FormatAsLink("Sour Brine");
+                public static LocString DESC = "TODO";
+            }
+
+            public class SOURBRINEICE
+            {
+                [Note("Brine with high concentration of Hydrogen sulfide & Methane (aka Sour Gas)")]
+                public static LocString NAME = FormatAsLink("Sour Brine Ice");
+                public static LocString DESC = "TODO";
+            }
+
             public class SELENITE
             {
                 public static LocString NAME = FormatAsLink("Selenite");
@@ -1407,6 +1445,12 @@ namespace Beached
                     public static LocString DESC = "...";
                 }
 
+                public class BEACHED_SPONGECAKE
+                {
+                    public static LocString NAME = "Sponge Cake";
+                    public static LocString DESC = "Fluffy and delighful, with a hint of seafood flavor.";
+                }
+
                 public class BEACHED_CRABCAKE
                 {
                     public static LocString NAME = "Crabcake";
@@ -1584,6 +1628,7 @@ namespace Beached
             {
                 public static LocString BEACHED_CORAL = "Coral";
                 public static LocString BEACHED_CRYSTAL = "Crystal";
+                public static LocString BEACHED_MEAT = "Test (meats)";
             }
         }
 

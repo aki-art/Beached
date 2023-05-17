@@ -12,6 +12,8 @@ namespace Beached
             {
                 public const int MORALBONUS = 2;
             }
+
+            public const string HISTAMINE_SUPPRESSION = "HistamineSuppression";
         }
 
         public static class TEMPLATE_VALUES

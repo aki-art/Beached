@@ -117,6 +117,7 @@ namespace Beached
                 root = Util.ColorFromHex("3a3430"),
                 saltyOxygen = new Color32(205, 170, 170, 120),
                 selenite = Util.ColorFromHex("ffd1dc"),
+                sourBrine = Util.ColorFromHex("8c5075"),
                 sulfurousWater = Util.ColorFromHex("d5ff2d"),
                 zinc = new Color32(30, 170, 170, 255),
                 zirconium = new Color32(205, 0, 0, 255),
@@ -132,7 +133,8 @@ namespace Beached
                 plankton = new Color32(0, 0, 255, 255),
                 limpetEggs = new Color32(255, 225, 185, 255),
                 capSpores = Color.red,
-                poffSpores = Color.white;
+                poffSpores = Color.white,
+                fur = new Color32(210, 40, 180, 255);
 
             public class Zones
             {
@@ -239,23 +241,6 @@ namespace Beached
             Prefabs.setpieces.Add("beach", beachSetPiece);
         }
 
-        /*
-                private static void ProcessTMP(GameObject gameObject)
-                {
-                    var textComponents = gameObject.GetComponentsInChildren(typeof(TextMeshProUGUI), true);
-
-                    foreach (var text in textComponents.Cast<TextMeshProUGUI>())
-                    {
-                        text.font = text.font.name.Contains("GRAYSTROKE") ? GrayStroke : NotoSans;
-                        var newText = TMPFixer.ConvertToLocText(text);
-                        //f_m_isAlignmentEnumConverted.SetValue(text, true);
-
-                        Log.Debug("alignment: " + text.alignment);
-
-                        //newText.text = STRINGS.FormatAsLink("读写汉字 - 学中文", "DECOR");
-                    }
-                }
-        */
         private static void SetupSetPiece(GameObject testSetPiece)
         {
             foreach (var renderer in testSetPiece.GetComponents<SpriteRenderer>())

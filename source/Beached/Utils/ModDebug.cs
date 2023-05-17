@@ -18,6 +18,7 @@ namespace Beached.Utils
             var debugLineRenderer = gameObject.AddComponent<LineRenderer>();
 
             debugLineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+            debugLineRenderer.material.renderQueue = 3501;
             debugLineRenderer.startColor = start;
             debugLineRenderer.endColor = end;
             debugLineRenderer.startWidth = debugLineRenderer.endWidth = width;

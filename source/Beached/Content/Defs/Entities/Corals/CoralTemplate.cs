@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Foods;
+using Beached.Content.Scripts.Entities;
 using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
@@ -19,6 +20,108 @@ namespace Beached.Content.Defs.Entities.Corals
             Elements.sulfurousWater
         };
 
+        public GameObject CreatePrefab(string ID, string anim, string initialAnim, int width, int height, EffectorValues decor)
+        {
+            var name = Strings.Get("STRINGS.CORALS." + ID.ToUpperInvariant() + ".NAME");
+            var desc = Strings.Get("STRINGS.CORALS." + ID.ToUpperInvariant() + ".DESCRIPTION");
+
+            var prefab = EntityTemplates.CreatePlacedEntity(
+                ID,
+                name,
+                desc,
+                10f,
+                Assets.GetAnim(anim),
+                initialAnim,
+                Grid.SceneLayer.BuildingBack,
+                width,
+                height,
+                decor,
+                additionalTags: new List<Tag>()
+                {
+                    BTags.aquatic,
+                    BTags.coral
+                });
+
+            EntityTemplates.ExtendEntityToBasicPlant(
+                prefab,
+                MiscUtil.CelsiusToKelvin(0f),
+                MiscUtil.CelsiusToKelvin(5f),
+                MiscUtil.CelsiusToKelvin(42f),
+                MiscUtil.CelsiusToKelvin(50f),
+                new[]
+                {
+                    SimHashes.Water,
+                    SimHashes.SaltWater,
+                    SimHashes.Brine,
+                    SimHashes.DirtyWater,
+                    Elements.murkyBrine
+                },
+                false,
+                0f,
+                0.15f,
+                null,
+                false,
+                true,
+                false,
+                true,
+                2400f,
+                0f,
+                7400f,
+                ID + "Original",
+                name);
+
+            prefab.AddOrGet<SubmersionMonitor>();
+
+            prefab.AddOrGet<LoopingSounds>();
+
+            var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
+                prefab,
+                SeedProducer.ProductionType.DigOnly,
+                ID + "Seed",
+                STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_LEAFLETCORAL.NAME,
+                STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_LEAFLETCORAL.DESC,
+                Assets.GetAnim("beached_leaflet_coral_frag_kanim"),
+                additionalTags: new()
+                {
+                    GameTags.WaterSeed ,
+                    BTags.coralFrag
+                },
+                sortOrder: 3,
+                domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_LEAFLETCORAL.DOMESTICATEDDESC,
+                width: 0.33f,
+                height: 0.33f,
+                ignoreDefaultSeedTag: true);
+
+            EntityTemplates.CreateAndRegisterPreviewForPlant(
+                seed,
+                ID + "Preview",
+                Assets.GetAnim("beached_leaflet_coral_kanim"),
+                "place",
+                1,
+                1);
+
+            var storage = prefab.AddOrGet<Storage>();
+            storage.showInUI = true;
+            storage.capacityKg = 1f;
+
+            var passiveElementConsumer = prefab.AddOrGet<PassiveElementConsumer>();
+            passiveElementConsumer.elementToConsume = SimHashes.Water;
+            passiveElementConsumer.consumptionRate = 0.2f;
+            passiveElementConsumer.capacityKG = 10f;
+            passiveElementConsumer.consumptionRadius = 3;
+            passiveElementConsumer.showInStatusPanel = true;
+            passiveElementConsumer.sampleCellOffset = new Vector3(0f, 0f, 0f);
+            passiveElementConsumer.isRequired = false;
+            passiveElementConsumer.storeOnConsume = true;
+            passiveElementConsumer.showDescriptor = false;
+
+            var coral = prefab.AddComponent<Coral>();
+            coral.emitTag = GameTags.Gas;
+            coral.emitMass = 0.05f;
+            coral.initialVelocity = new Vector2f(0, 1);
+
+            return prefab;
+        }
 
         public static GameObject Create(string id, float mass, string anim, int width, int height, EffectorValues decor, float defaultTemperature = 293f, string initialAnim = "idle_loop", List<Tag> additionalTags = null, SimHashes[] safeElements = null)
         {

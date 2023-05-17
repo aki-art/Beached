@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Foods;
+using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
 using Klei.AI;
 using System;
@@ -30,13 +31,21 @@ namespace Beached.Content.ModDb
             everlasting.Add(new AttributeModifier(Db.Get().Amounts.Age.maxAttribute.Id, float.PositiveInfinity));
             everlasting.OnAddTrait += OnEverLasting;
             CreateBasicTrait(FABULOUS).Add(new AttributeModifier(Db.Get().Attributes.Decor.Id, 1f, is_multiplier: true));
-            CreateBasicTrait(HYPOALLERGENIC); // TODO
+            CreateBasicTrait(HYPOALLERGENIC).OnAddTrait += OnHypoAllergenic;
             CreateBasicTrait(LASTING)
                 .Add(new AttributeModifier(Db.Get().Amounts.Age.maxAttribute.Id, 1f, is_multiplier: true));
             CreateBasicTrait(MEATY).OnAddTrait += OnMeaty;
             CreateBasicTrait(PRODUCTIVE1).OnAddTrait += go => OnProductive(go, 2f);
             CreateBasicTrait(PRODUCTIVE2).OnAddTrait += go => OnProductive(go, 4f);
             CreateBasicTrait(PRODUCTIVE3).OnAddTrait += go => OnProductive(go, 8f);
+        }
+
+        private static void OnHypoAllergenic(GameObject obj)
+        {
+            if(obj.TryGetComponent(out FurSource furSource))
+            {
+                furSource.RemoveReactable();
+            }
         }
 
         private static void OnProductive(GameObject obj, float multiplier)
