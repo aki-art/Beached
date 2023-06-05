@@ -1,42 +1,42 @@
 ﻿namespace Beached.Content.Scripts.Entities
 {
-    public class GrowingCrystal : KMonoBehaviour
-    {
-        //[MyCmpReq]
-        //private CrystalFoundationMonitor crystalFoundationMonitor;
+	public class GrowingCrystal : KMonoBehaviour
+	{
+		//[MyCmpReq]
+		//private CrystalFoundationMonitor crystalFoundationMonitor;
 
-        [MyCmpReq]
-        private KSelectable kSelectable;
+		[MyCmpReq]
+		private KSelectable kSelectable;
 
-        [MyCmpReq]
-        private KBatchedAnimController kbac;
+		[MyCmpReq]
+		private KBatchedAnimController kbac;
 
-        private static StatusItem test = new StatusItem("Beached_Growing", "Growing", "", StatusItem.IconType.Info, NotificationType.Good, false, new HashedString(129022));
+		private static StatusItem test = new StatusItem("Beached_Growing", "Growing", "", StatusItem.IconType.Info, NotificationType.Good, false, new HashedString(129022));
 
-        public int GetCurrentLength()
-        {
-            return 4;
-        }
+		public int GetCurrentLength()
+		{
+			return 4;
+		}
 
-        public override void OnSpawn()
-        {
-            base.OnSpawn();
+		public override void OnSpawn()
+		{
+			base.OnSpawn();
 
-            Subscribe((int)GameHashes.FoundationChanged, OnFoundationChanged);
+			Subscribe((int)GameHashes.FoundationChanged, OnFoundationChanged);
 
-            kbac.Play(GetCurrentLength().ToString());
-            //Log.Debug("HASH " + HashCache.Get().Get(new HashedString(129022)).ToString());
-        }
+			kbac.Play(GetCurrentLength().ToString());
+			//Log.Debug("HASH " + HashCache.Get().Get(new HashedString(129022)).ToString());
+		}
 
-        private void OnFoundationChanged(object obj)
-        {
-            //if(!crystalFoundationMonitor.hasFoundation)
-            //{
-            //    // shatter
-            Util.KDestroyGameObject(this);
-            //}
+		private void OnFoundationChanged(object obj)
+		{
+			//if(!crystalFoundationMonitor.hasFoundation)
+			//{
+			//    // shatter
+			Util.KDestroyGameObject(this);
+			//}
 
-            //kSelectable.ToggleStatusItem(test, crystalFoundationMonitor.hasMatchingFoundation);
-        }
-    }
+			//kSelectable.ToggleStatusItem(test, crystalFoundationMonitor.hasMatchingFoundation);
+		}
+	}
 }

@@ -4,38 +4,38 @@ using static EdiblesManager;
 
 namespace Beached.Content.Defs.Foods
 {
-    public class SmokedMeatConfig : IEntityConfig
-    {
-        public const string ID = "Beached_SmokedMeat";
+	public class SmokedMeatConfig : IEntityConfig
+	{
+		public const string ID = "Beached_SmokedMeat";
 
-        public GameObject CreatePrefab()
-        {
-            var foodInfo = new FoodInfo(
-                ID,
-                DlcManager.VANILLA_ID,
-                1_400_000f,
-                FOOD.FOOD_QUALITY_GOOD,
-                FOOD.DEFAULT_PRESERVE_TEMPERATURE,
-                FOOD.DEFAULT_ROT_TEMPERATURE,
-                FOOD.SPOIL_TIME.VERYSLOW,
-                true);
+		public GameObject CreatePrefab()
+		{
+			var foodInfo = new FoodInfo(
+				ID,
+				DlcManager.VANILLA_ID,
+				1_400_000f,
+				FOOD.FOOD_QUALITY_GOOD,
+				FOOD.DEFAULT_PRESERVE_TEMPERATURE,
+				FOOD.DEFAULT_ROT_TEMPERATURE,
+				FOOD.SPOIL_TIME.VERYSLOW,
+				true);
 
-            var prefab = BEntityTemplates.CreateFood(
-                ID,
-                "beached_smoked_meat_kanim",
-                0.8f,
-                0.8f,
-                foodInfo);
+			var prefab = BEntityTemplates.CreateFood(
+				ID,
+				"beached_smoked_meat_kanim",
+				0.8f,
+				0.8f,
+				foodInfo);
 
-            prefab.AddTag(BTags.meat);
-            
-            return prefab;
-        }
+			prefab.AddTag(BTags.meat);
 
-        public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+			return prefab;
+		}
 
-        public void OnPrefabInit(GameObject inst) { }
+		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
-        public void OnSpawn(GameObject inst) { }
-    }
+		public void OnPrefabInit(GameObject inst) { }
+
+		public void OnSpawn(GameObject inst) { }
+	}
 }

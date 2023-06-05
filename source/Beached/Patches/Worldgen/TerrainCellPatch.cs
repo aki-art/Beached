@@ -6,68 +6,68 @@ using ProcGenGame;
 
 namespace Beached.Patches.Worldgen
 {
-    internal class TerrainCellPatch
-    {
-        [HarmonyPatch(typeof(TerrainCell), "ApplyBackground")]
-        public class TerrainCell_ApplyBackground_Patch
-        {
-            public static bool Prefix(
-                TerrainCell __instance,
-                WorldGen worldGen,
-                Chunk world,
-                TerrainCell.SetValuesFunction SetValues,
-                float temperatureMin,
-                float temperatureRange,
-                SeededRandom rnd)
-            {
-                var leaf = worldGen.GetLeafForTerrainCell(__instance);
+	internal class TerrainCellPatch
+	{
+		[HarmonyPatch(typeof(TerrainCell), "ApplyBackground")]
+		public class TerrainCell_ApplyBackground_Patch
+		{
+			public static bool Prefix(
+				TerrainCell __instance,
+				WorldGen worldGen,
+				Chunk world,
+				TerrainCell.SetValuesFunction SetValues,
+				float temperatureMin,
+				float temperatureRange,
+				SeededRandom rnd)
+			{
+				var leaf = worldGen.GetLeafForTerrainCell(__instance);
 
-                if (leaf.tags.Contains(BWorldGenTags.WaveFunctionCollapse))
-                {
-                    var rubber = Elements.rubber.Get();
-                    var node = __instance.node;
-                    
-                    var availableTerrainPoints = __instance.availableTerrainPoints;
+				if (leaf.tags.Contains(BWorldGenTags.WaveFunctionCollapse))
+				{
+					var rubber = Elements.rubber.Get();
+					var node = __instance.node;
 
-                    foreach (var availableTerrainPoint in availableTerrainPoints)
-                    {
-                        if (worldGen.HighPriorityClaimedCells.Contains(availableTerrainPoint))
-                        {
-                            continue;
-                        }
+					var availableTerrainPoints = __instance.availableTerrainPoints;
 
-                        SetValues(availableTerrainPoint, rubber, rubber.defaultValues, Sim.DiseaseCell.Invalid);
-                    }
+					foreach (var availableTerrainPoint in availableTerrainPoints)
+					{
+						if (worldGen.HighPriorityClaimedCells.Contains(availableTerrainPoint))
+						{
+							continue;
+						}
 
-                    //HandleSurfaceModifier(worldGen.Settings, __instance, BWorldGenTags.SandBeds, world, SetValues, rnd);
+						SetValues(availableTerrainPoint, rubber, rubber.defaultValues, Sim.DiseaseCell.Invalid);
+					}
 
-                    return false;
-                }
+					//HandleSurfaceModifier(worldGen.Settings, __instance, BWorldGenTags.SandBeds, world, SetValues, rnd);
 
-                return true;
-            }
+					return false;
+				}
 
-            private static void HandleSurfaceModifier(
-                WorldGenSettings settings,
-                TerrainCell terrainCell,
-                Tag targetTag,
-                Chunk world,
-                TerrainCell.SetValuesFunction SetValues,
-                SeededRandom rnd)
-            {
-/*                var element = ElementLoader.FindElementByName(settings.GetFeature(targetTag.Name)
-                    .GetOneWeightedSimHash("SurfaceChoices", rnd)
-                    .element);*/
+				return true;
+			}
 
-                var element = ElementLoader.FindElementByHash(SimHashes.Sand);
-                var defaultValues = element.defaultValues;
-                var invalid = Sim.DiseaseCell.Invalid;
+			private static void HandleSurfaceModifier(
+				WorldGenSettings settings,
+				TerrainCell terrainCell,
+				Tag targetTag,
+				Chunk world,
+				TerrainCell.SetValuesFunction SetValues,
+				SeededRandom rnd)
+			{
+				/*                var element = ElementLoader.FindElementByName(settings.GetFeature(targetTag.Name)
+									.GetOneWeightedSimHash("SurfaceChoices", rnd)
+									.element);*/
 
-                foreach (var cell in terrainCell.availableTerrainPoints)
-                {
-                    //Log.Debug(Grid.Element[cell].id);
-                }
-            }
-        }
-    }
+				var element = ElementLoader.FindElementByHash(SimHashes.Sand);
+				var defaultValues = element.defaultValues;
+				var invalid = Sim.DiseaseCell.Invalid;
+
+				foreach (var cell in terrainCell.availableTerrainPoints)
+				{
+					//Log.Debug(Grid.Element[cell].id);
+				}
+			}
+		}
+	}
 }

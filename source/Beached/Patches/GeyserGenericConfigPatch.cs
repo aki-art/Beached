@@ -6,24 +6,24 @@ using UnityEngine;
 
 namespace Beached.Patches
 {
-    public class GeyserGenericConfigPatch
-    {
-        [HarmonyPatch(typeof(GeyserGenericConfig), "GenerateConfigs")]
-        public class GeyserGenericConfig_GenerateConfigs_Patch
-        {
-            public static void Postfix(List<GeyserGenericConfig.GeyserPrefabParams> __result)
-            {
-                GeyserConfigs.GenerateConfigs(__result);
-            }
-        }
+	public class GeyserGenericConfigPatch
+	{
+		[HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.GenerateConfigs))]
+		public class GeyserGenericConfig_GenerateConfigs_Patch
+		{
+			public static void Postfix(List<GeyserGenericConfig.GeyserPrefabParams> __result)
+			{
+				GeyserConfigs.GenerateConfigs(__result);
+			}
+		}
 
-        [HarmonyPatch(typeof(GeyserGenericConfig), "CreateGeyser")]
-        public class GeyserGenericConfig_CreateGeyser_Patch
-        {
-            public static void Postfix(GameObject __result)
-            {
-                __result.AddComponent<Vista>();
-            }
-        }
-    }
+		[HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
+		public class GeyserGenericConfig_CreateGeyser_Patch
+		{
+			public static void Postfix(GameObject __result)
+			{
+				__result.AddComponent<Vista>();
+			}
+		}
+	}
 }

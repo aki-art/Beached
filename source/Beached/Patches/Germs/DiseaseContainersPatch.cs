@@ -3,60 +3,60 @@ using Klei.AI;
 
 namespace Beached.Patches.Germs
 {
-    public class DiseaseContainersPatch
-    {
-        [HarmonyPatch(
-            typeof(DiseaseContainers),
-            "CalculateDelta",
-            new[]
-            {
-                typeof(DiseaseHeader),
-                typeof(DiseaseContainer),
-                typeof(Disease),
-                typeof(float),
-                typeof(bool) },
-            new[]
-            {
-                ArgumentType.Normal,
-                ArgumentType.Ref,
-                ArgumentType.Normal,
-                ArgumentType.Normal,
-                ArgumentType.Normal
-            })]
-        public class DiseaseContainers_CalculateDelta_Patch
-        {
-            public static void Postfix(ref DiseaseContainer container, ref float __result)
-            {
-                if (container.autoDisinfectable == null)
-                {
-                    return;
-                }
+	public class DiseaseContainersPatch
+	{
+		[HarmonyPatch(
+			typeof(DiseaseContainers),
+			"CalculateDelta",
+			new[]
+			{
+				typeof(DiseaseHeader),
+				typeof(DiseaseContainer),
+				typeof(Disease),
+				typeof(float),
+				typeof(bool) },
+			new[]
+			{
+				ArgumentType.Normal,
+				ArgumentType.Ref,
+				ArgumentType.Normal,
+				ArgumentType.Normal,
+				ArgumentType.Normal
+			})]
+		public class DiseaseContainers_CalculateDelta_Patch
+		{
+			public static void Postfix(ref DiseaseContainer container, ref float __result)
+			{
+				if (container.autoDisinfectable == null)
+				{
+					return;
+				}
 
-                var pos = Grid.PosToCell(container.autoDisinfectable);
-                if (Grid.LightCount[pos] == 0)
-                {
-                    __result *= 100f; // ridiculous number for testins
-                }
-            }
-        }
+				var pos = Grid.PosToCell(container.autoDisinfectable);
+				if (Grid.LightCount[pos] == 0)
+				{
+					__result *= 100f; // ridiculous number for testins
+				}
+			}
+		}
 
-        [HarmonyPatch(typeof(DiseaseContainers), "EvaluateGrowthConstants")]
-        public class DiseaseContainers_EvaluateGrowthConstants_Patch
-        {
-            public static void Postfix(DiseaseHeader header, ref DiseaseContainer container)
-            {
-                if (header.primaryElement == null)
-                {
-                    return;
-                }
+		[HarmonyPatch(typeof(DiseaseContainers), "EvaluateGrowthConstants")]
+		public class DiseaseContainers_EvaluateGrowthConstants_Patch
+		{
+			public static void Postfix(DiseaseHeader header, ref DiseaseContainer container)
+			{
+				if (header.primaryElement == null)
+				{
+					return;
+				}
 
-                var pos = Grid.PosToCell(header.primaryElement);
-                if (Grid.LightCount[pos] == 0)
-                {
-                    container.instanceGrowthRate *= 100f; // ridiculous number for testins
-                }
-            }
-            /*            public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
+				var pos = Grid.PosToCell(header.primaryElement);
+				if (Grid.LightCount[pos] == 0)
+				{
+					container.instanceGrowthRate *= 100f; // ridiculous number for testins
+				}
+			}
+			/*            public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
                         {
                             var codes = orig.ToList();
 
@@ -86,6 +86,6 @@ namespace Beached.Patches.Germs
                         {
                             return (Grid.Element[cell].id == Elements.SaltyOxygen) ? (byte)0 : (byte)existingValue;
                         }*/
-        }
-    }
+		}
+	}
 }

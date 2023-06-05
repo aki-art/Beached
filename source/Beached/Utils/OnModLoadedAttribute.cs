@@ -2,7 +2,7 @@
 
 namespace Beached.Utils
 {
-    public class OnModLoadedAttribute : Attribute
-    {
-    }
+	public class OnModLoadedAttribute : Attribute
+	{
+	}
 }

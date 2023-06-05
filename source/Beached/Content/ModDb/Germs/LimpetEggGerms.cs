@@ -4,48 +4,48 @@ using TUNING;
 
 namespace Beached.Content.ModDb.Germs
 {
-    public class LimpetEggGerms : Disease
-    {
-        public const string ID = "Beached_LimpetEgg";
-        public const float RAD_KILL_RATE = 2.5f;
+	public class LimpetEggGerms : Disease
+	{
+		public const string ID = "Beached_LimpetEgg";
+		public const float RAD_KILL_RATE = 2.5f;
 
-        public float UVHalfLife => 2f; // UV Lamps compat
+		public float UVHalfLife => 2f; // UV Lamps compat
 
-        private static readonly RangeInfo temperatureRangeInfo = MiscUtil.RangeInfoCelsius(0, 15, 65, 80);
-        private static readonly RangeInfo temperatureHalfLivesInfo = new(10f, 1200f, 1200f, 10f);
-        private static readonly RangeInfo pressureRangeInfo = new(0f, 0f, 1000f, 1000f);
+		private static readonly RangeInfo temperatureRangeInfo = MiscUtil.RangeInfoCelsius(0, 15, 65, 80);
+		private static readonly RangeInfo temperatureHalfLivesInfo = new(10f, 1200f, 1200f, 10f);
+		private static readonly RangeInfo pressureRangeInfo = new(0f, 0f, 1000f, 1000f);
 
 
-        public LimpetEggGerms(bool statsOnly) : base(ID, 20, temperatureRangeInfo, temperatureHalfLivesInfo,
-            pressureRangeInfo, RangeInfo.Idempotent(), RAD_KILL_RATE, statsOnly)
-        {
-            overlayColourName = ID;
-        }
+		public LimpetEggGerms(bool statsOnly) : base(ID, 20, temperatureRangeInfo, temperatureHalfLivesInfo,
+			pressureRangeInfo, RangeInfo.Idempotent(), RAD_KILL_RATE, statsOnly)
+		{
+			overlayColourName = ID;
+		}
 
-        public override void PopulateElemGrowthInfo()
-        {
-            InitializeElemGrowthArray(ref elemGrowthInfo, DEFAULT_GROWTH_INFO);
+		public override void PopulateElemGrowthInfo()
+		{
+			InitializeElemGrowthArray(ref elemGrowthInfo, DEFAULT_GROWTH_INFO);
 
-            var growth = new GrowthInfoBuilder(this)
-                .DefaultBehavior(
-                    DISEASE.UNDERPOPULATION_DEATH_RATE.NONE,
-                    1.4f,
-                    6000f,
-                    0.4f,
-                    500,
-                    3000,
-                    1f / 2000f,
-                    1)
-                .DiesIn(Element.State.Liquid)
-                .DiesAndSlowsOnSolid();
+			var growth = new GrowthInfoBuilder(this)
+				.DefaultBehavior(
+					DISEASE.UNDERPOPULATION_DEATH_RATE.NONE,
+					1.4f,
+					6000f,
+					0.4f,
+					500,
+					3000,
+					1f / 2000f,
+					1)
+				.DiesIn(Element.State.Liquid)
+				.DiesAndSlowsOnSolid();
 #if ELEMENTS
-            growth
-                .GrowsFastIn(SimHashes.Oxygen, Elements.saltyOxygen, SimHashes.ContaminatedOxygen)
-                .DisinfectedBy(SimHashes.ChlorineGas, SimHashes.BleachStone, SimHashes.Ethanol)
-                .DiesIn(Elements.murkyBrine, SimHashes.Brine, Elements.sulfurousWater, Elements.sourBrine);
+			growth
+				.GrowsFastIn(SimHashes.Oxygen, Elements.saltyOxygen, SimHashes.ContaminatedOxygen)
+				.DisinfectedBy(SimHashes.ChlorineGas, SimHashes.BleachStone, SimHashes.Ethanol)
+				.DiesIn(Elements.murkyBrine, SimHashes.Brine, Elements.sulfurousWater, Elements.sourBrine);
 #endif
 
-            InitializeElemExposureArray(ref elemExposureInfo, DEFAULT_EXPOSURE_INFO);
-        }
-    }
+			InitializeElemExposureArray(ref elemExposureInfo, DEFAULT_EXPOSURE_INFO);
+		}
+	}
 }

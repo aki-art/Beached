@@ -4,36 +4,36 @@ using static EdiblesManager;
 
 namespace Beached.Content.Defs.Foods
 {
-    public class BerryJellyConfig : IEntityConfig
-    {
-        public const string ID = "Beached_BerryJelly";
+	public class BerryJellyConfig : IEntityConfig
+	{
+		public const string ID = "Beached_BerryJelly";
 
-        public GameObject CreatePrefab()
-        {
-            var foodInfo = new FoodInfo(
-                ID,
-                DlcManager.VANILLA_ID,
-                1200_000f,
-                FOOD.FOOD_QUALITY_GREAT,
-                FOOD.DEFAULT_PRESERVE_TEMPERATURE,
-                FOOD.DEFAULT_ROT_TEMPERATURE,
-                FOOD.SPOIL_TIME.DEFAULT,
-                true);
+		public GameObject CreatePrefab()
+		{
+			var foodInfo = new FoodInfo(
+				ID,
+				DlcManager.VANILLA_ID,
+				1200_000f,
+				FOOD.FOOD_QUALITY_GREAT,
+				FOOD.DEFAULT_PRESERVE_TEMPERATURE,
+				FOOD.DEFAULT_ROT_TEMPERATURE,
+				FOOD.SPOIL_TIME.DEFAULT,
+				true);
 
-            var prefab = BEntityTemplates.CreateFood(
-                ID,
-                "beached_berry_jelly_kanim",
-                0.8f,
-                0.8f,
-                foodInfo);
+			var prefab = BEntityTemplates.CreateFood(
+				ID,
+				"beached_berry_jelly_kanim",
+				0.8f,
+				0.8f,
+				foodInfo);
 
-            return prefab;
-        }
+			return prefab;
+		}
 
-        public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
-        public void OnPrefabInit(GameObject inst) { }
+		public void OnPrefabInit(GameObject inst) { }
 
-        public void OnSpawn(GameObject inst) { }
-    }
+		public void OnSpawn(GameObject inst) { }
+	}
 }

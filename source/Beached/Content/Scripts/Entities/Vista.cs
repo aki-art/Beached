@@ -1,64 +1,64 @@
 ﻿namespace Beached.Content.Scripts.Entities
 {
-    public class Vista : KMonoBehaviour
-    {
-        [MyCmpGet]
-        private KPrefabID kPrefabID;
+	public class Vista : KMonoBehaviour
+	{
+		[MyCmpGet]
+		private KPrefabID kPrefabID;
 
-        private CavityInfo currentCavity;
+		private CavityInfo currentCavity;
 
-        public override void OnPrefabInit()
-        {
-            gameObject.AddTag(BTags.FastTrack.registerRoom);
-            gameObject.AddTag(BTags.vista);
+		public override void OnPrefabInit()
+		{
+			gameObject.AddTag(BTags.FastTrack.registerRoom);
+			gameObject.AddTag(BTags.vista);
 
-            if (Mod.isFastTrackHere)
-            {
-                Subscribe((int)GameHashes.UpdateRoom, OnUpdateRoom);
-            }
-        }
+			if (Mod.isFastTrackHere)
+			{
+				Subscribe((int)GameHashes.UpdateRoom, OnUpdateRoom);
+			}
+		}
 
-        private void OnUpdateRoom(object obj)
-        {
-            if (obj is Room room)
-            {
-                UpdateRoom(room?.cavity);
-            }
-        }
+		private void OnUpdateRoom(object obj)
+		{
+			if (obj is Room room)
+			{
+				UpdateRoom(room?.cavity);
+			}
+		}
 
-        public override void OnCleanUp()
-        {
-            RemoveVista();
-        }
+		public override void OnCleanUp()
+		{
+			RemoveVista();
+		}
 
-        public void UpdateRoom(CavityInfo cavity)
-        {
-            if (Game.IsQuitting())
-            {
-                return;
-            }
+		public void UpdateRoom(CavityInfo cavity)
+		{
+			if (Game.IsQuitting())
+			{
+				return;
+			}
 
-            if (cavity == currentCavity)
-            {
-                return;
-            }
+			if (cavity == currentCavity)
+			{
+				return;
+			}
 
-            RemoveVista();
+			RemoveVista();
 
-            if (cavity != null)
-            {
-                cavity.AddNaturePOI(kPrefabID);
-            }
+			if (cavity != null)
+			{
+				cavity.AddNaturePOI(kPrefabID);
+			}
 
-            currentCavity = cavity;
-        }
+			currentCavity = cavity;
+		}
 
-        private void RemoveVista()
-        {
-            if (currentCavity != null)
-            {
-                currentCavity.RemoveNaturePOI(kPrefabID);
-            }
-        }
-    }
+		private void RemoveVista()
+		{
+			if (currentCavity != null)
+			{
+				currentCavity.RemoveNaturePOI(kPrefabID);
+			}
+		}
+	}
 }

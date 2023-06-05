@@ -1,25 +1,25 @@
 ﻿namespace Beached.Content.Scripts
 {
-    public class Beached_WorldLoader : KMonoBehaviour
-    {
-        public static Beached_WorldLoader Instance;
-        
-        public override void OnPrefabInit() => Instance = this;
+	public class Beached_WorldLoader : KMonoBehaviour
+	{
+		public static Beached_WorldLoader Instance;
 
-        public override void OnCleanUp() => Instance = null;
+		public override void OnPrefabInit() => Instance = this;
 
-        public bool IsBeachedContentActive { get; private set; } = true;
-        
-        public void WorldLoaded(string clusterId)
-        {
-            IsBeachedContentActive = clusterId == CONSTS.WORLDGEN.CLUSTERS.BEACHED;
+		public override void OnCleanUp() => Instance = null;
 
-            if (IsBeachedContentActive)
-                Log.Info("Loaded Astropelagos world, initializing Beached settings.");
+		public bool IsBeachedContentActive { get; private set; } = true;
+
+		public void WorldLoaded(string clusterId)
+		{
+			IsBeachedContentActive = clusterId == CONSTS.WORLDGEN.CLUSTERS.BEACHED;
+
+			if (IsBeachedContentActive)
+				Log.Info("Loaded Astropelagos world, initializing Beached settings.");
 
 #if ELEMENTS
-            Elements.OnWorldReload(IsBeachedContentActive);
+			Elements.OnWorldReload(IsBeachedContentActive);
 #endif
-        }
-    }
+		}
+	}
 }

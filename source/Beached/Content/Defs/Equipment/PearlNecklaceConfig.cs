@@ -5,37 +5,37 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Equipment
 {
-    public class PearlNecklaceConfig : IEquipmentConfig
-    {
-        public const string ID = "Beached_Equipment_PearlNecklace";
+	public class PearlNecklaceConfig : IEquipmentConfig
+	{
+		public const string ID = "Beached_Equipment_PearlNecklace";
 
-        public EquipmentDef CreateEquipmentDef()
-        {
-            var attributeModifiers = new List<AttributeModifier>
-            {
-                new AttributeModifier(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 30)
-            };
+		public EquipmentDef CreateEquipmentDef()
+		{
+			var attributeModifiers = new List<AttributeModifier>
+			{
+				new AttributeModifier(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 30)
+			};
 
-            var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
-                ID,
-                BAssignableSlots.JEWELLERY_ID,
-                Elements.aquamarine,
-                30f,
-                TUNING.EQUIPMENT.VESTS.COOL_VEST_ICON0,
-                CONSTS.SNAPONS.JEWELLERIES.PEARL,
-                "beached_pearl_necklace_kanim",
-                4,
-                attributeModifiers,
-                additional_tags: new Tag[]
-                {
-                    GameTags.PedestalDisplayable
-                });
+			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
+				ID,
+				BAssignableSlots.JEWELLERY_ID,
+				Elements.aquamarine,
+				30f,
+				TUNING.EQUIPMENT.VESTS.COOL_VEST_ICON0,
+				CONSTS.SNAPONS.JEWELLERIES.PEARL,
+				"beached_pearl_necklace_kanim",
+				4,
+				attributeModifiers,
+				additional_tags: new Tag[]
+				{
+					GameTags.PedestalDisplayable
+				});
 
-            return equipmentDef;
-        }
+			return equipmentDef;
+		}
 
-        public void DoPostConfigure(GameObject go) {  }
+		public void DoPostConfigure(GameObject go) { }
 
-        public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
-    }
+		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+	}
 }

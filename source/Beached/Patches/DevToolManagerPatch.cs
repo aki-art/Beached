@@ -1,15 +1,16 @@
-﻿#if DEBUG
-using HarmonyLib;
+﻿using HarmonyLib;
 
 namespace Beached.Patches
 {
-    public class DevToolManagerPatch
-    {
-        [HarmonyPatch(typeof(DevToolManager), "UpdateShouldShowTools")]
-        public class DevToolManager_UpdateShouldShowTools_Patch
-        {
-            public static void Postfix(ref bool ___showImGui) => ___showImGui = true;
-        }
-    }
-}
+	public class DevToolManagerPatch
+	{
+#if DEBUG
+		// forces the debug menu to be on by default
+		[HarmonyPatch(typeof(DevToolManager), nameof(DevToolManager.UpdateShouldShowTools))]
+		public class DevToolManager_UpdateShouldShowTools_Patch
+		{
+			public static void Postfix(ref bool ___showImGui) => ___showImGui = true;
+		}
 #endif
+	}
+}

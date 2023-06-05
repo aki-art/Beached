@@ -6,40 +6,40 @@ using static ClothingWearer;
 
 namespace Beached.Content.Defs.Equipment
 {
-    internal class RubberBootsConfig : IEquipmentConfig
-    {
-        public const string ID = "Beached_Equipment_RubberBoots";
+	internal class RubberBootsConfig : IEquipmentConfig
+	{
+		public const string ID = "Beached_Equipment_RubberBoots";
 
-        public EquipmentDef CreateEquipmentDef()
-        {
-            var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
-                ID,
-                BAssignableSlots.SHOES_ID,
-                Elements.rubber,
-                30f,
-                "beached_rubberboots_item_kanim",
-                CONSTS.SNAPONS.RUBBER_BOOTS,
-                "beached_rubberboots_kanim",
-                4,
-                new List<AttributeModifier>(),
-                additional_tags: new Tag[]
-                {
-                    GameTags.PedestalDisplayable
-                });
+		public EquipmentDef CreateEquipmentDef()
+		{
+			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
+				ID,
+				BAssignableSlots.SHOES_ID,
+				Elements.rubber,
+				30f,
+				"beached_rubberboots_item_kanim",
+				CONSTS.SNAPONS.RUBBER_BOOTS,
+				"beached_rubberboots_kanim",
+				4,
+				new List<AttributeModifier>(),
+				additional_tags: new Tag[]
+				{
+					GameTags.PedestalDisplayable
+				});
 
-            var clothingInfo = ClothingInfo.BASIC_CLOTHING;
+			var clothingInfo = ClothingInfo.BASIC_CLOTHING;
 
-            equipmentDef.EffectImmunites.Add(Db.Get().effects.Get("WetFeet"));
-            equipmentDef.OnEquipCallBack = eq => CoolVestConfig.OnEquipVest(eq, clothingInfo);
-            equipmentDef.OnUnequipCallBack = CoolVestConfig.OnUnequipVest;
+			equipmentDef.EffectImmunites.Add(Db.Get().effects.Get("WetFeet"));
+			equipmentDef.OnEquipCallBack = eq => CoolVestConfig.OnEquipVest(eq, clothingInfo);
+			equipmentDef.OnUnequipCallBack = CoolVestConfig.OnUnequipVest;
 
-            return equipmentDef;
-        }
+			return equipmentDef;
+		}
 
-        public void DoPostConfigure(GameObject go)
-        {
-        }
+		public void DoPostConfigure(GameObject go)
+		{
+		}
 
-        public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
-    }
+		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+	}
 }

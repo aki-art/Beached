@@ -4,115 +4,115 @@ using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
-    // goes on an Sleepable, so it can keep track of a dupe's bedroom
-    [SerializationConfig(MemberSerialization.OptIn)]
-    public class TargetOfGoalTracker : KMonoBehaviour
-    {
-        [SerializeField]
-        public Tag targetTag;
+	// goes on an Sleepable, so it can keep track of a dupe's bedroom
+	[SerializationConfig(MemberSerialization.OptIn)]
+	public class TargetOfGoalTracker : KMonoBehaviour
+	{
+		[SerializeField]
+		public Tag targetTag;
 
-        [MyCmpReq]
-        private Assignable assignable;
-        private GameObject target;
+		[MyCmpReq]
+		private Assignable assignable;
+		private GameObject target;
 
-        [Serialize]
-        private bool isAssignedToTrackedDupe;
+		[Serialize]
+		private bool isAssignedToTrackedDupe;
 
-        [Serialize]
-        private Ref<KPrefabID> targetRef;
+		[Serialize]
+		private Ref<KPrefabID> targetRef;
 
-        public override void OnSpawn()
-        {
-            Subscribe((int)GameHashes.AssigneeChanged, OnAssigneeChanged);
+		public override void OnSpawn()
+		{
+			Subscribe((int)GameHashes.AssigneeChanged, OnAssigneeChanged);
 
-            if (targetRef != null)
-            {
-                OnUpdateRoom(Game.Instance.roomProber.GetRoomOfGameObject(gameObject));
-            }
-        }
+			if (targetRef != null)
+			{
+				OnUpdateRoom(Game.Instance.roomProber.GetRoomOfGameObject(gameObject));
+			}
+		}
 
-        private void OnAssigneeChanged(object obj)
-        {
-            if (obj is IAssignableIdentity assignee)
-            {
-                var identity = assignee.GetSoleOwner();
+		private void OnAssigneeChanged(object obj)
+		{
+			if (obj is IAssignableIdentity assignee)
+			{
+				var identity = assignee.GetSoleOwner();
 
-                if (identity != null && identity.TryGetComponent(out BedroomBuildingGoal goal))
-                {
-                    Subscribe((int)GameHashes.UpdateRoom, OnUpdateRoom);
-                    isAssignedToTrackedDupe = true;
+				if (identity != null && identity.TryGetComponent(out BedroomBuildingGoal goal))
+				{
+					Subscribe((int)GameHashes.UpdateRoom, OnUpdateRoom);
+					isAssignedToTrackedDupe = true;
 
-                    return;
-                }
-            }
+					return;
+				}
+			}
 
-            if (isAssignedToTrackedDupe)
-            {
-                Unsubscribe((int)GameHashes.UpdateRoom, OnUpdateRoom);
-            }
+			if (isAssignedToTrackedDupe)
+			{
+				Unsubscribe((int)GameHashes.UpdateRoom, OnUpdateRoom);
+			}
 
-            isAssignedToTrackedDupe = false;
-        }
+			isAssignedToTrackedDupe = false;
+		}
 
-        private Room GetRoom(GameObject target)
-        {
-            return Game.Instance.roomProber.GetRoomOfGameObject(target);
-        }
+		private Room GetRoom(GameObject target)
+		{
+			return Game.Instance.roomProber.GetRoomOfGameObject(target);
+		}
 
-        private void OnUpdateRoom(object data)
-        {
-            if (assignable.assignee == null)
-            {
-                // no dupe is assigned
-                return;
-            }
+		private void OnUpdateRoom(object data)
+		{
+			if (assignable.assignee == null)
+			{
+				// no dupe is assigned
+				return;
+			}
 
-            GameObject newTarget = null;
-            var isTargetValid = target == null;
+			GameObject newTarget = null;
+			var isTargetValid = target == null;
 
-            if (data is Room room)
-            {
-                isTargetValid &= GetRoom(target) == room;
+			if (data is Room room)
+			{
+				isTargetValid &= GetRoom(target) == room;
 
-                if (isTargetValid)
-                {
-                    // all is in order
-                    return;
-                }
+				if (isTargetValid)
+				{
+					// all is in order
+					return;
+				}
 
-                // target was lost or changed, look for it again
-                foreach (var building in room.buildings)
-                {
-                    if (building.HasTag(targetTag))
-                    {
-                        newTarget = building.gameObject;
-                        SetTarget(building.gameObject);
+				// target was lost or changed, look for it again
+				foreach (var building in room.buildings)
+				{
+					if (building.HasTag(targetTag))
+					{
+						newTarget = building.gameObject;
+						SetTarget(building.gameObject);
 
-                        return;
-                    }
-                }
-            }
+						return;
+					}
+				}
+			}
 
-            SetTarget(null);
-        }
+			SetTarget(null);
+		}
 
-        private void SetTarget(GameObject newTarget)
-        {
-            if (target != newTarget)
-            {
-                TriggerOwner(newTarget.gameObject);
-            }
+		private void SetTarget(GameObject newTarget)
+		{
+			if (target != newTarget)
+			{
+				TriggerOwner(newTarget.gameObject);
+			}
 
-            target = newTarget;
-            targetRef = newTarget == null ? null : new Ref<KPrefabID>(newTarget.GetComponent<KPrefabID>());
-        }
+			target = newTarget;
+			targetRef = newTarget == null ? null : new Ref<KPrefabID>(newTarget.GetComponent<KPrefabID>());
+		}
 
-        private void TriggerOwner(GameObject target)
-        {
-            if (assignable.assignee != null)
-            {
-                assignable.assignee.GetSoleOwner()?.Trigger(ModHashes.lifeGoalTrackerUpdate, (target, this));
-            }
-        }
-    }
+		private void TriggerOwner(GameObject target)
+		{
+			if (assignable.assignee != null)
+			{
+				assignable.assignee.GetSoleOwner()?.Trigger(ModHashes.lifeGoalTrackerUpdate, (target, this));
+			}
+		}
+	}
 }

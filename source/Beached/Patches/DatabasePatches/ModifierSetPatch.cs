@@ -3,15 +3,15 @@ using HarmonyLib;
 
 namespace Beached.Patches.DatabasePatches
 {
-    public class ModifierSetPatch
-    {
-        [HarmonyPatch(typeof(ModifierSet), "Initialize")]
-        public static class ModifierSet_Initialize_Patch
-        {
-            public static void Postfix(ModifierSet __instance)
-            {
-                BEffects.Register(__instance);
-            }
-        }
-    }
+	public class ModifierSetPatch
+	{
+		[HarmonyPatch(typeof(ModifierSet), "Initialize")]
+		public static class ModifierSet_Initialize_Patch
+		{
+			public static void Postfix(ModifierSet __instance)
+			{
+				BEffects.Register(__instance);
+			}
+		}
+	}
 }

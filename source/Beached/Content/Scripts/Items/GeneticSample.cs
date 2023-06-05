@@ -2,14 +2,14 @@
 
 namespace Beached.Content.Scripts.Items
 {
-    public class GeneticSample : KMonoBehaviour
-    {
-        [SerializeField]
-        public string traitId;
+	public class GeneticSample : KMonoBehaviour
+	{
+		[SerializeField]
+		public string traitId;
 
-        public override void OnSpawn()
-        {
-            base.OnSpawn();
-        }
-    }
+		public override void OnSpawn()
+		{
+			base.OnSpawn();
+		}
+	}
 }
