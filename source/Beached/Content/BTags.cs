@@ -21,7 +21,8 @@ namespace Beached.Content
             wishingStars = TagManager.Create("Beached_WishingStars"), // used on events that should trigger the wishing star effect on dupes
             coralFrag = TagManager.Create("Beached_CoralFrag"),
             dim = TagManager.Create("Beached_Dim"),
-            dark = TagManager.Create("Beached_Dark"),
+            palateCleanserFood = TagManager.Create("Beached_PalateCleanserFood"),
+            palateCleansed = TagManager.Create("Beached_PalateCleansed"),
             furAllergic = TagManager.Create("Beached_FurAllergic");
 
         public static TagSet eggs = new()

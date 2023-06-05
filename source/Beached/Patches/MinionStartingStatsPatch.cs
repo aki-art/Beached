@@ -9,9 +9,23 @@ namespace Beached.Patches
 {
     public class MinionStartingStatsPatch
     {
+        [HarmonyPatch(typeof(MinionStartingStats), "CreateBodyData")]
+        public class MinionStartingStats_CreateBodyData_Patch
+        {
+            public static void Postfix(Personality p, ref KCompBuilder.BodyData __result)
+            {
+                BDuplicants.ModifyBodyData(p, ref __result);
+            }
+        }
+
         [HarmonyPatch(typeof(MinionStartingStats), "GenerateTraits")]
         public class MinionStartingStats_GenerateTraits_Patch
         {
+            public static void Prefix(MinionStartingStats __instance)
+            {
+                BDuplicants.OnTraitRoll(__instance);
+            }
+
             public static void Postfix(MinionStartingStats __instance)
             {
                 if (Mod.settings.CrossWorld.LifeGoals || Beached_WorldLoader.Instance.IsBeachedContentActive)

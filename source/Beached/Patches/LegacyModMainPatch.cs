@@ -11,7 +11,9 @@ namespace Beached.Patches
         {
             public static void Postfix()
             {
+#if ELEMENTS
                 Elements.AddAttributeModifiers();
+#endif
             }
         }
     }

@@ -65,12 +65,15 @@ namespace Beached.Content.Scripts
 
         public void Sim200ms(float dt)
         {
+#if ELEMENTS
+
             if (!enabled)
             {
                 return;
             }
 
             UpdateCells();
+#endif
         }
 
         public void UpdateCells()
@@ -152,7 +155,9 @@ namespace Beached.Content.Scripts
 
             else if (element.HasTag(BTags.corrodable))
             {
+#if ELEMENTS
                 WorldDamage.Instance.ApplyDamage(cellBelow, Elements.corrosionData[element.id], cell);
+#endif
                 Game.Instance.SpawnFX(SpawnFXHashes.BleachStoneEmissionBubbles, cellBelow, 0);
             }
         }
@@ -252,7 +257,9 @@ namespace Beached.Content.Scripts
             base.OnSpawn();
 
             SetChunks();
+#if ELEMENTS
             SetElements();
+#endif
 
             fungusInfos = new()
             {

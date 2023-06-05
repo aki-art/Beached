@@ -56,7 +56,7 @@ namespace Beached.Content.Defs.Items
 
             prefab.AddOrGet<EntitySplitter>();
             prefab.AddOrGet<SimpleMassStatusItem>();
-            prefab.AddOrGet<OccupyArea>().OccupiedCellsOffsets = EntityTemplates.GenerateOffsets(1, 1);
+            prefab.AddOrGet<OccupyArea>().SetCellOffsets(EntityTemplates.GenerateOffsets(1, 1));
             prefab.AddOrGet<DecorProvider>().SetValues(decor);
 
             if (loop)

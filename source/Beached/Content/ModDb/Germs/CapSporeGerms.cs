@@ -45,7 +45,7 @@ namespace Beached.Content.ModDb.Germs
                 diffusionScale = new float?(1E-06f),
                 minDiffusionCount = new int?(1000000)
             });
-
+#if ELEMENTS
             AddGrowthRule(new ElementGrowthRule(Elements.mucus)
             {
                 underPopulationDeathRate = new float?(0f),
@@ -54,6 +54,7 @@ namespace Beached.Content.ModDb.Germs
                 maxCountPerKG = new float?(4500),
                 diffusionScale = new float?(0.05f)
             });
+#endif
 
             AddGrowthRule(new ElementGrowthRule(SimHashes.BleachStone)
             {

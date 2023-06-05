@@ -12,9 +12,9 @@ namespace Beached.Content.ModDb.Germs
 
         public float UVHalfLife => 1f; // UV Lamps compat
 
-        private static readonly RangeInfo temperatureRangeInfo = new RangeInfo(283.15f, 293.15f, 363.15f, 373.15f);
-        private static readonly RangeInfo temperatureHalfLivesInfo = new RangeInfo(10f, 1200f, 1200f, 10f);
-        private static readonly RangeInfo pressureRangeInfo = new RangeInfo(0f, 0f, 1000f, 1000f);
+        private static readonly RangeInfo temperatureRangeInfo = MiscUtil.RangeInfoCelsius(0, 10, 60, 75);
+        private static readonly RangeInfo temperatureHalfLivesInfo = new(10f, 1200f, 1200f, 10f);
+        private static readonly RangeInfo pressureRangeInfo = new(0f, 0f, 1000f, 1000f);
 
         public PlanktonGerms(bool statsOnly) : base(ID, 20, temperatureRangeInfo, temperatureHalfLivesInfo,
             pressureRangeInfo, RangeInfo.Idempotent(), RAD_KILL_RATE, statsOnly)
@@ -24,25 +24,31 @@ namespace Beached.Content.ModDb.Germs
 
         public override void PopulateElemGrowthInfo()
         {
-            new GrowthInfoBuilder(this)
+            var growth = new GrowthInfoBuilder(this)
                 .DefaultBehavior(
-                    DISEASE.UNDERPOPULATION_DEATH_RATE.NONE,
+                    DISEASE.UNDERPOPULATION_DEATH_RATE.FAST,
                     1.4f,
-                    6000f,
+                    10_000f,
                     0.4f,
                     500,
-                    3000,
-                    1f / 2000f,
+                    500,
+                    1f / 200f,
                     1)
-                .DiesIn(Element.State.Gas)
                 .DiesAndSlowsOnSolid()
                 .GrowsIn(GameTags.AnyWater)
-                .DisinfectedBy(SimHashes.ChlorineGas, SimHashes.BleachStone, SimHashes.Ethanol)
-                .DiesIn(Elements.sulfurousWater);
+                .DisinfectedBy(SimHashes.ChlorineGas, SimHashes.BleachStone, SimHashes.Ethanol);
+#if ELEMENTS
+            growth
+                .InstantlyDiesIn(Elements.sulfurousWater);
+#endif
 
-            InitializeElemExposureArray(ref elemExposureInfo, DEFAULT_EXPOSURE_INFO);
-            new ElementExposureRule(SimHashes.ChlorineGas).populationHalfLife = new float?(10f);
-            new ElementExposureRule(SimHashes.Ethanol).populationHalfLife = new float?(10f);
+            var exposure = new ExposureRuleBuilder(this)
+                .DefaultHalfLife(DISEASE.GROWTH_FACTOR.DEATH_3)
+                .DisinfectedBy(SimHashes.ChlorineGas, SimHashes.Ethanol);
+#if ELEMENTS
+            exposure
+                .InstantlyDiesIn(Elements.sulfurousWater);
+#endif
         }
     }
 }

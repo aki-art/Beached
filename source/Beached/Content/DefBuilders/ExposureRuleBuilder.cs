@@ -15,6 +15,16 @@ namespace Beached.Content.DefBuilders
             disease.InitializeElemExposureArray(ref disease.elemExposureInfo, Disease.DEFAULT_EXPOSURE_INFO);
         }
 
+        public ExposureRuleBuilder DefaultHalfLife(float populationHalfLife)
+        {
+            disease.AddExposureRule(new ExposureRule()
+            {
+                populationHalfLife = new float?(populationHalfLife)
+            });
+
+            return this;
+        }
+
         public ExposureRuleBuilder GrowsIn(params SimHashes[] elements)
         {
             foreach (var element in elements)
@@ -30,7 +40,7 @@ namespace Beached.Content.DefBuilders
 
         public ExposureRuleBuilder DisinfectedBy(params SimHashes[] elements)
         {
-            foreach(var element in elements)
+            foreach (var element in elements)
             {
                 disease.AddExposureRule(new ElementExposureRule(element)
                 {

@@ -12,6 +12,7 @@ namespace Beached.Patches.Germs
         {
             public static void Postfix(SlimeGerms __instance)
             {
+#if ELEMENTS
                 __instance.growthRules.Add(new ElementGrowthRule(Elements.saltyOxygen)
                 {
                     populationHalfLife = new float?(1200f),
@@ -36,6 +37,7 @@ namespace Beached.Patches.Germs
                 {
                     populationHalfLife = new float?(-12000f)
                 });
+#endif
             }
         }
     }

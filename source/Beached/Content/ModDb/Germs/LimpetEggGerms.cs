@@ -26,7 +26,7 @@ namespace Beached.Content.ModDb.Germs
         {
             InitializeElemGrowthArray(ref elemGrowthInfo, DEFAULT_GROWTH_INFO);
 
-            new GrowthInfoBuilder(this)
+            var growth = new GrowthInfoBuilder(this)
                 .DefaultBehavior(
                     DISEASE.UNDERPOPULATION_DEATH_RATE.NONE,
                     1.4f,
@@ -37,10 +37,13 @@ namespace Beached.Content.ModDb.Germs
                     1f / 2000f,
                     1)
                 .DiesIn(Element.State.Liquid)
-                .DiesAndSlowsOnSolid()
+                .DiesAndSlowsOnSolid();
+#if ELEMENTS
+            growth
                 .GrowsFastIn(SimHashes.Oxygen, Elements.saltyOxygen, SimHashes.ContaminatedOxygen)
                 .DisinfectedBy(SimHashes.ChlorineGas, SimHashes.BleachStone, SimHashes.Ethanol)
                 .DiesIn(Elements.murkyBrine, SimHashes.Brine, Elements.sulfurousWater, Elements.sourBrine);
+#endif
 
             InitializeElemExposureArray(ref elemExposureInfo, DEFAULT_EXPOSURE_INFO);
         }

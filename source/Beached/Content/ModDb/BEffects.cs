@@ -28,6 +28,9 @@ namespace Beached.Content.ModDb
         // applied when they see shooting stars
         public const string WISHING_STAR = "Beached_WishingStar";
 
+        public const string
+            POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds";
+
         public static void Register(ModifierSet set)
         {
             var stressDelta = Db.Get().Amounts.Stress.deltaAttribute.Id;
@@ -70,6 +73,10 @@ namespace Beached.Content.ModDb
 
             new EffectBuilder(WISHING_STAR, 600f, false)
                 .Modifier(Db.Get().Attributes.QualityOfLife.Id, 4)
+                .Add(set);
+
+            new EffectBuilder(POFF_CLEANEDTASTEBUDS, CONSTS.CYCLE_LENGTH * 6, false)
+                .Modifier(Db.Get().Attributes.FoodExpectation.Id, 1)
                 .Add(set);
 
             /*            new EffectBuilder(LIMPETHOST, 0, false)

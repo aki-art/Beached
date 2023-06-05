@@ -8,6 +8,7 @@ namespace Beached.Patches
 {
     public class UnstableGroundManagerPatch
     {
+#if ELEMENTS
         [HarmonyPatch(typeof(UnstableGroundManager), "OnPrefabInit")]
         public class UnstableGroundManager_OnPrefabInit_Patch
         {
@@ -40,5 +41,6 @@ namespace Beached.Patches
                 };
             }
         }
+#endif
     }
 }

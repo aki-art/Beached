@@ -31,7 +31,7 @@ namespace Beached.Utils
 
         public HarvestablePOIBuilder Element(SimHashes element, float weight)
         {
-            poiType.harvestableElements.Add(element, weight); 
+            poiType.harvestableElements[element] = weight; 
             return this;
         }
 

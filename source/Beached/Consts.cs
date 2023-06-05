@@ -14,6 +14,40 @@ namespace Beached
             }
 
             public const string HISTAMINE_SUPPRESSION = "HistamineSuppression";
+
+            public static class GENDER
+            {
+                public const string FEMALE = "Female";
+                public const string MALE = "Male";
+                public const string NONBINARY = "Nb"; // displays as X on UI
+            }
+
+            public static class PERSONALITY_TYPE
+            {
+
+            }
+
+            public static class JOY_TRAITS
+            {
+                public const string BALLOONARTIST = "BalloonArtist";
+                public const string SPARKLESTREAKER = "SparkleStreaker";
+                public const string STICKERBOMBER = "StickerBomber";
+                public const string SUPERPRODUCTIVE = "SuperProductive";
+                public const string HAPPYSINGER = "HappySinger";
+            }
+
+            public static class STRESS_TRAIT
+            {
+                public const string AGGRESSIVE = "Aggressive";
+                public const string STRESSVOMITER = "StressVomiter";
+                public const string UGLYCRIER = "UglyCrier";
+                public const string BINGEEATER = "BingeEater";
+            }
+
+            public static class SKIN_COLORS
+            {
+
+            }
         }
 
         public static class TEMPLATE_VALUES

@@ -487,6 +487,17 @@ namespace Beached
                     }
                 }
 
+                public class OTHERS
+                {
+                    public class BEACHED_BRINE_POOL
+                    {
+                        public static LocString NAME = "Brine Pool";
+                        public static LocString DESC = "Releases Salt into the liquids or air it is submerged in.";
+                        public static LocString SALTOFF = "Converting {0} to {1}";
+                        public static LocString SALTOFF_TOOLTIP = "Saturates elements it is submerged in with salt at an average interval of {0}.";
+                    }
+                }
+
                 public class SEEDS
                 {
                     public class BEACHED_CORAL_WASHUSPONGE
@@ -754,10 +765,22 @@ namespace Beached
 
             public class PERSONALITIES
             {
-                public class MINNOW
+                public class BEACHED_MINNOW
                 {
-                    public static LocString NAME = "Minnow";
+                    public static LocString NAME = "MinnowDISPLAYNAME";
                     public static LocString DESC = "Minnow's printing label actually says \"Experiment MRM8\", but she prefers to go by Minnow.";
+                }
+
+                public class BEACHED_MIKA
+                {
+                    public static LocString NAME = "Mika";
+                    public static LocString DESC = "It is scientifically impossible to not get along with a Mika. He's just that cool.";
+                }
+
+                public class BEACHED_VAHANO
+                {
+                    public static LocString NAME = "Va'Hano";
+                    public static LocString DESC = "This Va'Hano's favorite food is roasted Tropical Pacu, served extra rare.";
                 }
             }
 
@@ -830,6 +853,13 @@ namespace Beached
                     public static LocString DESC = "This duplicant can live like a fish in the water... or at least breath like one.";
                     public static LocString WATERBREATHING = "• Amphibious";
                 }
+
+                public class BEACHED_COMFORT_SEEKER
+                {
+                    public static LocString NAME = "Comfort Seeker";
+                    public static LocString DESC = "This duplicant gains a moral bonus from wearing comfortable clothing.";
+                }
+
 
                 public class PRECISIONUP
                 {
@@ -924,6 +954,12 @@ namespace Beached
             {
                 public static LocString NAME = "Ocean Breeze";
                 public static LocString DESC = $"Breathing in fresh {ELEMENTS.SALTYOXYGEN.NAME} is improving this duplicants mood and respiration.";
+            }
+
+            public class BEACHED_POFFCLEANEDTASTEBUDS
+            {
+                public static LocString NAME = "Cleansed Palate";
+                public static LocString DESC = $"This duplicant is less picky about their food.";
             }
 
             public class BEACHED_LIMPETHOST
@@ -1387,6 +1423,12 @@ namespace Beached
                     public static LocString DESC = "...";
                 }
 
+                public class BEACHED_PALATECLEANSERFOOD
+                {
+                    public static LocString NAME = "Palate Cleanser";
+                    public static LocString DESC = "...";
+                }
+
                 public class BEACHED_BLUEPRINT
                 {
                     public static LocString NAME = "Blueprint: {0}";
@@ -1521,6 +1563,54 @@ namespace Beached
                 {
                     public static LocString NAME = FormatAsLink("Smoked Tofu", SmokedTofuConfig.ID);
                     public static LocString DESC = "...";
+                }
+
+                public class BEACHED_OXYGEN_POFF_RAW
+                {
+                    public static LocString NAME = FormatAsLink("Blue Poff", PoffConfig.GetRawId(SimHashes.Oxygen));
+                    public static LocString DESC = "...";
+                }
+
+                public class BEACHED_OXYGEN_POFF_COOKED
+                {
+                    public static LocString NAME = FormatAsLink("Cooked Blue Poff", PoffConfig.GetCookedId(SimHashes.Oxygen));
+                    public static LocString DESC = "...";
+                }
+
+                public class BEACHED_NITROGEN_POFF_RAW
+                {
+                    public static LocString NAME = FormatAsLink("White Poff", PoffConfig.GetRawId(Elements.nitrogen));
+                    public static LocString DESC = "So bland, it sucks the taste out of the tongue.";
+                }
+
+                public class BEACHED_NITROGEN_POFF_COOKED
+                {
+                    public static LocString NAME = FormatAsLink("Cooked White Poff", PoffConfig.GetCookedId(Elements.nitrogen));
+                    public static LocString DESC = "Still has an astonishing lack of flavor, but now it's also mushy.";
+                }
+
+                public class BEACHED_SALTYOXYGEN_POFF_RAW
+                {
+                    public static LocString NAME = FormatAsLink("Pale Poff", PoffConfig.GetRawId(Elements.saltyOxygen));
+                    public static LocString DESC = "Tastes like an eraser.";
+                }
+
+                public class BEACHED_SALTYOXYGEN_POFF_COOKED
+                {
+                    public static LocString NAME = FormatAsLink("Cooked Pale Poff", PoffConfig.GetCookedId(Elements.saltyOxygen));
+                    public static LocString DESC = "Pleasantly chewy, with a strong flavor of salt.";
+                }
+
+                public class BEACHED_AMMONIA_POFF_RAW
+                {
+                    public static LocString NAME = FormatAsLink("Purple Poff", PoffConfig.poffLookup[Elements.ammonia].raw);
+                    public static LocString DESC = "Leaves a stinging feel in the mouth.";
+                }
+
+                public class BEACHED_AMMONIA_POFF_COOKED
+                {
+                    public static LocString NAME = FormatAsLink("Cooked Purple Poff", PoffConfig.poffLookup[Elements.ammonia].cooked);
+                    public static LocString DESC = "Tastes alright, as long as you pinch your nose and don't smell it.";
                 }
             }
 

@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs.Ores;
-using TUNING;
+﻿using TUNING;
 using UnityEngine;
 using static EdiblesManager;
 

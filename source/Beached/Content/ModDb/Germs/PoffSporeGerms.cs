@@ -1,6 +1,8 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Foods;
 using Klei.AI;
 using Klei.AI.DiseaseGrowthRules;
+using System.Linq;
 using TUNING;
 
 namespace Beached.Content.ModDb.Germs
@@ -44,27 +46,34 @@ namespace Beached.Content.ModDb.Germs
         public override void PopulateElemGrowthInfo()
         {
             // applies to floating in air, and being stuck to items
-            new GrowthInfoBuilder(this)
+            var growth = new GrowthInfoBuilder(this)
                 .DefaultBehavior(
                     DISEASE.UNDERPOPULATION_DEATH_RATE.NONE,
                     1.4f,
-                    6000f,
+                    60_000f,
                     0.4f,
                     500,
                     3000,
                     1f / 2000f,
                     1)
                 .DiesIn(Element.State.Liquid)
-                .DiesAndSlowsOnSolid()
-                .GrowsVeryFastIn(SimHashes.ContaminatedOxygen, SimHashes.CarbonDioxide)
-                .DisinfectedBy(SimHashes.ChlorineGas, SimHashes.SourGas, SimHashes.BleachStone, Elements.sourBrine)
-                .DiesIn(Elements.murkyBrine, SimHashes.Brine, SimHashes.SaltWater, Elements.saltyOxygen, Elements.zincOre, Elements.zinc)
-                .InstantlyDiesIn(Elements.sulfurousWater);
+                .DiesAndSlowsOnSolid();
 
-            // applies to the atmosphere around an item
-            new ExposureRuleBuilder(this)
-                .DisinfectedBy(SimHashes.Chlorine, SimHashes.SourGas, Elements.sourBrine)
+#if ELEMENTS
+            growth
+                .GrowsIn(PoffConfig.configs.Select(c => c.elementID).ToArray())
+                .DisinfectedBy(Elements.sourBrine)
+                .DiesIn(Elements.murkyBrine, SimHashes.Brine, SimHashes.SaltWater)
                 .InstantlyDiesIn(Elements.sulfurousWater);
+#endif
+
+            var exposure = new ExposureRuleBuilder(this)
+                .DefaultHalfLife(float.PositiveInfinity);
+#if ELEMENTS
+            exposure
+                .DisinfectedBy(Elements.sourBrine, Elements.murkyBrine, SimHashes.Brine, SimHashes.SaltWater)
+                .InstantlyDiesIn(Elements.sulfurousWater);
+#endif
         }
     }
 }

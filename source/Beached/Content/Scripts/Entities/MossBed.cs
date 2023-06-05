@@ -58,6 +58,7 @@ namespace Beached.Content.Scripts.Entities
 
             Util.KDestroyGameObject(this);
 
+#if ELEMENTS
             SimMessages.AddRemoveSubstance(
                 cell,
                 Elements.moss,
@@ -66,7 +67,8 @@ namespace Beached.Content.Scripts.Entities
                 temp,
                 diseaseIdx,
                 diseaseCount);
-
+                
+#endif
             Game.Instance.SpawnFX(ModAssets.Fx.mossplosion, cell, 0);
         }
 

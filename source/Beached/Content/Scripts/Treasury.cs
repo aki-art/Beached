@@ -24,6 +24,7 @@ namespace Beached.Content.Scripts
         {
             chances = new();
 
+#if ELEMENTS
             chances.CreateTreasureEntry(SimHashes.Diamond, 0.1f)
                 .Add(RareGemsConfig.FLAWLESS_DIAMOND, 1, 1f, true);
 
@@ -42,6 +43,7 @@ namespace Beached.Content.Scripts
 
             chances.CreateTreasureEntry(Elements.siltStone, 0.1f)
                 .Add(SlickShellConfig.EGG_ID);
+#endif
         }
 
         public void TrySpawnTreasure(Diggable diggable, Element element, Worker worker)

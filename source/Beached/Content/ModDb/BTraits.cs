@@ -5,6 +5,7 @@ using Klei.AI;
 using System;
 using System.Collections.Generic;
 using TUNING;
+using UnityEngine;
 
 namespace Beached.Content.ModDb
 {
@@ -12,6 +13,8 @@ namespace Beached.Content.ModDb
     {
         public const string DEXTEROUS = "Beached_Dexterous";
         public const string FUR_ALLERGY = "Beached_FurAllergy";
+        public const string GILLS = "Beached_Gills";
+        public const string COMFORT_SEEKER = "Beached_ComfortSeeker";
 
         public class LifeGoals
         {
@@ -63,6 +66,34 @@ namespace Beached.Content.ModDb
                 "Surfin' and Snoozin'",
                 string.Format("This duplicant sannot stop talking about how cool it would be to have a {0} in their bedroom.", global::STRINGS.BUILDINGS.PREFABS.MECHANICALSURFBOARD.NAME),
                 MechanicalSurfboardConfig.ID);
+            
+            var gillsTrait = Db.Get().CreateTrait(
+                    GILLS,
+                    STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.NAME,
+                    STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.DESC,
+                    null,
+                    true,
+                    null,
+                    true,
+                    true);
+
+            gillsTrait.Add(new AttributeModifier(
+                Db.Get().Attributes.AirConsumptionRate.Id,
+                -0.005f,
+                STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.NAME));
+
+            gillsTrait.ExtendedTooltip = GetGillsTooltip;
+            gillsTrait.OnAddTrait = OnAddGills;
+
+            var comfortSeeker = Db.Get().CreateTrait(
+                    COMFORT_SEEKER,
+                    STRINGS.DUPLICANTS.TRAITS.BEACHED_COMFORT_SEEKER.NAME,
+                    STRINGS.DUPLICANTS.TRAITS.BEACHED_COMFORT_SEEKER.DESC,
+                    null,
+                    true,
+                    null,
+                    true,
+                    true);
 
             DUPLICANTSTATS.GOODTRAITS.Add(new DUPLICANTSTATS.TraitVal()
             {
@@ -87,6 +118,17 @@ namespace Beached.Content.ModDb
             });
 
             LIFEGOALS.Add(LifeGoals.JEWELLERY_AQUAMARINE);
+        }
+
+        private static void OnAddGills(GameObject go)
+        {
+            if (go.TryGetComponent(out KPrefabID kPrefabID))
+                kPrefabID.AddTag(BTags.amphibious, true);
+        }
+
+        private static string GetGillsTooltip()
+        {
+            return STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.WATERBREATHING;
         }
 
         private static void AddJewelleryTrait(string id, string name, string desc, Tag targetTag, Func<string> extendedDescFn = null)

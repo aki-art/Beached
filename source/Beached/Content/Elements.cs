@@ -64,6 +64,7 @@ namespace Beached.Content
             zincOre = ElementInfo.Solid("ZincOre", ModAssets.Colors.zinc),
             zincMolten = ElementInfo.Liquid("ZincMolten", ModAssets.Colors.zinc);
 
+#if ELEMENTS
         public static Dictionary<SimHashes, float> corrosionData;
 
         public static List<SimHashes> GetMetals()
@@ -257,5 +258,6 @@ namespace Beached.Content
 
             return configs.ToArray();
         }
+#endif
     }
 }

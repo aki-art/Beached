@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs.Ores;
-using UnityEngine;
+﻿using UnityEngine;
 using TUNING;
 using Beached.Content.DefBuilders;
 

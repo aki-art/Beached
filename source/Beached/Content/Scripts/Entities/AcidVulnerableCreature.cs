@@ -109,7 +109,9 @@ namespace Beached.Content.Scripts.Entities
         public override void OnPrefabInit()
         {
             base.OnPrefabInit();
+#if ELEMENTS
             acidIdx = Elements.sulfurousWater.Get().idx;
+#endif
 
             flashGradient = new Gradient();
 
@@ -160,6 +162,9 @@ namespace Beached.Content.Scripts.Entities
 
         public void Sim1000ms(float dt)
         {
+#if !ELEMENTS
+            return;
+#endif
             if (!isHurtByAcid)
             {
                 return;

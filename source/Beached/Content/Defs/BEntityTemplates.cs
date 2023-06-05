@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static EdiblesManager;
 
-namespace Beached.Content.Defs.Ores
+namespace Beached.Content.Defs
 {
     internal class BEntityTemplates
     {
@@ -33,7 +33,7 @@ namespace Beached.Content.Defs.Ores
                 width,
                 height,
                 true);
-            
+
             var gameObject = EntityTemplates.ExtendEntityToFood(prefab, foodInfo);
 
             return gameObject;

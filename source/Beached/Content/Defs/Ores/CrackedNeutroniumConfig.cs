@@ -2,6 +2,7 @@
 
 namespace Beached.Content.Defs.Ores
 {
+#if ELEMENTS
     public class CrackedNeutroniumConfig : IOreConfig
     {
         public SimHashes ElementID => Elements.crackedNeutronium;
@@ -19,4 +20,5 @@ namespace Beached.Content.Defs.Ores
             return prefab;
         }
     }
+#endif
 }

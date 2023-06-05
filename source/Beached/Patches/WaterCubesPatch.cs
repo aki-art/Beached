@@ -4,18 +4,17 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Linq;
+using System.Diagnostics;
 
 namespace Beached.Patches
 {
     public class WaterCubesPatch
     {
         private static MeshFilter mesh;
-
-        // make the liquids a little more see-through
+#if TRANSPILERS
         [HarmonyPatch(typeof(WaterCubes), "Init")]
         public class WaterCubes_Init_Patch
         {
-
             public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
             {
                 var codes = orig.ToList();
@@ -33,7 +32,7 @@ namespace Beached.Patches
                 // inject right after the found index
                 codes.InsertRange(index + 1, new[]
                 {
-                     new CodeInstruction(OpCodes.Ldloc_0),
+                     new CodeInstruction(OpCodes.Ldloc_1),
                      new CodeInstruction(OpCodes.Call, m_InjectedMethod)
                 });
 
@@ -57,9 +56,11 @@ namespace Beached.Patches
                     mesh.gameObject.layer = LayerMask.NameToLayer("Water");
                 }
 
+                // make the liquids a little more see-through
                 __instance.material.SetFloat("_BlendScreen", 0.5f);
 
                 var gameObject = new GameObject("Beached_WaterWobbleMesh");
+
 
                 gameObject.transform.parent = __instance.cubes.transform;
 
@@ -80,5 +81,6 @@ namespace Beached.Patches
                 gameObject.SetActive(true);
             }
         }
+#endif
     }
 }

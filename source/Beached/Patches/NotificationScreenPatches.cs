@@ -79,6 +79,7 @@ namespace Beached.Patches
             }
         }
 
+#if TRANSPILERS
         [HarmonyPatch(typeof(NotificationScreen), "AddNotification")]
         public class NotificationScreen_AddNotification_Patch
         {
@@ -177,5 +178,7 @@ namespace Beached.Patches
                 return notification.Type == BDb.BeachedTutorialMessage ? screen.MessagesFolder : existingValue;
             }
         }
+
+#endif
     }
 }

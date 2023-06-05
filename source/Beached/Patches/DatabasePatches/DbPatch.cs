@@ -36,6 +36,7 @@ namespace Beached.Patches.DatabasePatches
                 BRoomTypes.ModifyConstraintRules();
                 BGameplayEvents.Register(__instance.GameplayEvents);
                 BGameplaySeasons.Register(__instance.GameplaySeasons);
+                BDuplicants.Register(__instance.Personalities);
                 // TechTreeTitles has to be patched on class
                 //BTechs.Register(__instance.Techs);
 

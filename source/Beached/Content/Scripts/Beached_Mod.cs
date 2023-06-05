@@ -62,7 +62,7 @@ namespace Beached.Content.Scripts
             waterCamera.cullingMask = LayerMask.GetMask("Water"); /// <see cref="Patches.WaterCubesPatch.WaterCubes_Init_Patch"/>
             waterCamera.targetTexture = waterTarget;
 
-            ModAssets.Materials.liquidRefractionMat.SetTexture("_RenderedLiquid", waterTarget);
+            //ModAssets.Materials.liquidRefractionMat.SetTexture("_RenderedLiquid", waterTarget);
             //waterCamera.depthTextureMode |= DepthTextureMode.Depth;
 
             //waterCamera.gameObject.AddComponent<WaterPostFx>();

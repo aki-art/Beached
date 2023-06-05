@@ -5,6 +5,8 @@ using System.Reflection.Emit;
 
 namespace Beached.Patches
 {
+#if TRANSPILERS
+
     public class DevToolMenuNodeListPatch
     {
         // nesting doesnt work in base game, because they use Path methods, which are system dependent
@@ -64,4 +66,6 @@ namespace Beached.Patches
             }
         }
     }
+
+#endif
 }

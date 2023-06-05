@@ -5,6 +5,7 @@ namespace Beached.Patches
 {
     public class GasBreatherFromWorldProviderPatch
     {
+#if ELEMENTS
         [HarmonyPatch(typeof(GasBreatherFromWorldProvider), "OnSimConsume")]
         public class GasBreatherFromWorldProvider_OnSimConsume_Patch
         {
@@ -23,5 +24,6 @@ namespace Beached.Patches
                 }
             }
         }
+#endif
     }
 }

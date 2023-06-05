@@ -6,6 +6,7 @@ namespace Beached.Patches
 {
     public class GasLiquidExposureMonitorPatch
     {
+#if ELEMENTS
         [HarmonyPatch(typeof(GasLiquidExposureMonitor), "InitializeCustomRates")]
         public class GasLiquidExposureMonitor_InitializeCustomRates_Patch
         {
@@ -17,5 +18,6 @@ namespace Beached.Patches
                 }
             }
         }
+#endif
     }
 }

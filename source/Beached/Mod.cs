@@ -33,6 +33,10 @@ namespace Beached
         {
             base.OnLoad(harmony);
 
+#if !ELEMENTS
+            Log.Warning("UNSTABLE BUILD: This build was compiled with no ELEMENTS. All elements disabled, attempted worldgen will fail.");
+#endif
+
             BTags.OnModLoad();
 
             ZoneTypes.Initialize();

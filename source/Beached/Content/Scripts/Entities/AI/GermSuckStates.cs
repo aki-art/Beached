@@ -19,29 +19,29 @@
                 .ToggleMainStatusItem(GetMovingStatusItem);
 
             inhaling
-                    .DefaultState(inhaling.inhale)
-                    .ToggleStatusItem(global::STRINGS.CREATURES.STATUSITEMS.INHALING.NAME, global::STRINGS.CREATURES.STATUSITEMS.INHALING.TOOLTIP, category: Db.Get().StatusItemCategories.Main);
+                .DefaultState(inhaling.inhale)
+                .ToggleStatusItem(global::STRINGS.CREATURES.STATUSITEMS.INHALING.NAME, global::STRINGS.CREATURES.STATUSITEMS.INHALING.TOOLTIP, category: Db.Get().StatusItemCategories.Main);
 
             inhaling.inhale
-                    .PlayAnim(smi => smi.def.inhaleAnimPre)
-                    .QueueAnim(smi => smi.def.inhaleAnimLoop, true)
-                    .Update("Consume", (smi, dt) => smi.monitor.Consume(dt))
-                    .EventTransition(GameHashes.ElementNoLongerAvailable, inhaling.pst)
-                    .Enter("StartInhaleSound", smi => smi.StartInhaleSound())
-                    .Exit("StopInhaleSound", smi => smi.StopInhaleSound())
-                    .ScheduleGoTo(smi => smi.def.inhaleTime, inhaling.pst);
+                .PlayAnim(smi => smi.def.inhaleAnimPre)
+                .QueueAnim(smi => smi.def.inhaleAnimLoop, true)
+                .Update("Consume", (smi, dt) => smi.monitor.Consume(dt))
+                .EventTransition(GameHashes.ElementNoLongerAvailable, inhaling.pst)
+                .Enter("StartInhaleSound", smi => smi.StartInhaleSound())
+                .Exit("StopInhaleSound", smi => smi.StopInhaleSound())
+                .ScheduleGoTo(smi => smi.def.inhaleTime, inhaling.pst);
 
             inhaling.pst
-                    .Transition(inhaling.full, smi => smi.def.alwaysPlayPstAnim || IsFull(smi))
-                    .Transition(behaviourcomplete, Not(IsFull));
+                .Transition(inhaling.full, smi => smi.def.alwaysPlayPstAnim || IsFull(smi))
+                .Transition(behaviourcomplete, Not(IsFull));
 
             inhaling.full
-                    .QueueAnim(smi => smi.def.inhaleAnimPst)
-                    .OnAnimQueueComplete(behaviourcomplete);
+                .QueueAnim(smi => smi.def.inhaleAnimPst)
+                .OnAnimQueueComplete(behaviourcomplete);
 
             behaviourcomplete
-                    .PlayAnim("idle_loop", KAnim.PlayMode.Loop)
-                    .BehaviourComplete(smi => smi.def.behaviourTag);
+                .PlayAnim("idle_loop", KAnim.PlayMode.Loop)
+                .BehaviourComplete(smi => smi.def.behaviourTag);
         }
 
         private static StatusItem GetMovingStatusItem(Instance smi) => smi.def.useStorage 

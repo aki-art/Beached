@@ -20,6 +20,7 @@ namespace Beached.Integration
 
         public static void RegisterTiles()
         {
+#if ELEMENTS
             var decorPackAPIType = Type.GetType("DecorPackA.ModAPI, DecorPackA");
 
             if (decorPackAPIType == null) return;
@@ -31,6 +32,7 @@ namespace Beached.Integration
             AddTile(addTile, Elements.mucus.ToString(), Color.white, false);
             AddTile(addTile, Elements.bismuth.ToString(), Color.red);
             AddTile(addTile, Elements.siltStone.ToString(), Color.white);
+#endif
         }
 
         private static void AddTile(AddTileDelegate addTile, string id, Color specColor, bool isSolid = true)

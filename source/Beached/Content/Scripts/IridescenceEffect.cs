@@ -6,6 +6,7 @@ namespace Beached.Content.Scripts
     [SkipSaveFileSerialization]
     public class IridescenceEffect : KMonoBehaviour
     {
+#if ELEMENTS
         private Gradient rainbowGradient;
 
         private static Color pearl1 = Util.ColorFromHex("ca3b4c");
@@ -91,5 +92,6 @@ namespace Beached.Content.Scripts
             diamondMat.alpha.SetColor("_ShineColour", rainbowColor);
             diamondMat.opaque.SetColor("_ShineColour", rainbowColor);
         }
+#endif
     }
 }

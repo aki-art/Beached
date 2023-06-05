@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using Beached.Content.ModDb;
+﻿using Beached.Content.ModDb;
 using ImGuiNET;
 using KSerialization;
-using rail;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.Buildings
@@ -37,6 +35,7 @@ namespace Beached.Content.Scripts.Buildings
 
         private void OnStorageChange(object o)
         {
+#if ELEMENTS
             var lubricated = mucusStorage.GetMassAvailable(Elements.mucus) >= massUsedEachTime;
 
             if (lubricated)
@@ -60,11 +59,14 @@ namespace Beached.Content.Scripts.Buildings
 
             kSelectable.ToggleStatusItem(BStatusItems.lubricated, lubricated, this);
             UpdateDelivery();
+#endif
         }
 
         public void OnUse()
         {
+#if ELEMENTS
             mucusStorage.ConsumeIgnoringDisease(Elements.mucus.Tag, massUsedEachTime);
+#endif
         }
 
         public static Lubricatable ConfigurePrefab(GameObject prefab, float capacityKg, float massUsedEachTime)
@@ -72,22 +74,26 @@ namespace Beached.Content.Scripts.Buildings
             if(prefab.TryGetComponent(out Lubricatable existingLubricatable))
             {
                 existingLubricatable.mucusStorage.capacityKg = capacityKg;
-                existingLubricatable.delivery.minimumMass = massUsedEachTime;
+                existingLubricatable.delivery.MinimumMass = massUsedEachTime;
                 existingLubricatable.delivery.refillMass = massUsedEachTime;
 
                 return existingLubricatable;
             }
 
             var storage = prefab.AddComponent<Storage>();
+#if ELEMENTS
             storage.storageFilters = new() { Elements.mucus.Tag };
+#endif
             storage.capacityKg = capacityKg;
             storage.allowItemRemoval = false;
 
             var delivery = prefab.AddComponent<ManualDeliveryKG>();
             delivery.storage = storage;
+#if ELEMENTS
             delivery.RequestedItemTag = Elements.mucus.Tag;
+#endif
             delivery.allowPause = true;
-            delivery.minimumMass = massUsedEachTime;
+            delivery.MinimumMass = massUsedEachTime;
             delivery.refillMass = massUsedEachTime;
             delivery.choreTypeIDHash = Db.Get().ChoreTypes.MachineTinker.IdHash;
 

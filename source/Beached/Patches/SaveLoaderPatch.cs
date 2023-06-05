@@ -29,6 +29,7 @@ namespace Beached.Patches
             }
         }
 
+#if TRANSPILERS
         [HarmonyPatch(typeof(SaveLoader), "LoadFromWorldGen")]
         public class SaveLoader_LoadFromWorldGen_Patch
         {
@@ -68,5 +69,7 @@ namespace Beached.Patches
                 Beached_WorldLoader.Instance.WorldLoaded(cluster.Id);
             }
         }
+
+#endif
     }
 }

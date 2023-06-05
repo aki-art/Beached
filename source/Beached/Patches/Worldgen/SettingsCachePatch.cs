@@ -67,13 +67,14 @@ namespace Beached.Patches.Worldgen
                     }
                 }
 
+#if ELEMENTS
                 var metals = Elements.GetMetals().Select(e => e.ToString());
 
                 Log.Info($"Adding Beached metals to Metal Poor & Metal Rich traits...");
 
                 AddElementsToTrait("MetalPoor", metals);
                 AddElementsToTrait("MetalRich", metals);
-
+#endif
                 Log.Info("== Worldgen Tweaking Done ==");
             }
 

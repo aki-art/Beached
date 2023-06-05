@@ -70,7 +70,8 @@ namespace Beached.Patches
             SandySeashellsConfig.SLICKSHELL,
             SeaShellConfig.ID,
             JellyfishStrobilaConfig.ID,
-            PlanktonGerms.ID /// <see cref="UIOnlyPlankton"/>
+            PlanktonGerms.ID, /// <see cref="UIOnlyPlankton"/>
+            BrinePoolConfig.ID,
         };
 
         [HarmonyPatch(typeof(SandboxToolParameterMenu), "ConfigureEntitySelector")]

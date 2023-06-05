@@ -6,6 +6,7 @@ namespace Beached.Patches
 {
     public class ElementLoaderPatch
     {
+#if ELEMENTS
         [HarmonyPatch(typeof(ElementLoader), "Load")]
         public class ElementLoader_Load_Patch
         {
@@ -70,5 +71,6 @@ namespace Beached.Patches
                 }
             }
         }
+#endif
     }
 }

@@ -32,10 +32,7 @@ namespace Beached.Utils
         }
 
         // be able to reference this class without havng to cast to (SimHashes)
-        public static implicit operator SimHashes(ElementInfo info)
-        {
-            return info.SimHash;
-        }
+        public static implicit operator SimHashes(ElementInfo info) => info.SimHash;
 
         // GetElement(Tag) is the fastest way to fetch an element, but i can't remember that so here is a shortcut for it
         public Element Get()

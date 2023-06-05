@@ -6,6 +6,7 @@ using System.Reflection.Emit;
 
 namespace Beached.Patches
 {
+#if TRANSPILERS
     public class AssignableSideScreenRowPatch
     {
         [HarmonyPatch(typeof(AssignableSideScreenRow), "GetTooltip")]
@@ -44,4 +45,6 @@ namespace Beached.Patches
             }
         }
     }
+
+#endif
 }

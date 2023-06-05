@@ -15,10 +15,13 @@ namespace Beached.Patches
         {
             public static void Postfix(PropertyTextures __instance)
             {
-                ModAssets.Materials.liquidRefractionMat.SetTexture("_LiquidTex", __instance.externallyUpdatedTextures[(int)PropertyTextures.Property.Liquid]);
+                ModAssets.Materials.liquidRefractionMat.SetTexture(
+                    "_LiquidTex", 
+                    __instance.externallyUpdatedTextures[(int)PropertyTextures.Property.Liquid]);
             }
         }
 
+#if ELEMENTS
         // Makes the Salty Oxygen texture the lighter texture Oxygen uses
         // TODO transpiler
         [HarmonyPatch(typeof(PropertyTextures), "UpdateDanger")]
@@ -53,5 +56,6 @@ namespace Beached.Patches
                 return (Grid.Element[cell].id == Elements.saltyOxygen) ? (byte)0 : (byte)existingValue;
             }
         }
+#endif
     }
 }

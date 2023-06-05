@@ -15,11 +15,11 @@
             IsBeachedContentActive = clusterId == CONSTS.WORLDGEN.CLUSTERS.BEACHED;
 
             if (IsBeachedContentActive)
-            {
                 Log.Info("Loaded Astropelagos world, initializing Beached settings.");
-            }
 
+#if ELEMENTS
             Elements.OnWorldReload(IsBeachedContentActive);
+#endif
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Beached.Patches
 {
     public class SteppedInMonitorPatch
     {
-
+#if ELEMENTS
         [HarmonyPatch(typeof(SteppedInMonitor), "GetSoaked", typeof(SteppedInMonitor.Instance))]
         public class SteppedInMonitor_GetSoaked_Patch
         {
@@ -42,5 +42,6 @@ namespace Beached.Patches
                 }
             }
         }
+#endif
     }
 }

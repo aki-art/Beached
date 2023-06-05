@@ -17,6 +17,7 @@ namespace Beached.Patches
                     "beached_poffmouth_mouth_kanim",
                     "beached_rubberboots_kanim",
                     "beached_zeolite_necklace_kanim",
+                    "minnow_head_kanim"
                 };
 
                 var swapAnimsGroup = KAnimGroupFile.GetGroup(new HashedString(CONSTS.BATCH_TAGS.SWAPS));

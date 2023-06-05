@@ -29,12 +29,6 @@ namespace Beached.Content.DefBuilders
             }
         }
 
-        public GrowthInfoBuilder DiesOnLight()
-        {
-            // TODO
-            return this;
-        }
-
         public GrowthInfoBuilder DefaultBehavior(
             float underPopulationDeathRate,
             float minCountPerKG,

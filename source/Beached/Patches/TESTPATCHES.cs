@@ -387,6 +387,7 @@ namespace Beached.Patches
             }
         }
 
+#if ELEMENTS
         [HarmonyPatch(typeof(DiseaseInfoScreen), "BuildFactorsStrings")]
         public class DiseaseInfoScreen_BuildFactorsStrings_Patch
         {
@@ -397,6 +398,7 @@ namespace Beached.Patches
                 ___currentGermsPanel.SetLabel("beached_light", str, "test");
             }
         }
+#endif
 
         //[HarmonyPatch(typeof(SkillsScreen), "RefreshSkillWidgets")]
         public class SkillsScreen_RefreshSkillWidgets_Patch
