@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Beached.Content.ModDb;
+using System;
+using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities
 {
@@ -39,11 +41,17 @@ namespace Beached.Content.Scripts.Entities
 					.Enter(smi => ToggleConsumers(smi, true));
 
 				gunked
-					// .PlayAnim("full")
+					.Enter(smi => ToggleConsumers(smi, false))
+					.ToggleStatusItem(BStatusItems.gunked)
+					.ScheduleAction("clear gunk", GetGunkClearTime, ClearGunk)
 					.EventHandlerTransition(GameHashes.OnStorageChange, alive, (smi, data) => !IsGunked(smi, data))
-					.ScheduleAction("clear gunk", GetGunkClearTime, ClearGunk) // TODO: do this part smarter
-					.Enter(smi => ToggleConsumers(smi, false));
+					.EventHandlerTransition(GameHashes.Harvest, alive, OnHarvest);
+			}
 
+			private bool OnHarvest(StatesInstance smi, object data)
+			{
+				ClearGunk(smi);
+				return true;
 			}
 
 			private void ToggleConsumers(StatesInstance smi, bool enabled)
@@ -54,7 +62,11 @@ namespace Beached.Content.Scripts.Entities
 
 			private float GetGunkClearTime(StatesInstance smi) => smi.master.gunkClearTimeSeconds;
 
-			private void ClearGunk(StatesInstance smi) => smi.master.storage.Drop(smi.master.gunkTag);
+			private void ClearGunk(StatesInstance smi)
+			{
+				smi.master.storage.Drop(smi.master.gunkTag);
+				PopFXManager.Instance.SpawnFX(PopFXManager.Instance.sprite_Plus, smi.master.gunkTag.ProperName(), smi.transform);
+			}
 
 			private bool IsGunked(StatesInstance smi, object data) => smi.master.storage.GetMassAvailable(smi.master.gunkTag) > smi.master.gunkLimit;
 		}

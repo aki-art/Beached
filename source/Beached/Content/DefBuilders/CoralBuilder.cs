@@ -1,6 +1,8 @@
 ﻿using Beached.Content.Defs.Entities.Corals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using TemplateClasses;
 using UnityEngine;
 
 namespace Beached.Content.DefBuilders
@@ -30,6 +32,7 @@ namespace Beached.Content.DefBuilders
 		private string seedAnimName;
 		private List<Tag> seedTags;
 		private int seedSortOrder = 0;
+		private bool harvestable = false;
 
 		public CoralBuilder(string ID, string animName)
 		{
@@ -120,6 +123,12 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
+		public CoralBuilder Harvestable()
+		{
+			harvestable = true;
+			return this;
+		}
+
 		public CoralBuilder Frag(string anim, float width = 0.25f, float height = 0.25f, int sortOrder = 0, params Tag[] additionalTags)
 		{
 			seedAnimName = anim;
@@ -181,6 +190,12 @@ namespace Beached.Content.DefBuilders
 
 			prefab.AddOrGet<SubmersionMonitor>();
 			prefab.AddOrGet<LoopingSounds>();
+
+			if (harvestable)
+			{
+				prefab.AddOrGet<Harvestable>();
+				prefab.AddOrGet<HarvestDesignatable>().defaultHarvestStateWhenPlanted = false;
+			}
 
 			if (seedAnimName != null)
 			{

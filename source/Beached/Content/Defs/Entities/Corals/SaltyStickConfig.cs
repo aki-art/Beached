@@ -13,6 +13,7 @@ namespace Beached.Content.Defs.Entities.Corals
 		public GameObject CreatePrefab()
 		{
 			var prefab = new CoralBuilder(ID, "beached_salty_stick_kanim")
+				.Harvestable()
 				.InitialAnim("idle_full")
 				.Frag("beached_leaflet_coral_frag_kanim")
 				.Build().entityPrefab;
@@ -40,14 +41,14 @@ namespace Beached.Content.Defs.Entities.Corals
 			return prefab;
 		}
 
-		private static void AddConverter(GameObject prefab, Tag from, SimHashes output, float saltContent, Storage storage)
+		private static void AddConverter(GameObject prefab, Tag from, SimHashes output, float kgPerSecond, Storage storage)
 		{
 			var converter = prefab.AddComponent<ElementConverter>();
 			converter.consumedElements = new[] { new ElementConverter.ConsumedElement(from, CONSUMPTION_RATE) };
 			converter.outputElements = new[]
 			{
-				new ElementConverter.OutputElement(1f - saltContent, output, MIN_OUTPUT_TEMP, outputElementOffsety: 1),
-				new ElementConverter.OutputElement(saltContent, SimHashes.Salt, MIN_OUTPUT_TEMP, storeOutput: true),
+				new ElementConverter.OutputElement(1f - kgPerSecond, output, MIN_OUTPUT_TEMP, outputElementOffsety: 1),
+				new ElementConverter.OutputElement(kgPerSecond, SimHashes.Salt, MIN_OUTPUT_TEMP, storeOutput: true),
 			};
 
 			converter.ShowInUI = false;

@@ -12,9 +12,20 @@ namespace Beached.Content.ModDb
 		public static StatusItem lubricated;
 		public static StatusItem smoking;
 		public static StatusItem geneticallyMofidied;
+		public static StatusItem gunked;
 
 		public static void Register(Db db)
 		{
+			gunked = new(
+				"Beached_Gunked",
+				"BUILDINGS",
+				string.Empty,
+				StatusItem.IconType.Exclamation,
+				NotificationType.Bad,
+				false,
+				OverlayModes.None.ID
+				);
+
 			desiccation = new(
 				"Beached_Desiccation",
 				"CREATURES",
