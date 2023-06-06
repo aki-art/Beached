@@ -11,7 +11,8 @@ namespace Beached.Patches
 		{
 			public static void Postfix(GameObject target, ref bool __result)
 			{
-				__result &= !target.HasTag(AmmoniaGeneratorConfig.ID);
+				if(__result)
+					__result = !target.HasTag(AmmoniaGeneratorConfig.ID);
 			}
 		}
 	}

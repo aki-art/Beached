@@ -75,6 +75,15 @@ namespace Beached.Patches.DatabasePatches
 				{
 					resolveStringCallback = (str, data) => str
 				};
+
+
+				BDb.OnDbInit();
+			}
+
+			[HarmonyPostfix]
+			[HarmonyPriority(Priority.Low)]
+			public static void LatePostfix()
+			{
 			}
 
 			private static void RegisterBuildings()

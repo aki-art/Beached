@@ -11,7 +11,7 @@ namespace Beached.Patches
 	{
 		private static MeshFilter mesh;
 #if TRANSPILERS
-		[HarmonyPatch(typeof(WaterCubes), nameof(WaterCubes.Init))]
+		//[HarmonyPatch(typeof(WaterCubes), nameof(WaterCubes.Init))]
 		public class WaterCubes_Init_Patch
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)

@@ -15,6 +15,7 @@ namespace Beached.Content.ModDb
 		public const string FUR_ALLERGY = "Beached_FurAllergy";
 		public const string GILLS = "Beached_Gills";
 		public const string COMFORT_SEEKER = "Beached_ComfortSeeker";
+		public const string PLUSHIE_MAKER = "Beached_PlushieMaker";
 
 		public class LifeGoals
 		{
@@ -27,6 +28,18 @@ namespace Beached.Content.ModDb
 		public static void Register()
 		{
 			var db = Db.Get();
+
+			var plushieMakerTrait = db.CreateTrait(
+				PLUSHIE_MAKER,
+				STRINGS.DUPLICANTS.TRAITS.BEACHED_PLUSHIE_MAKER.NAME,
+				STRINGS.DUPLICANTS.TRAITS.BEACHED_PLUSHIE_MAKER.DESC,
+				null,
+				true,
+				null,
+				true,
+				true);
+
+			plushieMakerTrait.OnAddTrait += OnAddPlushieMaker;
 
 			var dexterousTrait = db.CreateTrait(
 				DEXTEROUS,
@@ -126,6 +139,18 @@ namespace Beached.Content.ModDb
 				kPrefabID.AddTag(BTags.amphibious, true);
 		}
 
+		private static void OnAddPlushieMaker(GameObject go)
+		{
+			var component = go.GetComponent<KMonoBehaviour>();
+			new BalloonArtist.Instance(component).StartSM();
+			new JoyBehaviourMonitor.Instance(
+				component,
+				"anim_loco_happy_balloon_kanim",
+				null,
+				Db.Get().Expressions.Balloon)
+				.StartSM();
+		}
+
 		private static string GetGillsTooltip()
 		{
 			return STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.WATERBREATHING;
@@ -140,13 +165,10 @@ namespace Beached.Content.ModDb
 				go.AddOrGet<EquipmentGoal>();
 			};
 
-
 			trait.ExtendedTooltip += () => "Complete this objective to motivate this duplicant.\n\n";
 
 			if (extendedDescFn != null)
-			{
 				trait.ExtendedTooltip += extendedDescFn;
-			}
 		}
 
 		private static void AddBedroomTrait(string id, string name, string desc, Tag targetTag, Func<string> extendedDescFn = null)

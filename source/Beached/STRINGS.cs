@@ -860,6 +860,11 @@ namespace Beached
 					public static LocString DESC = "This duplicant gains a moral bonus from wearing comfortable clothing.";
 				}
 
+				public class BEACHED_PLUSHIE_MAKER
+				{
+					public static LocString NAME = "Plushie Gifter";
+					public static LocString DESC = "...";
+				}
 
 				public class PRECISIONUP
 				{
@@ -960,6 +965,24 @@ namespace Beached
 			{
 				public static LocString NAME = "Cleansed Palate";
 				public static LocString DESC = $"This duplicant is less picky about their food.";
+			}
+
+			public class BEACHED_EFFECT_PLUSHIEVOLE
+			{
+				public static LocString NAME = "Shove-Vole Plushie";
+				public static LocString DESC = $"This duplicant owns an adorable pup plush.";
+			}
+
+			public class BEACHED_EFFECT_PLUSHIEPUFT
+			{
+				public static LocString NAME = "Puft Plushie";
+				public static LocString DESC = $"This duplicant owns a wonderfully round puft plushie.";
+			}
+
+			public class BEACHED_EFFECT_PLUSHIEPACU
+			{
+				public static LocString NAME = "Pacu Plushie";
+				public static LocString DESC = $"This duplicant owns a soft and squishy Pacu plushie.";
 			}
 
 			public class BEACHED_LIMPETHOST
@@ -1712,6 +1735,13 @@ namespace Beached
 			{
 				public static LocString NAME = "Maki Bed";
 				public static LocString DESCRIPTION = "Resting spot of a companion Maki.";
+			}
+
+			public class PLUSHIES
+			{
+				public static LocString PUFT = "Puft Plushie";
+				public static LocString PACU = "Pacu Plushie";
+				public static LocString VOLE = "Shove Vole Plushie";			
 			}
 
 			public class TAGS

@@ -10,6 +10,13 @@ namespace Beached.Content.ModDb
 		public const NotificationType BeachedTutorialMessage = (NotificationType)351;
 		public const string poisBuildCategory = "Beached_POIs";
 
+		public static BPlushies plushies;
+
+		public static void OnDbInit()
+		{
+			plushies = new BPlushies();
+		}
+
 		public class WearableTypes
 		{
 			public static readonly WearableAccessorizer.WearableType jewellery = (WearableAccessorizer.WearableType)Hash.SDBMLower("Beached_jewellery");

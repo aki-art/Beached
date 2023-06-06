@@ -2,32 +2,20 @@
 {
 	public class BEffects
 	{
-		// -5% stress/cycle, -10g Oxygen
-		public const string OCEAN_BREEZE = "Beached_OceanBreeze";
-
-		// +10% Stress/cycle, +5% Bladder delta
-		public const string SCARED = "Beached_Scared";
-
-		// idk yet
-		public const string DIMWIT = "Beached_Dimwit";
-
-		// no effect
-		public const string LIMPETS_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery";
-
-		// no effect
-		public const string CAPPED_RECOVERY = "Beached_Capped_Recovery";
-		public const string POFFMOUTH_RECOVERY = "Beached_PoffMouth_Recovery";
-
-		// for critters, used for growing limpets
-		public const string LIMPETHOST = "Beached_LimpetHost";
-
-		public const string STEPPED_IN_MUCUS = "Beached_SteppedInMucus";
-
-		// applied when they see shooting stars
-		public const string WISHING_STAR = "Beached_WishingStar";
-
 		public const string
-			POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds";
+			OCEAN_BREEZE = "Beached_OceanBreeze", // -5% stress/cycle, -10g Oxygen
+			SCARED = "Beached_Scared", // +10% Stress/cycle, +5% Bladder delta
+			DIMWIT = "Beached_Dimwit",
+			LIMPETS_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
+			CAPPED_RECOVERY = "Beached_Capped_Recovery",
+			POFFMOUTH_RECOVERY = "Beached_PoffMouth_Recovery",
+			LIMPETHOST = "Beached_LimpetHost", // for critters, used for growing limpets
+			STEPPED_IN_MUCUS = "Beached_SteppedInMucus",
+			WISHING_STAR = "Beached_WishingStar", // applied when they see shooting stars
+			POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds",
+			PLUSHIE_PACU = "Beached_Effect_PlushiePacu",
+			PLUSHIE_PUFT = "Beached_Effect_PlushiePuft",
+			PLUSHIE_VOLE = "Beached_Effect_PlushieVole";
 
 		public static void Register(ModifierSet set)
 		{
@@ -35,6 +23,18 @@
 			var peeDelta = Db.Get().Amounts.Bladder.deltaAttribute.Id;
 			var carryCapacity = Db.Get().Attributes.CarryAmount.Id;
 			var airConsumptionRate = Db.Get().Attributes.AirConsumptionRate.Id;
+
+			new EffectBuilder(PLUSHIE_PACU, CONSTS.CYCLE_LENGTH, false)
+				.Modifier(airConsumptionRate, -0.005f)
+				.Add(set);
+
+			new EffectBuilder(PLUSHIE_VOLE, CONSTS.CYCLE_LENGTH, false)
+				.Modifier(Db.Get().Attributes.Digging.Id, 2)
+				.Add(set);
+
+			new EffectBuilder(PLUSHIE_PUFT, CONSTS.CYCLE_LENGTH, false)
+				.Modifier(stressDelta, -5f / CONSTS.CYCLE_LENGTH) // TODO: something more interesting
+				.Add(set);
 
 			new EffectBuilder(OCEAN_BREEZE, 180f, false)
 				.Modifier(airConsumptionRate, -0.01f)

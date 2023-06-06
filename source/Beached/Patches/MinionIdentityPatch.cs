@@ -1,14 +1,10 @@
-﻿using Beached.Content.Defs.Duplicants;
-using HarmonyLib;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
+﻿using HarmonyLib;
 
 namespace Beached.Patches
 {
 	public class MinionIdentityPatch
 	{
-		[HarmonyPatch(typeof(MinionIdentity), nameof(MinionIdentity.OnSpawn)]
+		[HarmonyPatch(typeof(MinionIdentity), nameof(MinionIdentity.OnSpawn))]
 		public class MinionIdentity_OnSpawn_Patch
 		{
 			public static void Prefix(MinionIdentity __instance)

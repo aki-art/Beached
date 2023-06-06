@@ -1,4 +1,5 @@
 ﻿using Beached.Content;
+using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
 using System;
@@ -93,5 +94,25 @@ namespace Beached
 		/// </summary>
 		/// <param name="prefabID"></param>
 		public static void RegisterFurEmitter(string prefabID) => FurSource.furries.Add(prefabID);
+
+		/// <summary>
+		/// Add a new plushie type. Call in Db.Initialize Postfix!
+		/// To fix offsets on beds, use the 
+		/// </summary>
+		/// <param name="ID"></param>
+		/// <param name="animFile"></param>
+		/// <param name="effectId">This effect gets applied to the dupe when sleeping with this plushie. null for none</param>
+		/// <param name="onSleepingWithPlush">Called when a dupe goes to sleep with this plushie. The GameObject is the dupe. null for none</param>
+		/// <param name="offset">offset of the anim file for the bed </param>
+		public static void RegisterPlushie(
+			string ID,
+			string name,
+			string animFile,
+			string effectId,
+			Func<GameObject> onSleepingWithPlush,
+			Vector3 offset)
+		{
+			BDb.plushies.Add(ID, name, animFile, effectId, offset, onSleepingWithPlush);
+		}
 	}
 }

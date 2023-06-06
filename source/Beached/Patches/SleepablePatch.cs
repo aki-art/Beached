@@ -13,6 +13,8 @@ namespace Beached.Patches
 				{
 					__instance.gameObject.AddComponent<TargetOfGoalTracker>().targetTag = MechanicalSurfboardConfig.ID;
 					__instance.gameObject.AddComponent<TargetOfGoalTracker>().targetTag = ItemPedestalConfig.ID;
+
+					__instance.gameObject.AddOrGet<Beached_PlushiePlaceable>();
 				}
 			}
 		}
