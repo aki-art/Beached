@@ -24,16 +24,23 @@ namespace Beached.Content.Defs.Entities.Corals
 			elementConsumer.showInStatusPanel = true;
 			elementConsumer.consumptionRadius = 1;
 
-			prefab.AddOrGet<FilteringCoral>().gunkTag = SimHashes.Salt.CreateTag();
+			var storage = prefab.AddOrGet<Storage>();
+			storage.capacityKg = 1000f;
+			storage.showInUI = true;
 
-			AddConverter(prefab, SimHashes.SaltWater.CreateTag(), SimHashes.Water, 0.3f);
-			AddConverter(prefab, SimHashes.Brine.CreateTag(), SimHashes.SaltWater, 0.3f);
-			AddConverter(prefab, Elements.murkyBrine.Tag, SimHashes.DirtyWater, 0.3f);
+			var filteringCoral = prefab.AddOrGet<FilteringCoral>();
+			filteringCoral.gunkTag = SimHashes.Salt.CreateTag();
+			filteringCoral.storage = storage;
+			filteringCoral.gunkLimit = 10f;
+
+			AddConverter(prefab, SimHashes.SaltWater.CreateTag(), SimHashes.Water, 0.3f, storage);
+			AddConverter(prefab, SimHashes.Brine.CreateTag(), SimHashes.SaltWater, 0.3f, storage);
+			AddConverter(prefab, Elements.murkyBrine.Tag, SimHashes.DirtyWater, 0.3f, storage);
 
 			return prefab;
 		}
 
-		private static void AddConverter(GameObject prefab, Tag from, SimHashes output, float saltContent)
+		private static void AddConverter(GameObject prefab, Tag from, SimHashes output, float saltContent, Storage storage)
 		{
 			var converter = prefab.AddComponent<ElementConverter>();
 			converter.consumedElements = new[] { new ElementConverter.ConsumedElement(from, CONSUMPTION_RATE) };
@@ -45,6 +52,7 @@ namespace Beached.Content.Defs.Entities.Corals
 
 			converter.ShowInUI = false;
 			converter.showDescriptors = false;
+			converter.storage = storage;
 		}
 
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
@@ -54,9 +62,7 @@ namespace Beached.Content.Defs.Entities.Corals
 		public void OnSpawn(GameObject inst)
 		{
 			if (inst.TryGetComponent(out PassiveElementConsumer consumer))
-			{
 				consumer.EnableConsumption(true);
-			}
 		}
 	}
 }
