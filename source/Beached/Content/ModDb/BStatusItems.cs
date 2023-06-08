@@ -13,6 +13,7 @@ namespace Beached.Content.ModDb
 		public static StatusItem smoking;
 		public static StatusItem geneticallyMofidied;
 		public static StatusItem gunked;
+		public static StatusItem plushed;
 
 		public static void Register(Db db)
 		{
@@ -25,6 +26,17 @@ namespace Beached.Content.ModDb
 				false,
 				OverlayModes.None.ID
 				);
+
+			plushed = new(
+				"Beached_Plushed",
+				"BUILDINGS",
+				string.Empty,
+				StatusItem.IconType.Info,
+				NotificationType.Good,
+				false,
+				OverlayModes.None.ID);
+
+			plushed.SetResolveStringCallback(Beached_PlushiePlaceable.GetStatusItemTooltip);
 
 			desiccation = new(
 				"Beached_Desiccation",

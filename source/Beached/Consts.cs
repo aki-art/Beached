@@ -66,10 +66,12 @@ namespace Beached
 
 		public static class CORROSION_VULNERABILITY
 		{
-			public const float VERY_WEAK = 0.5f;
-			public const float WEAK = 0.33f;
+			public const float NONREACTIVE = 0f;
+			public const float LITTLE_REACTIVE = 0.01f;
 			public const float MEDIUM = 0.05f;
-			public const float STRONG = 0.01f;
+			public const float REACTIVE = 0.33f;
+			public const float VERY_REACTIVE = 0.5f;
+			public const float INSTANTLY_MELT = 1f;
 		}
 		public static class EXPOSURE_EFFECT
 		{

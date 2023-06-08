@@ -8,6 +8,7 @@ namespace Beached.Content.ModDb
 
 		public static void Register(Accessories accessories, AccessorySlots slots)
 		{
+			Log.Debug("registering accessories");
 			accessories.AddCustomAccessories(Assets.GetAnim("beached_poffmouth_mouth"), accessories, slots);
 			var minnowHead = Assets.GetAnim("minnow_head_kanim");
 			var limpetFace = Assets.GetAnim("limpet_face_kanim");
@@ -33,6 +34,8 @@ namespace Beached.Content.ModDb
 					var accessory = new Accessory(symbolName, parent, slot, file.batchTag, build.symbols[i]);
 					slot.accessories.Add(accessory);
 					HashCache.Get().Add(accessory.IdHash.HashValue, accessory.Id);
+
+					Log.Debug("Added accessory: " + accessory.Id);
 				}
 			}
 		}

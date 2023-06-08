@@ -27,6 +27,8 @@ namespace Beached.ModDevTools
 		private static Material mat;
 		public static bool renderLiquidTexture;
 		private static string liquidCullingMaskLayer = "Water";
+		private static float foulingPlaneZ = Grid.GetLayerZ(Grid.SceneLayer.BuildingFront);
+		private static int foulingPlaneLayer = 3500;
 
 		private string[] zoneTypes;
 		EventInstance instance;
@@ -81,11 +83,6 @@ namespace Beached.ModDevTools
 				Beached_Mod.Instance.Trigger(ModHashes.debugDataChange);
 			}
 
-			if (ImGui.Button("Infrared Disease"))
-			{
-				Infrared.Instance.SetMode(Infrared.Mode.Disease);
-			}
-
 			var selectedObject = SelectTool.Instance?.selected;
 
 			if (selectedObject != null)
@@ -93,7 +90,10 @@ namespace Beached.ModDevTools
 				var debugs = selectedObject.GetComponents<IImguiDebug>();
 				if (debugs != null)
 				{
+					ImGui.Separator();
 					ImGui.Text($"Selected object: {selectedObject.GetProperName()}");
+					ImGui.Separator();
+
 					foreach (var imguiDebug in debugs)
 					{
 						ImGui.Spacing();
@@ -102,9 +102,17 @@ namespace Beached.ModDevTools
 					}
 				}
 
+				var joyBehavior = selectedObject.GetSMI<JoyBehaviourMonitor.Instance>();
+				if (joyBehavior != null && ImGui.Button("Overjoy"))
+					joyBehavior.GoToOverjoyed();
+
+				var stress = Db.Get().Amounts.Stress.Lookup(selectedObject);
+				if (stress != null && ImGui.Button("Stress"))
+					stress.SetValue(100f);
+
 				if (selectedObject.TryGetComponent(out CreatureBrain brain) && brain.TryGetComponent(out Traits traits))
 				{
-					ImGui.Spacing();
+					ImGui.Separator();
 					ImGui.Text("GMO Traits");
 					var allTraits = Db.Get().traitGroups.Get(BCritterTraits.GMO_GROUP).modifiers;
 					foreach (var trait in allTraits)
@@ -123,6 +131,15 @@ namespace Beached.ModDevTools
 					}
 				}
 			}
+
+			ImGui.Separator();
+
+			if (ImGui.Button("Infrared Disease"))
+			{
+				Infrared.Instance.SetMode(Infrared.Mode.Disease);
+			}
+
+			FoulingPlane();
 
 			if (ImGui.CollapsingHeader("Seasons"))
 			{
@@ -456,33 +473,47 @@ namespace Beached.ModDevTools
 			}
 		}
 
+		private static void FoulingPlane()
+		{
+			if (ImGui.CollapsingHeader("Fouling Plane"))
+			{
+				var foulingPlane = Beached_Mod.Instance.foulingPlane;
+
+				if (ImGui.DragFloat("Z", ref foulingPlaneZ))
+					foulingPlane.plane.transform.position = foulingPlane.plane.transform.position with { z = foulingPlaneZ };
+
+				if (ImGui.DragInt("Layer", ref foulingPlaneLayer))
+					foulingPlane.material.renderQueue = foulingPlaneLayer;
+			}
+		}
+
 		private void InitializeLiquidShaderProperties()
 		{
 			mat = WaterCubes.Instance.material;
 			liquidShaderProperties = new Dictionary<string, ShaderPropertyInfo>();
 
-			RegisterWaterShaderProperty(mat, "_BlendScreen", 0.5f, 0, 1);
-			RegisterWaterShaderProperty(mat, "_LiquidSelectStart", 0.438f, 0, 1);
-			RegisterWaterShaderProperty(mat, "_LiquidSelectRangeNear", 0.438f, 0, 1);
-			RegisterWaterShaderProperty(mat, "_LiquidSelectRangeFar", 0.438f, 0, 1);
-			RegisterWaterShaderProperty(mat, "_LiquidSelectRangeNearOrthoSize", 0.438f, 0, 200);
-			RegisterWaterShaderProperty(mat, "_LiquidSelectRangeFarOrthoSize", 0.438f, 0, 200);
-			RegisterWaterShaderProperty(mat, "_SampleFiltering", 0f);
-			RegisterWaterShaderProperty(mat, "_EnableCaustics", 1f);
-			RegisterWaterShaderProperty(mat, "_CausticSpeed, 1.21f", 0f, 10);
-			RegisterWaterShaderProperty(mat, "_CausticFrequency", 0.5f, 0, 1);
-			RegisterWaterShaderProperty(mat, "_CausticCount", 5f, 2, 10);
-			RegisterWaterShaderProperty(mat, "_CausticScale", 1.4f, 0, 10);
-			RegisterWaterShaderProperty(mat, "_HeatOctaves", 5f, 1, 5);
-			RegisterWaterShaderProperty(mat, "_HeatSpeed", 3.8f, 0, 10);
-			RegisterWaterShaderProperty(mat, "_HeatFrequency", 0.45f, 0, 2);
-			RegisterWaterShaderProperty(mat, "_HeatScale", 2f, 0, 2);
-			RegisterWaterShaderProperty(mat, "_HeatColour", new Color(1, 0.913725f, 0.5529411f, 1f));
-			RegisterWaterShaderProperty(mat, "_EnableWaves", 1f);
-			RegisterWaterShaderProperty(mat, "_WaveSpeed", 1f, 0, 10);
-			RegisterWaterShaderProperty(mat, "_WaveFrequency", 1f, 0, 10);
-			RegisterWaterShaderProperty(mat, "_WaveCount", 5f, 2, 10);
-			RegisterWaterShaderProperty(mat, "_WaveHeight", 5f, 0, 20);
+			RegisterWaterShaderProperty(mat, "BlendScreen##shaderBlendScreen", 0.5f, 0, 1);
+			RegisterWaterShaderProperty(mat, "LiquidSelectStart##shaderLiquidSelectStart", 0.438f, 0, 1);
+			RegisterWaterShaderProperty(mat, "LiquidSelectRangeNear##shaderLiquidSelectRangeNear", 0.438f, 0, 1);
+			RegisterWaterShaderProperty(mat, "LiquidSelectRangeFar##shaderLiquidSelectRangeFar", 0.438f, 0, 1);
+			RegisterWaterShaderProperty(mat, "LiquidSelectRangeNearOrthoSize##shaderLiquidSelectRangeNearOrthoSize", 0.438f, 0, 200);
+			RegisterWaterShaderProperty(mat, "LiquidSelectRangeFarOrthoSize##shaderLiquidSelectRangeFarOrthoSize", 0.438f, 0, 200);
+			RegisterWaterShaderProperty(mat, "SampleFiltering##shaderSampleFiltering", 0f);
+			RegisterWaterShaderProperty(mat, "EnableCaustics##shaderEnableCaustics", 1f);
+			RegisterWaterShaderProperty(mat, "CausticSpeed##shaderCausticSpeed,", 1.21f, 0f, 10);
+			RegisterWaterShaderProperty(mat, "CausticFrequency##shaderCausticFrequency", 0.5f, 0, 1);
+			RegisterWaterShaderProperty(mat, "CausticCount##shaderCausticCount", 5f, 2, 10);
+			RegisterWaterShaderProperty(mat, "CausticScale##shaderCausticScale", 1.4f, 0, 10);
+			RegisterWaterShaderProperty(mat, "HeatOctaves##shaderHeatOctaves", 5f, 1, 5);
+			RegisterWaterShaderProperty(mat, "HeatSpeed##shaderHeatSpeed", 3.8f, 0, 10);
+			RegisterWaterShaderProperty(mat, "HeatFrequency##shaderHeatFrequency", 0.45f, 0, 2);
+			RegisterWaterShaderProperty(mat, "HeatScale##shaderHeatScale", 2f, 0, 2);
+			RegisterWaterShaderProperty(mat, "HeatColour##shaderHeatColour", new Color(1, 0.913725f, 0.5529411f, 1f));
+			RegisterWaterShaderProperty(mat, "EnableWaves##shaderEnableWaves", 1f);
+			RegisterWaterShaderProperty(mat, "WaveSpeed##shaderWaveSpeed", 1f, 0, 10);
+			RegisterWaterShaderProperty(mat, "WaveFrequency##shaderWaveFrequency", 1f, 0, 10);
+			RegisterWaterShaderProperty(mat, "WaveCount##shaderWaveCount", 5f, 2, 10);
+			RegisterWaterShaderProperty(mat, "WaveHeight##shaderWaveHeight", 5f, 0, 20);
 		}
 
 		private void InitializeRefracionShaderProperties()

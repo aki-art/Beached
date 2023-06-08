@@ -1,5 +1,6 @@
 ﻿using Beached.Content.Defs.Equipment;
 using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.LifeGoals;
 using Klei.AI;
 using System;
@@ -16,6 +17,7 @@ namespace Beached.Content.ModDb
 		public const string GILLS = "Beached_Gills";
 		public const string COMFORT_SEEKER = "Beached_ComfortSeeker";
 		public const string PLUSHIE_MAKER = "Beached_PlushieMaker";
+		public const string SIREN = "Beached_Siren";
 
 		public class LifeGoals
 		{
@@ -40,6 +42,18 @@ namespace Beached.Content.ModDb
 				true);
 
 			plushieMakerTrait.OnAddTrait += OnAddPlushieMaker;
+
+			var sirenTrait = db.CreateTrait(
+				SIREN,
+				STRINGS.DUPLICANTS.TRAITS.BEACHED_SIREN.NAME,
+				STRINGS.DUPLICANTS.TRAITS.BEACHED_SIREN.DESC,
+				null,
+				true,
+				null,
+				false,
+				true);
+
+			sirenTrait.OnAddTrait += OnAddSiren;
 
 			var dexterousTrait = db.CreateTrait(
 				DEXTEROUS,
@@ -108,14 +122,28 @@ namespace Beached.Content.ModDb
 					true,
 					true);
 
-			DUPLICANTSTATS.GOODTRAITS.Add(new DUPLICANTSTATS.TraitVal()
+			DUPLICANTSTATS.GOODTRAITS.AddRange(new List<DUPLICANTSTATS.TraitVal>()
 			{
-				id = DEXTEROUS,
-				rarity = DUPLICANTSTATS.RARITY_COMMON,
-				dlcId = "",
-				mutuallyExclusiveTraits = new List<string>
+				new DUPLICANTSTATS.TraitVal()
 				{
-					//"Anemic"
+					id = DEXTEROUS,
+					rarity = DUPLICANTSTATS.RARITY_COMMON,
+					dlcId = "",
+					mutuallyExclusiveTraits = new List<string>
+					{
+						//"Anemic"
+					}
+				},
+				new DUPLICANTSTATS.TraitVal()
+				{
+					id = COMFORT_SEEKER,
+					rarity = DUPLICANTSTATS.RARITY_COMMON,
+					dlcId = "",
+					mutuallyExclusiveTraits = new List<string>
+					{
+						"DecorUp", // "Stylish"
+						"Fashionable" // need type trait normally unused, but Bio-Inks reintroduces it
+					}
 				}
 			});
 
@@ -130,7 +158,45 @@ namespace Beached.Content.ModDb
 				}
 			});
 
+			DUPLICANTSTATS.JOYTRAITS.Add(new DUPLICANTSTATS.TraitVal()
+			{
+				id = PLUSHIE_MAKER,
+				dlcId = ""
+			});
+
+			DUPLICANTSTATS.STRESSTRAITS.Add(new DUPLICANTSTATS.TraitVal()
+			{
+				id = SIREN,
+				dlcId = ""
+			});
+
+
 			LIFEGOALS.Add(LifeGoals.JEWELLERY_AQUAMARINE);
+		}
+
+		private static void OnAddSiren(GameObject go)
+		{
+			var statusItem = new StatusItem(
+				"Beached_StressSignalSiren",
+				"Siren",
+				"",
+				"",
+				StatusItem.IconType.Info,
+				NotificationType.BadMinor,
+				false,
+				OverlayModes.None.ID);
+
+			new StressBehaviourMonitor.Instance(go.GetComponent<KMonoBehaviour>(),
+				(chore_provider => new StressEmoteChore(
+					chore_provider,
+					Db.Get().ChoreTypes.StressEmote,
+					"anim_interrupt_binge_eat_kanim",
+					new HashedString[] { "interrupt_binge_eat" },
+					KAnim.PlayMode.Once,
+					() => statusItem)),
+				chore_provider => new EmptyChore(chore_provider),
+				"anim_loco_binge_eat_kanim", 30f)
+				.StartSM();
 		}
 
 		private static void OnAddGills(GameObject go)
@@ -142,7 +208,7 @@ namespace Beached.Content.ModDb
 		private static void OnAddPlushieMaker(GameObject go)
 		{
 			var component = go.GetComponent<KMonoBehaviour>();
-			new BalloonArtist.Instance(component).StartSM();
+			new PlushieGifter.Instance(component).StartSM();
 			new JoyBehaviourMonitor.Instance(
 				component,
 				"anim_loco_happy_balloon_kanim",

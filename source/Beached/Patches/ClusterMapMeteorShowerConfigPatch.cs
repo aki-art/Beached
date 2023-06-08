@@ -13,6 +13,7 @@ namespace Beached.Patches
 			public static void Postfix(List<GameObject> __result)
 			{
 				__result.Add(ClusterMapMeteorShowerConfig.CreateClusterMeteor(
+					"Beached_Diamond",
 					BGameplayEvents.DIAMOND_SHOWER,
 					STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.BEACHED_DIAMOND.NAME,
 					STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.BEACHED_DIAMOND.DESCRIPTION,
@@ -23,6 +24,7 @@ namespace Beached.Patches
 					SimHashes.Unobtanium));
 
 				__result.Add(ClusterMapMeteorShowerConfig.CreateClusterMeteor(
+					"Beached_Abyssalite",
 					BGameplayEvents.ABYSSALITE_SHOWER,
 					STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.BEACHED_ABYSSALITE.NAME,
 					STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.BEACHED_ABYSSALITE.DESCRIPTION,

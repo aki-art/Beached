@@ -64,12 +64,61 @@ namespace Beached.Content
 			zincOre = ElementInfo.Solid("ZincOre", ModAssets.Colors.zinc),
 			zincMolten = ElementInfo.Liquid("ZincMolten", ModAssets.Colors.zinc);
 
-#if ELEMENTS
-		public static Dictionary<SimHashes, float> corrosionData;
+		// everything not in this list will get MEDIUM (0.5f) assigned, except metals which get an INSTANTLY_MELT (1f)
+		/// <see cref="ModAPI.SetElementAcidVulnerability(SimHashes, float)"/>
+		public static readonly Dictionary<SimHashes, float> acidVulnerabilities = new()
+		{
+			// resistant elements
+			{ SimHashes.Ceramic, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Clay, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Copper, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Cuprite, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ crackedNeutronium, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Electrum, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Glass, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Gold, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.GoldAmalgam, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Granite, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Katairite, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.SolidMercury, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE }, // has no metal tag for some reason
+			{ SimHashes.Unobtanium, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Polypropylene, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ rubber, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Steel, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Sulfur, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ sulfurousIce, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Tungsten, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ SimHashes.Wolframite, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+
+			// very reactive
+			{ SimHashes.Algae, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.BrineIce, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ bone, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ coquina, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.Cement, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.CrushedIce, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.DirtyIce, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.Fossil, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.Fullerene, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.Graphite, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.Ice, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.Lime, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ moss, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ mycelium, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ mucusFrozen, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ pearl, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ permaFrost, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ root, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ rot, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.SandStone, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.Snow, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ sourBrineIce, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+		};
 
 		public static List<SimHashes> GetMetals()
 		{
-			return new List<SimHashes>() {
+			return new List<SimHashes>()
+			{
 				bismuth,
 				bismuthOre,
 				zincOre,
@@ -78,9 +127,11 @@ namespace Beached.Content
 				beryllium,
 				calcium,
 				zirconium,
-				zirconiumOre };
+				zirconiumOre
+			};
 		}
 
+#if ELEMENTS
 		public static void RegisterSubstances(List<Substance> list)
 		{
 			var ore = list.Find(e => e.elementID == SimHashes.Cuprite).material;
@@ -122,40 +173,50 @@ namespace Beached.Content
 			list.AddRange(newElements);
 
 			SetAtmosphereModifiers();
-			SetCorrosionData();
 		}
 
-		internal static void AfterLoad()
+		public static void AfterLoad()
 		{
-			foreach (var kvp in corrosionData)
+			SetAcidCorrosions();
+
+			foreach (var kvp in acidVulnerabilities)
 			{
 				var element = ElementLoader.FindElementByHash(kvp.Key);
 				if (element != null)
 				{
-					if (element.oreTags == null)
-					{
-						element.oreTags = new Tag[] { BTags.corrodable };
-					}
-					else
-					{
-						element.oreTags = element.oreTags.AddToArray(BTags.corrodable);
-					}
+					element.oreTags = element.oreTags == null
+						? (new Tag[] { BTags.corrodable })
+						: element.oreTags.AddToArray(BTags.corrodable);
 				}
 			}
 		}
 
-		private static void SetCorrosionData()
+		private static void SetAcidCorrosions()
 		{
-			corrosionData = new Dictionary<SimHashes, float>()
+			var modsAcidResistantElements = new HashSet<string>()
 			{
-				{ SimHashes.Algae, CONSTS.CORROSION_VULNERABILITY.WEAK },
-				{ SimHashes.Aluminum, CONSTS.CORROSION_VULNERABILITY.WEAK },
-				{ SimHashes.AluminumOre, CONSTS.CORROSION_VULNERABILITY.WEAK },
-				{ SimHashes.SandStone, CONSTS.CORROSION_VULNERABILITY.WEAK },
-				{ SimHashes.Sand, CONSTS.CORROSION_VULNERABILITY.WEAK },
-				{ SimHashes.Salt, CONSTS.CORROSION_VULNERABILITY.WEAK },
-				{ SimHashes.Obsidian, CONSTS.CORROSION_VULNERABILITY.STRONG },
+				"Platinum",
+				"Silver",
+
+				// Chemical Processing
+				"SolidPlatinum",
+				"SolidSilver",
+
+				// Rocketry Expanded
+				"NeutroniumAlloy"
 			};
+
+			foreach (var element in ElementLoader.elements)
+			{
+				if (acidVulnerabilities.ContainsKey(element.id))
+					continue;
+
+				if (modsAcidResistantElements.Contains(element.id.ToString()))
+					acidVulnerabilities[element.id] = CONSTS.CORROSION_VULNERABILITY.NONREACTIVE;
+
+				else if (element.HasTag(GameTags.Metal))
+					acidVulnerabilities[element.id] = CONSTS.CORROSION_VULNERABILITY.INSTANTLY_MELT;
+			}
 		}
 
 		// Food sterilization/rotting modifier
@@ -189,7 +250,7 @@ namespace Beached.Content
 			ElementUtil.AddModifier(pearl.Get(), 1.5f, 0);
 			ElementUtil.AddModifier(selenite.Get(), 1f, 400);
 			ElementUtil.AddModifier(zirconium.Get(), 0.4f, 150);
-			ElementUtil.AddModifier(zirconiumOre.Get(), 0.4f, 150);
+
 		}
 
 		public static void OnWorldReload(bool isBeachedWorld)

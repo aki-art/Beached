@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb;
+﻿using Beached.Content.Defs.Duplicants;
+using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
 using Beached.Content.Scripts;
@@ -20,6 +21,25 @@ namespace Beached.Patches
 	{
 		public static Texture2D testMask;
 
+		[HarmonyPatch(typeof(Accessorizer), "OnDeserialized")]
+		public class Accessorizer_OnDeserialized_Patch
+		{
+			public static void Prefix(Accessorizer __instance)
+			{
+				var component = __instance.GetComponent<MinionIdentity>();
+				if (component.personalityResourceId == (HashedString)MinnowConfig.ID)
+				{
+					var personality = Db.Get().Personalities.Get(MinnowConfig.ID);
+					__instance.bodyData = MinionStartingStats.CreateBodyData(personality); //Accessorizer.UpdateAccessorySlots(component.nameStringKey, ref __instance.accessories);
+					__instance.accessories.RemoveAll(x => x.Get() == null);
+
+					__instance.AddAccessory(Db.Get().AccessorySlots.Hair.Lookup(__instance.bodyData.hair));
+					__instance.AddAccessory(Db.Get().AccessorySlots.HeadShape.Lookup(__instance.bodyData.headShape));
+					__instance.AddAccessory(Db.Get().AccessorySlots.Mouth.Lookup(__instance.bodyData.mouth));
+					__instance.AddAccessory(Db.Get().AccessorySlots.HatHair.accessories[0]);
+				}
+			}
+		}
 
 		[HarmonyPatch(typeof(TileRenderer), "LateUpdate")]
 		public class TileRenderer_LateUpdate_Patch

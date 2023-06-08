@@ -20,6 +20,7 @@ namespace Beached.Patches.DatabasePatches
 
 				// do not reorder randomly, loading order matters!
 				BAttributes.Register(__instance.Attributes);
+				BAttributes.RegisterBuildingAttributes(__instance.BuildingAttributes);
 				BAccessories.Register(__instance.Accessories, __instance.AccessorySlots);
 				BAmounts.Register(__instance.Amounts);
 				BAssignableSlots.Register(__instance.AssignableSlots);

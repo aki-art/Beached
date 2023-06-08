@@ -15,8 +15,8 @@ namespace Beached.Content.Defs.Duplicants
 					STRINGS.DUPLICANTS.PERSONALITIES.BEACHED_MINNOW.NAME,
 					CONSTS.DUPLICANTS.GENDER.FEMALE,
 					null,
-					"StressVomiter",
-					"HappySinger",
+					BTraits.SIREN,
+					BTraits.PLUSHIE_MAKER,
 					"",
 					null,
 					1,
@@ -43,5 +43,7 @@ namespace Beached.Content.Defs.Duplicants
 			bodyData.headShape = HashCache.Get().Add("headshape_minnow");
 			bodyData.mouth = HashCache.Get().Add("mouth_minnow");
 		}
+
+		public string GetHeadAnim() => "minnow_head_kanim";
 	}
 }

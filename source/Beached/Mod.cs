@@ -1,6 +1,7 @@
 ﻿global using Beached.Utils;
 using Beached.Content;
 using Beached.Content.BWorldGen;
+using Beached.Content.Scripts;
 using Beached.ModDevTools;
 using Beached.Settings;
 using HarmonyLib;
@@ -10,11 +11,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using UnityEngine;
 
 namespace Beached
 {
 	public class Mod : UserMod2
 	{
+		public static Components.Cmps<Beached_PlushiePlaceable> plushiePlaceables = new();
+
 		public const string STATIC_ID = "Beached";
 
 		public static bool debugMode = true;
@@ -31,6 +35,12 @@ namespace Beached
 
 		public override void OnLoad(Harmony harmony)
 		{
+			for(int i = 0; i < 32; i++)
+			{
+				var layerN = LayerMask.LayerToName(i);
+				Log.Debug($"{i} : {layerN}");
+			}
+
 			base.OnLoad(harmony);
 
 #if !ELEMENTS

@@ -6,24 +6,26 @@ namespace Beached.Content.ModDb
 	public class BDuplicants
 	{
 		public static Dictionary<string, IDuplicantConfig> duplicantConfigs;
+		public static Dictionary<HashedString, string> headKanims;
 
 		public static void Register(Database.Personalities personalities)
 		{
 			duplicantConfigs = new()
 			{
-				{ MinnowConfig.ID , new MinnowConfig() },
-				{ MikaConfig.ID , new MikaConfig() },
+				{ MinnowConfig.ID , new MinnowConfig() }, // TODO clean up
 			};
+
+			headKanims = new();
 
 			foreach (var config in duplicantConfigs.Values)
 			{
 				personalities.Add(config.CreatePersonality());
+				headKanims[(HashedString)config.GetID()] = config.GetHeadAnim();
 			}
 		}
 
 		public static void ModifyBodyData(Personality personality, ref KCompBuilder.BodyData bodyData)
 		{
-			Log.Debug("trying to modify body: " + personality.Id);
 			if (duplicantConfigs.TryGetValue(personality.Id, out var config))
 				config.ModifyBodyData(ref bodyData);
 		}

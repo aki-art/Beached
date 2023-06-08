@@ -1,6 +1,8 @@
 ﻿using Beached.Content.ModDb;
 using ImGuiNET;
+using Klei.AI;
 using KSerialization;
+using System;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -11,11 +13,14 @@ namespace Beached.Content.Scripts
 	{
 		[MyCmpReq] private Assignable assignable;
 		[MyCmpReq] private KBatchedAnimController kbac;
+		[MyCmpReq] private KSelectable kSelectable;
 		[Serialize] private string plushieId;
 		private int debugCurrentlySelectedPlushie;
 		private KBatchedAnimController plushie;
 		private KAnimLink link;
 		private Vector3 offset;
+		// plushed up statusitem
+		public string GetEffectId() => BDb.plushies.Get(plushieId).effect;
 
 		public void OnImguiDraw()
 		{
@@ -32,7 +37,11 @@ namespace Beached.Content.Scripts
 
 			if (plushieId != null)
 				StorePlushie(plushieId);
+
+			Mod.plushiePlaceables.Add(this);
 		}
+
+		public bool HasPlushie() => plushieId != null;
 
 		public void StorePlushie(string plushieId)
 		{
@@ -48,6 +57,8 @@ namespace Beached.Content.Scripts
 
 			CreatePlushieGameObject(plushieResource);
 			this.plushieId = plushieId;
+
+			kSelectable.AddStatusItem(BStatusItems.plushed);
 		}
 
 		private void CreatePlushieGameObject(Plushie plushieResource)
@@ -82,12 +93,36 @@ namespace Beached.Content.Scripts
 				Util.KDestroyGameObject(plushie);
 
 			plushieId = null;
+
+			if (kSelectable.HasStatusItem(BStatusItems.plushed))
+				kSelectable.AddStatusItem(BStatusItems.plushed);
 		}
 
 		public override void OnCleanUp()
 		{
 			RemovePlushie();
+			Mod.plushiePlaceables.Remove(this);
 			base.OnCleanUp();
+		}
+
+		public static string GetStatusItemTooltip(string str, object data)
+		{
+			if (data is Beached_PlushiePlaceable bed)
+			{
+				if (bed.plushieId == null)
+					return str;
+
+				var plush = BDb.plushies.TryGet(bed.plushieId);
+
+				if (plush == null)
+					return str;
+
+				str = string.Format(str, plush.Name);
+				var effect = Db.Get().effects.Get(plush.effect);
+				str += Effect.CreateTooltip(effect, true);
+			}
+
+			return str;
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Scripts.Entities;
+using Beached.Content.Scripts.Fx;
 using KSerialization;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Beached.Content.Scripts
 		public Tutorials tutorials;
 		public Treasury treasury;
 		public WishingStarEvent wishingStarEvent;
+		public FoulingPlane foulingPlane;
 
 		public Camera waterCamera;
 		private RenderTexture waterTarget;
@@ -35,6 +37,7 @@ namespace Beached.Content.Scripts
 			elementInteractions = childGo.AddOrGet<ElementInteractions>();
 			tutorials = childGo.AddOrGet<Tutorials>();
 			wishingStarEvent = childGo.AddOrGet<WishingStarEvent>();
+			foulingPlane = childGo.AddOrGet<FoulingPlane>();
 
 			treasury = childGo.AddOrGet<Treasury>();
 			treasury.Configure();

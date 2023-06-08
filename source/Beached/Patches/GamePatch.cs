@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.Scripts;
+using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,16 @@ namespace Beached.Patches
 {
 	public class GamePatch
 	{
+
+		[HarmonyPatch(typeof(Game), nameof(Game.OnSpawn))]
+		public class Game_OnSpawn_Patch
+		{
+			public static void Postfix()
+			{
+				Beached_Mod.Instance.foulingPlane.Init();
+			}
+		}
+
 		[HarmonyPatch(typeof(Game), nameof(Game.InitializeFXSpawners))]
 		public class Game_InitializeFXSpawners_Patch
 		{

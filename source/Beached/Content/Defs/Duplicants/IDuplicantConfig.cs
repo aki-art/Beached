@@ -11,5 +11,7 @@
 		public void OnSpawn(MinionIdentity identity);
 
 		public void ModifyBodyData(ref KCompBuilder.BodyData bodyData);
+
+		public string GetHeadAnim();
 	}
 }

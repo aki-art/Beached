@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Defs.Comets;
 using Beached.Content.Defs.Flora;
 using Beached.Content.ModDb.Germs;
+using Beached.Content.Scripts.ClassExtensions;
 using Beached.Content.Scripts.Entities.Comets;
 using System.Collections.Generic;
 using UnityEngine;
@@ -153,11 +154,10 @@ namespace Beached.Content.Scripts
 				// TODO: sound fx
 			}
 
-			else if (element.HasTag(BTags.corrodable))
+			var acidVulnerability = element.AcidVulnerability();
+			if (acidVulnerability > 0)
 			{
-#if ELEMENTS
-				WorldDamage.Instance.ApplyDamage(cellBelow, Elements.corrosionData[element.id], cell);
-#endif
+				WorldDamage.Instance.ApplyDamage(cellBelow, acidVulnerability, cell);
 				Game.Instance.SpawnFX(SpawnFXHashes.BleachStoneEmissionBubbles, cellBelow, 0);
 			}
 		}

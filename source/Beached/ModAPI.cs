@@ -114,5 +114,36 @@ namespace Beached
 		{
 			BDb.plushies.Add(ID, name, animFile, effectId, offset, onSleepingWithPlush);
 		}
+
+		/// <summary>
+		/// Set how much this element is affected by Sulfuric Acid, 0-1
+		/// Note: explosions happen to elements with Metal tag that have > 0 vulnerability.
+		/// The default is 0.
+		/// </summary>
+		/// <param name="elementId"></param>
+		/// <param name="value">
+		/// 0 = unaffected
+		/// 1 = nearly instant destruction</param>
+		public static void SetElementAcidVulnerability(string elementId, float value)
+		{
+			var element = ElementLoader.FindElementByName(elementId);
+			if (element != null)
+				SetElementAcidVulnerability(element.id, value);
+		}
+
+		/// <summary>
+		/// Set how much this element is affected by Sulfuric Acid, 0-1
+		/// Note: explosions happen to elements with Metal tag that have > 0 vulnerability.
+		/// The default is 0.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="value">
+		/// 0 = unaffected
+		/// 1 = nearly instant destruction</param>
+		public static void SetElementAcidVulnerability(SimHashes id, float value)
+		{
+			value = Mathf.Clamp01(value);
+			Elements.acidVulnerabilities[id] = value;
+		}
 	}
 }

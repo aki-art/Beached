@@ -1,4 +1,5 @@
-﻿using Klei.AI;
+﻿using Beached.Content.ModDb;
+using Klei.AI;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -67,17 +68,17 @@ namespace Beached.Utils
 			}
 		}
 
-		public static void AddModifier(Element element, float decor, float overHeat)
+		public static void AddModifier(Element element, float decor = 0f, float overHeat = 0f, float acidResistant = 0f)
 		{
 			if (decor != 0)
-			{
 				element.attributeModifiers.Add(new AttributeModifier(Db.Get().BuildingAttributes.Decor.Id, decor, element.name, true));
-			}
 
 			if (overHeat != 0)
-			{
 				element.attributeModifiers.Add(new AttributeModifier(Db.Get().BuildingAttributes.OverheatTemperature.Id, overHeat, element.name, false));
-			}
+
+			if (acidResistant != 0)
+				element.attributeModifiers.Add(new AttributeModifier(BAttributes.Buildings.acidResistance.Id, acidResistant, element.name, false));
+
 		}
 
 		// The game incorrectly assigns the display name to elements not in the original SimHashes table,

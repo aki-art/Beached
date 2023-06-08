@@ -6,6 +6,16 @@ namespace Beached.Patches
 {
 	public class MinionConfigPatch
 	{
+		[HarmonyPatch(typeof(MinionConfig), "OnSpawn")]
+		public class MinionConfig_OnSpawn_Patch
+		{
+			public static void Postfix(GameObject go)
+			{
+				var sensors = go.GetComponent<Sensors>();
+				sensors.Add(new PlushPlacebleBedSensor(sensors));
+			}
+		}
+
 		[HarmonyPatch(typeof(MinionConfig), nameof(MinionConfig.CreatePrefab))]
 		public class MinionConfig_CreatePrefab_Patch
 		{

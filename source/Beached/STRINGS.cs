@@ -208,8 +208,14 @@ namespace Beached
 				{
 					public static LocString NAME = "Lubricated";
 
-					public static LocString TOOLTIP =
-						"This machine has been lubricated with Mucus, allowing it to perform better than ever.";
+					public static LocString TOOLTIP = "A {0} has been placed on this bed.\n\n<b>Effects</b>";
+				}
+
+				public class BEACHED_PLUSHED
+				{
+					public static LocString NAME = "{0} Plush";
+
+					public static LocString TOOLTIP = "A {0} has been placed on this bed.\n\n<b>Effects</b>";
 				}
 			}
 		}
@@ -752,6 +758,14 @@ namespace Beached
 					public static LocString NAME = "Precision";
 					public static LocString DESC = "...";
 				}
+
+				// Building attributes
+				// The game expects them under DUPLICANT
+				public class BEACHED_BUILDING_ACIDVULNERABILITY
+				{
+					public static LocString NAME = "Acid Vulnerability";
+					public static LocString DESC = "...";
+				}
 			}
 
 			public class CHOREGROUPS
@@ -863,6 +877,12 @@ namespace Beached
 				public class BEACHED_PLUSHIE_MAKER
 				{
 					public static LocString NAME = "Plushie Gifter";
+					public static LocString DESC = "...";
+				}
+
+				public class BEACHED_SIREN
+				{
+					public static LocString NAME = "Scary Scales";
 					public static LocString DESC = "...";
 				}
 
@@ -1741,7 +1761,7 @@ namespace Beached
 			{
 				public static LocString PUFT = "Puft Plushie";
 				public static LocString PACU = "Pacu Plushie";
-				public static LocString VOLE = "Shove Vole Plushie";			
+				public static LocString VOLE = "Shove Vole Plushie";
 			}
 
 			public class TAGS

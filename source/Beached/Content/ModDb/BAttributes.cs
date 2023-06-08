@@ -14,10 +14,25 @@ namespace Beached.Content.ModDb
 			public static Attribute acidVulnerability;
 		}
 
+		// also used for Elements
+		public static class Buildings
+		{
+			public static Attribute acidResistance;
+		}
+
 		public static void Register(Database.Attributes parent)
 		{
 			RegisterDuplicantAttributes(parent);
 			RegisterCritterAttributes(parent);
+		}
+
+		public static void RegisterBuildingAttributes(Database.BuildingAttributes parent)
+		{
+			Buildings.acidResistance = parent.Add(new Attribute(
+				 "Beached_Building_AcidResistant",
+				 true,
+				 Attribute.Display.General,
+				 false));
 		}
 
 		private static void RegisterCritterAttributes(Database.Attributes parent)
