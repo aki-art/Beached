@@ -20,24 +20,20 @@ namespace Beached.Content.ModDb
 			public static Attribute acidResistance;
 		}
 
-		public static void Register(Database.Attributes parent)
+		[DbEntry]
+		public static void RegisterBuildingAttributes(Database.BuildingAttributes __instance)
 		{
-			RegisterDuplicantAttributes(parent);
-			RegisterCritterAttributes(parent);
-		}
-
-		public static void RegisterBuildingAttributes(Database.BuildingAttributes parent)
-		{
-			Buildings.acidResistance = parent.Add(new Attribute(
+			Buildings.acidResistance = __instance.Add(new Attribute(
 				 "Beached_Building_AcidResistant",
 				 true,
 				 Attribute.Display.General,
 				 false));
 		}
 
-		private static void RegisterCritterAttributes(Database.Attributes parent)
+		[DbEntry]
+		public static void RegisterCritterAttributes(Database.CritterAttributes __instance)
 		{
-			Critters.acidVulnerability = parent.Add(new Attribute(
+			Critters.acidVulnerability = __instance.Add(new Attribute(
 				"Beached_AcidVulnerability",
 				STRINGS.CREATURES.STATS.ACIDVULNERABILITY.NAME,
 				"",
@@ -49,9 +45,10 @@ namespace Beached.Content.ModDb
 			Critters.acidVulnerability.SetFormatter(new StandardAttributeFormatter(GameUtil.UnitClass.SimpleFloat, GameUtil.TimeSlice.None));
 		}
 
-		private static void RegisterDuplicantAttributes(Database.Attributes parent)
+		[DbEntry]
+		public static void RegisterDuplicantAttributes(Database.Attributes __instance)
 		{
-			handSteadiness = parent.Add(new Attribute(
+			handSteadiness = __instance.Add(new Attribute(
 				PRECISION_ID,
 				true,
 				Attribute.Display.Skill,

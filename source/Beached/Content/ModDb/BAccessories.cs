@@ -8,7 +8,6 @@ namespace Beached.Content.ModDb
 
 		public static void Register(Accessories accessories, AccessorySlots slots)
 		{
-			Log.Debug("registering accessories");
 			accessories.AddCustomAccessories(Assets.GetAnim("beached_poffmouth_mouth"), accessories, slots);
 			var minnowHead = Assets.GetAnim("minnow_head_kanim");
 			var limpetFace = Assets.GetAnim("limpet_face_kanim");
@@ -18,7 +17,7 @@ namespace Beached.Content.ModDb
 			AddAccessories(minnowHead, slots.HatHair, accessories);
 			AddAccessories(minnowHead, slots.Mouth, accessories);
 			AddAccessories(minnowHead, slots.HeadShape, accessories);
-			//AddAccessories(limpetFace, slots.HeadEffects, accessories);
+			AddAccessories(limpetFace, slots.HeadEffects, accessories);
 		}
 
 		public static void AddAccessories(KAnimFile file, AccessorySlot slot, ResourceSet parent)

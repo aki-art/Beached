@@ -7,9 +7,10 @@ namespace Beached.Content
 		public static Amount Moisture;
 		public static Amount LimpetGrowth;
 
-		public static void Register(Database.Amounts amounts)
+		[DbEntry]
+		public static void Register(Database.Amounts __instance)
 		{
-			Moisture = amounts.CreateAmount(
+			Moisture = __instance.CreateAmount(
 				"Moisture",
 				0f,
 				100f,
@@ -24,7 +25,7 @@ namespace Beached.Content
 
 			Moisture.SetDisplayer(new StandardAmountDisplayer(GameUtil.UnitClass.Percent, GameUtil.TimeSlice.PerCycle, null));
 
-			LimpetGrowth = amounts.CreateAmount(
+			LimpetGrowth = __instance.CreateAmount(
 				"LimpetGrowth",
 				0f,
 				100f,

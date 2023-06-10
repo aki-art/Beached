@@ -1,8 +1,6 @@
-﻿using Beached.Content;
-using Beached.Content.Defs.Buildings;
+﻿using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
-using Beached.Content.ModDb.Sicknesses;
 using Database;
 using HarmonyLib;
 using System.Collections.Generic;
@@ -16,29 +14,12 @@ namespace Beached.Patches.DatabasePatches
 		{
 			public static void Postfix(Db __instance)
 			{
-				Log.Debug("DB POSTFIX ------------------------------------");
+				BRoomTypes.ModifyConstraintRules();
+				BDuplicants.Register(__instance.Personalities);
 
-				// do not reorder randomly, loading order matters!
-				BAttributes.Register(__instance.Attributes);
-				BAttributes.RegisterBuildingAttributes(__instance.BuildingAttributes);
-				BAccessories.Register(__instance.Accessories, __instance.AccessorySlots);
-				BAmounts.Register(__instance.Amounts);
-				BAssignableSlots.Register(__instance.AssignableSlots);
-				BChoreGroups.Register(__instance.ChoreGroups);
-				BStatusItems.Register(__instance);
-				BSkillGroups.Register(__instance.SkillGroups);
-				BSkillPerks.Register(__instance.SkillPerks);
-				BSkills.Register(__instance.Skills);
-				BSicknesses.Register(__instance.Sicknesses);
 				BTraits.Register();
 				BCritterTraits.Register();
-				BRoomTypes.Register(__instance.RoomTypes);
-				BRoomTypes.ModifyConstraintRules();
-				BGameplayEvents.Register(__instance.GameplayEvents);
-				BGameplaySeasons.Register(__instance.GameplaySeasons);
-				BDuplicants.Register(__instance.Personalities);
-				// TechTreeTitles has to be patched on class
-				//BTechs.Register(__instance.Techs);
+				BAccessories.Register(__instance.Accessories, __instance.AccessorySlots);
 
 				var items = __instance.ColonyAchievements.EatkCalFromMeatByCycle100.requirementChecklist;
 
@@ -79,12 +60,6 @@ namespace Beached.Patches.DatabasePatches
 
 
 				BDb.OnDbInit();
-			}
-
-			[HarmonyPostfix]
-			[HarmonyPriority(Priority.Low)]
-			public static void LatePostfix()
-			{
 			}
 
 			private static void RegisterBuildings()

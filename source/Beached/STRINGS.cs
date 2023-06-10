@@ -1013,6 +1013,18 @@ namespace Beached
 						"Once fully grown, they can be sheared off for resources.";
 			}
 
+			class BEACHED_SCARED
+			{
+				public static LocString NAME = "Scared";
+				public static LocString DESC = $"This duplicant has been terrified by darkness.";
+			}
+
+			class BEACHED_SCARED_SIREN
+			{
+				public static LocString NAME = "Scared";
+				public static LocString DESC = $"This duplicant has seen something really scary!";
+			}
+
 			public class BEACHED_WISHINGSTAR
 			{
 				public static LocString NAME = "Wishing Star";

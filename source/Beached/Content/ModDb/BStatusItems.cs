@@ -2,6 +2,7 @@
 using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.Items;
+using Database;
 
 namespace Beached.Content.ModDb
 {
@@ -15,7 +16,8 @@ namespace Beached.Content.ModDb
 		public static StatusItem gunked;
 		public static StatusItem plushed;
 
-		public static void Register(Db db)
+		[DbEntry]
+		public static void RegisterMiscStatusItems(MiscStatusItems __instance)
 		{
 			gunked = new(
 				"Beached_Gunked",
@@ -24,9 +26,26 @@ namespace Beached.Content.ModDb
 				StatusItem.IconType.Exclamation,
 				NotificationType.Bad,
 				false,
-				OverlayModes.None.ID
-				);
+				OverlayModes.None.ID);
 
+			__instance.Add(gunked);
+
+			smoking = new(
+				"Beached_Smoking",
+				"CREATURES",
+				string.Empty,
+				StatusItem.IconType.Info,
+				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID);
+
+			smoking.SetResolveStringCallback((str, data) => data is SmokeCookable smokable ? smokable.GetStatusItemTooltip(str) : str);
+			__instance.Add(smoking);
+		}
+
+		[DbEntry]
+		public static void RegisterBuildingStatusItems(BuildingStatusItems __instance)
+		{
 			plushed = new(
 				"Beached_Plushed",
 				"BUILDINGS",
@@ -38,6 +57,26 @@ namespace Beached.Content.ModDb
 
 			plushed.SetResolveStringCallback(Beached_PlushiePlaceable.GetStatusItemTooltip);
 
+			__instance.Add(plushed);
+
+			lubricated = new(
+				"Beached_Lubricated",
+				"BUILDINGS",
+				string.Empty,
+				StatusItem.IconType.Info,
+				NotificationType.Good,
+				false,
+				OverlayModes.None.ID,
+				false);
+
+			lubricated.SetResolveStringCallback(GetLubricantString);
+
+			__instance.Add(lubricated);
+		}
+
+		[DbEntry]
+		public static void RegisterCreatureStatusItems(CreatureStatusItems __instance)
+		{
 			desiccation = new(
 				"Beached_Desiccation",
 				"CREATURES",
@@ -48,6 +87,9 @@ namespace Beached.Content.ModDb
 				OverlayModes.None.ID);
 
 			desiccation.SetResolveStringCallback((str, data) => data is MoistureMonitor.Instance moistureMonitor ? string.Format(str, moistureMonitor.timeUntilDeath) : str);
+
+			__instance.Add(desiccation);
+
 
 			geneticallyMofidied = new(
 				"Beached_GeneticallyModified",
@@ -63,6 +105,8 @@ namespace Beached.Content.ModDb
 				return data is Beached_GeneticallyModifiableEgg egg ? egg.GetStatusItemString(str) : str;
 			});
 
+			__instance.Add(geneticallyMofidied);
+
 			secretingMucus = new(
 				"Beached_SecretingMucus",
 				"CREATURES",
@@ -73,32 +117,7 @@ namespace Beached.Content.ModDb
 				OverlayModes.None.ID,
 				false);
 
-			lubricated = new(
-				"Beached_Lubricated",
-				"BUILDINGS",
-				string.Empty,
-				StatusItem.IconType.Info,
-				NotificationType.Good,
-				false,
-				OverlayModes.None.ID,
-				false);
-
-			lubricated.SetResolveStringCallback(GetLubricantString);
-
-			smoking = new(
-				"Beached_Smoking",
-				"CREATURES",
-				string.Empty,
-				StatusItem.IconType.Info,
-				NotificationType.Neutral,
-				false,
-				OverlayModes.None.ID);
-
-			smoking.SetResolveStringCallback((str, data) => data is SmokeCookable smokable ? smokable.GetStatusItemTooltip(str) : str);
-
-			db.CreatureStatusItems.Add(desiccation);
-			db.CreatureStatusItems.Add(lubricated);
-			db.CreatureStatusItems.Add(smoking);
+			__instance.Add(secretingMucus);
 		}
 
 		private static string GetLubricantString(string str, object data)

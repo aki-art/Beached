@@ -8,9 +8,10 @@ namespace Beached.Content.ModDb
 		public const string ASTROPELAGOS = "Beached_AstropelagosMoonletMeteorShowers";
 		public static GameplaySeason astropelagosMoonletMeteorShowers;
 
-		public static void Register(GameplaySeasons gameplaySeasons)
+		[DbEntry]
+		public static void Register(GameplaySeasons __instance)
 		{
-			astropelagosMoonletMeteorShowers = gameplaySeasons.Add(new MeteorShowerSeason(
+			astropelagosMoonletMeteorShowers = __instance.Add(new MeteorShowerSeason(
 				ASTROPELAGOS,
 				GameplaySeason.Type.World,
 				DlcManager.EXPANSION1_ID,

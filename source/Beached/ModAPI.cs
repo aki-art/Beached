@@ -8,7 +8,8 @@ using UnityEngine;
 namespace Beached
 {
 	/* Collection of methods which is promised to not change signature or be deleted, allowing 
-     * relatively easy integration.  
+     * relatively easy integration.
+     * All of these are expected to be called on OnAllModsLoaded, unless the comment says otherwise
      * If you need any assistance, or would like to request more methods, you can open an issue on Github: https://github.com/aki-art/Beached/issues
      * 
      * [Permissions]
@@ -40,7 +41,7 @@ namespace Beached
 
 		/// <summary>
 		/// Make this prefab accept Mucus upgrading. (Doors are automatically recognized, no need to add them separately here,
-		/// unless you want to override the values.)
+		/// unless you want to override the values or add custom behavior.)
 		/// You can subscribe your own component to OnStorageChange to listen to changes, and check for Mucus
 		/// in the Storage. <see cref="GameHashes.OnStorageChange"/>
 		/// Overrides existing configurations, if any existed.
@@ -52,14 +53,6 @@ namespace Beached
 		public static Storage ExtendPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, float kgUsedEachTime)
 		{
 			return Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, kgUsedEachTime).mucusStorage;
-		}
-
-		/// <summary>
-		/// Returns id this object has any mucus applied at the moment.
-		/// </summary>
-		public static bool IsLubricated(GameObject gameObject)
-		{
-			return gameObject.HasBTag(BTags.lubricated);
 		}
 
 		/// <summary>
@@ -97,13 +90,12 @@ namespace Beached
 
 		/// <summary>
 		/// Add a new plushie type. Call in Db.Initialize Postfix!
-		/// To fix offsets on beds, use the 
 		/// </summary>
 		/// <param name="ID"></param>
 		/// <param name="animFile"></param>
 		/// <param name="effectId">This effect gets applied to the dupe when sleeping with this plushie. null for none</param>
 		/// <param name="onSleepingWithPlush">Called when a dupe goes to sleep with this plushie. The GameObject is the dupe. null for none</param>
-		/// <param name="offset">offset of the anim file for the bed </param>
+		/// <param name="offset">offset of the anim file for the bed. use debug tool Mods/Beached/Debug for help.</param>
 		public static void RegisterPlushie(
 			string ID,
 			string name,
@@ -117,18 +109,19 @@ namespace Beached
 
 		/// <summary>
 		/// Set how much this element is affected by Sulfuric Acid, 0-1
-		/// Note: explosions happen to elements with Metal tag that have > 0 vulnerability.
-		/// The default is 0.
+		/// The default is 0.5 (slow reaction)
 		/// </summary>
 		/// <param name="elementId"></param>
 		/// <param name="value">
 		/// 0 = unaffected
-		/// 1 = nearly instant destruction</param>
+		/// 1 = violent reaction</param>
 		public static void SetElementAcidVulnerability(string elementId, float value)
 		{
 			var element = ElementLoader.FindElementByName(elementId);
 			if (element != null)
 				SetElementAcidVulnerability(element.id, value);
+			else if (Mod.debugMode)
+				Log.Warning("No element with ID " + elementId);
 		}
 
 		/// <summary>

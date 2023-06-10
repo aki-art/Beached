@@ -10,32 +10,27 @@ namespace Beached.Content.ModDb.Sicknesses
 		public static Sickness capped;
 		public static Sickness poffMouth;
 
-
-		public static void Register(Database.Sicknesses sicknesses)
+		[DbEntry]
+		public static void Register(Database.Sicknesses __instance)
 		{
-			/*            limpets = sicknesses.Add(new LimpetsSickness());
-
-                        var exposures = new List<ExposureType>(TUNING.GERM_EXPOSURE.TYPES)
-                        {
-                            new ExposureType
-                            {
-                                germ_id = LimpetEggGerms.ID,
-                                sickness_id = LimpetsSickness.ID,
-                                exposure_threshold = 100,
-                                base_resistance = 0,
-                                infect_immediately = true,
-                                excluded_effects = new List<string>
-                                {
-                                    BEffects.LIMPETS_DUPLICANT_RECOVERY
-                                }
-                            }
-                        };*/
-
-			capped = sicknesses.Add(new CappedSickness());
-			poffMouth = sicknesses.Add(new PoffMouthSickness());
+			capped = __instance.Add(new CappedSickness());
+			poffMouth = __instance.Add(new PoffMouthSickness());
+			limpets = __instance.Add(new LimpetsSickness());
 
 			var exposures = new List<ExposureType>(TUNING.GERM_EXPOSURE.TYPES)
 			{
+				new ExposureType
+				{
+					germ_id = LimpetEggGerms.ID,
+					sickness_id = LimpetsSickness.ID,
+					exposure_threshold = 100,
+					base_resistance = 0,
+					infect_immediately = true,
+					excluded_effects = new List<string>
+					{
+						BEffects.LIMPETS_DUPLICANT_RECOVERY
+					}
+				},
 				new ExposureType
 				{
 					germ_id = CapSporeGerms.ID,

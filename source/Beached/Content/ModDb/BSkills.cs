@@ -16,19 +16,21 @@ namespace Beached.Content.ModDb
 		public static Skill aquaCulture2;
 		// fungiCulture?
 
-		public const string ANIMALHANDLING_ID = "Beached_AnimalHandling";
-		public const string ARCHEOLOGY_ID = "Beached_Archeology";
-		public const string ARCHEOLOGY2_ID = "Beached_Archeology2";
-		public const string CRYSTALLOGRAPHY_ID = "Beached_Crystallography";
-		public const string GEOCHEMISTRY_ID = "Beached_GeoChemistry";
-		public const string AQUACULTURE1_ID = "Beached_AquaCulture1";
-		public const string AQUACULTURE2_ID = "Beached_AquaCulture2";
-		public const string MAKITRAINING1_ID = "Beached_MakiTraining1";
-		public const string MAKITRAINING2_ID = "Beached_MakiTraining2";
+		public const string
+			ANIMALHANDLING_ID = "Beached_AnimalHandling",
+			ARCHEOLOGY_ID = "Beached_Archeology",
+			ARCHEOLOGY2_ID = "Beached_Archeology2",
+			CRYSTALLOGRAPHY_ID = "Beached_Crystallography",
+			GEOCHEMISTRY_ID = "Beached_GeoChemistry",
+			AQUACULTURE1_ID = "Beached_AquaCulture1",
+			AQUACULTURE2_ID = "Beached_AquaCulture2",
+			MAKITRAINING1_ID = "Beached_MakiTraining1",
+			MAKITRAINING2_ID = "Beached_MakiTraining2";
 
-		public static void Register(Skills skills)
+		[DbEntry]
+		public static void Register(Skills __instance)
 		{
-			archeology = skills.Add(new Skill(
+			archeology = __instance.Add(new Skill(
 					ARCHEOLOGY_ID,
 					STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.NAME,
 					STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.DESCRIPTION,
@@ -42,7 +44,7 @@ namespace Beached.Content.ModDb
 						BSkillPerks.CanFindTreasures
 					}, null));
 
-			archeology2 = skills.Add(new Skill(
+			archeology2 = __instance.Add(new Skill(
 					ARCHEOLOGY2_ID,
 					STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY2.NAME,
 					STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY2.DESCRIPTION,
@@ -57,10 +59,10 @@ namespace Beached.Content.ModDb
 					}, new List<string>
 					{
 						ARCHEOLOGY_ID,
-						skills.Mining1.Id
+						__instance.Mining1.Id
 					}));
 
-			crystallography = skills.Add(new Skill(
+			crystallography = __instance.Add(new Skill(
 					CRYSTALLOGRAPHY_ID,
 					STRINGS.DUPLICANTS.ROLES.CRYSTALLOGRAPHY.NAME,
 					STRINGS.DUPLICANTS.ROLES.CRYSTALLOGRAPHY.DESCRIPTION,
@@ -77,7 +79,7 @@ namespace Beached.Content.ModDb
 						ARCHEOLOGY_ID
 					}));
 
-			geoChemistry = skills.Add(new Skill(
+			geoChemistry = __instance.Add(new Skill(
 					GEOCHEMISTRY_ID,
 					STRINGS.DUPLICANTS.ROLES.GEOCHEMISTRY.NAME,
 					STRINGS.DUPLICANTS.ROLES.GEOCHEMISTRY.DESCRIPTION,
@@ -92,10 +94,10 @@ namespace Beached.Content.ModDb
 					}, new List<string>
 					{
 						CRYSTALLOGRAPHY_ID,
-						skills.Researching2.Id
+						__instance.Researching2.Id
 					}));
 
-			aquaCulture1 = skills.Add(new Skill(
+			aquaCulture1 = __instance.Add(new Skill(
 					AQUACULTURE1_ID,
 					STRINGS.DUPLICANTS.ROLES.AQUACULTURE1.NAME,
 					STRINGS.DUPLICANTS.ROLES.AQUACULTURE1.DESCRIPTION,
@@ -109,10 +111,10 @@ namespace Beached.Content.ModDb
 						BSkillPerks.AquaCulture1
 					}, new List<string>
 					{
-						skills.Farming1.Id
+						__instance.Farming1.Id
 					}));
 
-			aquaCulture2 = skills.Add(new Skill(
+			aquaCulture2 = __instance.Add(new Skill(
 					AQUACULTURE2_ID,
 					STRINGS.DUPLICANTS.ROLES.AQUACULTURE2.NAME,
 					STRINGS.DUPLICANTS.ROLES.AQUACULTURE2.DESCRIPTION,
@@ -129,7 +131,7 @@ namespace Beached.Content.ModDb
 						AQUACULTURE1_ID
 					}));
 
-			animalHandling = skills.Add(new Skill(
+			animalHandling = __instance.Add(new Skill(
 					ANIMALHANDLING_ID,
 					STRINGS.DUPLICANTS.ROLES.ANIMALHANDLING.NAME,
 					STRINGS.DUPLICANTS.ROLES.ANIMALHANDLING.DESCRIPTION,
@@ -143,7 +145,7 @@ namespace Beached.Content.ModDb
 						BSkillPerks.AnimalHandling
 					}, null));
 
-			makiTraining1 = skills.Add(new Skill(
+			makiTraining1 = __instance.Add(new Skill(
 					MAKITRAINING1_ID,
 					STRINGS.DUPLICANTS.ROLES.MAKITRAINER1.NAME,
 					STRINGS.DUPLICANTS.ROLES.MAKITRAINER1.DESCRIPTION,
@@ -160,7 +162,7 @@ namespace Beached.Content.ModDb
 						ANIMALHANDLING_ID
 					}));
 
-			makiTraining2 = skills.Add(new Skill(
+			makiTraining2 = __instance.Add(new Skill(
 					MAKITRAINING2_ID,
 					STRINGS.DUPLICANTS.ROLES.MAKITRAINER2.NAME,
 					STRINGS.DUPLICANTS.ROLES.MAKITRAINER2.DESCRIPTION,
@@ -178,7 +180,7 @@ namespace Beached.Content.ModDb
 					}));
 
 			// Moves ranching to Animal Handling tree
-			skills.Ranching1.priorSkills = new List<string>()
+			__instance.Ranching1.priorSkills = new List<string>()
 			{
 				ANIMALHANDLING_ID
 			};

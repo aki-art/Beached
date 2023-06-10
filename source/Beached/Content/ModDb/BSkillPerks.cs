@@ -24,55 +24,56 @@ namespace Beached.Content.ModDb
 		public const string MAKITRAINER1_ID = "Beached_SkillPerk_MakiTrainer1";
 		public const string MAKITRAINER2_ID = "Beached_SkillPerk_MakiTrainer2";
 
-		public static void Register(SkillPerks skillPerks)
+		[DbEntry]
+		public static void Register(SkillPerks __instance)
 		{
-			CanFindTreasures = skillPerks.Add(new SkillAttributePerk(
+			CanFindTreasures = __instance.Add(new SkillAttributePerk(
 				CANFINDTREASURES_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.NAME));
 
-			CanFindMoreTreasures = skillPerks.Add(new SkillAttributePerk(
+			CanFindMoreTreasures = __instance.Add(new SkillAttributePerk(
 				CANFINDMORETREASURES_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY2.NAME));
 
-			CanSafelyHarvestClusters = skillPerks.Add(new SkillAttributePerk(
+			CanSafelyHarvestClusters = __instance.Add(new SkillAttributePerk(
 				CANSAFELYHARVESTCLUSTERS_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.CRYSTALLOGRAPHY.NAME));
 
-			CanAnalyzeClusters = skillPerks.Add(new SkillAttributePerk(
+			CanAnalyzeClusters = __instance.Add(new SkillAttributePerk(
 				CANANALYZECLUSTERS_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.GEOCHEMISTRY.NAME));
 
-			AquaCulture1 = skillPerks.Add(new SkillAttributePerk(
+			AquaCulture1 = __instance.Add(new SkillAttributePerk(
 				AQUACULTURE1_ID,
 				Db.Get().Attributes.Botanist.Id,
 				2,
 				STRINGS.DUPLICANTS.ROLES.AQUACULTURE1.NAME));
 
-			AquaCulture2 = skillPerks.Add(new SkillAttributePerk(
+			AquaCulture2 = __instance.Add(new SkillAttributePerk(
 				AQUACULTURE2_ID,
 				Db.Get().Attributes.Botanist.Id,
 				2,
 				STRINGS.DUPLICANTS.ROLES.AQUACULTURE2.NAME));
 
-			AnimalHandling = skillPerks.Add(new SkillAttributePerk(
+			AnimalHandling = __instance.Add(new SkillAttributePerk(
 				AQUACULTURE2_ID,
 				Db.Get().Attributes.Ranching.Id,
 				2,
 				STRINGS.DUPLICANTS.ROLES.ANIMALHANDLING.NAME));
 
-			MakiTrainer1 = skillPerks.Add(new SimpleSkillPerk(
+			MakiTrainer1 = __instance.Add(new SimpleSkillPerk(
 				AQUACULTURE1_ID,
 				STRINGS.DUPLICANTS.ROLES.MAKITRAINER1.NAME));
 
-			MakiTrainer2 = skillPerks.Add(new SimpleSkillPerk(
+			MakiTrainer2 = __instance.Add(new SimpleSkillPerk(
 				AQUACULTURE1_ID,
 				STRINGS.DUPLICANTS.ROLES.MAKITRAINER2.NAME));
 		}

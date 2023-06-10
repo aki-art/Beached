@@ -19,8 +19,6 @@ namespace Beached.ModDevTools
 		private static Vector4 zoneTypeColor;
 		private static Vector4 previousZoneTypeColor;
 		private static int selectedZoneType;
-		private static float waterCube = 0.66f;
-		private static float previousWaterCube = waterCube;
 		private static string audioFile = "";
 		private static Dictionary<string, ShaderPropertyInfo> liquidShaderProperties;
 		private static Dictionary<string, ShaderPropertyInfo> refractionShaderProperties;
@@ -55,7 +53,7 @@ namespace Beached.ModDevTools
 				this.material = material;
 			}
 
-			internal void RefreshValue()
+			public void RefreshValue()
 			{
 				if (!value.Equals(newValue))
 				{
@@ -79,144 +77,245 @@ namespace Beached.ModDevTools
 		public override void RenderTo(DevPanel panel)
 		{
 			if (ImGui.Button("Debug Data trigger"))
-			{
 				Beached_Mod.Instance.Trigger(ModHashes.debugDataChange);
-			}
 
+			HandleSelectedObject();
+			FoulingPlane();
+			Seasons();
+			Notifications();
+			Audio();
+			ZoneColors();
+			Shaders();
+		}
+
+		private static void HandleSelectedObject()
+		{
 			var selectedObject = SelectTool.Instance?.selected;
 
-			if (selectedObject != null)
+			if (selectedObject == null)
+				return;
+
+			var debugs = selectedObject.GetComponents<IImguiDebug>();
+			if (debugs != null)
 			{
-				var debugs = selectedObject.GetComponents<IImguiDebug>();
-				if (debugs != null)
+				ImGui.Separator();
+				ImGui.Text($"Selected object: {selectedObject.GetProperName()}");
+				ImGui.Separator();
+
+				foreach (var imguiDebug in debugs)
 				{
 					ImGui.Separator();
-					ImGui.Text($"Selected object: {selectedObject.GetProperName()}");
-					ImGui.Separator();
+					ImGui.Text($"{imguiDebug.GetType()}");
+					imguiDebug.OnImguiDraw();
+				}
+			}
 
-					foreach (var imguiDebug in debugs)
+			var joyBehavior = selectedObject.GetSMI<JoyBehaviourMonitor.Instance>();
+			if (joyBehavior != null && ImGui.Button("Overjoy"))
+				joyBehavior.GoToOverjoyed();
+
+			var stress = Db.Get().Amounts.Stress.Lookup(selectedObject);
+			if (stress != null)
+			{
+				if (joyBehavior != null)
+					ImGui.SameLine();
+
+				if (ImGui.Button("Stress"))
+					stress.SetValue(100f);
+			}
+
+			if (selectedObject.TryGetComponent(out CreatureBrain brain) && brain.TryGetComponent(out Traits traits))
+			{
+				ImGui.Separator();
+				ImGui.Text("GMO Traits");
+				var allTraits = Db.Get().traitGroups.Get(BCritterTraits.GMO_GROUP).modifiers;
+				foreach (var trait in allTraits)
+				{
+					if (!traits.HasTrait(trait))
 					{
-						ImGui.Spacing();
-						ImGui.Text($"{imguiDebug.GetType()}");
-						imguiDebug.OnImguiDraw();
+						if (ImGui.Button(trait.Name))
+							traits.Add(trait);
+					}
+					else
+					{
+						ImGui.Text(trait.Name);
+						ImGui.SameLine();
+
+						if (ImGui.SmallButton("X"))
+							traits.Remove(trait);
+					}
+				}
+			}
+		}
+
+		private void Shaders()
+		{
+			if (ImGui.CollapsingHeader("Shader"))
+			{
+				ImGui.InputText("Mask: ", ref liquidCullingMaskLayer, 256);
+
+				if (ImGui.Button("Save Liquid renderer snapshot"))
+				{
+					Beached_Mod.Instance.SetCullingMask(liquidCullingMaskLayer);
+
+					Beached_Mod.Instance.RenderDebugWater();
+					renderLiquidTexture = true;
+
+					var tileRenderers = Object.FindObjectsOfType<TileRenderer>();
+					if (tileRenderers == null)
+						Log.Debug("no tile renderers");
+					else
+					{
+						Log.Debug("tile renderers: " + tileRenderers.Length);
+						foreach (TileRenderer tileRenderer in tileRenderers)
+						{
+							Log.Debug("r: " + tileRenderer.name);
+						}
+
 					}
 				}
 
-				var joyBehavior = selectedObject.GetSMI<JoyBehaviourMonitor.Instance>();
-				if (joyBehavior != null && ImGui.Button("Overjoy"))
-					joyBehavior.GoToOverjoyed();
-
-				var stress = Db.Get().Amounts.Stress.Lookup(selectedObject);
-				if (stress != null && ImGui.Button("Stress"))
-					stress.SetValue(100f);
-
-				if (selectedObject.TryGetComponent(out CreatureBrain brain) && brain.TryGetComponent(out Traits traits))
+				if (ImGui.Button("Save liquid plane"))
 				{
-					ImGui.Separator();
-					ImGui.Text("GMO Traits");
-					var allTraits = Db.Get().traitGroups.Get(BCritterTraits.GMO_GROUP).modifiers;
-					foreach (var trait in allTraits)
+					Log.Debug(WaterCubes.Instance.material.shader.name);
+					foreach (var prop in WaterCubes.Instance.material.GetTexturePropertyNames())
 					{
-						if (!traits.HasTrait(trait))
+						Log.Debug(prop);
+
+					}
+
+					Material mat = null;
+
+					foreach (var renderer in Object.FindObjectsOfType<MeshRenderer>())
+					{
+						Log.Debug($"{renderer.gameObject.name} - {renderer.material?.shader?.name}");
+						if (renderer.gameObject.name == "WaterCubesMesh")
 						{
-							if (ImGui.Button(trait.Name))
-							{
-								traits.Add(trait);
-							}
+							mat = renderer.material;
 						}
+					}
+
+					//ModAssets.SaveImage(WaterCubes.Instance.material.GetTexture("_MainTex2"), "watercubes");
+
+					int mult = 50;
+
+					var size = new Vector2(Grid.WidthInCells, Grid.HeightInCells);
+					size.Normalize();
+
+					size *= 16384 / Mathf.Max(size.x, size.y);
+					size *= 0.1f;
+
+					var width = (int)size.x;
+					var height = (int)size.y;
+
+					var texture2D = new Texture2D(width, height, TextureFormat.RGBA32, false);
+
+					var renderTexture = new RenderTexture(width, height, 32);
+					Graphics.Blit(texture2D, renderTexture, mat);
+
+					texture2D.ReadPixels(new(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+					texture2D.Apply();
+
+					var bytes = texture2D.EncodeToPNG();
+					var dirPath = Mod.folder;
+
+					if (!Directory.Exists(dirPath))
+						Directory.CreateDirectory(dirPath);
+
+					File.WriteAllBytes(Path.Combine(dirPath, "water") + System.DateTime.Now.Millisecond + ".png", bytes);
+
+					ModAssets.SaveImage(PropertyTextures.instance.externallyUpdatedTextures[(int)PropertyTextures.Property.Liquid], "externalliquid");
+					ModAssets.SaveImage(PropertyTextures.instance.externallyUpdatedTextures[(int)PropertyTextures.Property.SolidLiquidGasMass], "solid");
+				}
+
+				var rendererGo = WaterCubes.Instance.cubes.transform.Find("WaterCubesMesh");
+				if (rendererGo != null)
+				{
+					if (rendererGo.TryGetComponent(out MeshRenderer renderer))
+					{
+						if (renderer.sharedMaterial == null)
+							ImGui.Text("shared material is null");
 						else
 						{
-							ImGui.Text(trait.Name);
+							if (renderer.sharedMaterial.shader == null)
+								ImGui.Text("shared material shader is null");
+							else
+							{
+								ImGui.Text(renderer.sharedMaterial.shader.name);
+							}
 						}
 					}
-				}
-			}
-
-			ImGui.Separator();
-
-			if (ImGui.Button("Infrared Disease"))
-			{
-				Infrared.Instance.SetMode(Infrared.Mode.Disease);
-			}
-
-			FoulingPlane();
-
-			if (ImGui.CollapsingHeader("Seasons"))
-			{
-				if (ImGui.Button("Start meteor season"))
-				{
-					ClusterManager.Instance.activeWorld
-						.GetSMI<GameplaySeasonManager.Instance>()
-						.StartNewSeason(BGameplaySeasons.astropelagosMoonletMeteorShowers);
-				}
-			}
-
-			if (ImGui.CollapsingHeader("Notifications"))
-			{
-				if (ImGui.Button("Open test notification"))
-				{
-					Tutorials.Instance.Test();
-				}
-			}
-
-			if (ImGui.TreeNode("Basic"))
-			{
-				if (ImGui.BeginTabBar("MyTabBar", ImGuiTabBarFlags.None))
-				{
-					if (ImGui.BeginTabItem("Avocado"))
+					else
 					{
-						ImGui.Text("This is the Avocado tab!\nblah blah blah blah blah");
-						ImGui.EndTabItem();
+						ImGui.Text("renderer is null");
 					}
-					if (ImGui.BeginTabItem("Broccoli"))
-					{
-						ImGui.Text("This is the Broccoli tab!\nblah blah blah blah blah");
-						ImGui.EndTabItem();
-					}
-					if (ImGui.BeginTabItem("Cucumber"))
-					{
-						ImGui.Text("This is the Cucumber tab!\nblah blah blah blah blah");
-						ImGui.EndTabItem();
-					}
-					ImGui.EndTabBar();
-				}
-				ImGui.Separator();
-				ImGui.TreePop();
-			}
-
-			if (ImGui.CollapsingHeader("Diggers"))
-			{
-				foreach (var digger in Treasury.diggers)
-				{
-					ImGui.Text($"{digger.Key}\t{digger.Value?.GetProperName()}");
-					var element = Grid.Element[digger.Key];
-					if (Beached_Mod.Instance.treasury.chances.TryGetValue(element.id, out var treasures))
-					{
-						foreach (var treasure in treasures.treasures)
-						{
-							ImGui.Text($"\t\t{treasure.tag} {treasure.weight}");
-						}
-					}
-				}
-			}
-
-			if (ImGui.Button("Find monitor"))
-			{
-				var monitors = Object.FindObjectsOfType<DrowningMonitorUpdater>();
-				if (monitors == null)
-				{
-					ImGui.Text("no monitor");
 				}
 				else
 				{
-					ImGui.Text($"{monitors.Length} monitors");
-					foreach (var monitor in monitors)
+					ImGui.Text("rendererGo is null");
+				}
+
+				if (liquidShaderProperties == null)
+				{
+					InitializeLiquidShaderProperties();
+					InitializeRefracionShaderProperties();
+				}
+
+				foreach (var prop in liquidShaderProperties.Values)
+				{
+					if (prop is ShaderPropertyInfo<float> floatProperty)
 					{
-						ImGui.Text($"{monitor.name} {monitor.transform.parent?.name}");
+						ImGui.DragFloat("L:" + floatProperty.propertyKey, ref floatProperty.newValue, (floatProperty.maxValue - floatProperty.minValue) / 1000f, floatProperty.minValue, floatProperty.maxValue);
+						floatProperty.RefreshValue();
 					}
 				}
 
+				if (mat != null && ImGui.Button("toggle heat haze"))
+					mat.EnableKeyword("ENABLE_HEAT_HAZE");
+
+				ImGui.Spacing();
+
+				foreach (var prop in refractionShaderProperties.Values)
+				{
+					if (prop is ShaderPropertyInfo<float> floatProperty)
+					{
+						ImGui.DragFloat("R:" + floatProperty.propertyKey, ref floatProperty.newValue, (floatProperty.maxValue - floatProperty.minValue) / 1000f, floatProperty.minValue, floatProperty.maxValue);
+						floatProperty.RefreshValue();
+					}
+				}
 			}
+		}
+
+		private void ZoneColors()
+		{
+			if (ImGui.CollapsingHeader("Zone colors"))
+			{
+				if (zoneTypes == null || zoneTypes.Length == 0)
+				{
+					zoneTypes = ZoneTypes.values.Select(z => z.ToString()).ToArray();
+				}
+
+				ImGui.SetColorEditOptions(ImGuiColorEditFlags.DisplayHex);
+				ImGui.ColorPicker4("Color", ref zoneTypeColor);
+				ImGui.ListBox("ZoneType", ref selectedZoneType, zoneTypes, zoneTypes.Length);
+
+				if (zoneTypeColor != previousZoneTypeColor)
+				{
+					if (zoneTypeColor != null)
+					{
+						var color = new Color(zoneTypeColor.x, zoneTypeColor.y, zoneTypeColor.z, zoneTypeColor.w);
+
+						World.Instance.zoneRenderData.zoneColours[(int)ZoneTypes.values.ElementAt(selectedZoneType)] = color;
+						World.Instance.zoneRenderData.OnActiveWorldChanged();
+
+						previousZoneTypeColor = zoneTypeColor;
+					}
+				}
+			}
+		}
+
+		private void Audio()
+		{
 			if (ImGui.CollapsingHeader("Audio Player"))
 			{
 				if (ImGui.Button("Dump audio names"))
@@ -298,178 +397,23 @@ namespace Beached.ModDevTools
 					}
 				}
 			}
+		}
 
-			ImGui.Spacing();
-
-			if (ImGui.CollapsingHeader("Zone colors"))
+		private static void Notifications()
+		{
+			if (ImGui.CollapsingHeader("Notifications"))
 			{
-				if (zoneTypes == null || zoneTypes.Length == 0)
-				{
-					zoneTypes = ZoneTypes.values.Select(z => z.ToString()).ToArray();
-				}
-
-				ImGui.SetColorEditOptions(ImGuiColorEditFlags.DisplayHex);
-				ImGui.ColorPicker4("Color", ref zoneTypeColor);
-				ImGui.ListBox("ZoneType", ref selectedZoneType, zoneTypes, zoneTypes.Length);
-
-				if (zoneTypeColor != previousZoneTypeColor)
-				{
-					if (zoneTypeColor != null)
-					{
-						var color = new Color(zoneTypeColor.x, zoneTypeColor.y, zoneTypeColor.z, zoneTypeColor.w);
-
-						World.Instance.zoneRenderData.zoneColours[(int)ZoneTypes.values.ElementAt(selectedZoneType)] = color;
-						World.Instance.zoneRenderData.OnActiveWorldChanged();
-
-						previousZoneTypeColor = zoneTypeColor;
-					}
-				}
+				if (ImGui.Button("Open test notification"))
+					Tutorials.Instance.Test();
 			}
+		}
 
-
-			if (ImGui.CollapsingHeader("Shader"))
+		private static void Seasons()
+		{
+			if (ImGui.CollapsingHeader("Seasons"))
 			{
-				ImGui.InputText("Mask: ", ref liquidCullingMaskLayer, 256);
-
-				if (ImGui.Button("Save Liquid renderer snapshot"))
-				{
-					Beached_Mod.Instance.SetCullingMask(liquidCullingMaskLayer);
-
-					Beached_Mod.Instance.RenderDebugWater();
-					renderLiquidTexture = true;
-
-					var tileRenderers = Object.FindObjectsOfType<TileRenderer>();
-					if (tileRenderers == null)
-					{
-						Log.Debug("no tile renderers");
-					}
-					else
-					{
-						Log.Debug("tile renderers: " + tileRenderers.Length);
-						foreach (TileRenderer tileRenderer in tileRenderers)
-						{
-							Log.Debug("r: " + tileRenderer.name);
-						}
-
-					}
-				}
-
-				if (ImGui.Button("Save liquid plane"))
-				{
-					Log.Debug(WaterCubes.Instance.material.shader.name);
-					foreach (var prop in WaterCubes.Instance.material.GetTexturePropertyNames())
-					{
-						Log.Debug(prop);
-
-					}
-
-					Material mat = null;
-
-					foreach (var renderer in Object.FindObjectsOfType<MeshRenderer>())
-					{
-						Log.Debug($"{renderer.gameObject.name} - {renderer.material?.shader?.name}");
-						if (renderer.gameObject.name == "WaterCubesMesh")
-						{
-							mat = renderer.material;
-						}
-					}
-
-					//ModAssets.SaveImage(WaterCubes.Instance.material.GetTexture("_MainTex2"), "watercubes");
-
-					int mult = 50;
-
-					var size = new Vector2(Grid.WidthInCells, Grid.HeightInCells);
-					size.Normalize();
-
-					size *= 16384 / Mathf.Max(size.x, size.y);
-					size *= 0.1f;
-
-					var width = (int)size.x;
-					var height = (int)size.y;
-
-					var texture2D = new Texture2D(width, height, TextureFormat.RGBA32, false);
-
-					var renderTexture = new RenderTexture(width, height, 32);
-					Graphics.Blit(texture2D, renderTexture, mat);
-
-					texture2D.ReadPixels(new(0, 0, renderTexture.width, renderTexture.height), 0, 0);
-					texture2D.Apply();
-
-					var bytes = texture2D.EncodeToPNG();
-					var dirPath = Mod.folder;
-
-					if (!Directory.Exists(dirPath))
-					{
-						Directory.CreateDirectory(dirPath);
-					}
-
-					File.WriteAllBytes(Path.Combine(dirPath, "water") + System.DateTime.Now.Millisecond + ".png", bytes);
-
-					ModAssets.SaveImage(PropertyTextures.instance.externallyUpdatedTextures[(int)PropertyTextures.Property.Liquid], "externalliquid");
-					ModAssets.SaveImage(PropertyTextures.instance.externallyUpdatedTextures[(int)PropertyTextures.Property.SolidLiquidGasMass], "solid");
-				}
-
-				var rendererGo = WaterCubes.Instance.cubes.transform.Find("WaterCubesMesh");
-				if (rendererGo != null)
-				{
-					if (rendererGo.TryGetComponent(out MeshRenderer renderer))
-					{
-						if (renderer.sharedMaterial == null)
-						{
-							ImGui.Text("shared material is null");
-						}
-						else
-						{
-							if (renderer.sharedMaterial.shader == null)
-							{
-								ImGui.Text("shared material shader is null");
-							}
-							else
-							{
-								ImGui.Text(renderer.sharedMaterial.shader.name);
-							}
-						}
-					}
-					else
-					{
-						ImGui.Text("renderer is null");
-					}
-				}
-				else
-				{
-					ImGui.Text("rendererGo is null");
-				}
-
-				if (liquidShaderProperties == null)
-				{
-					InitializeLiquidShaderProperties();
-					InitializeRefracionShaderProperties();
-				}
-
-				foreach (var prop in liquidShaderProperties.Values)
-				{
-					if (prop is ShaderPropertyInfo<float> floatProperty)
-					{
-						ImGui.DragFloat("L:" + floatProperty.propertyKey, ref floatProperty.newValue, (floatProperty.maxValue - floatProperty.minValue) / 1000f, floatProperty.minValue, floatProperty.maxValue);
-						floatProperty.RefreshValue();
-					}
-				}
-
-				if (mat != null && ImGui.Button("toggle heat haze"))
-				{
-					mat.EnableKeyword("ENABLE_HEAT_HAZE");
-				}
-
-				ImGui.Spacing();
-
-				foreach (var prop in refractionShaderProperties.Values)
-				{
-					if (prop is ShaderPropertyInfo<float> floatProperty)
-					{
-						ImGui.DragFloat("R:" + floatProperty.propertyKey, ref floatProperty.newValue, (floatProperty.maxValue - floatProperty.minValue) / 1000f, floatProperty.minValue, floatProperty.maxValue);
-						floatProperty.RefreshValue();
-					}
-				}
+				if (ImGui.Button("Start meteor season"))
+					ClusterManager.Instance.activeWorld.GetSMI<GameplaySeasonManager.Instance>().StartNewSeason(BGameplaySeasons.astropelagosMoonletMeteorShowers);
 			}
 		}
 

@@ -186,6 +186,10 @@ namespace Beached.Content.ModDb
 				false,
 				OverlayModes.None.ID);
 
+			var component = go.GetComponent<KMonoBehaviour>();
+
+			new Siren.Instance(component).StartSM();
+
 			new StressBehaviourMonitor.Instance(go.GetComponent<KMonoBehaviour>(),
 				(chore_provider => new StressEmoteChore(
 					chore_provider,

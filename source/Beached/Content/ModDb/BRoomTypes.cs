@@ -29,9 +29,10 @@ namespace Beached.Content.ModDb
 			return pois != null && pois.Count > 0;
 		}
 
-		public static void Register(RoomTypes roomTypes)
+		[DbEntry]
+		public static void Register(RoomTypes __instance)
 		{
-			NatureVista = roomTypes.Add(new RoomType(
+			NatureVista = __instance.Add(new RoomType(
 				"Beached_NatureVista",
 				STRINGS.ROOMS.TYPES.BEACHED_NATUREVISTA.NAME,
 				STRINGS.ROOMS.TYPES.BEACHED_NATUREVISTA.DESCRIPTION,

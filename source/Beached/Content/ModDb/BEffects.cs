@@ -5,6 +5,7 @@
 		public const string
 			OCEAN_BREEZE = "Beached_OceanBreeze", // -5% stress/cycle, -10g Oxygen
 			SCARED = "Beached_Scared", // +10% Stress/cycle, +5% Bladder delta
+			SCARED_SIREN = "Beached_Scared_Siren", // +10% Stress/cycle, +5% Bladder delta
 			DIMWIT = "Beached_Dimwit",
 			LIMPETS_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
 			CAPPED_RECOVERY = "Beached_Capped_Recovery",
@@ -42,6 +43,11 @@
 				.Add(set);
 
 			new EffectBuilder(SCARED, 2f, true)
+				.Modifier(stressDelta, 10f / CONSTS.CYCLE_LENGTH)
+				.Modifier(peeDelta, 5f / CONSTS.CYCLE_LENGTH)
+				.Add(set);
+
+			new EffectBuilder(SCARED_SIREN, 60f, true)
 				.Modifier(stressDelta, 10f / CONSTS.CYCLE_LENGTH)
 				.Modifier(peeDelta, 5f / CONSTS.CYCLE_LENGTH)
 				.Add(set);

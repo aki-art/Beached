@@ -12,9 +12,10 @@ namespace Beached.Content.ModDb
 		public const string ABYSSALITE_SHOWER = "Beached_ClusterAbyssaliteShowerEvent";
 		public static GameplayEvent ClusterAbyssaliteShower;
 
-		public static void Register(GameplayEvents gameplayEvents)
+		[DbEntry]
+		public static void Register(GameplayEvents __instance)
 		{
-			ClusterDiamondShower = gameplayEvents.Add(new MeteorShowerEvent(
+			ClusterDiamondShower = __instance.Add(new MeteorShowerEvent(
 				DIAMOND_SHOWER,
 				300f,
 				3.5f,
@@ -29,7 +30,7 @@ namespace Beached.Content.ModDb
 
 			ClusterDiamondShower.tags.Add(BTags.wishingStars);
 
-			ClusterAbyssaliteShower = gameplayEvents.Add(new MeteorShowerEvent(
+			ClusterAbyssaliteShower = __instance.Add(new MeteorShowerEvent(
 				ABYSSALITE_SHOWER,
 				300f,
 				3.5f,

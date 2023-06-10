@@ -1,36 +1,35 @@
 ﻿namespace Beached.Content.Scripts
 {
-    public class PlushPlacebleBedSensor : Sensor
-    {
-        private Navigator navigator;
-        public int cell;
+	public class PlushPlacebleBedSensor : Sensor
+	{
+		private Navigator navigator;
+		public Beached_PlushiePlaceable placeable;
 
-        public PlushPlacebleBedSensor(Sensors sensors) : base(sensors)
-        {
-            navigator = GetComponent<Navigator>();
-        }
+		public PlushPlacebleBedSensor(Sensors sensors) : base(sensors)
+		{
+			navigator = GetComponent<Navigator>();
+		}
 
-        public override void Update()
-        {
-            cell = Grid.InvalidCell;
+		public override void Update()
+		{
+			if (placeable != null)
+				return;
 
-            foreach (var bed in Mod.plushiePlaceables)
-            {
-                var buildingCell = bed.NaturalBuildingCell();
+			foreach (var bed in Mod.plushiePlaceables.items)
+			{
+				if (IsBedEligible(bed))
+				{
+					placeable = bed;
+					break;
+				}
+			}
+		}
 
-                if (IsBedEligible(bed, buildingCell))
-                {
-                    cell = bed.NaturalBuildingCell();
-                    break;
-                }
-            }
-        }
-
-        private bool IsBedEligible(Beached_PlushiePlaceable bed, int cell)
-        {
-            return !bed.HasPlushie()
-                && bed.GetComponent<Operational>().IsOperational
-                && navigator.GetNavigationCost(cell) != -1;
-        }
-    }
+		private bool IsBedEligible(Beached_PlushiePlaceable bed)
+		{
+			return !bed.HasPlushie()
+				&& bed.GetComponent<Operational>().IsOperational
+				&& navigator.GetNavigationCost(bed.NaturalBuildingCell()) != -1;
+		}
+	}
 }
