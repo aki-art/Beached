@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 namespace Beached.Patches
 {
@@ -253,18 +254,6 @@ namespace Beached.Patches
 			}
 		}
 
-		[HarmonyPatch(typeof(GeneratedBuildings))]
-		[HarmonyPatch(nameof(GeneratedBuildings.LoadGeneratedBuildings))]
-		public static class GeneratedBuildings_LoadGeneratedBuildings_Patch
-		{
-
-			public static void Postfix()
-			{
-				Debug.Log("And now: Crash!");
-				Debug.Log("This should Crash:" + LogicWattageSensorConfig.kanim);
-			}
-		}
-
 		//[HarmonyPatch(typeof(SimDebugView), "OnPrefabInit")]
 		public class SimDebugView_OnPrefabInit_Patch
 		{
@@ -281,7 +270,6 @@ namespace Beached.Patches
 				__instance.diseaseMaterial.SetVector("_UVScale", new Vector4(testMask.width / (Grid.WidthInCells * 100f) * 16f, testMask.height / (Grid.HeightInCells * 100f) * 16f, 0, 0));
 			}
 		}
-
 
 		//[HarmonyPatch(typeof(SimDebugView), "SetDisease")]
 		public class SimDebugView_SetDisease_Patch

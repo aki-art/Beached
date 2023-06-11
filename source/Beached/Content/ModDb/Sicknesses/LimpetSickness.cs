@@ -33,9 +33,7 @@ namespace Beached.Content.ModDb.Sicknesses
 			}));
 
 			if(BExpressions.limpetFace == null)
-			{
 				Log.Warning("Limpet face expression is null");
-			}
 
 			AddSicknessComponent(new SicknessExpressionEffect(BExpressions.limpetFace));
 		}

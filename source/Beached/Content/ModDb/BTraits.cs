@@ -12,20 +12,72 @@ namespace Beached.Content.ModDb
 {
 	public class BTraits
 	{
-		public const string DEXTEROUS = "Beached_Dexterous";
-		public const string FUR_ALLERGY = "Beached_FurAllergy";
-		public const string GILLS = "Beached_Gills";
-		public const string COMFORT_SEEKER = "Beached_ComfortSeeker";
-		public const string PLUSHIE_MAKER = "Beached_PlushieMaker";
-		public const string SIREN = "Beached_Siren";
+		public const string
+			DEXTEROUS = "Beached_Dexterous",
+			FUR_ALLERGY = "Beached_FurAllergy",
+			GILLS = "Beached_Gills",
+			COMFORT_SEEKER = "Beached_ComfortSeeker",
+			PLUSHIE_MAKER = "Beached_PlushieMaker",
+			SIREN = "Beached_Siren";
 
-		public class LifeGoals
+		public class LIFE_GOALS
 		{
-			public const string JEWELLERY_AQUAMARINE = "Beached_Trait_WantsJewellery";
-			public const string BEDROOM_SURFBOARD = "Beached_Trait_WantsSurfboardInBedroom";
+			public class CATEGORIES
+			{
+				public const string
+					GENERIC = "Generic",
+					JEWELLERY = "Jewellery",
+					MINNOW = "Minnow",
+					PET = "Pet",
+					BURT = "Burt";
+			}
+
+			public const string
+				JEWELLERY_MAXIXE = "Beached_Trait_WantsJewellery_Maxixe",
+				JEWELLERY_STRANGE_MATTER = "Beached_Trait_WantsJewellery_StrangeMatter",
+				JEWELLERY_PEARLS = "Beached_Trait_WantsJewellery_FlawlessDiamond",
+				BEDROOM_SURFBOARD = "Beached_Trait_WantsSurfboardInBedroom";
 		}
 
-		public static List<string> LIFEGOALS = new();
+		public static readonly Dictionary<string, List<string>> LIFE_GOAL_CATEGORIES = new()
+		{
+			{
+				LIFE_GOALS.CATEGORIES.JEWELLERY,
+				new()
+				{
+					LIFE_GOALS.JEWELLERY_STRANGE_MATTER,
+					LIFE_GOALS.JEWELLERY_PEARLS,
+					LIFE_GOALS.JEWELLERY_MAXIXE
+				}
+			},
+			{
+				LIFE_GOALS.CATEGORIES.MINNOW,
+				new()
+				{
+					LIFE_GOALS.BEDROOM_SURFBOARD
+				}
+			},
+			{
+				LIFE_GOALS.CATEGORIES.GENERIC,
+				new()
+				{
+					LIFE_GOALS.JEWELLERY_STRANGE_MATTER,
+					LIFE_GOALS.JEWELLERY_PEARLS,
+					LIFE_GOALS.JEWELLERY_MAXIXE
+				}
+			}
+		};
+
+		public static List<string> lifeGoals = new();
+
+		public static Dictionary<string, string> LifeGoalsPerDupe = new()
+		{
+			{ "PEI" , LIFE_GOALS.CATEGORIES.JEWELLERY },
+			{ "ARI" , LIFE_GOALS.CATEGORIES.JEWELLERY },
+			{ "ELLIE" , LIFE_GOALS.CATEGORIES.JEWELLERY },
+			{ "GOSSMANN" , LIFE_GOALS.CATEGORIES.JEWELLERY },
+			{ "MINNOW" , LIFE_GOALS.CATEGORIES.MINNOW },
+		};
 
 		public static void Register()
 		{
@@ -83,13 +135,25 @@ namespace Beached.Content.ModDb
 			furAllergyTrait.OnAddTrait += go => go.AddTag(BTags.furAllergic);
 
 			AddJewelleryTrait(
-				LifeGoals.JEWELLERY_AQUAMARINE,
+				LIFE_GOALS.JEWELLERY_MAXIXE,
 				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_MAXIXEPENDANT.NAME,
-				string.Format("This duplicant really wishes to express themselves by wearing a {0}.", STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_MAXIXEPENDANT.NAME),
+				"This duplicant really wishes to express themselves by wearing a Maxixe Pendant.",
 				MaxixePendantConfig.ID);
 
+			AddJewelleryTrait(
+				LIFE_GOALS.JEWELLERY_PEARLS,
+				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_PEARLNECKLACE.NAME,
+				"This duplicant would love to don a Pearl Necklace.",
+				PearlNecklaceConfig.ID);
+
+			AddJewelleryTrait(
+				LIFE_GOALS.JEWELLERY_STRANGE_MATTER,
+				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME,
+				"This duplicant has a deep desire the wear a Strange Matter Amulet.",
+				StrangeMatterAmuletConfig.ID);
+
 			AddBedroomTrait(
-				LifeGoals.BEDROOM_SURFBOARD,
+				LIFE_GOALS.BEDROOM_SURFBOARD,
 				"Surfin' and Snoozin'",
 				string.Format("This duplicant sannot stop talking about how cool it would be to have a {0} in their bedroom.", global::STRINGS.BUILDINGS.PREFABS.MECHANICALSURFBOARD.NAME),
 				MechanicalSurfboardConfig.ID);
@@ -171,7 +235,7 @@ namespace Beached.Content.ModDb
 			});
 
 
-			LIFEGOALS.Add(LifeGoals.JEWELLERY_AQUAMARINE);
+			lifeGoals.Add(LIFE_GOALS.JEWELLERY_MAXIXE);
 		}
 
 		private static void OnAddSiren(GameObject go)
@@ -260,9 +324,18 @@ namespace Beached.Content.ModDb
 				trait.ExtendedTooltip += extendedDescFn;
 			}
 		}
+
 		public static Trait GetGoalForPersonality(Personality personality)
 		{
-			return Db.Get().traits.Get(LifeGoals.BEDROOM_SURFBOARD);
+			var category = LifeGoalsPerDupe.TryGetValue(personality.Id, out var goalsPerDupe)
+				? goalsPerDupe
+				: LIFE_GOALS.CATEGORIES.GENERIC;
+
+			if (LIFE_GOAL_CATEGORIES.TryGetValue(category, out var options))
+				return Db.Get().traits.TryGet(options.GetRandom());
+
+			Log.Warning("Could not roll goal for personality: " + personality.Id);
+			return null;
 		}
 	}
 }

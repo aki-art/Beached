@@ -8,21 +8,21 @@ namespace Beached.Patches
 		[HarmonyPatch(typeof(CharacterContainer), nameof(CharacterContainer.SetInfoText))]
 		public class CharacterContainer_SetInfoText_Patch
 		{
-			public static void Postfix(MinionStartingStats ___stats, LocText ___expectationRight, List<LocText> ___expectationLabels)
+			public static void Postfix(CharacterContainer __instance)
 			{
-				var lifeGoal = ___stats.GetLifeGoalTrait();
+				var lifeGoal = __instance.stats.GetLifeGoalTrait();
 
 				if (lifeGoal == null)
 					return;
 
-				var label = Util.KInstantiateUI<LocText>(___expectationRight.gameObject, ___expectationRight.transform.parent.gameObject);
+				var label = Util.KInstantiateUI<LocText>(__instance.expectationRight.gameObject, __instance.expectationRight.transform.parent.gameObject);
 				label.gameObject.SetActive(true);
 				label.text = string.Format(STRINGS.UI.CHARACTERCONTAINER_LIFEGOAL_TRAIT, lifeGoal.Name);
 
 				var tooltip = lifeGoal.GetTooltip();
 				var attributes = Db.Get().Attributes;
 
-				foreach (var item in ___stats.GetLifeGoalAttributes())
+				foreach (var item in __instance.stats.GetLifeGoalAttributes())
 				{
 					var attribute = attributes.TryGet(item.Key);
 
@@ -40,7 +40,7 @@ namespace Beached.Patches
 				}
 
 				label.GetComponent<ToolTip>().SetSimpleTooltip(tooltip);
-				___expectationLabels.Add(label);
+				__instance.expectationLabels.Add(label);
 			}
 		}
 	}

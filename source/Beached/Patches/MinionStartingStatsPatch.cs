@@ -31,6 +31,9 @@ namespace Beached.Patches
 				{
 					var trait = BTraits.GetGoalForPersonality(__instance.personality);
 
+					if (trait == null)
+						return;
+
 					var ext = __instance.GetExtension();
 					ext.SetLifeGoal(trait);
 

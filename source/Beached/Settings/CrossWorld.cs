@@ -4,7 +4,7 @@ namespace Beached.Settings
 {
 	public class CrossWorld
 	{
-		public bool LifeGoals { get; set; } = false;
+		public bool LifeGoals { get; set; } = true;
 
 		public bool UseVibrantLUTEverywhere { get; set; } = false;
 

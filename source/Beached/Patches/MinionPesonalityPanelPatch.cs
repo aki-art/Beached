@@ -12,24 +12,22 @@ namespace Beached.Patches
 	public class MinionPesonalityPanelPatch
 	{
 		// TODO
-		//[HarmonyPatch(typeof(MinionPersonalityPanel), "RefreshTraits")]
+		[HarmonyPatch(typeof(MinionPersonalityPanel), nameof(MinionPersonalityPanel.RefreshTraits))]
 		public class MinionPersonalityPanel_RefreshTraits_Patch
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
 			{
 				var codes = orig.ToList();
-				var m_GetTooltip = AccessTools.Method(typeof(Trait), "GetTooltip");
+				var m_GetTooltip = AccessTools.Method(typeof(Trait), nameof(Trait.GetTooltip));
 
 				var index = codes.FindIndex(ci => ci.Calls(m_GetTooltip));
 
 				if (index == -1)
-				{
 					return codes;
-				}
 
 				var f_selectedTarget = AccessTools.Field(typeof(TargetScreen), "selectedTarget");
 
-				var m_GetToolTip = AccessTools.Method(typeof(MinionPersonalityPanel_RefreshTraits_Patch), "GetToolTip", new[]
+				var m_GetToolTip = AccessTools.Method(typeof(MinionPersonalityPanel_RefreshTraits_Patch), nameof(GetToolTip), new[]
 				{
 					typeof(string),
 					typeof(Trait),
@@ -38,7 +36,7 @@ namespace Beached.Patches
 
 				codes.InsertRange(index + 1, new[]
 				{
-					new CodeInstruction(OpCodes.Ldloc_1), // trait (iterator) was 1
+					new CodeInstruction(OpCodes.Ldloc_3), // trait (iterator) was 1
                     new CodeInstruction(OpCodes.Ldarg_0), // this
                     new CodeInstruction(OpCodes.Ldfld, f_selectedTarget), // .selectedTarget
                     new CodeInstruction(OpCodes.Call, m_GetToolTip) // GetToolTip(str, trait, this.selectedTarget);
@@ -49,7 +47,7 @@ namespace Beached.Patches
 
 			private static string GetToolTip(string tooltip, Trait trait, GameObject target)
 			{
-				if (BTraits.LIFEGOALS.Contains(trait.Id))
+				if (BTraits.lifeGoals.Contains(trait.Id))
 				{
 					if (target.TryGetComponent(out Beached_LifeGoalTracker storage))
 					{
