@@ -29,14 +29,18 @@ namespace Beached.Content.ModDb
 					JEWELLERY = "Jewellery",
 					MINNOW = "Minnow",
 					PET = "Pet",
-					BURT = "Burt";
+					BURT = "Burt",
+					RUBY = "Ruby",
+					MEEP = "Meep";
 			}
 
 			public const string
+				GOLDENTHRONE = "GoldenThrone",
 				JEWELLERY_MAXIXE = "Beached_Trait_WantsJewellery_Maxixe",
 				JEWELLERY_STRANGE_MATTER = "Beached_Trait_WantsJewellery_StrangeMatter",
 				JEWELLERY_PEARLS = "Beached_Trait_WantsJewellery_FlawlessDiamond",
-				BEDROOM_SURFBOARD = "Beached_Trait_WantsSurfboardInBedroom";
+				BEDROOM_SURFBOARD = "Beached_Trait_WantsSurfboardInBedroom",
+				HAS_50_DECOR = "Beached_Trait_Wants50Decor";
 		}
 
 		public static readonly Dictionary<string, List<string>> LIFE_GOAL_CATEGORIES = new()
@@ -55,6 +59,20 @@ namespace Beached.Content.ModDb
 				new()
 				{
 					LIFE_GOALS.BEDROOM_SURFBOARD
+				}
+			},
+			{
+				LIFE_GOALS.CATEGORIES.MEEP,
+				new()
+				{
+					LIFE_GOALS.GOLDENTHRONE
+				}
+			},
+			{
+				LIFE_GOALS.CATEGORIES.RUBY,
+				new()
+				{
+					LIFE_GOALS.HAS_50_DECOR
 				}
 			},
 			{
@@ -77,62 +95,41 @@ namespace Beached.Content.ModDb
 			{ "ELLIE" , LIFE_GOALS.CATEGORIES.JEWELLERY },
 			{ "GOSSMANN" , LIFE_GOALS.CATEGORIES.JEWELLERY },
 			{ "MINNOW" , LIFE_GOALS.CATEGORIES.MINNOW },
+			{ "MEEP" , LIFE_GOALS.CATEGORIES.MEEP },
+			{ "RUBY" , LIFE_GOALS.CATEGORIES.RUBY },
 		};
 
 		public static void Register()
 		{
 			var db = Db.Get();
 
-			var plushieMakerTrait = db.CreateTrait(
-				PLUSHIE_MAKER,
-				STRINGS.DUPLICANTS.TRAITS.BEACHED_PLUSHIE_MAKER.NAME,
-				STRINGS.DUPLICANTS.TRAITS.BEACHED_PLUSHIE_MAKER.DESC,
-				null,
-				true,
-				null,
-				true,
-				true);
+			new TraitBuilder(PLUSHIE_MAKER, true)
+				.OnAdd(OnAddPlushieMaker)
+				.AddToTraits(DUPLICANTSTATS.JOYTRAITS);
 
-			plushieMakerTrait.OnAddTrait += OnAddPlushieMaker;
+			new TraitBuilder(SIREN, false)
+				.OnAdd(OnAddSiren)
+				.AddToTraits(DUPLICANTSTATS.STRESSTRAITS);
 
-			var sirenTrait = db.CreateTrait(
-				SIREN,
-				STRINGS.DUPLICANTS.TRAITS.BEACHED_SIREN.NAME,
-				STRINGS.DUPLICANTS.TRAITS.BEACHED_SIREN.DESC,
-				null,
-				true,
-				null,
-				false,
-				true);
+			new TraitBuilder(FUR_ALLERGY, false)
+				.Tag(BTags.furAllergic)
+				.AddToTraits(DUPLICANTSTATS.BADTRAITS)
+					.Rarity(DUPLICANTSTATS.RARITY_COMMON)
+					.ExclusiveWithTraits("Allergies");
 
-			sirenTrait.OnAddTrait += OnAddSiren;
+			new TraitBuilder(COMFORT_SEEKER, true)
+				.AddToTraits(DUPLICANTSTATS.GOODTRAITS)
+					.ExclusiveWithTraits("DecorUp", "Fashionable");
 
-			var dexterousTrait = db.CreateTrait(
-				DEXTEROUS,
-				STRINGS.DUPLICANTS.TRAITS.PRECISIONUP.NAME,
-				STRINGS.DUPLICANTS.TRAITS.PRECISIONUP.DESC,
-				BAttributes.PRECISION_ID,
-				true,
-				null,
-				true,
-				true);
+			new TraitBuilder(GILLS, true)
+				.OnAdd(OnAddGills)
+				.Modifier(db.Attributes.AirConsumptionRate.Id, -0.005f)
+				.ExtendedTooltip(GetGillsTooltip);
 
-			dexterousTrait.Add(new AttributeModifier(
-				BAttributes.PRECISION_ID,
-				TRAITS.GOOD_ATTRIBUTE_BONUS,
-				STRINGS.DUPLICANTS.TRAITS.PRECISIONUP.NAME));
+			new TraitBuilder(DEXTEROUS, true, BAttributes.PRECISION_ID)
+				.Modifier(BAttributes.PRECISION_ID, TRAITS.GOOD_ATTRIBUTE_BONUS)
+				.AddToTraits(DUPLICANTSTATS.GOODTRAITS);
 
-			var furAllergyTrait = db.CreateTrait(
-				FUR_ALLERGY,
-				STRINGS.DUPLICANTS.TRAITS.BEACHED_FURALLERGY.NAME,
-				STRINGS.DUPLICANTS.TRAITS.BEACHED_FURALLERGY.DESC,
-				null,
-				true,
-				null,
-				false,
-				true);
-
-			furAllergyTrait.OnAddTrait += go => go.AddTag(BTags.furAllergic);
 
 			AddJewelleryTrait(
 				LIFE_GOALS.JEWELLERY_MAXIXE,
@@ -152,88 +149,32 @@ namespace Beached.Content.ModDb
 				"This duplicant has a deep desire the wear a Strange Matter Amulet.",
 				StrangeMatterAmuletConfig.ID);
 
+			AddAssignableTrait(
+				LIFE_GOALS.GOLDENTHRONE,
+				"Golden Lavatory",
+				"This duplicant wishes to own their very own golden lavatory.",
+				slot => slot.assignable != null
+					&& slot.assignable.PrefabID() == FlushToiletConfig.ID
+					&& slot.assignable.TryGetComponent(out PrimaryElement pe)
+					&& pe.ElementID == SimHashes.GoldAmalgam);
+
+			AddAssignableTrait(
+				LIFE_GOALS.HAS_50_DECOR,
+				"Fashion Idol",
+				"This duplicants dream is to be as slick as it can get. Achieve 50 additional decor with equipment to achieve their life goal.",
+				slot =>
+				{
+					var assignee = slot.assignable.assignee;
+					return assignee is KMonoBehaviour component
+						&& component.TryGetComponent(out ClothingWearer clothingWearer)
+						&& clothingWearer.decorModifier.Value >= 50f;
+				}); // TODO
+
 			AddBedroomTrait(
 				LIFE_GOALS.BEDROOM_SURFBOARD,
 				"Surfin' and Snoozin'",
 				string.Format("This duplicant sannot stop talking about how cool it would be to have a {0} in their bedroom.", global::STRINGS.BUILDINGS.PREFABS.MECHANICALSURFBOARD.NAME),
 				MechanicalSurfboardConfig.ID);
-
-			var gillsTrait = Db.Get().CreateTrait(
-					GILLS,
-					STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.NAME,
-					STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.DESC,
-					null,
-					true,
-					null,
-					true,
-					true);
-
-			gillsTrait.Add(new AttributeModifier(
-				Db.Get().Attributes.AirConsumptionRate.Id,
-				-0.005f,
-				STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.NAME));
-
-			gillsTrait.ExtendedTooltip = GetGillsTooltip;
-			gillsTrait.OnAddTrait = OnAddGills;
-
-			var comfortSeeker = Db.Get().CreateTrait(
-					COMFORT_SEEKER,
-					STRINGS.DUPLICANTS.TRAITS.BEACHED_COMFORT_SEEKER.NAME,
-					STRINGS.DUPLICANTS.TRAITS.BEACHED_COMFORT_SEEKER.DESC,
-					null,
-					true,
-					null,
-					true,
-					true);
-
-			DUPLICANTSTATS.GOODTRAITS.AddRange(new List<DUPLICANTSTATS.TraitVal>()
-			{
-				new DUPLICANTSTATS.TraitVal()
-				{
-					id = DEXTEROUS,
-					rarity = DUPLICANTSTATS.RARITY_COMMON,
-					dlcId = "",
-					mutuallyExclusiveTraits = new List<string>
-					{
-						//"Anemic"
-					}
-				},
-				new DUPLICANTSTATS.TraitVal()
-				{
-					id = COMFORT_SEEKER,
-					rarity = DUPLICANTSTATS.RARITY_COMMON,
-					dlcId = "",
-					mutuallyExclusiveTraits = new List<string>
-					{
-						"DecorUp", // "Stylish"
-						"Fashionable" // need type trait normally unused, but Bio-Inks reintroduces it
-					}
-				}
-			});
-
-			DUPLICANTSTATS.BADTRAITS.Add(new DUPLICANTSTATS.TraitVal()
-			{
-				id = FUR_ALLERGY,
-				rarity = DUPLICANTSTATS.RARITY_COMMON,
-				dlcId = "",
-				mutuallyExclusiveTraits = new List<string>
-				{
-					"Allergies"
-				}
-			});
-
-			DUPLICANTSTATS.JOYTRAITS.Add(new DUPLICANTSTATS.TraitVal()
-			{
-				id = PLUSHIE_MAKER,
-				dlcId = ""
-			});
-
-			DUPLICANTSTATS.STRESSTRAITS.Add(new DUPLICANTSTATS.TraitVal()
-			{
-				id = SIREN,
-				dlcId = ""
-			});
-
 
 			lifeGoals.Add(LIFE_GOALS.JEWELLERY_MAXIXE);
 		}
@@ -288,6 +229,30 @@ namespace Beached.Content.ModDb
 		private static string GetGillsTooltip()
 		{
 			return STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.WATERBREATHING;
+		}
+
+		private static void AddAssignableTrait(string id, string name, string desc, Tag wantedAssignable)
+		{
+			var trait = Db.Get().CreateTrait(id, name, desc, null, true, null, true, true);
+			trait.OnAddTrait = go =>
+			{
+				go.AddOrGet<Beached_LifeGoalTracker>().AddSimpleAssignable(wantedAssignable);
+				go.AddOrGet<AssignableGoal>();
+			};
+
+			trait.ExtendedTooltip += () => "Complete this objective to motivate this duplicant.\n\n";
+		}
+
+		private static void AddAssignableTrait(string id, string name, string desc, Func<AssignableSlotInstance, bool> hasWantedAssignableFn)
+		{
+			var trait = Db.Get().CreateTrait(id, name, desc, null, true, null, true, true);
+			trait.OnAddTrait = go =>
+			{
+				go.AddOrGet<Beached_LifeGoalTracker>().hasWantedAssignableFn = hasWantedAssignableFn;
+				go.AddOrGet<AssignableGoal>();
+			};
+
+			trait.ExtendedTooltip += () => "Complete this objective to motivate this duplicant.\n\n";
 		}
 
 		private static void AddJewelleryTrait(string id, string name, string desc, Tag targetTag, Func<string> extendedDescFn = null)

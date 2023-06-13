@@ -184,10 +184,11 @@ namespace Beached
 				Log.Debug(asset);
 			}
 
-			Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/generated assets/tmp converted ui/UniversalSidescreen_tmpconverted.prefab");
+			var universalBundle = LoadAssetBundle("akis_universal_sidesceen_v1", platformSpecific: true);
+			Prefabs.universalSidescreen = universalBundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
 
 			var tmpConverter = new TMPConverter();
-			tmpConverter.ReplaceAllText(Prefabs.universalSidescreen);
+			//tmpConverter.ReplaceAllText(Prefabs.universalSidescreen);
 
 			/*            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
                         Materials.forceField = new(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"))

@@ -11,7 +11,7 @@ namespace Beached.Content.Scripts
 		public static Beached_Mod Instance;
 
 		// a bunch of singleton components i don't want to spam on SaveGame
-		// these do not serialize, put serialialized data here
+		// these do not serialize, put serialialized data on this component instead
 		public IridescenceEffect iridescenceEffect;
 		public ElementInteractions elementInteractions;
 		public Tutorials tutorials;
@@ -60,23 +60,16 @@ namespace Beached.Content.Scripts
 
 			waterCamera = CameraController.Instance.CopyCamera(reference, "Beached_WaterCamera");
 			waterCamera.transform.parent = reference.transform.parent;
-			waterCamera.cullingMask = LayerMask.GetMask("Water"); /// <see cref="Patches.WaterCubesPatch.WaterCubes_Init_Patch"/>
+			waterCamera.cullingMask = LayerMask.GetMask("Water"); /// <see cref="Patches.WaterCubesPatch.WaterCubes_Init_Patch"/>  //, "Pickupables"); 
 			waterCamera.targetTexture = waterTarget;
 
-			//ModAssets.Materials.liquidRefractionMat.SetTexture("_RenderedLiquid", waterTarget);
-			//waterCamera.depthTextureMode |= DepthTextureMode.Depth;
-
-			//waterCamera.gameObject.AddComponent<WaterPostFx>();
-
-			//reference.gameObject.AddComponent<CameraRenderTexture>().TextureName = "_Water";
-			//waterCamera.gameObject.AddComponent<CameraReferenceTexture>().referenceCamera = reference;
+			ModAssets.Materials.liquidRefractionMat.SetTexture("_RenderedLiquid", waterTarget);
 		}
 
 		public void SetCullingMask(string cullingMask)
 		{
 			waterCamera.cullingMask = LayerMask.GetMask(cullingMask);
 		}
-
 
 		public void RenderDebugWater()
 		{
@@ -100,9 +93,7 @@ namespace Beached.Content.Scripts
 			Instance = null;
 
 			if (iridescenceEffect != null)
-			{
 				Util.KDestroyGameObject(iridescenceEffect.gameObject);
-			}
 		}
 	}
 }

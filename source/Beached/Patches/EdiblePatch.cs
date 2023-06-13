@@ -11,11 +11,14 @@ namespace Beached.Patches
 		{
 			public static void Postfix(Edible __instance, Worker worker)
 			{
-				if (!__instance.HasTag(BTags.palateCleanserFood) || worker == null)
+				if (worker == null)
 					return;
 
-				if (worker.TryGetComponent(out Beached_MinionStorage minionStorage))
-					minionStorage.OnPalateCleansed();
+				if (__instance.HasTag(BTags.palateCleanserFood))
+				{
+					if (worker.TryGetComponent(out Beached_MinionStorage minionStorage))
+						minionStorage.OnPalateCleansed();
+				}
 			}
 		}
 	}

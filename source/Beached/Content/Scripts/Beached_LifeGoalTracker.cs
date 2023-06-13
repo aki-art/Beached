@@ -1,5 +1,6 @@
 ﻿using Klei.AI;
 using KSerialization;
+using System;
 using System.Collections.Generic;
 
 namespace Beached.Content.Scripts
@@ -7,14 +8,11 @@ namespace Beached.Content.Scripts
 	[SerializationConfig(MemberSerialization.OptIn)]
 	public class Beached_LifeGoalTracker : KMonoBehaviour
 	{
-		[MyCmpReq]
-		private ChoreProvider choreProvider;
+		[MyCmpReq] private ChoreProvider choreProvider;
 
-		[Serialize]
-		private Dictionary<string, int> attributesSerialized;
-
-		[Serialize]
-		public Tag wantTag;
+		[Serialize] private Dictionary<string, int> attributesSerialized;
+		[Serialize] public Tag wantTag;
+		[Serialize] public Func<AssignableSlotInstance, bool> hasWantedAssignableFn;
 
 		public bool isGoalFulfilled;
 
@@ -82,6 +80,18 @@ namespace Beached.Content.Scripts
 			{
 				fulfilledLifegoalModifiers.Add(new AttributeModifier(attribute.Key, attribute.Value, "Life Goal"));
 			}
+		}
+
+		public void AddSimpleAssignable(Tag tag)
+		{
+			hasWantedAssignableFn = slot => slot.assignable != null && slot.assignable.PrefabID() == tag;
+		}
+
+		public bool HasWantedAssignable(AssignableSlotInstance assignableSlotInstance)
+		{
+			return assignableSlotInstance != null 
+				&& hasWantedAssignableFn != null 
+				&& hasWantedAssignableFn(assignableSlotInstance);
 		}
 	}
 }

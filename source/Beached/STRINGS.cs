@@ -903,6 +903,12 @@ namespace Beached
 					public static LocString NAME = "Fur Allergy";
 					public static LocString DESC = "This duplicant will sneeze and get hives when exposed to furry critters, such as Pips, Pufts or Makis.";
 				}
+
+				public class BEACHED_SEAFOODALLERGY
+				{
+					public static LocString NAME = "Sea-Food Allergy";
+					public static LocString DESC = "...";
+				}
 			}
 
 			public class DISEASES

@@ -23,7 +23,8 @@ namespace Beached.Content
 			dim = TagManager.Create("Beached_Dim"),
 			palateCleanserFood = TagManager.Create("Beached_PalateCleanserFood"),
 			palateCleansed = TagManager.Create("Beached_PalateCleansed"),
-			furAllergic = TagManager.Create("Beached_FurAllergic");
+			furAllergic = TagManager.Create("Beached_FurAllergic"),
+			seafoodAllergic = TagManager.Create("Beached_SeafoodAllergic");
 
 		public static TagSet eggs = new()
 		{
