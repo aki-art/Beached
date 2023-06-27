@@ -81,10 +81,10 @@ Shader "Beached/LiquidRefraction" {
                 disPos.y = sin(_Time * _WaveSpeed + (i.uv0.x + i.uv0.y) * _WaveFrequency);
 
                 // TODO: the wave is inconsistent with zoom (orto camera size) level
-                float2 sceneUVs = i.projPos + disPos * _WaveAmplitude;// * (1 /_WorldCameraPos.w);
+                float2 sceneUVs = i.projPos + disPos * _WaveAmplitude;
                 float4 sceneColor = tex2D(_GrabTexture, sceneUVs);
                 
-                float4 renderedLiquid = tex2D(_RenderedLiquid, i.projPos);
+                float4 renderedLiquid = tex2D(_RenderedLiquid, sceneUVs);
                 fixed a = renderedLiquid.a == 1 ? 0 : 1;
 
                 float4 finalColor = fixed4(sceneColor.rgb, a * ceil(liquid.a)); 

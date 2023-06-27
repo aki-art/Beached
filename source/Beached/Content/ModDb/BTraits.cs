@@ -35,7 +35,7 @@ namespace Beached.Content.ModDb
 			}
 
 			public const string
-				GOLDENTHRONE = "GoldenThrone",
+				GOLDENTHRONE = "Beached_Trait_GoldenThrone",
 				JEWELLERY_MAXIXE = "Beached_Trait_WantsJewellery_Maxixe",
 				JEWELLERY_STRANGE_MATTER = "Beached_Trait_WantsJewellery_StrangeMatter",
 				JEWELLERY_PEARLS = "Beached_Trait_WantsJewellery_FlawlessDiamond",
@@ -257,7 +257,15 @@ namespace Beached.Content.ModDb
 
 		private static void AddJewelleryTrait(string id, string name, string desc, Tag targetTag, Func<string> extendedDescFn = null)
 		{
-			var trait = Db.Get().CreateTrait(id, name, desc, null, true, null, true, true);
+			var trait = Db.Get().CreateTrait(
+				id,
+				name,
+				desc,
+				null,
+				true,
+				null,
+				true,
+				true);
 			trait.OnAddTrait = go =>
 			{
 				go.AddOrGet<Beached_LifeGoalTracker>().wantTag = targetTag;
@@ -275,19 +283,14 @@ namespace Beached.Content.ModDb
 			var trait = Db.Get().CreateTrait(id, name, desc, null, true, null, true, true);
 			trait.OnAddTrait = go =>
 			{
-				Log.Debug("on add traits");
 				go.AddOrGet<Beached_LifeGoalTracker>().wantTag = targetTag;
-				Log.Debug(targetTag);
-				go.FindOrAddUnityComponent<BedroomBuildingGoal>();
+				go.AddOrGet<BedroomBuildingGoal>();
 			};
-
 
 			trait.ExtendedTooltip += () => "Complete this objective to motivate this duplicant.\n\n";
 
 			if (extendedDescFn != null)
-			{
 				trait.ExtendedTooltip += extendedDescFn;
-			}
 		}
 
 		public static Trait GetGoalForPersonality(Personality personality)

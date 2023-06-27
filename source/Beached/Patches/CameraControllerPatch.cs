@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Scripts;
 using HarmonyLib;
 using Neutronium.PostProcessing.LUT;
+using UnityEngine;
 using static Beached.ModAssets;
 
 namespace Beached.Patches
@@ -11,9 +12,19 @@ namespace Beached.Patches
 		[HarmonyPatch(typeof(CameraController), nameof(CameraController.OnSpawn))]
 		public class CameraController_OnSpawn_Patch
 		{
+			public static void Prefix()
+			{
+				Camera.main.cullingMask |= LayerMask.NameToLayer("Water");
+			}
+
 			public static void Postfix(CameraController __instance)
 			{
 				Beached_Mod.Instance.InitWaterCamera(__instance.baseCamera);
+
+				var water = LayerMask.NameToLayer("Water");
+				__instance.baseCamera.cullingMask |= water;
+				__instance.overlayCamera.cullingMask |= water;
+				__instance.uiCamera.cullingMask |= water;
 			}
 		}
 

@@ -15,7 +15,6 @@ namespace Beached.ModDevTools
 			{
 				{ "help", new Command(Help, "lists all commands", 0, 0) },
 				{ "id", new Command(LogId, "logs id of selected object", 0, 0) },
-				{ "position", new Command(Position, "", 2, 3) },
 				{ "removegerms", new Command(RemoveGerms, "removes germs on the selected object", 0, 0) },
 				{ "repeat", new Command(Repeat, "<number> repeat last commands number times", 1, 1) },
 				{ "setgerms", new Command(SetGerms, "<germid> <amount> sets germs on the selected object", 2, 2) },
@@ -23,7 +22,44 @@ namespace Beached.ModDevTools
 				{ "settemperature", new Command(SetTemperature, "<celsius> sets temperature of selected object", 1, 1) },
 				{ "spawn", new Command(Spawn, "<id> <amount?> spawns a prefabId at selected cell", 1, 2) },
 				{ "tint", new Command(Tint, "<hex> or <r> <g> <b> sets tint color of selected object.", 1, 3) },
+				{ "place", new Command(PlaceBuilding, "<prefabId> <materials?> place a building", 0, 4) },
 			};
+		}
+
+		private string PlaceBuilding(string[] arg)
+		{
+			var cell = SelectTool.Instance.selectedCell;
+
+			if (!Grid.IsValidBuildingCell(cell))
+				return "Invalid building cell";
+
+			var def = Assets.GetBuildingDef(arg[1]);
+
+			if (def == null)
+				return "No building with id.";
+
+			var elements = new List<Tag>();
+
+			var defaultElements = def.DefaultElements();
+
+			if(arg.Length > 2)
+			{
+				if (arg.Length - 2 != defaultElements.Count)
+					return $"This building needs {defaultElements.Count} elements.";
+
+				for (int i = 2; i < arg.Length; i++)
+				{
+					elements.Add(new Tag(arg[i]));
+				}
+			}
+			else
+			{
+				elements = defaultElements;
+			}
+
+			def.Build(cell, Orientation.Neutral, null, elements, 300);
+
+			return null;
 		}
 
 		private string RemoveGerms(string[] arg)
@@ -117,7 +153,7 @@ namespace Beached.ModDevTools
 						&& float.TryParse(args[2], out var gf)
 						&& float.TryParse(args[3], out var bf))
 					{
-						kbac.TintColour = new Color(rf, gf, bf);
+						kbac.TintColour = new Color(rf, gf, bf, 255);
 						return null;
 					}
 				}
@@ -126,64 +162,6 @@ namespace Beached.ModDevTools
 			}
 			else
 				return "not a tintable object";
-		}
-
-		private string Position(string[] arg)
-		{
-			var transform = SelectTool.Instance.selected.transform;
-			float x = transform.position.x, y = transform.position.y, z = transform.position.z;
-
-			if (arg.Length > 1)
-			{
-				if (arg[1] == "~")
-					x = transform.position.x;
-				else if (arg[1].StartsWith("+"))
-				{
-					if (float.TryParse(arg[1].Substring(1), out float xo))
-						x += xo;
-				}
-				else if (arg[1].StartsWith("-"))
-				{
-					if (float.TryParse(arg[1].Substring(1), out float xo))
-						x -= xo;
-				}
-				else
-					float.TryParse(arg[1], out x);
-			}
-
-			if (arg.Length > 2)
-				if (arg[2] == "~")
-					y = transform.position.y;
-				else if (arg[2].StartsWith("+"))
-				{
-					if (float.TryParse(arg[2].Substring(1), out float yo))
-						y += yo;
-				}
-				else if (arg[2].StartsWith("-"))
-				{
-					if (float.TryParse(arg[2].Substring(1), out float yo))
-						y -= yo;
-				}
-				else
-					float.TryParse(arg[2], out y);
-			if (arg.Length > 3)
-				if (arg[3] == "~")
-					z = transform.position.z;
-				else if (arg[3].StartsWith("+"))
-				{
-					if (float.TryParse(arg[3].Substring(1), out float zo))
-						z += zo;
-				}
-				else if (arg[3].StartsWith("-"))
-				{
-					if (float.TryParse(arg[3].Substring(1), out float zo))
-						z -= zo;
-				}
-				else
-					float.TryParse(arg[3], out z);
-
-			transform.position = new UnityEngine.Vector3(x, y, z);
-			return null;
 		}
 
 		private string LogId(string[] args)

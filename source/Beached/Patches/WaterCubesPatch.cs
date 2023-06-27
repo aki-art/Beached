@@ -55,7 +55,9 @@ namespace Beached.Patches
 				var waterCubesMesh = __instance.transform.Find("WaterCubesMesh");
 
 				if (waterCubesMesh != null)
-					waterCubesMesh.gameObject.SetLayerRecursively(LayerMask.NameToLayer("Water") | waterCubesMesh.gameObject.layer);
+					waterCubesMesh.gameObject.SetLayerRecursively(LayerMask.NameToLayer("Water")); // | waterCubesMesh.gameObject.layer);
+
+				Log.Debug(waterCubesMesh.transform.parent.name);
 
 				// make the liquids a little more see-through
 				__instance.material.SetFloat("_BlendScreen", 0.5f);

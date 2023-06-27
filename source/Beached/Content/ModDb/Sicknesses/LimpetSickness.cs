@@ -1,6 +1,7 @@
 ﻿using FUtility;
 using Klei.AI;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Beached.Content.ModDb.Sicknesses
 {
@@ -8,7 +9,7 @@ namespace Beached.Content.ModDb.Sicknesses
 	{
 		public const string ID = "Beached_Sickness_Limpets_Duplicant";
 		public const float IMMUNE_ATTACK_STRENGTH = TUNING.DISEASE.IMMUNE_ATTACK_STRENGTH_PERCENT.SLOW_3;
-		public static float duration = 7 * Consts.CYCLE_LENGTH;
+		public static float duration = 0.05f * Consts.CYCLE_LENGTH;
 
 		public static List<InfectionVector> limpetsInfectionVectors = new()
 		{
@@ -32,7 +33,7 @@ namespace Beached.Content.ModDb.Sicknesses
 				new AttributeModifier(Db.Get().Attributes.Decor.Id, -20)
 			}));
 
-			if(BExpressions.limpetFace == null)
+			if (BExpressions.limpetFace == null)
 				Log.Warning("Limpet face expression is null");
 
 			AddSicknessComponent(new SicknessExpressionEffect(BExpressions.limpetFace));
