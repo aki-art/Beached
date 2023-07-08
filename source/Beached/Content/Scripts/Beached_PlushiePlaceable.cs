@@ -22,6 +22,8 @@ namespace Beached.Content.Scripts
 		// plushed up statusitem
 		public string GetEffectId() => BDb.plushies.Get(plushieId).effect;
 
+		public bool HasPlushie() => !plushieId.IsNullOrWhiteSpace();
+
 		public void OnImguiDraw()
 		{
 			if (ImGui.Combo("Set Plushie", ref debugCurrentlySelectedPlushie, BDb.plushies.ids, BDb.plushies.ids.Length))
@@ -40,8 +42,6 @@ namespace Beached.Content.Scripts
 
 			Mod.plushiePlaceables.Add(this);
 		}
-
-		public bool HasPlushie() => plushieId != null;
 
 		public void StorePlushie(string plushieId)
 		{

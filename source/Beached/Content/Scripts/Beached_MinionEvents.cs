@@ -8,19 +8,22 @@ namespace Beached.Content.Scripts
 	public class Beached_MinionEvents : KMonoBehaviour, ISim1000ms
 	{
 		public bool isUnderShootingStars;
+		public int worldId;
 
 		[MyCmpReq] private Effects effects;
 
 		public override void OnSpawn()
 		{
 			base.OnSpawn();
+			worldId = gameObject.GetMyWorldId();
+
 			UpdateWishingStarEvent();
 			Beached_Mod.Instance.wishingStarEvent.Subscribe(ModHashes.wishingStarEvent, OnWishingStarEvent);
 		}
 
 		private void OnWishingStarEvent(object data)
 		{
-			if (data is int worldId && worldId == this.GetMyWorldId())
+			if (data is int worldId && worldId == this.worldId)
 			{
 				UpdateWishingStarEvent();
 			};
@@ -28,8 +31,7 @@ namespace Beached.Content.Scripts
 
 		private void UpdateWishingStarEvent()
 		{
-			var myWorldId = this.GetMyWorldId();
-			isUnderShootingStars = Beached_Mod.Instance.wishingStarEvent.DoesWorldHaveShooties(myWorldId);
+			isUnderShootingStars = Beached_Mod.Instance.wishingStarEvent.DoesWorldHaveShooties(worldId);
 		}
 
 		public void Sim1000ms(float dt)

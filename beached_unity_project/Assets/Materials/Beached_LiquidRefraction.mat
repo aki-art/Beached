@@ -43,12 +43,14 @@ Material:
     - _BaseHeight: 1.1
     - _BlendAlpha: 1
     - _Cutoff: 0.5
-    - _LiquidAlphaTreshold: 0.6
+    - _EdgeMultiplier: 2
+    - _EdgeSize: 0.55
+    - _LiquidAlphaTreshold: 0.484
     - _ScrollOffset: 12.79
     - _ScrollSpeed: 3.46
     - _Turbulence: 1.41
     - _WaveAmplitude: 0.005
-    - _WaveFrequency: 150
+    - _WaveFrequency: 1128.1
     - _WaveSpeed: 66.4
     - _WaveStrength: 0.1
     m_Colors: []

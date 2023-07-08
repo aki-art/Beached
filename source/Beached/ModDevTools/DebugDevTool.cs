@@ -21,7 +21,6 @@ namespace Beached.ModDevTools
 		private static int selectedZoneType;
 		private static string audioFile = "";
 		private static Dictionary<string, ShaderPropertyInfo> liquidShaderProperties;
-		private static Dictionary<string, ShaderPropertyInfo> refractionShaderProperties;
 		private static Material mat;
 		public static bool renderLiquidTexture;
 		private static string liquidCullingMaskLayer = "Water";
@@ -30,44 +29,6 @@ namespace Beached.ModDevTools
 
 		private string[] zoneTypes;
 		EventInstance instance;
-
-		public abstract class ShaderPropertyInfo
-		{
-		}
-
-		public class ShaderPropertyInfo<T> : ShaderPropertyInfo
-		{
-			public string propertyKey;
-			public float minValue;
-			public float maxValue;
-			public T newValue;
-			public T value;
-			private Material material;
-
-			public ShaderPropertyInfo(Material material, string propertyKey, T defaultValue, float minValue = -1, float maxValue = -1)
-			{
-				this.propertyKey = propertyKey;
-				this.minValue = minValue;
-				this.maxValue = maxValue;
-				value = newValue = defaultValue;
-				this.material = material;
-			}
-
-			public void RefreshValue()
-			{
-				if (!value.Equals(newValue))
-				{
-					if (value is int i)
-						material.SetInt(propertyKey, i);
-					else if (value is float f)
-						material.SetFloat(propertyKey, f);
-					else if (value is Color c)
-						material.SetColor(propertyKey, c);
-
-					value = newValue;
-				}
-			}
-		}
 
 		public DebugDevTool()
 		{
@@ -258,7 +219,6 @@ namespace Beached.ModDevTools
 				if (liquidShaderProperties == null)
 				{
 					InitializeLiquidShaderProperties();
-					InitializeRefracionShaderProperties();
 				}
 
 				foreach (var prop in liquidShaderProperties.Values)
@@ -275,14 +235,6 @@ namespace Beached.ModDevTools
 
 				ImGui.Spacing();
 
-				foreach (var prop in refractionShaderProperties.Values)
-				{
-					if (prop is ShaderPropertyInfo<float> floatProperty)
-					{
-						ImGui.DragFloat("R:" + floatProperty.propertyKey, ref floatProperty.newValue, (floatProperty.maxValue - floatProperty.minValue) / 1000f, floatProperty.minValue, floatProperty.maxValue);
-						floatProperty.RefreshValue();
-					}
-				}
 			}
 		}
 
@@ -460,26 +412,9 @@ namespace Beached.ModDevTools
 			RegisterWaterShaderProperty(mat, "WaveHeight##shaderWaveHeight", 5f, 0, 20);
 		}
 
-		private void InitializeRefracionShaderProperties()
-		{
-			mat = ModAssets.Materials.liquidRefractionMat;
-			refractionShaderProperties = new Dictionary<string, ShaderPropertyInfo>();
-
-			RegisterRefractionShaderProperty(mat, "_WaveSpeed", 61.1f);
-			RegisterRefractionShaderProperty(mat, "_BlendAlpha", 15.5f);
-			RegisterRefractionShaderProperty(mat, "_WaveFrequency", 1f);
-			RegisterRefractionShaderProperty(mat, "_WaveAmplitude", 0.015f);
-		}
-
 		private void RegisterWaterShaderProperty<T>(Material material, string propertyKey, T value, float minValue = -1, float maxValue = -1)
 		{
 			liquidShaderProperties.Add(propertyKey, new ShaderPropertyInfo<T>(material, propertyKey, value, minValue, maxValue));
 		}
-
-		private void RegisterRefractionShaderProperty<T>(Material material, string propertyKey, T value, float minValue = -1, float maxValue = -1)
-		{
-			refractionShaderProperties.Add(propertyKey, new ShaderPropertyInfo<T>(material, propertyKey, value, minValue, maxValue));
-		}
-
 	}
 }

@@ -30,6 +30,7 @@ namespace Beached.Patches
 					return;
 
 				if (__instance.TryGetComponent(out Beached_PlushiePlaceable plushie)
+					&& plushie.HasPlushie()
 					&& __instance.worker.TryGetComponent(out Effects effects))
 					effects.Add(plushie.GetEffectId(), true);
 			}

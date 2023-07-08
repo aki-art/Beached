@@ -7,6 +7,8 @@ Shader "Beached/LiquidRefraction" {
         _RenderedLiquid("Rendered Liquid", 2D) = "white" {}
         _BlendAlpha("Alpha", Range(0, 1)) = 0.6
         _LiquidAlphaTreshold("Alpha", Range(0, 1)) = 0.6
+        _EdgeSize("Edge Size", Range(0, 1)) = 0.55
+        _EdgeMultiplier("Edge Mult", Range(0, 2)) = 2
     }
     SubShader {
         Tags {
@@ -36,6 +38,9 @@ Shader "Beached/LiquidRefraction" {
             
             sampler2D _MainTex; float4 _MainTex_ST;
             sampler2D _RenderedLiquid;
+
+            float _EdgeSize;
+            float _EdgeMultiplier;
             
             struct VertexInput {
                 UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -75,10 +80,11 @@ Shader "Beached/LiquidRefraction" {
                 UNITY_SETUP_INSTANCE_ID( i );
                 
                 float4 liquid = tex2D(_LiquidTex, i.uv0);
+                float strength = clamp((liquid.a - _EdgeSize) * _EdgeMultiplier, 0, 1);
 
                 fixed2 disPos;
-                disPos.x = cos(_Time * _WaveSpeed + (i.uv0.x + i.uv0.y) * _WaveFrequency);
-                disPos.y = sin(_Time * _WaveSpeed + (i.uv0.x + i.uv0.y) * _WaveFrequency);
+                disPos.x = lerp(i.uv0.x, cos(_Time * _WaveSpeed + (i.uv0.x + i.uv0.y) * _WaveFrequency), strength);
+                disPos.y = lerp(i.uv0.y, sin(_Time * _WaveSpeed + (i.uv0.x + i.uv0.y) * _WaveFrequency), strength);
 
                 // TODO: the wave is inconsistent with zoom (orto camera size) level
                 float2 sceneUVs = i.projPos + disPos * _WaveAmplitude;
