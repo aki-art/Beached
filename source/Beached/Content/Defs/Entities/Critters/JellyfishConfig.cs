@@ -1,4 +1,5 @@
 ﻿using Beached.Content.ModDb.Germs;
+using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
 using Klei.AI;
 using UnityEngine;
@@ -33,6 +34,12 @@ namespace Beached.Content.Defs.Entities.Critters
 			germConsumerMonitor.consumableGermIdx = Db.Get().Diseases.GetIndex(BDiseases.plankton.id);
 
 			prefab.AddTag(GameTags.OriginalCreature); // for gravitas critter manipulator
+
+			var electricEmitter = prefab.AddComponent<ElectricEmitter>();
+			electricEmitter.maxCells = 128;
+			electricEmitter.powerLossMultiplier = 1;
+			electricEmitter.minPathSecs = 0.3f;
+			electricEmitter.maxPathSecs = 2f;
 
 			return prefab;
 		}

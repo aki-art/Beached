@@ -14,7 +14,9 @@ namespace Beached.Content.Scripts
 
 	/* Loading Custom C++ extensions: ran into problems with Linux and Mac systems. 
      * Linux is not as lenient with path searching as Windows is, and can't find the extra dll if it's not in the same folder as the main dll. 
-     * Problem with that is that the game tries to load every DLL as a mod, and crashes if a random c++ dll is in there. */
+     * Problem with that is that the game tries to load every DLL as a mod, and crashes if a random c++ dll is in there. 
+     * 
+     * Although if i release 3 separate versions of the mod for each platform, this may still be on the table */
 	[SkipSaveFileSerialization]
 	public class ElementInteractions : KMonoBehaviour, ISim200ms
 	{
@@ -52,10 +54,9 @@ namespace Beached.Content.Scripts
 				this.seedTag = seedTag;
 				this.spawnFXHashes = spawnFXHashes;
 				var seedPrefab = Assets.TryGetPrefab(seedTag);
+
 				if (seedPrefab != null)
-				{
 					plantableSeed = seedPrefab.GetComponent<PlantableSeed>();
-				}
 			}
 
 			public bool IsValid()
@@ -173,19 +174,21 @@ namespace Beached.Content.Scripts
 					if (Grid.LightCount[cell] > 0)
 					{
 						SimMessages.ModifyDiseaseOnCell(cell, germIdx, -GermsToKill(diseaseCount, FUNGAL_LIGHT_KILL_RATE));
+						return;
 					}
-					else
-					{
-						var roll = Random.value < 0.1f;
-						if (roll)
-						{
-							if (MiscUtil.IsNaturalCell(Grid.CellBelow(cell)) &&
-								!Grid.IsSolidCell(Grid.CellAbove(cell)) &&
-								info.plantableSeed.TestSuitableGround(cell))
-							{
-								var seed = MiscUtil.Spawn(info.seedTag, Grid.CellToPos(cell));
-								seed.GetComponent<PlantableSeed>().TryPlant();
 
+					var rollForMushroomGrowing = Random.value < 0.1f;
+					if (rollForMushroomGrowing)
+					{
+						if (MiscUtil.IsNaturalCell(Grid.CellBelow(cell))
+							&& !Grid.IsSolidCell(Grid.CellAbove(cell))
+							&& info.IsValid()
+							&& info.plantableSeed.TestSuitableGround(cell))
+						{
+							var seed = MiscUtil.Spawn(info.seedTag, Grid.CellToPos(cell));
+							if (seed.TryGetComponent(out PlantableSeed plantableSeed))
+							{
+								plantableSeed.GetComponent<PlantableSeed>().TryPlant();
 								Game.Instance.SpawnFX(info.spawnFXHashes, cell, 0);
 							}
 						}
@@ -202,9 +205,7 @@ namespace Beached.Content.Scripts
 		private int GermsToKill(int count, float strength)
 		{
 			if (count == 1)
-			{
 				return 1;
-			}
 
 			return (int)Mathf.Clamp(count * strength, 0, count);
 		}
@@ -216,16 +217,12 @@ namespace Beached.Content.Scripts
 				var liquidMass = Grid.Mass[cell];
 
 				if (liquidMass < 0.3f)
-				{
 					return;
-				}
 
 				var cellAbove = Grid.CellAbove(cell);
 
 				if (!Grid.IsValidCell(cellAbove))
-				{
 					return;
-				}
 
 				if (Grid.Element[cellAbove].idx == oxygenIdx)
 				{
@@ -274,7 +271,7 @@ namespace Beached.Content.Scripts
 			};
 
 			// TODO: only revealed areas
-			// TODO: liauid change?
+			// TODO: liquid change?
 		}
 
 		public static void SetElements()

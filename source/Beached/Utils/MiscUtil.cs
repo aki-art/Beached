@@ -30,6 +30,44 @@ namespace Beached.Utils
 				CelsiusToKelvin(maxViable));
 		}
 
+		public const char CENTER = 'O';
+		public const char FILLED = 'X';
+
+		public static CellOffset[] MakeCellOffsetsFromMap(bool fillCenter, params string[] pattern)
+		{
+			var xCenter = 0;
+			var yCenter = 0;
+			var result = new List<CellOffset>();
+
+			for(int y = 0; y < pattern.Length; y++)
+			{
+				var line = pattern[y];
+				for(int x = 0; x < line.Length; x++)
+				{
+					if (line[x] == CENTER)
+					{
+						xCenter = x;
+						yCenter = y;
+
+						break;
+					}
+				}
+			}
+
+			for (int y = 0; y < pattern.Length; y++)
+			{
+				var line = pattern[y];
+				for (int x = 0; x < line.Length; x++)
+				{
+					if (line[x] == FILLED 
+						|| (fillCenter && line[x] == CENTER))
+						result.Add(new CellOffset(x - xCenter, y - yCenter));
+				}
+			}
+
+			return result.ToArray();
+		}
+
 		public static void AddToStaticReadonlyArray<ElemType, InstanceType>(string fieldName, params ElemType[] items)
 		{
 			var ref_ALL_ATTRIBUTES = AccessTools.FieldRefAccess<ElemType[]>(typeof(InstanceType), fieldName);

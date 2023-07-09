@@ -45,6 +45,20 @@ namespace Beached
 			World.Instance.zoneRenderData.OnActiveWorldChanged();
 		}
 
+		public static float GetElectricConduction(int cell)
+		{
+			// TODO: actual conduction values, this is just for testing
+			var element = Grid.Element[cell];
+
+			if (element.HasTag(GameTags.Metal))
+				return 1f;
+
+			if (element.IsLiquid)
+				return 0.7f;
+
+			return 0f;
+		}
+
 		public void RegenerateBackwallTexture()
 		{
 			if (World.Instance.zoneRenderData == null)
