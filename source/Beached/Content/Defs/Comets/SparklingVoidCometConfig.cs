@@ -9,7 +9,7 @@ namespace Beached.Content.Defs.Comets
 		public const string ID = "Beached_SparklingVoidComet";
 		public GameObject CreatePrefab()
 		{
-			var go = BaseCometConfig.BaseComet(
+			var go = BEntityTemplates.SparkleComet(
 				ID,
 				STRINGS.COMETS.BEACHED_SPARKLINGVOIDCOMET.NAME,
 				"beached_meteor_sparkling_void_kanim",
@@ -22,7 +22,7 @@ namespace Beached.Content.Defs.Comets
 				SpawnFXHashes.MeteorImpactMetal,
 				0.3f);
 
-			var comet = go.GetComponent<Comet>();
+			var comet = go.GetComponent<SparkleComet>();
 			comet.explosionOreCount = new Vector2I(0, 0);
 			comet.entityDamage = 7;
 			comet.totalTileDamage = 0.3f;

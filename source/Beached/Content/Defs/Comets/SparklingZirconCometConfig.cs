@@ -9,7 +9,7 @@ namespace Beached.Content.Defs.Comets
 		public const string ID = "Beached_SparklingZirconComet";
 		public GameObject CreatePrefab()
 		{
-			var go = BaseCometConfig.BaseComet(
+			var go = BEntityTemplates.SparkleComet(
 				ID,
 				STRINGS.COMETS.BEACHED_SPARKLINGZIRCONCOMET.NAME,
 				"beached_meteor_sparkling_zircon_kanim",
@@ -22,7 +22,7 @@ namespace Beached.Content.Defs.Comets
 				SpawnFXHashes.MeteorImpactMetal,
 				0.3f);
 
-			var comet = go.GetComponent<Comet>();
+			var comet = go.AddOrGet<SparkleComet>();
 			comet.explosionOreCount = new Vector2I(0, 0);
 			comet.entityDamage = 7;
 			comet.totalTileDamage = 0.3f;
@@ -38,7 +38,6 @@ namespace Beached.Content.Defs.Comets
 
 			return go;
 		}
-
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
 		public void OnPrefabInit(GameObject inst) { }
