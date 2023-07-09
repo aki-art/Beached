@@ -203,15 +203,15 @@ namespace Beached
 			//Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid_b.png");
 			// Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
 			// LoadSetpieces(bundle);
-			/*
-						Prefabs.cometTrailFx = bundle.LoadAsset<GameObject>("Assets/Beached/fx/CometSparkles.prefab");
-						var renderer = Prefabs.cometTrailFx.GetComponent<ParticleSystemRenderer>();
-						var texture = renderer.material.mainTexture;
-						renderer.material = new Material(Shader.Find("Klei/BloomedParticleShader"))
-						{
-							renderQueue = RenderQueues.Liquid,
-							mainTexture = texture
-						};*/
+
+			Prefabs.cometTrailFx = bundle.LoadAsset<GameObject>("Assets/Beached/fx/CometSparkles.prefab");
+			var renderer = Prefabs.cometTrailFx.GetComponent<ParticleSystemRenderer>();
+			var texture = renderer.material.mainTexture;
+			renderer.material = new Material(Shader.Find("Klei/BloomedParticleShader"))
+			{
+				renderQueue = RenderQueues.Liquid,
+				mainTexture = texture
+			};
 
 			Materials.liquidRefractionMat = shadersBundle.LoadAsset<Material>("Assets/Materials/Beached_LiquidRefraction.mat");
 			Materials.liquidRefractionMat.SetFloat("_WaveFrequency", 850f);
