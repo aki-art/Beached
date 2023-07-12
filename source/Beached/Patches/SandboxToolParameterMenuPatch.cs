@@ -20,20 +20,20 @@ namespace Beached.Patches
 		{
 			CrystalConfig.ID,
 
-            // Geysers
-            "GeyserGeneric_" + GeyserConfigs.AMMONIA_VENT,
+			// Geysers
+			"GeyserGeneric_" + GeyserConfigs.AMMONIA_VENT,
 			"GeyserGeneric_" + GeyserConfigs.MURKY_BRINE_GEYSER,
 			"GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO,
 			"GeyserGeneric_" + GeyserConfigs.CORAL_REEF,
 
-            // Gems
-            RareGemsConfig.FLAWLESS_DIAMOND,
+			// Gems
+			RareGemsConfig.FLAWLESS_DIAMOND,
 			RareGemsConfig.HADEAN_ZIRCON,
 			RareGemsConfig.MAXIXE,
 			RareGemsConfig.STRANGE_MATTER,
 
-            // Equipment
-            MaxixePendantConfig.ID,
+			// Equipment
+			MaxixePendantConfig.ID,
 			RubberBootsConfig.ID,
 			HematiteNecklaceConfig.ID,
 			HadeanZirconAmuletConfig.ID,
@@ -41,8 +41,8 @@ namespace Beached.Patches
 			ZeolitePendantConfig.ID,
 			StrangeMatterAmuletConfig.ID,
 
-            // Plants & Creatures
-            CellAlgaeConfig.ID,
+			// Plants & Creatures
+			CellAlgaeConfig.ID,
 			GlowCapConfig.ID,
 			LeafletCoralConfig.ID,
 			MusselSproutConfig.ID,
@@ -54,24 +54,24 @@ namespace Beached.Patches
 			BambooConfig.ID,
 			PurpleHangerConfig.ID,
 
-            // setpieces
-            SetPiecesConfig.TEST,
+			// setpieces
+			SetPiecesConfig.TEST,
 			SetPiecesConfig.BEACH,
 			SetPiecesConfig.ZEOLITE,
 
-            // genetic samples
-            GeneticSamplesConfig.EVERLASTING,
+			// genetic samples
+			GeneticSamplesConfig.EVERLASTING,
 			GeneticSamplesConfig.MEATY,
 
-            // misc
-            ForceFieldConfig.ID,
+			// misc
+			ForceFieldConfig.ID,
 			SmokerConfig.ID,
 			SandySeashellsConfig.SEASHELL,
 			SandySeashellsConfig.SLICKSHELL,
 			SeaShellConfig.ID,
 			JellyfishStrobilaConfig.ID,
 			PlanktonGerms.ID, /// <see cref="UIOnlyPlankton"/>
-            BrinePoolConfig.ID,
+			BrinePoolConfig.ID,
 		};
 
 		[HarmonyPatch(typeof(SandboxToolParameterMenu), nameof(SandboxToolParameterMenu.ConfigureEntitySelector))]
