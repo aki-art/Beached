@@ -80,7 +80,7 @@ namespace Beached.Utils
 
 		public override string ToString()
 		{
-			return SimHash.ToString();
+			return id;
 		}
 	}
 }

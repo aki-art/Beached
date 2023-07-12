@@ -1926,6 +1926,17 @@ namespace Beached
 				public static LocString CAPPED = "Capped {0}";
 			}
 
+			public class OVERLAY
+			{
+				public class BEACHED_CONDUCTIONOVERLAY
+				{
+					public static LocString NAME = "ELECTRIC CONDUCTION OVERLAY";
+					public static LocString HOVERTITLE = "ELECTRIC CONDUCTION";
+					public static LocString BUTTON = "Electric Conduction Overlay";
+					public static LocString TOOLTIP = "Displays the relative electrical conductivity of materials.";
+				}
+			}
+
 			public class SPACEDESTINATIONS
 			{
 				public class CLUSTERMAPMETEORSHOWERS

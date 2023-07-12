@@ -18,15 +18,16 @@ namespace Beached.Content.Scripts.Entities
 		[Serialize] public List<int> targetCells = new();
 		private readonly List<int> affectedCells = new();
 		private float remainingPower;
-		public static CellOffset[] offsets = MiscUtil.MakeCellOffsetsFromMap(false,
+		public static List<CellOffset> offsets = MiscUtil.MakeCellOffsetsFromMap(false,
 			"XXX",
 			"XOX",
-			"XXX");
+			"XXX").ToList();
 
 		private List<NeighborEntry> neighborCells;
 		private int currentCell;
-		private LineRenderer lineRenderer;
+		private List<LineRenderer> lineRenderers;
 		private float debugStartPower = 10f;
+		private int debugStrokeCount;
 
 		public void Stop() => changesPath = false;
 
@@ -39,12 +40,56 @@ namespace Beached.Content.Scripts.Entities
 		{
 			base.OnSpawn();
 			neighborCells = new List<NeighborEntry>();
-			lineRenderer = ModDebug.AddSimpleLineRenderer(transform, Color.white, Color.blue, 0.1f);
+			lineRenderers = new List<LineRenderer>();
 		}
 
-		public void Pulse(float duration, float power)
+		public void Pulse(float duration, float power, int strokeCount)
 		{
-			affectedCells.Clear();
+			foreach(var renderer in lineRenderers)
+				Util.KDestroyGameObject(renderer.gameObject);
+
+			lineRenderers.Clear();
+
+			for(var i = 0; i < strokeCount; i++)
+			{
+				affectedCells.Clear();
+				GenerateStroke(power);
+				var lineRenderer = AddSimpleLineRenderer(transform, Color.white, Color.blue, 0.05f, 0);
+
+				if (affectedCells.Count > 0)
+					DrawDebugStroke(lineRenderer);
+
+				lineRenderers.Add(lineRenderer);
+			}
+		}
+
+		public static LineRenderer AddSimpleLineRenderer(Transform transform, Color start, Color end, float startWidth, float endWidth)
+		{
+			var gameObject = new GameObject("Beached_DebugLineRenderer");
+			gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, Grid.GetLayerZ(Grid.SceneLayer.SceneMAX));
+			transform.SetParent(transform);
+
+			gameObject.SetActive(true);
+
+			var debugLineRenderer = gameObject.AddComponent<LineRenderer>();
+
+			debugLineRenderer.material = new Material(Shader.Find("Klei/BloomedParticleShader"))
+			{
+				renderQueue = 3501
+			};
+			debugLineRenderer.startColor = start;
+			debugLineRenderer.endColor = end;
+			debugLineRenderer.startWidth = startWidth;
+			debugLineRenderer.endWidth = endWidth;
+			debugLineRenderer.positionCount = 2;
+
+			debugLineRenderer.GetComponent<LineRenderer>().material.renderQueue = RenderQueues.Liquid;
+
+			return debugLineRenderer;
+		}
+
+		private void GenerateStroke(float power)
+		{
 			currentCell = Grid.PosToCell(this);
 			remainingPower = power;
 
@@ -53,18 +98,15 @@ namespace Beached.Content.Scripts.Entities
 				if (affectedCells.Count > maxCells)
 					break;
 			}
-
-			if (affectedCells.Count > 0)
-				DrawDebugStroke();
 		}
 
-		private void DrawDebugStroke()
+		private void DrawDebugStroke(LineRenderer lineRenderer)
 		{
 			lineRenderer.positionCount = affectedCells.Count;
 			lineRenderer.SetPositions(affectedCells.Select(c =>
 			{
 				var pos = Grid.CellToPos(c);
-				pos += new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, 0);
+				pos += new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, Grid.GetLayerZ(Grid.SceneLayer.SceneMAX));
 
 				return pos;//Grid.CellToPosCCC(c, Grid.SceneLayer.FXFront2);
 			}).ToArray());
@@ -73,6 +115,7 @@ namespace Beached.Content.Scripts.Entities
 		private bool Step()
 		{
 			neighborCells.Clear();
+			offsets.Shuffle();
 
 			foreach (var offset in offsets)
 			{
@@ -116,9 +159,10 @@ namespace Beached.Content.Scripts.Entities
 		public void OnImguiDraw()
 		{
 			ImGui.DragFloat("Power", ref debugStartPower);
+			ImGui.InputInt("Stokes", ref debugStrokeCount);
 
 			if (ImGui.Button("Pulse"))
-				Pulse(-1, debugStartPower);
+				Pulse(-1, debugStartPower, debugStrokeCount);
 
 			foreach (var neighbor in neighborCells)
 				ImGui.Text($"{neighbor.cell} : {neighbor.conduction}");
@@ -133,7 +177,7 @@ namespace Beached.Content.Scripts.Entities
 
 			public int CompareTo(NeighborEntry other)
 			{
-				if(other.Equals(this)) 
+				if (other.Equals(this))
 					return UnityEngine.Random.value > 0.5f ? 1 : -1;
 
 				return conduction.CompareTo(other.conduction);

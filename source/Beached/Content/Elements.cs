@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -115,6 +116,23 @@ namespace Beached.Content
 			{ sourBrineIce, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 		};
 
+		public static readonly Dictionary<SimHashes, float> electricConductiviy = new()
+		{
+			// perfect insulators
+			{ SimHashes.Polypropylene, 0 },
+			{ SimHashes.Unobtanium, 0 },
+			{ SimHashes.SuperInsulator, 0 },
+			{ SimHashes.Salt, 0 },
+			{ SimHashes.Isoresin, 0 },
+			{ SimHashes.SaltWater, 0.8f },
+			{ SimHashes.Brine, 0.8f },
+			{ rubber, 0 },
+			{ sourBrine, 0.8f },
+			{ crackedNeutronium, 0 },
+		};
+
+		public static readonly Dictionary<ushort, float> electricConductivityLookup = new();
+
 		public static List<SimHashes> GetMetals()
 		{
 			return new List<SimHashes>()
@@ -178,6 +196,7 @@ namespace Beached.Content
 		public static void AfterLoad()
 		{
 			SetAcidCorrosions();
+			SetElectricalConductivities();
 
 			foreach (var kvp in acidVulnerabilities)
 			{
@@ -188,6 +207,38 @@ namespace Beached.Content
 						? (new Tag[] { BTags.corrodable })
 						: element.oreTags.AddToArray(BTags.corrodable);
 				}
+			}
+		}
+
+		private static void SetConduction(SimHashes element, float conduction)
+		{
+			electricConductivityLookup[ElementLoader.GetElementIndex(element)] = conduction;
+		}
+
+		private static void SetElectricalConductivities()
+		{
+			foreach (var element in ElementLoader.elements)
+			{
+				float conduction = 0;
+
+				if (!electricConductiviy.ContainsKey(element.id))
+				{
+					if (element.hardness == byte.MaxValue)
+						conduction = 0f;
+
+					else if (element.HasTag(GameTags.RefinedMetal))
+						conduction = 1f;
+
+					else if (element.HasTag(GameTags.Metal))
+						conduction = 0.8f;
+
+					else if (element.IsLiquid)
+						conduction = 0.5f;
+
+					acidVulnerabilities[element.id] = conduction;
+				}
+
+				SetConduction(element.id, conduction);
 			}
 		}
 
@@ -214,7 +265,7 @@ namespace Beached.Content
 				if (modsAcidResistantElements.Contains(element.id.ToString()))
 					acidVulnerabilities[element.id] = CONSTS.CORROSION_VULNERABILITY.NONREACTIVE;
 
-				else if (element.HasTag(GameTags.Metal))
+				else if (element.HasTag(GameTags.Metal) || element.HasTag(GameTags.RefinedMetal))
 					acidVulnerabilities[element.id] = CONSTS.CORROSION_VULNERABILITY.INSTANTLY_MELT;
 			}
 		}

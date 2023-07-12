@@ -1,12 +1,24 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.Overlays;
+using HarmonyLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using UnityEngine;
 
 namespace Beached.Patches
 {
 	public class SimDebugViewPatch
 	{
+		[HarmonyPatch(typeof(SimDebugView), nameof(SimDebugView.OnPrefabInit))]
+		public static class SimDebugView_OnPrefabInit_Patch
+		{
+			public static void Postfix(Dictionary<HashedString, Func<SimDebugView, int, Color>> ___getColourFuncs)
+			{
+				___getColourFuncs.Add(ConductionOverlayMode.ID, ConductionOverlayMode.GetColorForCell);
+			}
+		}
+
 		[HarmonyPatch(typeof(SimDebugView), nameof(SimDebugView.GetOxygenMapColour))]
 		public class SimDebugView_GetOxygenMapColour_Patch
 		{

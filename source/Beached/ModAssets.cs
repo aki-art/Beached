@@ -134,7 +134,9 @@ namespace Beached
 				limpetEggs = new Color32(255, 225, 185, 255),
 				capSpores = Color.red,
 				poffSpores = Color.white,
-				fur = new Color32(210, 40, 180, 255);
+				fur = new Color32(210, 40, 180, 255),
+
+				electricBlue = Util.ColorFromHex("0090ff");
 
 			public class Zones
 			{
