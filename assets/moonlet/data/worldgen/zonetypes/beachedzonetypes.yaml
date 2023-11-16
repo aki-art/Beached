@@ -1,0 +1,6 @@
+zoneTypes:
+  - id: Beached_Beach
+    background: beached_shared_assets::Assets/Textures/biome_backgrounds.png
+    backgroundIndex: 7
+    color: C06410
+    border: FrozenWastes

@@ -1,0 +1,35 @@
+temperatureRange: Room
+pdWeight: 8
+density:
+  min: 10
+  max: 20
+avoidRadius: 10.0
+extraBiomeChildren: 3
+doAvoidPoints: false
+dontRelaxChildren: true
+sampleBehaviour: PoissonDisk
+borderOverride: rocky
+biomes:
+  - name: biomes/Beached_beach/Basic_Dense
+    weight: 2
+    tags:
+      - Beached_MusselSprout
+  - name: biomes/Oceanaria/Lakes
+    weight: 3
+    tags:
+      - Pacu
+      - Beached_MusselSprout
+      - Beached_SingleCell
+centralFeature:
+  type: features/generic/StartLocation
+features:
+  - type: features/oceanaria/AirPocket
+  - type: features/oceanaria/MetalCavern
+  - type: features/oceanaria/AlgaePocket
+  - type: features/oceanaria/MediumFreshwaterLake
+  - type: features/oceanaria/TinyFreshWaterLake
+tags:
+  - IgnoreCaveOverride
+  - NoGlobalFeatureSpawning
+  - StartWorld
+zoneType: BasaltShore

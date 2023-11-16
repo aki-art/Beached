@@ -1,24 +1,30 @@
 elements:
-  - elementId: Moss
+  - elementId: Beached_Moss
+    name: Moss
+    descriptionText: todo
+    color: 528b35
+    audio:
+      copyElement: Algae
     specificHeatCapacity: 0.2
     thermalConductivity: 2
     solidSurfaceAreaMultiplier: 1
     liquidSurfaceAreaMultiplier: 1
     gasSurfaceAreaMultiplier: 1
     strength: 0.2
-    highTemp: 398.15
+    highTemp: 125C
     highTempTransitionTarget: Dirt
     defaultTemperature: 290
     defaultMass: 200
     maxMass: 300
     hardness: 2
     molarMass: 4
-    lightAbsorptionFactor: 1
-    radiationAbsorptionFactor: 0.65
+    lightAbsorptionFactor: 100%
+    radiationAbsorptionFactor: 65%
     radiationPer1000Mass: 0
     materialCategory: Organics
     buildMenuSort: 2
-    isDisabled: false
     state: Solid
-    localizationID: STRINGS.ELEMENTS.MOSS.NAME
     dlcId: ""
+    duplicantEffects:
+      walkedOn:
+        id: CarpetFeet

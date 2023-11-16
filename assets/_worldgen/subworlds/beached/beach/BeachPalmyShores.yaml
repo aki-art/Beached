@@ -1,6 +1,6 @@
 biomeNoise: noise/beach_solid
 temperatureRange: Room
-pdWeight: 4
+pdWeight: 1
 density:
   min: 5
   max: 10
@@ -10,7 +10,7 @@ sampleBehaviour: PoissonDisk
 borderOverride: rocky
 biomes:
   - name: biomes/Beach/Solid
-    weight: 3
+    weight: 2
     tags:
       - Pacu
       - Beached_MusselSprout
@@ -26,10 +26,17 @@ features:
   - type: features/beach/LimePocket
   - type: features/beach/MediumFreshwaterLake
   - type: features/beach/TinyFreshWaterLake
-  - type: features/beach/SnailPocket
-  - type: features/beach/PalmyShore
 tags:
   - IgnoreCaveOverride
   - NoGlobalFeatureSpawning
-  - StartWorld
-zoneType: Beach
+subworldTemplateRules:
+  - names:
+      - beached/worldgen/beach/simplepalm1
+      - beached/worldgen/beach/simplepalm2
+      - beached/worldgen/beach/simplepalm3
+      - beached/worldgen/beach/simplepalm4
+      - beached/worldgen/beach/simplepalm5
+    listRule: TrySome
+    someCount: 4
+    allowDuplicates: false
+zoneType: Beached_Beach

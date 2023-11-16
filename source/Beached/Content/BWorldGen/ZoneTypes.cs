@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using ZoneTypeAPI;
 using static ProcGen.SubWorld;
 
 namespace Beached.Content.BWorldGen
 {
 	public class ZoneTypes
 	{
-		public static ZoneTypes2 zones;
+		//public static ZoneTypes2 zones;
 		public static HashSet<ZoneType> values = new();
 
 		public static ZoneType
@@ -24,10 +22,10 @@ namespace Beached.Content.BWorldGen
 
 		public static void Initialize()
 		{
-			zones = new ZoneTypes2();
+			//zones = new ZoneTypes2();
 
 			// texture loading is very temporary, ZoneType API is far from done
-			Add("BasaltShore", ModAssets.Colors.Zones.basaltShores, 7, ZoneType.FrozenWastes);
+			/*Add("BasaltShore", ModAssets.Colors.Zones.basaltShores, 7, ZoneType.FrozenWastes);
 			Add("Bamboo", ModAssets.Colors.Zones.bamboo, 1, ZoneType.Sandstone);
 			Add("Beach", ModAssets.Colors.Zones.beach, 7, ZoneType.FrozenWastes);
 			Add("Depths", ModAssets.Colors.Zones.depths, 4, ZoneType.MagmaCore);
@@ -61,12 +59,12 @@ namespace Beached.Content.BWorldGen
 				values.Add(pearly);
 				values.Add(bone);
 				values.Add(sulfur);
-			};
+			};*/
 		}
 
-		private static void Add(string id, Color color, int textureIndex, ZoneType zoneType)
-		{
-			zones.Add(id, color, textureIndex, zoneType, "beached_assets", "biome_backgrounds");
-		}
+		/*		private static void Add(string id, Color color, int textureIndex, ZoneType zoneType)
+				{
+					zones.Add(id, color, textureIndex, zoneType, "beached_assets", "biome_backgrounds");
+				}*/
 	}
 }

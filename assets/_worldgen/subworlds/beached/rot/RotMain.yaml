@@ -14,4 +14,4 @@ tags:
 features:
   - type: features/rot/RotPocket
   - type: features/rot/GoldCavern
-zoneType: Bone
+zoneType: Beached_Beach #  Bone

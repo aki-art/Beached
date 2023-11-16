@@ -1,0 +1,81 @@
+TerrainBiomeLookupTable:
+  # keys to remove from in-memory structure when this file is loaded
+  remove: [] 
+  # elements to add from in-memory structure when this file is loaded
+  add:
+    SnowyBase:
+    - content: Ice
+      bandSize: 0.7
+    - content: Snow
+      bandSize: 0.5
+    - content: Sand
+      bandSize: 0.3
+    - content: CrushedRock
+      bandSize: 0.3
+    - content: IgneousRock
+      bandSize: 0.7
+    - content: Wolframite
+      bandSize: 0.05
+    SnowyCarbon:
+    - content: Ice
+      bandSize: 0.35
+    - content: Snow
+      bandSize: 0.3
+    - content: Sand
+      bandSize: 0.15
+    - content: Wolframite
+      bandSize: 0.025
+    - content: CrushedRock
+      bandSize: 0.05
+    - content: IgneousRock
+      bandSize: 0.5
+    - content: SaltyOxygen
+      bandSize: 0.1
+    Start:
+    - content: SiltStone
+      bandSize: 0.2
+    - content: Sand
+      bandSize: 0.15
+    - content: Dirt
+      bandSize: 0.2
+      overrides:
+        massOverride: 1200
+    - content: Algae
+      bandSize: 0.4
+      overrides:
+        massOverride: 600
+    - content: BismuthOre
+      bandSize: 0.06
+      overrides:
+        massOverride: 850
+    - content: OxyRock
+      bandSize: 0.04
+    - content: Oxygen
+      bandSize: 1.3
+    Lakes:
+    - content: SiltStone
+      bandSize: 0.45
+    - content: Algae
+      bandSize: 0.35
+      overrides:
+        massOverride: 600
+    - content: Algae
+      bandSize: 0.25
+    - content: Dirt
+      bandSize: 0.2
+      overrides:
+        massOverride: 1200
+    - content: Sand
+      bandSize: 0.6
+      overrides:
+        massOverride: 600
+    - content: Fertilizer
+      bandSize: 0.4
+      overrides:
+        massOverride: 850
+    - content: OxyRock
+      bandSize: 0.08
+    - content: Water
+      bandSize: 0.6   
+    - content: SaltyOxygen
+      bandSize: 3.5     

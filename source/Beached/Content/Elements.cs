@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +6,9 @@ namespace Beached.Content
 {
 	public class Elements
 	{
+		public static readonly SimHashes
+			moss = (SimHashes)Hash.SDBMLower("Beached_Moss");
+
 		public static ElementInfo
 			amber = ElementInfo.Solid("Amber", ModAssets.Colors.amber),
 			ammonia = ElementInfo.Gas("Ammonia", ModAssets.Colors.ammonia),
@@ -36,7 +38,7 @@ namespace Beached.Content
 			latex = ElementInfo.Liquid("Latex", ModAssets.Colors.latex),
 			litter = ElementInfo.Solid("Litter", ModAssets.Colors.iridium),
 			metamorphicRock = ElementInfo.Solid("MetamorphicRock", ModAssets.Colors.moss),
-			moss = ElementInfo.Solid("Moss", ModAssets.Colors.moss),
+			//moss = ElementInfo.Solid("Moss", ModAssets.Colors.moss),
 			mucus = ElementInfo.Liquid("Mucus", ModAssets.Colors.mucus),
 			mucusFrozen = ElementInfo.Solid("FrozenMucus", ModAssets.Colors.mucus),
 			murkyBrine = ElementInfo.Liquid("MurkyBrine", ModAssets.Colors.murkyBrine),
@@ -104,7 +106,7 @@ namespace Beached.Content
 			{ SimHashes.Graphite, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 			{ SimHashes.Ice, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 			{ SimHashes.Lime, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
-			{ moss, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			//{ moss, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 			{ mycelium, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 			{ mucusFrozen, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 			{ pearl, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
@@ -357,7 +359,7 @@ namespace Beached.Content
 			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.CrushedRock, gravel));
 			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.OxyRock, heulandite));
 			configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, iridium));
-			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Algae, moss));
+			//configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Algae, moss));
 			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.DirtyIce, mucusFrozen));
 			configs.Add(ElementUtil.CopyElementAudioConfig(clay, mycelium));
 			configs.Add(ElementUtil.CopyElementAudioConfig(phosphate, pearl));

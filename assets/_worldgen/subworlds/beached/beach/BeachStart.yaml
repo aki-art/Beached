@@ -1,11 +1,13 @@
 biomeNoise: noise/beach_solid
 temperatureRange: Room
-pdWeight: 1
+pdWeight: 8
 density:
-  min: 5
-  max: 10
-avoidRadius: 5.0
-minChildCount: 4
+  min: 10
+  max: 20
+avoidRadius: 10.0
+extraBiomeChildren: 3
+doAvoidPoints: false
+dontRelaxChildren: true
 sampleBehaviour: PoissonDisk
 borderOverride: rocky
 biomes:
@@ -20,23 +22,17 @@ biomes:
       - Beached_LeafletCoral
       - Beached_SandySeashell
       - Beached_SandySlickshell
+centralFeature:
+  type: features/generic/StartLocation
 features:
   - type: features/beach/AirPocket
   - type: features/beach/MetalCavern
-  - type: features/beach/LimePocket
+  - type: features/beach/AlgaePocket
   - type: features/beach/MediumFreshwaterLake
   - type: features/beach/TinyFreshWaterLake
+  - type: features/beach/SnailPocket
 tags:
   - IgnoreCaveOverride
   - NoGlobalFeatureSpawning
-subworldTemplateRules:
-  - names:
-      - beached/worldgen/beach/simplepalm1
-      - beached/worldgen/beach/simplepalm2
-      - beached/worldgen/beach/simplepalm3
-      - beached/worldgen/beach/simplepalm4
-      - beached/worldgen/beach/simplepalm5
-    listRule: TrySome
-    someCount: 4
-    allowDuplicates: false
-zoneType: Beach
+  - StartWorld
+zoneType: Beached_Beach

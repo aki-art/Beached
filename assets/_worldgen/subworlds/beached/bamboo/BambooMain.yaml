@@ -25,4 +25,4 @@ tags:
   - NoGlobalFeatureSpawning
   - Beached_SmoothNoise
   - Beached_AllowCritterManipulator
-zoneType: Bamboo
+zoneType: Beached_Beach # bamboo

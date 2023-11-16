@@ -1,5 +1,5 @@
 biomeNoise: noise/thermalvents
-temperatureRange: VeryCold
+temperatureRange: VeryHot
 pdWeight: 2
 density:
   min: 0
@@ -12,4 +12,6 @@ biomes:
   - name: biomes/ThermalVents/Frozen
 tags:
   - IgnoreCaveOverride
-zoneType: Sulfur
+
+# bunch of plants or something
+zoneType: Beached_Beach # Sulfur

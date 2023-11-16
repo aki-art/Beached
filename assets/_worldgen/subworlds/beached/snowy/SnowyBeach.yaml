@@ -18,6 +18,6 @@ biomes:
       - ColdBreather
 tags:
   - IgnoreCaveOverride
-zoneType: Icy
+zoneType: Beached_Beach # Icy
 features:
   - type: features/beach/SnowCavern

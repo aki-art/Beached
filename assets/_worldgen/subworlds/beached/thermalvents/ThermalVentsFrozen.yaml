@@ -1,5 +1,6 @@
 biomeNoise: noise/thermalvents
-temperatureRange: VeryHot
+temperatureRange: VeryCold
+pdWeight: 2
 density:
   min: 0
   max: 30
@@ -8,7 +9,7 @@ minChildCount: 2
 sampleBehaviour: PoissonDisk
 borderOverride: hardToDig
 biomes:
-  - name: biomes/ThermalVents/Default
+  - name: biomes/ThermalVents/Frozen
 tags:
   - IgnoreCaveOverride
-zoneType: Sulfur
+zoneType: Beached_Beach # Sulfur
