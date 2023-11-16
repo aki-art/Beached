@@ -2,6 +2,7 @@
 
 namespace Beached.Content.Defs.Entities.Critters
 {
+	[EntityConfigOrder(100)]
 	public class BabyJellyfishConfig : IEntityConfig
 	{
 		public const string ID = "Beached_Jellyfish_Baby";

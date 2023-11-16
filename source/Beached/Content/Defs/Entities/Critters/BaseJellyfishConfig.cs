@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters
 {
+	[EntityConfigOrder(0)]
 	public static class BaseJellyfishConfig
 	{
 		public static GameObject CreatePrefab(string id, string name, string desc, string anim_file, string traitId, string symbolOverridePrefix)

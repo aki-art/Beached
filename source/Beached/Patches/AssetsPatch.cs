@@ -22,6 +22,8 @@ namespace Beached.Patches
 			{
 				BDb.AddRecipes();
 				DNAInjector.InitializeOptions();
+
+				EdiblePatch.Edible_AddOnConsumeEffects_Patch.Patch(Mod.harmonyInstance);
 			}
 		}
 	}

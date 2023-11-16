@@ -37,7 +37,7 @@ namespace Beached.Patches
 			}
 		}
 
-		[HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToFood))]
+		[HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToFood), typeof(GameObject), typeof(EdiblesManager.FoodInfo), typeof(bool))]
 		public class EntityTemplates_ExtendEntityToFood_Patch
 		{
 			public static void Postfix(GameObject template)

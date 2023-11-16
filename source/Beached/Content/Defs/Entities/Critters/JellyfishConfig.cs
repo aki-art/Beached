@@ -7,6 +7,7 @@ using static Beached.STRINGS.CREATURES.SPECIES;
 
 namespace Beached.Content.Defs.Entities.Critters
 {
+	[EntityConfigOrder(0)]
 	internal class JellyfishConfig : IEntityConfig
 	{
 		public const string ID = "Beached_Jellyfish";

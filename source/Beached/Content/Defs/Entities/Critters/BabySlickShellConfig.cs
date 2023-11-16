@@ -2,6 +2,7 @@
 
 namespace Beached.Content.Defs.Entities.Critters
 {
+	[EntityConfigOrder(100)]
 	internal class BabySlickShellConfig : IEntityConfig
 	{
 		public const string ID = "Beached_SlickShell_Baby";
