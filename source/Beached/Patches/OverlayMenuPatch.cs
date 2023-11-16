@@ -21,6 +21,17 @@ namespace Beached.Patches
 				);
 
 				___overlayToggleInfos.Add(menu);
+
+				var debugMenu = new OverlayMenu.OverlayToggleInfo(
+					"Chunks",
+					"status_item_interference",
+					ElementInteractionsOverlayMode.ID,
+					"",
+					Action.NumActions,
+					STRINGS.UI.OVERLAY.BEACHED_CONDUCTIONOVERLAY.TOOLTIP
+				);
+
+				___overlayToggleInfos.Add(debugMenu);
 			}
 		}
 	}

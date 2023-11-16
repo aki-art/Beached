@@ -36,6 +36,8 @@ namespace Beached
 
 		public static LUT_API lutAPI;
 
+		public static Harmony harmonyInstance;
+
 		public override void OnLoad(Harmony harmony)
 		{
 			base.OnLoad(harmony);
@@ -54,7 +56,7 @@ namespace Beached
 			BWorldGenTags.Initialize();
 
 			lutAPI = LUT_API.Setup(harmony, true);
-
+			harmonyInstance = harmony;
 
 			ProcessAttributes(harmony);
 		}

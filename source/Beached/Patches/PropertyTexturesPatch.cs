@@ -38,9 +38,9 @@ namespace Beached.Patches
 
 				codes.InsertRange(index + 3, new[]
 				{
-                    // byte.maxValue is loaded to the stack
-                    new CodeInstruction(OpCodes.Ldloc_2), // load num to the stack
-                    new CodeInstruction(OpCodes.Call, m_GetDangerForElement)
+					// byte.maxValue is loaded to the stack
+					new CodeInstruction(OpCodes.Ldloc_2), // load num to the stack
+					new CodeInstruction(OpCodes.Call, m_GetDangerForElement)
 				});
 
 				return codes;

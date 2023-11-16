@@ -16,6 +16,7 @@ namespace Beached.Patches
 			public static void Postfix(Dictionary<HashedString, Func<SimDebugView, int, Color>> ___getColourFuncs)
 			{
 				___getColourFuncs.Add(ConductionOverlayMode.ID, ConductionOverlayMode.GetColorForCell);
+				___getColourFuncs.Add(ElementInteractionsOverlayMode.ID, ElementInteractionsOverlayMode.GetColorForCell);
 			}
 		}
 

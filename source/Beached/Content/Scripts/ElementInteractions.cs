@@ -20,8 +20,7 @@ namespace Beached.Content.Scripts
 	[SkipSaveFileSerialization]
 	public class ElementInteractions : KMonoBehaviour, ISim200ms
 	{
-		private const int CHUNK_EDGE = 16;
-		private const int UPDATE_ATTEMPTS = 4;
+		private const int CHUNK_EDGE = 4;
 		private const float FUNGAL_LIGHT_KILL_RATE = 0.5f;
 		private const float SHRAPNEL_SPEED = 10f;
 		private const float ACID_LOSS = 0.25f;
@@ -43,6 +42,8 @@ namespace Beached.Content.Scripts
 
 		private static Dictionary<byte, FungusInfo> fungusInfos = new();
 
+		public static HashSet<int> simActiveChunks = new HashSet<int>();
+
 		public struct FungusInfo
 		{
 			public PlantableSeed plantableSeed;
@@ -59,60 +60,70 @@ namespace Beached.Content.Scripts
 					plantableSeed = seedPrefab.GetComponent<PlantableSeed>();
 			}
 
-			public bool IsValid()
-			{
-				return plantableSeed != null;
-			}
+			public readonly bool IsValid() => plantableSeed != null;
 		}
 
 		public void Sim200ms(float dt)
 		{
-#if ELEMENTS
-
-			if (!enabled)
+			foreach (var worldContainer in ClusterManager.Instance.WorldContainers)
 			{
-				return;
+				if (worldContainer.IsDiscovered)
+				{
+					var min = worldContainer.worldOffset;
+					var max = worldContainer.worldOffset + worldContainer.worldSize;
+
+					for (int x = min.x; x <= max.x; x += CHUNK_EDGE)
+					{
+						for (int y = min.y; y <= max.y; y += CHUNK_EDGE)
+						{
+							var chunkIdx = WorldXYToChunkIdx(x, y);
+							simActiveChunks.Add(chunkIdx);
+						}
+					}
+				}
 			}
 
+			if (!enabled)
+				return;
+
 			UpdateCells();
-#endif
 		}
+
+		public static int CellToChunkIdx(int cell)
+		{
+			Grid.CellToXY(cell, out var x, out var y);
+			return WorldXYToChunkIdx(x, y);
+		}
+
+		public static int WorldXYToChunkIdx(int x, int y) => XYToChunk(x / CHUNK_EDGE, y / CHUNK_EDGE);
 
 		public void UpdateCells()
 		{
 			for (var c = 0; c < chunkCount; c++)
 			{
-				for (var i = 0; i < UPDATE_ATTEMPTS; i++)
-				{
-					var cell = GetRandomCellInChunk(c);
-					UpdateCell(cell);
-				}
+				var cell = GetRandomCellInChunk(c);
+				UpdateCell(cell);
 			}
 		}
 
 		private void UpdateCell(int cell)
 		{
-			if (!Grid.IsValidCell(cell))
-			{
+			if (!Grid.IsValidCell(cell) || !Grid.IsVisible(cell))
 				return;
-			}
 
 			var element = Grid.Element[cell];
 			var elementIdx = element.idx;
 			var diseaseCount = Grid.DiseaseCount[cell];
 
-			if (Grid.IsLiquid(cell))
+			if (element.IsLiquid)
 			{
 				UpdateSaltWater(cell, element, elementIdx);
+
 				if (elementIdx == acidIdx)
-				{
 					UpdateAcid(cell);
-				}
 			}
-			else if (Grid.IsGas(cell))
-			{
+			else if (element.IsGas)
 				UpdateSpores(cell, diseaseCount);
-			}
 		}
 
 		private void UpdateAcid(int cell)
@@ -158,13 +169,16 @@ namespace Beached.Content.Scripts
 			var acidVulnerability = element.AcidVulnerability();
 			if (acidVulnerability > 0)
 			{
-				WorldDamage.Instance.ApplyDamage(cellBelow, acidVulnerability, cell);
+				WorldDamage.Instance.ApplyDamage(cellBelow, acidVulnerability, -1);
+				Log.Debug($"applying damange:{cellBelow} {element.id} {acidVulnerability}");
 				Game.Instance.SpawnFX(SpawnFXHashes.BleachStoneEmissionBubbles, cellBelow, 0);
 			}
 		}
 
 		private void UpdateSpores(int cell, int diseaseCount)
 		{
+
+
 			if (diseaseCount > 0)
 			{
 				var germIdx = Grid.DiseaseIdx[cell];
@@ -199,7 +213,7 @@ namespace Beached.Content.Scripts
 
 		public static float GetFungalGermAverageChangeRateInLight()
 		{
-			return 5f * (UPDATE_ATTEMPTS / (CHUNK_EDGE * CHUNK_EDGE) * FUNGAL_LIGHT_KILL_RATE);
+			return 5f * (1f / (CHUNK_EDGE * CHUNK_EDGE) * FUNGAL_LIGHT_KILL_RATE); // TODO: sketchy math
 		}
 
 		private int GermsToKill(int count, float strength)
@@ -226,10 +240,7 @@ namespace Beached.Content.Scripts
 
 				if (Grid.Element[cellAbove].idx == oxygenIdx)
 				{
-					if (saltyOxygen == null)
-					{
-						saltyOxygen = ElementLoader.FindElementByHash(Elements.saltyOxygen);
-					}
+					saltyOxygen ??= ElementLoader.FindElementByHash(Elements.saltyOxygen);
 
 					Game.Instance.SpawnFX(saltFx, Grid.CellToPosCTC(cell, Grid.SceneLayer.FXFront), 0f);
 
@@ -254,9 +265,7 @@ namespace Beached.Content.Scripts
 			base.OnSpawn();
 
 			SetChunks();
-#if ELEMENTS
 			SetElements();
-#endif
 
 			fungusInfos = new()
 			{
