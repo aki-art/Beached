@@ -53,5 +53,6 @@ Material:
     - _WaveFrequency: 1128.1
     - _WaveSpeed: 66.4
     - _WaveStrength: 0.1
+    - _ZoomMagicNumber: 15
     m_Colors: []
   m_BuildTextureStacks: []

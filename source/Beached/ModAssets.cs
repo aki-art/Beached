@@ -190,7 +190,7 @@ namespace Beached
 			Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
 
 			var tmpConverter = new TMPConverter();
-			tmpConverter.ReplaceAllText(Prefabs.universalSidescreen);
+			//tmpConverter.ReplaceAllText(Prefabs.universalSidescreen);
 
 			/*            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
                         Materials.forceField = new(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"))
@@ -220,6 +220,7 @@ namespace Beached
 			Materials.liquidRefractionMat.SetFloat("_WaveAmplitude", 0.001f);
 			Materials.liquidRefractionMat.SetFloat("_EdgeSize", 0.55f);
 			Materials.liquidRefractionMat.SetFloat("_EdgeMultiplier", 2f);
+			Materials.liquidRefractionMat.SetFloat("_ZoomMagicNumber", 20f);
 
 			sw.Stop();
 			Log.Info($"Finished loading assets. It took {sw.ElapsedMilliseconds} ms");
