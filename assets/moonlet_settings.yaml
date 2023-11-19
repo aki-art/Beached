@@ -1,0 +1,15 @@
+# This file must be included in your mods root directory
+
+# log additional information to the game log.
+# recommended to enable while developing, but disable when releasing to Steam Workshop
+debugLogging: true
+
+# Generate a template.pot file in mods/strings_templates
+generateTranslationsTemplate: true
+
+# Type target assembly qualified name to overload strings to. Only relevant if you have a C# dll with a STRING-s class.
+# overloadTranslations: Tundra.STRINGS, Tundra
+
+# use {platform to insert platform keyword, windows|mac|linux }
+loadAssetBundles:
+  - root::assetbundles/beached_shared_assets

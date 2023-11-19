@@ -1,0 +1,24 @@
+TerrainBiomeLookupTable:
+  add:
+    Basic:
+    - content: Sandstone
+      bandSize: 1
+    - content: Gravel
+      bandSize: 0.2
+    - content: Fertilizer
+      bandSize: 0.3
+    - content: Beached_Moss
+      bandSize: 0.5
+    - content: ChlorineGas
+      bandSize: 6
+    Mossy:
+    - content: Sandstone
+      bandSize: 0.4
+    - content: Gravel
+      bandSize: 0.2
+    - content: Fertilizer
+      bandSize: 0.3
+    - content: Beached_Moss
+      bandSize: 1.5
+    - content:  ChlorineGas
+      bandSize: 6

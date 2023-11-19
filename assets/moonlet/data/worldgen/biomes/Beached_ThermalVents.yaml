@@ -1,0 +1,52 @@
+TerrainBiomeLookupTable:
+  # keys to remove from in-memory structure when this file is loaded
+  remove: [] 
+  # elements to add from in-memory structure when this file is loaded
+  add:
+    Default:
+    - content: Basalt
+      bandSize: 2
+    - content: Obsidian
+      bandSize: 1
+    - content: Fossil
+      bandSize: 1
+    - content: FoolsGold
+      bandSize: 1
+    - content: Ash
+      bandSize: 1
+    - content: LiquidSulfur
+      bandSize: 1
+      overrides:
+        massOverride: 1000
+    Lush:
+    - content: Basalt
+      bandSize: 2
+    - content: Obsidian
+      bandSize: 1
+    - content: Fossil
+      bandSize: 2
+    - content: FoolsGold
+      bandSize: 1
+    - content: Ash
+      bandSize: 0.2
+    - content: LiquidSulfur
+      bandSize: 1
+      overrides:
+        massOverride: 1000
+    - content: Chlorine
+      bandSize: 1
+    Frozen:
+    - content: Basalt
+      bandSize: 2
+    - content: Obsidian
+      bandSize: 1
+    - content: Fossil
+      bandSize: 1
+    - content: FoolsGold
+      bandSize: 1
+    - content: Ash
+      bandSize: 1
+    - content: Sulfur
+      bandSize: 1
+      overrides:
+        massOverride: 1000

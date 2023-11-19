@@ -19,7 +19,11 @@ namespace Beached.Patches
 					"beached_zeolite_necklace_kanim",
 					"minnow_head_kanim"
 				};
+				AddSwaps(groups, swaps);
+			}
 
+			private static void AddSwaps(List<KAnimGroupFile.Group> groups, HashSet<HashedString> swaps)
+			{
 				var swapAnimsGroup = KAnimGroupFile.GetGroup(new HashedString(CONSTS.BATCH_TAGS.SWAPS));
 
 				// remove the wrong group

@@ -1,0 +1,27 @@
+biomeNoise: noise/Beached_Bamboo
+temperatureRange: Room
+density:
+  min: 20
+  max: 25
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+borderOverride: rocky
+biomes:
+  - name: biomes/Beached_Bamboo/Basic
+    weight: 2
+    tags:
+      - Beached_Bamboo
+      - Beached_BambooForest_Cylindrica
+  - name: biomes/Beached_Bamboo/Mossy
+    weight: 1
+    tags:
+      - Beached_Bamboo
+      - Beached_BambooForest_Cylindrica
+tags:
+  - IgnoreCaveOverride
+  - NoGlobalFeatureSpawning
+  - Beached_SmoothNoise
+  - Beached_AllowCritterManipulator
+
+zoneType: Beached_Bamboo
