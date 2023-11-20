@@ -2,6 +2,7 @@
 using Beached.Content.Scripts;
 using HarmonyLib;
 using Klei.AI;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Patches
@@ -22,6 +23,11 @@ namespace Beached.Patches
 		{
 			public static void Prefix(MinionStartingStats __instance)
 			{
+				Log.Debug("ROLLING TRAITS");
+				foreach (var trait in DUPLICANTSTATS.GOODTRAITS)
+				{
+					Log.Debug($"{trait.id} {trait.rarity}");
+				}
 				BDuplicants.OnTraitRoll(__instance);
 			}
 

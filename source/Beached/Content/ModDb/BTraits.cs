@@ -109,25 +109,31 @@ namespace Beached.Content.ModDb
 
 		public static void Register()
 		{
+			Log.Debug("REGISTER TRAITS");
 			var db = Db.Get();
 
 			new TraitBuilder(PLUSHIE_MAKER, true)
 				.OnAdd(OnAddPlushieMaker)
-				.AddToTraits(DUPLICANTSTATS.JOYTRAITS);
+				.AddToTraits()
+					.Build(DUPLICANTSTATS.JOYTRAITS);
 
 			new TraitBuilder(SIREN, false)
 				.OnAdd(OnAddSiren)
-				.AddToTraits(DUPLICANTSTATS.STRESSTRAITS);
+				.AddToTraits()
+					.Build(DUPLICANTSTATS.STRESSTRAITS);
 
 			new TraitBuilder(FUR_ALLERGY, false)
 				.Tag(BTags.furAllergic)
-				.AddToTraits(DUPLICANTSTATS.BADTRAITS)
+				.AddToTraits()
 					.Rarity(DUPLICANTSTATS.RARITY_COMMON)
-					.ExclusiveWithTraits("Allergies");
+					.ExclusiveWithTraits("Allergies")
+					.Build(DUPLICANTSTATS.BADTRAITS);
 
 			new TraitBuilder(COMFORT_SEEKER, true)
-				.AddToTraits(DUPLICANTSTATS.GOODTRAITS)
-					.ExclusiveWithTraits("DecorUp", "Fashionable");
+				.AddToTraits()
+					.ExclusiveWithTraits("DecorUp", "Fashionable")
+					.Rarity(DUPLICANTSTATS.RARITY_COMMON)
+					.Build(DUPLICANTSTATS.GOODTRAITS);
 
 			new TraitBuilder(GILLS, true)
 				.OnAdd(OnAddGills)
@@ -136,7 +142,9 @@ namespace Beached.Content.ModDb
 
 			new TraitBuilder(DEXTEROUS, true, BAttributes.PRECISION_ID)
 				.Modifier(BAttributes.PRECISION_ID, TRAITS.GOOD_ATTRIBUTE_BONUS)
-				.AddToTraits(DUPLICANTSTATS.GOODTRAITS);
+				.AddToTraits()
+					.Rarity(DUPLICANTSTATS.RARITY_COMMON)
+					.Build(DUPLICANTSTATS.GOODTRAITS);
 
 			foreach (var trait in DUPLICANTSTATS.GOODTRAITS)
 				Log.Debug("JOY: " + trait.id);

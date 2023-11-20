@@ -10,51 +10,65 @@ namespace Beached.Utils
 	public class TraitBuilder
 	{
 		private Trait trait;
-		private int rarity = DUPLICANTSTATS.RARITY_COMMON;
 
 		public class TraitValBuilder
 		{
-			public DUPLICANTSTATS.TraitVal val;
+			string id;
+			int rarity = DUPLICANTSTATS.RARITY_COMMON;
+			int impact = 0;
+			string dlcId = DlcManager.VANILLA_ID;
+			List<string> mutuallyExclusiveTraits;
+			List<HashedString> mutuallyExclusiveAptitudes;
 
 			public TraitValBuilder(string id)
 			{
-				val = new()
-				{
-					id = id,
-					dlcId = DlcManager.VANILLA_ID,
-					mutuallyExclusiveTraits = new(),
-					mutuallyExclusiveAptitudes = new(),
-				};
+				this.id = id;
 			}
 
 			public TraitValBuilder Rarity(int rarity)
 			{
-				val.rarity = rarity;
+				this.rarity = rarity;
 				return this;
 			}
 
 			public TraitValBuilder ExclusiveWithTraits(params string[] traits)
 			{
-				val.mutuallyExclusiveTraits = traits.ToList();
+				mutuallyExclusiveTraits = traits.ToList();
 				return this;
 			}
 
 			public TraitValBuilder ExclusiveWithAptitudes(params HashedString[] traits)
 			{
-				val.mutuallyExclusiveAptitudes = traits.ToList();
+				mutuallyExclusiveAptitudes = traits.ToList();
 				return this;
 			}
 
 			public TraitValBuilder Dlc(string dlcId)
 			{
-				val.dlcId = dlcId;
+				this.dlcId = dlcId;
 				return this;
 			}
 
 			public TraitValBuilder Impact(int impact)
 			{
-				val.impact = impact;
+				this.impact = impact;
 				return this;
+			}
+
+			public DUPLICANTSTATS.TraitVal Build(List<DUPLICANTSTATS.TraitVal> traitsList)
+			{
+				var item = new DUPLICANTSTATS.TraitVal()
+				{
+					id = id,
+					mutuallyExclusiveAptitudes = mutuallyExclusiveAptitudes,
+					mutuallyExclusiveTraits = mutuallyExclusiveTraits,
+					dlcId = dlcId,
+					impact = impact,
+					rarity = rarity,
+				};
+
+				traitsList.Add(item);
+				return item;
 			}
 		}
 
@@ -77,10 +91,9 @@ namespace Beached.Utils
 			this.trait = trait;
 		}
 
-		public TraitValBuilder AddToTraits(List<DUPLICANTSTATS.TraitVal> traitVals)
+		public TraitValBuilder AddToTraits()
 		{
 			var traitVal = new TraitValBuilder(trait.Id);
-			traitVals.Add(traitVal.val);
 
 			return traitVal;
 		}
