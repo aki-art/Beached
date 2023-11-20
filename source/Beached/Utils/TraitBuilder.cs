@@ -1,5 +1,4 @@
-﻿using Geometry;
-using Klei.AI;
+﻿using Klei.AI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +20,8 @@ namespace Beached.Utils
 			{
 				val = new()
 				{
-					id = id
+					id = id,
+					dlcId = DlcManager.VANILLA_ID
 				};
 			}
 

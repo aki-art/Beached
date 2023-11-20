@@ -868,13 +868,13 @@ namespace Beached
 					public static LocString WATERBREATHING = "• Amphibious";
 				}
 
-				public class BEACHED_COMFORT_SEEKER
+				public class BEACHED_COMFORTSEEKER
 				{
 					public static LocString NAME = "Comfort Seeker";
 					public static LocString DESC = "This duplicant gains a moral bonus from wearing comfortable clothing.";
 				}
 
-				public class BEACHED_PLUSHIE_MAKER
+				public class BEACHED_PLUSHIEMAKER
 				{
 					public static LocString NAME = "Plushie Gifter";
 					public static LocString DESC = "...";
@@ -886,7 +886,7 @@ namespace Beached
 					public static LocString DESC = "...";
 				}
 
-				public class PRECISIONUP
+				public class BEACHED_DEXTEROUS
 				{
 					public static LocString NAME = "Dexterous";
 					public static LocString DESC = "This duplicant can live like a fish in the water... or at least breath like one.";
