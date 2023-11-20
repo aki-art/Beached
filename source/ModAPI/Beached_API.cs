@@ -48,7 +48,7 @@ namespace Beached_ModAPI
 		/// </summary>
 		public static RemoveLifeGoalDelegate RemoveLifeGoal;
 
-		public delegate Klei.AI.Trait GetLifeGoalFromPersonalityDelegate(Personality personality, bool force);
+		public delegate Klei.AI.Trait GetLifeGoalFromPersonalityDelegate(Personality personality);
 
 		/// <summary>
 		/// Get the expected life goal trait for a personality
