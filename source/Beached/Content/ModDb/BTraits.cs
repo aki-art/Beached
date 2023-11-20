@@ -138,6 +138,8 @@ namespace Beached.Content.ModDb
 				.Modifier(BAttributes.PRECISION_ID, TRAITS.GOOD_ATTRIBUTE_BONUS)
 				.AddToTraits(DUPLICANTSTATS.GOODTRAITS);
 
+			foreach (var trait in DUPLICANTSTATS.GOODTRAITS)
+				Log.Debug("JOY: " + trait.id);
 
 			AddJewelleryTrait(
 				LIFE_GOAL_IDS.JEWELLERY_MAXIXE,

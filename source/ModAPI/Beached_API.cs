@@ -25,6 +25,15 @@ namespace Beached_ModAPI
 		/// <returns>A dictionary of trait id to attribute points.</returns>
 		public static GetLifeGoalPointsDelegate GetLifeGoalPoints;
 
+		public delegate Klei.AI.Trait GetCurrentLifeGoalDelegate(MinionStartingStats minionStartingStats);
+
+		/// <summary>
+		/// Get the currently rolled life goal attributes for a duplicant before printing
+		/// </summary>
+		/// <param name="minionStartingStats"></param>
+		/// <returns>A dictionary of trait id to attribute points.</returns>
+		public static GetCurrentLifeGoalDelegate GetCurrentLifeGoal;
+
 		public delegate bool IsUsingLifeGoalsDelegate();
 
 		/// <summary>
@@ -39,7 +48,7 @@ namespace Beached_ModAPI
 		/// </summary>
 		public static RemoveLifeGoalDelegate RemoveLifeGoal;
 
-		public delegate Klei.AI.Trait GetLifeGoalFromPersonalityDelegate(MinionStartingStats minionStartingStats, bool force);
+		public delegate Klei.AI.Trait GetLifeGoalFromPersonalityDelegate(Personality personality, bool force);
 
 		/// <summary>
 		/// Get the expected life goal trait for a personality
@@ -99,6 +108,20 @@ namespace Beached_ModAPI
 
 			GetPossibleLifegoalTraits = (GetPossibleLifegoalTraitsDelegate)Delegate.CreateDelegate(typeof(GetPossibleLifegoalTraitsDelegate), m_GetPossibleLifegoalTraits);
 
+			var m_GetCurrentLifeGoal = AccessTools.Method(type, "GetCurrentLifeGoal",
+				new[]
+				{
+					typeof(MinionStartingStats)
+				});
+
+			if (m_GetCurrentLifeGoal == null)
+			{
+				if (logWarnings) Debug.LogWarning("GetCurrentLifeGoal is not a method.");
+				return false;
+			}
+
+			GetCurrentLifeGoal = (GetCurrentLifeGoalDelegate)Delegate.CreateDelegate(typeof(GetCurrentLifeGoalDelegate), m_GetCurrentLifeGoal);
+
 			var m_GetLifeGoalPoints = AccessTools.Method(type, "GetLifeGoalPoints",
 				new[]
 				{
@@ -138,7 +161,7 @@ namespace Beached_ModAPI
 			var m_GetLifeGoalFromPersonality = AccessTools.Method(type, "GetLifeGoalFromPersonality",
 				new[]
 				{
-					typeof(MinionStartingStats)
+					typeof(Personality)
 				});
 
 			if (m_GetLifeGoalFromPersonality == null)

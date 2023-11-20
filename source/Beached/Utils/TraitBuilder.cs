@@ -21,7 +21,9 @@ namespace Beached.Utils
 				val = new()
 				{
 					id = id,
-					dlcId = DlcManager.VANILLA_ID
+					dlcId = DlcManager.VANILLA_ID,
+					mutuallyExclusiveTraits = new(),
+					mutuallyExclusiveAptitudes = new(),
 				};
 			}
 
@@ -79,6 +81,7 @@ namespace Beached.Utils
 		{
 			var traitVal = new TraitValBuilder(trait.Id);
 			traitVals.Add(traitVal.val);
+
 			return traitVal;
 		}
 

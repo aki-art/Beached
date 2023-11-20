@@ -62,6 +62,11 @@ namespace Beached
 		/// </summary>
 		public static bool IsUsingLifeGoals() => Mod.settings.CrossWorld.LifeGoals || Beached_WorldLoader.Instance.IsBeachedContentActive;
 
+		public static Klei.AI.Trait GetCurrentLifeGoal(MinionStartingStats minionStartingStats)
+		{
+			return minionStartingStats.GetExtension()?.lifeGoalTrait;
+		}
+
 		public static void RemoveLifeGoal(MinionStartingStats minionStartingStats)
 		{
 			var ext = minionStartingStats.GetExtension();
@@ -88,9 +93,9 @@ namespace Beached
 		/// <summary>
 		/// Get the expected life goal trait for a personality
 		/// </summary>
-		public static Klei.AI.Trait GetLifeGoalFromPersonality(MinionStartingStats minionStartingStats)
+		public static Klei.AI.Trait GetLifeGoalFromPersonality(Personality personality)
 		{
-			return BTraits.GetGoalForPersonality(minionStartingStats.personality);
+			return BTraits.GetGoalForPersonality(personality);
 		}
 
 		/// <summary>
