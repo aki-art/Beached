@@ -20,7 +20,7 @@ namespace Beached.Content.ModDb
 			PLUSHIE_MAKER = "Beached_PlushieMaker",
 			SIREN = "Beached_Siren";
 
-		public class LIFE_GOALS
+		public class LIFE_GOAL_IDS
 		{
 			public class CATEGORIES
 			{
@@ -46,57 +46,65 @@ namespace Beached.Content.ModDb
 		public static readonly Dictionary<string, List<string>> LIFE_GOAL_CATEGORIES = new()
 		{
 			{
-				LIFE_GOALS.CATEGORIES.JEWELLERY,
+				LIFE_GOAL_IDS.CATEGORIES.JEWELLERY,
 				new()
 				{
-					LIFE_GOALS.JEWELLERY_STRANGE_MATTER,
-					LIFE_GOALS.JEWELLERY_PEARLS,
-					LIFE_GOALS.JEWELLERY_MAXIXE
+					LIFE_GOAL_IDS.JEWELLERY_STRANGE_MATTER,
+					LIFE_GOAL_IDS.JEWELLERY_PEARLS,
+					LIFE_GOAL_IDS.JEWELLERY_MAXIXE
 				}
 			},
 			{
-				LIFE_GOALS.CATEGORIES.MINNOW,
+				LIFE_GOAL_IDS.CATEGORIES.MINNOW,
 				new()
 				{
-					LIFE_GOALS.BEDROOM_SURFBOARD
+					LIFE_GOAL_IDS.BEDROOM_SURFBOARD
 				}
 			},
 			{
-				LIFE_GOALS.CATEGORIES.MEEP,
+				LIFE_GOAL_IDS.CATEGORIES.MEEP,
 				new()
 				{
-					LIFE_GOALS.GOLDENTHRONE
+					LIFE_GOAL_IDS.GOLDENTHRONE
 				}
 			},
 			{
-				LIFE_GOALS.CATEGORIES.RUBY,
+				LIFE_GOAL_IDS.CATEGORIES.RUBY,
 				new()
 				{
-					LIFE_GOALS.HAS_50_DECOR
+					LIFE_GOAL_IDS.HAS_50_DECOR
 				}
 			},
 			{
-				LIFE_GOALS.CATEGORIES.GENERIC,
+				LIFE_GOAL_IDS.CATEGORIES.GENERIC,
 				new()
 				{
-					LIFE_GOALS.JEWELLERY_STRANGE_MATTER,
-					LIFE_GOALS.JEWELLERY_PEARLS,
-					LIFE_GOALS.JEWELLERY_MAXIXE
+					LIFE_GOAL_IDS.JEWELLERY_STRANGE_MATTER,
+					LIFE_GOAL_IDS.JEWELLERY_PEARLS,
+					LIFE_GOAL_IDS.JEWELLERY_MAXIXE
 				}
 			}
 		};
 
-		public static List<string> lifeGoals = new();
+		public static readonly List<string> LIFE_GOALS = new()
+		{
+			LIFE_GOAL_IDS.GOLDENTHRONE,
+			LIFE_GOAL_IDS.JEWELLERY_MAXIXE,
+			LIFE_GOAL_IDS.JEWELLERY_STRANGE_MATTER,
+			LIFE_GOAL_IDS.JEWELLERY_PEARLS,
+			LIFE_GOAL_IDS.BEDROOM_SURFBOARD,
+			LIFE_GOAL_IDS.HAS_50_DECOR,
+		};
 
 		public static Dictionary<string, string> LifeGoalsPerDupe = new()
 		{
-			{ "PEI" , LIFE_GOALS.CATEGORIES.JEWELLERY },
-			{ "ARI" , LIFE_GOALS.CATEGORIES.JEWELLERY },
-			{ "ELLIE" , LIFE_GOALS.CATEGORIES.JEWELLERY },
-			{ "GOSSMANN" , LIFE_GOALS.CATEGORIES.JEWELLERY },
-			{ "MINNOW" , LIFE_GOALS.CATEGORIES.MINNOW },
-			{ "MEEP" , LIFE_GOALS.CATEGORIES.MEEP },
-			{ "RUBY" , LIFE_GOALS.CATEGORIES.RUBY },
+			{ "PEI" , LIFE_GOAL_IDS.CATEGORIES.JEWELLERY },
+			{ "ARI" , LIFE_GOAL_IDS.CATEGORIES.JEWELLERY },
+			{ "ELLIE" , LIFE_GOAL_IDS.CATEGORIES.JEWELLERY },
+			{ "GOSSMANN" , LIFE_GOAL_IDS.CATEGORIES.JEWELLERY },
+			{ "MINNOW" , LIFE_GOAL_IDS.CATEGORIES.MINNOW },
+			{ "MEEP" , LIFE_GOAL_IDS.CATEGORIES.MEEP },
+			{ "RUBY" , LIFE_GOAL_IDS.CATEGORIES.RUBY },
 		};
 
 		public static void Register()
@@ -132,25 +140,25 @@ namespace Beached.Content.ModDb
 
 
 			AddJewelleryTrait(
-				LIFE_GOALS.JEWELLERY_MAXIXE,
+				LIFE_GOAL_IDS.JEWELLERY_MAXIXE,
 				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_MAXIXEPENDANT.NAME,
 				"This duplicant really wishes to express themselves by wearing a Maxixe Pendant.",
 				MaxixePendantConfig.ID);
 
 			AddJewelleryTrait(
-				LIFE_GOALS.JEWELLERY_PEARLS,
+				LIFE_GOAL_IDS.JEWELLERY_PEARLS,
 				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_PEARLNECKLACE.NAME,
 				"This duplicant would love to don a Pearl Necklace.",
 				PearlNecklaceConfig.ID);
 
 			AddJewelleryTrait(
-				LIFE_GOALS.JEWELLERY_STRANGE_MATTER,
+				LIFE_GOAL_IDS.JEWELLERY_STRANGE_MATTER,
 				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME,
 				"This duplicant has a deep desire the wear a Strange Matter Amulet.",
 				StrangeMatterAmuletConfig.ID);
 
 			AddAssignableTrait(
-				LIFE_GOALS.GOLDENTHRONE,
+				LIFE_GOAL_IDS.GOLDENTHRONE,
 				"Golden Lavatory",
 				"This duplicant wishes to own their very own golden lavatory.",
 				slot => slot.assignable != null
@@ -159,7 +167,7 @@ namespace Beached.Content.ModDb
 					&& pe.ElementID == SimHashes.GoldAmalgam);
 
 			AddAssignableTrait(
-				LIFE_GOALS.HAS_50_DECOR,
+				LIFE_GOAL_IDS.HAS_50_DECOR,
 				"Fashion Idol",
 				"This duplicants dream is to be as slick as it can get. Achieve 50 additional decor with equipment to achieve their life goal.",
 				slot =>
@@ -171,12 +179,10 @@ namespace Beached.Content.ModDb
 				}); // TODO
 
 			AddBedroomTrait(
-				LIFE_GOALS.BEDROOM_SURFBOARD,
+				LIFE_GOAL_IDS.BEDROOM_SURFBOARD,
 				"Surfin' and Snoozin'",
 				string.Format("This duplicant sannot stop talking about how cool it would be to have a {0} in their bedroom.", global::STRINGS.BUILDINGS.PREFABS.MECHANICALSURFBOARD.NAME),
 				MechanicalSurfboardConfig.ID);
-
-			lifeGoals.Add(LIFE_GOALS.JEWELLERY_MAXIXE);
 		}
 
 		private static void OnAddSiren(GameObject go)
@@ -297,7 +303,7 @@ namespace Beached.Content.ModDb
 		{
 			var category = LifeGoalsPerDupe.TryGetValue(personality.Id, out var goalsPerDupe)
 				? goalsPerDupe
-				: LIFE_GOALS.CATEGORIES.GENERIC;
+				: LIFE_GOAL_IDS.CATEGORIES.GENERIC;
 
 			if (LIFE_GOAL_CATEGORIES.TryGetValue(category, out var options))
 				return Db.Get().traits.TryGet(options.GetRandom());

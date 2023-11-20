@@ -47,7 +47,7 @@ namespace Beached.Patches
 
 			private static string GetToolTip(string tooltip, Trait trait, GameObject target)
 			{
-				if (BTraits.lifeGoals.Contains(trait.Id))
+				if (BTraits.LIFE_GOALS.Contains(trait.Id))
 				{
 					if (target.TryGetComponent(out Beached_LifeGoalTracker storage))
 					{

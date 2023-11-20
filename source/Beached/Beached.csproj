@@ -10,6 +10,8 @@
 		<IsMod>true</IsMod>
 		<IsPacked>true</IsPacked>
 		<DefineConstants>ELEMENTS,TRANSPILERS</DefineConstants>
+		<Publicised>true</Publicised>
+		<CopyFiles>true</CopyFiles>
 		<!--
 		constants:
 			ELEMENTS
@@ -35,6 +37,7 @@
 		<APIVersion>2</APIVersion>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
+	
 	<ItemGroup>
 	  <Compile Remove="Assets\**" />
 	  <EmbeddedResource Remove="Assets\**" />
@@ -112,8 +115,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Aze.Publicise.MSBuild.Task" Version="1.1.0">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Neutronium.PostProcessing" Version="0.0.1-alpha10" />
 		<PackageReference Include="PLib" Version="4.13.0" />

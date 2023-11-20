@@ -27,28 +27,7 @@ namespace Beached.Patches
 
 			public static void Postfix(MinionStartingStats __instance)
 			{
-				if (Mod.settings.CrossWorld.LifeGoals || Beached_WorldLoader.Instance.IsBeachedContentActive)
-				{
-					var trait = BTraits.GetGoalForPersonality(__instance.personality);
-
-					if (trait == null)
-						return;
-
-					var ext = __instance.GetExtension();
-					ext.SetLifeGoal(trait);
-
-					// Always add 2 morale
-					ext.AddLifeGoalReward(Db.Get().Attributes.QualityOfLife.Id, CONSTS.DUPLICANTS.LIFEGOALS.MORALBONUS);
-
-					// Add 3-5 more of their already present aptitudes
-					foreach (var aptitude in __instance.skillAptitudes)
-					{
-						foreach (var skill in aptitude.Key.relevantAttributes)
-						{
-							ext.AddLifeGoalReward(skill.Id, Random.Range(3, 6));
-						}
-					}
-				}
+				ModAPI.ApplyLifeGoalFromPersonality(__instance, false);
 			}
 		}
 

@@ -3,6 +3,7 @@ using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached
@@ -24,6 +25,110 @@ namespace Beached
 
 	public class ModAPI
 	{
+		/// <summary>
+		/// Get all possible life goal traits. Leaving <c>category</c> to be <c>null</c> will return all trait ids.
+		/// </summary>
+		/// <param name="category"></param>
+		/// <param name="logWarning"></param>
+		/// <returns></returns>
+		public static List<string> GetPossibleLifegoalTraits(string category, bool logWarning)
+		{
+			if (!category.IsNullOrWhiteSpace())
+			{
+				if (BTraits.LIFE_GOAL_CATEGORIES.TryGetValue(category, out var list))
+					return list;
+				else if (logWarning)
+				{
+					Log.Warning($"No life goal category by ID {category}");
+					return null;
+				}
+			}
+
+			return BTraits.LIFE_GOALS;
+		}
+
+		/// <summary>
+		/// Get the currently rolled life goal attributes for a duplicant before printing
+		/// </summary>
+		/// <param name="minionStartingStats"></param>
+		/// <returns></returns>
+		public static Dictionary<string, int> GetLifeGoalPoints(MinionStartingStats minionStartingStats)
+		{
+			return minionStartingStats.GetLifeGoalAttributes();
+		}
+
+		/// <summary>
+		/// Returns if the user has enabled using life goals globally, or a Beached world is being played.
+		/// </summary>
+		public static bool IsUsingLifeGoals() => Mod.settings.CrossWorld.LifeGoals || Beached_WorldLoader.Instance.IsBeachedContentActive;
+
+		public static void RemoveLifeGoal(MinionStartingStats minionStartingStats)
+		{
+			var ext = minionStartingStats.GetExtension();
+
+			if (ext == null)
+				return;
+
+			ext.lifeGoalAttributes?.Clear();
+			ext.SetLifeGoal(null);
+		}
+
+		/// <summary>
+		/// Applies a life goal based on personality.
+		/// </summary>
+		public static void ApplyLifeGoalFromPersonality(MinionStartingStats minionStartingStats, bool force)
+		{
+			if (force || IsUsingLifeGoals())
+			{
+				var trait = BTraits.GetGoalForPersonality(minionStartingStats.personality);
+				SetLifeGoal(minionStartingStats, trait, force);
+			}
+		}
+
+		/// <summary>
+		/// Get the expected life goal trait for a personality
+		/// </summary>
+		public static Klei.AI.Trait GetLifeGoalFromPersonality(MinionStartingStats minionStartingStats)
+		{
+			return BTraits.GetGoalForPersonality(minionStartingStats.personality);
+		}
+
+		/// <summary>
+		/// Set a specific life goal
+		/// </summary>
+		public static void SetLifeGoal(MinionStartingStats minionStartingStats, string traitId, bool force)
+		{
+			var trait = Db.Get().traits.TryGet(traitId);
+			if (trait == null) return;
+
+			SetLifeGoal(minionStartingStats, trait, force);
+		}
+
+		public static void SetLifeGoal(MinionStartingStats minionStartingStats, Klei.AI.Trait trait, bool force)
+		{
+			if (force || IsUsingLifeGoals())
+			{
+				var ext = minionStartingStats.GetExtension();
+
+				if (ext == null)
+					return;
+
+				ext.SetLifeGoal(trait);
+
+				// Always add 2 morale
+				ext.AddLifeGoalReward(Db.Get().Attributes.QualityOfLife.Id, CONSTS.DUPLICANTS.LIFEGOALS.MORALBONUS);
+
+				// Add 3-5 more of their already present aptitudes
+				foreach (var aptitude in minionStartingStats.skillAptitudes)
+				{
+					foreach (var skill in aptitude.Key.relevantAttributes)
+					{
+						ext.AddLifeGoalReward(skill.Id, UnityEngine.Random.Range(3, 6));
+					}
+				}
+			}
+		}
+
 		/// <summary>
 		/// Add a new filter rule for genetics samplers and the DNA injector building.
 		/// </summary>
