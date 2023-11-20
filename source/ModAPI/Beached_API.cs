@@ -67,14 +67,14 @@ namespace Beached_ModAPI
 		/// <summary>
 		/// Set a specific life goal
 		/// </summary>
-		public static readonly SetLifeGoalFromIdDelegate SetLifeGoalFromId;
+		public static SetLifeGoalFromIdDelegate SetLifeGoalFromId;
 
 		public delegate void SetLifeGoalDelegate(MinionStartingStats minionStartingStats, Klei.AI.Trait trait, bool force);
 
 		/// <summary>
 		/// Set a specific life goal
 		/// </summary>
-		public static readonly SetLifeGoalDelegate SetLifeGoal;
+		public static SetLifeGoalDelegate SetLifeGoal;
 
 		/// <summary>
 		/// Call this at Db.Initialize. Please do not use late priority.
@@ -158,6 +158,8 @@ namespace Beached_ModAPI
 				return false;
 			}
 
+			RemoveLifeGoal = (RemoveLifeGoalDelegate)Delegate.CreateDelegate(typeof(RemoveLifeGoalDelegate), m_RemoveLifeGoal);
+
 			var m_GetLifeGoalFromPersonality = AccessTools.Method(type, "GetLifeGoalFromPersonality",
 				new[]
 				{
@@ -169,6 +171,8 @@ namespace Beached_ModAPI
 				if (logWarnings) Debug.LogWarning("GetLifeGoalFromPersonality is not a method.");
 				return false;
 			}
+
+			GetLifeGoalFromPersonality = (GetLifeGoalFromPersonalityDelegate)Delegate.CreateDelegate(typeof(GetLifeGoalFromPersonalityDelegate), m_GetLifeGoalFromPersonality);
 
 			var m_ApplyLifeGoalFromPersonality = AccessTools.Method(type, "ApplyLifeGoalFromPersonality",
 				new[]
@@ -182,6 +186,8 @@ namespace Beached_ModAPI
 				if (logWarnings) Debug.LogWarning("ApplyLifeGoalFromPersonality is not a method.");
 				return false;
 			}
+
+			ApplyLifeGoalFromPersonality = (ApplyLifeGoalFromPersonalityDelegate)Delegate.CreateDelegate(typeof(ApplyLifeGoalFromPersonalityDelegate), m_ApplyLifeGoalFromPersonality);
 
 			var m_SetLifeGoalFromId = AccessTools.Method(type, "SetLifeGoal",
 				new[]
@@ -197,6 +203,8 @@ namespace Beached_ModAPI
 				return false;
 			}
 
+			SetLifeGoalFromId = (SetLifeGoalFromIdDelegate)Delegate.CreateDelegate(typeof(SetLifeGoalFromIdDelegate), m_SetLifeGoalFromId);
+
 			var m_SetLifeGoal = AccessTools.Method(type, "SetLifeGoal",
 				new[]
 				{
@@ -210,6 +218,8 @@ namespace Beached_ModAPI
 				if (logWarnings) Debug.LogWarning("SetLifeGoal is not a method.");
 				return false;
 			}
+
+			SetLifeGoal = (SetLifeGoalDelegate)Delegate.CreateDelegate(typeof(SetLifeGoalDelegate), m_SetLifeGoal);
 
 			return true;
 		}
