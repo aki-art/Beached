@@ -14,6 +14,7 @@
 			STEPPED_IN_MUCUS = "Beached_SteppedInMucus",
 			WISHING_STAR = "Beached_WishingStar", // applied when they see shooting stars
 			POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds",
+			POFF_HELIUM = "Beached_PoffHelium",
 			PLUSHIE_PACU = "Beached_Effect_PlushiePacu",
 			PLUSHIE_PUFT = "Beached_Effect_PlushiePuft",
 			PLUSHIE_VOLE = "Beached_Effect_PlushieVole";
@@ -81,6 +82,10 @@
 
 			new EffectBuilder(POFF_CLEANEDTASTEBUDS, CONSTS.CYCLE_LENGTH * 6, false)
 				.Modifier(Db.Get().Attributes.FoodExpectation.Id, 1)
+				.Add(set);
+
+			new EffectBuilder(POFF_HELIUM, CONSTS.CYCLE_LENGTH, false)
+				.Modifier(Db.Get().Attributes.QualityOfLife.Id, 1)
 				.Add(set);
 
 			/*            new EffectBuilder(LIMPETHOST, 0, false)

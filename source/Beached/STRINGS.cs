@@ -993,6 +993,12 @@ namespace Beached
 				public static LocString DESC = $"This duplicant is less picky about their food.";
 			}
 
+			public class BEACHED_HELIUM
+			{
+				public static LocString NAME = "High Pitched";
+				public static LocString DESC = $"This duplicant is less picky about their food.";
+			}
+
 			public class BEACHED_EFFECT_PLUSHIEVOLE
 			{
 				public static LocString NAME = "Shove-Vole Plushie";

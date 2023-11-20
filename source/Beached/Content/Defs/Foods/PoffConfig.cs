@@ -33,6 +33,13 @@ namespace Beached.Content.Defs.Foods
 				qualityCooked = 0,
 				caloriesCooked = 900f
 			}.Effects(DlcManager.AVAILABLE_ALL_VERSIONS, BEffects.POFF_CLEANEDTASTEBUDS),
+			new PoffInfo(SimHashes.Helium)
+			{
+				qualityRaw = 1,
+				caloriesRaw = 900f,
+				qualityCooked = 3,
+				caloriesCooked = 1100f
+			}.Effects(DlcManager.AVAILABLE_ALL_VERSIONS, BEffects.POFF_HELIUM),
 			new PoffInfo(Elements.ammonia)
 			{
 				qualityRaw = 0,

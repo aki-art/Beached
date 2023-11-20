@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Beached.Content;
+using HarmonyLib;
 namespace Beached.Patches
 {
 	public class SpeechMonitorPatch
@@ -8,8 +9,8 @@ namespace Beached.Patches
 		{
 			public static void Postfix(SpeechMonitor.Instance smi)
 			{
-				// TODO: if under effect of Helium Poff
-				smi.ev.setPitch(10f);
+				if (smi.HasTag(BTags.heliumPoffed))
+					smi.ev.setPitch(10f);
 			}
 		}
 	}

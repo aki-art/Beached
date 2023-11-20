@@ -40,6 +40,9 @@ namespace Beached.Content.Scripts
 		{
 			if (!effects.HasEffect(BEffects.POFF_CLEANEDTASTEBUDS))
 				kPrefabID.RemoveTag(BTags.palateCleansed);
+
+			if (!effects.HasEffect(BEffects.POFF_HELIUM))
+				kPrefabID.RemoveTag(BTags.heliumPoffed);
 		}
 
 		internal void OnPalateCleansed()

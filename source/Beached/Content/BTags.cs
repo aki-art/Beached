@@ -24,7 +24,8 @@ namespace Beached.Content
 			palateCleanserFood = TagManager.Create("Beached_PalateCleanserFood"),
 			palateCleansed = TagManager.Create("Beached_PalateCleansed"),
 			furAllergic = TagManager.Create("Beached_FurAllergic"),
-			seafoodAllergic = TagManager.Create("Beached_SeafoodAllergic");
+			seafoodAllergic = TagManager.Create("Beached_SeafoodAllergic"),
+			heliumPoffed = TagManager.Create("Beached_HeliumPoffed");
 
 		public static TagSet eggs = new()
 		{
