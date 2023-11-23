@@ -13,6 +13,7 @@ namespace Beached.Content.ModDb
 			duplicantConfigs = new()
 			{
 				{ MinnowConfig.ID , new MinnowConfig() }, // TODO clean up
+				{ VahanoConfig.ID , new VahanoConfig() }, // TODO clean up
 			};
 
 			headKanims = new();
