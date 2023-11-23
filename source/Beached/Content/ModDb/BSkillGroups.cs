@@ -14,12 +14,11 @@ namespace Beached.Content.ModDb
 		public static void Register(SkillGroups __instance)
 		{
 			Precision = new SkillGroup(
-							PRECISION_ID,
-							//BChoreGroups.HANDYWORK_ID,
-							Db.Get().ChoreGroups.Research.Id,
-							STRINGS.DUPLICANTS.CHOREGROUPS.BEACHED_CHOREGROUP_HANDYWORK.NAME,
-							ModAssets.Sprites.ERRAND_MINERALOGY,
-							ModAssets.Sprites.ARCHETYPE_MINERALOGY);
+				PRECISION_ID,
+				BChoreGroups.HANDYWORK_ID,
+				STRINGS.DUPLICANTS.CHOREGROUPS.BEACHED_CHOREGROUP_HANDYWORK.NAME,
+				ModAssets.Sprites.ERRAND_MINERALOGY,
+				ModAssets.Sprites.ARCHETYPE_MINERALOGY);
 
 			var index = __instance.resources.FindIndex(s => s.Id == __instance.Mining.Id);
 
@@ -40,8 +39,7 @@ namespace Beached.Content.ModDb
 
 			Precision.requiredChoreGroups = new List<string>
 			{
-                //BChoreGroups.HANDYWORK_ID
-                Db.Get().ChoreGroups.Research.Id
+				BChoreGroups.HANDYWORK_ID
 			};
 
 			DUPLICANTSTATS.ARCHETYPE_TRAIT_EXCLUSIONS.Add(PRECISION_ID, new List<string>()

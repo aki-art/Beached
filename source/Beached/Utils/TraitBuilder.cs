@@ -1,4 +1,5 @@
-﻿using Klei.AI;
+﻿using HarmonyLib;
+using Klei.AI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Beached.Utils
 			string id;
 			int rarity = DUPLICANTSTATS.RARITY_COMMON;
 			int impact = 0;
+			int statBonus = 0;
 			string dlcId = DlcManager.VANILLA_ID;
 			List<string> mutuallyExclusiveTraits;
 			List<HashedString> mutuallyExclusiveAptitudes;
@@ -23,6 +25,12 @@ namespace Beached.Utils
 			public TraitValBuilder(string id)
 			{
 				this.id = id;
+			}
+
+			public TraitValBuilder StatBonus(int statBonus)
+			{
+				this.statBonus = statBonus;
+				return this;
 			}
 
 			public TraitValBuilder Rarity(int rarity)
@@ -65,6 +73,7 @@ namespace Beached.Utils
 					dlcId = dlcId,
 					impact = impact,
 					rarity = rarity,
+					statBonus = statBonus,
 				};
 
 				traitsList.Add(item);
@@ -133,7 +142,24 @@ namespace Beached.Utils
 			return this;
 		}
 
-		public TraitBuilder DisableChoreGroups(ChoreGroup[] choreGroups)
+		public TraitBuilder DisableChoreGroup(string choreGroup)
+		{
+			trait.disabledChoreGroups ??= new ChoreGroup[1];
+			trait.disabledChoreGroups = trait.disabledChoreGroups.AddToArray(Db.Get().ChoreGroups.Get(choreGroup));
+
+			Log.Debug("Added disabled choregroup");
+			Log.Debug((trait.disabledChoreGroups != null).ToString());
+			foreach (var cg in trait.disabledChoreGroups)
+			{
+				Log.Debug($"is null? {cg == null}");
+				Log.Debug("Disabled: " + cg.Id);
+				Log.Debug(cg.Name);
+			}
+
+			return this;
+		}
+
+		public TraitBuilder DisableChoreGroups(params ChoreGroup[] choreGroups)
 		{
 			trait.disabledChoreGroups = choreGroups;
 			return this;

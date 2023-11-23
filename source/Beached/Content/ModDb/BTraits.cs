@@ -14,6 +14,7 @@ namespace Beached.Content.ModDb
 	{
 		public const string
 			DEXTEROUS = "Beached_Dexterous",
+			CLUMSY = "Beached_Clumsy",
 			FUR_ALLERGY = "Beached_FurAllergy",
 			GILLS = "Beached_Gills",
 			COMFORT_SEEKER = "Beached_ComfortSeeker",
@@ -109,7 +110,6 @@ namespace Beached.Content.ModDb
 
 		public static void Register()
 		{
-			Log.Debug("REGISTER TRAITS");
 			var db = Db.Get();
 
 			new TraitBuilder(PLUSHIE_MAKER, true)
@@ -121,6 +121,15 @@ namespace Beached.Content.ModDb
 				.OnAdd(OnAddSiren)
 				.AddToTraits()
 					.Build(DUPLICANTSTATS.STRESSTRAITS);
+
+			new TraitBuilder(CLUMSY, false)
+				.DisableChoreGroups(BChoreGroups.handyWork)
+				.AddToTraits()
+					.Rarity(DUPLICANTSTATS.RARITY_EPIC)
+					.StatBonus(DUPLICANTSTATS.LARGE_STATPOINT_BONUS)
+					.ExclusiveWithTraits(DEXTEROUS)
+					.ExclusiveWithAptitudes(BSkillGroups.PRECISION_ID)
+					.Build(DUPLICANTSTATS.BADTRAITS);
 
 			new TraitBuilder(FUR_ALLERGY, false)
 				.Tag(BTags.furAllergic)
@@ -143,11 +152,9 @@ namespace Beached.Content.ModDb
 			new TraitBuilder(DEXTEROUS, true, BAttributes.PRECISION_ID)
 				.Modifier(BAttributes.PRECISION_ID, TRAITS.GOOD_ATTRIBUTE_BONUS)
 				.AddToTraits()
+					.ExclusiveWithTraits(CLUMSY)
 					.Rarity(DUPLICANTSTATS.RARITY_COMMON)
 					.Build(DUPLICANTSTATS.GOODTRAITS);
-
-			foreach (var trait in DUPLICANTSTATS.GOODTRAITS)
-				Log.Debug("JOY: " + trait.id);
 
 			AddJewelleryTrait(
 				LIFE_GOAL_IDS.JEWELLERY_MAXIXE,

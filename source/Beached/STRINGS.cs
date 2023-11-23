@@ -781,7 +781,7 @@ namespace Beached
 			{
 				public class BEACHED_MINNOW
 				{
-					public static LocString NAME = "MinnowDISPLAYNAME";
+					public static LocString NAME = "Minnow";
 					public static LocString DESC = "Minnow's printing label actually says \"Experiment MRM8\", but she prefers to go by Minnow.";
 				}
 
@@ -866,6 +866,12 @@ namespace Beached
 					public static LocString SHORT_DESC_TOOLTIP = "This Duplicant can also breath in any kind of Water. Does not grant immunity to wet debuffs.";
 					public static LocString DESC = "This duplicant can live like a fish in the water... or at least breath like one.";
 					public static LocString WATERBREATHING = "• Amphibious";
+				}
+
+				public class BEACHED_CLUMSY
+				{
+					public static LocString NAME = "Clumsy";
+					public static LocString DESC = "This duplicant is not very precise in dexterous with their movements and cannot to Precision Work errands.";
 				}
 
 				public class BEACHED_COMFORTSEEKER
