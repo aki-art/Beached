@@ -1,12 +1,15 @@
-﻿using Beached.Content.Defs;
+﻿using Beached.Content;
+using Beached.Content.Defs;
 using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Corals;
 using Beached.Content.Defs.Entities.Critters;
 using Beached.Content.Defs.Entities.SetPieces;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Flora;
+using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
 using Beached.Content.ModDb.Germs;
+using FUtility;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +19,7 @@ namespace Beached.Patches
 {
 	public class SandboxToolParameterMenuPatch
 	{
-		private static readonly HashSet<Tag> tags = new()
+		private static readonly HashSet<Tag> TAGS = new()
 		{
 			CrystalConfig.ID,
 
@@ -74,20 +77,120 @@ namespace Beached.Patches
 			BrinePoolConfig.ID,
 		};
 
+		private static readonly HashSet<Tag> FOOD = new()
+		{
+			AstrobarConfig.ID,
+			SmokedFishConfig.ID,
+			SmokedLiceConfig.ID,
+			SmokedMeatConfig.ID,
+			SmokedTofuConfig.ID,
+			LegendarySteakConfig.ID,
+			AspicLiceConfig.ID,
+			JellyConfig.ID,
+			BerryJellyConfig.ID,
+			MusselTongueConfig.ID,
+			SpongeCakeConfig.ID,
+			PipShootConfig.ID
+		};
+
+		private static readonly HashSet<Tag> FAUNA = new()
+		{
+			SlickShellConfig.ID,
+			BabySlickShellConfig.ID,
+			JellyfishStrobilaConfig.ID,
+			JellyfishConfig.ID,
+			BabyJellyfishConfig.ID
+		};
+
+		private static readonly HashSet<Tag> FLORA = new()
+		{
+			CellAlgaeConfig.ID,
+			GlowCapConfig.ID,
+			LeafletCoralConfig.ID,
+			MusselSproutConfig.ID,
+			PoffShroomConfig.ID,
+			WaterCupsConfig.ID,
+			DewPalmConfig.ID,
+			BambooConfig.ID,
+			PurpleHangerConfig.ID,
+		};
+
+		private static readonly HashSet<Tag> GEYSERS = new()
+		{
+			"GeyserGeneric_" + GeyserConfigs.AMMONIA_VENT,
+			"GeyserGeneric_" + GeyserConfigs.MURKY_BRINE_GEYSER,
+			"GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO,
+			"GeyserGeneric_" + GeyserConfigs.CORAL_REEF,
+		};
+
+		private static readonly HashSet<Tag> GEMS = new()
+		{
+			RareGemsConfig.FLAWLESS_DIAMOND,
+			RareGemsConfig.HADEAN_ZIRCON,
+			RareGemsConfig.MAXIXE,
+			RareGemsConfig.STRANGE_MATTER,
+		};
+
+		private static readonly HashSet<Tag> EQUIPMENTS = new()
+		{
+
+			MaxixePendantConfig.ID,
+			RubberBootsConfig.ID,
+			HematiteNecklaceConfig.ID,
+			HadeanZirconAmuletConfig.ID,
+			PearlNecklaceConfig.ID,
+			ZeolitePendantConfig.ID,
+			StrangeMatterAmuletConfig.ID,
+		};
+
 		[HarmonyPatch(typeof(SandboxToolParameterMenu), nameof(SandboxToolParameterMenu.ConfigureEntitySelector))]
 		public static class SandboxToolParameterMenu_ConfigureEntitySelector_Patch
 		{
 			public static void Postfix(SandboxToolParameterMenu __instance)
 			{
-				var sprite = Def.GetUISprite(Assets.GetPrefab(CrabConfig.ID));
-				var parent = __instance.entitySelector.filters.First(x =>
-					x.Name == global::STRINGS.UI.SANDBOXTOOLS.FILTERS.ENTITIES.SPECIAL);
+				foreach (var poff in PoffConfig.configs)
+				{
+					FOOD.Add(poff.rawID);
+					FOOD.Add(poff.cookedID);
+				}
 
-				var filter = new SearchFilter("Beached", obj => obj is KPrefabID id && tags.Contains(id.PrefabTag), parent, sprite);
+				var sprite = Def.GetUISprite(Assets.GetPrefab(SlickShellConfig.ID));
+				var mods = SandboxUtil.AddModMenu(__instance, "Beached", sprite, _ => false);
 
-				AddFilters(__instance, filter);
+				AddSubMenu(__instance, mods, "All", TAGS, JellyfishConfig.ID);
+				AddSubMenu(__instance, mods, "Flora", FLORA, WaterCupsConfig.ID);
+				AddSubMenu(__instance, mods, "Fauna", FAUNA, JellyfishConfig.ID);
+				AddSubMenu(__instance, mods, "Geysers", GEYSERS, "GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO);
+				AddSubMenu(__instance, mods, "Gems", GEMS, RareGemsConfig.HADEAN_ZIRCON);
+				AddSubMenu(__instance, mods, "Equipment", EQUIPMENTS, RubberBootsConfig.ID);
+				AddSubMenu(__instance, mods, "Set Pieces", BTags.setPiece, SetPiecesConfig.BEACH);
+				AddSubMenu(__instance, mods, "Food", FOOD, AstrobarConfig.ID);
+				AddSubMenu(__instance, mods, "Genetic Samples", BTags.geneticSample, GeneticSamplesConfig.FABULOUS);
+
+				SandboxUtil.UpdateOptions(__instance);
 			}
 
+			private static void AddSubMenu(SandboxToolParameterMenu menu, SearchFilter mods, string name, Tag tag, string sprite)
+			{
+				var filter = new SearchFilter(
+					name,
+					prefab => prefab is KPrefabID id && id.HasTag(tag),
+					mods,
+					Def.GetUISprite(Assets.GetPrefab(sprite)));
+
+				menu.entitySelector.filters = menu.entitySelector.filters.AddToArray(filter);
+			}
+
+			private static void AddSubMenu(SandboxToolParameterMenu menu, SearchFilter mods, string name, HashSet<Tag> set, string sprite)
+			{
+				var filter = new SearchFilter(
+					name,
+					prefab => prefab is KPrefabID id && set.Contains(id.PrefabTag),
+					mods,
+					Def.GetUISprite(Assets.GetPrefab(sprite)));
+
+				menu.entitySelector.filters = menu.entitySelector.filters.AddToArray(filter);
+			}
 
 			public static void AddFilters(SandboxToolParameterMenu menu, params SearchFilter[] newFilters)
 			{

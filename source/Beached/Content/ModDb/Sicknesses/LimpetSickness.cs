@@ -1,7 +1,5 @@
-﻿using FUtility;
-using Klei.AI;
+﻿using Klei.AI;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Beached.Content.ModDb.Sicknesses
 {
@@ -9,7 +7,7 @@ namespace Beached.Content.ModDb.Sicknesses
 	{
 		public const string ID = "Beached_Sickness_Limpets_Duplicant";
 		public const float IMMUNE_ATTACK_STRENGTH = TUNING.DISEASE.IMMUNE_ATTACK_STRENGTH_PERCENT.SLOW_3;
-		public static float duration = 0.05f * Consts.CYCLE_LENGTH;
+		public static float duration = 0.05f * CONSTS.CYCLE_LENGTH;
 
 		public static List<InfectionVector> limpetsInfectionVectors = new()
 		{
@@ -29,7 +27,7 @@ namespace Beached.Content.ModDb.Sicknesses
 		{
 			AddSicknessComponent(new AttributeModifierSickness(new[]
 			{
-				new AttributeModifier(Db.Get().Amounts.Calories.deltaAttribute.Id, -500_000f / Consts.CYCLE_LENGTH, STRINGS.DUPLICANTS.DISEASES.BEACHED_LIMPETS_DUPLICANT.NAME),
+				new AttributeModifier(Db.Get().Amounts.Calories.deltaAttribute.Id, -500_000f / CONSTS.CYCLE_LENGTH, STRINGS.DUPLICANTS.DISEASES.BEACHED_LIMPETS_DUPLICANT.NAME),
 				new AttributeModifier(Db.Get().Attributes.Decor.Id, -20)
 			}));
 

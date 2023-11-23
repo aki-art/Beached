@@ -32,7 +32,11 @@ namespace Beached.Content.Defs.Entities.SetPieces
 				Grid.SceneLayer.Backwall,
 				width,
 				height,
-				TUNING.DECOR.BONUS.TIER2);
+				TUNING.DECOR.BONUS.TIER2,
+				additionalTags: new List<Tag>()
+				{
+					BTags.setPiece
+				});
 
 			var setPiece = prefab.AddComponent<SetPiece>();
 			setPiece.setPiecePrefabID = "test";

@@ -60,7 +60,8 @@ namespace Beached.Content.Defs.Items
 				additionalTags: new List<Tag>
 				{
 					GameTags.PedestalDisplayable,
-					GameTags.Organics
+					GameTags.Organics,
+					BTags.geneticSample
 				});
 
 			prefab.AddOrGet<EntitySplitter>();

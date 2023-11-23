@@ -6,26 +6,28 @@ namespace Beached.Content
 	public class BTags
 	{
 		public static readonly Tag
-			meat = TagManager.Create("Beached_Meat"), // any food from animals. Va'Hano eats these
-			corrodable = TagManager.Create("Beached_Corrodable"), // get damaged in acid
-			vista = TagManager.Create("Beached_Vista"), // allows Vista rooms
-			lubricated = TagManager.Create("Beached_Lubricated"),
 			amphibious = TagManager.Create("Beached_Amphibious"),
+			aquatic = TagManager.Create("Beached_Aquatic"),
 			bamboo = TagManager.Create("Beached_Bamboo"),
 			blueprintable = TagManager.Create("Beached_Blueprintable"),
 			coral = TagManager.Create("Beached_Coral"),
-			noPaint = TagManager.Create("NoPaint"), // MaterialColor mod uses this
-			noBackwall = TagManager.Create("NoBackwall"), // Background Tiles mod uses this
-			aquatic = TagManager.Create("Beached_Aquatic"),
-			geneticallyModified = TagManager.Create("Beached_GeneticallyModified"),
-			wishingStars = TagManager.Create("Beached_WishingStars"), // used on events that should trigger the wishing star effect on dupes
 			coralFrag = TagManager.Create("Beached_CoralFrag"),
+			corrodable = TagManager.Create("Beached_Corrodable"), // get damaged in acid
 			dim = TagManager.Create("Beached_Dim"),
-			palateCleanserFood = TagManager.Create("Beached_PalateCleanserFood"),
-			palateCleansed = TagManager.Create("Beached_PalateCleansed"),
 			furAllergic = TagManager.Create("Beached_FurAllergic"),
+			geneticallyModified = TagManager.Create("Beached_GeneticallyModified"),
+			geneticSample = TagManager.Create("Beached_GeneticSample"),
+			heliumPoffed = TagManager.Create("Beached_HeliumPoffed"),
+			lubricated = TagManager.Create("Beached_Lubricated"),
+			meat = TagManager.Create("Beached_Meat"), // any food from animals. Va'Hano eats these
+			noBackwall = TagManager.Create("NoBackwall"), // Background Tiles mod uses this
+			noPaint = TagManager.Create("NoPaint"), // MaterialColor mod uses this
+			palateCleansed = TagManager.Create("Beached_PalateCleansed"),
+			palateCleanserFood = TagManager.Create("Beached_PalateCleanserFood"),
 			seafoodAllergic = TagManager.Create("Beached_SeafoodAllergic"),
-			heliumPoffed = TagManager.Create("Beached_HeliumPoffed");
+			setPiece = TagManager.Create("Beached_SetPiece"),
+			vista = TagManager.Create("Beached_Vista"), // allows Vista rooms
+			wishingStars = TagManager.Create("Beached_WishingStars"); // used on events that should trigger the wishing star effect on dupes
 
 		public static TagSet eggs = new()
 		{
