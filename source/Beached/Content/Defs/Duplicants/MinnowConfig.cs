@@ -4,7 +4,8 @@ namespace Beached.Content.Defs.Duplicants
 {
 	public class MinnowConfig : IDuplicantConfig
 	{
-		public const string ID = "MINNOW";
+		public const string ID = "BEACHED_MINNOW";
+		public const int HASH = 770288065;
 
 		public string GetID() => ID;
 
@@ -19,12 +20,18 @@ namespace Beached.Content.Defs.Duplicants
 					BTraits.PLUSHIE_MAKER,
 					"",
 					null,
-					1,
-					1,
+					HASH,
+					HASH,
 					1,
 					2,
-					4,
+					HASH,
 					2,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
 					STRINGS.DUPLICANTS.PERSONALITIES.BEACHED_MINNOW.DESC,
 					true);
 		}
@@ -39,9 +46,6 @@ namespace Beached.Content.Defs.Duplicants
 
 		public void ModifyBodyData(ref KCompBuilder.BodyData bodyData)
 		{
-			bodyData.hair = HashCache.Get().Add("hair_minnow");
-			bodyData.headShape = HashCache.Get().Add("headshape_minnow");
-			bodyData.mouth = HashCache.Get().Add("mouth_minnow");
 		}
 
 		public string GetHeadAnim() => "minnow_head_kanim";
