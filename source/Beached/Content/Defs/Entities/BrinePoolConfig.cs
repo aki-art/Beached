@@ -34,6 +34,8 @@ namespace Beached.Content.Defs.Entities
 
 		public void OnPrefabInit(GameObject inst) { }
 
-		public void OnSpawn(GameObject inst) { }
+		public void OnSpawn(GameObject inst)
+		{
+		}
 	}
 }

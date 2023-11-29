@@ -1,11 +1,48 @@
 ﻿using Beached.Content.Scripts.Entities.Comets;
+using System.Collections.Generic;
 using UnityEngine;
 using static EdiblesManager;
 
 namespace Beached.Content.Defs
 {
-	internal class BEntityTemplates
+	public class BEntityTemplates
 	{
+		public static GameObject CreateSimpleItem(string ID, string name, string description, string anim, EffectorValues decor, SimHashes element, bool loop = false)
+		{
+			var prefab = EntityTemplates.CreateLooseEntity(
+				ID,
+				name,
+				description,
+				1f,
+				false,
+				Assets.GetAnim(anim),
+				"object",
+				Grid.SceneLayer.Creatures,
+				EntityTemplates.CollisionShape.RECTANGLE,
+				0.66f,
+				0.75f,
+				true,
+				0,
+				element,
+				additionalTags: new List<Tag>
+				{
+					BTags.MaterialCategories.crystal,
+					GameTags.PedestalDisplayable
+				});
+
+			prefab.AddOrGet<EntitySplitter>();
+			prefab.AddOrGet<SimpleMassStatusItem>();
+			prefab.AddOrGet<OccupyArea>().SetCellOffsets(EntityTemplates.GenerateOffsets(1, 1));
+			prefab.AddOrGet<DecorProvider>().SetValues(decor);
+
+			if (loop)
+			{
+				prefab.GetComponent<KBatchedAnimController>().initialMode = KAnim.PlayMode.Loop;
+			}
+
+			return prefab;
+		}
+
 		public static GameObject CreateFood(
 			string ID,
 			string anim,

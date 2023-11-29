@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Scripts.ClassExtensions;
 using Klei.AI;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Beached.Utils
 {
@@ -8,6 +9,23 @@ namespace Beached.Utils
 	{
 		public static Dictionary<MinionStartingStats, MinionStartingStatsExtension> minionStartingStatsExtensions = new();
 		public static Dictionary<CavityInfo, CavityInfoExtension> cavityInfoExtensions = new();
+
+		public static void AddTags(this GameObject gameObject, params Tag[] tags)
+		{
+			if (gameObject == null)
+				return;
+
+			if (gameObject.TryGetComponent(out KPrefabID prefabID))
+				foreach (var tag in tags)
+				{
+					prefabID.AddTag(tag);
+				}
+		}
+
+		public static void AddTags(this KMonoBehaviour component, params Tag[] tags)
+		{
+			component.gameObject.AddTags(tags);
+		}
 
 		public static MinionStartingStatsExtension GetExtension(this MinionStartingStats stats)
 		{

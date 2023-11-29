@@ -84,6 +84,7 @@ namespace Beached.Patches
 			SmokedLiceConfig.ID,
 			SmokedMeatConfig.ID,
 			SmokedTofuConfig.ID,
+			HighQualityMeatConfig.ID,
 			LegendarySteakConfig.ID,
 			AspicLiceConfig.ID,
 			JellyConfig.ID,
@@ -166,6 +167,7 @@ namespace Beached.Patches
 				AddSubMenu(__instance, mods, "Set Pieces", BTags.setPiece, SetPiecesConfig.BEACH);
 				AddSubMenu(__instance, mods, "Food", FOOD, AstrobarConfig.ID);
 				AddSubMenu(__instance, mods, "Genetic Samples", BTags.geneticSample, GeneticSamplesConfig.FABULOUS);
+				AddSubMenu(__instance, mods, "Amber Inclusions", BTags.amberInclusion, AmberInclusionsConfig.FLYING_CENTIPEDE);
 
 				SandboxUtil.UpdateOptions(__instance);
 			}

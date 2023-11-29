@@ -7,6 +7,7 @@ namespace Beached.Content
 	{
 		public static readonly Tag
 			amphibious = TagManager.Create("Beached_Amphibious"),
+			amberInclusion = TagManager.Create("Beached_AmberInclusion"),
 			aquatic = TagManager.Create("Beached_Aquatic"),
 			bamboo = TagManager.Create("Beached_Bamboo"),
 			blueprintable = TagManager.Create("Beached_Blueprintable"),

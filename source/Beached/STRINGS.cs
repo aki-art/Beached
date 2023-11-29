@@ -1602,6 +1602,12 @@ namespace Beached
 					public static LocString DESC = "...";
 				}
 
+				public class BEACHED_DRYAGEDMEAT
+				{
+					public static LocString NAME = FormatAsLink("Dry Aged Meat", DryAgedMeatConfig.ID);
+					public static LocString DESC = "...";
+				}
+
 				public class BEACHED_SMOKEDMEAT
 				{
 					public static LocString NAME = FormatAsLink("Smoked Meat", SmokedMeatConfig.ID);
@@ -1754,6 +1760,27 @@ namespace Beached
 					[Note("https://en.wikipedia.org/wiki/Strange_matter")]
 					public static LocString NAME = FormatAsLink("Strange Matter", RareGemsConfig.STRANGE_MATTER);
 					public static LocString DESCRIPTION = "A droplet of strange quark matter, safely contained.";
+				}
+			}
+
+			public class AMBER_INCLUSIONS
+			{
+				public class FLYINGCENTIPEDE
+				{
+					public static LocString NAME = "Flying Centipede";
+					public static LocString DESCRIPTION = $"And ancient centipede trapped in {ELEMENTS.AMBER.NAME}.";
+				}
+
+				public class STRANGEHATCH
+				{
+					public static LocString NAME = "Strange Hatch";
+					public static LocString DESCRIPTION = $"And oddly smooth and tiny hatch trapped in {ELEMENTS.AMBER.NAME}.";
+				}
+
+				public class FEATHER
+				{
+					public static LocString NAME = "Preserved Feather";
+					public static LocString DESCRIPTION = $"A single feather trapped in {ELEMENTS.AMBER.NAME}.";
 				}
 			}
 
