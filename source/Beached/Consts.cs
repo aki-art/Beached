@@ -6,6 +6,13 @@ namespace Beached
 	{
 		public const float CYCLE_LENGTH = 600f;
 
+		public static class CRITTER_LOAD_ORDER
+		{
+			public const int
+				BABY = 100,
+				ADULT = 0;
+		}
+
 		public static class DUPLICANTS
 		{
 			public static class LIFEGOALS

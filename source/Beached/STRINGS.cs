@@ -329,6 +329,11 @@ namespace Beached
 						"It cannot receive any more modifications.";
 				}
 
+				public class BEACHED_HUNTING
+				{
+					public static LocString NAME = "Hunting";
+					public static LocString TOOLTIP = "This critter is looking for prey.";
+				}
 
 				public class BEACHED_SMOKING
 				{
@@ -619,6 +624,15 @@ namespace Beached
 					public static LocString BABY_NAME = "Maki Kit";
 					public static LocString BABY_DESC = "...";
 					public static LocString EGG_NAME = "Maki Egg";
+				}
+
+				public class BEACHED_MUFFIN
+				{
+					public static LocString NAME = FormatAsLink("Muffin", MuffinConfig.ID);
+					public static LocString DESC = "...";
+					public static LocString BABY_NAME = FormatAsLink("Muffling Whelp", MuffinConfig.ID);
+					public static LocString BABY_DESC = "...";
+					public static LocString EGG_NAME = FormatAsLink("Muffling Whelp Egg", MuffinConfig.ID);
 				}
 
 				public class DEWPALM

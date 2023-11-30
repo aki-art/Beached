@@ -15,6 +15,7 @@ namespace Beached.Content.ModDb
 		public static StatusItem geneticallyMofidied;
 		public static StatusItem gunked;
 		public static StatusItem plushed;
+		public static StatusItem hunting;
 
 		[DbEntry]
 		public static void RegisterMiscStatusItems(MiscStatusItems __instance)
@@ -118,6 +119,19 @@ namespace Beached.Content.ModDb
 				false);
 
 			__instance.Add(secretingMucus);
+
+
+			hunting = new(
+				"Beached_Hunting",
+				"CREATURES",
+				string.Empty,
+				StatusItem.IconType.Exclamation,
+				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID,
+				false);
+
+			__instance.Add(hunting);
 		}
 
 		private static string GetLubricantString(string str, object data)

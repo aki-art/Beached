@@ -27,6 +27,8 @@ namespace Beached.Content.Defs.Foods
 				0.45f,
 				foodInfo);
 
+			prefab.AddTag(BTags.meat);
+
 			return prefab;
 		}
 

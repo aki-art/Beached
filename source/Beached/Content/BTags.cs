@@ -42,12 +42,16 @@ namespace Beached.Content
 
 		public class Creatures
 		{
-			public static readonly Tag secretingMucus = TagManager.Create("BeachedSecretingMucus");
+			public static readonly Tag
+				secretingMucus = TagManager.Create("Beached_SecretingMucus"),
+				hunting = TagManager.Create("Beached_Hunting"),
+				muffinFriend = TagManager.Create("Beached_MuffinFriend");
 		}
 
 		public static class Species
 		{
 			public static readonly Tag snail = TagManager.Create("BeachedSnailSpecies");
+			public static readonly Tag muffin = TagManager.Create("BeachedMuffinSpecies");
 		}
 
 		public static class MaterialCategories
