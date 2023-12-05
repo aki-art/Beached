@@ -1,4 +1,6 @@
 ﻿using Beached.Content.Defs.Items;
+using System.Collections.Generic;
+using System.Linq;
 using TUNING;
 
 namespace Beached.Content
@@ -27,6 +29,7 @@ namespace Beached.Content
 			palateCleanserFood = TagManager.Create("Beached_PalateCleanserFood"),
 			seafoodAllergic = TagManager.Create("Beached_SeafoodAllergic"),
 			setPiece = TagManager.Create("Beached_SetPiece"),
+			glacier = TagManager.Create("Beached_Glacier"),
 			vista = TagManager.Create("Beached_Vista"), // allows Vista rooms
 			wishingStars = TagManager.Create("Beached_WishingStars"); // used on events that should trigger the wishing star effect on dupes
 
@@ -45,7 +48,7 @@ namespace Beached.Content
 			public static readonly Tag
 				secretingMucus = TagManager.Create("Beached_SecretingMucus"),
 				hunting = TagManager.Create("Beached_Hunting"),
-				muffinFriend = TagManager.Create("Beached_MuffinFriend");
+				doNotTargetMeByCarnivores = TagManager.Create("Beached_DoNotTargetMeByCarnivores");
 		}
 
 		public static class Species
@@ -62,6 +65,24 @@ namespace Beached.Content
 		public static class BuildingMaterials
 		{
 			public static Tag chime = TagManager.Create("Beached_ChimeMaterial");
+		}
+
+		public static class TagCollections
+		{
+			public static HashSet<Tag> cullableCreatures;
+
+			public static void Setup()
+			{
+				cullableCreatures = Assets.GetPrefabsWithComponent<CreatureBrain>()
+				.Where(go => !go.HasTag(BTags.Creatures.doNotTargetMeByCarnivores))
+				.Select(go => go.PrefabID())
+				.ToHashSet();
+			}
+		}
+
+		public static void OnDbInit()
+		{
+			TagCollections.Setup();
 		}
 
 		public static void OnModLoad()

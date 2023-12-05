@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts;
+﻿using Beached.Content;
+using Beached.Content.Scripts;
 using HarmonyLib;
 using UnityEngine;
 
@@ -26,6 +27,8 @@ namespace Beached.Patches
 				__result.AddOrGet<Beached_MinionStorage>();
 				__result.AddOrGet<Beached_LifeGoalTracker>();
 				__result.AddOrGet<Beached_MinionEvents>();
+
+				__result.AddTag(BTags.Creatures.doNotTargetMeByCarnivores);
 			}
 
 			private static void ConfigureSnapons(GameObject __result)

@@ -5,6 +5,8 @@ namespace Beached.Content.Scripts.UI
 {
 	// just a flat list of selectables that notify the treefilterable to fetch somethings.
 	// very similar to FlatTagFilterableSidescreen, but this one has a scrollbar
+
+	// of course a few weeks after i coded this Klei added a similar UI to the water cooler... oh well
 	public class Beached_SimplifiedFilterSideScreen : SideScreenContent
 	{
 		private SimpleFlatFilterable target;

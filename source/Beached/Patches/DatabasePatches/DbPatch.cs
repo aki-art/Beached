@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Buildings;
+﻿using Beached.Content;
+using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
 using Database;
@@ -60,6 +61,7 @@ namespace Beached.Patches.DatabasePatches
 
 
 				BDb.OnDbInit();
+				BTags.OnDbInit();
 			}
 
 			private static void RegisterBuildings()
@@ -68,6 +70,7 @@ namespace Beached.Patches.DatabasePatches
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.UTILITIES, MossBedConfig.ID, "Default", ExteriorWallConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, MiniFridgeConfig.ID, "Default", ExteriorWallConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, DNAInjectorConfig.ID, "Default", EggIncubatorConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, CollarDispenserConfig.ID, "Default", DNAInjectorConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.BASE, LaboratoryTileConfig.ID, "Tiles", PlasticTileConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, WoodCarvingConfig.ID, "decor", MarbleSculptureConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, ChimeConfig.ID, "decor", FlowerVaseConfig.ID);

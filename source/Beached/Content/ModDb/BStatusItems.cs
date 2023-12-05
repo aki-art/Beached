@@ -1,5 +1,6 @@
 ﻿using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
+using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.Items;
 using Database;
@@ -16,6 +17,7 @@ namespace Beached.Content.ModDb
 		public static StatusItem gunked;
 		public static StatusItem plushed;
 		public static StatusItem hunting;
+		public static StatusItem controllerByCollarDispenser;
 
 		[DbEntry]
 		public static void RegisterMiscStatusItems(MiscStatusItems __instance)
@@ -120,7 +122,6 @@ namespace Beached.Content.ModDb
 
 			__instance.Add(secretingMucus);
 
-
 			hunting = new(
 				"Beached_Hunting",
 				"CREATURES",
@@ -132,6 +133,25 @@ namespace Beached.Content.ModDb
 				false);
 
 			__instance.Add(hunting);
+
+			controllerByCollarDispenser = new(
+				"Beached_ControllerByCollarDispenser",
+				"CREATURES",
+				string.Empty,
+				StatusItem.IconType.Info,
+				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID,
+				false);
+
+			controllerByCollarDispenser.SetResolveStringCallback(GetCollarDispenserString);
+
+			__instance.Add(hunting);
+		}
+
+		private static string GetCollarDispenserString(string str, object data)
+		{
+			return data is CollarDispenser dispenser ? dispenser.FormatStatusItemString(str) : str;
 		}
 
 		private static string GetLubricantString(string str, object data)

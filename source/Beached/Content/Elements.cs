@@ -161,6 +161,9 @@ namespace Beached.Content
 			var iridiumSubstance = iridium.CreateSubstance(true, refined);
 			iridiumSubstance.material.SetFloat("_WorldUVScale", 10f);
 
+			var permaFrostSubstance = permaFrost.CreateSubstance();
+			permaFrostSubstance.material.SetFloat("_WorldUVScale", 18f);
+
 			// Add the ones with some special attribute
 			var newElements = new HashSet<Substance>()
 			{
@@ -173,6 +176,7 @@ namespace Beached.Content
 				iridiumSubstance,
 				nitrogen.CreateSubstance(ModAssets.Colors.nitrogenOpaque, ModAssets.Colors.nitrogenOpaque),
 				pearl.CreateSubstance(true, gem, normal: "pearl_normal"),
+				permaFrostSubstance,
 				saltyOxygen.CreateSubstance(ModAssets.Colors.mucusUi, ModAssets.Colors.mucusConduit),
 				selenite.CreateSubstance(true, gem),
 				zirconium.CreateSubstance(true, refined, specularColor: ModAssets.Colors.zirconSpecular),

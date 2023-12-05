@@ -6,24 +6,26 @@ namespace Beached.Content.Scripts.Entities.AI
 	public class PreyMonitor : GameStateMachine<PreyMonitor, PreyMonitor.Instance, IStateMachineTarget, PreyMonitor.Def>
 	{
 		public BoolParameter hasEggToGuard;
-		// public State find_egg;
-		public HuntingStates guard;
+		public HuntingStates hunt;
 
 		public override void InitializeStates(out BaseState default_state)
 		{
-			default_state = guard.safe;
+			default_state = hunt.safe;
 
 			root
 				.EventHandler(GameHashes.ObjectDestroyed, (smi, d) => smi.Cleanup(d));
 
-			guard.safe
+			hunt.safe
 				.Enter(smi => smi.RefreshThreat(null))
-				.Update((smi, dt) => smi.RefreshThreat(null), load_balance: true)
-				.ToggleStatusItem("(idle)", "");
+				.Update((smi, dt) => smi.RefreshThreat(null), load_balance: true);
 
-			guard.threatened
-				.ToggleBehaviour(BTags.Creatures.hunting, smi => smi.mainThreat != null, smi => smi.GoTo(guard.safe))
+			hunt.hunting
+				.ToggleBehaviour(BTags.Creatures.hunting, smi => smi.mainThreat != null, smi => smi.GoTo(hunt.cooldown))
 				.Update(CritterUpdateThreats);
+
+			hunt.cooldown
+				.Update((smi, dt) => smi.RefreshThreat(null), load_balance: true)
+				.ScheduleGoTo(smi => smi.huntCooldown, hunt.safe);
 		}
 
 		private static void CritterUpdateThreats(Instance smi, float dt)
@@ -31,7 +33,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			if (smi.isMasterNull || smi.CheckForThreats())
 				return;
 
-			smi.GoTo(smi.sm.guard.safe);
+			smi.GoTo(smi.sm.hunt.safe);
 		}
 
 		public class Def : BaseDef
@@ -44,7 +46,8 @@ namespace Beached.Content.Scripts.Entities.AI
 		  State
 		{
 			public State safe;
-			public State threatened;
+			public State hunting;
+			public State cooldown;
 		}
 
 		public new class Instance : GameInstance
@@ -54,11 +57,14 @@ namespace Beached.Content.Scripts.Entities.AI
 			public GameObject mainThreat;
 			private List<FactionAlignment> threats = new();
 			private int maxThreatDistance = 12;
+			private CollarWearer collarWearer;
+			public float huntCooldown = 20f;
 
 			public Instance(IStateMachineTarget master, Def def) : base(master, def)
 			{
 				alignment = master.GetComponent<FactionAlignment>();
 				navigator = master.GetComponent<Navigator>();
+				collarWearer = master.GetComponent<CollarWearer>();
 			}
 
 			public bool CheckForThreats()
@@ -101,6 +107,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			public GameObject FindThreat()
 			{
 				threats.Clear();
+
 				var gathered_entries = ListPool<ScenePartitionerEntry, ThreatMonitor>.Allocate();
 				GameScenePartitioner.Instance.GatherEntries(new Extents(Grid.PosToCell(this), maxThreatDistance), GameScenePartitioner.Instance.attackableEntitiesLayer, gathered_entries);
 
@@ -111,6 +118,9 @@ namespace Beached.Content.Scripts.Entities.AI
 					if (!(factionAlignment.transform == null) && !(factionAlignment == alignment) && factionAlignment.IsAlignmentActive() && navigator.CanReach(factionAlignment.attackable))
 					{
 						var isAlly = false;
+
+						if (!collarWearer.IsAllowedToKill(factionAlignment.GetComponent<KPrefabID>()))
+							continue;
 
 						foreach (var allyTag in def.allyTags)
 						{
@@ -137,7 +147,7 @@ namespace Beached.Content.Scripts.Entities.AI
 				}
 			}
 
-			public void GoToThreatened() => smi.GoTo(sm.guard.threatened);
+			public void GoToThreatened() => smi.GoTo(sm.hunt.hunting);
 
 			public GameObject PickClosestTarget(List<FactionAlignment> threats)
 			{
@@ -172,12 +182,12 @@ namespace Beached.Content.Scripts.Entities.AI
 					return;
 				}
 
-				if (smi.GetCurrentState() == sm.guard.safe)
+				if (smi.GetCurrentState() == sm.hunt.safe)
 					return;
 
 				Trigger((int)GameHashes.SafeFromThreats);
 
-				smi.GoTo(sm.guard.safe);
+				smi.GoTo(sm.hunt.safe);
 			}
 		}
 	}

@@ -16,6 +16,11 @@ namespace Beached.Content.Scripts
 		{
 			base.OnSpawn();
 			treeFilterable.filterByStorageCategoriesOnSpawn = false;
+			Refresh();
+		}
+
+		public void Refresh()
+		{
 			treeFilterable.UpdateFilters(selectedTags);
 		}
 

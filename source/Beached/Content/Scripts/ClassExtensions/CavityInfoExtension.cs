@@ -1,16 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Beached.Content.Scripts.Entities;
+using System.Collections.Generic;
 
 namespace Beached.Content.Scripts.ClassExtensions
 {
-	public class CavityInfoExtension
+	public class CavityInfoExtension(CavityInfo original)
 	{
-		private CavityInfo original;
-		public List<KPrefabID> pois;
-
-		public CavityInfoExtension(CavityInfo original)
-		{
-			this.original = original;
-			pois = new List<KPrefabID>();
-		}
+		private CavityInfo original = original;
+		public List<KPrefabID> pois = new();
+		public List<CollarDispenser> collarDispensers = new();
 	}
 }

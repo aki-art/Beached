@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities.AI;
+﻿using Beached.Content.Scripts.Entities;
+using Beached.Content.Scripts.Entities.AI;
 using Klei.AI;
 using System.Linq;
 using UnityEngine;
@@ -18,19 +19,25 @@ namespace Beached.Content.Defs.Entities.Critters
 				ID,
 				STRINGS.CREATURES.SPECIES.BEACHED_MUFFIN.NAME,
 				STRINGS.CREATURES.SPECIES.BEACHED_MUFFIN.DESC,
-				"beached_muffin_kanim");
+				"beached_muffin_kanim",
+				false);
+
+			EntityTemplates.ExtendEntityToWildCreature(prefab, TUNING.CREATURES.SPACE_REQUIREMENTS.TIER3);
+			ExtendToFertileCreature(prefab);
 
 			ConfigureBaseTrait(STRINGS.CREATURES.SPECIES.BEACHED_MUFFIN.NAME);
 			var diet = ConfigureDiet(prefab);
 
 			prefab.AddTags(
 				GameTags.OriginalCreature,
-				BTags.Creatures.muffinFriend);
+				BTags.Creatures.doNotTargetMeByCarnivores);
 
 			prefab.AddOrGetDef<PreyMonitor.Def>().allyTags = new[]
 			{
-				BTags.Creatures.muffinFriend
+				BTags.Creatures.doNotTargetMeByCarnivores
 			};
+
+			prefab.AddComponent<CollarWearer>();
 
 			return prefab;
 		}

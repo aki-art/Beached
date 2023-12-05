@@ -26,6 +26,7 @@ namespace Beached.ModDevTools
 		private static string liquidCullingMaskLayer = "Water";
 		private static float foulingPlaneZ = Grid.GetLayerZ(Grid.SceneLayer.BuildingFront);
 		private static int foulingPlaneLayer = 3500;
+		private static float uvScale = 10f;
 
 		private string[] zoneTypes;
 		EventInstance instance;
@@ -40,6 +41,13 @@ namespace Beached.ModDevTools
 			if (ImGui.Button("Debug Data trigger"))
 				Beached_Mod.Instance.Trigger(ModHashes.debugDataChange);
 
+			if (ImGui.DragFloat("Permafrost UV Scale", ref uvScale))
+			{
+				//ElementLoader.GetElement(Elements.permaFrost.Tag).substance.material.SetFloat("_WorldUVScale", uvScale);
+				GroundRenderer.Materials materials = World.Instance.groundRenderer.elementMaterials[Elements.permaFrost];
+				materials.opaque.SetFloat("_WorldUVScale", uvScale);
+				materials.alpha.SetFloat("_WorldUVScale", uvScale);
+			}
 			HandleSelectedObject();
 			FoulingPlane();
 			Seasons();

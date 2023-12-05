@@ -138,6 +138,8 @@ namespace Beached
 
 			if (!isCritterTraitsRebornHere)
 				Patches.SimpleInfoScreenPatch.Patch(harmony);
+
+			Integration.CritterShedding.Initialize();
 		}
 	}
 }

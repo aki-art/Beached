@@ -224,6 +224,12 @@ namespace Beached
 		{
 			public class STORY_TRAITS
 			{
+				public class GLACIERS
+				{
+					public static LocString NAME = "Glaciers";
+					public static LocString DESCRIPTION = "Treasures trapped inside glacial ice.";
+				}
+
 				public class AFFG
 				{
 					public static LocString NAME = "Atmospheric Force-Field Generator";
@@ -319,6 +325,18 @@ namespace Beached
 						"Submerge in any liquid to rejuvenate.\n" +
 						"\n" +
 						"Death in {0}s";
+				}
+
+				public class BEACHED_CONTROLLERBYCOLLARDISPENSER
+				{
+					public static LocString NAME = "Instructed";
+					public static LocString TOOLTIP = "This hunter is selective about it's prey, as instructed. \n\n" +
+						"Allowed prey: {PermittedCritters}\n" +
+						"\n" +
+						"{PerCritter}.";
+
+					public static LocString PER_CRITTER = "It will leave {MinCount} of each premitted critter alive.";
+					public static LocString GLOBAL = "It will leave {MinCount} total critters alive in it's encluse, regardless of species.";
 				}
 
 				public class BEACHED_GENETICALLYMODIFIED
@@ -1418,6 +1436,20 @@ namespace Beached
 			{
 				public static LocString NAME = FormatAsLink("Molten Zirconium", Elements.zirconiumMolten.ToString());
 				public static LocString DESC = "TODO";
+			}
+		}
+
+		public class ENTITIES
+		{
+			public class GLACIERS
+			{
+				public static LocString GENERIC_THAW = "Thaw or dig up this feature to retrieve the treasures from the inside.";
+
+				public class BEACHED_GLACIER_MUFFINS
+				{
+					public static LocString NAME = "Trapped Creatures";
+					public static LocString DESCRIPTION = "Two unknown critters are trapped in this ice. Based on their large teeth and claws, if I want to thaw them I should prepare for accomodations fit for a carnivore with a big appetite. It appears these are the only two speciments left in existence.";
+				}
 			}
 		}
 

@@ -5,45 +5,35 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters
 {
+	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.ADULT + 1)]
 	public class BaseMuffinConfig
 	{
-		public static GameObject CreatePrefab(string id, string name, string desc, string animFile, string symbolOverridePrefix = null)
+		public static GameObject CreatePrefab(string id, string name, string desc, string animFile, bool isBaby, string symbolOverridePrefix = null)
 		{
-			var prefab = EntityTemplates.CreatePlacedEntity(
-				id,
-				name,
-				desc,
-				MuffinTuning.MASS,
-				Assets.GetAnim(animFile),
-				"idle_loop",
-				Grid.SceneLayer.Creatures,
-				1,
-				2,
-				DECOR.BONUS.TIER2);
+			var prefab = CritterBuilder.Create(id, animFile)
+				.Name(name)
+				.Description(desc)
+				.Mass(100)
+				.Size(1, 1)
+				.Navigation(CONSTS.NAV_GRID.WALKER_1X2, NavType.Floor)
+				.Temperatures(-60, -80, 50, 80)
+				.DeathDrops((MeatConfig.ID, 1), (BasicFabricConfig.ID, 1))
+				.Decor(DECOR.BONUS.TIER2)
+				.Faction(FactionManager.FactionID.Predator)
+				.CanDrown()
+				.CanEntomb()
+				.ShedFur(0.25f, Util.ColorFromHex("d7dfed"))
+				.Build();
 
-			EntityTemplates.ExtendEntityToBasicCreature(
-				prefab,
-				FactionManager.FactionID.Predator,
-				id + "Original",
-				CONSTS.NAV_GRID.WALKER_1X2,
-				NavType.Floor,
-				16,
-				MuffinTuning.SPEED,
-				MuffinTuning.ON_DEATH_DROP,
-				2,
-				true,
-				true,
-				GameUtil.GetTemperatureConvertedToKelvin(-60, GameUtil.TemperatureUnit.Celsius),
-				GameUtil.GetTemperatureConvertedToKelvin(50, GameUtil.TemperatureUnit.Celsius),
-				GameUtil.GetTemperatureConvertedToKelvin(-80, GameUtil.TemperatureUnit.Celsius),
-				GameUtil.GetTemperatureConvertedToKelvin(80, GameUtil.TemperatureUnit.Celsius));
-
-			ConfigureAI(prefab, symbolOverridePrefix, BTags.Species.snail);
+			ConfigureAI(prefab, symbolOverridePrefix, BTags.Species.snail, isBaby);
+			EntityTemplates.CreateAndRegisterBaggedCreature(prefab, true, true);
 
 			prefab.AddTag(GameTags.Creatures.Walker);
 
 			prefab.AddWeapon(2f, 3f);
 			prefab.AddOrGetDef<CreatureFallMonitor.Def>();
+			prefab.AddOrGet<Trappable>();
+			//placedEntity.AddOrGetDef<ThreatMonitor.Def>().fleethresholdState = Health.HealthState.Dead;
 
 			return prefab;
 		}
@@ -60,7 +50,7 @@ namespace Beached.Content.Defs.Entities.Critters
 			return prefab;
 		}
 
-		public static void ConfigureAI(GameObject gameObject, string symbolOverridePrefix, Tag species)
+		public static void ConfigureAI(GameObject gameObject, string symbolOverridePrefix, Tag species, bool isBaby)
 		{
 			var choreTable = new ChoreTable.Builder()
 				.Add(new DeathStates.Def())
@@ -69,19 +59,19 @@ namespace Beached.Content.Defs.Entities.Critters
 				.Add(new TrappedStates.Def())
 				//.Add(new IncubatingStates.Def())
 				.Add(new BaggedStates.Def())
-				//.Add(new FallStates.Def())
-				//.Add(new StunnedStates.Def())
+				.Add(new FallStates.Def())
+				.Add(new StunnedStates.Def())
 				.Add(new DebugGoToStates.Def())
 				.Add(new FleeStates.Def())
-				.Add(new HunterStates.Def())
 				.Add(new AttackStates.Def("eat_pre", "eat_pst", null))
 				.PushInterruptGroup()
 				//.Add(new CreatureSleepStates.Def())
 				.Add(new FixedCaptureStates.Def())
 				.Add(new EatStates.Def())
-				//.Add(new RanchedStates.Def())
+				.Add(new RanchedStates.Def())
+				.Add(new HunterStates.Def(), isBaby)
 				//.Add(new LayEggStates.Def())
-				//.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
+				.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
 				.Add(new CallAdultStates.Def())
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());

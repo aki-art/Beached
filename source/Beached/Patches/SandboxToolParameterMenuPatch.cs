@@ -168,6 +168,7 @@ namespace Beached.Patches
 				AddSubMenu(__instance, mods, "Food", FOOD, AstrobarConfig.ID);
 				AddSubMenu(__instance, mods, "Genetic Samples", BTags.geneticSample, GeneticSamplesConfig.FABULOUS);
 				AddSubMenu(__instance, mods, "Amber Inclusions", BTags.amberInclusion, AmberInclusionsConfig.FLYING_CENTIPEDE);
+				AddSubMenu(__instance, mods, "Glaciers", BTags.glacier, GlaciersConfig.MUFFINS);
 
 				SandboxUtil.UpdateOptions(__instance);
 			}
