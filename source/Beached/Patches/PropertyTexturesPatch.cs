@@ -8,17 +8,17 @@ namespace Beached.Patches
 {
 	public class PropertyTexturesPatch
 	{
-		// set the liquid texture for the wavy shader
-		[HarmonyPatch(typeof(PropertyTextures), nameof(PropertyTextures.OnReset))]
-		public class PropertyTextures_OnReset_Patch
-		{
-			public static void Postfix(PropertyTextures __instance)
-			{
-				ModAssets.Materials.liquidRefractionMat.SetTexture(
-					"_LiquidTex",
-					__instance.externallyUpdatedTextures[(int)PropertyTextures.Property.Liquid]);
-			}
-		}
+		/*		// set the liquid texture for the wavy shader
+				[HarmonyPatch(typeof(PropertyTextures), nameof(PropertyTextures.OnReset))]
+				public class PropertyTextures_OnReset_Patch
+				{
+					public static void Postfix(PropertyTextures __instance)
+					{
+						ModAssets.Materials.liquidRefractionMat.SetTexture(
+							"_LiquidTex",
+							__instance.externallyUpdatedTextures[(int)PropertyTextures.Property.Liquid]);
+					}
+				}*/
 
 #if ELEMENTS
 		// Makes the Salty Oxygen texture the lighter texture Oxygen uses

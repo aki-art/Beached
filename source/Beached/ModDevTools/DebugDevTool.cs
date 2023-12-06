@@ -6,9 +6,7 @@ using FMOD.Studio;
 using FMODUnity;
 using ImGuiNET;
 using Klei.AI;
-using Rendering.World;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -123,79 +121,7 @@ namespace Beached.ModDevTools
 			{
 				ImGui.InputText("Mask: ", ref liquidCullingMaskLayer, 256);
 
-				if (ImGui.Button("Save Liquid renderer snapshot"))
-				{
-					Beached_Mod.Instance.SetCullingMask(liquidCullingMaskLayer);
 
-					Beached_Mod.Instance.RenderDebugWater();
-					renderLiquidTexture = true;
-
-					var tileRenderers = Object.FindObjectsOfType<TileRenderer>();
-					if (tileRenderers == null)
-						Log.Debug("no tile renderers");
-					else
-					{
-						Log.Debug("tile renderers: " + tileRenderers.Length);
-						foreach (TileRenderer tileRenderer in tileRenderers)
-						{
-							Log.Debug("r: " + tileRenderer.name);
-						}
-
-					}
-				}
-
-				if (ImGui.Button("Save liquid plane"))
-				{
-					Log.Debug(WaterCubes.Instance.material.shader.name);
-					foreach (var prop in WaterCubes.Instance.material.GetTexturePropertyNames())
-					{
-						Log.Debug(prop);
-
-					}
-
-					Material mat = null;
-
-					foreach (var renderer in Object.FindObjectsOfType<MeshRenderer>())
-					{
-						Log.Debug($"{renderer.gameObject.name} - {renderer.material?.shader?.name}");
-						if (renderer.gameObject.name == "WaterCubesMesh")
-						{
-							mat = renderer.material;
-						}
-					}
-
-					//ModAssets.SaveImage(WaterCubes.Instance.material.GetTexture("_MainTex2"), "watercubes");
-
-					int mult = 50;
-
-					var size = new Vector2(Grid.WidthInCells, Grid.HeightInCells);
-					size.Normalize();
-
-					size *= 16384 / Mathf.Max(size.x, size.y);
-					size *= 0.1f;
-
-					var width = (int)size.x;
-					var height = (int)size.y;
-
-					var texture2D = new Texture2D(width, height, TextureFormat.RGBA32, false);
-
-					var renderTexture = new RenderTexture(width, height, 32);
-					Graphics.Blit(texture2D, renderTexture, mat);
-
-					texture2D.ReadPixels(new(0, 0, renderTexture.width, renderTexture.height), 0, 0);
-					texture2D.Apply();
-
-					var bytes = texture2D.EncodeToPNG();
-					var dirPath = Mod.folder;
-
-					if (!Directory.Exists(dirPath))
-						Directory.CreateDirectory(dirPath);
-
-					File.WriteAllBytes(Path.Combine(dirPath, "water") + System.DateTime.Now.Millisecond + ".png", bytes);
-
-					ModAssets.SaveImage(PropertyTextures.instance.externallyUpdatedTextures[(int)PropertyTextures.Property.Liquid], "externalliquid");
-					ModAssets.SaveImage(PropertyTextures.instance.externallyUpdatedTextures[(int)PropertyTextures.Property.SolidLiquidGasMass], "solid");
-				}
 
 				var rendererGo = WaterCubes.Instance.cubes.transform.Find("WaterCubesMesh");
 				if (rendererGo != null)

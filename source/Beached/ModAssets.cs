@@ -179,7 +179,7 @@ namespace Beached
 			Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
 
 			var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
-			var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
+			//var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
 
 			foreach (var asset in bundle.GetAllAssetNames())
 			{
@@ -214,13 +214,13 @@ namespace Beached
 				renderQueue = RenderQueues.Liquid,
 				mainTexture = texture
 			};
-
-			Materials.liquidRefractionMat = shadersBundle.LoadAsset<Material>("Assets/Materials/Beached_LiquidRefraction.mat");
-			Materials.liquidRefractionMat.SetFloat("_WaveFrequency", 850f);
-			Materials.liquidRefractionMat.SetFloat("_WaveAmplitude", 0.001f);
-			Materials.liquidRefractionMat.SetFloat("_EdgeSize", 0.55f);
-			Materials.liquidRefractionMat.SetFloat("_EdgeMultiplier", 2f);
-			Materials.liquidRefractionMat.SetFloat("_ZoomMagicNumber", 20f);
+			/*
+						Materials.liquidRefractionMat = shadersBundle.LoadAsset<Material>("Assets/Materials/Beached_LiquidRefraction.mat");
+						Materials.liquidRefractionMat.SetFloat("_WaveFrequency", 850f);
+						Materials.liquidRefractionMat.SetFloat("_WaveAmplitude", 0.001f);
+						Materials.liquidRefractionMat.SetFloat("_EdgeSize", 0.55f);
+						Materials.liquidRefractionMat.SetFloat("_EdgeMultiplier", 2f);
+						Materials.liquidRefractionMat.SetFloat("_ZoomMagicNumber", 20f);*/
 
 			sw.Stop();
 			Log.Info($"Finished loading assets. It took {sw.ElapsedMilliseconds} ms");
