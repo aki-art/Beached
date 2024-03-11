@@ -2,7 +2,6 @@
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
-using Beached.Content.Scripts;
 using Beached.ModDevTools;
 using HarmonyLib;
 using Klei;
@@ -14,7 +13,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 namespace Beached.Patches
 {
@@ -391,19 +389,19 @@ namespace Beached.Patches
 				}
 			}
 		}
-
-#if ELEMENTS
-		[HarmonyPatch(typeof(DiseaseInfoScreen), "BuildFactorsStrings")]
-		public class DiseaseInfoScreen_BuildFactorsStrings_Patch
-		{
-			public static void Postfix(CollapsibleDetailContentPanel ___currentGermsPanel)
-			{
-				var changeRate = ElementInteractions.GetFungalGermAverageChangeRateInLight();
-				var str = $"    • Exposed to Light: ~{changeRate}/s";
-				___currentGermsPanel.SetLabel("beached_light", str, "test");
-			}
-		}
-#endif
+		// todo: refactored screens
+		/*#if ELEMENTS
+				[HarmonyPatch(typeof(DiseaseInfoScreen), "BuildFactorsStrings")]
+				public class DiseaseInfoScreen_BuildFactorsStrings_Patch
+				{
+					public static void Postfix(CollapsibleDetailContentPanel ___currentGermsPanel)
+					{
+						var changeRate = ElementInteractions.GetFungalGermAverageChangeRateInLight();
+						var str = $"    • Exposed to Light: ~{changeRate}/s";
+						___currentGermsPanel.SetLabel("beached_light", str, "test");
+					}
+				}
+		#endif*/
 
 		//[HarmonyPatch(typeof(SkillsScreen), "RefreshSkillWidgets")]
 		public class SkillsScreen_RefreshSkillWidgets_Patch

@@ -120,7 +120,7 @@ namespace Beached.Content.Scripts.Entities
 			foreach (var offset in offsets)
 			{
 				var cell = Grid.OffsetCell(currentCell, offset);
-				var conduction = BeachedGrid.GetElectricConduction(cell);
+				var conduction = Beached_Grid.GetElectricConduction(cell);
 
 				if (conduction > 0 && !affectedCells.Contains(cell))
 					neighborCells.Add(new NeighborEntry()

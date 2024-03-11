@@ -48,7 +48,7 @@ namespace Beached.Patches
 			private static bool InjectedMethod(bool originalValue, Vector2 pos, byte[] rawTextureData1, byte[] rawTextureData2, OverworldCell overworldCell, SubworldZoneRenderData instance)
 			{
 				var cell = Grid.PosToCell(pos);
-				if (BeachedGrid.Instance.zoneTypeOverrides.TryGetValue(cell, out var zoneType))
+				if (Beached_Grid.Instance.zoneTypeOverrides.TryGetValue(cell, out var zoneType))
 				{
 					if (Grid.IsValidCell(cell))
 					{

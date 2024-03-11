@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using Beached.Content.Scripts.Entities.Plant;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
@@ -44,12 +45,23 @@ namespace Beached.Content.Defs.Flora
 
 			//prefab.AddOrGet<StackablePlant>().validFoundationTag = ID;
 
-			/*            var segmented = prefab.AddOrGet<SegmentedBamboo>();
+			/*			var segmented = prefab.AddOrGet<SegmentedBamboo>();
 						segmented.maxLength = 32;
-						segmented.segmentAnimFile = "beached_bamboo_kanim";
+						segmented.segmentAnimFile = "beached_bamboo_kanim";*/
 
-						var kbac = prefab.AddOrGet<KBatchedAnimController>();
-						kbac.randomiseLoopedOffset = true;*/
+			var kbac = prefab.AddOrGet<KBatchedAnimController>();
+			kbac.randomiseLoopedOffset = true;
+
+			var segment = prefab.AddOrGet<LongPlantSegment>();
+			segment.isRoot = true;
+			segment.animFileRoot = "beached_bamboo";
+
+			var longPlant = prefab.AddOrGet<LongPlant>();
+			longPlant.growPrefab = BambooSegmentConfig.ID;
+			longPlant.connectTag = BTags.bamboo;
+			longPlant.maxLength = 128;
+			longPlant.growthDirection = Direction.Up;
+
 			//kbac.animWidth = 0.75f;
 			/*
 						var ladder = prefab.AddOrGet<Ladder>();

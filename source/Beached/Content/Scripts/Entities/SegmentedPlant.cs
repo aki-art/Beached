@@ -106,6 +106,7 @@ namespace Beached.Content.Scripts.Entities
 
 		public override void OnSpawn()
 		{
+			segments ??= new List<SegmentInfo>();
 			base.OnSpawn();
 
 			UpdatePlant();
@@ -219,7 +220,7 @@ namespace Beached.Content.Scripts.Entities
 			}
 		}
 
-		public class SegmentInfo
+		public struct SegmentInfo
 		{
 			public int distanceFromRoot;
 			public int variationIdx;

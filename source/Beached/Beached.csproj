@@ -12,6 +12,7 @@
 		<DefineConstants>ELEMENTS,TRANSPILERS</DefineConstants>
 		<Publicised>true</Publicised>
 		<CopyFiles>true</CopyFiles>
+		<DebugType>Portable</DebugType>
 		<!--
 		constants:
 			ELEMENTS
@@ -52,7 +53,7 @@
 		</Reference>
 
 		<Reference Include="FUtility">
-		  <HintPath>D:\Modding\OxygenNotIncluded\Source\ONIMods\FUtility\bin\Debug\net471\FUtility.dll</HintPath>
+		  <HintPath>D:\Modding\OxygenNotIncluded\Lib\FUtility.dll</HintPath>
 		</Reference>
 		
 		<Reference Include="ImGui">

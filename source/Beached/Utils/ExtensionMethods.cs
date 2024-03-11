@@ -9,6 +9,11 @@ namespace Beached.Utils
 {
 	public static class ExtensionMethods
 	{
+		public static Direction Opposite(this Direction direction)
+		{
+			return MiscUtil.GetOpposite(direction);
+		}
+
 		public static Dictionary<MinionStartingStats, MinionStartingStatsExtension> minionStartingStatsExtensions = new();
 		public static Dictionary<CavityInfo, CavityInfoExtension> cavityInfoExtensions = new();
 

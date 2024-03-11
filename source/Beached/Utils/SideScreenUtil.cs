@@ -24,7 +24,7 @@ namespace Beached.Utils
 			if (DetailsScreen.Instance == null) return;
 
 			var screens = DetailsScreen.Instance.sideScreens;
-			var contentBody = DetailsScreen.Instance.sideScreenContentBody;
+			var contentBody = DetailsScreen.Instance.sideScreenConfigContentBody;
 
 			if (screens == null || contentBody == null) return;
 

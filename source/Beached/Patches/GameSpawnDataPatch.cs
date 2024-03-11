@@ -22,14 +22,14 @@ namespace Beached.Patches
 					if (template.info?.tags != null && template.info.tags.Contains(BWorldGenTags.Reefify))
 					{
 						var originCell = Grid.XYToCell(position.X, position.Y);
-						BeachedGrid.worldgenZoneTypes ??= new();
+						Beached_Grid.worldgenZoneTypes ??= new();
 
 						foreach (var offset in template.cells)
 						{
 							int cell = Grid.OffsetCell(Grid.XYToCell(position.x, position.y), offset.location_x, offset.location_y);
 
 							if (Grid.IsValidCell(cell))
-								BeachedGrid.worldgenZoneTypes[Grid.CellToXY(cell)] = ZoneTypes.coralReef;
+								Beached_Grid.worldgenZoneTypes[Grid.CellToXY(cell)] = ZoneTypes.coralReef;
 						}
 					}
 				}
@@ -44,14 +44,14 @@ namespace Beached.Patches
 				if (template.info?.tags != null && template.info.tags.Contains(BWorldGenTags.Reefify))
 				{
 					var originCell = Grid.XYToCell(position.X, position.Y);
-					BeachedGrid.worldgenZoneTypes ??= new();
+					Beached_Grid.worldgenZoneTypes ??= new();
 
 					foreach (var offset in template.cells)
 					{
 						var cell = Grid.OffsetCell(originCell, offset.location_x, offset.location_y);
 
 						if (!claimedCells.ContainsKey(cell))
-							BeachedGrid.worldgenZoneTypes[Grid.CellToXY(cell)] = ZoneTypes.coralReef;
+							Beached_Grid.worldgenZoneTypes[Grid.CellToXY(cell)] = ZoneTypes.coralReef;
 					}
 				}
 			}

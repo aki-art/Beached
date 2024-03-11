@@ -11,6 +11,7 @@
 			desiccated = new("Desiccated"),
 			enteredDarkness = new("EnteredDarkness"),
 			stackableChanged = new("StackableChanged"),
+			stackableSegmentDestroyed = new("StackableSegmentDestroyed"),
 			lifeGoalFulfilled = new("LifeGoalFulfilled"),
 			updateNeighbors = new("UpdateNeighbors"),
 			blockUpdate = new("BlockUpdate"),

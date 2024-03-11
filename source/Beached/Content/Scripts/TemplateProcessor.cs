@@ -27,11 +27,11 @@ namespace Beached.Content.Scripts
 
 				if (ModAssets.biomeOverrideLookup.TryGetValue(biomeOverride, out var zone))
 				{
-					BeachedGrid.Instance.zoneTypeOverrides[cell] = zone;
+					Beached_Grid.Instance.zoneTypeOverrides[cell] = zone;
 				}
 			}
 
-			BeachedGrid.Instance.RegenerateBackwallTexture();
+			Beached_Grid.Instance.RegenerateBackwallTexture();
 		}
 	}
 }

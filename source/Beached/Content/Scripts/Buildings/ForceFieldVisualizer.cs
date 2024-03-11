@@ -92,12 +92,12 @@ namespace Beached.Content.Scripts.Buildings
 			mesh.RecalculateBounds();
 
 			var myWorldId = this.GetMyWorldId();
-			BeachedGrid.forceFieldLevelPerWorld[myWorldId] = highestY;
+			Beached_Grid.forceFieldLevelPerWorld[myWorldId] = highestY;
 		}
 
 		public override void OnCleanUp()
 		{
-			BeachedGrid.forceFieldLevelPerWorld[this.GetMyWorldId()] = BeachedGrid.INVALID_FORCEFIELD_OFFSET;
+			Beached_Grid.forceFieldLevelPerWorld[this.GetMyWorldId()] = Beached_Grid.INVALID_FORCEFIELD_OFFSET;
 		}
 
 		public void OnDebugSelected()

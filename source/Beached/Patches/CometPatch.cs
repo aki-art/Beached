@@ -15,10 +15,10 @@ namespace Beached.Patches
 
 				var myWorldId = __instance.GetMyWorldId();
 
-				if (!BeachedGrid.forceFieldLevelPerWorld.TryGetValue(myWorldId, out var forceFieldY))
+				if (!Beached_Grid.forceFieldLevelPerWorld.TryGetValue(myWorldId, out var forceFieldY))
 					return;
 
-				if (forceFieldY == BeachedGrid.INVALID_FORCEFIELD_OFFSET)
+				if (forceFieldY == Beached_Grid.INVALID_FORCEFIELD_OFFSET)
 					return;
 
 				Grid.PosToXY(__instance.transform.position, out _, out var y);

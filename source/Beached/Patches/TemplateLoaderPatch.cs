@@ -17,10 +17,10 @@ namespace Beached.Patches
 					foreach (var offset in template.cells)
 					{
 						var cell = Grid.PosToCell(new Vector2(offset.location_x + rootLocation.x, offset.location_y + rootLocation.y));
-						BeachedGrid.Instance.zoneTypeOverrides[cell] = ZoneTypes.coralReef;
+						Beached_Grid.Instance.zoneTypeOverrides[cell] = ZoneTypes.coralReef;
 					}
 
-					BeachedGrid.Instance.RegenerateBackwallTexture();
+					Beached_Grid.Instance.RegenerateBackwallTexture();
 				}
 			}
 		}

@@ -7,7 +7,7 @@ using static ProcGen.SubWorld;
 namespace Beached
 {
 	[SerializationConfig(MemberSerialization.OptIn)]
-	public class BeachedGrid : KMonoBehaviour
+	public class Beached_Grid : KMonoBehaviour
 	{
 		public const int INVALID_FORCEFIELD_OFFSET = -1;
 
@@ -23,7 +23,7 @@ namespace Beached
 		[Serialize]
 		private bool initialized;
 
-		public static BeachedGrid Instance;
+		public static Beached_Grid Instance;
 
 		public override void OnPrefabInit() => Instance = this;
 
@@ -44,6 +44,30 @@ namespace Beached
 
 			RegenerateBackwallTexture();
 			World.Instance.zoneRenderData.OnActiveWorldChanged();
+		}
+
+		public static bool TryGetObject<ComponentType>(int cell, ObjectLayer layer, out ComponentType entity) where ComponentType : KMonoBehaviour
+		{
+			entity = null;
+			return Grid.ObjectLayers[(int)layer].TryGetValue(cell, out var go) && go.TryGetComponent(out entity);
+		}
+
+		public static bool TryGetPlant<ComponentType>(int cell, out ComponentType entity) where ComponentType : KMonoBehaviour
+		{
+			return TryGetObject(cell, ObjectLayer.Plants, out entity);
+		}
+
+		public static int GetCellTowards(int cell, Direction direction, int distance)
+		{
+			return direction switch
+			{
+				Direction.Up => Grid.OffsetCell(cell, 0, distance),
+				Direction.Down => Grid.OffsetCell(cell, 0, -distance),
+				Direction.Left => Grid.OffsetCell(cell, -distance, 0),
+				Direction.Right => Grid.OffsetCell(cell, distance, 0),
+				Direction.None => cell,
+				_ => -1,
+			};
 		}
 
 		public static float GetElectricConduction(int cell)

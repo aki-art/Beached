@@ -9,7 +9,7 @@ namespace Beached.Content.Overlays
 
 		public static Color GetColorForCell(SimDebugView _, int cell)
 		{
-			var t = BeachedGrid.GetElectricConduction(cell);
+			var t = Beached_Grid.GetElectricConduction(cell);
 			return Color.Lerp(Color.black, ModAssets.Colors.electricBlue, t);
 		}
 

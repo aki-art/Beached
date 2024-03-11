@@ -1,5 +1,6 @@
 ﻿using Beached.Content.ModDb;
 using Klei.AI;
+using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.UI
@@ -67,7 +68,9 @@ namespace Beached.Content.Scripts.UI
 				{
 					if (!string.IsNullOrEmpty(trait.Name) && group.modifiers.Contains(trait))
 					{
-						traitsDrawer.NewLabel(trait.Name).Tooltip(trait.GetTooltip());
+						traitsDrawer.NewLabel(trait.Name);
+						var label = traitsDrawer.labels.Last();
+						label.tooltip.SetSimpleTooltip(trait.GetTooltip());
 						hasAnyTraits = true;
 					}
 				}

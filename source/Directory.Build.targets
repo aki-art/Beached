@@ -20,6 +20,7 @@
 
 	<Target Name="CopyModFiles" AfterTargets="ILRepack" Condition="'$(CopyFiles)' == 'true'">
 		<Exec Command="xcopy /yqsr &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(ModFolder)\$(TargetName)\&quot;"/>
+		<Exec Command="xcopy /yqsr &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(ModFolder)\$(TargetName)\&quot;"/>
 		<!-- <Exec Command='xcopy "$(SolutionDir)..\assets" "$(ModFolder)\$(TargetName)" /s /i /y /d' ContinueOnError='true' /> -->
 	</Target>
 

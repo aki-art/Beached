@@ -75,6 +75,7 @@ namespace Beached.Patches
 			JellyfishStrobilaConfig.ID,
 			PlanktonGerms.ID, /// <see cref="UIOnlyPlankton"/>
 			BrinePoolConfig.ID,
+			BambooSegmentConfig.ID
 		};
 
 		private static readonly HashSet<Tag> FOOD = new()
