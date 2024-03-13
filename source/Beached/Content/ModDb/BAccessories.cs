@@ -6,12 +6,22 @@ namespace Beached.Content.ModDb
 	{
 		public const string POFFMOUTH = "beached_poffmouth";
 
+		// must start with hat_ 
+		public const string ARCHEOLOGY_HAT = "hat_role_beached_archeology";
+
 		public static void Register(Accessories accessories, AccessorySlots slots)
 		{
+			Log.Debug("Loading accessories for custom hats");
+			var archeologyHat = Assets.GetAnim("hat_role_beached_archeology_kanim");
+			AddAccessories(archeologyHat, slots.Hat, accessories);
+
+			Log.Debug("Loading accessories for diseases");
 			accessories.AddCustomAccessories(Assets.GetAnim("beached_poffmouth_mouth"), accessories, slots);
-			var minnowHead = Assets.GetAnim("minnow_head_kanim");
-			var vahanoHead = Assets.GetAnim("beached_vahano_head_kanim");
 			var limpetFace = Assets.GetAnim("limpet_face_kanim");
+
+
+			Log.Debug("Loading accessories for Minnow");
+			var minnowHead = Assets.GetAnim("minnow_head_kanim");
 			var hairSwapAnim = Assets.GetAnim("hair_swap_kanim");
 
 			AddAccessories(minnowHead, slots.Hair, accessories);
@@ -19,7 +29,9 @@ namespace Beached.Content.ModDb
 			AddAccessories(minnowHead, slots.Mouth, accessories);
 			AddAccessories(minnowHead, slots.HeadShape, accessories);
 
-			Log.Debug("Loading accessories for vahano");
+
+			Log.Debug("Loading accessories for Vahano");
+			var vahanoHead = Assets.GetAnim("beached_vahano_head_kanim");
 			Log.Debug((vahanoHead != null).ToString());
 
 			AddAccessories(vahanoHead, slots.Hair, accessories);
@@ -38,7 +50,6 @@ namespace Beached.Content.ModDb
 			var build = file.GetData().build;
 			var id = slot.Id.ToLower();
 
-			Log.Debug(0);
 			for (var i = 0; i < build.symbols.Length; i++)
 			{
 				var symbolName = HashCache.Get().Get(build.symbols[i].hash);
@@ -51,6 +62,10 @@ namespace Beached.Content.ModDb
 					HashCache.Get().Add(accessory.IdHash.HashValue, accessory.Id);
 
 					Log.Debug("Added accessory: " + accessory.Id);
+				}
+				else
+				{
+					Log.Debug($"Symbol {symbolName} in file {file.name} is not starting with {id}");
 				}
 			}
 		}

@@ -36,7 +36,7 @@ namespace Beached.Content.ModDb
 					STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.DESCRIPTION,
 					"",
 					0,
-					"hat_role_mining2",
+					BAccessories.ARCHEOLOGY_HAT,
 					"skillbadge_role_mining1",
 					BSkillGroups.PRECISION_ID,
 					new List<SkillPerk>
