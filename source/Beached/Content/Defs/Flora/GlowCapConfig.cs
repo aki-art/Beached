@@ -12,8 +12,8 @@ namespace Beached.Content.Defs.Flora
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				STRINGS.CREATURES.SPECIES.GLOWCAP.NAME,
-				STRINGS.CREATURES.SPECIES.GLOWCAP.DESC,
+				STRINGS.CREATURES.SPECIES.BEACHED_GLOWCAP.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_GLOWCAP.DESC,
 				40f,
 				Assets.GetAnim("beached_glowcap_kanim"),
 				"idle_empty",
@@ -25,7 +25,7 @@ namespace Beached.Content.Defs.Flora
 			EntityTemplates.ExtendEntityToBasicPlant(
 				prefab,
 				baseTraitId: BASE_TRAIT_ID,
-				baseTraitName: STRINGS.CREATURES.SPECIES.POFFSHROOM.NAME);
+				baseTraitName: STRINGS.CREATURES.SPECIES.BEACHED_POFFSHROOM.NAME);
 
 			//prefab.AddOrGet<StandardCropPlant>();
 

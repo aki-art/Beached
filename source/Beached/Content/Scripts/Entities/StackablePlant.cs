@@ -2,7 +2,7 @@
 
 namespace Beached.Content.Scripts.Entities;
 
-internal class StackablePlant : KMonoBehaviour
+public class StackablePlant : KMonoBehaviour
 {
 	[MyCmpGet] private Harvestable harvestable;
 

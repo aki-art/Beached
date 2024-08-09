@@ -11,7 +11,7 @@ namespace Beached.Content.Codex
 		{
 			CritterHappinessTutorial.GenerateEntry();
 			MushroomTutorial.GenerateEntry();
-			CreateGuidesEntry(new CodexEntry(BEACHED_GUIDES_CATEGORY, new List<ContentContainer>(), "title"));
+			CreateGuidesEntry(new CodexEntry(BEACHED_GUIDES_CATEGORY, [], "title"));
 		}
 
 		public static Dictionary<string, CodexEntry> CreateGuidesEntry(CodexEntry entry)
@@ -35,13 +35,9 @@ namespace Beached.Content.Codex
 			};
 
 			if (!CodexCache.entries.ContainsKey(ID))
-			{
 				CodexCache.AddEntry(ID, categoryEntry, null);
-			}
 			else
-			{
 				CodexCache.MergeEntry(ID, categoryEntry);
-			}
 		}
 	}
 }

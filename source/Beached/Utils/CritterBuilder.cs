@@ -109,8 +109,8 @@ namespace Beached.Utils
 
 		public GameObject Build()
 		{
-			name ??= Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.NAME");
-			description ??= Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DESC");
+			name ??= Strings.Get($"STRINGS_OLD.CREATURES.SPECIES.{ID.ToUpperInvariant()}.NAME");
+			description ??= Strings.Get($"STRINGS_OLD.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DESC");
 
 			prefab = EntityTemplates.CreatePlacedEntity(
 				ID,

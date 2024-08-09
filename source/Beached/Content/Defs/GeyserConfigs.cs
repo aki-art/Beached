@@ -75,9 +75,9 @@ namespace Beached.Content.Defs
 
 			// coral reef, emits planktonous salt water. it's high max pressure allows it to function under water.
 			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
-				"beached_bismuth_volcano_kanim",
-				4,
+				"beached_coral_reef_kanim",
 				2,
+				3,
 				new GeyserConfigurator.GeyserType(
 					CORAL_REEF,
 					SimHashes.SaltWater,

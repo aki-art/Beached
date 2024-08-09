@@ -21,7 +21,7 @@ namespace Beached.Content.Defs.Equipment
 				BAssignableSlots.JEWELLERY_ID,
 				Elements.aquamarine,
 				30f,
-				TUNING.EQUIPMENT.VESTS.COOL_VEST_ICON0,
+				TUNING.EQUIPMENT.VESTS.WARM_VEST_ICON0,
 				CONSTS.SNAPONS.JEWELLERIES.STRANGE_MATTER,
 				"beached_strange_matter_necklace_kanim",
 				4,

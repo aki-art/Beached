@@ -67,7 +67,10 @@ namespace Beached.Content.Scripts.Entities.AI
 		{
 			[Serialize] public int numPlushiesCreated;
 
-			public Instance(IStateMachineTarget master) : base(master) { }
+			public Instance(IStateMachineTarget master) : base(master)
+			{
+				Beached.Log.Debug("new plushie gifter instance");
+			}
 
 			public void PlacePlushie(int cell)
 			{

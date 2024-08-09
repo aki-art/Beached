@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
-	internal class Beached_HarvestablePOIClusterGridEntity : HarvestablePOIClusterGridEntity
+	public class Beached_HarvestablePOIClusterGridEntity : HarvestablePOIClusterGridEntity
 	{
 		[SerializeField] public string animFile;
 

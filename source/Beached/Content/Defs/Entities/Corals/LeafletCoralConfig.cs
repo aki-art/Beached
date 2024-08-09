@@ -76,7 +76,8 @@ namespace Beached.Content.Defs.Entities.Corals
 				additionalTags: new()
 				{
 					GameTags.WaterSeed ,
-					BTags.coralFrag
+					BTags.coralFrag,
+					BTags.smallAquariumSeed
 				},
 				sortOrder: 3,
 				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_LEAFLETCORAL.DOMESTICATEDDESC,

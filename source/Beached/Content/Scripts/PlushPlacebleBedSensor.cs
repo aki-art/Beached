@@ -4,6 +4,7 @@
 	{
 		private Navigator navigator;
 		public Beached_PlushiePlaceable placeable;
+		private int cell;
 
 		public PlushPlacebleBedSensor(Sensors sensors) : base(sensors)
 		{
@@ -25,11 +26,18 @@
 			}
 		}
 
+		public int GetCell() => placeable == null ? -1 : Grid.PosToCell(placeable);
+
 		private bool IsBedEligible(Beached_PlushiePlaceable bed)
 		{
 			return !bed.HasPlushie()
 				&& bed.GetComponent<Operational>().IsOperational
 				&& navigator.GetNavigationCost(bed.NaturalBuildingCell()) != -1;
+		}
+
+		public void Clear()
+		{
+			placeable = null;
 		}
 	}
 }

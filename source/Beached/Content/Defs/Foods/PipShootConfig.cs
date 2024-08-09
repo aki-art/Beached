@@ -4,7 +4,7 @@ using static EdiblesManager;
 
 namespace Beached.Content.Defs.Foods
 {
-	internal class PipShootConfig : IEntityConfig
+	public class PipShootConfig : IEntityConfig
 	{
 		public static string ID = "Beached_PipShoot";
 

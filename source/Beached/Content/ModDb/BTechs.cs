@@ -3,7 +3,7 @@ using Database;
 
 namespace Beached.Content.ModDb
 {
-	internal class BTechs
+	public class BTechs
 	{
 		public const string HIDDEN_ATMOSPHERIC_FORCEFIELD_GENERATOR =
 			"Beached_Tech_Hidden_AtmosphericForcefieldGenerator";

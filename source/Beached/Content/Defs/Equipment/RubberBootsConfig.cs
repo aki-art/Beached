@@ -2,11 +2,10 @@
 using Klei.AI;
 using System.Collections.Generic;
 using UnityEngine;
-using static ClothingWearer;
 
 namespace Beached.Content.Defs.Equipment
 {
-	internal class RubberBootsConfig : IEquipmentConfig
+	public class RubberBootsConfig : IEquipmentConfig
 	{
 		public const string ID = "Beached_Equipment_RubberBoots";
 
@@ -27,11 +26,11 @@ namespace Beached.Content.Defs.Equipment
 					GameTags.PedestalDisplayable
 				});
 
-			var clothingInfo = ClothingInfo.BASIC_CLOTHING;
+			var clothingInfo = ClothingWearer.ClothingInfo.BASIC_CLOTHING;
 
 			equipmentDef.EffectImmunites.Add(Db.Get().effects.Get("WetFeet"));
-			equipmentDef.OnEquipCallBack = eq => CoolVestConfig.OnEquipVest(eq, clothingInfo);
-			equipmentDef.OnUnequipCallBack = CoolVestConfig.OnUnequipVest;
+			equipmentDef.OnEquipCallBack = eq => ClothingWearer.ClothingInfo.OnEquipVest(eq, clothingInfo);
+			equipmentDef.OnUnequipCallBack = ClothingWearer.ClothingInfo.OnUnequipVest;
 
 			return equipmentDef;
 		}

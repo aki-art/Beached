@@ -15,6 +15,7 @@ namespace Beached.Content
 			blueprintable = TagManager.Create("Beached_Blueprintable"),
 			coral = TagManager.Create("Beached_Coral"),
 			coralFrag = TagManager.Create("Beached_CoralFrag"),
+			smallAquariumSeed = TagManager.Create("Beached_SmallAquariumSeed"),
 			corrodable = TagManager.Create("Beached_Corrodable"), // get damaged in acid
 			dim = TagManager.Create("Beached_Dim"),
 			furAllergic = TagManager.Create("Beached_FurAllergic"),

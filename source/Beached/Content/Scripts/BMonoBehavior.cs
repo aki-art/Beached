@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Beached.Content.Scripts
+﻿namespace Beached.Content.Scripts
 {
-	internal class BMonoBehavior
+	public class BMonoBehavior : KMonoBehaviour
 	{
+		protected void Debug(object message) => FUtility.Log.Debug($"{name} - {message}");
+		protected void Info(object message) => FUtility.Log.Info($"{name} - {message}");
+		protected void Warn(object message) => FUtility.Log.Warning($"{name} - {message}");
 	}
 }

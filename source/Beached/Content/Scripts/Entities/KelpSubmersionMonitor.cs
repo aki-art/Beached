@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Beached.Content.Scripts.Entities
 {
-	internal class KelpSubmersionMonitor : KMonoBehaviour, ISlicedSim1000ms
+	public class KelpSubmersionMonitor : KMonoBehaviour, ISlicedSim1000ms
 	{
 		[MyCmpReq] private SegmentedKelp kelp;
 

@@ -8,7 +8,7 @@ using static Beached.STRINGS.CREATURES.SPECIES;
 namespace Beached.Content.Defs.Entities.Critters
 {
 	[EntityConfigOrder(0)]
-	internal class JellyfishConfig : IEntityConfig
+	public class JellyfishConfig : IEntityConfig
 	{
 		public const string ID = "Beached_Jellyfish";
 		public const string EGG_ID = "Beached_Jellyfish_Egg";

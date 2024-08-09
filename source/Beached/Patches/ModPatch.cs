@@ -3,7 +3,7 @@ using KMod;
 
 namespace Beached.Patches
 {
-	internal class ModPatch
+	public class ModPatch
 	{
 		[HarmonyPatch(typeof(KMod.Mod), "LoadAnimation")]
 		public class KMod_Mod_LoadAnimation_Patch

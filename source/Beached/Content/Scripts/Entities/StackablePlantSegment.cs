@@ -62,7 +62,7 @@ namespace Beached.Content.Scripts.Entities
 			Util.KDestroyGameObject(gameObject);
 		}
 
-		internal void UpdateAllAbove()
+		public void UpdateAllAbove()
 		{
 			throw new NotImplementedException();
 		}

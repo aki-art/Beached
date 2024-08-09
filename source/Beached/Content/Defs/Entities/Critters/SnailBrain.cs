@@ -27,7 +27,7 @@ namespace Beached.Content.Defs.Entities.Critters
 				//.Add(new RanchedStates.Def())
 				//.Add(new LayEggStates.Def())
 				.Add(new EatStates.Def())
-				//.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
+				//.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", STRINGS_OLD.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, STRINGS_OLD.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
 				.Add(new CallAdultStates.Def())
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());

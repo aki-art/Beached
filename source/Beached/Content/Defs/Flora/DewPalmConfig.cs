@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-	internal class DewPalmConfig : IEntityConfig
+	public class DewPalmConfig : IEntityConfig
 	{
 		public const string ID = "Beached_DewPalm";
 		public const string SEED_ID = "Beached_DewPalmSeed";
@@ -13,8 +13,8 @@ namespace Beached.Content.Defs.Flora
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				STRINGS.CREATURES.SPECIES.DEWPALM.NAME,
-				STRINGS.CREATURES.SPECIES.DEWPALM.DESC,
+				STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.DESC,
 				100f,
 				Assets.GetAnim("beached_dewpalm_kanim"),
 				"idle",
@@ -43,7 +43,7 @@ namespace Beached.Content.Defs.Flora
 				0f,
 				2200f,
 				BASE_TRAIT_ID,
-				STRINGS.CREATURES.SPECIES.DEWPALM.NAME);
+				STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.NAME);
 
 			Object.DestroyImmediate(prefab.GetComponent<MutantPlant>());
 

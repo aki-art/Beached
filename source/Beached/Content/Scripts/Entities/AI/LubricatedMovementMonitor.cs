@@ -2,7 +2,7 @@
 
 namespace Beached.Content.Scripts.Entities.AI
 {
-	internal class LubricatedMovementMonitor : GameStateMachine<LubricatedMovementMonitor, LubricatedMovementMonitor.Instance, IStateMachineTarget, LubricatedMovementMonitor.Def>
+	public class LubricatedMovementMonitor : GameStateMachine<LubricatedMovementMonitor, LubricatedMovementMonitor.Instance, IStateMachineTarget, LubricatedMovementMonitor.Def>
 	{
 		public State idle;
 		public State moving;
@@ -42,7 +42,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			public AmountInstance moisture;
 			public AttributeModifier movementMoistureModifier;
 
-			internal float movingDryRate = -500f / CONSTS.CYCLE_LENGTH;
+			public float movingDryRate = -500f / CONSTS.CYCLE_LENGTH;
 
 
 			public Instance(IStateMachineTarget master) : base(master)

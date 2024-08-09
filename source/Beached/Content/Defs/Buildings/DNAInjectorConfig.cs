@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Buildings
 {
-	internal class DNAInjectorConfig : IBuildingConfig
+	public class DNAInjectorConfig : IBuildingConfig
 	{
 		public const string ID = "Beached_DNAInjector";
 

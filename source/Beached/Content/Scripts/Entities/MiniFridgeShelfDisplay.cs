@@ -16,7 +16,7 @@ namespace Beached.Content.Scripts.Entities
 		private Storage storage;
 
 		private KBatchedAnimController[] shelfItems;
-		internal static Vector3[] offsets = new[]
+		public static Vector3[] offsets = new[]
 		{
 			new Vector3(-0.1f, 0.1f, 0.1f), // bl
             new Vector3(-0.1f, 0.4f, 0.2f), // tl

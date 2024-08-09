@@ -98,7 +98,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		public class Def : BaseDef//, IGameObjectEffectDescriptor
 		{
-			internal float defaultDryRate = -30f / CONSTS.CYCLE_LENGTH;
+			public float defaultDryRate = -30f / CONSTS.CYCLE_LENGTH;
 			public SimHashes lubricant;
 			public float lubricantMassKg;
 			public float lubricantTemperatureKelvin;

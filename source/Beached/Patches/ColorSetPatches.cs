@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Beached.Patches
 {
-	internal class ColorSetPatches
+	public class ColorSetPatches
 	{
 		[HarmonyPatch(typeof(ColorSet), nameof(ColorSet.Init))]
 		public static class ColorSet_Init_Patch

@@ -40,16 +40,14 @@ namespace Beached.Content.ModDb
 				foreach (var config in configs)
 				{
 					Log.Debug(config.Key);
-					Log.Debug($"\t{config.Value.coordinate_dimension}");
-					Log.Debug($"\t{config.Value.coordinate_dimension_width}");
-
+					Log.Debug($"\t{config.Value.coordinate_range}");
 					List<SettingLevel> levels = config.Value.GetLevels();
 					if (levels == null)
 						continue;
 
 					foreach (var level in levels)
 					{
-						Log.Debug($"\t\t{level.id} {level.coordinate_offset}");
+						Log.Debug($"\t\t{level.id} {level.coordinate_value}");
 					}
 				}
 			}

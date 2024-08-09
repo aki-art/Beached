@@ -2,7 +2,7 @@
 
 namespace Beached.Content.Scripts.Entities
 {
-	internal class SegmentedBamboo : SegmentedPlant
+	public class SegmentedBamboo : SegmentedPlant
 	{
 		private static readonly List<string> liveSegmentAnims = new()
 		{

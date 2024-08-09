@@ -2,7 +2,7 @@
 
 namespace Beached.Content.ModDb
 {
-	internal class BAccessories
+	public class BAccessories
 	{
 		public const string POFFMOUTH = "beached_poffmouth";
 

@@ -4,7 +4,7 @@ using TUNING;
 
 namespace Beached.Content.ModDb.Germs
 {
-	internal class PlanktonGerms : Disease
+	public class PlanktonGerms : Disease
 	{
 		public const string ID = "Beached_Plankton";
 		public const float RAD_KILL_RATE = 2.5f;

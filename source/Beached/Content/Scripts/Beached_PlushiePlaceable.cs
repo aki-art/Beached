@@ -2,7 +2,6 @@
 using ImGuiNET;
 using Klei.AI;
 using KSerialization;
-using System;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -14,7 +13,7 @@ namespace Beached.Content.Scripts
 		[MyCmpReq] private Assignable assignable;
 		[MyCmpReq] private KBatchedAnimController kbac;
 		[MyCmpReq] private KSelectable kSelectable;
-		[Serialize] private string plushieId;
+		[Serialize] public string plushieId;
 		private int debugCurrentlySelectedPlushie;
 		private KBatchedAnimController plushie;
 		private KAnimLink link;

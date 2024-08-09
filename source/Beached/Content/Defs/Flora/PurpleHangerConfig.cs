@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-	internal class PurpleHangerConfig : IEntityConfig
+	public class PurpleHangerConfig : IEntityConfig
 	{
 		public const string ID = "Beached_PurpleHanger";
 
@@ -12,8 +12,8 @@ namespace Beached.Content.Defs.Flora
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				STRINGS.CREATURES.SPECIES.PURPLEHANGER.NAME,
-				STRINGS.CREATURES.SPECIES.PURPLEHANGER.DESC,
+				STRINGS.CREATURES.SPECIES.BEACHED_PURPLEHANGER.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_PURPLEHANGER.DESC,
 				100f,
 				Assets.GetAnim("beached_purplehanger_kanim"),
 				"idle_bottom",

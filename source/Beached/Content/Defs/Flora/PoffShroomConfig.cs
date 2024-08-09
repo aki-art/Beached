@@ -17,8 +17,8 @@ namespace Beached.Content.Defs.Flora
 
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				STRINGS.CREATURES.SPECIES.POFFSHROOM.NAME,
-				STRINGS.CREATURES.SPECIES.POFFSHROOM.DESC,
+				STRINGS.CREATURES.SPECIES.BEACHED_POFFSHROOM.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_POFFSHROOM.DESC,
 				40f,
 				anim,
 				"idle_full",
@@ -31,7 +31,7 @@ namespace Beached.Content.Defs.Flora
 				prefab,
 				crop_id: MushroomConfig.ID, // TODO
 				baseTraitId: BASE_TRAIT_ID,
-				baseTraitName: STRINGS.CREATURES.SPECIES.POFFSHROOM.NAME);
+				baseTraitName: STRINGS.CREATURES.SPECIES.BEACHED_POFFSHROOM.NAME);
 
 			prefab.AddOrGet<StandardCropPlant>();
 

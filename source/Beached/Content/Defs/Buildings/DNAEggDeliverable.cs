@@ -1,6 +1,6 @@
 ﻿namespace Beached.Content.Defs.Buildings
 {
-	internal class DNAEggDeliverable : SingleEntityReceptacle
+	public class DNAEggDeliverable : SingleEntityReceptacle
 	{
 		private KBatchedAnimTracker tracker;
 

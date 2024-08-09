@@ -10,7 +10,7 @@ using Path = System.IO.Path;
 
 namespace Beached.ModDevTools
 {
-	internal class NoisePreviewerDevTool : DevTool
+	public class NoisePreviewerDevTool : DevTool
 	{
 		public static int width = 100;
 		public static int height = 100;

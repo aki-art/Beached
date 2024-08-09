@@ -56,11 +56,11 @@ namespace Beached.ModDevTools
 				}
 			}
 
-			if (ImGui.Button("Reload Worldgen"))
+			if (ImGui.Button("X Reload Worldgen"))
 			{
 				WorldGen.LoadSettings(false);
 
-				cluster = Cluster.Load();
+				//cluster = Cluster.Load();
 				SettingsCache.LoadFiles(new List<YamlIO.Error>());
 			}
 

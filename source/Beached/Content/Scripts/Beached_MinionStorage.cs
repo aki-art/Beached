@@ -45,7 +45,7 @@ namespace Beached.Content.Scripts
 				kPrefabID.RemoveTag(BTags.heliumPoffed);
 		}
 
-		internal void OnPalateCleansed()
+		public void OnPalateCleansed()
 		{
 			consumableConsumer.SetPermitted(PoffConfig.GetRawId(Elements.nitrogen), false);
 			consumableConsumer.SetPermitted(PoffConfig.GetCookedId(Elements.nitrogen), false);

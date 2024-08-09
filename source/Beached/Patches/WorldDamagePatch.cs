@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Beached.Patches
 {
-	internal class WorldDamagePatch
+	public class WorldDamagePatch
 	{
 		[HarmonyPatch(typeof(WorldDamage), nameof(WorldDamage.OnDigComplete))]
 		public class WorldDamage_OnDigComplete_Patch

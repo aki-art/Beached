@@ -1,7 +1,5 @@
-﻿using System;
-using TUNING;
+﻿using TUNING;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace Beached.Content.Scripts.Entities.AI
 {
@@ -16,7 +14,11 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static bool HasBed(ref Precondition.Context context, object data)
 		{
-			return data is Chore<StatesInstance> chore && chore.smi.HasTargetCell();
+			Log.Debug("checking bed condition");
+
+			var result = data is Chore<StatesInstance> chore && chore.smi.HasTargetCell();
+			Log.Debug(result);
+			return result;
 		}
 
 		public PlushieGifterChore(IStateMachineTarget target) : base(
@@ -57,11 +59,13 @@ namespace Beached.Content.Scripts.Entities.AI
 				Target(artist);
 
 				root
+					.Enter(smi => Log.Debug("PlusheGifterChore root"))
 					.EventTransition(GameHashes.ScheduleBlocksChanged, idle, smi => !smi.IsRecTime());
 
 				idle
+					.Enter(smi => Log.Debug("PlusheGifterChore idle"))
 					.UpdateTransition(goToBed, FindBed, UpdateRate.SIM_1000ms);
-					//.EventTransition(GameHashes.NewBuilding, smi => GameplayEventManager.Instance, goToBed, FindBed);
+				//.EventTransition(GameHashes.NewBuilding, smi => GameplayEventManager.Instance, goToBed, FindBed);
 
 				goToBed
 					.UpdateTransition(idle, (smi, dt) => smi.targetBed == null)
@@ -69,12 +73,14 @@ namespace Beached.Content.Scripts.Entities.AI
 					.MoveTo(smi => smi.GetTargetCell(), creatingPlushie);
 
 				creatingPlushie
+					.Enter(smi => Log.Debug("PlusheGifterChore creatingPlushie"))
 					.PlayAnim("working_pre")
 					.QueueAnim("working_loop")
 					.QueueAnim("working_pst")
 					.OnAnimQueueComplete(success);
 
 				success
+					.Enter(smi => Log.Debug("PlusheGifterChore success"))
 					.Enter(smi =>
 					{
 						smi.PlacePlushie();
@@ -85,13 +91,18 @@ namespace Beached.Content.Scripts.Entities.AI
 
 			private bool FindBed(StatesInstance smi, float dt)
 			{
+				Log.Debug("looking for bed");
 				foreach (var plushiePlaceable in Mod.plushiePlaceables.items)
 				{
+					Log.Debug($"\tbed: {plushiePlaceable.name}");
 					if (IsBedEligible(plushiePlaceable, smi))
 					{
+						Log.Debug($"\tyes");
 						smi.targetBed = plushiePlaceable;
 						return true;
 					}
+					else
+						Log.Debug($"\no");
 				}
 
 				return false;
@@ -99,6 +110,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 			private bool IsBedEligible(Beached_PlushiePlaceable bed, StatesInstance smi)
 			{
+				Log.Debug($"\t\thasPlushie: {bed.HasPlushie()}, isOp: {bed.GetComponent<Operational>().IsOperational} nav cost: {smi.navigator.GetNavigationCost(bed.NaturalBuildingCell())}");
 				return !bed.HasPlushie()
 					&& bed.GetComponent<Operational>().IsOperational
 					&& smi.navigator.GetNavigationCost(bed.NaturalBuildingCell()) != -1;
@@ -108,6 +120,7 @@ namespace Beached.Content.Scripts.Entities.AI
 		public class StatesInstance : GameStateMachine<States, StatesInstance, PlushieGifterChore, object>.GameInstance
 		{
 			public Beached_PlushiePlaceable targetBed;
+			public PlushPlacebleBedSensor bedSensor;
 			public Navigator navigator;
 			private GameObject plushieGifter;
 
@@ -116,20 +129,21 @@ namespace Beached.Content.Scripts.Entities.AI
 				this.plushieGifter = plushieGifter;
 				navigator = master.GetComponent<Navigator>();
 				sm.artist.Set(plushieGifter, smi);
+				bedSensor = GetComponent<Sensors>().GetSensor<PlushPlacebleBedSensor>();
 			}
 
-			public bool HasTargetCell() => targetBed != null;
+			public bool HasTargetCell() => bedSensor.placeable != null;
 
 			public bool IsRecTime() => master.GetComponent<Schedulable>().IsAllowed(Db.Get().ScheduleBlockTypes.Recreation);
 
-			public int GetTargetCell() => targetBed.NaturalBuildingCell();
+			public int GetTargetCell() => bedSensor.GetCell();
 
 			public void PlacePlushie()
 			{
-				if (targetBed != null)
-					plushieGifter.GetSMI<PlushieGifter.Instance>().PlacePlushie(GetTargetCell());
+				if (bedSensor.placeable != null)
+					plushieGifter.GetSMI<PlushieGifter.Instance>().PlacePlushie(bedSensor.GetCell());
 
-				targetBed = null;
+				bedSensor.Clear();
 			}
 		}
 	}

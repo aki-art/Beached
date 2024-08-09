@@ -1,8 +1,6 @@
 ﻿using Beached.Content.Defs.Entities.Corals;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using TemplateClasses;
 using UnityEngine;
 
 namespace Beached.Content.DefBuilders
@@ -15,7 +13,7 @@ namespace Beached.Content.DefBuilders
 		private string ID;
 		private int width, height;
 		private string animName, initialAnim;
-		private List<Tag> tags = new List<Tag>() { BTags.aquatic, BTags.coral };
+		private List<Tag> tags = [BTags.aquatic, BTags.coral];
 		private EffectorValues decor;
 		private float
 			tempMinLethal = MiscUtil.CelsiusToKelvin(0f),
@@ -133,7 +131,7 @@ namespace Beached.Content.DefBuilders
 		{
 			seedAnimName = anim;
 			seedW = width; seedH = height;
-			seedTags = new List<Tag>() { BTags.aquatic, BTags.coral };
+			seedTags = new List<Tag>() { BTags.aquatic, BTags.coral, BTags.smallAquariumSeed };
 			seedSortOrder = sortOrder;
 
 			if (additionalTags != null)
@@ -199,9 +197,9 @@ namespace Beached.Content.DefBuilders
 
 			if (seedAnimName != null)
 			{
-				var name = Strings.Get($"STRINGS.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.NAME");
-				var description = Strings.Get($"STRINGS.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.DESC");
-				var domesicatedDesc = Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DOMESTICATEDDESC");
+				var name = Strings.Get($"STRINGS_OLD.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.NAME");
+				var description = Strings.Get($"STRINGS_OLD.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.DESC");
+				var domesicatedDesc = Strings.Get($"STRINGS_OLD.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DOMESTICATEDDESC");
 
 				if (name == null) Log.Warning("name is null");
 				if (description == null) Log.Warning("description is null");

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
-	internal class TemplateProcessor : KMonoBehaviour
+	public class TemplateProcessor : KMonoBehaviour
 	{
 		[SerializeField]
 		public int biomeOverride;

@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Foods;
+using Beached.Content.Scripts;
 using TUNING;
 using UnityEngine;
 
@@ -13,8 +14,8 @@ namespace Beached.Content.Defs.Flora
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				STRINGS.CREATURES.SPECIES.MUSSEL_SPROUT.NAME,
-				STRINGS.CREATURES.SPECIES.MUSSEL_SPROUT.DESC,
+				STRINGS.CREATURES.SPECIES.BEACHED_MUSSEL_SPROUT.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_MUSSEL_SPROUT.DESC,
 				50f,
 				Assets.GetAnim("beached_mussel_sprout_kanim"),
 				"idle",
@@ -24,10 +25,7 @@ namespace Beached.Content.Defs.Flora
 				DECOR.PENALTY.TIER0);
 
 			prefab.AddOrGet<SimTemperatureTransfer>();
-			prefab.AddOrGet<OccupyArea>().objectLayers = new ObjectLayer[]
-			{
-				ObjectLayer.Building
-			};
+			prefab.AddOrGet<OccupyArea>().objectLayers = [ObjectLayer.Building];
 			prefab.AddOrGet<EntombVulnerable>();
 			prefab.AddOrGet<Prioritizable>();
 			prefab.AddOrGet<Uprootable>();
@@ -35,7 +33,13 @@ namespace Beached.Content.Defs.Flora
 			prefab.AddOrGet<Harvestable>();
 			prefab.AddOrGet<HarvestDesignatable>();
 			prefab.AddOrGet<SeedProducer>().Configure(MusselTongueConfig.ID, SeedProducer.ProductionType.DigOnly, 1);
-			prefab.AddOrGet<BasicForagePlantPlanted>();
+			//prefab.AddOrGet<BasicForagePlantPlanted>();
+
+			var singleHarvestable = prefab.AddOrGet<SingleHarvestable>();
+			singleHarvestable.deathFx = EffectConfigs.PlantDeathId;
+			singleHarvestable.soundFx = ModAssets.Sounds.MUSSEL_SPROUT_HARVEST;
+			singleHarvestable.volume = 1.0f;
+
 			prefab.AddOrGet<KBatchedAnimController>().randomiseLoopedOffset = true;
 
 			return prefab;

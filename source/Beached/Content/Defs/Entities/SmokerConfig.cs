@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities
 {
-	internal class SmokerConfig : IEntityConfig
+	public class SmokerConfig : IEntityConfig
 	{
 		public const string ID = "Beached_Smoker";
 

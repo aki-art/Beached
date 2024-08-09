@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-	internal class PipTailConfig : IEntityConfig
+	public class PipTailConfig : IEntityConfig
 	{
 		public const string ID = "Beached_PipTail";
 		public const string SEED_ID = "Beached_PipTailSeed";

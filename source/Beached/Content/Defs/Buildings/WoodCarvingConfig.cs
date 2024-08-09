@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Buildings
 {
-	internal class WoodCarvingConfig : IBuildingConfig
+	public class WoodCarvingConfig : IBuildingConfig
 	{
 		public const string ID = "Beached_WoodCarving";
 

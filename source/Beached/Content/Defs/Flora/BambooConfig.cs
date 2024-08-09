@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-	internal class BambooConfig : IEntityConfig
+	public class BambooConfig : IEntityConfig
 	{
 		public const string ID = "Beached_Bamboo";
 
@@ -12,8 +12,8 @@ namespace Beached.Content.Defs.Flora
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				STRINGS.CREATURES.SPECIES.BAMBOO.NAME,
-				STRINGS.CREATURES.SPECIES.BAMBOO.DESC,
+				STRINGS.CREATURES.SPECIES.BEACHED_BAMBOO.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_BAMBOO.DESC,
 				100f,
 				Assets.GetAnim("beached_bamboo_kanim"),
 				"idle",

@@ -6,7 +6,7 @@ using ProcGenGame;
 
 namespace Beached.Patches.Worldgen
 {
-	internal class TerrainCellPatch
+	public class TerrainCellPatch
 	{
 		[HarmonyPatch(typeof(TerrainCell), "ApplyBackground")]
 		public class TerrainCell_ApplyBackground_Patch

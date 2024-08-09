@@ -43,7 +43,7 @@ namespace Beached.Content.Defs.Entities.Critters
 			var diet = new Diet(diet_infos.ToArray());
 			var def = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
 			def.diet = diet;
-			def.minPoopSizeInCalories = referenceCaloriesPerKg * minPoopSizeInKg;
+			def.minConsumedCaloriesBeforePooping = referenceCaloriesPerKg * minPoopSizeInKg;
 
 			prefab.AddOrGetDef<SolidConsumerMonitor.Def>().diet = diet;
 

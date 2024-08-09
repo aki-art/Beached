@@ -37,7 +37,8 @@ namespace Beached.Content.Defs.Entities.Corals
 				additionalTags: new List<Tag>()
 				{
 					BTags.aquatic,
-					BTags.coral
+					BTags.coral,
+					BTags.smallAquariumSeed
 				});
 
 			EntityTemplates.ExtendEntityToBasicPlant(

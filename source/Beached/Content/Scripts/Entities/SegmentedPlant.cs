@@ -131,13 +131,16 @@ namespace Beached.Content.Scripts.Entities
 
 		protected virtual void DestroySegment(SegmentInfo segment)
 		{
-			if (segmentDeathFx != SpawnFXHashes.None)
+			if (segmentDeathFx != SpawnFXHashes.None && segment.animController != null)
 			{
 				Game.Instance.SpawnFX(segmentDeathFx, Grid.PosToCell(segment.animController.gameObject), 0);
 			}
 
-			segment.animLink.Unregister();
-			Destroy(segment.animController);
+			if (segment.animLink != null)
+				segment.animLink.Unregister();
+
+			if (segment.animController != null)
+				Destroy(segment.animController);
 		}
 
 		private void UpdateSegmentAnims()

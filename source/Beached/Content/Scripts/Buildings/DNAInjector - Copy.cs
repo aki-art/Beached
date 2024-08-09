@@ -141,7 +141,7 @@ namespace Beached.Content.Scripts.Buildings
             DetailsScreen.Instance.Refresh(gameObject);
         }
 
-        internal Tag GetSelectedOption()
+        public Tag GetSelectedOption()
         {
             return selectedSample;
         }

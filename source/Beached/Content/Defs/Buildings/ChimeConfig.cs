@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Buildings
 {
-	internal class ChimeConfig : IBuildingConfig
+	public class ChimeConfig : IBuildingConfig
 	{
 		public const string ID = "Beached_Chime";
 

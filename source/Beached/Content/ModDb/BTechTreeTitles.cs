@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Beached.Content.ModDb
 {
-	internal class BTechTreeTitles
+	public class BTechTreeTitles
 	{
 		public const string UNKNOWN_ID = "Beached_TechTree_Unknown";
 

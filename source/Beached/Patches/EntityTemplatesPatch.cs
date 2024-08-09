@@ -9,7 +9,23 @@ namespace Beached.Patches
 {
 	public class EntityTemplatesPatch
 	{
-		[HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicCreature))]
+		[HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicCreature), [
+			typeof(bool),
+			typeof(GameObject),
+			typeof(FactionManager.FactionID),
+			typeof(string),
+			typeof(string),
+			typeof(NavType),
+			typeof(int),
+			typeof(float),
+			typeof(string),
+			typeof(int),
+			typeof(bool),
+			typeof(bool),
+			typeof(float),
+			typeof(float),
+			typeof(float),
+			typeof(float)])]
 		public class EntityTemplates_ExtendEntityToBasicCreature_Patch
 		{
 			public static void Postfix(GameObject template)

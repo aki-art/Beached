@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-	internal class KelpConfig : IEntityConfig
+	public class KelpConfig : IEntityConfig
 	{
 		public const string ID = "Beached_Kelp";
 
@@ -12,8 +12,8 @@ namespace Beached.Content.Defs.Flora
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				STRINGS.CREATURES.SPECIES.KELP.NAME,
-				STRINGS.CREATURES.SPECIES.KELP.DESC,
+				STRINGS.CREATURES.SPECIES.BEACHED_KELP.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_KELP.DESC,
 				100f,
 				Assets.GetAnim("beached_kelp_kanim"),
 				"idle_0",

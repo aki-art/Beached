@@ -2,7 +2,7 @@
 
 namespace Beached.Content.Defs.Entities.Critters
 {
-	internal class SlickShellTuning
+	public class SlickShellTuning
 	{
 		public static List<FertilityMonitor.BreedingChance> EGG_CHANCES_BASE = new()
 		{

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities
 {
-	internal class StemPiece : KMonoBehaviour
+	public class StemPiece : KMonoBehaviour
 	{
 		[MyCmpGet] private KBatchedAnimController kbac;
 

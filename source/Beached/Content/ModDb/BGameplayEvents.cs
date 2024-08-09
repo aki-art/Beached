@@ -5,10 +5,10 @@ using TUNING;
 
 namespace Beached.Content.ModDb
 {
-	internal class BGameplayEvents
+	public class BGameplayEvents
 	{
 		public const string DIAMOND_SHOWER = "Beached_ClusterDiamondShowerEvent";
-		public const string DIAMOND_METEOREVENTID= "Beached_Diamond";
+		public const string DIAMOND_METEOREVENTID = "Beached_Diamond";
 		public static GameplayEvent ClusterDiamondShower;
 		public const string ABYSSALITE_SHOWER = "Beached_ClusterAbyssaliteShowerEvent";
 		public const string ABYSSALITE_METEOREVENTID = "Beached_Abyssalite";
@@ -23,7 +23,7 @@ namespace Beached.Content.ModDb
 				3.5f,
 				METEORS.BOMBARDMENT_OFF.NONE,
 				METEORS.BOMBARDMENT_ON.UNLIMITED,
-				ClusterMapMeteorShowerConfig.GetFullID(DIAMOND_METEOREVENTID), 
+				ClusterMapMeteorShowerConfig.GetFullID(DIAMOND_METEOREVENTID),
 				true)
 				.AddMeteor(DiamondCometConfig.ID, 1f)
 				.AddMeteor(SparklingZirconCometConfig.ID, 0.001f)

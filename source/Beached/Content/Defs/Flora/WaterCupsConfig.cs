@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-	internal class WaterCupsConfig : IEntityConfig
+	public class WaterCupsConfig : IEntityConfig
 	{
 		public const string ID = "Beached_WaterCups";
 		public const string SEED_ID = "Beached_WaterCupsSeed";
@@ -17,8 +17,8 @@ namespace Beached.Content.Defs.Flora
 		{
 			var gameObject = EntityTemplates.CreatePlacedEntity(
 				ID,
-				STRINGS.CREATURES.SPECIES.WATERCUPS.NAME,
-				STRINGS.CREATURES.SPECIES.WATERCUPS.DESC,
+				STRINGS.CREATURES.SPECIES.BEACHED_WATERCUPS.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_WATERCUPS.DESC,
 				100f,
 				Assets.GetAnim("beached_watercups_kanim"),
 				"idle",
@@ -37,7 +37,7 @@ namespace Beached.Content.Defs.Flora
 				Elements.saltyOxygen,
 				SimHashes.ContaminatedOxygen,
 				SimHashes.CarbonDioxide
-			}, true, 0f, 0.15f, null, true, false, true, true, 2400f, 0f, 2200f, "CylindricaOriginal", STRINGS.CREATURES.SPECIES.WATERCUPS.NAME);
+			}, true, 0f, 0.15f, null, true, false, true, true, 2400f, 0f, 2200f, "CylindricaOriginal", STRINGS.CREATURES.SPECIES.BEACHED_WATERCUPS.NAME);
 
 			var prickleGrass = gameObject.AddOrGet<PrickleGrass>();
 			prickleGrass.positive_decor_effect = POSITIVE_DECOR_EFFECT;
@@ -46,7 +46,7 @@ namespace Beached.Content.Defs.Flora
 			EntityTemplates.CreateAndRegisterPreviewForPlant(EntityTemplates.CreateAndRegisterSeedForPlant(gameObject, SeedProducer.ProductionType.Hidden, "CylindricaSeed", STRINGS.CREATURES.SPECIES.SEEDS.WATERCUPS.NAME, STRINGS.CREATURES.SPECIES.SEEDS.WATERCUPS.DESC, Assets.GetAnim("seed_potted_cylindricafan_kanim"), "object", 1, new List<Tag>
 			{
 				GameTags.DecorSeed
-			}, SingleEntityReceptacle.ReceptacleDirection.Top, default, 12, STRINGS.CREATURES.SPECIES.WATERCUPS.DOMESTICATEDDESC, EntityTemplates.CollisionShape.CIRCLE, 0.25f, 0.25f, null, "", false), PREVIEW_ID, Assets.GetAnim("beached_watercups_kanim"), "place", 1, 1);
+			}, SingleEntityReceptacle.ReceptacleDirection.Top, default, 12, STRINGS.CREATURES.SPECIES.BEACHED_WATERCUPS.DOMESTICATEDDESC, EntityTemplates.CollisionShape.CIRCLE, 0.25f, 0.25f, null, "", false), PREVIEW_ID, Assets.GetAnim("beached_watercups_kanim"), "place", 1, 1);
 
 			return gameObject;
 		}

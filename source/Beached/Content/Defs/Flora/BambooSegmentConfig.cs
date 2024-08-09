@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-	internal class BambooSegmentConfig : IEntityConfig
+	public class BambooSegmentConfig : IEntityConfig
 	{
 		public const string ID = "Beached_BambooSegment";
 		private static readonly List<KAnimHashedString> liveSegmentAnims = new()
@@ -19,8 +19,8 @@ namespace Beached.Content.Defs.Flora
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				"segment",//STRINGS.CREATURES.SPECIES.BAMBOO.NAME,
-				STRINGS.CREATURES.SPECIES.BAMBOO.DESC,
+				"segment",//STRINGS_OLD.CREATURES.SPECIES.BAMBOO.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_BAMBOO.DESC,
 				100f,
 				Assets.GetAnim("beached_bamboo_kanim"),
 				"idle",

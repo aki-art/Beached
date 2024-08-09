@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Beached.Patches.Worldgen
 {
-	internal class PureNoiseTerrain
+	public class PureNoiseTerrain
 	{
 		public string biomeFilepath;
 		public string noiseFilepath;

@@ -22,26 +22,46 @@ namespace Beached.Patches
 				if (index == -1)
 					return codes;
 
-				var m_InjectedMethod = AccessTools.Method(typeof(FetchManager_FindEdibleFetchTarget_Patch), nameof(GetPathCost), new[]
-				{
+				var m_InjectedMethod = AccessTools.Method(typeof(FetchManager_FindEdibleFetchTarget_Patch), nameof(GetPathCost),
+				[
 					typeof(ushort),
 					typeof(FetchManager.Pickup),
 					typeof(Storage)
-				});
+				]);
 
-				codes.InsertRange(index + 1, new[]
-				{
-                    // ushort on stack
-                    new CodeInstruction(OpCodes.Ldloc, 4), // TODO find, pickup2
-                    new CodeInstruction(OpCodes.Ldarg_1), // Storage storage
-                    new CodeInstruction(OpCodes.Call, m_InjectedMethod)
-				});
+				codes.InsertRange(index + 1,
+				[
+					// ushort on stack
+					new CodeInstruction(OpCodes.Ldloc, 5), // TODO find, pickup2
+					new CodeInstruction(OpCodes.Ldarg_1), // Storage storage
+					new CodeInstruction(OpCodes.Call, m_InjectedMethod)
+				]);
 
 				return codes;
 			}
 
 			private static ushort GetPathCost(ushort originalValue, FetchManager.Pickup pickupable, Storage storage)
 			{
+				if (pickupable.pickupable == null)
+				{
+					Log.Warning("pickupable is null");
+					return originalValue;
+				}
+
+				if (pickupable.pickupable.KPrefabID == null)
+				{
+					Log.Warning(" pickupable.pickupable.KPrefabID is null");
+					return originalValue;
+				}
+
+				if (storage == null)
+				{
+					Log.Warning("storage is null");
+					return originalValue;
+				}
+
+				// TODO: Frosty broke this i think
+
 				var isLowPriorityPoff = pickupable.pickupable.KPrefabID.HasTag(BTags.palateCleanserFood)
 					&& storage.HasTag(BTags.palateCleansed);
 

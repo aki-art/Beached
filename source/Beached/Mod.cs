@@ -51,7 +51,6 @@ namespace Beached
 
 			BTags.OnModLoad();
 
-			ZoneTypes.Initialize();
 			BeachedDevTools.Initialize();
 			BWorldGenTags.Initialize();
 

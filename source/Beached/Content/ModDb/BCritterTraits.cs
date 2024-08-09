@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Beached.Content.ModDb
 {
-	internal class BCritterTraits
+	public class BCritterTraits
 	{
 		public const string GMO_GROUP = "Beached_GMOTraits";
 
@@ -112,8 +112,8 @@ namespace Beached.Content.ModDb
 		{
 			var trait = Db.Get().CreateTrait(
 				ID,
-				Strings.TryGet($"Beached.STRINGS.CREATURES.TRAITS.{ID.ToUpperInvariant()}.NAME", out var name) ? name : "MISSING.",
-				Strings.TryGet($"Beached.STRINGS.CREATURES.TRAITS.{ID.ToUpperInvariant()}.DESC", out var desc) ? desc : "MISSING.",
+				Strings.TryGet($"Beached.STRINGS_OLD.CREATURES.TRAITS.{ID.ToUpperInvariant()}.NAME", out var name) ? name : "MISSING.",
+				Strings.TryGet($"Beached.STRINGS_OLD.CREATURES.TRAITS.{ID.ToUpperInvariant()}.DESC", out var desc) ? desc : "MISSING.",
 				GMO_GROUP,
 				true,
 				null,

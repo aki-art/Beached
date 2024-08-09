@@ -29,12 +29,12 @@ namespace Beached
 			{ 1, ZoneTypes.coralReef }
 		};
 
-		public static readonly Direction[] cardinals = {
+		public static readonly Direction[] cardinals = [
 			Direction.Down,
 			Direction.Up,
 			Direction.Left,
 			Direction.Right,
-		};
+		];
 
 		public static class Textures
 		{
@@ -52,7 +52,9 @@ namespace Beached
 
 		public static class Sounds
 		{
-			public const string SHELL_CHIME_LOUD = "Beached_Chimes_Loud";
+			public const string
+				SHELL_CHIME_LOUD = "Beached_Chimes_Loud",
+				MUSSEL_SPROUT_HARVEST = "Beached_Mussel_Sprout_Harvet";
 		}
 
 		public static class Materials
@@ -64,18 +66,20 @@ namespace Beached
 
 		public static class Sprites
 		{
-			public const string MOD_MINERALOGIST = "beached_mod_mineralogist";
-			public const string ERRAND_MINERALOGY = "beached_errand_mineralogy";
-			public const string ARCHETYPE_MINERALOGY = "beached_archetype_mineralogy";
-			public const string BUILDCATEGORY_POIS = "beached_buildcategory_pois";
-			public const string STATUSITEM_DRIEDOUT = "beached_statusitem_driedout";
+			public const string
+				MOD_MINERALOGIST = "beached_mod_mineralogist",
+				ERRAND_MINERALOGY = "beached_errand_mineralogy",
+				ARCHETYPE_MINERALOGY = "beached_archetype_mineralogy",
+				BUILDCATEGORY_POIS = "beached_buildcategory_pois",
+				STATUSITEM_DRIEDOUT = "beached_statusitem_driedout";
 		}
 
 		public static class Fx
 		{
-			public static SpawnFXHashes saltOff = (SpawnFXHashes)"Beached_SaltOff".GetHashCode();
-			public static SpawnFXHashes grimcapPoff = (SpawnFXHashes)"Beached_GrimCapPoff".GetHashCode();
-			public static SpawnFXHashes mossplosion = (SpawnFXHashes)"Beached_Mossplosion".GetHashCode();
+			public static SpawnFXHashes
+				saltOff = (SpawnFXHashes)"Beached_SaltOff".GetHashCode(),
+				grimcapPoff = (SpawnFXHashes)"Beached_GrimCapPoff".GetHashCode(),
+				mossplosion = (SpawnFXHashes)"Beached_Mossplosion".GetHashCode();
 
 			public static Material testMaterial;
 			public static Material darkVeilPostFxMaterial;
@@ -265,8 +269,8 @@ namespace Beached
 
 		private static void LoadSounds(string path)
 		{
-			Log.Debug(Path.Combine(path, "511636__aslipasli__chimes.wav"));
 			AudioUtil.LoadSound(Sounds.SHELL_CHIME_LOUD, Path.Combine(path, "511636__aslipasli__chimes.wav"));
+			AudioUtil.LoadSound(Sounds.MUSSEL_SPROUT_HARVEST, Path.Combine(path, "250133__fngersounds__egg-cracking.wav"));
 		}
 
 		public static bool TryLoadTexture(string path, out Texture2D texture)
@@ -430,7 +434,7 @@ namespace Beached
 			}
 		}
 
-		internal static void LoadKAnims()
+		public static void LoadKAnims()
 		{
 			Log.Debug("Loading KAnims");
 			Stopwatch stopWatch = new();

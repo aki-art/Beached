@@ -198,7 +198,7 @@ namespace Beached.Content.Scripts.Buildings
 			DetailsScreen.Instance.Refresh(gameObject);
 		}
 
-		internal Tag GetSelectedOption()
+		public Tag GetSelectedOption()
 		{
 			return selectedSample;
 		}
@@ -317,7 +317,7 @@ namespace Beached.Content.Scripts.Buildings
 				tracker.symbol = EGG_TARGET;
 			}
 
-			internal void UpdateEgg()
+			public void UpdateEgg()
 			{
 				if (currentEgg != null)
 				{

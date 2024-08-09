@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Beached.Content.ModDb
 {
-	internal class BGameplaySeasons
+	public class BGameplaySeasons
 	{
 
 

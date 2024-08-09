@@ -18,7 +18,7 @@ namespace Beached.Content
 				Units.Flat,
 				0.35f,
 				true,
-				"STRINGS.CREATURES",
+				"STRINGS_OLD.CREATURES",
 				"ui_icon_stamina",
 				"attribute_stamina",
 				"mod_stamina");
@@ -33,7 +33,7 @@ namespace Beached.Content
 				Units.Flat,
 				0.1675f,
 				true,
-				"STRINGS.CREATURES",
+				"STRINGS_OLD.CREATURES",
 				"ui_icon_scale_growth");
 
 			LimpetGrowth.SetDisplayer(new AsPercentAmountDisplayer(GameUtil.TimeSlice.PerCycle));

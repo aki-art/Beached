@@ -2,7 +2,7 @@
 
 namespace Beached.Content.Defs.Comets
 {
-	internal class DiamondCometConfig : IEntityConfig
+	public class DiamondCometConfig : IEntityConfig
 	{
 		public const string ID = "Beached_DiamondComet";
 		public GameObject CreatePrefab()

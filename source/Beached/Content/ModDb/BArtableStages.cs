@@ -22,7 +22,9 @@ namespace Beached.Content.ModDb
 				15,
 				true,
 				Db.Get().ArtableStatuses.LookingGreat,
-				WoodCarvingConfig.ID));
+				WoodCarvingConfig.ID,
+				string.Empty,
+				DlcManager.AVAILABLE_ALL_VERSIONS));
 		}
 	}
 }

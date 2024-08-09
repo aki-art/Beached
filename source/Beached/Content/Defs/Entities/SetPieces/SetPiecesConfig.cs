@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.SetPieces
 {
-	internal class SetPiecesConfig : IMultiEntityConfig
+	public class SetPiecesConfig : IMultiEntityConfig
 	{
 		public const string TEST = "Beached_TestSetPiece";
 		public const string BEACH = "Beached_BeachSetPiece";

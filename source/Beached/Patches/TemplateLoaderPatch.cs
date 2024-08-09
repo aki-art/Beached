@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 namespace Beached.Patches
 {
-	internal class TemplateLoaderPatch
+	public class TemplateLoaderPatch
 	{
 
 		[HarmonyPatch(typeof(TemplateLoader), nameof(TemplateLoader.Stamp))]

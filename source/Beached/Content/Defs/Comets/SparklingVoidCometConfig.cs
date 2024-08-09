@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Comets
 {
-	internal class SparklingVoidCometConfig : IEntityConfig
+	public class SparklingVoidCometConfig : IEntityConfig
 	{
 		public const string ID = "Beached_SparklingVoidComet";
 		public GameObject CreatePrefab()

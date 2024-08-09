@@ -1,4 +1,6 @@
-﻿namespace Beached.Content.Scripts
+﻿using Beached.Content.BWorldGen;
+
+namespace Beached.Content.Scripts
 {
 	public class Beached_WorldLoader : KMonoBehaviour
 	{
@@ -17,9 +19,8 @@
 			if (IsBeachedContentActive)
 				Log.Info("Loaded Astropelagos world, initializing Beached settings.");
 
-#if ELEMENTS
 			Elements.OnWorldReload(IsBeachedContentActive);
-#endif
+			ZoneTypes.OnWorldLoad();
 		}
 	}
 }

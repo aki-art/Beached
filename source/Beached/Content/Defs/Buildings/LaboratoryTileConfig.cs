@@ -4,7 +4,7 @@ using MATERIALS = TUNING.MATERIALS;
 
 namespace Beached.Content.Defs.Buildings
 {
-	internal class LaboratoryTileConfig : IBuildingConfig
+	public class LaboratoryTileConfig : IBuildingConfig
 	{
 		public const string ID = "Beached_LaboratoryTiles";
 

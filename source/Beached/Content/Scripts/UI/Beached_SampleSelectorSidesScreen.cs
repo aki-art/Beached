@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Beached.Content.Scripts.UI
 {
-	internal class Beached_SampleSelectorSidesScreen : SideScreenContent
+	public class Beached_SampleSelectorSidesScreen : SideScreenContent
 	{
 		[SerializeField] private RectTransform consumptionSettingToggleContainer;
 		[SerializeField] private GameObject consumptionSettingTogglePrefab;

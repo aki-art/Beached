@@ -14,11 +14,11 @@ namespace Beached.Content.Defs.Entities
 
 		public List<GameObject> CreatePrefabs() => new()
 		{
-			CreatePrefab(MUFFINS, 7, 3, "beached_glacier_muffins_kanim", new()
-			{
+			CreatePrefab(MUFFINS, 7, 3, "beached_glacier_muffins_kanim",
+			[
 				MuffinConfig.ID,
 				MuffinConfig.ID,
-			})
+			])
 		};
 
 		private static GameObject CreatePrefab(string id, int width, int height, string anim, List<string> tags)
@@ -38,17 +38,17 @@ namespace Beached.Content.Defs.Entities
 				height,
 				TUNING.DECOR.BONUS.TIER2,
 				element: SimHashes.Ice,
-				additionalTags: new()
-				{
+				additionalTags:
+				[
 					BTags.glacier
-				},
+				],
 				defaultTemperature: GameUtil.GetTemperatureConvertedToKelvin(-30, GameUtil.TemperatureUnit.Celsius));
 
 			var locker = result.AddComponent<SetLocker>();
-			locker.possible_contents_ids = new[]
-			{
-				tags.ToArray()
-			};
+			locker.possible_contents_ids =
+			[
+				[.. tags]
+			];
 
 			result.AddComponent<Glacier>();
 

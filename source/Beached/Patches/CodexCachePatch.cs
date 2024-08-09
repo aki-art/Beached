@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Beached.Patches
 {
-	internal class CodexCachePatch
+	public class CodexCachePatch
 	{
 		public const string MODS = "MODS";
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Beached.ModDevTools
 {
-	internal class WorldLayoutHelper
+	public class WorldLayoutHelper
 	{
 		public WorldGen Generate(int seed)
 		{

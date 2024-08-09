@@ -4,7 +4,7 @@ using static EdiblesManager;
 
 namespace Beached.Content.Defs.Foods
 {
-	internal class MusselTongueConfig : IEntityConfig
+	public class MusselTongueConfig : IEntityConfig
 	{
 		public static string ID = "Beached_MusselTongue";
 

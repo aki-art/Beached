@@ -55,7 +55,14 @@
 		<Reference Include="FUtility">
 		  <HintPath>D:\Modding\OxygenNotIncluded\Lib\FUtility.dll</HintPath>
 		</Reference>
-		
+
+		<!--
+		<Reference Include="Moonlet">
+			<HintPath>C:\Users\Aki\Documents\Klei\OxygenNotIncluded\mods\dev\Moonlet_dev\Moonlet.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		-->
+
 		<Reference Include="ImGui">
 			<HintPath>$(GameLibsFolder)\ImGui.dll</HintPath>
 			<Private>false</Private>

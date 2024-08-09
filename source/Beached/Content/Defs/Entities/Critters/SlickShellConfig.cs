@@ -7,7 +7,7 @@ using static Beached.STRINGS.CREATURES.SPECIES;
 namespace Beached.Content.Defs.Entities.Critters
 {
 	[EntityConfigOrder(0)]
-	internal class SlickShellConfig : IEntityConfig
+	public class SlickShellConfig : IEntityConfig
 	{
 		public const string ID = "Beached_SlickShell";
 		public const string EGG_ID = "Beached_SlickShell_Egg";

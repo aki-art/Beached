@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities
 {
-	internal class ForceFieldConfig : IEntityConfig
+	public class ForceFieldConfig : IEntityConfig
 	{
 		public const string ID = "Beached_ForceField";
 
