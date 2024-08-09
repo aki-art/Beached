@@ -51,11 +51,19 @@ namespace Beached.Content.Scripts
 					.Enter(smi => smi.master.harvestable.SetCanBeHarvested(true));
 
 				alive.harvest
-					.QueueAnim("harvest")
+					.PlayAnim("harvest")
+					.Enter(smi =>
+					{
+						Log.Debug("ENTERED HARVEST");
+						if (!smi.master.soundFx.IsNullOrWhiteSpace())
+							AudioUtil.PlaySound(smi.master.soundFx, smi.transform.position, smi.master.volume);
+					})
+					.EventHandler(GameHashes.AnimQueueComplete, smi => Log.Debug("anim queue completed"))
 					.OnAnimQueueComplete(dead)
 					.Exit(smi => smi.master.seedProducer.DropSeed());
 
 				dead
+					.Enter(smi => Log.Debug("ENTERED DEAD"))
 					.Enter(Die);
 			}
 
@@ -76,9 +84,6 @@ namespace Beached.Content.Scripts
 						Assets.GetPrefab(deathFx),
 						smi.master.transform.GetPosition(), Grid.SceneLayer.FXFront)
 						.SetActive(true);
-
-			if (!soundFx.IsNullOrWhiteSpace())
-				AudioUtil.PlaySound(soundFx, volume);
 		}
 
 		public override void OnSpawn()

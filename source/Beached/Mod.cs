@@ -100,6 +100,18 @@ namespace Beached
 
 							harmony.Patch(targetConstructor, postfix: new HarmonyMethod(methodInfo));
 						}
+
+						if (attributeType == typeof(OverrideAttribute))
+						{
+							var prefix = new HarmonyMethod(methodInfo);
+							var overrideAttr = (OverrideAttribute)attr;
+
+							var targetMethod = overrideAttr.parameters == null
+								? type.BaseType.GetMethod(methodInfo.Name)
+								: type.BaseType.GetMethod(methodInfo.Name, ((OverrideAttribute)attr).parameters);
+
+							harmony.Patch(targetMethod, prefix: prefix);
+						}
 					}
 				}
 			}
@@ -107,6 +119,7 @@ namespace Beached
 			stopWatch.Stop();
 			Log.Debug($"Processed attributes in {stopWatch.ElapsedMilliseconds} ms");
 		}
+
 
 		public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods)
 		{
