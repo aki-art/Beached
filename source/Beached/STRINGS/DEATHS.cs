@@ -1,13 +1,14 @@
-﻿using FUtility.FLocalization;
-
-namespace Beached.STRINGS
+﻿namespace Beached
 {
-	public class DEATHS : StringsBase
+	public partial class STRINGS
 	{
-		public class DESICCATION
+		public class DEATHS
 		{
-			public static LocString NAME = "Desiccation";
-			public static LocString DESCRIPTION = "...";
+			public class DESICCATION
+			{
+				public static LocString NAME = "Desiccation";
+				public static LocString DESCRIPTION = "...";
+			}
 		}
 	}
 }

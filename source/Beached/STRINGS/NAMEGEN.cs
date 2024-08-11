@@ -1,14 +1,15 @@
-﻿using FUtility.FLocalization;
-
-namespace Beached.STRINGS
+﻿namespace Beached
 {
-	public class NAMEGEN : StringsBase
+	public partial class STRINGS
 	{
-		public class WORLD
+		public class NAMEGEN
 		{
-			public class ROOTS
+			public class WORLD
 			{
-				public static LocString OCEANARIA = "Oca\nSalt\nMarin\nDeep\nBrin\nBlu\nSalin\nCoral\nAq\nPelag\nNaut\nNav\n";
+				public class ROOTS
+				{
+					public static LocString OCEANARIA = "Oca\nSalt\nMarin\nDeep\nBrin\nBlu\nSalin\nCoral\nAq\nPelag\nNaut\nNav\n";
+				}
 			}
 		}
 	}

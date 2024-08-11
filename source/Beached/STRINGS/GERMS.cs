@@ -1,23 +1,23 @@
-﻿using FUtility.FLocalization;
-
-namespace Beached.STRINGS
+﻿namespace Beached
 {
-	public class GERMS : StringsBase
+	public partial class STRINGS
 	{
-		public class BEACHED_PLANKTON
+		public class GERMS
 		{
-			public static LocString NAME = "Plankton";
-		}
+			public class BEACHED_PLANKTON
+			{
+				public static LocString NAME = "Plankton";
+			}
 
-		public class BEACHED_LIMPETEGG
-		{
-			public static LocString NAME = "Limpet Eggs";
-		}
+			public class BEACHED_LIMPETEGG
+			{
+				public static LocString NAME = "Limpet Eggs";
+			}
 
-		public class BEACHED_CAPSPORE
-		{
-			public static LocString NAME = "Grimcap Spores";
+			public class BEACHED_CAPSPORE
+			{
+				public static LocString NAME = "Grimcap Spores";
+			}
 		}
 	}
-
 }

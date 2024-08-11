@@ -1,15 +1,18 @@
 ﻿using FUtility.FLocalization;
 
-namespace Beached.STRINGS
+namespace Beached
 {
-	public class TRUETILES : StringsBase
+	public partial class STRINGS
 	{
-		public class TEXTUREPACKS
+		public class TRUETILES
 		{
-			public class BEACHED
+			public class TEXTUREPACKS
 			{
-				public static LocString NAME = "Beached";
-				public static LocString DESCRIPTION = "Additional tiles for Beached elements.";
+				public class BEACHED
+				{
+					public static LocString NAME = "Beached";
+					public static LocString DESCRIPTION = "Additional tiles for Beached elements.";
+				}
 			}
 		}
 	}

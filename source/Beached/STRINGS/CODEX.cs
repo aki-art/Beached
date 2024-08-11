@@ -1,21 +1,22 @@
-﻿using FUtility.FLocalization;
-
-namespace Beached.STRINGS
+﻿namespace Beached
 {
-	public class CODEX : StringsBase
+	public partial class STRINGS
 	{
-		public class STORY_TRAITS
+		public class CODEX
 		{
-			public class GLACIERS
+			public class STORY_TRAITS
 			{
-				public static LocString NAME = "Glaciers";
-				public static LocString DESCRIPTION = "Treasures trapped inside glacial ice.";
-			}
+				public class GLACIERS
+				{
+					public static LocString NAME = "Glaciers";
+					public static LocString DESCRIPTION = "Treasures trapped inside glacial ice.";
+				}
 
-			public class AFFG
-			{
-				public static LocString NAME = "Atmospheric Force-Field Generator";
-				public static LocString DESCRIPTION = "TODO";
+				public class AFFG
+				{
+					public static LocString NAME = "Atmospheric Force-Field Generator";
+					public static LocString DESCRIPTION = "TODO";
+				}
 			}
 		}
 	}

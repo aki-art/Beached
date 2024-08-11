@@ -1,12 +1,15 @@
 ﻿using FUtility.FLocalization;
 
-namespace Beached.STRINGS
+namespace Beached
 {
-	public class RESEARCH : StringsBase
+	public partial class STRINGS
 	{
-		public class TREES
+		public class RESEARCH
 		{
-			public static LocString TITLE_UNKNOWN = "Unknown";
+			public class TREES
+			{
+				public static LocString TITLE_UNKNOWN = "Unknown";
+			}
 		}
 	}
 }
