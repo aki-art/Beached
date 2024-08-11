@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Scripts.Entities;
-using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
@@ -32,10 +31,10 @@ namespace Beached.Content.Defs.Buildings
 			def.EnergyConsumptionWhenActive = 120f;
 			def.SelfHeatKilowattsWhenActive = 0.125f;
 			def.ExhaustKilowattsWhenActive = 0f;
-			def.LogicOutputPorts = new List<LogicPorts.Port>
-			{
+			def.LogicOutputPorts =
+			[
 				LogicPorts.Port.OutputPort(FilteredStorage.FULL_PORT_ID, new CellOffset(0, 0), global::STRINGS.BUILDINGS.PREFABS.REFRIGERATOR.LOGIC_PORT, global::STRINGS.BUILDINGS.PREFABS.REFRIGERATOR.LOGIC_PORT_ACTIVE, global::STRINGS.BUILDINGS.PREFABS.REFRIGERATOR.LOGIC_PORT_INACTIVE, false, false)
-			};
+			];
 			def.SceneLayer = Grid.SceneLayer.Building;
 			def.ForegroundLayer = Grid.SceneLayer.BuildingBack;
 
@@ -43,10 +42,13 @@ namespace Beached.Content.Defs.Buildings
 			def.ViewMode = OverlayModes.Power.ID;
 			def.AudioCategory = AUDIO.CATEGORY.METAL;
 
-			//SoundEventVolumeCache.instance.AddVolume("fridge_kanim", "Refrigerator_open", NOISE_POLLUTION.NOISY.TIER1);
-			//SoundEventVolumeCache.instance.AddVolume("fridge_kanim", "Refrigerator_close", NOISE_POLLUTION.NOISY.TIER1);
-
 			return def;
+		}
+
+		public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
+		{
+			base.ConfigureBuildingTemplate(go, prefab_tag);
+			//LoreBearerUtil.AddLoreTo(go, LoreBearerUtil.UnlockSpecificEntry("pod_evacuation", "Inspect"));
 		}
 
 		public override void DoPostConfigureComplete(GameObject go)
