@@ -7,7 +7,17 @@ namespace Beached.Patches
 {
 	public class MinionConfigPatch
 	{
-		[HarmonyPatch(typeof(MinionConfig), "OnSpawn")]
+
+		[HarmonyPatch(typeof(MinionConfig), nameof(MinionConfig.SetupLaserEffects))]
+		public class MinionConfig_SetupLaserEffects_Patch
+		{
+			public static void Postfix(GameObject prefab)
+			{
+				ModAssets.Fx.Lasers.AddLaserEffect(prefab);
+			}
+		}
+
+		[HarmonyPatch(typeof(MinionConfig), nameof(MinionConfig.OnSpawn))]
 		public class MinionConfig_OnSpawn_Patch
 		{
 			public static void Postfix(GameObject go)
@@ -50,6 +60,15 @@ namespace Beached.Patches
 					context = "",
 					buildFile = Assets.GetAnim("beached_rubberboots_kanim"),
 					overrideSymbol = "foot"
+				});
+
+				snapOn.snapPoints.Add(new SnapOn.SnapPoint
+				{
+					pointName = "dig",
+					automatic = false,
+					context = ModAssets.CONTEXTS.HARVEST_ORANGE_SQUISH,
+					buildFile = Assets.GetAnim((HashedString)"plant_harvester_gun_kanim"),
+					overrideSymbol = (HashedString)"snapTo_rgtHand"
 				});
 
 				AddNecklaceSnapon(snapOn, CONSTS.SNAPONS.JEWELLERIES.MAXIXE, "beached_maxixe_necklace_kanim");

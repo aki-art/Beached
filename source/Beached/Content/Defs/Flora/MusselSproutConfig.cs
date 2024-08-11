@@ -36,12 +36,10 @@ namespace Beached.Content.Defs.Flora
 			prefab.AddOrGet<Harvestable>();
 			prefab.AddOrGet<HarvestDesignatable>();
 			prefab.AddOrGet<SeedProducer>().Configure(MusselTongueConfig.ID, SeedProducer.ProductionType.DigOnly, 1);
-			//prefab.AddOrGet<BasicForagePlantPlanted>();
 
 			var singleHarvestable = prefab.AddOrGet<SingleHarvestable>();
-			singleHarvestable.deathFx = EffectConfigs.PlantDeathId;
 			singleHarvestable.soundFx = ModAssets.Sounds.MUSSEL_SPROUT_HARVEST;
-			singleHarvestable.volume = 1.0f;
+			singleHarvestable.volume = 0.5f;
 
 			prefab.AddOrGet<KBatchedAnimController>().randomiseLoopedOffset = true;
 

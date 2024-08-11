@@ -2,6 +2,7 @@
 using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
 using HarmonyLib;
+using PeterHan.PLib.Core;
 
 namespace Beached.Patches
 {
@@ -24,6 +25,8 @@ namespace Beached.Patches
 				DNAInjector.InitializeOptions();
 
 				EdiblePatch.Edible_AddOnConsumeEffects_Patch.Patch(Mod.harmonyInstance);
+
+				PGameUtils.CopySoundsToAnim("beached_mussel_giblets_impact_kanim", "paint_impact_kanim");
 			}
 		}
 	}

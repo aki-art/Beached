@@ -11,13 +11,14 @@ namespace Beached.Patches
 		{
 			public static void Postfix()
 			{
-				Translations.RegisterForTranslation();
+				Translations.RegisterForTranslation(typeof(STRINGS));
 
 				Strings.Add("STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES", STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES);
 				Strings.Add("STRINGS.DUPLICANTS.TRAITS.GILLS.SHORT_DESC", STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.SHORT_DESC);
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MiniFridgeConfig.ID.ToUpperInvariant()}.EFFECT", global::STRINGS.BUILDINGS.PREFABS.REFRIGERATOR.EFFECT);
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{AmmoniaGeneratorConfig.ID.ToUpperInvariant()}.EFFECT", global::STRINGS.BUILDINGS.PREFABS.HYDROGENGENERATOR.EFFECT);
 			}
+
 		}
 	}
 }

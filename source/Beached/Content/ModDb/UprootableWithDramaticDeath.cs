@@ -1,4 +1,5 @@
-﻿using KSerialization;
+﻿using Beached.Content.Defs;
+using KSerialization;
 using UnityEngine;
 
 namespace Beached.Content.ModDb
@@ -13,6 +14,13 @@ namespace Beached.Content.ModDb
 
 		[Serialize] public bool allowUprooting;
 
+		public override void OnPrefabInit()
+		{
+			base.OnPrefabInit();
+			multitoolHitEffectTag = BEffectConfigs.MUSSEL_GIBLETS;
+			multitoolContext = ModAssets.CONTEXTS.HARVEST_ORANGE_SQUISH;
+		}
+
 		public UprootableWithDramaticDeath()
 		{
 			deathAnimation = "harvest";
@@ -26,8 +34,6 @@ namespace Beached.Content.ModDb
 			{
 				if (self.uprootComplete || self.allowUprooting)
 					return true;
-
-				Log.Debug("uprooting");
 
 				self.kbac.Play(self.deathAnimation);
 				self.kbac.onAnimComplete += self.UpRootedForReal;
@@ -45,7 +51,6 @@ namespace Beached.Content.ModDb
 		{
 			allowUprooting = true;
 			Uproot();
-			Log.Debug("uprooting for reals");
 		}
 	}
 }
