@@ -23,7 +23,7 @@ namespace Beached.Content.Defs.Foods
 			var prefab = BEntityTemplates.CreateFood(
 				ID,
 				"beached_astrobar_kanim",
-		  0.8f,
+				0.8f,
 				0.5f,
 				foodInfo);
 

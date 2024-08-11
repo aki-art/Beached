@@ -1,5 +1,4 @@
 ﻿using Beached.Content.BWorldGen;
-using Beached.Content.Scripts;
 using FUtility.FUI;
 using Newtonsoft.Json;
 using System;
@@ -15,6 +14,8 @@ namespace Beached
 	public class ModAssets
 	{
 		public const string BASE_FOLDER = "assets/textures";
+		public const string NEW_ASSETBUNDLE = "beached_assets2";
+
 		public static class Prefabs
 		{
 			public static Dictionary<string, GameObject> setpieces;
@@ -43,6 +44,8 @@ namespace Beached
 			public static Texture2DArray biomeBackgrounds;
 			public static Texture2D forceFieldGrid;
 			public static Texture2D forceFieldBlurMap;
+			public static Texture2D dirtLigher;
+			public static Texture dirtOriginal;
 
 			public static class Placeholders
 			{
@@ -74,6 +77,11 @@ namespace Beached
 				STATUSITEM_DRIEDOUT = "beached_statusitem_driedout";
 		}
 
+		public static class CONTEXTS
+		{
+			public static readonly HashedString HARVEST_ORANGE_SQUISH = "harvest_orangesquish";
+		}
+
 		public static class Fx
 		{
 			public static SpawnFXHashes
@@ -85,6 +93,53 @@ namespace Beached
 			public static Material darkVeilPostFxMaterial;
 			public static GameObject darkVeilOverlay;
 			public static GameObject test;
+
+			public static class Lasers
+			{
+				public const string SQUISH = "Beached_Laser_Squish";
+
+				public static void AddLaserEffect(GameObject minionPrefab)
+				{
+					var laserEffects = minionPrefab.transform.Find("LaserEffect").gameObject;
+					var kbatchedAnimEventToggler = laserEffects.GetComponent<KBatchedAnimEventToggler>();
+					var kbac = minionPrefab.GetComponent<KBatchedAnimController>();
+
+					var laserEffect = new MinionConfig.LaserEffect
+					{
+						id = SQUISH,
+						animFile = "beached_squish_harvest_beam_kanim",
+						anim = "loop",
+						context = CONTEXTS.HARVEST_ORANGE_SQUISH
+					};
+
+					var laserGo = new GameObject(laserEffect.id);
+					laserGo.transform.parent = laserEffects.transform;
+					laserGo.AddOrGet<KPrefabID>().PrefabTag = new Tag(laserEffect.id);
+
+					var tracker = laserGo.AddOrGet<KBatchedAnimTracker>();
+					tracker.controller = kbac;
+					tracker.symbol = new HashedString("snapTo_rgtHand");
+					tracker.offset = new Vector3(195f, -35f, 0f);
+					tracker.useTargetPoint = true;
+
+					var kbatchedAnimController = laserGo.AddOrGet<KBatchedAnimController>();
+					kbatchedAnimController.AnimFiles =
+					[
+						Assets.GetAnim(laserEffect.animFile)
+					];
+
+					var item = new KBatchedAnimEventToggler.Entry
+					{
+						anim = laserEffect.anim,
+						context = laserEffect.context,
+						controller = kbatchedAnimController
+					};
+
+					kbatchedAnimEventToggler.entries.Add(item);
+
+					laserGo.AddOrGet<LoopingSounds>();
+				}
+			}
 		}
 
 		public static class Colors
@@ -181,9 +236,13 @@ namespace Beached
 
 			Textures.Placeholders.zeoliteBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "heulandite_geode.png"));
 			Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
+			Textures.dirtLigher = LoadTexture(Path.Combine(assets, "textures", "dirt_lighter.png"));
 
 			var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
+			var sharedAssetsBundle = LoadAssetBundle("beached_shared_assets", platformSpecific: false);
+			var bundle2 = LoadAssetBundle("beached_assets2", platformSpecific: true);
 			//var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
+			LoadSetpieces(bundle2);
 
 			foreach (var asset in bundle.GetAllAssetNames())
 			{
@@ -232,39 +291,26 @@ namespace Beached
 
 		private static void LoadSetpieces(AssetBundle bundle)
 		{
-			Prefabs.setpieces = new();
+			Prefabs.setpieces = [];
 
-			var testSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/test_setpiece.prefab");
+			var beachSetPiece = bundle.LoadAsset<GameObject>("Assets/Prefabs/BeachVista.prefab");
+			//beachSetPiece.GetComponent<Transform>().localScale *= 2f;
+			//var setPieceMaterial = new Material(bundle.LoadAsset<Shader>("Assets/Beached/fx/parallax/BeachedParallax.shader"));
 
-			SetupSetPiece(testSetPiece);
-			Prefabs.setpieces.Add("test", testSetPiece);
-
-			var beachSetPiece = bundle.LoadAsset<GameObject>("Assets/Beached/fx/parallax/Beach/beach_setpiece.prefab");
-			beachSetPiece.GetComponent<Transform>().localScale *= 2f;
-			var setPieceMaterial = new Material(bundle.LoadAsset<Shader>("Assets/Beached/fx/parallax/BeachedParallax.shader"));
 			foreach (var renderer in beachSetPiece.GetComponents<SpriteRenderer>())
 			{
-				renderer.material = setPieceMaterial;
+				// reference to built in shaders are lost so reassigning it here
+				if (renderer.gameObject.name == "bg 1")
+				{
+					var texture = renderer.material.mainTexture;
+					renderer.material.shader = Shader.Find("Sprites/Default");
+					renderer.material.mainTexture = texture;
+				}
+
 				renderer.material.renderQueue = RenderQueues.Liquid;
 			}
-
-			beachSetPiece.AddComponent<ParallaxBg>().DeserializeFromJson();
 
 			Prefabs.setpieces.Add("beach", beachSetPiece);
-		}
-
-		private static void SetupSetPiece(GameObject testSetPiece)
-		{
-			foreach (var renderer in testSetPiece.GetComponents<SpriteRenderer>())
-			{
-				renderer.material.renderQueue = RenderQueues.Liquid;
-			}
-
-			var bg = testSetPiece.transform.Find("bg 1");
-			var bgRenderer = bg.GetComponent<SpriteRenderer>();
-			var sprite = bgRenderer.sprite;
-			bgRenderer.material = new Material(Shader.Find("Sprites/Default"));
-			bgRenderer.sprite = sprite;
 		}
 
 		private static void LoadSounds(string path)

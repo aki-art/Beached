@@ -15,7 +15,7 @@ namespace Beached.Content.Defs.Entities.SetPieces
 			return new List<GameObject>()
 			{
 				CreateSetPiece(TEST, 11, 8, "test"),
-				CreateSetPiece(BEACH, 13, 8, "beach"),
+				CreateSetPiece(BEACH, 17, 10, "beach"),
 				CreateTestPiece(ZEOLITE, 8, 8, ModAssets.Textures.Placeholders.zeoliteBg)
 			};
 		}
@@ -33,14 +33,16 @@ namespace Beached.Content.Defs.Entities.SetPieces
 				width,
 				height,
 				TUNING.DECOR.BONUS.TIER2,
-				additionalTags: new List<Tag>()
-				{
+				additionalTags:
+				[
 					BTags.setPiece
-				});
+				]);
 
 			var setPiece = prefab.AddComponent<SetPiece>();
 			setPiece.setPiecePrefabID = "test";
 			setPiece.placeholderTexture = texture;
+			setPiece.width = width;
+			setPiece.height = height;
 
 			return prefab;
 		}
@@ -59,7 +61,12 @@ namespace Beached.Content.Defs.Entities.SetPieces
 				height,
 				TUNING.DECOR.BONUS.TIER2);
 
-			prefab.AddComponent<SetPiece>().setPiecePrefabID = bgPrefabID;
+			var setPiece = prefab.AddComponent<SetPiece>();
+			setPiece.setPiecePrefabID = bgPrefabID;
+			setPiece.width = width;
+			setPiece.height = height;
+
+			prefab.AddComponent<Vista>();
 
 			return prefab;
 		}

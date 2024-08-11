@@ -1,6 +1,5 @@
 ﻿using Beached.Content;
 using HarmonyLib;
-using System;
 using System.Collections.Generic;
 
 namespace Beached.Patches

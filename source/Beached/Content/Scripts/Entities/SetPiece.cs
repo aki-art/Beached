@@ -1,41 +1,39 @@
-﻿using UnityEngine;
+﻿using ImGuiNET;
+using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities
 {
-	public class SetPiece : KMonoBehaviour
+	public class SetPiece : KMonoBehaviour, IImguiDebug
 	{
 		public GameObject visualizer;
 
-		[SerializeField]
-		public string setPiecePrefabID;
-
-		[SerializeField]
-		public Texture2D placeholderTexture;
+		[SerializeField] public string setPiecePrefabID;
+		[SerializeField] public Texture2D placeholderTexture;
+		[SerializeField] public int width;
+		[SerializeField] public int height;
 
 		public override void OnSpawn()
 		{
 			base.OnSpawn();
 
-			/*            if (ModAssets.Prefabs.setpieces.TryGetValue(setPiecePrefabID, out var prefab))
-						{
-							visualizer = Instantiate(prefab);
+			if (ModAssets.Prefabs.setpieces.TryGetValue(setPiecePrefabID, out var prefab))
+			{
+				visualizer = Instantiate(prefab);
 
-							if (placeholderTexture != null)
-							{
-								SetPlaceholder();
-							}
+				if (placeholderTexture != null)
+					SetPlaceholder();
 
-							var collider = GetComponent<KBoxCollider2D>();
+				var collider = GetComponent<KBoxCollider2D>();
 
-							var position = new Vector3(
-								transform.position.x - collider.offset.x,
-								transform.position.y - collider.offset.y,
-								Grid.GetLayerZ(Grid.SceneLayer.Backwall) - 0.1f);
+				var position = new Vector3(
+					transform.position.x,
+					transform.position.y,
+					Grid.GetLayerZ(Grid.SceneLayer.Backwall) - 0.1f);
 
-							visualizer.transform.position = position;
-							visualizer.transform.SetParent(transform);
-							visualizer.SetActive(true);
-						}*/
+				visualizer.transform.position = position;
+				visualizer.transform.SetParent(transform, true);
+				visualizer.SetActive(true);
+			}
 		}
 
 		private void SetPlaceholder()
@@ -64,8 +62,26 @@ namespace Beached.Content.Scripts.Entities
 			base.OnCleanUp();
 
 			if (visualizer != null)
-			{
 				Destroy(visualizer);
+		}
+
+		private static float scale;
+
+		public void OnImguiDraw()
+		{
+			if (ImGui.DragFloat("setpiece scale", ref scale))
+			{
+				visualizer.transform.localScale.Set(scale, scale, 1);
+			}
+
+			if (ImGui.Button("Fix layer"))
+			{
+				var position = new Vector3(
+					visualizer.transform.position.x,
+					visualizer.transform.position.y,
+					Grid.GetLayerZ(Grid.SceneLayer.Backwall) - 0.1f);
+
+				visualizer.transform.position = position;
 			}
 		}
 	}

@@ -7,7 +7,8 @@ namespace Beached.Content
 	public class Elements
 	{
 		public static readonly SimHashes
-			moss = (SimHashes)Hash.SDBMLower("Beached_Moss");
+			moss = (SimHashes)Hash.SDBMLower("Beached_Moss"),
+			silt = (SimHashes)Hash.SDBMLower("Beached_Silt");
 
 		public static ElementInfo
 			amber = ElementInfo.Solid("Amber", ModAssets.Colors.amber),
@@ -337,6 +338,17 @@ namespace Beached.Content
 				lime.highTemp = Mod.settings.CrossWorld.Elements.originalLimeHighTemp;
 				lime.highTempTransition = ElementLoader.GetElement(Mod.settings.CrossWorld.Elements.originalLimeHighTempTarget);
 			}
+
+			var substanceTable = Assets.instance.substanceTable;
+			substanceTable.GetSubstance(SimHashes.Water).colour = ModAssets.Colors.water;
+			substanceTable.GetSubstance(SimHashes.SaltWater).colour = ModAssets.Colors.saltWater;
+
+			var dirt = substanceTable.GetSubstance(SimHashes.Dirt);
+			ModAssets.Textures.dirtOriginal ??= dirt.material.mainTexture;
+
+			dirt.material.mainTexture = isBeachedWorld
+				? ModAssets.Textures.dirtLigher
+				: ModAssets.Textures.dirtOriginal;
 		}
 
 		public static void CreateAudioConfigs(ElementsAudio elementsAudio)
