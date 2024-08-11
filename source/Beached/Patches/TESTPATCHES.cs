@@ -18,6 +18,7 @@ namespace Beached.Patches
 {
 	public class TestPatches
 	{
+
 		public static Texture2D testMask;
 
 		[HarmonyPatch(typeof(Accessorizer), "OnDeserialized")]
