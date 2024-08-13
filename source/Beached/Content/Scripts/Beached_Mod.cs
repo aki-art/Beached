@@ -47,29 +47,29 @@ namespace Beached.Content.Scripts
 			childGo.AddOrGet<TileUpdater>();
 		}
 
-		/*		public void InitWaterCamera(Camera reference)
-				{
-					int mWidth = Screen.width;
-					int mHeight = Screen.height;
+		public void InitWaterCamera(Camera reference)
+		{
+			int mWidth = Screen.width;
+			int mHeight = Screen.height;
 
-					waterTarget = new RenderTexture(mWidth, mHeight, 24);
-					debugWaterTex = new Texture2D(1, 1, TextureFormat.RGBA32, false);
-					debugWaterTex.SetPixel(0, 0, new Color(0, 0, 0, 0));
-					debugWaterTex.Resize(mWidth, mHeight);
-					debugWaterTex.Apply();
+			waterTarget = new RenderTexture(mWidth, mHeight, 24);
+			debugWaterTex = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+			debugWaterTex.SetPixel(0, 0, new Color(0, 0, 0, 0));
+			debugWaterTex.Resize(mWidth, mHeight);
+			debugWaterTex.Apply();
 
-					waterCamera = CameraController.Instance.CopyCamera(reference, "Beached_WaterCamera");
-					waterCamera.transform.parent = reference.transform.parent;
-					waterCamera.cullingMask = LayerMask.GetMask("Water"); /// <see cref="Patches.WaterCubesPatch.WaterCubes_Init_Patch"/>  //, "Pickupables"); 
-					waterCamera.targetTexture = waterTarget;
+			waterCamera = CameraController.Instance.CopyCamera(reference, "Beached_WaterCamera");
+			waterCamera.transform.parent = reference.transform.parent;
+			waterCamera.cullingMask = LayerMask.GetMask("Water"); /// <see cref="Patches.WaterCubesPatch.WaterCubes_Init_Patch"/>  //, "Pickupables"); 
+			waterCamera.targetTexture = waterTarget;
 
-					ModAssets.Materials.liquidRefractionMat.SetTexture("_RenderedLiquid", waterTarget);
-				}*/
+			ModAssets.Materials.liquidRefractionMat.SetTexture("_RenderedLiquid", waterTarget);
+		}
 
-		/*		public void SetCullingMask(string cullingMask)
-				{
-					waterCamera.cullingMask = LayerMask.GetMask(cullingMask);
-				}*/
+		public void SetCullingMask(string cullingMask)
+		{
+			waterCamera.cullingMask = LayerMask.GetMask(cullingMask);
+		}
 
 		/*		public void RenderDebugWater()
 				{
