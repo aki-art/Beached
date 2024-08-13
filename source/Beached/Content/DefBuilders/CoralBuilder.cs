@@ -197,9 +197,9 @@ namespace Beached.Content.DefBuilders
 
 			if (seedAnimName != null)
 			{
-				var name = Strings.Get($"STRINGS_OLD.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.NAME");
-				var description = Strings.Get($"STRINGS_OLD.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.DESC");
-				var domesicatedDesc = Strings.Get($"STRINGS_OLD.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DOMESTICATEDDESC");
+				var name = Strings.Get($"STRINGS.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.NAME");
+				var description = Strings.Get($"STRINGS.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.DESC");
+				var domesicatedDesc = Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DOMESTICATEDDESC");
 
 				if (name == null) Log.Warning("name is null");
 				if (description == null) Log.Warning("description is null");

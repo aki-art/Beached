@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Scripts.Entities;
-using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
@@ -28,11 +27,11 @@ namespace Beached.Content.Defs.Entities.Corals
 				1,
 				1,
 				DECOR.BONUS.TIER0,
-				additionalTags: new List<Tag>()
-				{
+				additionalTags:
+				[
 					BTags.aquatic,
 					BTags.coral
-				});
+				]);
 
 			EntityTemplates.ExtendEntityToBasicPlant(
 				prefab,
@@ -40,14 +39,13 @@ namespace Beached.Content.Defs.Entities.Corals
 				MiscUtil.CelsiusToKelvin(5f),
 				MiscUtil.CelsiusToKelvin(42f),
 				MiscUtil.CelsiusToKelvin(50f),
-				new[]
-				{
+				[
 					SimHashes.Water,
 					SimHashes.SaltWater,
 					SimHashes.Brine,
 					SimHashes.DirtyWater,
 					Elements.murkyBrine
-				},
+				],
 				false,
 				0f,
 				0.15f,
@@ -112,6 +110,7 @@ namespace Beached.Content.Defs.Entities.Corals
 			coral.emitTag = GameTags.Gas;
 			coral.emitMass = 0.05f;
 			coral.initialVelocity = new Vector2f(0, 1);
+			coral.consumptionRate = 0.2f;
 
 			CoralTemplate.AddSimpleConverter(prefab, SimHashes.Water, SUCC_RATE, SimHashes.Oxygen, SUCC_RATE * CONVERSION_RATE);
 

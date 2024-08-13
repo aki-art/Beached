@@ -4,25 +4,37 @@ namespace Beached.Content.Scripts.Entities
 {
 	public class Coral : StateMachineComponent<Coral.StatesInstance>
 	{
-		[MyCmpReq]
-		private ElementConsumer elementConsumer;
+		[MyCmpReq] private ElementConsumer elementConsumer;
 
-		[SerializeField]
-		public Tag emitTag;
+		[SerializeField] public Tag emitTag;
+		[SerializeField] public float emitMass;
+		[SerializeField] public Vector3 emitOffset = Vector3.zero;
+		[SerializeField] public Vector2 initialVelocity;
+		public float consumptionRate;
 
-		[SerializeField]
-		public float emitMass;
-
-		[SerializeField]
-		public Vector3 emitOffset = Vector3.zero;
-
-		[SerializeField]
-		public Vector2 initialVelocity;
+		[MyCmpReq] private ReceptacleMonitor receptacleMonitor;
 
 		public override void OnSpawn()
 		{
 			base.OnSpawn();
 			smi.StartSM();
+		}
+
+		public override void OnPrefabInit()
+		{
+			Subscribe((int)GameHashes.PlanterStorage, OnReplanted);
+		}
+
+		private void OnReplanted(object _)
+		{
+			RefreshConsumptionRate();
+		}
+
+		public void RefreshConsumptionRate()
+		{
+			elementConsumer.consumptionRate = receptacleMonitor.Replanted
+				? consumptionRate * 4f
+				: consumptionRate;
 		}
 
 		public class States : GameStateMachine<States, StatesInstance, Coral>
@@ -35,6 +47,7 @@ namespace Beached.Content.Scripts.Entities
 				default_state = alive;
 
 				alive
+					.PlayAnim("idle_grown", KAnim.PlayMode.Loop)
 					.Update(UpdateEmission, UpdateRate.SIM_1000ms)
 					.EventHandler(GameHashes.OnStorageChange, OnStorageChanged)
 					.Enter(smi => smi.master.elementConsumer.EnableConsumption(true));
