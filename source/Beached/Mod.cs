@@ -1,7 +1,6 @@
 ﻿global using Beached.Utils;
 using Beached.Content;
 using Beached.Content.BWorldGen;
-using Beached.Content.Scripts;
 using Beached.ModDevTools;
 using Beached.Settings;
 using HarmonyLib;
@@ -17,9 +16,8 @@ namespace Beached
 {
 	public class Mod : UserMod2
 	{
-		public static Components.Cmps<Beached_PlushiePlaceable> plushiePlaceables = new();
-
 		public const string STATIC_ID = "Beached";
+
 #if DEBUG
 		public static bool debugMode = true;
 #else
@@ -30,24 +28,19 @@ namespace Beached
 
 		public static string folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // path field does not seem reliable with Local installs
 
-		public static bool isFastTrackHere;
-		public static bool isCritterTraitsRebornHere;
-		public static bool isTwitchHere;
+		public static bool
+			isFastTrackHere,
+			isCritterTraitsRebornHere,
+			isTwitchHere,
+			isRocketryExpandedHere;
 
 		public static LUT_API lutAPI;
-
 		public static Harmony harmonyInstance;
+		internal static bool drawDebugGuides;
 
 		public override void OnLoad(Harmony harmony)
 		{
 			base.OnLoad(harmony);
-
-#if !ELEMENTS
-            Log.Warning("UNSTABLE BUILD: This build was compiled with no ELEMENTS. All elements disabled, attempted worldgen will fail.");
-#endif
-#if !TRANSPILERS
-			Log.Warning("UNSTABLE BUILD: This build was compiled with no TRANSPILERS");
-#endif
 
 			BTags.OnModLoad();
 
@@ -143,6 +136,9 @@ namespace Beached
 						case "CritterTraitsReborn":
 							isCritterTraitsRebornHere = true;
 							Integration.CritterTraitsReborn.Initialize();
+							break;
+						case "Rocketry Expanded":
+							isRocketryExpandedHere = true;
 							break;
 					}
 				}

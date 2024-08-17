@@ -14,8 +14,8 @@ namespace Beached.Utils
 			return MiscUtil.GetOpposite(direction);
 		}
 
-		public static Dictionary<MinionStartingStats, MinionStartingStatsExtension> minionStartingStatsExtensions = new();
-		public static Dictionary<CavityInfo, CavityInfoExtension> cavityInfoExtensions = new();
+		public static Dictionary<MinionStartingStats, MinionStartingStatsExtension> minionStartingStatsExtensions = [];
+		public static Dictionary<CavityInfo, CavityInfoExtension> cavityInfoExtensions = [];
 
 		public static void AddTags(this GameObject gameObject, params Tag[] tags)
 		{

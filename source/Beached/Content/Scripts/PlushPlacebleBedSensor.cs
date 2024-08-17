@@ -16,7 +16,7 @@
 			if (placeable != null)
 				return;
 
-			foreach (var bed in Mod.plushiePlaceables.items)
+			foreach (var bed in ModCmps.plushiePlaceables.items)
 			{
 				if (IsBedEligible(bed))
 				{

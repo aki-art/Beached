@@ -35,7 +35,6 @@ namespace Beached.Content.Scripts.Buildings
 
 		private void OnStorageChange(object o)
 		{
-#if ELEMENTS
 			var lubricated = mucusStorage.GetMassAvailable(Elements.mucus) >= massUsedEachTime;
 
 			if (lubricated)
@@ -59,14 +58,11 @@ namespace Beached.Content.Scripts.Buildings
 
 			kSelectable.ToggleStatusItem(BStatusItems.lubricated, lubricated, this);
 			UpdateDelivery();
-#endif
 		}
 
 		public void OnUse()
 		{
-#if ELEMENTS
 			mucusStorage.ConsumeIgnoringDisease(Elements.mucus.Tag, massUsedEachTime);
-#endif
 		}
 
 		public static Lubricatable ConfigurePrefab(GameObject prefab, float capacityKg, float massUsedEachTime)
@@ -81,17 +77,13 @@ namespace Beached.Content.Scripts.Buildings
 			}
 
 			var storage = prefab.AddComponent<Storage>();
-#if ELEMENTS
-			storage.storageFilters = new() { Elements.mucus.Tag };
-#endif
+			storage.storageFilters = [Elements.mucus.Tag];
 			storage.capacityKg = capacityKg;
 			storage.allowItemRemoval = false;
 
 			var delivery = prefab.AddComponent<ManualDeliveryKG>();
 			delivery.storage = storage;
-#if ELEMENTS
 			delivery.RequestedItemTag = Elements.mucus.Tag;
-#endif
 			delivery.allowPause = true;
 			delivery.MinimumMass = massUsedEachTime;
 			delivery.refillMass = massUsedEachTime;

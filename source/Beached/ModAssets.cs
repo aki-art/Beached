@@ -22,6 +22,7 @@ namespace Beached
 			public static GameObject universalSidescreen; // prefab with commonly used controls ready to go
 			public static GameObject cometTrailFx;
 			public static GameObject testQuad;
+			public static GameObject forceFieldDome;
 		}
 
 		// static hardcoded indices for my zonetypes
@@ -45,6 +46,7 @@ namespace Beached
 			public static Texture2D forceFieldGrid;
 			public static Texture2D forceFieldBlurMap;
 			public static Texture2D dirtLigher;
+			public static Texture2D forceField;
 			public static Texture dirtOriginal;
 
 			public static class Placeholders
@@ -65,6 +67,7 @@ namespace Beached
 			public static Material germOverlayReplacer;
 			public static Material forceField;
 			public static Material liquidRefractionMat;
+			public static Material forceField2;
 		}
 
 		public static class Sprites
@@ -227,28 +230,37 @@ namespace Beached
 
 		public static void LoadAssets()
 		{
-			Stopwatch sw = new Stopwatch();
+			var sw = new Stopwatch();
 			sw.Start();
-			Log.Debug("Loading Assets...");
 
 			var assets = Path.Combine(Mod.folder, "assets");
+			Log.Debug("initiating asset bundles");
+			var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
+			var sharedAssetsBundle = LoadAssetBundle("beached_shared_assets", platformSpecific: false);
+			var bundle2 = LoadAssetBundle("beached_assets2", platformSpecific: true);
+			var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
+
+			Log.Debug("loading sounds");
 			LoadSounds(Path.Combine(assets, "sounds"));
 
+			Log.Debug("loading textures");
 			Textures.Placeholders.zeoliteBg = LoadTexture(Path.Combine(assets, "textures", "bgplaceholders", "heulandite_geode.png"));
 			Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
 			Textures.dirtLigher = LoadTexture(Path.Combine(assets, "textures", "dirt_lighter.png"));
 
-			var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
-			var sharedAssetsBundle = LoadAssetBundle("beached_shared_assets", platformSpecific: false);
-			var bundle2 = LoadAssetBundle("beached_assets2", platformSpecific: true);
 			//var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
+			Log.Debug("loading set pieces");
 			LoadSetpieces(bundle2);
+
+			Log.Debug("loading 3D models");
+			Prefabs.forceFieldDome = bundle2.LoadAsset<GameObject>("Assets/Prefabs/ForceField Dome.prefab");
 
 			foreach (var asset in bundle.GetAllAssetNames())
 			{
 				Log.Debug(asset);
 			}
 
+			Log.Debug("loading UI");
 			//var universalBundle = LoadAssetBundle("akis_universal_sidesceen_v1", platformSpecific: true);
 			Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
 
@@ -269,6 +281,7 @@ namespace Beached
 			// Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
 			// LoadSetpieces(bundle);
 
+			Log.Debug("loading particle systems");
 			Prefabs.cometTrailFx = bundle.LoadAsset<GameObject>("Assets/Beached/fx/CometSparkles.prefab");
 			var renderer = Prefabs.cometTrailFx.GetComponent<ParticleSystemRenderer>();
 			var texture = renderer.material.mainTexture;
@@ -278,9 +291,9 @@ namespace Beached
 				mainTexture = texture
 			};
 
-			var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
 
-			Materials.liquidRefractionMat = shadersBundle.LoadAsset<Material>("Assets/Materials/Beached_LiquidRefraction.mat");
+			Log.Debug("loading liquid shader");
+			Materials.liquidRefractionMat = bundle2.LoadAsset<Material>("Assets/Materials/Beached_LiquidRefraction.mat");
 			Materials.liquidRefractionMat.SetFloat("_WaveFrequency", 850f);
 			Materials.liquidRefractionMat.SetFloat("_WaveAmplitude", 0.001f);
 			Materials.liquidRefractionMat.SetFloat("_EdgeSize", 0.55f);

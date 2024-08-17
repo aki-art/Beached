@@ -72,8 +72,8 @@ namespace Beached.Content.Defs.Entities.Critters
 			var diet = new Diet(
 				new Diet.Info(
 					foods,
-					SimHashes.DirtyIce.CreateTag(),
-					400_000f)); // TODO: meat to ice balance
+					Elements.bone.CreateTag(),
+					400_000f));
 
 			var creatureCalorieMonitor = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
 			creatureCalorieMonitor.diet = diet;

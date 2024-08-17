@@ -19,7 +19,7 @@ namespace Beached.Content.Defs.Duplicants
 					BTraits.SIREN,
 					BTraits.PLUSHIE_MAKER,
 					"",
-					null,
+					null, // doesn't seem to work as expected, Gills is added manually later
 					HASH,
 					HASH,
 					1,

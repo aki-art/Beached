@@ -11,9 +11,8 @@ namespace Beached.Patches
 		[HarmonyPatch(typeof(Assets), nameof(Assets.OnPrefabInit))]
 		public class Assets_OnPrefabInit_Patch
 		{
-			public static void Prefix(Assets __instance)
+			public static void Prefix()
 			{
-				ModAssets.LoadSprites(__instance);
 				Assets.RegisterOnAddPrefab(AcidVulnerableCreature.OnAddPrefab);
 			}
 

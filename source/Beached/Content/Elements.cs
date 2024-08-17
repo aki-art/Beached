@@ -7,6 +7,7 @@ namespace Beached.Content
 	public class Elements
 	{
 		public static readonly SimHashes
+			bone = (SimHashes)Hash.SDBMLower("Beached_Bone"),
 			moss = (SimHashes)Hash.SDBMLower("Beached_Moss"),
 			silt = (SimHashes)Hash.SDBMLower("Beached_Silt");
 
@@ -25,7 +26,6 @@ namespace Beached.Content
 			bismuthGas = ElementInfo.Gas("BismuthGas", ModAssets.Colors.bismuth),
 			bismuthMolten = ElementInfo.Liquid("BismuthMolten", ModAssets.Colors.bismuth),
 			bismuthOre = ElementInfo.Solid("Bismuthinite", ModAssets.Colors.bismuth),
-			bone = ElementInfo.Solid("Bone", ModAssets.Colors.bone),
 			calcium = ElementInfo.Solid("Calcium", ModAssets.Colors.calcium),
 			calciumGas = ElementInfo.Gas("CalciumGas", ModAssets.Colors.calcium),
 			calciumMolten = ElementInfo.Liquid("MoltenCalcium", ModAssets.Colors.calcium),

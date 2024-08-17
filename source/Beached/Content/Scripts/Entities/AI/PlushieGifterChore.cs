@@ -92,7 +92,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			private bool FindBed(StatesInstance smi, float dt)
 			{
 				Log.Debug("looking for bed");
-				foreach (var plushiePlaceable in Mod.plushiePlaceables.items)
+				foreach (var plushiePlaceable in ModCmps.plushiePlaceables.items)
 				{
 					Log.Debug($"\tbed: {plushiePlaceable.name}");
 					if (IsBedEligible(plushiePlaceable, smi))

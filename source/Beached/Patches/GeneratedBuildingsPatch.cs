@@ -21,10 +21,9 @@ namespace Beached.Patches
 				var planInfo = new PlanScreen.PlanInfo(
 					BDb.poisBuildCategory,
 					false,
-					new()
-					{
+					[
 						ForceFieldGeneratorConfig.ID
-					});
+					]);
 
 				TUNING.BUILDINGS.PLANORDER.Add(planInfo);
 			}

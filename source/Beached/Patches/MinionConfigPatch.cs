@@ -1,6 +1,8 @@
 ﻿using Beached.Content;
+using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using HarmonyLib;
+using Klei.AI;
 using UnityEngine;
 
 namespace Beached.Patches
@@ -17,6 +19,16 @@ namespace Beached.Patches
 			}
 		}
 
+
+		[HarmonyPatch(typeof(MinionConfig), nameof(MinionConfig.AddMinionAmounts))]
+		public class MinionConfig_AddMinionAmounts_Patch
+		{
+			public static void Postfix(Modifiers modifiers)
+			{
+				modifiers.initialAmounts.Add(BAmounts.Wet.Id);
+			}
+		}
+
 		[HarmonyPatch(typeof(MinionConfig), nameof(MinionConfig.OnSpawn))]
 		public class MinionConfig_OnSpawn_Patch
 		{
@@ -24,6 +36,16 @@ namespace Beached.Patches
 			{
 				var sensors = go.GetComponent<Sensors>();
 				sensors.Add(new PlushPlacebleBedSensor(sensors));
+			}
+		}
+
+
+		[HarmonyPatch(typeof(MinionConfig), nameof(MinionConfig.OnPrefabInit))]
+		public class MinionConfig_OnPrefabInit_Patch
+		{
+			public static void Postfix(GameObject go)
+			{
+				BAmounts.Wet.Lookup(go).value = 0;
 			}
 		}
 
@@ -67,8 +89,8 @@ namespace Beached.Patches
 					pointName = "dig",
 					automatic = false,
 					context = ModAssets.CONTEXTS.HARVEST_ORANGE_SQUISH,
-					buildFile = Assets.GetAnim((HashedString)"plant_harvester_gun_kanim"),
-					overrideSymbol = (HashedString)"snapTo_rgtHand"
+					buildFile = Assets.GetAnim("plant_harvester_gun_kanim"),
+					overrideSymbol = "snapTo_rgtHand"
 				});
 
 				AddNecklaceSnapon(snapOn, CONSTS.SNAPONS.JEWELLERIES.MAXIXE, "beached_maxixe_necklace_kanim");

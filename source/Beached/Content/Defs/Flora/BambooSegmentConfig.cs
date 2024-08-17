@@ -19,7 +19,7 @@ namespace Beached.Content.Defs.Flora
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				"segment",//STRINGS_OLD.CREATURES.SPECIES.BAMBOO.NAME,
+				"segment",//STRINGS.CREATURES.SPECIES.BAMBOO.NAME,
 				STRINGS.CREATURES.SPECIES.BEACHED_BAMBOO.DESC,
 				100f,
 				Assets.GetAnim("beached_bamboo_kanim"),

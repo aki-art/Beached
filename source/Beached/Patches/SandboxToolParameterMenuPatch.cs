@@ -19,8 +19,8 @@ namespace Beached.Patches
 {
 	public class SandboxToolParameterMenuPatch
 	{
-		private static readonly HashSet<Tag> TAGS = new()
-		{
+		private static readonly HashSet<Tag> TAGS =
+		[
 			CrystalConfig.ID,
 
 			// Geysers
@@ -73,14 +73,17 @@ namespace Beached.Patches
 			SandySeashellsConfig.SLICKSHELL,
 			SeaShellConfig.ID,
 			JellyfishStrobilaConfig.ID,
-			PlanktonGerms.ID, /// <see cref="UIOnlyPlankton"/>
+			PlanktonGerms.ID, /// <see cref="UIOnlyPlanktonConfig"/>
 			BrinePoolConfig.ID,
 			BambooSegmentConfig.ID,
 			LimpetRockConfig.ID,
-		};
+			FueNestConfig.ID,
+			FueFuzzWallConfig.ID,
+			SleepingMuffinsConfig.ID,
+		];
 
-		private static readonly HashSet<Tag> FOOD = new()
-		{
+		private static readonly HashSet<Tag> FOOD =
+		[
 			AstrobarConfig.ID,
 			SmokedFishConfig.ID,
 			SmokedLiceConfig.ID,
@@ -94,19 +97,19 @@ namespace Beached.Patches
 			MusselTongueConfig.ID,
 			SpongeCakeConfig.ID,
 			PipShootConfig.ID
-		};
+		];
 
-		private static readonly HashSet<Tag> FAUNA = new()
-		{
+		private static readonly HashSet<Tag> FAUNA =
+		[
 			SlickShellConfig.ID,
 			BabySlickShellConfig.ID,
 			JellyfishStrobilaConfig.ID,
 			JellyfishConfig.ID,
 			BabyJellyfishConfig.ID
-		};
+		];
 
-		private static readonly HashSet<Tag> FLORA = new()
-		{
+		private static readonly HashSet<Tag> FLORA =
+		[
 			CellAlgaeConfig.ID,
 			GlowCapConfig.ID,
 			LeafletCoralConfig.ID,
@@ -116,27 +119,26 @@ namespace Beached.Patches
 			DewPalmConfig.ID,
 			BambooConfig.ID,
 			PurpleHangerConfig.ID,
-		};
+		];
 
-		private static readonly HashSet<Tag> GEYSERS = new()
-		{
+		private static readonly HashSet<Tag> GEYSERS =
+		[
 			"GeyserGeneric_" + GeyserConfigs.AMMONIA_VENT,
 			"GeyserGeneric_" + GeyserConfigs.MURKY_BRINE_GEYSER,
 			"GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO,
 			"GeyserGeneric_" + GeyserConfigs.CORAL_REEF,
-		};
+		];
 
-		private static readonly HashSet<Tag> GEMS = new()
-		{
+		private static readonly HashSet<Tag> GEMS =
+		[
 			RareGemsConfig.FLAWLESS_DIAMOND,
 			RareGemsConfig.HADEAN_ZIRCON,
 			RareGemsConfig.MAXIXE,
 			RareGemsConfig.STRANGE_MATTER,
-		};
+		];
 
-		private static readonly HashSet<Tag> EQUIPMENTS = new()
-		{
-
+		private static readonly HashSet<Tag> EQUIPMENTS =
+		[
 			MaxixePendantConfig.ID,
 			RubberBootsConfig.ID,
 			HematiteNecklaceConfig.ID,
@@ -144,7 +146,7 @@ namespace Beached.Patches
 			PearlNecklaceConfig.ID,
 			ZeolitePendantConfig.ID,
 			StrangeMatterAmuletConfig.ID,
-		};
+		];
 
 		[HarmonyPatch(typeof(SandboxToolParameterMenu), nameof(SandboxToolParameterMenu.ConfigureEntitySelector))]
 		public static class SandboxToolParameterMenu_ConfigureEntitySelector_Patch
@@ -158,19 +160,19 @@ namespace Beached.Patches
 				}
 
 				var sprite = Def.GetUISprite(Assets.GetPrefab(SlickShellConfig.ID));
-				var mods = SandboxUtil.AddModMenu(__instance, "Beached", sprite, _ => false);
+				var mods = SandboxUtil.AddModMenu(__instance, STRINGS.BEACHED_MOD_NAME, sprite, _ => false);
 
-				AddSubMenu(__instance, mods, "All", TAGS, JellyfishConfig.ID);
-				AddSubMenu(__instance, mods, "Flora", FLORA, WaterCupsConfig.ID);
-				AddSubMenu(__instance, mods, "Fauna", FAUNA, JellyfishConfig.ID);
-				AddSubMenu(__instance, mods, "Geysers", GEYSERS, "GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO);
-				AddSubMenu(__instance, mods, "Gems", GEMS, RareGemsConfig.HADEAN_ZIRCON);
-				AddSubMenu(__instance, mods, "Equipment", EQUIPMENTS, RubberBootsConfig.ID);
-				AddSubMenu(__instance, mods, "Set Pieces", BTags.setPiece, SetPiecesConfig.BEACH);
-				AddSubMenu(__instance, mods, "Food", FOOD, AstrobarConfig.ID);
-				AddSubMenu(__instance, mods, "Genetic Samples", BTags.geneticSample, GeneticSamplesConfig.FABULOUS);
-				AddSubMenu(__instance, mods, "Amber Inclusions", BTags.amberInclusion, AmberInclusionsConfig.FLYING_CENTIPEDE);
-				AddSubMenu(__instance, mods, "Glaciers", BTags.glacier, GlaciersConfig.MUFFINS);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.ALL, TAGS, JellyfishConfig.ID);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.FLORA, FLORA, WaterCupsConfig.ID);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.FAUNA, FAUNA, JellyfishConfig.ID);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.GEYSERS, GEYSERS, "GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.GEMS, GEMS, RareGemsConfig.HADEAN_ZIRCON);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.EQUIPMENT, EQUIPMENTS, RubberBootsConfig.ID);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.SET_PIECES, BTags.setPiece, SetPiecesConfig.BEACH);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.FOOD, FOOD, AstrobarConfig.ID);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.GENETIC_SAMPLES, BTags.geneticSample, GeneticSamplesConfig.FABULOUS);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.AMBER_INCLUSIONS, BTags.amberInclusion, AmberInclusionsConfig.FLYING_CENTIPEDE);
+				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.GLACIERS, BTags.glacier, GlaciersConfig.MUFFINS);
 
 				SandboxUtil.UpdateOptions(__instance);
 			}

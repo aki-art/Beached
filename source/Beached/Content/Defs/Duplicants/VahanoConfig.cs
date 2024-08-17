@@ -16,7 +16,7 @@ namespace Beached.Content.Defs.Duplicants
 					null,
 					BTraits.SIREN,
 					BTraits.PLUSHIE_MAKER,
-			"",
+					"",
 					null,
 					HASH,
 					HASH,

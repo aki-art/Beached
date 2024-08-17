@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities.AI;
+﻿using Beached.Content.ModDb;
+using Beached.Content.Scripts.Entities.AI;
 using Klei.AI;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -6,7 +7,7 @@ using static Beached.STRINGS.CREATURES.SPECIES;
 
 namespace Beached.Content.Defs.Entities.Critters
 {
-	[EntityConfigOrder(0)]
+    [EntityConfigOrder(0)]
 	public class SlickShellConfig : IEntityConfig
 	{
 		public const string ID = "Beached_SlickShell";

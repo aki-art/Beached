@@ -5,18 +5,23 @@
 	{
 		[MyCmpGet] public Diggable diggable;
 		private float mass;
+		private float temperature;
+
+		private static SimHashes neutroniumDust = (SimHashes)Hash.SDBMLower("UnobtaniumDust");
+		private const float dustMultiplier = 0.4f / 10_000f;
+		private int cachedCell;
 
 		public override void OnSpawn()
 		{
+			cachedCell = Grid.PosToCell(this);
 			diggable.OnWorkableEventCB += OnDiggableEvent;
-			mass = Grid.Mass[Grid.PosToCell(this)];
+			mass = Grid.Mass[cachedCell];
+
 
 			// needs to check once because the resumed work from a previous game
 			// session wont fire the workable event after this components OnSpawn
 			if (diggable.worker != null)
-			{
 				OnStartWork();
-			}
 		}
 
 		private void OnDiggableEvent(Workable workable, Workable.WorkableEvent evt)
@@ -38,9 +43,9 @@
 		private void OnStartWork()
 		{
 			if (diggable.worker != null)
-			{
-				Treasury.diggers[diggable.GetCell()] = diggable.worker;
-			}
+				Treasury.diggers[cachedCell] = diggable.worker;
+
+			temperature = Grid.Temperature[cachedCell];
 		}
 
 		private void OnStopWork()
@@ -48,14 +53,31 @@
 			if (diggable.isDigComplete)
 			{
 				Beached_Mod.Instance.treasury.TrySpawnTreasure(diggable, diggable.originalDigElement, diggable.worker);
+				SpawnNeutroniumDust();
 			}
 
-			Treasury.diggers.Remove(diggable.GetCell());
+			Treasury.diggers.Remove(cachedCell);
+		}
+
+		private void SpawnNeutroniumDust()
+		{
+			if (!Mod.isRocketryExpandedHere)
+				return;
+
+			if (diggable.originalDigElement?.id == neutroniumDust)
+			{
+				var dust = ElementLoader.FindElementByHash(neutroniumDust);
+
+				if (!isLoadingScene && dust != null && dust.substance != null)
+				{
+					dust.substance.SpawnResource(transform.position, mass * dustMultiplier, temperature, byte.MaxValue, 0);
+				}
+			}
 		}
 
 		public override void OnCleanUp()
 		{
-			Treasury.diggers.Remove(Grid.PosToCell(this));
+			Treasury.diggers.Remove(cachedCell);
 		}
 	}
 }

@@ -1,11 +1,31 @@
-﻿namespace Beached.Content.Scripts.Entities
+﻿using UnityEngine;
+
+namespace Beached.Content.Scripts.Entities
 {
 	public class Glacier : KMonoBehaviour
 	{
+		[SerializeField] public Tag[] rewards;
+		[SerializeField] public Vector3 offset;
+
+		[MyCmpReq] private PrimaryElement primaryElement;
+		private float meltTemperature;
+
+		private const float MARGIN = 1.0f;
+
 		public override void OnSpawn()
 		{
 			base.OnSpawn();
 			GetComponent<PrimaryElement>().SetTemperature(GameUtil.GetTemperatureConvertedToKelvin(-30, GameUtil.TemperatureUnit.Celsius));
+			meltTemperature = primaryElement.Element.highTemp - MARGIN;
+		}
+
+		public override void OnCleanUp()
+		{
+			if (primaryElement.Temperature > meltTemperature)
+			{
+				foreach (var item in rewards)
+					FUtility.Utils.Spawn(item, gameObject.transform.position + offset);
+			}
 		}
 	}
 }

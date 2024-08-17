@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Beached.Content.Defs.Entities
 {
 	// serves as informational placeholder for plankton germ diet
-	public class UIOnlyPlankton : IEntityConfig
+	public class UIOnlyPlanktonConfig : IEntityConfig
 	{
 		public GameObject CreatePrefab()
 		{

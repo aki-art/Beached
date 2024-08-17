@@ -21,6 +21,14 @@ namespace Beached.Utils
 			};
 		}
 
+		public static void AddSimpleButton(GameObject target, string icon, string text, string tooltip, System.Action onClick, bool isInteractable = true)
+		{
+			Game.Instance.userMenu.AddButton(
+				target,
+				new KIconButtonMenu.ButtonInfo(
+					icon, text, onClick, tooltipText: tooltip, is_interactable: isInteractable));
+		}
+
 		public static RangeInfo RangeInfoCelsius(float minViable, float minGrowth, float maxGrowth, float maxViable)
 		{
 			return new RangeInfo(

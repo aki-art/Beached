@@ -126,7 +126,7 @@ namespace Beached
 				public class BEACHED_DRYAGEDMEAT
 				{
 					public static LocString NAME = FormatAsLink("Dry Aged Meat", DryAgedMeatConfig.ID);
-					public static LocString DESC = "...";
+					public static LocString DESC = "Soft fatty meat of an unfortunate creature.";
 				}
 
 				public class BEACHED_SMOKEDMEAT
@@ -310,7 +310,7 @@ namespace Beached
 				public class BEACHED_SLICKSHELLSHELL
 				{
 					public static LocString NAME = "Slickshell House";
-					public static LocString DESC = "...";
+					public static LocString DESC = "No one lives here anymore.";
 				}
 			}
 		}

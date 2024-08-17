@@ -112,6 +112,15 @@ namespace Beached
 				}
 			}
 
+			public class STATS
+			{
+				public class BEACHED_WET
+				{
+					public static LocString NAME = "Wet";
+					public static LocString TOOLTIP = "";
+				}
+			}
+
 			public class TRAITS
 			{
 				public static LocString GENETIC_TRAIT = "This is a genetic trait always paired with a {0}.";

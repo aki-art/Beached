@@ -18,6 +18,26 @@ namespace Beached.Patches
 {
 	public class TestPatches
 	{
+		[HarmonyPatch(typeof(CustomGameSettings), nameof(CustomGameSettings.GetSettingsForMixingMetrics))]
+		public class CustomGameSettings_GetSettingsForMixingMetrics_Patch
+		{
+			public static void Prefix(CustomGameSettings __instance)
+			{
+				// TODO: this is a hack fix. figure out why it breaks in the first place. existing VANILLA mixing subworlds get added 
+				// has been reported without Moonlet or Beached on vanilla worldgen, seems the save file is getting corrupted somehow
+				// under another, pathed name (CarrotQuarryMixing -> subworldMixing/CarrotQuarryMixingSettings). the second should not exist, and does ont without Beached.
+				// then the game crashes when saving a world
+				var keys = new List<string>(__instance.CurrentMixingLevelsBySetting.Keys);
+				foreach (var key in keys)
+				{
+					if (!__instance.MixingSettings.ContainsKey(key))
+					{
+						__instance.CurrentMixingLevelsBySetting.Remove(key);
+						Log.Warning($"There was a corrupted MixingLevelsSetting \"{key}\" in the CustomGameSettings data, removed it to prevent a crash.");
+					}
+				}
+			}
+		}
 
 		public static Texture2D testMask;
 

@@ -452,6 +452,5 @@ namespace Beached
 				public static LocString BEACHEDJELLYFISHSPECIS = "Jellyfish";
 			}
 		}
-
 	}
 }

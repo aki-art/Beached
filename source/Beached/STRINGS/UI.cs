@@ -1,11 +1,26 @@
-﻿using FUtility.FLocalization;
-
-namespace Beached
+﻿namespace Beached
 {
 	public partial class STRINGS
 	{
+		public static LocString BEACHED_MOD_NAME = "Beached";
+
 		public class UI
 		{
+			public class SANDBOX
+			{
+				public static LocString ALL = "All";
+				public static LocString FLORA = "Flora";
+				public static LocString FAUNA = "Fauna";
+				public static LocString GEYSERS = "Geysers";
+				public static LocString GEMS = "Gems";
+				public static LocString EQUIPMENT = "Equipment";
+				public static LocString SET_PIECES = "Set Pieces";
+				public static LocString FOOD = "Food";
+				public static LocString GENETIC_SAMPLES = "Genetic Samples";
+				public static LocString AMBER_INCLUSIONS = "Amber Inclusions";
+				public static LocString GLACIERS = "Glaciers";
+			}
+
 			public static LocString CHARACTERCONTAINER_LIFEGOAL_TRAIT = "<color=#e6d084>Life Goal: {0}</color>";
 
 			public class BEACHED_MISC

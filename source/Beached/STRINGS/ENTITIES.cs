@@ -20,6 +20,12 @@
 					public static LocString DESCRIPTION = "Two unknown critters are trapped in this ice. Based on their large teeth and claws, if I want to thaw them I should prepare for accomodations fit for a carnivore with a big appetite. It appears these are the only two speciments left in existence.";
 				}
 			}
+
+			public class BEACHED_UNCONSCIOUS_CRITTERS
+			{
+				public static LocString NAME = "Unconscious Critters";
+				public static LocString DESCRIPTION = "Two sleeping creatures were thawed from the ice.";
+			}
 		}
 	}
 }

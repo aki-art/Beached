@@ -46,6 +46,7 @@ namespace Beached.ModDevTools
 				materials.opaque.SetFloat("_WorldUVScale", uvScale);
 				materials.alpha.SetFloat("_WorldUVScale", uvScale);
 			}
+
 			HandleSelectedObject();
 			FoulingPlane();
 			Seasons();

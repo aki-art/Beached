@@ -40,7 +40,7 @@ namespace Beached.Content.Defs.Entities.Critters
 
 		public static GameObject SetupDiet(GameObject prefab, List<Diet.Info> diet_infos, float referenceCaloriesPerKg, float minPoopSizeInKg)
 		{
-			var diet = new Diet(diet_infos.ToArray());
+			var diet = new Diet([.. diet_infos]);
 			var def = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
 			def.diet = diet;
 			def.minConsumedCaloriesBeforePooping = referenceCaloriesPerKg * minPoopSizeInKg;

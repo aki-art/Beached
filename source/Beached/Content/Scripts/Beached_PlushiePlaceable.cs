@@ -39,7 +39,7 @@ namespace Beached.Content.Scripts
 			if (plushieId != null)
 				StorePlushie(plushieId);
 
-			Mod.plushiePlaceables.Add(this);
+			ModCmps.plushiePlaceables.Add(this);
 		}
 
 		public void StorePlushie(string plushieId)
@@ -100,7 +100,7 @@ namespace Beached.Content.Scripts
 		public override void OnCleanUp()
 		{
 			RemovePlushie();
-			Mod.plushiePlaceables.Remove(this);
+			ModCmps.plushiePlaceables.Remove(this);
 			base.OnCleanUp();
 		}
 

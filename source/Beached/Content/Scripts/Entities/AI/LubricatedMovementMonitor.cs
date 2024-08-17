@@ -1,8 +1,9 @@
-﻿using Klei.AI;
+﻿using Beached.Content.ModDb;
+using Klei.AI;
 
 namespace Beached.Content.Scripts.Entities.AI
 {
-	public class LubricatedMovementMonitor : GameStateMachine<LubricatedMovementMonitor, LubricatedMovementMonitor.Instance, IStateMachineTarget, LubricatedMovementMonitor.Def>
+    public class LubricatedMovementMonitor : GameStateMachine<LubricatedMovementMonitor, LubricatedMovementMonitor.Instance, IStateMachineTarget, LubricatedMovementMonitor.Def>
 	{
 		public State idle;
 		public State moving;
