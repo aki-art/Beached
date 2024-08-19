@@ -47,10 +47,10 @@ namespace Beached.Content.Defs.Entities
 				SimHashes.Lime);
 
 			prefab.AddOrGet<SimTemperatureTransfer>();
-			prefab.AddOrGet<OccupyArea>().objectLayers = new ObjectLayer[1]
-			{
+			prefab.AddOrGet<OccupyArea>().objectLayers =
+			[
 				ObjectLayer.Building
-			};
+			];
 			prefab.AddOrGet<Prioritizable>();
 			prefab.AddOrGet<SandySeaShell>();
 			prefab.AddOrGet<UprootedMonitor>();

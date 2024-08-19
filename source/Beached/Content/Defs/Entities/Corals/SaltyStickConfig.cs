@@ -44,12 +44,12 @@ namespace Beached.Content.Defs.Entities.Corals
 		private static void AddConverter(GameObject prefab, Tag from, SimHashes output, float kgPerSecond, Storage storage)
 		{
 			var converter = prefab.AddComponent<ElementConverter>();
-			converter.consumedElements = new[] { new ElementConverter.ConsumedElement(from, CONSUMPTION_RATE) };
-			converter.outputElements = new[]
-			{
+			converter.consumedElements = [new ElementConverter.ConsumedElement(from, CONSUMPTION_RATE)];
+			converter.outputElements =
+			[
 				new ElementConverter.OutputElement(1f - kgPerSecond, output, MIN_OUTPUT_TEMP, outputElementOffsety: 1),
 				new ElementConverter.OutputElement(kgPerSecond, SimHashes.Salt, MIN_OUTPUT_TEMP, storeOutput: true),
-			};
+			];
 
 			converter.ShowInUI = false;
 			converter.showDescriptors = false;

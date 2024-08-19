@@ -1,4 +1,5 @@
-﻿using ImGuiNET;
+﻿#if DEVTOOLS
+using ImGuiNET;
 using Klei;
 using LibNoiseDotNet.Graphics.Tools.Noise.Builder;
 using ProcGen;
@@ -224,3 +225,4 @@ namespace Beached.ModDevTools
 
 	}
 }
+#endif

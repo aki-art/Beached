@@ -40,22 +40,20 @@ namespace Beached.Content.ModDb
 				STRINGS.ROOMS.TYPES.BEACHED_NATUREVISTA.EFFECT,
 				Db.Get().RoomTypeCategories.Park,
 				NATURAL_POI,
-				new[]
-				{
+				[
 					RoomConstraints.NO_INDUSTRIAL_MACHINERY,
 					RoomConstraints.MINIMUM_SIZE_32,
 					MAXIMUM_SIZE_256
-				},
-				new[]
-				{
+				],
+				[
 					RoomDetails.SIZE,
 					HAS_NATURAL_POI,
-				},
+				],
 				1,
-				effects: new[]
-				{
+				effects:
+				[
 					"RoomNatureReserve"
-				},
+				],
 				sortKey: 17));
 		}
 

@@ -27,10 +27,10 @@ namespace Beached.Content.Defs.Equipment
 				"peached_hematite_necklace_kanim",
 				99,
 				attributeModifiers,
-				additional_tags: new Tag[]
-				{
+				additional_tags:
+				[
 					GameTags.PedestalDisplayable
-				});
+				]);
 
 			return equipmentDef;
 		}

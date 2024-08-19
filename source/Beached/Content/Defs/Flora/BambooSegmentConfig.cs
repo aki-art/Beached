@@ -30,11 +30,11 @@ namespace Beached.Content.Defs.Flora
 				DECOR.BONUS.TIER1);
 
 			prefab.AddOrGet<SimTemperatureTransfer>();
-			prefab.AddOrGet<OccupyArea>().objectLayers = new[]
-			{
+			prefab.AddOrGet<OccupyArea>().objectLayers =
+			[
 				ObjectLayer.Building,
 				ObjectLayer.Plants
-			};
+			];
 
 			/*			var randomAnimSelector = prefab.AddOrGet<RandomSymbolVisible>();
 						randomAnimSelector.targetSymbols = liveSegmentAnims;

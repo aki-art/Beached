@@ -1,4 +1,5 @@
-﻿using ImGuiNET;
+﻿#if DEVTOOLS
+using ImGuiNET;
 using UnityEngine;
 
 namespace Beached.ModDevTools
@@ -68,3 +69,4 @@ namespace Beached.ModDevTools
 		}
 	}
 }
+#endif

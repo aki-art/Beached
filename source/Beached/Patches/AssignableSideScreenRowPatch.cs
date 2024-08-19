@@ -25,7 +25,7 @@ namespace Beached.Patches
 				var m_GetNewString = AccessTools.Method(
 					typeof(AssignableSideScreenRow_GetTooltip_Patch),
 					nameof(GetNewString),
-					new[] { typeof(string), typeof(AssignableSideScreen) });
+					[typeof(string), typeof(AssignableSideScreen)]);
 
 				var f_sideSreen = typeof(AssignableSideScreenRow).GetField("sideScreen");
 

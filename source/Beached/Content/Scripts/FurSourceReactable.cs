@@ -28,12 +28,12 @@ namespace Beached.Content.Scripts
 			component.Queue("hug_dupe_pst");
 
 			component.onAnimComplete += Finish;
-			gameObject.GetSMI<AnimInterruptMonitor.Instance>().PlayAnimSequence(new HashedString[3]
-			{
+			gameObject.GetSMI<AnimInterruptMonitor.Instance>().PlayAnimSequence(
+			[
 			   "hug_dupe_pre",
 			   "hug_dupe_loop",
 			   "hug_dupe_pst"
-			});
+			]);
 		}
 
 		private void Finish(HashedString anim)

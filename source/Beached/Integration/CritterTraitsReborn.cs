@@ -12,7 +12,7 @@ namespace Beached.Integration
 			var type = Type.GetType("CritterTraitsReborn.ModAPI, CritterTraitsReborn");
 			if (type != null)
 			{
-				var methodInfo = type.GetMethod("AddTraitToVisibleList", new[] { typeof(string) });
+				var methodInfo = type.GetMethod("AddTraitToVisibleList", [typeof(string)]);
 				addTraitToVisibleList = Delegate.CreateDelegate(typeof(AddTraitToVisibleListDelegate), methodInfo) as AddTraitToVisibleListDelegate;
 			}
 		}

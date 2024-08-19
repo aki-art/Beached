@@ -31,13 +31,13 @@ namespace Beached.Content.Defs.Flora
 				null,
 				298.15f);
 
-			EntityTemplates.ExtendEntityToBasicPlant(gameObject, 288.15f, 293.15f, 323.15f, 373.15f, new SimHashes[]
-			{
+			EntityTemplates.ExtendEntityToBasicPlant(gameObject, 288.15f, 293.15f, 323.15f, 373.15f,
+			[
 				SimHashes.Oxygen,
 				Elements.saltyOxygen,
 				SimHashes.ContaminatedOxygen,
 				SimHashes.CarbonDioxide
-			}, true, 0f, 0.15f, null, true, false, true, true, 2400f, 0f, 2200f, "CylindricaOriginal", STRINGS.CREATURES.SPECIES.BEACHED_WATERCUPS.NAME);
+			], true, 0f, 0.15f, null, true, false, true, true, 2400f, 0f, 2200f, "CylindricaOriginal", STRINGS.CREATURES.SPECIES.BEACHED_WATERCUPS.NAME);
 
 			var prickleGrass = gameObject.AddOrGet<PrickleGrass>();
 			prickleGrass.positive_decor_effect = POSITIVE_DECOR_EFFECT;

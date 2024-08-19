@@ -68,10 +68,10 @@ namespace Beached.Content.Scripts
 			var pos = (transform.position + plushieResource.offset) with { z = Grid.GetLayerZ(Grid.SceneLayer.BuildingFront) };
 			gameObject.transform.SetPosition(pos);
 			plushie = gameObject.AddComponent<KBatchedAnimController>();
-			plushie.AnimFiles = new[]
-			{
+			plushie.AnimFiles =
+			[
 				Assets.GetAnim( plushieResource.animFile)
-			};
+			];
 
 			plushie.initialAnim = "object";
 			gameObject.transform.parent = transform;

@@ -39,7 +39,7 @@ namespace Beached.Patches
 
 				var f_Element = AccessTools.Field(typeof(Grid), "Element");
 				var f_Breathable = AccessTools.Field(typeof(GameTags), "Breathable");
-				var m_HasTag = AccessTools.Method(typeof(Element), "HasTag", new[] { typeof(Tag) });
+				var m_HasTag = AccessTools.Method(typeof(Element), "HasTag", [typeof(Tag)]);
 
 				var EnoughMassLabel = codes[targetIndex].operand;
 

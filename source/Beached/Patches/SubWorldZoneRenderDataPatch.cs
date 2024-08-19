@@ -17,7 +17,7 @@ namespace Beached.Patches
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
 			{
-				var m_Contains = AccessTools.Method(typeof(Delaunay.Geo.Polygon), "Contains", new[] { typeof(Vector2) });
+				var m_Contains = AccessTools.Method(typeof(Delaunay.Geo.Polygon), "Contains", [typeof(Vector2)]);
 
 				var codes = orig.ToList();
 

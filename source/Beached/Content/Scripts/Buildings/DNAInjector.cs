@@ -136,11 +136,11 @@ namespace Beached.Content.Scripts.Buildings
 			eggStorage = storages[0];
 			sampleStorage = storages[1];
 
-			eggStorageFilter = new FilteredStorage(GetComponent<KPrefabID>(), new[]
-			{
+			eggStorageFilter = new FilteredStorage(GetComponent<KPrefabID>(),
+			[
 				BTags.geneticallyModified,
 				Tag.Invalid
-			}, null, false, Db.Get().ChoreTypes.CreatureFetch);
+			], null, false, Db.Get().ChoreTypes.CreatureFetch);
 
 			eggStorageFilter.SetHasMeter(false);
 
@@ -284,10 +284,10 @@ namespace Beached.Content.Scripts.Buildings
 
 				gameObject.transform.SetPosition(column);
 				eggKbac = gameObject.AddComponent<KBatchedAnimController>();
-				eggKbac.AnimFiles = new[]
-				{
+				eggKbac.AnimFiles =
+				[
 					Assets.GetAnim( "egg_hatch_kanim")
-				};
+				];
 
 				tracker = gameObject.AddComponent<KBatchedAnimTracker>();
 				tracker.symbol = EGG_TARGET;

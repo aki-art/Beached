@@ -1,4 +1,5 @@
-﻿using Beached.Content;
+﻿#if DEVTOOLS
+using Beached.Content;
 using Beached.Content.BWorldGen;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
@@ -353,3 +354,4 @@ namespace Beached.ModDevTools
 		}
 	}
 }
+#endif

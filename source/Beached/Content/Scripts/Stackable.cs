@@ -82,10 +82,10 @@ namespace Beached.Content.Scripts
 		private void SetThickness(Thickness thickness)
 		{
 			this.thickness = thickness;
-			kbac.SwapAnims(new KAnimFile[]
-			{
+			kbac.SwapAnims(
+			[
 				Assets.GetAnim($"{animFileName}_{thickness.ToString().ToLowerInvariant()}_kanim")
-			});
+			]);
 
 			kbac.Play("idle");
 		}

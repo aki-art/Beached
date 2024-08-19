@@ -24,10 +24,10 @@ namespace Beached.Content.ModDb.Sicknesses
 			duration,
 			BEffects.CAPPED_RECOVERY)
 		{
-			AddSicknessComponent(new AttributeModifierSickness(new[]
-			{
+			AddSicknessComponent(new AttributeModifierSickness(
+			[
 				new AttributeModifier(Db.Get().Attributes.QualityOfLife.Id, -2)
-			}));
+			]));
 
 			AddSicknessComponent(new Capped());
 		}

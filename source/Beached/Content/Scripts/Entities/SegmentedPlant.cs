@@ -194,10 +194,10 @@ namespace Beached.Content.Scripts.Entities
 			go.transform.position = transform.position + Vector3.up * info.distanceFromRoot;
 
 			var animController = go.AddOrGet<KBatchedAnimController>();
-			animController.AnimFiles = new[]
-			{
+			animController.AnimFiles =
+			[
 				Assets.GetAnim( segmentAnimFile)
-			};
+			];
 
 			animController.initialAnim = GetSegmentAnim(info, length);
 

@@ -26,10 +26,10 @@ namespace Beached.Content.Defs.Equipment
 				"beached_pearl_necklace_kanim",
 				4,
 				attributeModifiers,
-				additional_tags: new Tag[]
-				{
+				additional_tags:
+				[
 					GameTags.PedestalDisplayable
-				});
+				]);
 
 			return equipmentDef;
 		}

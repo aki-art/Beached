@@ -19,12 +19,12 @@ namespace Beached.Content.Scripts.Entities
 		[MyCmpReq]
 		private KBatchedAnimController kbac;
 
-		private static readonly KAnimHashedString[] anims = new KAnimHashedString[]
-		{
+		private static readonly KAnimHashedString[] anims =
+		[
 			"moss_0",
 			"moss_1",
 			"moss_2"
-		};
+		];
 
 		public override void OnSpawn()
 		{

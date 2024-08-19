@@ -7,22 +7,18 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ForceFieldMaterial
-  m_Shader: {fileID: 4800000, guid: 35131a0febf50c448be3e903b70972c2, type: 3}
+  m_Name: ForceFieldMaterial2
+  m_Shader: {fileID: 4800000, guid: 4e0ebb8db1d02974c8a0a7ad9db1792e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3501
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BlurTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e2b7dff79e490394c8c2733ecd2f5271, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -64,35 +60,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Alpha: 0.02
-    - _AlphaMultiplier: 28.87
-    - _BlurSize: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DisplacementStrength: 0.5
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _NoiseAMplitude: 0.001
-    - _NoiseScale: 51.39
     - _OcclusionStrength: 1
+    - _OutlineWidth: 0.001
     - _Parallax: 0.02
-    - _RimStrength: 6.45
-    - _ScrollSpeed: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WorbleSpeed: 0.02
+    - _WarpStrength: 0
     - _ZWrite: 1
-    - _ZoomMagicNumber: 15
     m_Colors:
-    - _BorderColor: {r: 0.21333212, g: 0.6150102, b: 0.8867924, a: 0.5058824}
-    - _Center: {r: 0, g: 1.6, b: 0, a: 0}
-    - _Color: {r: 0.008410451, g: 0.32927632, b: 0.5943396, a: 1}
+    - _Color: {r: 0.096903004, g: 0.24483728, b: 0.333, a: 0.6745098}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.5330188, g: 0.90602934, b: 1, a: 0.43137255}
+    - _node_4437: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_BuildTextureStacks: []

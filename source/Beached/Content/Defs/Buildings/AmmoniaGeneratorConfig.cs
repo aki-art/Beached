@@ -64,15 +64,15 @@ namespace Beached.Content.Defs.Buildings
 			var energyGenerator = go.AddOrGet<EnergyGenerator>();
 			energyGenerator.formula = new EnergyGenerator.Formula
 			{
-				inputs = new[]
-				{
+				inputs =
+				[
 					new EnergyGenerator.InputItem(Elements.ammonia.Tag, 0.09f, 0.90000004f)
-				},
-				outputs = new[]
-				{
+				],
+				outputs =
+				[
 					new EnergyGenerator.OutputItem(SimHashes.Water, 0.0675f, true, new CellOffset(1, 1), 313.15f),
 					new EnergyGenerator.OutputItem(Elements.nitrogen, 0.0225f, false, new CellOffset(0, 2), 383.15f)
-				}
+				]
 			};
 
 			energyGenerator.powerDistributionOrder = 8;

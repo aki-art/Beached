@@ -9,7 +9,7 @@
 		<RootNamespace>Beached</RootNamespace>
 		<IsMod>true</IsMod>
 		<IsPacked>true</IsPacked>
-		<DefineConstants>ELEMENTS,TRANSPILERS</DefineConstants>
+		<DefineConstants>ELEMENTS,TRANSPILERS, DEVTOOLS</DefineConstants>
 		<Publicised>true</Publicised>
 		<CopyFiles>true</CopyFiles>
 		<DebugType>Portable</DebugType>

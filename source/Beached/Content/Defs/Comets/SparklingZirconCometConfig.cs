@@ -27,10 +27,10 @@ namespace Beached.Content.Defs.Comets
 			comet.entityDamage = 7;
 			comet.totalTileDamage = 0.3f;
 			comet.affectedByDifficulty = false;
-			comet.craterPrefabs = new[]
-			{
+			comet.craterPrefabs =
+			[
 				RareGemsConfig.HADEAN_ZIRCON
-			};
+			];
 			comet.EXHAUST_RATE = 10f;
 
 			var trail = go.AddOrGet<CometTrail>();

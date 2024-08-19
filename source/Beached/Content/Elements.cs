@@ -211,7 +211,7 @@ namespace Beached.Content
 				if (element != null)
 				{
 					element.oreTags = element.oreTags == null
-						? (new Tag[] { BTags.corrodable })
+						? ([BTags.corrodable])
 						: element.oreTags.AddToArray(BTags.corrodable);
 				}
 			}

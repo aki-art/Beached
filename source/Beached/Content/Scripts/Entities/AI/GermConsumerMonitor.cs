@@ -30,7 +30,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		public class Def : BaseDef
 		{
-			public Tag[] transitionTag = { GameTags.Creatures.Hungry };
+			public Tag[] transitionTag = [GameTags.Creatures.Hungry];
 			public Tag behaviourTag = GameTags.Creatures.WantsToEat;
 			public float minCooldown = 5f;
 			public float maxCooldown = 5f;

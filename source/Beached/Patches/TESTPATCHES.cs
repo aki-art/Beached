@@ -395,7 +395,7 @@ namespace Beached.Patches
 				var type = typeof(SuitMarker).GetNestedType("SuitMarkerReactable", BindingFlags.NonPublic | BindingFlags.Instance);
 
 				Debug.Assert(type != null, "type is null");
-				return type.GetMethod("InternalCanBegin", new[] { typeof(GameObject), typeof(Navigator.ActiveTransition) });
+				return type.GetMethod("InternalCanBegin", [typeof(GameObject), typeof(Navigator.ActiveTransition)]);
 			}
 
 			public static void Postfix(GameObject new_reactor, ref bool __result)

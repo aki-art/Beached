@@ -8,15 +8,15 @@ namespace Beached.Content.Defs.Entities.Corals
 {
 	public class CoralTemplate
 	{
-		public static readonly SimHashes[] ALL_WATERS = new[]
-		{
+		public static readonly SimHashes[] ALL_WATERS =
+		[
 			SimHashes.Water,
 			SimHashes.SaltWater,
 			SimHashes.Brine,
 			SimHashes.DirtyWater,
 			Elements.murkyBrine,
 			Elements.sulfurousWater
-		};
+		];
 
 		public GameObject CreatePrefab(string ID, string anim, string initialAnim, int width, int height, EffectorValues decor)
 		{
@@ -47,14 +47,13 @@ namespace Beached.Content.Defs.Entities.Corals
 				MiscUtil.CelsiusToKelvin(5f),
 				MiscUtil.CelsiusToKelvin(42f),
 				MiscUtil.CelsiusToKelvin(50f),
-				new[]
-				{
+				[
 					SimHashes.Water,
 					SimHashes.SaltWater,
 					SimHashes.Brine,
 					SimHashes.DirtyWater,
 					Elements.murkyBrine
-				},
+				],
 				false,
 				0f,
 				0.15f,
@@ -146,10 +145,10 @@ namespace Beached.Content.Defs.Entities.Corals
 			prefab.GetComponent<KBatchedAnimController>().initialMode = KAnim.PlayMode.Loop;
 
 			prefab.AddOrGet<SimTemperatureTransfer>();
-			prefab.AddOrGet<OccupyArea>().objectLayers = new ObjectLayer[]
-			{
+			prefab.AddOrGet<OccupyArea>().objectLayers =
+			[
 				ObjectLayer.Building
-			};
+			];
 
 			prefab.AddOrGet<EntombVulnerable>();
 			//prefab.AddOrGet<DrowningMonitor>().livesUnderWater = true;
@@ -223,13 +222,13 @@ namespace Beached.Content.Defs.Entities.Corals
 			var elementConverter = prefab.AddComponent<ElementConverter>();
 			elementConverter.OutputMultiplier = outputMultiplier;
 
-			elementConverter.consumedElements = new[]
-			{
+			elementConverter.consumedElements =
+			[
 				new ElementConverter.ConsumedElement(input.ToString(), inKgPerSecond)
-			};
+			];
 
-			elementConverter.outputElements = new ElementConverter.OutputElement[]
-			{
+			elementConverter.outputElements =
+			[
 				new ElementConverter.OutputElement(outKgPerSecond,
 					output,
 					0f,
@@ -240,7 +239,7 @@ namespace Beached.Content.Defs.Entities.Corals
 					0.75f,
 					disase,
 					diseaseCount)
-			};
+			];
 		}
 	}
 }

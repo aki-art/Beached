@@ -8,14 +8,14 @@ namespace Beached.Content.Scripts.Entities.AI
 		public HuntStates protectEntity;
 		public State behaviourcomplete;
 
-		private static readonly CellOffset[] offsets = new[]
-		{
+		private static readonly CellOffset[] offsets =
+		[
 			new CellOffset(0, 0),
 			new CellOffset(1, 0),
 			new CellOffset(-1, 0),
 			new CellOffset(1, 1),
 			new CellOffset(-1, 1)
-		};
+		];
 
 		public override void InitializeStates(out BaseState default_state)
 		{

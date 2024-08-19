@@ -24,11 +24,11 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				var m_ReplacementMethod = AccessTools.Method(typeof(DevToolMenuNodeList_AddOrGetParentFor_Patch), nameof(RedoPaths), new[]
-				{
+				var m_ReplacementMethod = AccessTools.Method(typeof(DevToolMenuNodeList_AddOrGetParentFor_Patch), nameof(RedoPaths),
+				[
 					typeof(string[]),
 					typeof(string)
-				});
+				]);
 
 				codes.InsertRange(index, new[]
 				{

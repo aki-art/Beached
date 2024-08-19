@@ -41,10 +41,10 @@ namespace Beached.Content.Defs.Entities
 				MiscUtil.CelsiusToKelvin(65),
 				MiscUtil.CelsiusToKelvin(80));
 
-			prefab.AddOrGet<OccupyArea>().objectLayers = new[]
-			{
+			prefab.AddOrGet<OccupyArea>().objectLayers =
+			[
 				ObjectLayer.Building
-			};
+			];
 
 			prefab.GetComponent<KPrefabID>().prefabInitFn += inst =>
 			{

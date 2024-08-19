@@ -223,7 +223,7 @@ namespace Beached.Content.ModDb
 					chore_provider,
 					Db.Get().ChoreTypes.StressEmote,
 					"anim_interrupt_binge_eat_kanim",
-					new HashedString[] { "interrupt_binge_eat" },
+					["interrupt_binge_eat"],
 					KAnim.PlayMode.Once,
 					() => statusItem)),
 				chore_provider => new EmptyChore(chore_provider),

@@ -36,14 +36,13 @@ namespace Beached.Content.Defs.Flora
 				MiscUtil.CelsiusToKelvin(0f),
 				MiscUtil.CelsiusToKelvin(32f),
 				MiscUtil.CelsiusToKelvin(40f),
-				new[]
-				{
+				[
 					SimHashes.Water,
 					SimHashes.SaltWater,
 					SimHashes.Brine,
 					SimHashes.DirtyWater,
 					Elements.murkyBrine
-				},
+				],
 				false,
 				0f,
 				0.15f,
@@ -62,10 +61,10 @@ namespace Beached.Content.Defs.Flora
 
 			prefab.AddOrGet<StandardCropPlant>();
 
-			EntityTemplates.ExtendPlantToIrrigated(prefab, new[]
-			{
+			EntityTemplates.ExtendPlantToIrrigated(prefab,
+			[
 				new PlantElementAbsorber.ConsumeInfo(GameTags.Water,  WATER_RATE)
-			});
+			]);
 
 			prefab.AddOrGet<LoopingSounds>();
 

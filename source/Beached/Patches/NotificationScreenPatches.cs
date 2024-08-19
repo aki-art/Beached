@@ -96,11 +96,11 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				var m_GetColor = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetColor", new[]
-				{
+				var m_GetColor = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetColor",
+				[
 					typeof(ColorBlock),
 					typeof(Notification),
-				});
+				]);
 
 				codes.InsertRange(index, new[]
 				{
@@ -129,19 +129,19 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				var m_GetPrefab = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetPrefab", new[]
-				{
+				var m_GetPrefab = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetPrefab",
+				[
 					typeof(GameObject),
 					typeof(NotificationScreen),
 					typeof(Notification),
-				});
+				]);
 
-				var m_GetParent = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetParent", new[]
-				{
+				var m_GetParent = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetParent",
+				[
 					typeof(GameObject),
 					typeof(NotificationScreen),
 					typeof(Notification),
-				});
+				]);
 
 				codes.InsertRange(index3 + 1, new[]
 				{

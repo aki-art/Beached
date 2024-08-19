@@ -21,10 +21,10 @@ namespace Beached.Content.Defs.Equipment
 				"beached_rubberboots_kanim",
 				4,
 				new List<AttributeModifier>(),
-				additional_tags: new Tag[]
-				{
+				additional_tags:
+				[
 					GameTags.PedestalDisplayable
-				});
+				]);
 
 			var clothingInfo = ClothingWearer.ClothingInfo.BASIC_CLOTHING;
 

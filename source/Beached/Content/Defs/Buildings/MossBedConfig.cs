@@ -17,16 +17,14 @@ namespace Beached.Content.Defs.Buildings
 				"beached_mossframe_kanim",
 				BUILDINGS.HITPOINTS.TIER1,
 				BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER3,
-				new[]
-				{
+				[
 					200f,
 					100f
-				},
-				new[]
-				{
+				],
+				[
 					GameTags.Farmable.ToString(),
 					Elements.moss.ToString()
-				},
+				],
 				BUILDINGS.MELTING_POINT_KELVIN.TIER1,
 				BuildLocationRule.NotInTiles,
 				DECOR.NONE,
@@ -63,13 +61,13 @@ namespace Beached.Content.Defs.Buildings
 
 			// leaving output on null on purpose
 			var converter = go.AddComponent<ElementConverter>();
-			converter.consumedElements = new[]
-			{
+			converter.consumedElements =
+			[
 				new ElementConverter.ConsumedElement(GameTags.Water, MossBed.WATER_REQUIREMENT_KG / MossBed.GROWTH_TIME_SECONDS)
-			};
+			];
 
 			// empty list so this really just acts like a consumer
-			converter.outputElements = new ElementConverter.OutputElement[] { };
+			converter.outputElements = [];
 		}
 
 		public override void DoPostConfigureComplete(GameObject go)

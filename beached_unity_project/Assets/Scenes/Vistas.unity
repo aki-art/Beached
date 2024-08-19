@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &228414712
 Transform:
   m_ObjectHideFlags: 0
@@ -222,7 +222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1460115248
 AudioListener:
   m_ObjectHideFlags: 0
@@ -298,6 +298,10 @@ PrefabInstance:
     - target: {fileID: 3015834712732749830, guid: a684b88bb3d6b1d4c815ba4a9f8f21eb, type: 3}
       propertyPath: m_Name
       value: BeachVista
+      objectReference: {fileID: 0}
+    - target: {fileID: 3015834712732749830, guid: a684b88bb3d6b1d4c815ba4a9f8f21eb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4058184151948739357, guid: a684b88bb3d6b1d4c815ba4a9f8f21eb, type: 3}
       propertyPath: m_Pivot.x

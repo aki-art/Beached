@@ -27,12 +27,12 @@ namespace Beached.Patches
 
 				var f_selectedTarget = AccessTools.Field(typeof(TargetScreen), "selectedTarget");
 
-				var m_GetToolTip = AccessTools.Method(typeof(MinionPersonalityPanel_RefreshTraits_Patch), nameof(GetToolTip), new[]
-				{
+				var m_GetToolTip = AccessTools.Method(typeof(MinionPersonalityPanel_RefreshTraits_Patch), nameof(GetToolTip),
+				[
 					typeof(string),
 					typeof(Trait),
 					typeof(GameObject)
-				});
+				]);
 
 				codes.InsertRange(index + 1, new[]
 				{

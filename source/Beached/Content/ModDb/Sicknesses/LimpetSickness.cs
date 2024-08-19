@@ -25,11 +25,11 @@ namespace Beached.Content.ModDb.Sicknesses
 			duration,
 			BEffects.LIMPETS_DUPLICANT_RECOVERY)
 		{
-			AddSicknessComponent(new AttributeModifierSickness(new[]
-			{
+			AddSicknessComponent(new AttributeModifierSickness(
+			[
 				new AttributeModifier(Db.Get().Amounts.Calories.deltaAttribute.Id, -500_000f / CONSTS.CYCLE_LENGTH, STRINGS.DUPLICANTS.DISEASES.BEACHED_LIMPETS_DUPLICANT.NAME),
 				new AttributeModifier(Db.Get().Attributes.Decor.Id, -20)
-			}));
+			]));
 
 			if (BExpressions.limpetFace == null)
 				Log.Warning("Limpet face expression is null");

@@ -16,13 +16,13 @@ namespace Beached.Content.Scripts.Entities
 		private Storage storage;
 
 		private KBatchedAnimController[] shelfItems;
-		public static Vector3[] offsets = new[]
-		{
+		public static Vector3[] offsets =
+		[
 			new Vector3(-0.1f, 0.1f, 0.1f), // bl
             new Vector3(-0.1f, 0.4f, 0.2f), // tl
             new Vector3(0.2f, 0.1f, 0.05f), // br
             new Vector3(0.2f, 0.4f, 0.15f)  // tr
-        };
+        ];
 
 		public override void OnSpawn()
 		{
@@ -62,10 +62,10 @@ namespace Beached.Content.Scripts.Entities
 				item.enabled = show;
 				if (show)
 				{
-					item.SwapAnims(new[]
-					{
+					item.SwapAnims(
+					[
 						animFile
-					});
+					]);
 				}
 
 				return item;
@@ -77,10 +77,10 @@ namespace Beached.Content.Scripts.Entities
 			go.SetActive(false);
 
 			var result = go.AddComponent<KBatchedAnimController>();
-			result.AnimFiles = new[]
-			{
+			result.AnimFiles =
+			[
 				animFile
-			};
+			];
 
 			result.initialAnim = "ui";
 			result.sceneLayer = Grid.SceneLayer.Building;

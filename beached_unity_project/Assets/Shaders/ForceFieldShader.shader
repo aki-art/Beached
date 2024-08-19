@@ -9,11 +9,15 @@ Shader "Beached/ForceFieldShader2"
         _MainTex ("Texture", 2D) = "white" {}
         _NoiseTex ("Noise", 2D) = "white" {}
         _Color ("Color", Color) = (0.5, 0.5, 1.0, 1.0)
+        _BorderColor ("Border Color", Color) = (0.5, 0.5, 1.0, 1.0)
         _RimStrength ("Rim Strength", float) = 1.0
         _DisplacementStrength("Displacement Strenfth", float) = 1.0
         _WorbleSpeed("Worble Speed", float) = 0.2
         _Alpha("Alpha", float) = 0.2
         _NoiseScale("Noise Scale", float) = 0.2
+        _NoiseAMplitude("Noise Ampl", float) = 0.2
+        _Center("Center", Vector) = (0, 0, 0, 0)
+        _ZoomMagicNumber("Zoom Magic Number", float) = 15
     }
     SubShader
     {
@@ -52,16 +56,22 @@ Shader "Beached/ForceFieldShader2"
 				float3 normalDir : TEXCOORD3;
             };
 
+            uniform float4 _WorldCameraPos;
+
             sampler2D _MainTex;
             float4 _MainTex_ST;
             sampler2D _NoiseTex;
             float4 _NoiseTex_ST;
             float4 _Color;
+            float4 _BorderColor;
             float _RimStrength;
             float _DisplacementStrength;
             float _WorbleSpeed;
             float _Alpha;
             float _NoiseScale;
+            float _NoiseAMplitude;
+            float4 _Center;
+            float _ZoomMagicNumber;
 
             float2 rotation(float2 uv, float2 center, float angle) 
             {
@@ -86,6 +96,7 @@ Shader "Beached/ForceFieldShader2"
 
             v2f vert (appdata v)
             {
+                // 3.14159265359 
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
@@ -93,21 +104,27 @@ Shader "Beached/ForceFieldShader2"
 
 				float3 normal = normalize( mul( float4( v.normal, 0.0 ), unity_WorldToObject ).xyz);
                 o.normalDir = normal;
-                float2 normalUv = remap(normal.xy, -1, 1, 0, 1);
-                normal = float3(rotation(normal.xy, float2(0.5, 0), _Time * _WorbleSpeed), 0);
 
+                float2 normalUv = remap(normal.xy, -1, 1, 0, 1);
+                normal = float3(rotation(normal.xy, _Center, _Time * _WorbleSpeed), 0);
+
+                float t = 1 - clamp(_WorldCameraPos.w / _ZoomMagicNumber, 0, 0.9);
                 float4 noise =  tex2Dlod (_NoiseTex, float4(normal.xy * _NoiseScale, 0, 0));
-                o.vertex += (noise * noise * noise * _DisplacementStrength);
-                
-                UNITY_TRANSFER_FOG(o,o.vertex);
+                //o.vertex += (noise * noise * noise * _DisplacementStrength);
+                float offset = _Time;
+                //offset *= _DisplacementStrength;
+                //offset /= 2.0;
+                o.vertex.xyz += (normal * noise* _DisplacementStrength * t);// ((sin(noise * _Time  * _NoiseAMplitude) * 0.5 + 0.5) * _DisplacementStrength); //((sin((noise * _NoiseAMplitude  + _Time )) * _DisplacementStrength / 2.0) + 1.0); 
+
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-				float3 normalDirection = i.normalDir;
-				float3 viewDirection = normalize( _WorldSpaceCameraPos.xyz - i.posWorld.xyz );
-                half rim = 1 - saturate(dot(normalize(viewDirection), i.normalDir));
+				//float3 normalDirection = i.normalDir;
+				//float3 viewDirection = normalize( _WorldSpaceCameraPos.xyz - i.posWorld.xyz );
+                half rim = 1 - saturate(dot(normalize(float3(0, 1, 1)), i.normalDir));
+                // use viewdir instead of the hardcode float to make it clip the middle of where we look
                 
                 float a = tex2D(_MainTex, i.uv).a;
                 fixed4 tex = fixed4(a, a, a, 1.0);
@@ -121,7 +138,10 @@ Shader "Beached/ForceFieldShader2"
                 //return offset;
 
                 //return noise;
-                return col * _Color;// * fresnel(1.0, );
+                float4 baseColor = (tex * _BorderColor + _Color);
+                baseColor.a = max(a, _Color.a);
+                
+                return  baseColor * col;// * fresnel(1.0, );
             }
 
 

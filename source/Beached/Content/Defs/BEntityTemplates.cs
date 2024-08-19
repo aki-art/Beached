@@ -92,7 +92,7 @@ namespace Beached.Content.Defs
 			primaryElement2.Temperature = (comet.temperatureRange.x + comet.temperatureRange.y) / 2f;
 
 			var kBatchedAnimController = gameObject.AddOrGet<KBatchedAnimController>();
-			kBatchedAnimController.AnimFiles = new KAnimFile[1] { Assets.GetAnim(animName) };
+			kBatchedAnimController.AnimFiles = [Assets.GetAnim(animName)];
 			kBatchedAnimController.isMovable = true;
 			kBatchedAnimController.initialAnim = "fall_loop";
 			kBatchedAnimController.initialMode = KAnim.PlayMode.Loop;

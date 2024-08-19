@@ -17,11 +17,10 @@ namespace Beached.Patches
 				var m_RemapSymbolName = AccessTools.Method(
 					typeof(MinionIdentity_OnSpawn_Patch),
 					"RemapAnimFileName",
-					new[]
-					{
+					[
 						typeof(string),
 						typeof(MinionIdentity)
-					});
+					]);
 
 				var codes = orig.ToList();
 				var index = codes.FindIndex(c => c.opcode == OpCodes.Ldstr && c.operand is string str && str == "head_swap_kanim");

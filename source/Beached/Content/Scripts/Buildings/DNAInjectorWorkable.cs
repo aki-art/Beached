@@ -18,11 +18,11 @@ namespace Beached.Content.Scripts.Buildings
 			attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.PART_DAY_EXPERIENCE;
 			skillExperienceSkillGroup = Db.Get().SkillGroups.Ranching.Id;
 			skillExperienceMultiplier = SKILLS.PART_DAY_EXPERIENCE;
-			overrideAnims = new[]
-			{
+			overrideAnims =
+			[
                 //Assets.GetAnim("anim_interacts_spice_grinder_kanim")
                 Assets.GetAnim("anim_interacts_vet_kanim")
-			};
+			];
 
 			SetWorkTime(5f);
 			synchronizeAnims = false;

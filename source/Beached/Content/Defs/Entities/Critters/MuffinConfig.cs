@@ -32,10 +32,10 @@ namespace Beached.Content.Defs.Entities.Critters
 				GameTags.OriginalCreature,
 				BTags.Creatures.doNotTargetMeByCarnivores);
 
-			prefab.AddOrGetDef<PreyMonitor.Def>().allyTags = new[]
-			{
+			prefab.AddOrGetDef<PreyMonitor.Def>().allyTags =
+			[
 				BTags.Creatures.doNotTargetMeByCarnivores
-			};
+			];
 
 			prefab.AddComponent<CollarWearer>();
 

@@ -17,12 +17,11 @@ namespace Beached.Integration
 			{
 				var methodInfo = type.GetMethod(
 					"AddFluffyCritter",
-					new[]
-					{
+					[
 						typeof(Tag),
 						typeof(float),
 						typeof(Color),
-					});
+					]);
 
 				CrittersShedFurOnBrush = (CrittersShedFurOnBrushDelegate)Delegate.CreateDelegate(typeof(CrittersShedFurOnBrushDelegate), methodInfo);
 			}

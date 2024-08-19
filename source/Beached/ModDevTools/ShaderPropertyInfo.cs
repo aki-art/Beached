@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if DEVTOOLS
+using UnityEngine;
 
 namespace Beached.ModDevTools
 {
@@ -43,3 +44,4 @@ namespace Beached.ModDevTools
 	}
 
 }
+#endif

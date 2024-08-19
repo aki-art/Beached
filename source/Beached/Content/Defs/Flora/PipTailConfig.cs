@@ -32,15 +32,14 @@ namespace Beached.Content.Defs.Flora
 				248.15f,
 				273.15f,
 				323.15f,
-				new[]
-				{
+				[
 					SimHashes.Oxygen,
 					SimHashes.ContaminatedOxygen,
 					Elements.saltyOxygen,
 					SimHashes.CarbonDioxide,
 					SimHashes.DirtyWater,
 					SimHashes.Water
-				},
+				],
 				pressure_warning_low: 0.025f,
 				crop_id: PipShootConfig.ID,
 				max_radiation: 9800f,
@@ -50,14 +49,14 @@ namespace Beached.Content.Defs.Flora
 			prefab.AddOrGet<StandardCropPlant>();
 			prefab.AddOrGet<LoopingSounds>();
 
-			EntityTemplates.ExtendPlantToFertilizable(prefab, new[]
-			{
+			EntityTemplates.ExtendPlantToFertilizable(prefab,
+			[
 				new PlantElementAbsorber.ConsumeInfo()
 				{
 					tag = Elements.heulandite.Tag,
 					massConsumptionRate = FERTILIZATION_RATE
 				}
-			});
+			]);
 
 			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
 				prefab,

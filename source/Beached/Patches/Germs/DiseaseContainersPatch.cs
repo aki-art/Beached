@@ -8,21 +8,19 @@ namespace Beached.Patches.Germs
 		[HarmonyPatch(
 			typeof(DiseaseContainers),
 			"CalculateDelta",
-			new[]
-			{
+			[
 				typeof(DiseaseHeader),
 				typeof(DiseaseContainer),
 				typeof(Disease),
 				typeof(float),
-				typeof(bool) },
-			new[]
-			{
+				typeof(bool) ],
+			[
 				ArgumentType.Normal,
 				ArgumentType.Ref,
 				ArgumentType.Normal,
 				ArgumentType.Normal,
 				ArgumentType.Normal
-			})]
+			])]
 		public class DiseaseContainers_CalculateDelta_Patch
 		{
 			public static void Postfix(ref DiseaseContainer container, ref float __result)

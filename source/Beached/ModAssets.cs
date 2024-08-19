@@ -253,7 +253,7 @@ namespace Beached
 			LoadSetpieces(bundle2);
 
 			Log.Debug("loading 3D models");
-			Prefabs.forceFieldDome = bundle2.LoadAsset<GameObject>("Assets/Prefabs/ForceField Dome.prefab");
+			Prefabs.forceFieldDome = bundle2.LoadAsset<GameObject>("Assets/Prefabs/Smaller Wider Dome.prefab");
 
 			foreach (var asset in bundle.GetAllAssetNames())
 			{

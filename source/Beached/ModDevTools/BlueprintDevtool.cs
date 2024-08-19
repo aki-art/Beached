@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb;
+﻿#if DEVTOOLS
+using Beached.Content.ModDb;
 using ImGuiNET;
 
 namespace Beached.ModDevTools
@@ -20,3 +21,4 @@ namespace Beached.ModDevTools
 		}
 	}
 }
+#endif

@@ -34,8 +34,8 @@ namespace Beached.Content.Defs.Buildings
 		{
 			ForceField forceField = go.AddComponent<ForceField>();
 			forceField.offset = new Vector3(2.5f, 2.75f);
-			forceField.radiusMultiplier = 5f;
-			forceField.distanceFromWorldTop = 10;
+			forceField.radiusMultiplier = 1.1f;
+			forceField.distanceFromWorldTop = -20;
 		}
 	}
 }

@@ -28,10 +28,10 @@ namespace Beached.Content.Defs.Comets
 			primaryElement.Temperature = MiscUtil.CelsiusToKelvin(500);
 
 			var kbac = go.AddOrGet<KBatchedAnimController>();
-			kbac.AnimFiles = new KAnimFile[]
-			{
+			kbac.AnimFiles =
+			[
 				Assets.GetAnim("meteor_rock_kanim")
-			};
+			];
 
 			kbac.isMovable = true;
 			kbac.initialAnim = "fall_loop";

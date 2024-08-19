@@ -28,11 +28,11 @@ namespace Beached.Content.Scripts.Entities.Plant
 			base.OnSpawn();
 			Subscribe(ModHashes.stackableChanged, OnChanged);
 
-			tipAnim = new[] { Assets.GetAnim($"{animFileRoot}_tip_kanim") };
-			middleAnim = new[] { Assets.GetAnim($"{animFileRoot}_middle_kanim") };
-			frustumAnim = new[] { Assets.GetAnim($"{animFileRoot}_frustum_kanim") };
-			baseAnim = new[] { Assets.GetAnim($"{animFileRoot}_base_kanim") };
-			singleAnim = new[] { Assets.GetAnim($"{animFileRoot}_single_kanim") };
+			tipAnim = [Assets.GetAnim($"{animFileRoot}_tip_kanim")];
+			middleAnim = [Assets.GetAnim($"{animFileRoot}_middle_kanim")];
+			frustumAnim = [Assets.GetAnim($"{animFileRoot}_frustum_kanim")];
+			baseAnim = [Assets.GetAnim($"{animFileRoot}_base_kanim")];
+			singleAnim = [Assets.GetAnim($"{animFileRoot}_single_kanim")];
 
 			TryToAttachToExisting();
 		}

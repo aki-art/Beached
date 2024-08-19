@@ -20,7 +20,6 @@ namespace Beached.Patches
 			}
 		}
 
-#if ELEMENTS
 		// Makes the Salty Oxygen texture the lighter texture Oxygen uses
 		[HarmonyPatch(typeof(PropertyTextures), nameof(PropertyTextures.UpdateDanger))]
 		public static class PropertyTextures_UpdateDanger_Patch
@@ -34,14 +33,14 @@ namespace Beached.Patches
 				if (index == -1)
 					return codes;
 
-				var m_GetDangerForElement = AccessTools.Method(typeof(PropertyTextures_UpdateDanger_Patch), nameof(GetDangerForElement), new[] { typeof(int), typeof(int) });
+				var m_GetDangerForElement = AccessTools.Method(typeof(PropertyTextures_UpdateDanger_Patch), nameof(GetDangerForElement), [typeof(int), typeof(int)]);
 
-				codes.InsertRange(index + 3, new[]
-				{
+				codes.InsertRange(index + 3,
+				[
 					// byte.maxValue is loaded to the stack
 					new CodeInstruction(OpCodes.Ldloc_2), // load num to the stack
 					new CodeInstruction(OpCodes.Call, m_GetDangerForElement)
-				});
+				]);
 
 				return codes;
 			}
@@ -54,6 +53,5 @@ namespace Beached.Patches
 					: (byte)existingValue;
 			}
 		}
-#endif
 	}
 }

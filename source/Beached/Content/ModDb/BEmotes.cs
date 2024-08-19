@@ -13,12 +13,11 @@ namespace Beached.Content.ModDb
 			scared = new Emote(
 				__instance,
 				"Beached_Emote_Scared",
-				new[]
-				{
+				[
 					new EmoteStep() { anim = "floor_floor_1_0_pre" },
 					new EmoteStep() { anim = "floor_floor_1_0_loop" },
 					new EmoteStep() { anim = "floor_floor_1_0_pst" },
-				},
+				],
 				"anim_loco_run_insane_kanim");
 		}
 	}

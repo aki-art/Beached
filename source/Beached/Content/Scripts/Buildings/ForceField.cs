@@ -16,6 +16,7 @@ namespace Beached.Content.Scripts.Buildings
 		private bool showDebug;
 		private float rotationSpeed;
 		private Transform testField;
+		private Material material;
 
 		public override void OnSpawn()
 		{
@@ -33,13 +34,24 @@ namespace Beached.Content.Scripts.Buildings
 			}
 
 			var test = Instantiate(ModAssets.Prefabs.forceFieldDome, transform);
-			test.transform.position = new Vector3(center.x, center.y, 35);
+
+			material = test.GetComponent<MeshRenderer>().materials[0];
+
+			var x = myWorld.Width / 2.0f + myWorld.PosMin().x;
+			var y = myWorld.Height - distanceFromWorldTop + myWorld.PosMin().y + 1.0f;
+
+			test.transform.position = new Vector3(x, y, 45);
 			test.transform.SetParent(transform, true);
+			var scale = myWorld.Width * radiusMultiplier;
+			test.transform.localScale = Vector3.one * scale;
 			test.SetActive(true);
 
 			testField = test.transform;
 
 			Subscribe(ModHashes.debugDataChange, OnDebugChange);
+
+			showDebug = true;
+			ToggleDebugLines(showDebug);
 
 			smi.StartSM();
 		}
@@ -108,6 +120,8 @@ namespace Beached.Content.Scripts.Buildings
 			comet.Explode();
 		}
 
+		private float rimStrength;
+		private float alpha;
 		public void OnImguiDraw()
 		{
 			if (visualizer != null)
@@ -117,6 +131,17 @@ namespace Beached.Content.Scripts.Buildings
 				ToggleDebugLines(showDebug);
 
 			ImGui.DragFloat("Rotation Speed", ref rotationSpeed);
+			if (ImGui.DragFloat("Top Offset", ref distanceFromWorldTop))
+			{
+				var myWorld = this.GetMyWorld();
+				var y = myWorld.Height - distanceFromWorldTop + myWorld.PosMin().y + 1.0f;
+			}
+
+			if (ImGui.DragFloat("Rim Strength", ref rimStrength))
+				material.SetFloat("_RimStrength", rimStrength);
+
+			if (ImGui.DragFloat("Alpha Mult", ref alpha))
+				material.SetFloat("_Alpha", alpha);
 		}
 
 		public void RenderEveryTick(float dt)

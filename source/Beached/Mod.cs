@@ -43,8 +43,9 @@ namespace Beached
 			base.OnLoad(harmony);
 
 			BTags.OnModLoad();
-
+#if DEVTOOLS
 			BeachedDevTools.Initialize();
+#endif
 			BWorldGenTags.Initialize();
 
 			lutAPI = LUT_API.Setup(harmony, true);
@@ -82,8 +83,8 @@ namespace Beached
 								Log.Warning($"Cannot insert Db entries to {type.Name}.{methodInfo.Name}, no parameter given");
 
 							var targetType = methodInfo.GetParameters()[0].ParameterType;
-							var targetConstructor = AccessTools.Constructor(targetType, new Type[] { typeof(ResourceSet) })
-								?? AccessTools.Constructor(targetType, new Type[] { });
+							var targetConstructor = AccessTools.Constructor(targetType, [typeof(ResourceSet)])
+								?? AccessTools.Constructor(targetType, []);
 
 							if (targetConstructor == null)
 							{

@@ -1,4 +1,5 @@
-﻿namespace Beached.ModDevTools
+﻿#if DEVTOOLS
+namespace Beached.ModDevTools
 {
 	public class BeachedDevTools
 	{
@@ -7,13 +8,12 @@
 		/// also to fix nesting, <see cref="Patches.DevToolMenuNodeListPatch.DevToolMenuNodeList_AddOrGetParentFor_Patch"/>
 		public static void Initialize()
 		{
-			DevToolManager.Instance.RegisterDevTool<WorldGenDevTool>("Mods/Beached/Worldgen");
 			DevToolManager.Instance.RegisterDevTool<DebugDevTool>("Mods/Beached/Debug");
-			DevToolManager.Instance.RegisterDevTool<ConsoleDevTool>("Mods/Beached/Log");
 			DevToolManager.Instance.RegisterDevTool<NoisePreviewerDevTool>("Mods/Beached/Noise");
 			DevToolManager.Instance.RegisterDevTool<BlueprintDevtool>("Mods/Beached/Blueprints");
-			DevToolManager.Instance.RegisterDevTool<WFCDevTool>("Mods/Beached/WFC");
+			//DevToolManager.Instance.RegisterDevTool<WFCDevTool>("Mods/Beached/WFC");
 			//DevToolManager.Instance.RegisterDevTool<LiquidShaderDevTool>("Mods/Beached/Liquid Shader");
 		}
 	}
 }
+#endif
