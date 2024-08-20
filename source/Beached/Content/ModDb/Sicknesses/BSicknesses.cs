@@ -19,8 +19,7 @@ namespace Beached.Content.ModDb.Sicknesses
 
 			var exposures = new List<ExposureType>(TUNING.GERM_EXPOSURE.TYPES)
 			{
-				new ExposureType
-				{
+				new() {
 					germ_id = LimpetEggGerms.ID,
 					sickness_id = LimpetsSickness.ID,
 					exposure_threshold = 100,
@@ -31,8 +30,7 @@ namespace Beached.Content.ModDb.Sicknesses
 						BEffects.LIMPETS_DUPLICANT_RECOVERY
 					]
 				},
-				new ExposureType
-				{
+				new() {
 					germ_id = CapSporeGerms.ID,
 					sickness_id = CappedSickness.ID,
 					exposure_threshold = 100,
@@ -43,8 +41,7 @@ namespace Beached.Content.ModDb.Sicknesses
 						BEffects.CAPPED_RECOVERY
 					]
 				},
-				new ExposureType
-				{
+				new() {
 					germ_id = PoffSporeGerms.ID,
 					sickness_id = PoffMouthSickness.ID,
 					exposure_threshold = 100,

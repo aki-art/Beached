@@ -5,6 +5,7 @@ namespace Beached.Content.Defs.Entities.Critters
 {
 	public static class BaseJellyfishConfig
 	{
+		public const int SORTING_ORDER = 53;
 		public static GameObject CreatePrefab(string id, string name, string desc, string anim_file, string traitId, string symbolOverridePrefix)
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(

@@ -13,7 +13,7 @@ namespace Beached.Content.Defs.Equipment
 		{
 			var attributeModifiers = new List<AttributeModifier>
 			{
-				new AttributeModifier(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 30)
+				new(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 30)
 			};
 
 			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(

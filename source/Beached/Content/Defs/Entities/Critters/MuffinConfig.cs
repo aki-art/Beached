@@ -12,6 +12,7 @@ namespace Beached.Content.Defs.Entities.Critters
 		public const string ID = "Beached_Muffin";
 		public const string EGG_ID = "Beached_Muffin_Egg";
 		public const string BASE_TRAIT_ID = ID + "Original";
+		public const int SORTING_ORDER = 48;
 
 		public GameObject CreatePrefab()
 		{

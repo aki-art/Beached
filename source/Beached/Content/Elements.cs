@@ -6,6 +6,13 @@ namespace Beached.Content
 {
 	public class Elements
 	{
+		// setting these when loaded
+		public static SolidAmbienceType
+			crystalAmbiance = 0;
+
+		public static AmbienceType
+			acidAmbience = 0;
+
 		public static readonly SimHashes
 			bone = (SimHashes)Hash.SDBMLower("Beached_Bone"),
 			moss = (SimHashes)Hash.SDBMLower("Beached_Moss"),
@@ -152,7 +159,6 @@ namespace Beached.Content
 			];
 		}
 
-#if ELEMENTS
 		public static void RegisterSubstances(List<Substance> list)
 		{
 			var ore = list.Find(e => e.elementID == SimHashes.Cuprite).material;
@@ -353,6 +359,18 @@ namespace Beached.Content
 
 		public static void CreateAudioConfigs(ElementsAudio elementsAudio)
 		{
+			var ambianceManager = Object.FindObjectOfType<AmbienceManager>();
+			if (ambianceManager != null)
+			{
+				foreach (var def in ambianceManager.quadrantDefs)
+				{
+					Log.Debug($"- {def.name} {def.solidSounds.Length}");
+					Elements.crystalAmbiance = (SolidAmbienceType)def.solidSounds.Length;
+					var reference = def.solidSounds[(int)SolidAmbienceType.Ice];
+					def.solidSounds = def.solidSounds.AddToArray(reference);
+				}
+			}
+
 			var configs = new List<ElementsAudio.ElementAudioConfig>();
 
 			var ice = elementsAudio.GetConfigForElement(SimHashes.Ice);
@@ -364,7 +382,7 @@ namespace Beached.Content
 
 			configs.Add(ElementUtil.GetCrystalAudioConfig(amber));
 			configs.Add(ElementUtil.CopyElementAudioConfig(ice, ammoniaFrozen));
-			configs.Add(ElementUtil.CopyElementAudioConfig(ice, permaFrost));
+			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Snow, permaFrost));
 			configs.Add(ElementUtil.GetCrystalAudioConfig(aquamarine));
 			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Sand, ash));
 			configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, basalt));
@@ -385,9 +403,21 @@ namespace Beached.Content
 			configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, zirconium));
 			configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, zirconiumOre));
 			configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, siltStone));
+			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.DirtyWater, sulfurousWater));
+
+			configs.Add(new ElementsAudio.ElementAudioConfig()
+			{
+				elementID = sulfurousWater,
+				ambienceType = AmbienceType.None,
+				solidAmbienceType = SolidAmbienceType.None,
+				miningSound = null,
+				miningBreakSound = null,
+				oreBumpSound = null,
+				floorEventAudioCategory = null,
+				creatureChewSound = null
+			});
 
 			elementsAudio.elementAudioConfigs = elementsAudio.elementAudioConfigs.AddRangeToArray(configs.ToArray());
 		}
-#endif
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb;
+﻿using Beached.Content;
+using Beached.Content.ModDb;
 using Klei.AI;
 using System.Collections.Generic;
 using System.IO;
@@ -81,25 +82,15 @@ namespace Beached.Utils
 
 		}
 
-		// The game incorrectly assigns the display name to elements not in the original SimHashes table,
-		// so this needs to be changed to the actual ID. 
-		public static void FixTags()
-		{
-			foreach (var elem in elements)
-			{
-				elem.Get().substance.nameTag = TagManager.Create(elem.SimHash.ToString());
-			}
-		}
-
 		public static ElementsAudio.ElementAudioConfig GetCrystalAudioConfig(SimHashes id)
 		{
 			var crushedIce = ElementsAudio.Instance.GetConfigForElement(SimHashes.CrushedIce);
-
+			Log.Debug($"crystal audio index: {(int)Elements.crystalAmbiance}");
 			return new ElementsAudio.ElementAudioConfig()
 			{
 				elementID = id,
 				ambienceType = AmbienceType.None,
-				solidAmbienceType = SolidAmbienceType.CrushedIce,
+				solidAmbienceType = Elements.crystalAmbiance,
 				miningSound = "PhosphateNodule", // kind of gritty glassy
 				miningBreakSound = crushedIce.miningBreakSound,
 				oreBumpSound = crushedIce.oreBumpSound,

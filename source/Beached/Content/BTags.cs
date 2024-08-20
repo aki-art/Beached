@@ -29,6 +29,7 @@ namespace Beached.Content
 			palateCleanserFood = TagManager.Create("Beached_PalateCleanserFood"),
 			seafoodAllergic = TagManager.Create("Beached_SeafoodAllergic"),
 			setPiece = TagManager.Create("Beached_SetPiece"),
+			sparksOnAcid = TagManager.Create("Beached_SparksOnAcid"), // should this critter induce small explosions when in contact with acid. (Metallic scales or metals at positions above copper in the reactivity series.)
 			glacier = TagManager.Create("Beached_Glacier"),
 			vista = TagManager.Create("Beached_Vista"), // allows Vista rooms
 			wishingStars = TagManager.Create("Beached_WishingStars"); // used on events that should trigger the wishing star effect on dupes

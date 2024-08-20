@@ -10,9 +10,9 @@ namespace Beached.Content.ModDb.Germs
 
 		public float UVHalfLife => 2f; // UV Lamps compat
 
-		private static readonly RangeInfo temperatureRangeInfo = new RangeInfo(283.15f, 293.15f, 363.15f, 373.15f);
-		private static readonly RangeInfo temperatureHalfLivesInfo = new RangeInfo(10f, 1200f, 1200f, 10f);
-		private static readonly RangeInfo pressureRangeInfo = new RangeInfo(0f, 0f, 1000f, 1000f);
+		private static readonly RangeInfo temperatureRangeInfo = new(283.15f, 293.15f, 363.15f, 373.15f);
+		private static readonly RangeInfo temperatureHalfLivesInfo = new(10f, 1200f, 1200f, 10f);
+		private static readonly RangeInfo pressureRangeInfo = new(0f, 0f, 1000f, 1000f);
 
 
 		public CapSporeGerms(bool statsOnly) : base(ID, 20, temperatureRangeInfo, temperatureHalfLivesInfo,

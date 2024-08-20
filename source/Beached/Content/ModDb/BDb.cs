@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Entities.Corals;
+using Beached.Content.Defs.Entities.Critters;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Foods;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace Beached.Content.ModDb
 		public static void OnDbInit()
 		{
 			plushies = new BPlushies();
+
+			TUNING.CREATURES.SORTING.CRITTER_ORDER[SlickShellConfig.ID] = BaseSnailConfig.SORTING_ORDER;
+			TUNING.CREATURES.SORTING.CRITTER_ORDER[MuffinConfig.ID] = MuffinConfig.SORTING_ORDER;
+			TUNING.CREATURES.SORTING.CRITTER_ORDER[JellyConfig.ID] = BaseJellyfishConfig.SORTING_ORDER;
 		}
 
 		public class WearableTypes
@@ -92,7 +97,7 @@ namespace Beached.Content.ModDb
 			{
 				RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPONGECAKE.DESC, 40f)
 					.Input(WashuSpongeConfig.SEED_ID, 3f)
-					// TODO
+					.Input(SimHashes.Sucrose.CreateTag(), 30f)
 					.Output(SpongeCakeConfig.ID, 1f)
 					.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 					.Visualizer()
@@ -123,6 +128,7 @@ namespace Beached.Content.ModDb
 			CloneRecipes(oreStarters, Elements.bismuthOre.ToString());
 		}
 
+		// TODO: move to Moonlet
 		private static void CloneRecipes(List<string> starters, string newElement)
 		{
 			var referenceElement = starters[0];

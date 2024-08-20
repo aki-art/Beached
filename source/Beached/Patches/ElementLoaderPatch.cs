@@ -19,9 +19,6 @@ namespace Beached.Patches
 
 			public static void Postfix()
 			{
-				// fix a bug with tags, IMPORTANT FOR NEW ELEMENTS
-				ElementUtil.FixTags();
-
 				// recolor water and salt water to be more watery and distinguishable
 				var substanceTable = Assets.instance.substanceTable;
 				substanceTable.GetSubstance(SimHashes.Water).colour = ModAssets.Colors.water;

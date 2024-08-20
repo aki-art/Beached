@@ -6,6 +6,8 @@ namespace Beached.Content.Defs.Entities.Critters
 	// Most basic form of a Slickshell, shared by adults, babies and all morphs
 	public static class BaseSnailConfig
 	{
+		public const int SORTING_ORDER = 83;
+
 		public static GameObject CreatePrefab(string id, string name, string desc, string anim_file, string traitId, string[] onDeathDrops)
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(

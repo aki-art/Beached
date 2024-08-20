@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Beached.Content.Defs.Items;
+using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters
 {
@@ -14,7 +15,8 @@ namespace Beached.Content.Defs.Entities.Critters
 				STRINGS.CREATURES.SPECIES.BEACHED_SLICKSHELL.BABY_NAME,
 				STRINGS.CREATURES.SPECIES.BEACHED_SLICKSHELL.BABY_DESC,
 				"beached_snail_kanim",
-				SlickShellConfig.BASE_TRAIT_ID);
+				SlickShellConfig.BASE_TRAIT_ID,
+				[SeaShellConfig.ID]);
 
 			EntityTemplates.ExtendEntityToBeingABaby(prefab, SlickShellConfig.ID, null);
 

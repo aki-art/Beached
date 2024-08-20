@@ -13,8 +13,8 @@ namespace Beached.Content.Defs.Equipment
 		{
 			var attributeModifiers = new List<AttributeModifier>
 			{
-				new AttributeModifier(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME),
-				new AttributeModifier(Db.Get().Attributes.Strength.Id, 2, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME),
+				new(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME),
+				new(Db.Get().Attributes.Strength.Id, 2, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME),
 			};
 
 			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(

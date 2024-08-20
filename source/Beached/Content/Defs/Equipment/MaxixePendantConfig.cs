@@ -13,8 +13,8 @@ namespace Beached.Content.Defs.Equipment
 		{
 			var attributeModifiers = new List<AttributeModifier>
 			{
-				new AttributeModifier(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20),
-				new AttributeModifier(Db.Get().Attributes.AirConsumptionRate.Id, -0.05f),
+				new(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20),
+				new(Db.Get().Attributes.AirConsumptionRate.Id, -0.05f),
 			};
 
 			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(

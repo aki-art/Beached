@@ -44,6 +44,29 @@ namespace Beached.Patches.DatabasePatches
 
 				ModAssets.LoadAssets();
 
+				Log.Debug("GUID");
+
+				FMODUnity.RuntimeManager.StudioSystem.getBankList(out var bankList);
+				foreach (var bank in bankList)
+				{
+					var hasBuses = bank.getBusList(out var buses);
+					if (hasBuses == FMOD.RESULT.OK)
+					{
+						Log.Debug("buses: " + buses.Join());
+						foreach (var bus in buses)
+						{
+							Log.Debug("bus");
+							bus.getPath(out var path);
+							Log.Debug(path);
+							bus.getID(out var id);
+							Log.Debug(id);
+							Log.Debug("----------");
+						}
+					}
+					else Debug.Log(hasBuses.ToString());
+				}
+;
+
 				PlanScreen.iconNameMap.Add(HashCache.Get().Add(BDb.poisBuildCategory), ModAssets.Sprites.BUILDCATEGORY_POIS);
 
 				// modify status item of "DryingOut", which is an otherwise unused status with no icon set
@@ -58,7 +81,6 @@ namespace Beached.Patches.DatabasePatches
 				{
 					resolveStringCallback = (str, data) => str
 				};
-
 
 				BDb.OnDbInit();
 				BTags.OnDbInit();

@@ -24,7 +24,7 @@ namespace Beached.Content.Scripts.Entities
 		[MyCmpGet]
 		private KPrefabID kPrefabID;
 
-		public CellOffset monitorCell = new CellOffset(0, -1);
+		public CellOffset monitorCell = new(0, -1);
 
 		private List<HandleVector<int>.Handle> partitionerEntries = [];
 

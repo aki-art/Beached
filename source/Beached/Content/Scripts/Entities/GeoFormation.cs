@@ -30,8 +30,8 @@ namespace Beached.Content.Scripts.Entities
 		private LineRenderer transformLineRenderer;
 		private LineRenderer checkLineRenderer;
 
-		private static Vector3 leftOffset = new Vector3(-0.5f, 0.5f);
-		private static Vector3 rightOffset = new Vector3(0.5f, 0.5f);
+		private static Vector3 leftOffset = new(-0.5f, 0.5f);
+		private static Vector3 rightOffset = new(0.5f, 0.5f);
 
 		private Vector3 originOffset;
 

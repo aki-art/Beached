@@ -8,18 +8,14 @@ namespace Beached.Content.Scripts.Entities
 {
 	public class AcidVulnerableCreature : KMonoBehaviour, ISim1000ms//, IGameObjectEffectDescriptor//, IWiltCause
 	{
+		[MyCmpGet] private Health health;
+		[MyCmpGet] private KBatchedAnimController kbac;
+
+		[SerializeField] public float baseAcidDamage;
+
 		private int acidIdx;
-
-		[MyCmpGet]
-		private Health health;
-
-		[MyCmpGet]
-		private KBatchedAnimController kbac;
-
-		[SerializeField]
-		public float baseAcidDamage;
-
 		public bool isHurtByAcid;
+		public bool sparksOnContact;
 
 		public const float FLASH_DURATION = 0.33f;
 		private float flashElapsedTime = 0f;
@@ -33,24 +29,27 @@ namespace Beached.Content.Scripts.Entities
 			{ "RollerSnake", CONSTS.ACID_VULNERABILITY.EXTREME },
 		};
 
+		private static HashSet<string> metallicCritters = [
+			"RollerSnakeSteel",
+			"RollerSnake",
+		];
+
 		public static void OnAddPrefab(KPrefabID prefab)
 		{
 			if (prefab.TryGetComponent(out CreatureBrain brain))
 			{
-				var vulnerability = 0f;
+				var tag = prefab.PrefabID().ToString();
 
-				if (acidVulnerabilities.TryGetValue(prefab.PrefabID().ToString(), out var v1))
-				{
-					vulnerability = v1;
-				}
-				else if (acidVulnerabilitiesBySpecies.TryGetValue(brain.species, out var v2))
-				{
-					vulnerability = v2;
-				}
+				if (!acidVulnerabilities.TryGetValue(tag, out float vulnerability))
+					acidVulnerabilitiesBySpecies.TryGetValue(brain.species, out vulnerability);
 
 				if (vulnerability > 0)
 				{
-					prefab.gameObject.AddComponent<AcidVulnerableCreature>().baseAcidDamage = vulnerability;
+					var acidVulnerableCreature = prefab.gameObject.AddComponent<AcidVulnerableCreature>();
+					acidVulnerableCreature.baseAcidDamage = vulnerability;
+
+					if (metallicCritters.Contains(tag))
+						prefab.AddTag(BTags.sparksOnAcid);
 
 					if (prefab.TryGetComponent(out Modifiers modifiers)
 						&& prefab.TryGetComponent(out Attributes attributes))
@@ -108,26 +107,22 @@ namespace Beached.Content.Scripts.Entities
 
 		public override void OnPrefabInit()
 		{
-			base.OnPrefabInit();
-#if ELEMENTS
 			acidIdx = Elements.sulfurousWater.Get().idx;
-#endif
-
 			flashGradient = new Gradient();
 
 			var colorKeys = new GradientColorKey[]
 			{
-				new GradientColorKey(Color.black, 0f),
-				new GradientColorKey(Color.green, 0.4f),
-				new GradientColorKey(Color.white, 0.5f),
-				new GradientColorKey(Color.green, 0.6f),
-				new GradientColorKey(Color.black, 1f)
+				new(Color.black, 0f),
+				new(Color.green, 0.4f),
+				new(Color.white, 0.5f),
+				new(Color.green, 0.6f),
+				new(Color.black, 1f)
 			};
 
 			var alphaKeys = new GradientAlphaKey[]
 			{
-				new GradientAlphaKey(1f, 0),
-				new GradientAlphaKey(1f, 1f),
+				new(1f, 0),
+				new(1f, 1f),
 			};
 
 			flashGradient.SetKeys(colorKeys, alphaKeys);
@@ -144,31 +139,23 @@ namespace Beached.Content.Scripts.Entities
              }*/
 
 			isHurtByAcid = baseAcidDamage > 0;
+			sparksOnContact = gameObject.HasTag(BTags.sparksOnAcid);
 
 
 			if (TryGetComponent(out Attributes attributes) && BAttributes.Critters.acidVulnerability != null)
 			{
 				var acidAttribute = attributes.Get(BAttributes.Critters.acidVulnerability);
 				if (acidAttribute != null)
-				{
 					Log.Debug($"Spawned a {this.GetProperName()}, with acid vulnerability of " + acidAttribute.GetTotalValue());
-				}
 				else
-				{
 					Log.Debug($"Spawned a {this.GetProperName()}, but it has no acid vulnerable attribute.");
-				}
 			}
 		}
 
 		public void Sim1000ms(float dt)
 		{
-#if !ELEMENTS
-            return;
-#endif
 			if (!isHurtByAcid)
-			{
 				return;
-			}
 
 			var pos = Grid.PosToCell(transform.position);
 			if (Grid.ElementIdx[pos] == acidIdx)
@@ -187,6 +174,7 @@ namespace Beached.Content.Scripts.Entities
 				}
 				// TODO: sizzle
 				// todo: acid resistance
+				// TODO: explosions
 			}
 		}
 	}

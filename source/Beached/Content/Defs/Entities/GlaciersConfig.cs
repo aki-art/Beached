@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs.Entities.Critters;
-using Beached.Content.Scripts;
+﻿using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,14 +14,10 @@ namespace Beached.Content.Defs.Entities
 
 		public List<GameObject> CreatePrefabs() =>
 		[
-			CreatePrefab(MUFFINS, 7, 3, "beached_glacier_muffins_kanim",
-			[
-				MuffinConfig.ID,
-				MuffinConfig.ID,
-			])
+			CreatePrefab(MUFFINS, 7, 3, "beached_glacier_muffins_kanim",[SleepingMuffinsConfig.ID])
 		];
 
-		private static GameObject CreatePrefab(string id, int width, int height, string anim, List<string> tags)
+		private static GameObject CreatePrefab(string id, int width, int height, string anim, Tag[] rewardDrops = null, Vector3 rewardDropOffset = default)
 		{
 			var name = Strings.Get($"STRINGS.ENTITIES.GLACIERS.{id.ToUpperInvariant()}.NAME");
 			var description = $"{Strings.Get($"STRINGS.ENTITIES.GLACIERS.{id.ToUpperInvariant()}.DESCRIPTION")}\n\n{STRINGS.ENTITIES.GLACIERS.GENERIC_THAW}";
@@ -43,11 +38,11 @@ namespace Beached.Content.Defs.Entities
 				[
 					BTags.glacier
 				],
-				defaultTemperature: GameUtil.GetTemperatureConvertedToKelvin(-30, GameUtil.TemperatureUnit.Celsius));
+				defaultTemperature: MiscUtil.CelsiusToKelvin(-30));
 
 			var glacier = prefab.AddComponent<Glacier>();
-			glacier.rewards = [SleepingMuffinsConfig.ID];
-			glacier.offset = Vector3.zero;
+			glacier.rewards = rewardDrops;
+			glacier.offset = rewardDropOffset;
 
 			prefab.AddOrGet<KBatchedAnimHeatPostProcessingEffect>();
 

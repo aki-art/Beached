@@ -19,7 +19,7 @@ namespace Beached.Content.Codex.Guides
 		{
 			var containers = new List<ContentContainer>
 			{
-				new ContentContainer(
+				new(
 				[
 					new CodexText(name, CodexTextStyle.Title, null),
 					new CodexDividerLine()
@@ -45,7 +45,7 @@ namespace Beached.Content.Codex.Guides
 
 			var containers = new List<ContentContainer>
 			{
-				new ContentContainer(guidePart1, ContentContainer.ContentLayout.Vertical)
+				new(guidePart1, ContentContainer.ContentLayout.Vertical)
 				{
 					lockID = "Beached_Lock_CritterHappiness"
 				}

@@ -11,7 +11,7 @@
 		[MyCmpReq]
 		private KBatchedAnimController kbac;
 
-		private static StatusItem test = new StatusItem("Beached_Growing", "Growing", "", StatusItem.IconType.Info, NotificationType.Good, false, new HashedString(129022));
+		private static StatusItem test = new("Beached_Growing", "Growing", "", StatusItem.IconType.Info, NotificationType.Good, false, new HashedString(129022));
 
 		public int GetCurrentLength()
 		{

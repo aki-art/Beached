@@ -5,7 +5,6 @@ namespace Beached.Patches
 {
 	public class ElementsAudioPatch
 	{
-#if ELEMENTS
 		[HarmonyPatch(typeof(ElementsAudio), nameof(ElementsAudio.LoadData))]
 		public class ElementsAudio_LoadData_Patch
 		{
@@ -14,6 +13,5 @@ namespace Beached.Patches
 				Elements.CreateAudioConfigs(__instance);
 			}
 		}
-#endif
 	}
 }

@@ -14,7 +14,8 @@ namespace Beached.Content.Defs.Entities.Critters
 				STRINGS.CREATURES.SPECIES.BEACHED_JELLYFISH.BABY_NAME,
 				STRINGS.CREATURES.SPECIES.BEACHED_JELLYFISH.BABY_DESC,
 				"beached_jellyfish_kanim",
-				JellyfishConfig.BASE_TRAIT_ID);
+				JellyfishConfig.BASE_TRAIT_ID,
+				[]);
 
 			EntityTemplates.ExtendEntityToBeingABaby(prefab, JellyfishConfig.ID, null);
 

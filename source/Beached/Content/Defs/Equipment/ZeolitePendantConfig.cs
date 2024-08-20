@@ -13,8 +13,8 @@ namespace Beached.Content.Defs.Equipment
 		{
 			var attributeModifiers = new List<AttributeModifier>
 			{
-				new AttributeModifier(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20),
-				new AttributeModifier(Db.Get().Amounts.Stress.deltaAttribute.Id, -2f / CONSTS.CYCLE_LENGTH),
+				new(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20),
+				new(Db.Get().Amounts.Stress.deltaAttribute.Id, -2f / CONSTS.CYCLE_LENGTH),
 			};
 
 			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
