@@ -20,7 +20,7 @@ namespace Beached.Patches
 					if (pois == null)
 						return true;
 
-					__instance.primary_buildings ??= new();
+					__instance.primary_buildings ??= [];
 
 					foreach (var poi in pois)
 					{

@@ -6,7 +6,7 @@ namespace Beached.Content.Defs.Entities.Critters
 	// Most basic form of a Slickshell, shared by adults, babies and all morphs
 	public static class BaseSnailConfig
 	{
-		public static GameObject CreatePrefab(string id, string name, string desc, string anim_file, string traitId)
+		public static GameObject CreatePrefab(string id, string name, string desc, string anim_file, string traitId, string[] onDeathDrops)
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				id,
@@ -40,6 +40,8 @@ namespace Beached.Content.Defs.Entities.Critters
 			prefab.AddTag(GameTags.Creatures.Walker);
 			prefab.AddTag(GameTags.Creatures.CrabFriend);
 			prefab.AddTag(GameTags.Amphibious);
+
+			prefab.GetComponent<Butcherable>().SetDrops(onDeathDrops);
 
 			SnailBrain.ConfigureAI(prefab, null, BTags.Species.snail);
 

@@ -71,12 +71,12 @@ namespace Beached.Content.Defs.Entities.Corals
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_LEAFLETCORAL.NAME,
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_LEAFLETCORAL.DESC,
 				Assets.GetAnim("beached_leaflet_coral_frag_kanim"),
-				additionalTags: new()
-				{
+				additionalTags:
+				[
 					GameTags.WaterSeed ,
 					BTags.coralFrag,
 					BTags.smallAquariumSeed
-				},
+				],
 				sortOrder: 3,
 				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_LEAFLETCORAL.DOMESTICATEDDESC,
 				width: 0.33f,

@@ -5,11 +5,11 @@ namespace Beached.Content.Scripts
 {
 	public class SimpleFlatFilterable : KMonoBehaviour
 	{
-		[Serialize] public HashSet<Tag> selectedTags = new();
+		[Serialize] public HashSet<Tag> selectedTags = [];
 
 		[MyCmpReq] private TreeFilterable treeFilterable;
 
-		public HashSet<Tag> tagOptions = new();
+		public HashSet<Tag> tagOptions = [];
 		public string headerText;
 
 		public override void OnSpawn()

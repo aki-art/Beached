@@ -75,7 +75,7 @@ namespace Beached.Content.Scripts
 
 		private void InitAttributes(Dictionary<string, int> attributes)
 		{
-			fulfilledLifegoalModifiers = new();
+			fulfilledLifegoalModifiers = [];
 			foreach (var attribute in attributes)
 			{
 				fulfilledLifegoalModifiers.Add(new AttributeModifier(attribute.Key, attribute.Value, "Life Goal"));

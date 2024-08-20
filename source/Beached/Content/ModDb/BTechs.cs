@@ -12,10 +12,9 @@ namespace Beached.Content.ModDb
 		{
 			new Tech(
 				HIDDEN_ATMOSPHERIC_FORCEFIELD_GENERATOR,
-				new()
-				{
+				[
 					ForceFieldGeneratorConfig.ID
-				},
+				],
 				techs);
 		}
 

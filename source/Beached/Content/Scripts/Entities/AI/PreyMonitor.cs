@@ -55,7 +55,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			public FactionAlignment alignment;
 			private readonly Navigator navigator;
 			public GameObject mainThreat;
-			private List<FactionAlignment> threats = new();
+			private List<FactionAlignment> threats = [];
 			private int maxThreatDistance = 12;
 			private CollarWearer collarWearer;
 			public float huntCooldown = 20f;

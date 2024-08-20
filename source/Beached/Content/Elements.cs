@@ -134,12 +134,12 @@ namespace Beached.Content
 			{ crackedNeutronium, 0 },
 		};
 
-		public static readonly Dictionary<ushort, float> electricConductivityLookup = new();
+		public static readonly Dictionary<ushort, float> electricConductivityLookup = [];
 
 		public static List<SimHashes> GetMetals()
 		{
-			return new List<SimHashes>()
-			{
+			return
+			[
 				bismuth,
 				bismuthOre,
 				zincOre,
@@ -149,7 +149,7 @@ namespace Beached.Content
 				calcium,
 				zirconium,
 				zirconiumOre
-			};
+			];
 		}
 
 #if ELEMENTS

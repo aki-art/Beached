@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs.Items;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TUNING;
 
@@ -34,10 +33,10 @@ namespace Beached.Content
 			vista = TagManager.Create("Beached_Vista"), // allows Vista rooms
 			wishingStars = TagManager.Create("Beached_WishingStars"); // used on events that should trigger the wishing star effect on dupes
 
-		public static TagSet eggs = new()
-		{
+		public static TagSet eggs =
+		[
 			GameTags.IncubatableEgg
-		};
+		];
 
 		public static class FastTrack
 		{
@@ -88,7 +87,8 @@ namespace Beached.Content
 
 		public static void OnModLoad()
 		{
-			GameTags.MaterialBuildingElements.Add(SeaShellConfig.ID);
+			GameTags.MaterialBuildingElements.Add(BuildingMaterials.chime);
+
 			GameTags.MaterialCategories.Add(MaterialCategories.crystal);
 
 			var index = STORAGEFILTERS.NOT_EDIBLE_SOLIDS.FindIndex(tag => tag == GameTags.BuildableProcessed);

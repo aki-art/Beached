@@ -26,10 +26,10 @@ namespace Beached.Content.ModDb.Sicknesses
 					exposure_threshold = 100,
 					base_resistance = 0,
 					infect_immediately = true,
-					excluded_effects = new List<string>
-					{
+					excluded_effects =
+					[
 						BEffects.LIMPETS_DUPLICANT_RECOVERY
-					}
+					]
 				},
 				new ExposureType
 				{
@@ -38,10 +38,10 @@ namespace Beached.Content.ModDb.Sicknesses
 					exposure_threshold = 100,
 					base_resistance = 0,
 					infect_immediately = true,
-					excluded_effects = new List<string>
-					{
+					excluded_effects =
+					[
 						BEffects.CAPPED_RECOVERY
-					}
+					]
 				},
 				new ExposureType
 				{
@@ -50,10 +50,10 @@ namespace Beached.Content.ModDb.Sicknesses
 					exposure_threshold = 100,
 					base_resistance = 0,
 					infect_immediately = true,
-					excluded_effects = new List<string>
-					{
+					excluded_effects =
+					[
 						BEffects.POFFMOUTH_RECOVERY
-					}
+					]
 				}
 			};
 

@@ -25,8 +25,8 @@ namespace Beached.Utils
 				description = description,
 				time = time,
 				nameDisplay = RecipeNameDisplay.IngredientToResult,
-				inputs = new List<RecipeElement>(),
-				outputs = new List<RecipeElement>()
+				inputs = [],
+				outputs = []
 			};
 
 			return builder;
@@ -89,7 +89,7 @@ namespace Beached.Utils
 				time = time,
 				description = description,
 				nameDisplay = nameDisplay,
-				fabricators = new List<Tag> { fabricator },
+				fabricators = [fabricator],
 				requiredTech = requiredTech,
 			};
 

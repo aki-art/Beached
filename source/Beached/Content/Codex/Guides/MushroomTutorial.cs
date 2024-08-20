@@ -8,7 +8,7 @@ namespace Beached.Content.Codex.Guides
 
 		public static CodexEntry GenerateEntry()
 		{
-			var categoryEntry = CodexEntryGenerator.GenerateCategoryEntry(ID, STRINGS.UI.CODEX.SPORES.TITLE, new Dictionary<string, CodexEntry>());
+			var categoryEntry = CodexEntryGenerator.GenerateCategoryEntry(ID, STRINGS.UI.CODEX.SPORES.TITLE, []);
 			categoryEntry.category = BeachedCodexEntries.BEACHED_GUIDES_CATEGORY;
 			PopulateEntries(categoryEntry);
 
@@ -19,14 +19,14 @@ namespace Beached.Content.Codex.Guides
 		{
 			var containers = new List<ContentContainer>
 			{
-				new ContentContainer(new List<ICodexWidget>
-				{
+				new ContentContainer(
+				[
 					new CodexText(name, CodexTextStyle.Title, null),
 					new CodexDividerLine()
-				}, ContentContainer.ContentLayout.Vertical)
+				], ContentContainer.ContentLayout.Vertical)
 			};
 
-			var categoryEntry = new CategoryEntry("Root", containers, name, new List<CodexEntry>(), true, true)
+			var categoryEntry = new CategoryEntry("Root", containers, name, [], true, true)
 			{
 				icon = null
 			};

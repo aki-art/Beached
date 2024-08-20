@@ -24,11 +24,11 @@ namespace Beached.Content.Defs
 				true,
 				0,
 				element,
-				additionalTags: new List<Tag>
-				{
+				additionalTags:
+				[
 					BTags.MaterialCategories.crystal,
 					GameTags.PedestalDisplayable
-				});
+				]);
 
 			prefab.AddOrGet<EntitySplitter>();
 			prefab.AddOrGet<SimpleMassStatusItem>();

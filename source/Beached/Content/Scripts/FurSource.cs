@@ -8,11 +8,11 @@ namespace Beached.Content.Scripts
 	{
 		private FurSourceReactable reactable;
 
-		public static HashSet<string> furries = new()
-		{
+		public static HashSet<string> furries =
+		[
 			SquirrelConfig.ID,
 			SquirrelHugConfig.ID
-		};
+		];
 
 		public bool CanTriggerReaction() => GetComponent<Traits>().HasTrait(BCritterTraits.HYPOALLERGENIC);
 

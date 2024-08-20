@@ -7,13 +7,13 @@ namespace Beached.Content.Scripts.Entities
 	{
 		[SerializeField] public float minimumWaterMass;
 
-		private static readonly List<string> liveSegmentAnims = new()
-		{
+		private static readonly List<string> liveSegmentAnims =
+		[
 			"idle0",
 			"idle1",
 			"idle2",
 			"idle3",
-		};
+		];
 
 		private static readonly string liveTopPiece = "top";
 

@@ -8,10 +8,10 @@ namespace Beached.Content.Defs.Foods
 {
 	public class PoffConfig : IMultiEntityConfig
 	{
-		public static Dictionary<SimHashes, (string raw, string cooked)> poffLookup = new();
+		public static Dictionary<SimHashes, (string raw, string cooked)> poffLookup = [];
 
-		public static List<PoffInfo> configs = new()
-		{
+		public static List<PoffInfo> configs =
+		[
 			new PoffInfo(SimHashes.Oxygen)
 			{
 				qualityRaw = 0,
@@ -48,7 +48,7 @@ namespace Beached.Content.Defs.Foods
 				qualityCooked = 1,
 				caloriesCooked = 1100,
 			},
-		};
+		];
 
 		public class PoffInfo
 		{
@@ -83,9 +83,9 @@ namespace Beached.Content.Defs.Foods
 			{
 				if (DlcManager.IsDlcListValidForCurrentContent(dlcIds))
 				{
-					effectRaw ??= new();
+					effectRaw ??= [];
 					effectRaw.AddRange(effects);
-					effectCooked ??= new();
+					effectCooked ??= [];
 					effectCooked.AddRange(effects);
 				}
 

@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs.Items;
-using Beached.Content.Scripts;
+﻿using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
 using TUNING;
 using UnityEngine;
@@ -25,7 +24,7 @@ namespace Beached.Content.Defs.Buildings
 				],
 				[
 					MATERIALS.BUILDABLERAW,
-					SeaShellConfig.ID
+					BTags.BuildingMaterials.chime.ToString()
 				],
 				BUILDINGS.MELTING_POINT_KELVIN.TIER2,
 				BuildLocationRule.OnCeiling,

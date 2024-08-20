@@ -30,7 +30,7 @@ namespace Beached.Content.Scripts.Entities
 		{
 			length = 1;
 			debugPreviousLength = 1;
-			segments = new List<SegmentInfo>();
+			segments = [];
 		}
 
 		public void GrowOne()
@@ -106,7 +106,7 @@ namespace Beached.Content.Scripts.Entities
 
 		public override void OnSpawn()
 		{
-			segments ??= new List<SegmentInfo>();
+			segments ??= [];
 			base.OnSpawn();
 
 			UpdatePlant();

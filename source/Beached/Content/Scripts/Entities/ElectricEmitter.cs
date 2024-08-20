@@ -15,8 +15,8 @@ namespace Beached.Content.Scripts.Entities
 		[Serialize] public bool isZapping;
 		[Serialize] public bool changesPath;
 		[Serialize] public float minPathSecs, maxPathSecs;
-		[Serialize] public List<int> targetCells = new();
-		private readonly List<int> affectedCells = new();
+		[Serialize] public List<int> targetCells = [];
+		private readonly List<int> affectedCells = [];
 		private float remainingPower;
 		public static List<CellOffset> offsets = MiscUtil.MakeCellOffsetsFromMap(false,
 			"XXX",
@@ -39,8 +39,8 @@ namespace Beached.Content.Scripts.Entities
 		public override void OnSpawn()
 		{
 			base.OnSpawn();
-			neighborCells = new List<NeighborEntry>();
-			lineRenderers = new List<LineRenderer>();
+			neighborCells = [];
+			lineRenderers = [];
 		}
 
 		public void Pulse(float duration, float power, int strokeCount)

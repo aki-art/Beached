@@ -14,12 +14,12 @@ namespace Beached.Content.Defs.Items
 		public static EffectorValues MEDIUM = new(15, 2);
 		public static EffectorValues BIG = new(20, 2);
 
-		public List<GameObject> CreatePrefabs() => new()
-		{
+		public List<GameObject> CreatePrefabs() =>
+		[
 			CreateAmber(FLYING_CENTIPEDE, "beached_amberinclusion_flyingcentipede_kanim", MEDIUM),
 			CreateAmber(STRANGE_HATCH, "beached_amberinclusion_strangehatch_kanim", BIG),
 			CreateAmber(FEATHER, "beached_amberinclusion_feather_kanim", SMALL)
-		};
+		];
 
 		private static GameObject CreateAmber(string ID, string anim, EffectorValues decor)
 		{

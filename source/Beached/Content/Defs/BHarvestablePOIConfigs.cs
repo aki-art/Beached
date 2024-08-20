@@ -15,8 +15,8 @@ namespace Beached.Content
 
 		public List<GameObject> CreatePrefabs()
 		{
-			return new List<GameObject>()
-			{
+			return
+			[
 				new HarvestablePOIBuilder(PEARLESCENT, "beached_pearlescent_harvestable_asteroid_kanim")
 					.Capacity(54000, 81000)
 					.Recharge(30000, 60000)
@@ -32,7 +32,7 @@ namespace Beached.Content
 					.Element(SimHashes.Lime, 1f)
 					.Element(Elements.rot, 1f)
 					.Build()
-			};
+			];
 		}
 
 		public void OnPrefabInit(GameObject inst) { }

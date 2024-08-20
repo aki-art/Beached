@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb;
+﻿using Beached.Content.Defs.Items;
+using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities.AI;
 using Klei.AI;
 using UnityEngine;
@@ -7,7 +8,7 @@ using static Beached.STRINGS.CREATURES.SPECIES;
 
 namespace Beached.Content.Defs.Entities.Critters
 {
-    [EntityConfigOrder(0)]
+	[EntityConfigOrder(0)]
 	public class SlickShellConfig : IEntityConfig
 	{
 		public const string ID = "Beached_SlickShell";
@@ -16,7 +17,6 @@ namespace Beached.Content.Defs.Entities.Critters
 
 		public GameObject CreatePrefab()
 		{
-			Log.Debug("CREATE SNAIL PREFAB -----------------------------");
 			var prefab = CreateBasePrefab();
 
 			EntityTemplates.ExtendEntityToWildCreature(prefab, CrabTuning.PEN_SIZE_PER_CREATURE);
@@ -42,7 +42,8 @@ namespace Beached.Content.Defs.Entities.Critters
 				BEACHED_SLICKSHELL.NAME,
 				BEACHED_SLICKSHELL.DESC,
 				"beached_snail_kanim",
-				BASE_TRAIT_ID);
+				BASE_TRAIT_ID,
+				[SeaShellConfig.ID]);
 		}
 
 		private void ExtendToFertileCreature(GameObject prefab)

@@ -4,8 +4,8 @@ namespace Beached.Content.Scripts.Entities
 {
 	public class SegmentedBamboo : SegmentedPlant
 	{
-		private static readonly List<string> liveSegmentAnims = new()
-		{
+		private static readonly List<string> liveSegmentAnims =
+		[
 			"idle0_0",
 			"idle0_1",
 			"idle0_2",
@@ -18,7 +18,7 @@ namespace Beached.Content.Scripts.Entities
 			"idle0_9",
 			"idle0_10",
 			"idle0_11"
-		};
+		];
 
 		private const string liveTopPiece = "top";
 		private const string shoot = "shoot";

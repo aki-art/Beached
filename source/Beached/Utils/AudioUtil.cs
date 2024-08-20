@@ -12,7 +12,7 @@ namespace Beached.Utils
 	{
 		public static float soundMultiplier = -10;
 
-		private static readonly Dictionary<string, FMOD.Sound> sounds = new Dictionary<string, FMOD.Sound>();
+		private static readonly Dictionary<string, FMOD.Sound> sounds = [];
 
 		public static bool LoadSound(string key, string soundFile, bool looping = false, bool oneAtATime = false)
 		{

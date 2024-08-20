@@ -65,7 +65,7 @@ namespace Beached.Content.Defs.Flora
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_PIPTAIL.NAME,
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_PIPTAIL.DESC,
 				Assets.GetAnim("beached_pipcorn_kanim"),
-				additionalTags: new List<Tag>() { GameTags.CropSeed },
+				additionalTags: [GameTags.CropSeed],
 				sortOrder: 3,
 				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_PIPTAIL.DOMESTICATEDDESC,
 				width: 0.33f,

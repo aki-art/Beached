@@ -32,22 +32,22 @@ namespace Beached.Content.ModDb
 				__instance.resources.Insert(index + 1, Precision);
 			}
 
-			Precision.relevantAttributes = new List<Attribute>
-			{
+			Precision.relevantAttributes =
+			[
 				BAttributes.handSteadiness
-			};
+			];
 
-			Precision.requiredChoreGroups = new List<string>
-			{
+			Precision.requiredChoreGroups =
+			[
 				BChoreGroups.HANDYWORK_ID
-			};
+			];
 
-			DUPLICANTSTATS.ARCHETYPE_TRAIT_EXCLUSIONS.Add(PRECISION_ID, new List<string>()
-			{
+			DUPLICANTSTATS.ARCHETYPE_TRAIT_EXCLUSIONS.Add(PRECISION_ID,
+			[
 					"DiggingDown",
 					"ArtDown",
 					"SlowLearner"
-			});
+			]);
 		}
 	}
 }

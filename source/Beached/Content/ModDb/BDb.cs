@@ -166,10 +166,10 @@ namespace Beached.Content.ModDb
 						time = recipe.time,
 						nameDisplay = recipe.nameDisplay,
 						description = description,
-						fabricators = new List<Tag>()
-						{
+						fabricators =
+						[
 							fabricator
-						}
+						]
 					};
 
 					Log.Info($"Automatically added {newElementName} to {fabricator} recipes with id {id}");

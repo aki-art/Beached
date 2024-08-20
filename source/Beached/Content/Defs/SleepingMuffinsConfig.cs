@@ -26,10 +26,10 @@ namespace Beached.Content.Defs
 
 			prefab.AddOrGet<GenericUnlockablePOIWorkable>().workTime = 5f;
 			var def = prefab.AddOrGetDef<GenericUnlockablePOI.Def>();
-			def.techUnlockIDs = new List<string>()
-			{
+			def.techUnlockIDs =
+			[
 				CollarDispenserConfig.ID
-			};
+			];
 
 			def.popUpName = global::STRINGS.BUILDINGS.PREFABS.DLC2POITECHUNLOCKS.NAME;
 			def.animName = "ceres_remote_archive_kanim";

@@ -34,7 +34,7 @@ namespace Beached.Content.Scripts.Buildings
 			var creatures = Assets.GetPrefabsWithComponent<CreatureBrain>();
 
 			var eggListsByRule = new Dictionary<string, HashSet<Tag>>();
-			Tuning.Genetics.rules.Do(rule => eggListsByRule.Add(rule.Key, new HashSet<Tag>()));
+			Tuning.Genetics.rules.Do(rule => eggListsByRule.Add(rule.Key, []));
 
 			foreach (var creature in creatures)
 			{

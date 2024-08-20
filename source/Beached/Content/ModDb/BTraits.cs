@@ -87,15 +87,15 @@ namespace Beached.Content.ModDb
 			}
 		};
 
-		public static readonly List<string> LIFE_GOALS = new()
-		{
+		public static readonly List<string> LIFE_GOALS =
+		[
 			LIFE_GOAL_IDS.GOLDENTHRONE,
 			LIFE_GOAL_IDS.JEWELLERY_MAXIXE,
 			LIFE_GOAL_IDS.JEWELLERY_STRANGE_MATTER,
 			LIFE_GOAL_IDS.JEWELLERY_PEARLS,
 			LIFE_GOAL_IDS.BEDROOM_SURFBOARD,
 			LIFE_GOAL_IDS.HAS_50_DECOR,
-		};
+		];
 
 		public static Dictionary<string, string> LifeGoalsPerDupe = new()
 		{

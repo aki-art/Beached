@@ -36,20 +36,20 @@ namespace Beached.Patches.Worldgen
 
 					var traitRules = world.Value.worldTraitRules;
 
-					world.Value.worldTraitRules ??= new List<ProcGen.World.TraitRule>();
+					world.Value.worldTraitRules ??= [];
 
 					if (world.Value.worldTraitRules.Count == 0)
 					{
 						world.Value.worldTraitRules.Add(new ProcGen.World.TraitRule()
 						{
-							forbiddenTags = new() { BWorldGenTags.BeachedTraits.ToString() }
+							forbiddenTags = [BWorldGenTags.BeachedTraits.ToString()]
 						});
 					}
 					else
 					{
 						foreach (var traitRule in traitRules)
 						{
-							traitRule.forbiddenTags ??= new List<string>();
+							traitRule.forbiddenTags ??= [];
 							traitRule.forbiddenTags.Add(BWorldGenTags.BeachedTraits.ToString());
 						}
 					}

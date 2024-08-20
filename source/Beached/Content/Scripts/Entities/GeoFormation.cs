@@ -168,13 +168,13 @@ namespace Beached.Content.Scripts.Entities
 			rotationSet = true;
 		}
 
-		public List<Direction> validFoundationDirections = new List<Direction>()
-		{
+		public List<Direction> validFoundationDirections =
+		[
 			Direction.Down,
 			Direction.Right,
 			Direction.Left,
 			Direction.Up
-		};
+		];
 
 		private float GetGrowthDirection(Direction foundationDir)
 		{

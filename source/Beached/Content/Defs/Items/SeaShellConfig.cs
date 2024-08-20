@@ -23,10 +23,10 @@ namespace Beached.Content.Defs.Items
 				true,
 				0,
 				SimHashes.Lime,
-				new()
-				{
-					GameTags.Organics
-				});
+				[
+					GameTags.Organics,
+					BTags.BuildingMaterials.chime
+				]);
 
 			return prefab;
 		}

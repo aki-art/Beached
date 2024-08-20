@@ -60,9 +60,9 @@ namespace Beached.Content.ModDb
 		public static void ModifyConstraintRules()
 		{
 			// make bed room constraits stomp rec rooms, this allows rec buildings to be in bedrooms
-			RoomConstraints.BED_SINGLE.stomp_in_conflict ??= new List<RoomConstraints.Constraint>();
+			RoomConstraints.BED_SINGLE.stomp_in_conflict ??= [];
 			RoomConstraints.BED_SINGLE.stomp_in_conflict.Add(RoomConstraints.REC_BUILDING);
-			RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict ??= new List<RoomConstraints.Constraint>();
+			RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict ??= [];
 			RoomConstraints.LUXURY_BED_SINGLE.stomp_in_conflict.Add(RoomConstraints.REC_BUILDING);
 		}
 	}

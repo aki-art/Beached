@@ -13,8 +13,8 @@ namespace Beached.Content.Defs.Entities
 
 		public List<GameObject> CreatePrefabs()
 		{
-			return new()
-			{
+			return
+			[
 				CreateShell(
 					SEASHELL,
 					STRINGS.MISC.BEACHED_SANDY_SEASHELL.NAME,
@@ -27,7 +27,7 @@ namespace Beached.Content.Defs.Entities
 					STRINGS.MISC.BEACHED_SANDY_SLICKSHELL.DESCRIPTION,
 					"beached_sandy_slickshell_kanim",
 					SeaShellConfig.ID)
-			};
+			];
 		}
 
 		private static GameObject CreateShell(string ID, string name, string description, string anim, string harvestTag)

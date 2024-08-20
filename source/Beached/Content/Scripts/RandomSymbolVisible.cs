@@ -21,7 +21,7 @@ namespace Beached.Content.Scripts
 				DebugLog("setting symbols");
 				var count = Random.Range(minVisibleSymbols, maxVisibleSymbols + 1);
 
-				visibleSymbols = new List<KAnimHashedString>();
+				visibleSymbols = [];
 				targetSymbols.Shuffle();
 
 				for (int i = 0; i < count; i++)

@@ -322,7 +322,7 @@ namespace Beached.ModDevTools
 		private void InitializeLiquidShaderProperties()
 		{
 			mat = WaterCubes.Instance.material;
-			liquidShaderProperties = new Dictionary<string, ShaderPropertyInfo>();
+			liquidShaderProperties = [];
 
 			RegisterWaterShaderProperty(mat, "BlendScreen##shaderBlendScreen", 0.5f, 0, 1);
 			RegisterWaterShaderProperty(mat, "LiquidSelectStart##shaderLiquidSelectStart", 0.438f, 0, 1);

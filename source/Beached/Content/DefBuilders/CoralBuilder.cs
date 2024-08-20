@@ -131,7 +131,7 @@ namespace Beached.Content.DefBuilders
 		{
 			seedAnimName = anim;
 			seedW = width; seedH = height;
-			seedTags = new List<Tag>() { BTags.aquatic, BTags.coral, BTags.smallAquariumSeed };
+			seedTags = [BTags.aquatic, BTags.coral, BTags.smallAquariumSeed];
 			seedSortOrder = sortOrder;
 
 			if (additionalTags != null)

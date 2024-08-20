@@ -17,12 +17,12 @@ namespace Beached.Content.Scripts
 		public override void OnPrefabInit()
 		{
 			base.OnPrefabInit();
-			diggers = new();
+			diggers = [];
 		}
 
 		public void Configure()
 		{
-			chances = new();
+			chances = [];
 
 #if ELEMENTS
 			chances.CreateTreasureEntry(SimHashes.Diamond, 0.1f)

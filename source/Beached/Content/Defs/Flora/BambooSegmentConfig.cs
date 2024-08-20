@@ -8,12 +8,12 @@ namespace Beached.Content.Defs.Flora
 	public class BambooSegmentConfig : IEntityConfig
 	{
 		public const string ID = "Beached_BambooSegment";
-		private static readonly List<KAnimHashedString> liveSegmentAnims = new()
-		{
+		private static readonly List<KAnimHashedString> liveSegmentAnims =
+		[
 			"leaf_a",
 			"leaf_b",
 			"leaf_c",
-		};
+		];
 
 		public GameObject CreatePrefab()
 		{

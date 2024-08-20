@@ -25,10 +25,10 @@ namespace Beached.Content.Defs.Flora
 				1,
 				1,
 				DECOR.BONUS.TIER0,
-				additionalTags: new List<Tag>()
-				{
+				additionalTags:
+				[
 					BTags.aquatic
-				});
+				]);
 
 			EntityTemplates.ExtendEntityToBasicPlant(
 				prefab,
@@ -75,7 +75,7 @@ namespace Beached.Content.Defs.Flora
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_CELLALGAE.NAME,
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_CELLALGAE.DESC,
 				Assets.GetAnim("beached_small_cell_kanim"),
-				additionalTags: new List<Tag>() { GameTags.CropSeed },
+				additionalTags: [GameTags.CropSeed],
 				sortOrder: 3,
 				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_CELLALGAE.DOMESTICATEDDESC,
 				width: 0.33f,

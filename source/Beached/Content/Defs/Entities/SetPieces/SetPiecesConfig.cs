@@ -12,12 +12,12 @@ namespace Beached.Content.Defs.Entities.SetPieces
 
 		public List<GameObject> CreatePrefabs()
 		{
-			return new List<GameObject>()
-			{
+			return
+			[
 				CreateSetPiece(TEST, 11, 8, "test"),
 				CreateSetPiece(BEACH, 17, 10, "beach"),
 				CreateTestPiece(ZEOLITE, 8, 8, ModAssets.Textures.Placeholders.zeoliteBg)
-			};
+			];
 		}
 
 		private GameObject CreateTestPiece(string ID, int width, int height, Texture2D texture)

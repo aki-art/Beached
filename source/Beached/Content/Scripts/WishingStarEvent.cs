@@ -4,7 +4,7 @@ namespace Beached.Content.Scripts
 {
 	public class WishingStarEvent : KMonoBehaviour
 	{
-		public HashSet<int> activeWorlds = new();
+		public HashSet<int> activeWorlds = [];
 
 		public bool DoesWorldHaveShooties(int worldId) => activeWorlds.Contains(worldId);
 

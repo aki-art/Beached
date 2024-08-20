@@ -93,7 +93,7 @@ namespace Beached.Content.ModDb.Sicknesses
 
 		public override List<Descriptor> GetSymptoms()
 		{
-			var symptoms = base.GetSymptoms() ?? new List<Descriptor>();
+			var symptoms = base.GetSymptoms() ?? [];
 			symptoms.Add(new Descriptor(
 				"Withered Tastebuds",
 				"This Duplicant is unable to enjoy any food. No morale from food will be gained.")); // this doesn't even appear in

@@ -20,7 +20,7 @@ namespace Beached.Content.Defs.Equipment
 				CONSTS.SNAPONS.RUBBER_BOOTS,
 				"beached_rubberboots_kanim",
 				4,
-				new List<AttributeModifier>(),
+				[],
 				additional_tags:
 				[
 					GameTags.PedestalDisplayable

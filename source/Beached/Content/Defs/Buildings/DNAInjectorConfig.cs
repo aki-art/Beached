@@ -49,10 +49,10 @@ namespace Beached.Content.Defs.Buildings
 			var eggStorage = go.AddComponent<Storage>();
 			eggStorage.showInUI = true;
 			eggStorage.showDescriptor = true;
-			eggStorage.storageFilters = new List<Tag>()
-			{
+			eggStorage.storageFilters =
+			[
 				GameTags.Egg
-			};
+			];
 			eggStorage.allowItemRemoval = false;
 			eggStorage.capacityKg = 1f;
 			eggStorage.storageFullMargin = STORAGE.STORAGE_LOCKER_FILLED_MARGIN;

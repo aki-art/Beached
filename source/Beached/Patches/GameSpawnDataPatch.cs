@@ -22,7 +22,7 @@ namespace Beached.Patches
 					if (template.info?.tags != null && template.info.tags.Contains(BWorldGenTags.Reefify))
 					{
 						var originCell = Grid.XYToCell(position.X, position.Y);
-						Beached_Grid.worldgenZoneTypes ??= new();
+						Beached_Grid.worldgenZoneTypes ??= [];
 
 						foreach (var offset in template.cells)
 						{
@@ -44,7 +44,7 @@ namespace Beached.Patches
 				if (template.info?.tags != null && template.info.tags.Contains(BWorldGenTags.Reefify))
 				{
 					var originCell = Grid.XYToCell(position.X, position.Y);
-					Beached_Grid.worldgenZoneTypes ??= new();
+					Beached_Grid.worldgenZoneTypes ??= [];
 
 					foreach (var offset in template.cells)
 					{

@@ -16,8 +16,8 @@ namespace Beached.Content.Scripts.UI
 
 		private DNAInjector target;
 		private LocText descriptor = null;
-		private Dictionary<Tag, HierarchyReferences> settingToggles = new();
-		private List<GameObject> requirementRows = new List<GameObject>();
+		private Dictionary<Tag, HierarchyReferences> settingToggles = [];
+		private List<GameObject> requirementRows = [];
 
 		public override bool IsValidForTarget(GameObject target) => target.TryGetComponent(out DNAInjector _);
 

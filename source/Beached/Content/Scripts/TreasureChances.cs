@@ -19,7 +19,7 @@ namespace Beached.Content.Scripts
 				{
 					extraLootChance = extraLootChance,
 					minimumMassKg = minimumMassKg,
-					treasures = new()
+					treasures = []
 				};
 			}
 

@@ -9,11 +9,11 @@ namespace Beached.Content.ModDb.Sicknesses
 		public const float IMMUNE_ATTACK_STRENGTH = 0.00025f;
 		public static float duration = 3 * CONSTS.CYCLE_LENGTH;
 
-		public static List<InfectionVector> vectors = new()
-		{
+		public static List<InfectionVector> vectors =
+		[
 			InfectionVector.Inhalation,
 			InfectionVector.Digestion
-		};
+		];
 
 		public PoffMouthSickness() : base(
 			ID,

@@ -46,7 +46,7 @@ namespace Beached.Utils
 
 		public EffectBuilder Modifier(string id, float value, bool isMultiplier = false)
 		{
-			modifiers = modifiers ?? new List<AttributeModifier>();
+			modifiers = modifiers ?? [];
 			modifiers.Add(new AttributeModifier(id, value, name, is_multiplier: isMultiplier));
 
 			return this;
@@ -62,7 +62,7 @@ namespace Beached.Utils
 
 		public EffectBuilder EmotePrecondition(Reactable.ReactablePrecondition condition)
 		{
-			emotePreconditions = emotePreconditions ?? new List<Reactable.ReactablePrecondition>();
+			emotePreconditions = emotePreconditions ?? [];
 			emotePreconditions.Add(condition);
 
 			return this;

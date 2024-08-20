@@ -20,7 +20,7 @@ namespace Beached.Content.Scripts.Items
 
 		public void ApplyTrait(string traitId)
 		{
-			traitIds ??= new List<string>();
+			traitIds ??= [];
 			if (!traitIds.Contains(traitId))
 			{
 				traitIds.Add(traitId);

@@ -16,7 +16,7 @@ namespace Beached.Content.ModDb
 				{ VahanoConfig.ID , new VahanoConfig() }, // TODO clean up
 			};
 
-			headKanims = new();
+			headKanims = [];
 
 			foreach (var config in duplicantConfigs.Values)
 			{

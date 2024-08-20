@@ -28,7 +28,7 @@ namespace Beached.Content.Codex
 
 		private static void CreateModsCategory(string ID, Dictionary<string, CodexEntry> entries)
 		{
-			var categoryEntry = new CodexEntry(ID, new List<ContentContainer>(), STRINGS.UI.CODEX.GUIDES)
+			var categoryEntry = new CodexEntry(ID, [], STRINGS.UI.CODEX.GUIDES)
 			{
 				id = ID,
 				category = ""

@@ -61,7 +61,7 @@ namespace Beached.Content.Defs.Flora
 				"Poffshroom Spore",
 				"",
 				Assets.GetAnim("beached_poffshroom_seed_kanim"),
-				additionalTags: new() { GameTags.CropSeed });
+				additionalTags: [GameTags.CropSeed]);
 
 			EntityTemplates.CreateAndRegisterPreviewForPlant(
 				seed,

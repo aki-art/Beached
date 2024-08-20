@@ -8,13 +8,13 @@ namespace Beached.Content.ModDb.Sicknesses
 	/// <see cref="Beached.Patches.HelmetControllerPatch.HelmetController_OnPrefabInit_Patch"/>
 	public class Capped : Sickness.SicknessComponent
 	{
-		public static Dictionary<int, bool> dupesWithCaps = new Dictionary<int, bool>();
-		private static List<string> caps = new List<string>()
-		{
+		public static Dictionary<int, bool> dupesWithCaps = [];
+		private static List<string> caps =
+		[
 			"beached_greencap_kanim",
 			"beached_purplecap_kanim",
 			"beached_bluecap_kanim"
-		};
+		];
 
 		public override void OnCure(GameObject go, object instance_data)
 		{
@@ -35,10 +35,10 @@ namespace Beached.Content.ModDb.Sicknesses
 
 		public override List<Descriptor> GetSymptoms()
 		{
-			return new List<Descriptor>()
-			{
+			return
+			[
 				new Descriptor("Occupied Head", "Cannot wear Helmets (such as Atmo Suits).")
-			};
+			];
 		}
 
 		private void ToggleSymbolOverride(GameObject target, bool on, string anim_file, KAnimHashedString targetSymbolName)

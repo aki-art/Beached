@@ -43,10 +43,10 @@ namespace Beached.Content.Defs.Flora
 			prickleGrass.positive_decor_effect = POSITIVE_DECOR_EFFECT;
 			prickleGrass.negative_decor_effect = NEGATIVE_DECOR_EFFECT;
 
-			EntityTemplates.CreateAndRegisterPreviewForPlant(EntityTemplates.CreateAndRegisterSeedForPlant(gameObject, SeedProducer.ProductionType.Hidden, "CylindricaSeed", STRINGS.CREATURES.SPECIES.SEEDS.WATERCUPS.NAME, STRINGS.CREATURES.SPECIES.SEEDS.WATERCUPS.DESC, Assets.GetAnim("seed_potted_cylindricafan_kanim"), "object", 1, new List<Tag>
-			{
+			EntityTemplates.CreateAndRegisterPreviewForPlant(EntityTemplates.CreateAndRegisterSeedForPlant(gameObject, SeedProducer.ProductionType.Hidden, "CylindricaSeed", STRINGS.CREATURES.SPECIES.SEEDS.WATERCUPS.NAME, STRINGS.CREATURES.SPECIES.SEEDS.WATERCUPS.DESC, Assets.GetAnim("seed_potted_cylindricafan_kanim"), "object", 1,
+			[
 				GameTags.DecorSeed
-			}, SingleEntityReceptacle.ReceptacleDirection.Top, default, 12, STRINGS.CREATURES.SPECIES.BEACHED_WATERCUPS.DOMESTICATEDDESC, EntityTemplates.CollisionShape.CIRCLE, 0.25f, 0.25f, null, "", false), PREVIEW_ID, Assets.GetAnim("beached_watercups_kanim"), "place", 1, 1);
+			], SingleEntityReceptacle.ReceptacleDirection.Top, default, 12, STRINGS.CREATURES.SPECIES.BEACHED_WATERCUPS.DOMESTICATEDDESC, EntityTemplates.CollisionShape.CIRCLE, 0.25f, 0.25f, null, "", false), PREVIEW_ID, Assets.GetAnim("beached_watercups_kanim"), "place", 1, 1);
 
 			return gameObject;
 		}

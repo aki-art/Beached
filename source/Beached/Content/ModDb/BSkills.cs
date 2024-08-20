@@ -39,10 +39,9 @@ namespace Beached.Content.ModDb
 					BAccessories.ARCHEOLOGY_HAT,
 					"skillbadge_role_mining1",
 					BSkillGroups.PRECISION_ID,
-					new List<SkillPerk>
-					{
+					[
 						BSkillPerks.CanFindTreasures
-					}, null));
+					], null));
 
 			archeology2 = __instance.Add(new Skill(
 					ARCHEOLOGY2_ID,
@@ -53,14 +52,13 @@ namespace Beached.Content.ModDb
 					"hat_role_mining2",
 					"skillbadge_role_mining1",
 					BSkillGroups.PRECISION_ID,
-					new List<SkillPerk>
-					{
+					[
 						BSkillPerks.CanFindMoreTreasures
-					}, new List<string>
-					{
+					],
+					[
 						ARCHEOLOGY_ID,
 						__instance.Mining1.Id
-					}));
+					]));
 
 			crystallography = __instance.Add(new Skill(
 					CRYSTALLOGRAPHY_ID,
@@ -71,13 +69,12 @@ namespace Beached.Content.ModDb
 					"hat_role_mining2",
 					"skillbadge_role_mining1",
 					BSkillGroups.PRECISION_ID,
-					new List<SkillPerk>
-					{
+					[
 						BSkillPerks.CanFindTreasures
-					}, new List<string>
-					{
+					],
+					[
 						ARCHEOLOGY_ID
-					}));
+					]));
 
 			geoChemistry = __instance.Add(new Skill(
 					GEOCHEMISTRY_ID,
@@ -88,14 +85,13 @@ namespace Beached.Content.ModDb
 					"hat_role_mining2",
 					"skillbadge_role_mining1",
 					BSkillGroups.PRECISION_ID,
-					new List<SkillPerk>
-					{
+					[
 						BSkillPerks.CanFindTreasures
-					}, new List<string>
-					{
+					],
+					[
 						CRYSTALLOGRAPHY_ID,
 						__instance.Researching2.Id
-					}));
+					]));
 
 			aquaCulture1 = __instance.Add(new Skill(
 					AQUACULTURE1_ID,
@@ -106,13 +102,12 @@ namespace Beached.Content.ModDb
 					"hat_role_mining2",
 					"skillbadge_role_mining1",
 					Db.Get().SkillGroups.Farming.Id,
-					new List<SkillPerk>
-					{
+					[
 						BSkillPerks.AquaCulture1
-					}, new List<string>
-					{
+					],
+					[
 						__instance.Farming1.Id
-					}));
+					]));
 
 			aquaCulture2 = __instance.Add(new Skill(
 					AQUACULTURE2_ID,
@@ -123,13 +118,12 @@ namespace Beached.Content.ModDb
 					"hat_role_mining2",
 					"skillbadge_role_mining1",
 					Db.Get().SkillGroups.Farming.Id,
-					new List<SkillPerk>
-					{
+					[
 						BSkillPerks.AquaCulture2
-					}, new List<string>
-					{
+					],
+					[
 						AQUACULTURE1_ID
-					}));
+					]));
 
 			animalHandling = __instance.Add(new Skill(
 					ANIMALHANDLING_ID,
@@ -140,10 +134,9 @@ namespace Beached.Content.ModDb
 					"hat_role_mining2",
 					"skillbadge_role_mining1",
 					Db.Get().SkillGroups.Ranching.Id,
-					new List<SkillPerk>
-					{
+					[
 						BSkillPerks.AnimalHandling
-					}, null));
+					], null));
 
 			makiTraining1 = __instance.Add(new Skill(
 					MAKITRAINING1_ID,
@@ -154,13 +147,12 @@ namespace Beached.Content.ModDb
 					"hat_role_mining2",
 					"skillbadge_role_mining1",
 					Db.Get().SkillGroups.Ranching.Id,
-					new List<SkillPerk>
-					{
+					[
 						BSkillPerks.MakiTrainer1
-					}, new List<string>
-					{
+					],
+					[
 						ANIMALHANDLING_ID
-					}));
+					]));
 
 			makiTraining2 = __instance.Add(new Skill(
 					MAKITRAINING2_ID,
@@ -171,19 +163,18 @@ namespace Beached.Content.ModDb
 					"hat_role_mining2",
 					"skillbadge_role_mining1",
 					Db.Get().SkillGroups.Ranching.Id,
-					new List<SkillPerk>
-					{
+					[
 						BSkillPerks.MakiTrainer2
-					}, new List<string>
-					{
+					],
+					[
 						MAKITRAINING1_ID
-					}));
+					]));
 
 			// Moves ranching to Animal Handling tree
-			__instance.Ranching1.priorSkills = new List<string>()
-			{
+			__instance.Ranching1.priorSkills =
+			[
 				ANIMALHANDLING_ID
-			};
+			];
 		}
 	}
 }

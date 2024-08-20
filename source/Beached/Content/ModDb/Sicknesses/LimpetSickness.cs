@@ -9,12 +9,12 @@ namespace Beached.Content.ModDb.Sicknesses
 		public const float IMMUNE_ATTACK_STRENGTH = TUNING.DISEASE.IMMUNE_ATTACK_STRENGTH_PERCENT.SLOW_3;
 		public static float duration = 0.05f * CONSTS.CYCLE_LENGTH;
 
-		public static List<InfectionVector> limpetsInfectionVectors = new()
-		{
+		public static List<InfectionVector> limpetsInfectionVectors =
+		[
 			InfectionVector.Contact,
 			InfectionVector.Inhalation,
 			InfectionVector.Digestion
-		};
+		];
 
 		public LimpetsSickness() : base(
 			ID,

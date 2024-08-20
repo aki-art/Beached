@@ -40,9 +40,9 @@ namespace Beached.Content.Scripts
 
 		private readonly SpawnFXHashes saltFx = ModAssets.Fx.saltOff;
 
-		private static Dictionary<byte, FungusInfo> fungusInfos = new();
+		private static Dictionary<byte, FungusInfo> fungusInfos = [];
 
-		public static HashSet<int> simActiveChunks = new HashSet<int>();
+		public static HashSet<int> simActiveChunks = [];
 
 		public struct FungusInfo
 		{

@@ -6,7 +6,7 @@ namespace Beached.Content.Scripts.ClassExtensions
 	public class CavityInfoExtension(CavityInfo original)
 	{
 		private CavityInfo original = original;
-		public List<KPrefabID> pois = new();
-		public List<CollarDispenser> collarDispensers = new();
+		public List<KPrefabID> pois = [];
+		public List<CollarDispenser> collarDispensers = [];
 	}
 }

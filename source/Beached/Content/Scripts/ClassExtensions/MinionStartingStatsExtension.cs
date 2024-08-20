@@ -6,7 +6,7 @@ namespace Beached.Content.Scripts.ClassExtensions
 	public class MinionStartingStatsExtension
 	{
 		public Trait lifeGoalTrait;
-		public Dictionary<string, int> lifeGoalAttributes = new();
+		public Dictionary<string, int> lifeGoalAttributes = [];
 		public string testValue;
 		private MinionStartingStats original;
 
@@ -18,7 +18,7 @@ namespace Beached.Content.Scripts.ClassExtensions
 		public MinionStartingStatsExtension SetLifeGoal(Trait goal)
 		{
 			lifeGoalTrait = goal;
-			lifeGoalAttributes = new();
+			lifeGoalAttributes = [];
 
 			return this;
 		}

@@ -23,7 +23,7 @@ namespace Beached.Content.Defs.Entities.Critters
 			ExtendToFertileCreature(prefab);
 
 			var planktonDiet = new Diet(new Diet.Info(
-				new() { PlanktonGerms.ID },
+				[PlanktonGerms.ID],
 				null,
 				1f));
 

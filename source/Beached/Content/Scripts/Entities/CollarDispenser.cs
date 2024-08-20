@@ -9,8 +9,8 @@ namespace Beached.Content.Scripts.Entities
 	{
 		[MyCmpReq] private SimpleFlatFilterable filterable;
 
-		private Dictionary<Tag, int> critterCounts = new();
-		private List<CollarWearer> wearers = new();
+		private Dictionary<Tag, int> critterCounts = [];
+		private List<CollarWearer> wearers = [];
 		private int critterCount;
 		private CavityInfo currentCavity;
 
@@ -46,7 +46,7 @@ namespace Beached.Content.Scripts.Entities
 
 			if (cullableCritters == null)
 			{
-				cullableCritters = new();
+				cullableCritters = [];
 
 				foreach (var critter in Assets.GetPrefabsWithComponent<Butcherable>())
 				{

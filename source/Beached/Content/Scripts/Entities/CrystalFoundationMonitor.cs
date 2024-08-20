@@ -26,7 +26,7 @@ namespace Beached.Content.Scripts.Entities
 
 		public CellOffset monitorCell = new CellOffset(0, -1);
 
-		private List<HandleVector<int>.Handle> partitionerEntries = new List<HandleVector<int>.Handle>();
+		private List<HandleVector<int>.Handle> partitionerEntries = [];
 
 		public override void OnSpawn()
 		{

@@ -7,7 +7,7 @@ namespace Beached.Content.Scripts
 	{
 		public static TileUpdater Instance { get; set; }
 
-		private readonly Dictionary<int, HashSet<Updatable>> updateables = new();
+		private readonly Dictionary<int, HashSet<Updatable>> updateables = [];
 
 		public override void OnPrefabInit() => Instance = this;
 
@@ -45,7 +45,7 @@ namespace Beached.Content.Scripts
 		{
 			if (!updateables.ContainsKey(updatable.cell))
 			{
-				updateables[updatable.cell] = new HashSet<Updatable>();
+				updateables[updatable.cell] = [];
 			}
 
 			updateables[updatable.cell].Add(updatable);

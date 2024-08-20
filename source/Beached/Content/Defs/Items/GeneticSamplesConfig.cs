@@ -7,7 +7,7 @@ namespace Beached.Content.Defs.Items
 {
 	public class GeneticSamplesConfig : IMultiEntityConfig
 	{
-		public static List<GameObject> items = new();
+		public static List<GameObject> items = [];
 
 		public const string MEATY = "Beached_Item_GeneticSample_Meaty";
 		public const string EVERLASTING = "Beached_Item_GeneticSample_Everlasting";
@@ -21,8 +21,8 @@ namespace Beached.Content.Defs.Items
 
 		public List<GameObject> CreatePrefabs()
 		{
-			items = new()
-			{
+			items =
+			[
 				CreateItem(MEATY,"beached_dna_sample_basic_kanim",BCritterTraits.MEATY),
 				CreateItem(EVERLASTING,"beached_dna_sample_basic_kanim",BCritterTraits.EVERLASTING),
 				CreateItem(BLAND,"beached_dna_sample_basic_kanim",BCritterTraits.BLAND),
@@ -32,7 +32,7 @@ namespace Beached.Content.Defs.Items
 				CreateItem(PRODUCTIVE3,"beached_dna_sample_basic_kanim",BCritterTraits.PRODUCTIVE3),
 				CreateItem(LASTING,"beached_dna_sample_basic_kanim",BCritterTraits.PRODUCTIVE3),
 				CreateItem(HYPOALLERGENIC,"beached_dna_sample_basic_kanim",BCritterTraits.HYPOALLERGENIC),
-			};
+			];
 
 			return items;
 		}
@@ -57,12 +57,12 @@ namespace Beached.Content.Defs.Items
 				true,
 				0,
 				SimHashes.Creature,
-				additionalTags: new List<Tag>
-				{
+				additionalTags:
+				[
 					GameTags.PedestalDisplayable,
 					GameTags.Organics,
 					BTags.geneticSample
-				});
+				]);
 
 			prefab.AddOrGet<EntitySplitter>();
 			prefab.AddOrGet<SimpleMassStatusItem>();

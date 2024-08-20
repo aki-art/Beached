@@ -85,17 +85,17 @@ namespace Beached.Content.Scripts.Entities
 			var converted = GetSaltedElement(elem);
 
 			if (converted != SimHashes.Void)
-				return new List<Descriptor>()
-				{
+				return
+				[
 					new Descriptor(
 						string.Format(STRINGS.CREATURES.SPECIES.OTHERS.BEACHED_BRINE_POOL.SALTOFF, elem.tag.ProperName(), converted.CreateTag().ProperName()),
 						string.Format(STRINGS.CREATURES.SPECIES.OTHERS.BEACHED_BRINE_POOL.SALTOFF_TOOLTIP, GameUtil.GetFormattedTime(avgInterval)))
-				};
+				];
 			else
-				return new List<Descriptor>()
-				{
+				return
+				[
 					new Descriptor("Idle", "")
-				};
+				];
 		}
 	}
 }

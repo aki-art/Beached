@@ -42,7 +42,7 @@ namespace Beached.Content.Scripts.UI
 
 		private void UpdateToggles(HashSet<Tag> tags)
 		{
-			toggles ??= new Dictionary<Tag, BIconToggle>();
+			toggles ??= [];
 
 			foreach (var toggle in toggles.Values)
 			{

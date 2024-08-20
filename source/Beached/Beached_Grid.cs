@@ -12,13 +12,13 @@ namespace Beached
 		public const int INVALID_FORCEFIELD_OFFSET = -1;
 
 		[Serialize]
-		private Dictionary<int, NaturalTileInfo> naturalTiles = new();
+		private Dictionary<int, NaturalTileInfo> naturalTiles = [];
 
 		[Serialize]
-		public Dictionary<int, ZoneType> zoneTypeOverrides = new();
+		public Dictionary<int, ZoneType> zoneTypeOverrides = [];
 
 		public static Dictionary<Vector2I, ZoneType> worldgenZoneTypes;
-		public static Dictionary<int, int> forceFieldLevelPerWorld = new();
+		public static Dictionary<int, int> forceFieldLevelPerWorld = [];
 
 		[Serialize]
 		private bool initialized;

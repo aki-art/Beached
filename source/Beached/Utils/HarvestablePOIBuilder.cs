@@ -18,7 +18,7 @@ namespace Beached.Utils
 
 			poiType = new HarvestablePOIConfigurator.HarvestablePOIType(
 				ID,
-				new(),
+				[],
 				54_000f,
 				81_000f,
 				30_000f,

@@ -8,17 +8,17 @@ namespace Beached.Content.Scripts.Entities
 	[SkipSaveFileSerialization]
 	public class Beached_CritterMetabolismModifier : KMonoBehaviour, IGameObjectEffectDescriptor
 	{
-		public List<float> multipliers = new();
+		public List<float> multipliers = [];
 		private float multiplier = 1f;
 		public AttributeInstance metabolism;
 		public AttributeModifier metabolismModifier;
 
 		public List<Descriptor> GetDescriptors(GameObject go)
 		{
-			return new()
-			{
+			return
+			[
 				new Descriptor($"This critter has {multiplier}X metabolism", "", Descriptor.DescriptorType.Effect)
-			};
+			];
 		}
 
 		public void UpdateMetabolism(float multiplier)
