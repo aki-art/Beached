@@ -6,17 +6,9 @@ namespace Beached.Patches
 {
 	public class ElementLoaderPatch
 	{
-#if ELEMENTS
 		[HarmonyPatch(typeof(ElementLoader), nameof(ElementLoader.Load))]
 		public class ElementLoader_Load_Patch
 		{
-			public static void Prefix(Dictionary<string, SubstanceTable> substanceTablesByDlc)
-			{
-				// Add my new elements
-				var list = substanceTablesByDlc[DlcManager.VANILLA_ID].GetList();
-				Elements.RegisterSubstances(list);
-			}
-
 			public static void Postfix()
 			{
 				// recolor water and salt water to be more watery and distinguishable
@@ -68,6 +60,5 @@ namespace Beached.Patches
 				}
 			}
 		}
-#endif
 	}
 }

@@ -52,7 +52,7 @@ namespace Beached.Content.Defs.Buildings
 			var conduitConsumer = go.AddOrGet<ConduitConsumer>();
 			conduitConsumer.conduitType = ConduitType.Gas;
 			conduitConsumer.consumptionRate = 1f;
-			conduitConsumer.capacityTag = Elements.ammonia.Tag;
+			conduitConsumer.capacityTag = Elements.ammonia.CreateTag();
 			conduitConsumer.capacityKG = 2f;
 			conduitConsumer.forceAlwaysSatisfied = true;
 			conduitConsumer.wrongElementResult = ConduitConsumer.WrongElementResult.Dump;
@@ -66,7 +66,7 @@ namespace Beached.Content.Defs.Buildings
 			{
 				inputs =
 				[
-					new EnergyGenerator.InputItem(Elements.ammonia.Tag, 0.09f, 0.90000004f)
+					new EnergyGenerator.InputItem(Elements.ammonia.CreateTag(), 0.09f, 0.90000004f)
 				],
 				outputs =
 				[

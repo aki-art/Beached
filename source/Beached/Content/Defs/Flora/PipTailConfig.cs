@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Defs.Foods;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
@@ -53,7 +52,7 @@ namespace Beached.Content.Defs.Flora
 			[
 				new PlantElementAbsorber.ConsumeInfo()
 				{
-					tag = Elements.heulandite.Tag,
+					tag = Elements.zeolite.CreateTag(),
 					massConsumptionRate = FERTILIZATION_RATE
 				}
 			]);

@@ -5,6 +5,9 @@ namespace Beached.Content.BWorldGen
 	public class BWorldGenTags
 	{
 		public static Tag
+
+			BeachedCluster = TagManager.Create("BeachedCluster"),
+
 			AtSideADepth = TagManager.Create("Beached_AtSideADepth"),
 			AtSideBDepth = TagManager.Create("Beached_AtSideBDepth"),
 			AtSideACorner = TagManager.Create("Beached_AtSideACorner"),

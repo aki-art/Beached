@@ -24,7 +24,7 @@ namespace Beached.Patches.Worldgen
 
 				if (leaf.tags.Contains(BWorldGenTags.WaveFunctionCollapse))
 				{
-					var rubber = Elements.rubber.Get();
+					var rubber = ElementLoader.FindElementByHash(Elements.rubber);
 					var node = __instance.node;
 
 					var availableTerrainPoints = __instance.availableTerrainPoints;

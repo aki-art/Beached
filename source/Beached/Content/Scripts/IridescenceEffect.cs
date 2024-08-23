@@ -57,7 +57,6 @@ namespace Beached.Content.Scripts
 
 				UpdatePearl(materials, t);
 				UpdateBismuth(materials, t);
-				UpdateSelenite(materials, rainbowColor);
 				UpdateDiamond(materials, rainbowColor);
 			}
 		}
@@ -77,13 +76,6 @@ namespace Beached.Content.Scripts
 			var bismuthMat = materials[Elements.bismuthOre];
 			bismuthMat.alpha.SetColor("_ShineColour", bismuthColor);
 			bismuthMat.opaque.SetColor("_ShineColour", bismuthColor);
-		}
-
-		private static void UpdateSelenite(Dictionary<SimHashes, GroundRenderer.Materials> materials, Color rainbowColor)
-		{
-			var seleniteMat = materials[Elements.selenite];
-			seleniteMat.alpha.SetColor("_ShineColour", rainbowColor);
-			seleniteMat.opaque.SetColor("_ShineColour", rainbowColor);
 		}
 
 		private static void UpdateDiamond(Dictionary<SimHashes, GroundRenderer.Materials> materials, Color rainbowColor)

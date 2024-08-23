@@ -107,7 +107,7 @@ namespace Beached.Content.Scripts.Entities
 
 		public override void OnPrefabInit()
 		{
-			acidIdx = Elements.sulfurousWater.Get().idx;
+			acidIdx = ElementLoader.GetElementIndex(Elements.sulfurousWater);
 			flashGradient = new Gradient();
 
 			var colorKeys = new GradientColorKey[]

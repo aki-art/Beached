@@ -73,7 +73,7 @@ namespace Beached.Content.Defs.Entities.Corals
 				Assets.GetAnim("beached_leaflet_coral_frag_kanim"),
 				additionalTags:
 				[
-					GameTags.WaterSeed ,
+					GameTags.WaterSeed,
 					BTags.coralFrag,
 					BTags.smallAquariumSeed
 				],

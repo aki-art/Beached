@@ -1,0 +1,24 @@
+name: STRINGS.CODEX.STORY_TRAITS.GLACIERS.NAME
+description: STRINGS.CODEX.STORY_TRAITS.GLACIERS.DESCRIPTION
+icon: Beached_Glaciers_icon
+colorHex: FF0000
+
+
+additionalWorldTemplateRules:
+  # MAIN
+  - names:
+      - beached/storytraits/muffinglacerb
+    listRule: GuaranteeOne
+    priority: 400
+    useRelaxedFiltering: true
+    allowedCellsFilter:
+      - command: All
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGlobalFeatureSpawning # this also excludes Space
+      - command: IntersectWith  # too close to start
+        temperatureRanges:
+          - ExtremelyCold
+          - VeryCold
+        
+  # ICE PIECE

@@ -63,12 +63,12 @@ cells:
   temperature: 300.149994
   location_x: -4
   location_y: -3
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -3
   location_y: -3
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -2
@@ -102,17 +102,17 @@ cells:
   temperature: 300.149994
   location_x: 4
   location_y: -3
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 5
   location_y: -3
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -4
   location_y: -2
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -3
@@ -156,7 +156,7 @@ cells:
   temperature: 306.986389
   location_x: 5
   location_y: -2
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -4
@@ -293,7 +293,7 @@ cells:
   temperature: 307.010315
   location_x: 5
   location_y: 1
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -4
@@ -342,7 +342,7 @@ cells:
   temperature: 307.11615
   location_x: 5
   location_y: 2
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -4
@@ -391,17 +391,17 @@ cells:
   temperature: 307.276642
   location_x: 5
   location_y: 3
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -4
   location_y: 4
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -3
   location_y: 4
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -2
@@ -435,17 +435,17 @@ cells:
   temperature: 307.214447
   location_x: 4
   location_y: 4
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 5
   location_y: 4
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -4
   location_y: 5
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -3
@@ -479,27 +479,27 @@ cells:
   temperature: 307.161255
   location_x: 3
   location_y: 5
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 4
   location_y: 5
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 5
   location_y: 5
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -4
   location_y: 6
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -3
   location_y: 6
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -2
@@ -596,37 +596,37 @@ cells:
   temperature: 300.149994
   location_x: -5
   location_y: 1
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -5
   location_y: 2
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -5
   location_y: 3
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -5
   location_y: 4
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: -5
   location_y: 5
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 6
   location_y: -3
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 6
   location_y: -2
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 6
@@ -640,51 +640,51 @@ cells:
   temperature: 300.149994
   location_x: 6
   location_y: 1
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 6
   location_y: 2
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 6
   location_y: 3
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 6
   location_y: 4
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 7
   location_y: -2
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 7
   location_y: -1
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 7
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 7
   location_y: 1
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 7
   location_y: 2
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 8
   location_y: -1
-- element: Pearl
+- element: Beached_Pearl
   mass: 700
   temperature: 300.149994
   location_x: 8

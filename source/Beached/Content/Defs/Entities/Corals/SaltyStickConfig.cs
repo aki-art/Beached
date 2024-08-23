@@ -36,7 +36,7 @@ namespace Beached.Content.Defs.Entities.Corals
 
 			AddConverter(prefab, SimHashes.SaltWater.CreateTag(), SimHashes.Water, 0.3f, storage);
 			AddConverter(prefab, SimHashes.Brine.CreateTag(), SimHashes.SaltWater, 0.3f, storage);
-			AddConverter(prefab, Elements.murkyBrine.Tag, SimHashes.DirtyWater, 0.3f, storage);
+			AddConverter(prefab, Elements.murkyBrine.CreateTag(), SimHashes.DirtyWater, 0.3f, storage);
 
 			return prefab;
 		}

@@ -111,7 +111,7 @@ namespace Beached
 
 			public class CALCIUMMOLTEN
 			{
-				public static LocString NAME = FormatAsLink("Molten Calcium", Elements.calciumMolten.ToString());
+				public static LocString NAME = FormatAsLink("Molten Calcium", Elements.moltenCalcium.ToString());
 				public static LocString DESC = "TODO";
 			}
 
@@ -309,30 +309,6 @@ namespace Beached
 			public class SULFUROUS_WATER
 			{
 				public static LocString NAME = FormatAsLink("Sulfuric Acid", Elements.sulfurousWater.ToString());
-				public static LocString DESC = "TODO";
-			}
-
-			public class ZINC
-			{
-				public static LocString NAME = FormatAsLink("Zinc");
-				public static LocString DESC = "TODO";
-			}
-
-			public class ZINCORE
-			{
-				public static LocString NAME = FormatAsLink("Zinc Ore");
-				public static LocString DESC = "TODO";
-			}
-
-			public class ZINCGAS
-			{
-				public static LocString NAME = FormatAsLink("Zinc Gas", Elements.zincGas.ToString());
-				public static LocString DESC = "TODO";
-			}
-
-			public class ZINCMOLTEN
-			{
-				public static LocString NAME = FormatAsLink("Molten Zinc", Elements.zincMolten.ToString());
 				public static LocString DESC = "TODO";
 			}
 

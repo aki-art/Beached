@@ -5,11 +5,16 @@
 debugLogging: true
 
 # Generate a template.pot file in mods/strings_templates
-generateTranslationsTemplate: true
+generateTranslationsTemplate: false
 
 # Type target assembly qualified name to overload strings to. Only relevant if you have a C# dll with a STRING-s class.
 # overloadTranslations: Tundra.STRINGS, Tundra
 
 # use {platform to insert platform keyword, windows|mac|linux }
+# looks in moonlet/assets/assetBundles by default. use root:: for root folder of your mod
 loadAssetBundles:
   - root::assetbundles/beached_shared_assets
+
+# .bank files are created with FMOD Studio, and can be used to import new sounds
+loadFMODBanks:
+  - Beached.bank

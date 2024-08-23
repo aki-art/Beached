@@ -31,7 +31,7 @@ namespace Beached.Content.Defs.Duplicants
 					0,
 					0,
 					STRINGS.DUPLICANTS.PERSONALITIES.BEACHED_VAHANO.DESC,
-					true);
+					false);
 		}
 
 		public string GetHeadAnim() => "beached_vahano_head_kanim";

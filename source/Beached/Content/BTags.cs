@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using HarmonyLib;
+using System.Collections.Generic;
 using System.Linq;
 using TUNING;
 
@@ -10,6 +11,7 @@ namespace Beached.Content
 			amphibious = TagManager.Create("Beached_Amphibious"),
 			amberInclusion = TagManager.Create("Beached_AmberInclusion"),
 			aquatic = TagManager.Create("Beached_Aquatic"),
+			aquaticFarm = TagManager.Create("Beached_AquaticFarm"),
 			bamboo = TagManager.Create("Beached_Bamboo"),
 			blueprintable = TagManager.Create("Beached_Blueprintable"),
 			coral = TagManager.Create("Beached_Coral"),
@@ -96,10 +98,14 @@ namespace Beached.Content
 			if (index == -1) index = 0; // in case some other mod tweaked the filters and removed BuildableProcessed
 
 			STORAGEFILTERS.NOT_EDIBLE_SOLIDS.Insert(index, MaterialCategories.crystal);
+			STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE = STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE.AddToArray(coralFrag);
 
 			Filterable.filterableCategories.Add(GameTags.Egg);
 			GameTags.AllCategories.Add(GameTags.Egg);
 			GameTags.IgnoredMaterialCategories.Remove(GameTags.Egg);
+
+			GameTags.AllCategories.Add(coralFrag);
+			Filterable.filterableCategories.Add(coralFrag);
 		}
 	}
 }

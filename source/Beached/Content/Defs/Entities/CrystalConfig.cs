@@ -23,7 +23,7 @@ namespace Beached.Content.Defs.Entities
 				1,
 				TUNING.DECOR.BONUS.TIER4,
 				default,
-				Elements.selenite);
+				Elements.zeolite);
 
 			//prefab.AddOrGet<GeoFormation>().allowDiagonalGrowth = true;
 			prefab.AddOrGet<Crystal>().growthDirection = Direction.None;

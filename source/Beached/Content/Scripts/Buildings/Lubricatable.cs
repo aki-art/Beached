@@ -62,7 +62,7 @@ namespace Beached.Content.Scripts.Buildings
 
 		public void OnUse()
 		{
-			mucusStorage.ConsumeIgnoringDisease(Elements.mucus.Tag, massUsedEachTime);
+			mucusStorage.ConsumeIgnoringDisease(Elements.mucus.CreateTag(), massUsedEachTime);
 		}
 
 		public static Lubricatable ConfigurePrefab(GameObject prefab, float capacityKg, float massUsedEachTime)
@@ -77,13 +77,13 @@ namespace Beached.Content.Scripts.Buildings
 			}
 
 			var storage = prefab.AddComponent<Storage>();
-			storage.storageFilters = [Elements.mucus.Tag];
+			storage.storageFilters = [Elements.mucus.CreateTag()];
 			storage.capacityKg = capacityKg;
 			storage.allowItemRemoval = false;
 
 			var delivery = prefab.AddComponent<ManualDeliveryKG>();
 			delivery.storage = storage;
-			delivery.RequestedItemTag = Elements.mucus.Tag;
+			delivery.RequestedItemTag = Elements.mucus.CreateTag();
 			delivery.allowPause = true;
 			delivery.MinimumMass = massUsedEachTime;
 			delivery.refillMass = massUsedEachTime;

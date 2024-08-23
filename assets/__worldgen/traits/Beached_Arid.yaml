@@ -1,0 +1,36 @@
+# slower crop growth
+# less water
+# some slime is converted to dirt
+name: STRINGS.WORLD_TRAITS.ARID.NAME
+description: STRINGS.WORLD_TRAITS.ARID.DESCRIPTION
+colorHex: bdaf8d
+
+exclusiveWithTags:
+  - Wet
+
+traitTags:
+  - Dry
+
+elementBandModifiers:
+  - element: Water
+    massMultiplier: 0.7
+  - element: DirtyWater
+    massMultiplier: 0.7
+  - element: Beached_MurkyBrine
+    massMultiplier: 0.7
+  - element: Brine
+    massMultiplier: 0.7
+  - element: SaltWater
+    massMultiplier: 0.7
+  - element: Mucus
+    massMultiplier: 0.7
+  - element: CrudeOil
+    massMultiplier: 0.7
+  - element: DirtyIce
+    massMultiplier: 0.7
+  - element: Snow
+    massMultiplier: 0.5
+  - element: Ice
+    massMultiplier: 0.7
+  - element: BrineIce
+    massMultiplier: 0.7

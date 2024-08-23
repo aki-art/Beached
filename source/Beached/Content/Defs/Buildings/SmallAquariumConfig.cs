@@ -66,12 +66,14 @@ namespace Beached.Content.Defs.Buildings
 			storage.storageFilters = STORAGEFILTERS.LIQUIDS;
 			storage.SetDefaultStoredItemModifiers(Storage.StandardSealedStorage);
 
-
 			var plantablePlot = go.AddOrGet<PlantablePlot>();
 			plantablePlot.occupyingObjectRelativePosition = new Vector3(0.0f, 1f, 0.0f);
 			plantablePlot.AddDepositTag(BTags.smallAquariumSeed);
 			plantablePlot.SetFertilizationFlags(false, true);
 			plantablePlot.SetReceptacleDirection(SingleEntityReceptacle.ReceptacleDirection.Top);
+			plantablePlot.tagOnPlanted = GameTags.PlantedOnFloorVessel;
+
+			go.AddOrGet<CopyBuildingSettings>().copyGroupTag = BTags.aquaticFarm;
 
 			Prioritizable.AddRef(go);
 		}

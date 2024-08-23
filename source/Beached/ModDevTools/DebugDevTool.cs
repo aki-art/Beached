@@ -3,7 +3,6 @@ using Beached.Content;
 using Beached.Content.BWorldGen;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
-using FMOD;
 using FMOD.Studio;
 using FMODUnity;
 using ImGuiNET;
@@ -57,36 +56,8 @@ namespace Beached.ModDevTools
 				if (ImGui.Button("Jelly Bounce"))
 					KFMOD.PlayUISound("event:/jellybounce1");
 
-				if (ImGui.Button("Jelly complex"))
-				{
-					RuntimeManager.StudioSystem.getBankList(out var bankList);
-					foreach (var bankEntry in bankList)
-					{
-						bankEntry.getPath(out var path3);
-						Log.Debug("- " + path3);
-
-						if (path3 == "bank:/Beached")
-						{
-							bankEntry.getEventList(out var eventList);
-							foreach (var ev in eventList)
-							{
-								ev.getPath(out var evPath);
-								ev.getID(out var evId);
-								Log.Debug($"\t- {evPath} {evId}");
-							}
-						}
-					}
-
-
-					// Initializing an empty EventReference
-					var eventref = new EventReference
-					{
-						Guid = GUID.Parse("{7ae69134-6848-41a1-b7b6-07e2c13bb9e6}")
-					};
-
-					//KFMOD.PlayUISound(eventref);
-					KFMOD.BeginOneShot(eventref, Vector3.zero);
-				}
+				if (ImGui.Button("Play Stinger"))
+					MusicManager.instance.PlaySong(Assets.GetSimpleSoundEventName("event:/beached/Music/ocean_palace"));
 			}
 
 			HandleSelectedObject();

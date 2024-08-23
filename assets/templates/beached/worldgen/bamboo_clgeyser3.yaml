@@ -26,7 +26,7 @@ cells:
   temperature: 1.1499939
   location_x: 1
   location_y: -2
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.094818
   location_x: 2
@@ -320,12 +320,12 @@ cells:
   temperature: 294.164124
   location_x: 6
   location_y: 4
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.115356
   location_x: 6
   location_y: -1
-- element: Gravel
+- element: Beached_Gravel
   mass: 1680.69763
   temperature: 296.02887
   location_x: 7
@@ -379,7 +379,7 @@ cells:
   temperature: 295.096771
   location_x: 6
   location_y: -3
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.094147
   location_x: 5
@@ -399,31 +399,31 @@ cells:
   temperature: 295.150909
   location_x: 4
   location_y: -4
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.138306
   location_x: -4
   location_y: -3
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.142273
   location_x: -3
   location_y: -3
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.145721
   location_x: -2
   location_y: -3
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.145966
   location_x: -1
   location_y: -3
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.145966
   location_y: -3
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.126221
   location_x: 1

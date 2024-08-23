@@ -4,7 +4,6 @@ using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
 using Beached.ModDevTools;
-using FMOD.Studio;
 using FMODUnity;
 using HarmonyLib;
 using Klei;
@@ -24,19 +23,14 @@ namespace Beached.Patches
 	{
 		public static void Prefix(AmbienceManager __instance)
 		{
-			Log.Debug("parameters:");
-			RuntimeManager.StudioSystem.getParameterDescriptionList(out var list);
-			foreach (var item in list)
-			{
-				Log.Debug($"{item.name} {item.type} {item.defaultvalue}");
-
-			}
-
 			if (!RuntimeManager.IsInitialized || Elements.crystalAmbiance > 0)
 				return;
 
 			foreach (var def in __instance.quadrantDefs)
 			{
+				var dirtTest = def.solidSounds[(int)SolidAmbienceType.Dirt];
+				var dirtDesc = RuntimeManager.GetEventDescription(dirtTest);
+
 				// padding for the useless NumTypes
 				if (def.solidSounds.Length == 19)
 				{
@@ -46,11 +40,11 @@ namespace Beached.Patches
 
 				// adding my events
 				Elements.crystalAmbiance = (SolidAmbienceType)def.solidSounds.Length; // 20
-				var crystal = RuntimeManager.PathToEventReference("event:/beached/Environment/mines_crystal_shimmer_loop");
+				var crystal = RuntimeManager.PathToEventReference("event:/beached/Environment/crystal_ambience");
 				def.solidSounds = def.solidSounds.AddToArray(crystal);
 
 				Elements.acidAmbience = (AmbienceType)def.liquidSounds.Length;
-				var acid = RuntimeManager.PathToEventReference("event:/beached/Environment/hk_acid_ambient_loop");
+				var acid = RuntimeManager.PathToEventReference("event:/beached/Environment/acid_sizzle_loop");
 				def.liquidSounds = def.liquidSounds.AddToArray(acid);
 			}
 
@@ -73,7 +67,6 @@ namespace Beached.Patches
 				description.getMinMaxDistance(out var min, out var max);
 				Log.Debug($"{label} {desc.type} {desc.defaultvalue} {min} {max}");
 			}
-
 		}
 	}
 
@@ -103,82 +96,6 @@ namespace Beached.Patches
 			}
 		}
 	}
-
-	[HarmonyPatch(typeof(Assets), "OnPrefabInit")]
-	public class Assets_OnPrefabInit_Patch
-	{
-		public static void Postfix()
-		{
-			RuntimeManager.StudioSystem.loadBankFile(System.IO.Path.Combine(Mod.folder, "assets", "sounds", "Beached.bank"), LOAD_BANK_FLAGS.NORMAL, out var bankFile);
-			RuntimeManager.StudioSystem.loadBankFile(System.IO.Path.Combine(Mod.folder, "assets", "sounds", "Beached.strings.bank"), LOAD_BANK_FLAGS.NORMAL, out var stringsFile);
-
-			bankFile.getEventList(out var eventList);
-			bankFile.loadSampleData();
-
-			foreach (var ev in eventList)
-			{
-				ev.getPath(out var path);
-				ev.getID(out var id);
-				Log.Debug($"{path} {id.ToString()}");
-			}
-
-			bankFile.getPath(out var path2);
-			FMODUnity.Settings.Instance.Banks.Add(path2);
-
-			// this is called in KFMOD for all banks, but before mods are loaded, to need to do this again for our assets
-			CollectSoundDescriptions("bank:/Beached");
-		}
-
-		/// copy paste of <see cref="KFMOD.CollectSoundDescriptions" />, but just for the one bank we want
-		private static void CollectSoundDescriptions(string myBankName)
-		{
-			RuntimeManager.StudioSystem.getBank(myBankName, out var bank);
-
-			bank.getEventList(out EventDescription[] eventDescriptions);
-
-			for (var i = 0; i < eventDescriptions.Length; ++i)
-			{
-				var eventDescription = eventDescriptions[i];
-				eventDescription.getPath(out string path1);
-				var key = (HashedString)path1;
-				SoundDescription soundDescription = new()
-				{
-					path = path1
-				};
-
-				eventDescription.getMinMaxDistance(out float _, out float max);
-
-				if (max == 0.0)
-					max = 60f;
-
-				soundDescription.falloffDistanceSq = max * max;
-				var parameterUpdaterList = new List<OneShotSoundParameterUpdater>();
-				eventDescription.getParameterDescriptionCount(out int count);
-				var parameterArray = new SoundDescription.Parameter[count];
-
-				for (var j = 0; j < count; ++j)
-				{
-					eventDescription.getParameterDescriptionByIndex(j, out PARAMETER_DESCRIPTION parameter);
-					var name = (string)parameter.name;
-
-					parameterArray[j] = new SoundDescription.Parameter()
-					{
-						name = new HashedString(name),
-						id = parameter.id
-					};
-
-					if (KFMOD.parameterUpdaters.TryGetValue((HashedString)name, out OneShotSoundParameterUpdater parameterUpdater))
-						parameterUpdaterList.Add(parameterUpdater);
-				}
-
-				soundDescription.parameters = parameterArray;
-				soundDescription.oneShotParameterUpdaters = parameterUpdaterList.ToArray();
-
-				KFMOD.soundDescriptions[key] = soundDescription;
-			}
-		}
-	}
-
 
 	public class TestPatches
 	{

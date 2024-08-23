@@ -1,0 +1,103 @@
+{
+    "GasPermeableMembrane": {
+        "Beached_Bismuthinite": {
+            "MainTex": "airflow_bismuthore_main",
+            "TopTex": "airflow_bismuthore_top",
+            "MainSpecular" : "airflow_bismuthore_spec"
+        },
+        "Beached_Bismuth": {
+            "MainTex": "airflow_bismuthore_main",
+            "TopTex": "airflow_bismuthore_top",
+            "MainSpecular" : "airflow_bismuthore_spec"
+        }
+    },
+    
+    "MetalTile": {
+        "Beached_Bismuth": {
+            "MainTex": "metal_bismuth_main",
+            "TopTex": "metal_bismuth_top",
+            "MainSpecular" : "metal_bismuth_spec"
+        }
+    },
+    
+    "MeshTile": {
+        "Beached_Bismuthinite": {
+            "MainTex": "mesh_bismuthore_main",
+            "TopTex": "mesh_bismuthore_top",
+            "MainSpecular" : "mesh_bismuthore_spec"
+        },
+        "Beached_Bismuth": {
+            "MainTex": "mesh_bismuthore_main",
+            "TopTex": "mesh_bismuthore_top",
+            "MainSpecular" : "mesh_bismuthore_spec"
+        },
+        "Beached_Zirconium": {
+            "MainTex": "mesh_zirconium_main",
+            "TopTex": "mesh_zirconium_top",
+            "MainSpecular" : "mesh_zirconium_spec",
+            "MainSpecularColor": [
+              2.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "TopSpecularColor ": [
+              2.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+        },
+        "Beached_Zircon": {
+            "MainTex": "mesh_zirconium_main",
+            "TopTex": "mesh_zirconium_top",
+            "MainSpecular" : "mesh_zirconium_spec",
+            "MainSpecularColor": [
+              2.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "TopSpecularColor ": [
+              2.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+        }
+    },
+    
+    "CarpetTile": {
+        "Beached_Basalt": {
+            "MainTex": "carpet_basalt_main",
+            "TopTex": "carpet_basalt_top"
+        }
+    },
+    
+    "Tile": {
+        "Beached_Basalt": {
+            "MainTex": "tile_basalt_main",
+            "TopTex": "tile_basalt_top"
+        },
+        "Beached_SiltStone": {
+            "MainTex": "tile_siltstone_main",
+            "TopTex": "tile_siltstone_top"
+        }
+    },
+    
+    "WindowTile": {
+        "Beached_Aquamarine": {
+            "MainTex": "window_aquamarine_main",
+            "TopTex": "window_aquamarine_top",
+            "MainSpecular" : "window_aquamarine_spec",
+            "SpecularColor" : "1255FF",
+            "NormalTex" : "window_aquamarine_normal"
+        }
+    },
+
+    "InsulationTile": {
+        "Beached_SiltStone": {
+            "MainTex": "insulated_siltstone_main"
+        }
+    }
+}

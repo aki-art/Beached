@@ -7,21 +7,21 @@ info:
     Y: -4
   area: 71
 cells:
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.868866
   location_y: -4
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.864868
   location_x: 1
   location_y: -4
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.868896
   location_x: 2
   location_y: -4
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 300.149994
   location_x: 3
@@ -40,25 +40,25 @@ cells:
   temperature: 290.597351
   location_x: 2
   location_y: -3
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.589874
   location_x: 3
   location_y: -3
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 1200.10571
   temperature: 282.161102
   diseaseName: Beached_LimpetEgg
   diseaseCount: 139463
   location_y: -2
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 1200.03516
   temperature: 282.159454
   diseaseName: Beached_LimpetEgg
   diseaseCount: 138758
   location_x: 1
   location_y: -2
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 1200.01489
   temperature: 282.171844
   diseaseName: Beached_LimpetEgg
@@ -70,27 +70,27 @@ cells:
   temperature: 290.176575
   location_x: 3
   location_y: -2
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 823.678772
   temperature: 282.162079
   diseaseName: Beached_LimpetEgg
   diseaseCount: 98166
   location_y: -1
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 812.900757
   temperature: 282.159454
   diseaseName: Beached_LimpetEgg
   diseaseCount: 97863
   location_x: 1
   location_y: -1
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 804.14093
   temperature: 282.172333
   diseaseName: Beached_LimpetEgg
   diseaseCount: 98186
   location_x: 2
   location_y: -1
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 799.462036
   temperature: 281.977417
   diseaseName: Beached_LimpetEgg
@@ -102,7 +102,7 @@ cells:
   temperature: 290.112762
   diseaseName: Beached_LimpetEgg
   diseaseCount: 533760
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.149994
   location_x: 1
@@ -139,16 +139,16 @@ cells:
   diseaseCount: 685549
   location_x: 3
   location_y: 1
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 8.47842979
   temperature: 263.754791
   location_y: 2
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 2.67065597
   temperature: 264.223999
   location_x: 1
   location_y: 2
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 1.52539945
   temperature: 264.960938
   location_x: 2
@@ -183,7 +183,7 @@ cells:
   diseaseCount: 782513
   location_x: 3
   location_y: 3
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.149994
   location_y: 4
@@ -201,31 +201,31 @@ cells:
   diseaseCount: 804650
   location_x: 2
   location_y: 4
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.797211
   location_x: 3
   location_y: 4
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 300.149994
   location_y: 5
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.149994
   location_x: 1
   location_y: 5
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.149994
   location_x: 2
   location_y: 5
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 300.149994
   location_x: 3
   location_y: 5
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.870697
   location_x: 4
@@ -235,12 +235,12 @@ cells:
   temperature: 290.727966
   location_x: 4
   location_y: -2
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.278625
   location_x: 4
   location_y: -1
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.149994
   location_x: 4
@@ -259,43 +259,43 @@ cells:
   temperature: 290.762207
   location_x: 4
   location_y: 3
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.871124
   location_x: 4
   location_y: 4
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.549133
   location_x: -2
   location_y: -3
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.28125
   location_x: -1
   location_y: -3
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 1200.44714
   temperature: 281.892609
   diseaseName: Beached_LimpetEgg
   diseaseCount: 137525
   location_x: -2
   location_y: -2
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 1200.32617
   temperature: 282.184204
   diseaseName: Beached_LimpetEgg
   diseaseCount: 139900
   location_x: -1
   location_y: -2
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 839.91626
   temperature: 282.214569
   diseaseName: Beached_LimpetEgg
   diseaseCount: 99614
   location_x: -2
   location_y: -1
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 833.62085
   temperature: 282.182739
   diseaseName: Beached_LimpetEgg
@@ -333,12 +333,12 @@ cells:
   diseaseCount: 520715
   location_x: -2
   location_y: 2
-- element: MurkyBrine
+- element: Beached_MurkyBrine
   mass: 2.07445812
   temperature: 264.254395
   location_x: -1
   location_y: 2
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.149994
   location_x: -2
@@ -350,27 +350,27 @@ cells:
   diseaseCount: 1163581
   location_x: -1
   location_y: 3
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 300.149994
   location_x: -2
   location_y: 4
-- element: CrackedNeutronium
+- element: Beached_CrackedNeutronium
   mass: 1840
   temperature: 300.149994
   location_x: -1
   location_y: 4
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 300.149994
   location_x: -1
   location_y: -4
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.549133
   location_x: -3
   location_y: -2
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.280884
   location_x: -3
@@ -379,7 +379,7 @@ cells:
   mass: 500
   temperature: 290.717834
   location_x: -3
-- element: Basalt
+- element: Beached_Basalt
   mass: 1840
   temperature: 299.548981
   location_x: -3

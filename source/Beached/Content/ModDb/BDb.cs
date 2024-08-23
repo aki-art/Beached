@@ -37,7 +37,7 @@ namespace Beached.Content.ModDb
 			{
 				RecipeBuilder.Create(
 					SuitFabricatorConfig.ID, global::STRINGS.EQUIPMENT.PREFABS.LEAD_SUIT.RECIPE_DESC, TUNING.EQUIPMENT.SUITS.ATMOSUIT_FABTIME)
-				.Input(Elements.bismuth.Tag, 200f)
+				.Input(Elements.bismuth.CreateTag(), 200f)
 				.Input(SimHashes.Glass.CreateTag(), 10f)
 				.Output(LeadSuitConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.ResultWithIngredient)
@@ -45,17 +45,39 @@ namespace Beached.Content.ModDb
 				.SortOrder(6)
 				.Build();
 			}
+
+			ZincAndCopperToBrass();
+			BoneToCalcium();
+		}
+
+		private static void BoneToCalcium()
+		{
+			RecipeBuilder.Create(MetalRefineryConfig.ID, STRINGS.ELEMENTS.CALCIUMMOLTEN.DESC, 40f)
+				.Input(Elements.bone.CreateTag(), 100f)
+				.Output(Elements.moltenCalcium.CreateTag(), 50f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
+				.Build();
+		}
+
+		private static void ZincAndCopperToBrass()
+		{
+			RecipeBuilder.Create(MetalRefineryConfig.ID, Strings.Get("STRINGS.ELEMENTS.BEACHED_BRASS.DESCRIPTION"), 40f)
+				.Input(Elements.zinc.CreateTag(), 50f)
+				.Input(SimHashes.Copper.CreateTag(), 100f)
+				.Output(Elements.brass.CreateTag(), 150f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
+				.Build();
 		}
 
 		private static void CreateEquipmentRecipes()
 		{
 			RecipeBuilder.Create(CraftingTableConfig.ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_RUBBERBOOTS.DESCRIPTION, 60f)
-				.Input(Elements.rubber.Tag, 30f)
+				.Input(Elements.rubber.CreateTag(), 30f)
 				.Output(RubberBootsConfig.ID, 1f)
 				.Build();
 
 			RecipeBuilder.Create(CraftingTableConfig.ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_ZEOLITEPENDANT.DESCRIPTION, 60f)
-				.Input(Elements.heulandite.Tag, 30f)
+				.Input(Elements.zeolite.CreateTag(), 30f)
 				.Output(ZeolitePendantConfig.ID, 1f)
 				.Build();
 		}

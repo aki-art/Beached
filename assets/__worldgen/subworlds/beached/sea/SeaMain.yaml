@@ -1,0 +1,23 @@
+biomeNoise: noise/sea
+temperatureRange: HumanWarm
+density:
+  min: 10
+  max: 15
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+pdWeight: 1
+biomes:
+  - name: biomes/Sea/Basic
+    weight: 2
+    tags:
+      - Pacu
+      - Crab
+      - Beached_Kelp
+tags:
+  - IgnoreCaveOverride
+  - NoGravitasFeatures
+  - NoGlobalFeatureSpawning
+  - Beached_SandBeds
+
+zoneType: Beached_Beach # sea
