@@ -152,7 +152,7 @@ namespace Beached
 		{
 			public static class CLUSTERS
 			{
-				public const string BEACHED = "clusters/AstropelagosCluster";
+				public const string BEACHED = "clusters/AstropelagosMoonlets";
 			}
 		}
 

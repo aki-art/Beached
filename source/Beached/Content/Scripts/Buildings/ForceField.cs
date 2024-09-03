@@ -3,54 +3,50 @@ using UnityEngine;
 
 namespace Beached.Content.Scripts.Buildings
 {
-	public class ForceField : StateMachineComponent<ForceField.StatesInstance>, IImguiDebug, IRenderEveryTick
+	public class ForceField : StateMachineComponent<ForceField.StatesInstance>, IImguiDebug
 	{
 		[SerializeField] public Vector2 offset;
 		[SerializeField] public float distanceFromWorldTop;
 		[SerializeField] public float radiusMultiplier;
+		[SerializeField] public float cometExplosionMargin;
 		private float radius;
 		private Vector3 center;
 
-		public ForceFieldVisualizer visualizer;
 		public LineRenderer debugVisualizer;
 		private bool showDebug;
-		private float rotationSpeed;
-		private Transform testField;
+		private Transform visualizer;
 		private Material material;
 
 		public override void OnSpawn()
 		{
-			/*			visualizer = MiscUtil.Spawn(ForceFieldConfig.ID, transform.position + offset).AddOrGet<ForceFieldVisualizer>();
-						visualizer.transform.SetParent(transform);
-						visualizer.CreateMesh();*/
-
 			ModCmps.forceFields.Add(this);
 
 			var myWorld = gameObject.GetMyWorld();
 			if (myWorld != null)
 			{
 				radius = myWorld.Width * radiusMultiplier;
-				center = new Vector2(myWorld.Width / 2f, myWorld.Height - distanceFromWorldTop) + myWorld.PosMin();
+				center = new Vector2(myWorld.Width / 2f, myWorld.Height - distanceFromWorldTop - radius) + myWorld.PosMin();
 			}
 
-			var test = Instantiate(ModAssets.Prefabs.forceFieldDome, transform);
+			Beached_Mod.Instance.forceFields[myWorld.id] = this;
 
-			material = test.GetComponent<MeshRenderer>().materials[0];
+			var visualizer = Instantiate(ModAssets.Prefabs.forceFieldDome, transform);
+
+			material = visualizer.GetComponent<MeshRenderer>().materials[0];
 
 			var x = myWorld.Width / 2.0f + myWorld.PosMin().x;
 			var y = myWorld.Height - distanceFromWorldTop + myWorld.PosMin().y + 1.0f;
 
-			test.transform.position = new Vector3(x, y, 45);
-			test.transform.SetParent(transform, true);
+			visualizer.transform.position = new Vector3(x, y, 45);
+			visualizer.transform.SetParent(transform, true);
 			var scale = myWorld.Width * radiusMultiplier;
-			test.transform.localScale = Vector3.one * scale;
-			test.SetActive(true);
+			visualizer.transform.localScale = Vector3.one * scale;
+			visualizer.SetActive(true);
 
-			testField = test.transform;
+			this.visualizer = visualizer.transform;
 
 			Subscribe(ModHashes.debugDataChange, OnDebugChange);
 
-			showDebug = true;
 			ToggleDebugLines(showDebug);
 
 			smi.StartSM();
@@ -59,6 +55,11 @@ namespace Beached.Content.Scripts.Buildings
 		private void OnDebugChange(object obj)
 		{
 			ToggleDebugLines(Mod.drawDebugGuides);
+		}
+
+		public bool IsIntersecting(GameObject obj)
+		{
+			return Vector3.Distance(obj.transform.position, center) + cometExplosionMargin < radius;
 		}
 
 		private void ToggleDebugLines(bool visible)
@@ -70,10 +71,10 @@ namespace Beached.Content.Scripts.Buildings
 					debugVisualizer = ModDebug.AddSimpleLineRenderer(transform, Color.magenta, Color.magenta, 0.1f);
 					debugVisualizer.loop = true;
 					debugVisualizer.positionCount = 360;
-					debugVisualizer.useWorldSpace = true;
+					debugVisualizer.useWorldSpace = false;
 
-					debugVisualizer.transform.position = center;
 					debugVisualizer.transform.SetParent(transform, true);
+					debugVisualizer.transform.position = center;
 				}
 
 				UpdateDebugVisualizer();
@@ -100,19 +101,12 @@ namespace Beached.Content.Scripts.Buildings
 		public override void OnCleanUp()
 		{
 			ModCmps.forceFields.Remove(this);
-
-			if (visualizer != null)
-				Util.KDestroyGameObject(visualizer.gameObject);
+			Beached_Mod.Instance.forceFields.Remove(this.GetMyWorldId());
 
 			if (debugVisualizer != null)
 				Util.KDestroyGameObject(debugVisualizer.gameObject);
 
 			base.OnCleanUp();
-		}
-
-		public bool IsIntersecting(Vector3 position)
-		{
-			return (double)(position - center).sqrMagnitude <= radius * radius;
 		}
 
 		public void OnCometCollided(Comet comet)
@@ -124,29 +118,14 @@ namespace Beached.Content.Scripts.Buildings
 		private float alpha;
 		public void OnImguiDraw()
 		{
-			if (visualizer != null)
-				visualizer.OnDebugSelected();
-
 			if (ImGui.Checkbox("Show Range", ref showDebug))
 				ToggleDebugLines(showDebug);
-
-			ImGui.DragFloat("Rotation Speed", ref rotationSpeed);
-			if (ImGui.DragFloat("Top Offset", ref distanceFromWorldTop))
-			{
-				var myWorld = this.GetMyWorld();
-				var y = myWorld.Height - distanceFromWorldTop + myWorld.PosMin().y + 1.0f;
-			}
 
 			if (ImGui.DragFloat("Rim Strength", ref rimStrength))
 				material.SetFloat("_RimStrength", rimStrength);
 
 			if (ImGui.DragFloat("Alpha Mult", ref alpha))
 				material.SetFloat("_Alpha", alpha);
-		}
-
-		public void RenderEveryTick(float dt)
-		{
-			testField.RotateAround(Vector3.up, rotationSpeed * dt);
 		}
 
 		public class StatesInstance : GameStateMachine<States, StatesInstance, ForceField, object>.GameInstance

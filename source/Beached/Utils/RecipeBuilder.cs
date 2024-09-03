@@ -81,6 +81,8 @@ namespace Beached.Utils
 
 			var recipeID = facadeID.IsNullOrWhiteSpace() ? ComplexRecipeManager.MakeRecipeID(fabricator, i, o) : ComplexRecipeManager.MakeRecipeID(fabricator, i, o, facadeID);
 
+			recipeID = $"Beached_{recipeID}";
+
 			var obsoleteId = ComplexRecipeManager.MakeObsoleteRecipeID(fabricator, inputs[0].material);
 			ComplexRecipeManager.Get().AddObsoleteIDMapping(obsoleteId, recipeID);
 

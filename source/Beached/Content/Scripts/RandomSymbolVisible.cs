@@ -31,9 +31,6 @@ namespace Beached.Content.Scripts
 			}
 
 			UpdateSymbols();
-
-
-			//kbac.onAnimEnter += OnAnimChanged;
 		}
 
 		private void UpdateSymbols()

@@ -26,6 +26,7 @@
 			public class BEACHED_MISC
 			{
 				public static LocString CAPPED = "Capped {0}";
+				public static LocString BEACHED_CONTENT = "Content added by <color=d6926d><i>Beached</i></color>";
 			}
 
 			public class BUILDCATEGORIES

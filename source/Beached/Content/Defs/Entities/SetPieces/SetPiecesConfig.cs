@@ -6,26 +6,66 @@ namespace Beached.Content.Defs.Entities.SetPieces
 {
 	public class SetPiecesConfig : IMultiEntityConfig
 	{
-		public const string TEST = "Beached_TestSetPiece";
-		public const string BEACH = "Beached_BeachSetPiece";
-		public const string ZEOLITE = "Beached_ZeoliteSetPiece";
+		public const string
+			AMMONIAVENT = "Beached_AmmoniaVentSetPiece",
+			BEACH = "Beached_BeachSetPiece",
+			BRAINPOI = "Beached_BrainPOISetPiece",
+			FORCEFIELD_LAB = "Beached_ForceFieldLabSetPiece",
+			FPP_THERMAL_VENT = "Beached_FPP_ThermalVentSetPiece",
+			JEORGE_HIDEOUT = "Beached_JeorgeHideOutSetPiece",
+			REEF = "Beached_ReefSetPiece",
+			VAHANO_HIDEOUT = "Beached_VahanoHideOutSetPiece",
+			ZEOLITE = "Beached_ZeoliteSetPiece",
+
+			TEST = "Beached_TestSetPiece";
 
 		public List<GameObject> CreatePrefabs()
 		{
 			return
 			[
 				CreateSetPiece(TEST, 11, 8, "test"),
-				CreateSetPiece(BEACH, 17, 10, "beach"),
-				CreateTestPiece(ZEOLITE, 8, 8, ModAssets.Textures.Placeholders.zeoliteBg)
+				(ConfigureBeachSetPiece()),
+				CreateSetPiece(ZEOLITE, 8, 8, "generic", "beached_zeolitebg")
 			];
 		}
 
-		private GameObject CreateTestPiece(string ID, int width, int height, Texture2D texture)
+		private GameObject ConfigureBeachSetPiece()
+		{
+			var beach = CreateSetPiece(BEACH, 17, 10, "beach");
+
+			var emitter = beach.AddComponent<ElementEmitter>();
+			emitter.outputElement = new ElementConverter.OutputElement(0.2f, Elements.saltyOxygen, MiscUtil.CelsiusToKelvin(29));
+			emitter.emitRange = 3;
+			emitter.SetEmitting(true);
+			emitter.maxPressure = 2.0f;
+
+			/*			var oxygenStorage = beach.AddComponent<Storage>();
+						oxygenStorage.SetDefaultStoredItemModifiers(Storage.StandardSealedStorage);
+						oxygenStorage.capacityKg = 100000;
+						oxygenStorage.storageFilters = [Elements.saltyOxygen.CreateTag()];
+
+						var elementSource = beach.AddComponent<ElementSourceVista>();
+						elementSource.element = Elements.saltyOxygen;
+						elementSource.initialStoredAmount = 100;
+						elementSource.exchangeRatePerTile = 100;
+						elementSource.depth = 5;
+						elementSource.storage = oxygenStorage;
+						elementSource.emissionShape = MiscUtil.MakeCellOffsetsFromMap(true, "",
+							"  X  ",
+							" XXX ",
+							"XXOXX",
+							" XXX ",
+							"  X  ");*/
+
+			return beach;
+		}
+
+		private GameObject CreateSetPiece(string ID, int width, int height, string bgPrefabID, string spriteId = null)
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				ID,
-				"",
+				Strings.Get($"STRINGS.ENTITIES.SET_PIECES.{ID.ToUpperInvariant()}.NAME"),
+				Strings.Get($"STRINGS.ENTITIES.SET_PIECES.{ID.ToUpperInvariant()}.DESCRIPTION"),
 				100f,
 				Assets.GetAnim("farmtile_kanim"),
 				"",
@@ -39,32 +79,10 @@ namespace Beached.Content.Defs.Entities.SetPieces
 				]);
 
 			var setPiece = prefab.AddComponent<SetPiece>();
-			setPiece.setPiecePrefabID = "test";
-			setPiece.placeholderTexture = texture;
-			setPiece.width = width;
-			setPiece.height = height;
-
-			return prefab;
-		}
-
-		private GameObject CreateSetPiece(string ID, int width, int height, string bgPrefabID)
-		{
-			var prefab = EntityTemplates.CreatePlacedEntity(
-				ID,
-				"Set Piece",
-				"",
-				100f,
-				Assets.GetAnim("farmtile_kanim"),
-				"",
-				Grid.SceneLayer.Backwall,
-				width,
-				height,
-				TUNING.DECOR.BONUS.TIER2);
-
-			var setPiece = prefab.AddComponent<SetPiece>();
 			setPiece.setPiecePrefabID = bgPrefabID;
 			setPiece.width = width;
 			setPiece.height = height;
+			setPiece.sprite = spriteId;
 
 			prefab.AddComponent<Vista>();
 

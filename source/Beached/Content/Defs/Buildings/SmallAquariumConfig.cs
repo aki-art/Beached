@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Scripts.Buildings;
-using HarmonyLib;
 using TUNING;
 using UnityEngine;
 
@@ -31,29 +30,6 @@ namespace Beached.Content.Defs.Buildings
 			def.InputConduitType = ConduitType.Liquid;
 
 			return def;
-		}
-
-
-		[HarmonyPatch(typeof(PlanterSideScreen), "AdditionalCanDepositTest")]
-		public class PlanterSideScreen_AdditionalCanDepositTest_Patch
-		{
-			public static void Prefix(PlanterSideScreen __instance)
-			{
-				Log.Debug("selectedDepositObjectTag.IsValid");
-				Log.Debug(__instance.selectedDepositObjectTag.IsValid);
-				Log.Debug("IsValidPlantableSeed");
-				Log.Debug(__instance.selectedDepositObjectTag.ProperNameStripLink());
-				Log.Debug(__instance.selectedDepositObjectAdditionalTag.ProperNameStripLink());
-				Log.Debug(PlantSubSpeciesCatalog.Instance.IsValidPlantableSeed(__instance.selectedDepositObjectTag, __instance.selectedDepositObjectAdditionalTag));
-				Log.Debug("IsValidPlantableSeed");
-				Log.Debug(__instance.selectedDepositObjectTag.ProperNameStripLink());
-				PlantablePlot targetReceptacle = __instance.targetReceptacle as PlantablePlot;
-				Log.Debug("ValidPlant");
-				Log.Debug(targetReceptacle.ValidPlant);
-				WorldContainer myWorld = __instance.targetReceptacle.GetMyWorld();
-				Log.Debug("count");
-				Log.Debug(myWorld.worldInventory.GetCountWithAdditionalTag(__instance.selectedDepositObjectTag, __instance.selectedDepositObjectAdditionalTag, myWorld.IsModuleInterior));
-			}
 		}
 
 		public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)

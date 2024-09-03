@@ -128,6 +128,12 @@ namespace Beached
 					public static LocString NAME = FormatAsLink("Dry Aged Meat", DryAgedMeatConfig.ID);
 					public static LocString DESC = "Soft fatty meat of an unfortunate creature.";
 				}
+				public class BEACHED_SALTRUBBEDJELLY
+				{
+					public static LocString NAME = FormatAsLink("Salt Rubbed Jelly", SaltRubbedJellyConfig.ID);
+					public static LocString DESC = "A bit of salt greatly elevates raw jelly.";
+				}
+
 
 				public class BEACHED_SMOKEDMEAT
 				{
@@ -211,6 +217,12 @@ namespace Beached
 				{
 					public static LocString NAME = FormatAsLink("Cooked Purple Poff", PoffConfig.poffLookup[Elements.ammonia].cooked);
 					public static LocString DESC = "Tastes alright, as long as you pinch your nose and don't smell it.";
+				}
+
+				public class BEACHED_RAWKELP
+				{
+					public static LocString NAME = FormatAsLink("Raw Kelp", RawKelpConfig.ID);
+					public static LocString DESC = "Slimy and salty leaf of a Kelp plant.";
 				}
 			}
 

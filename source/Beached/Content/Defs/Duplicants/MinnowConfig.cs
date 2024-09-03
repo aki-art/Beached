@@ -19,7 +19,7 @@ namespace Beached.Content.Defs.Duplicants
 					BTraits.SIREN,
 					BTraits.PLUSHIE_MAKER,
 					"",
-					null, // doesn't seem to work as expected, Gills is added manually later
+					BTraits.GILLS, // doesn't seem to work as expected, Gills is added manually later
 					HASH,
 					HASH,
 					1,
@@ -40,8 +40,8 @@ namespace Beached.Content.Defs.Duplicants
 
 		public void OnTraitRoll(MinionStartingStats stats)
 		{
-			var trait = Db.Get().traits.Get(BTraits.GILLS);
-			stats.Traits.Add(trait);
+			//var trait = Db.Get().traits.Get(BTraits.GILLS);
+			//stats.Traits.Add(trait);
 		}
 
 		public void ModifyBodyData(ref KCompBuilder.BodyData bodyData)

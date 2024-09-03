@@ -205,7 +205,7 @@ namespace Beached
 
 				public class BEACHED_CAPSPORE
 				{
-					public static LocString NAME = FormatAsLink("Grimcap Spores", CapSporeGerms.ID);
+					public static LocString NAME = FormatAsLink("Cap-Cap Spores", CapSporeGerms.ID);
 				}
 
 				public class BEACHED_POFFSPORE

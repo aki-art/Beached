@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿using Beached.Content.ModDb.Germs;
+using Beached.Content.Scripts.Entities;
 using TUNING;
 using UnityEngine;
 
@@ -59,6 +60,11 @@ namespace Beached.Content.Defs.Flora
 
 			var kbac = prefab.AddOrGet<KBatchedAnimController>();
 			kbac.randomiseLoopedOffset = true;
+
+			var germCultivator = prefab.AddOrGet<GermCultivator>();
+			germCultivator.rate = 0.2f;
+			germCultivator.germ = PlanktonGerms.ID;
+			germCultivator.maxDiseaseCount = 100_000;
 
 			return prefab;
 		}

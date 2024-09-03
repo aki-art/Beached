@@ -129,13 +129,22 @@ namespace Beached.ModDevTools
 			}
 		}
 
+		private float siltStoneUV = 1f;
+
 		private void Shaders()
 		{
 			if (ImGui.CollapsingHeader("Shader"))
 			{
+				ImGui.DragFloat("_Beached_TimeOfDayColor", ref Beached_Mod.tempDayTimeProgress);
+
 				ImGui.InputText("Mask: ", ref liquidCullingMaskLayer, 256);
 
-
+				if (ImGui.DragFloat("Silstone UV Scale", ref siltStoneUV))
+				{
+					var materials = World.Instance.groundRenderer.elementMaterials;
+					materials[Elements.siltStone].opaque.SetFloat("_WorldUVScale", siltStoneUV);
+					materials[Elements.siltStone].alpha.SetFloat("_WorldUVScale", siltStoneUV);
+				}
 
 				var rendererGo = WaterCubes.Instance.cubes.transform.Find("WaterCubesMesh");
 				if (rendererGo != null)

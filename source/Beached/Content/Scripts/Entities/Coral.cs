@@ -5,6 +5,7 @@ namespace Beached.Content.Scripts.Entities
 	public class Coral : StateMachineComponent<Coral.StatesInstance>
 	{
 		[MyCmpReq] private ElementConsumer elementConsumer;
+		[MyCmpReq] private ElementConverter elementConverter;
 
 		[SerializeField] public Tag emitTag;
 		[SerializeField] public float emitMass;
@@ -35,6 +36,8 @@ namespace Beached.Content.Scripts.Entities
 			elementConsumer.consumptionRate = receptacleMonitor.Replanted
 				? consumptionRate * 4f
 				: consumptionRate;
+
+			elementConverter.OutputMultiplier = receptacleMonitor.Replanted ? 4f : 1f;
 		}
 
 		public class States : GameStateMachine<States, StatesInstance, Coral>

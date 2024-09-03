@@ -55,8 +55,8 @@ namespace Beached.Content.Scripts
 					.Enter(smi =>
 					{
 						Log.Debug("ENTERED HARVEST");
-						if (!smi.master.soundFx.IsNullOrWhiteSpace())
-							AudioUtil.PlaySound(smi.master.soundFx, smi.transform.position, smi.master.volume);
+						//if (!smi.master.soundFx.IsNullOrWhiteSpace())
+						//AudioUtil.PlaySound(smi.master.soundFx, smi.transform.position, smi.master.volume);
 					})
 					.EventHandler(GameHashes.AnimQueueComplete, smi => Log.Debug("anim queue completed"))
 					.OnAnimQueueComplete(dead)

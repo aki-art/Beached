@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using Beached.Content.Scripts.Entities.Plant;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
@@ -45,7 +46,17 @@ namespace Beached.Content.Defs.Flora
 				BASE_TRAIT_ID,
 				STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.NAME);
 
-			Object.DestroyImmediate(prefab.GetComponent<MutantPlant>());
+			//Object.DestroyImmediate(prefab.GetComponent<MutantPlant>());
+
+			var latexStorage = prefab.AddComponent<Storage>();
+			latexStorage.storageFilters = [Elements.latex.CreateTag()];
+			latexStorage.capacityKg = 5;
+			latexStorage.allowItemRemoval = true;
+
+			var tap = prefab.AddComponent<RubberTappable>();
+			tap.trackSymbol = "bucket";
+			tap.latexStorage = latexStorage;
+			tap.latexPerCycle = 20;
 
 			return prefab;
 		}

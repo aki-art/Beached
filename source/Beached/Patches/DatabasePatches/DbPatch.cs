@@ -1,10 +1,10 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Buildings;
+using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
 using Database;
 using HarmonyLib;
-using System.Collections.Generic;
 
 namespace Beached.Patches.DatabasePatches
 {
@@ -18,27 +18,17 @@ namespace Beached.Patches.DatabasePatches
 				BRoomTypes.ModifyConstraintRules();
 				BDuplicants.Register(__instance.Personalities);
 
+				Log.Debug("PERSONALITIES");
+				foreach (var personality in __instance.Personalities.resources)
+				{
+					Log.Debug($"- {personality.Id} {personality.nameStringKey} {personality.congenitaltrait}");
+				}
 				BTraits.Register();
 				BCritterTraits.Register();
 				BAccessories.Register(__instance.Accessories, __instance.AccessorySlots);
 
-				var items = __instance.ColonyAchievements.EatkCalFromMeatByCycle100.requirementChecklist;
-
-				foreach (var requirement in items)
-				{
-					if (requirement is EatXCaloriesFromY foodRequirement)
-					{
-						foodRequirement.fromFoodType.AddRange(new List<string>()
-						{
-							SmokedMeatConfig.ID,
-							SmokedFishConfig.ID,
-							HighQualityMeatConfig.ID,
-							LegendarySteakConfig.ID,
-						});
-
-						break;
-					}
-				}
+				AddMeatsToCarnivore(__instance);
+				AddSeedsToGMOOK(__instance);
 
 				RegisterBuildings();
 
@@ -63,6 +53,35 @@ namespace Beached.Patches.DatabasePatches
 				BTags.OnDbInit();
 			}
 
+			private static void AddSeedsToGMOOK(Db instance)
+			{
+				var achievement = instance.ColonyAchievements.GMOOK;
+				achievement.requirementChecklist.Add(new AnalyzeSeed(PoffShroomConfig.ID));
+				achievement.requirementChecklist.Add(new AnalyzeSeed(PipTailConfig.ID));
+				achievement.requirementChecklist.Add(new AnalyzeSeed(AlgaeCellConfig.ID));
+			}
+
+			private static void AddMeatsToCarnivore(Db __instance)
+			{
+				var items = __instance.ColonyAchievements.EatkCalFromMeatByCycle100.requirementChecklist;
+
+				foreach (var requirement in items)
+				{
+					if (requirement is EatXCaloriesFromY foodRequirement)
+					{
+						foodRequirement.fromFoodType.AddRange(
+						[
+							SmokedMeatConfig.ID,
+							SmokedFishConfig.ID,
+							HighQualityMeatConfig.ID,
+							LegendarySteakConfig.ID,
+						]);
+
+						break;
+					}
+				}
+			}
+
 			private static void RegisterBuildings()
 			{
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.POWER, AmmoniaGeneratorConfig.ID, "Default", MethaneGeneratorConfig.ID);
@@ -75,6 +94,9 @@ namespace Beached.Patches.DatabasePatches
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, ChimeConfig.ID, "decor", FlowerVaseConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, SmallAquariumConfig.ID, "decor", FlowerVaseConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.REFINING, MudStomperConfig.ID, FUtility.CONSTS.SUB_BUILD_CATEGORY.Refining.MATERIALS);
+
+
+				FUtility.BuildingUtil.AddToResearch(ChimeConfig.ID, FUtility.CONSTS.TECH.DECOR.INTERIOR_DECOR);
 			}
 		}
 	}

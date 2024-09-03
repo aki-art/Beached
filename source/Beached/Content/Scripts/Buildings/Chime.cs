@@ -1,4 +1,5 @@
-﻿using ImGuiNET;
+﻿using FMOD.Studio;
+using ImGuiNET;
 using System.Runtime.InteropServices;
 
 namespace Beached.Content.Scripts.Buildings
@@ -9,26 +10,25 @@ namespace Beached.Content.Scripts.Buildings
 		private const float SLOW_THRESHOLD = 0.002f;
 		private const float MEDIUM_THRESHOLD = 0.003f;
 		private const float VOLUME_LERP_SPEED = 2f;
+		private EventInstance soundEvent;
 
 		public override void OnSpawn() => smi.StartSM();
 
+		private static float strength = 0f;
 		public void OnImguiDraw()
 		{
-			if (ImGui.Button("Play Test Sound"))
-			{
-				smi.audioPlayer.PlayLoop(ModAssets.Sounds.SHELL_CHIME_LOUD);
-			}
+			ImGui.Text($"Chime Power: {smi.sm.ChimePower(smi.cell)}");
 
-			if (ImGui.Button("Stop Test Sound"))
+			if (ImGui.DragFloat("Chime", ref strength, 0.01f, 0f, 1f))
 			{
-				smi.audioPlayer.Stop();
+				GetComponent<LoopingSounds>().UpdateFirstParameter("event:/beached/SFX/Chimes/Beached_Chime_Loop", "Beached_PressureChange", strength);
 			}
 		}
 
 		public class StatesInstance : GameStateMachine<States, StatesInstance, Chime, object>.GameInstance
 		{
 			public Operational operational;
-			public CustomAudioPlayer audioPlayer;
+			public LoopingSounds loopingSounds;
 			public int cell;
 			public float flowMin;
 			public float flowMax;
@@ -36,7 +36,7 @@ namespace Beached.Content.Scripts.Buildings
 			public StatesInstance(Chime master) : base(master)
 			{
 				master.TryGetComponent(out operational);
-				master.TryGetComponent(out audioPlayer);
+				master.TryGetComponent(out loopingSounds);
 				cell = Grid.CellBelow(Grid.PosToCell(master));
 				flowMin = float.PositiveInfinity;
 				flowMax = float.NegativeInfinity;
@@ -57,8 +57,8 @@ namespace Beached.Content.Scripts.Buildings
 
 				flowing
 					.DefaultState(flowing.still)
-					.Enter(smi => smi.audioPlayer.PlayLoop(ModAssets.Sounds.SHELL_CHIME_LOUD))
-					.Exit(smi => smi.audioPlayer.StopLooping())
+					//.Enter(smi => smi.audioPlayer.PlayLoop(ModAssets.Sounds.SHELL_CHIME_LOUD))
+					//.Exit(smi => smi.audioPlayer.StopLooping())
 					.Update(UpdateFlow, UpdateRate.SIM_200ms)
 					.EventHandlerTransition(GameHashes.OperationalChanged, flowing, (smi, _) => !IsOperational(smi, _));
 
@@ -104,19 +104,19 @@ namespace Beached.Content.Scripts.Buildings
 					{
 						case float i when i > STILL_THRESHOLD && i < SLOW_THRESHOLD:
 							smi.GoTo(smi.sm.flowing.mild);
-							smi.audioPlayer.SetTargetVolume(0.2f, VOLUME_LERP_SPEED);
+							//smi.audioPlayer.SetTargetVolume(0.2f, VOLUME_LERP_SPEED);
 							break;
 						case float i when i > SLOW_THRESHOLD && i < MEDIUM_THRESHOLD:
 							smi.GoTo(smi.sm.flowing.medium);
-							smi.audioPlayer.SetTargetVolume(0.5f, VOLUME_LERP_SPEED);
+							//smi.audioPlayer.SetTargetVolume(0.5f, VOLUME_LERP_SPEED);
 							break;
 						case float i when i > MEDIUM_THRESHOLD:
 							smi.GoTo(smi.sm.flowing.hard);
-							smi.audioPlayer.SetTargetVolume(1f, VOLUME_LERP_SPEED);
+							//smi.audioPlayer.SetTargetVolume(1f, VOLUME_LERP_SPEED);
 							break;
 						default:
 							smi.GoTo(smi.sm.flowing.still);
-							smi.audioPlayer.SetTargetVolume(0f, VOLUME_LERP_SPEED);
+							//smi.audioPlayer.SetTargetVolume(0f, VOLUME_LERP_SPEED);
 							break;
 					}
 				}
@@ -124,7 +124,7 @@ namespace Beached.Content.Scripts.Buildings
 			}
 
 			// credit: Asquared
-			unsafe float ChimePower(int cell)
+			unsafe public float ChimePower(int cell)
 			{
 				var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
 				var flowTexVec = vecPtr[cell];

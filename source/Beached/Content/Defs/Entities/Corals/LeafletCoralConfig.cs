@@ -8,8 +8,8 @@ namespace Beached.Content.Defs.Entities.Corals
 	{
 		public const string ID = "Beached_LeafletCoral";
 		public const string SEED_ID = "Beached_LeafletCoralSeed";
-		public const string BASE_TRAIT_ID = "Beached_LeafletCoraOriginal";
-		public const string PREVIEW_ID = "Beached_LeafletCoraPreview";
+		public const string BASE_TRAIT_ID = "Beached_LeafletCoral_Original";
+		public const string PREVIEW_ID = "Beached_LeafletCora_Preview";
 
 		public const float CONVERSION_RATE = 0.5f;
 		public const float SUCC_RATE = 0.01f;
@@ -83,13 +83,16 @@ namespace Beached.Content.Defs.Entities.Corals
 				height: 0.33f,
 				ignoreDefaultSeedTag: true);
 
-			EntityTemplates.CreateAndRegisterPreviewForPlant(
+			var preview = EntityTemplates.CreateAndRegisterPreviewForPlant(
 				seed,
 				PREVIEW_ID,
 				Assets.GetAnim("beached_leaflet_coral_kanim"),
 				"place",
 				1,
 				1);
+
+			preview.GetComponent<EntityPreview>().objectLayer = ObjectLayer.Plants;
+			preview.GetComponent<OccupyArea>().objectLayers = [ObjectLayer.Plants];
 
 			var storage = prefab.AddOrGet<Storage>();
 			storage.showInUI = true;

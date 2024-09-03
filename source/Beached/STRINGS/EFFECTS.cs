@@ -4,6 +4,18 @@
 	{
 		public class EFFECTS
 		{
+			public class BEACHED_DAMP_PLANTGROWTHBOOST
+			{
+				public static LocString NAME = "Damp Environment";
+				public static LocString DESC = $"This plant is enjoying a humid atmosphere, boosting its growth.(World Trait: Damp)";
+			}
+
+			public class BEACHED_ARID_PLANTGROWTHPENALTY
+			{
+				public static LocString NAME = "Arid Environment";
+				public static LocString DESC = $"This place is too dry for plants, growth is slowed.(World Trait: Arid)";
+			}
+
 			public class BEACHED_STEPPEDINMUCUS
 			{
 				public static LocString NAME = "Slippery Feet";

@@ -1,4 +1,5 @@
 ﻿using Beached.Content.ModDb;
+using Beached.Content.Scripts;
 using Klei.AI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,11 @@ namespace Beached.Content.Defs.Equipment
 				[
 					GameTags.PedestalDisplayable
 				]);
+
+			equipmentDef.OnEquipCallBack += eq =>
+			{
+				Beached_Mod.Instance.rareJewelleryObjectiveComplete = true;
+			};
 
 			return equipmentDef;
 		}

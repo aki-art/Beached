@@ -18,6 +18,7 @@ namespace Beached.Content.ModDb
 		public static StatusItem plushed;
 		public static StatusItem hunting;
 		public static StatusItem controllerByCollarDispenser;
+		public static StatusItem cultivatingGerms;
 
 		[DbEntry]
 		public static void RegisterMiscStatusItems(MiscStatusItems __instance)
@@ -32,6 +33,20 @@ namespace Beached.Content.ModDb
 				OverlayModes.None.ID);
 
 			__instance.Add(gunked);
+
+			cultivatingGerms = new(
+				"Beached_CultivatingGerms",
+				"CREATURES",
+				string.Empty,
+				StatusItem.IconType.Info,
+				NotificationType.Good,
+				false,
+				OverlayModes.None.ID);
+
+			cultivatingGerms.SetResolveStringCallback(GermCultivator.ResolveStatusItemString);
+
+			__instance.Add(cultivatingGerms);
+
 
 			smoking = new(
 				"Beached_Smoking",

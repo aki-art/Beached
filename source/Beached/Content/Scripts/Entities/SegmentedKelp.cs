@@ -5,7 +5,9 @@ namespace Beached.Content.Scripts.Entities
 {
 	public class SegmentedKelp : SegmentedPlant
 	{
+		[MyCmpReq] private GermCultivator germCultivator;
 		[SerializeField] public float minimumWaterMass;
+		[SerializeField] public Tag dropTag;
 
 		private static readonly List<string> liveSegmentAnims =
 		[
@@ -32,6 +34,23 @@ namespace Beached.Content.Scripts.Entities
 			}
 
 			return Random.Range(1, y);
+		}
+
+		public override void SetLength(int length)
+		{
+			base.SetLength(length);
+			germCultivator.SetCells(GetCells());
+		}
+
+		public override void OnCleanUp()
+		{
+			if (dropTag.IsValid)
+			{
+				if (DebugHandler.InstantBuildMode)
+					return;
+
+				FUtility.Utils.Spawn(dropTag, gameObject);
+			}
 		}
 
 		protected override string GetSegmentAnim(SegmentInfo segment, int totalLength)

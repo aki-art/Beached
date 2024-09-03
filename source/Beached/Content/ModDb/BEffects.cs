@@ -3,6 +3,8 @@
 	public class BEffects
 	{
 		public const string
+			DAMP_PLANTGROWTH = "Beached_Damp_PlantGrowthBoost",
+			ARID_PLANTGROWTH = "Beached_Arid_PlantGrowthPenalty",
 			OCEAN_BREEZE = "Beached_OceanBreeze", // -5% stress/cycle, -10g Oxygen
 			SCARED = "Beached_Scared", // +10% Stress/cycle, +5% Bladder delta
 			SCARED_SIREN = "Beached_Scared_Siren", // +10% Stress/cycle, +5% Bladder delta
@@ -25,6 +27,14 @@
 			var peeDelta = Db.Get().Amounts.Bladder.deltaAttribute.Id;
 			var carryCapacity = Db.Get().Attributes.CarryAmount.Id;
 			var airConsumptionRate = Db.Get().Attributes.AirConsumptionRate.Id;
+
+			new EffectBuilder(DAMP_PLANTGROWTH, 0f, false)
+				.Modifier(Db.Get().Amounts.Maturity.deltaAttribute.Id, 0.05f, true)
+				.Add(set);
+
+			new EffectBuilder(ARID_PLANTGROWTH, 0f, true)
+				.Modifier(Db.Get().Amounts.Maturity.deltaAttribute.Id, -0.05f, true)
+				.Add(set);
 
 			new EffectBuilder(PLUSHIE_PACU, CONSTS.CYCLE_LENGTH, false)
 				.Modifier(airConsumptionRate, -0.005f)

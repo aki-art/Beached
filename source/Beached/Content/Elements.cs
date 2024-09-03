@@ -13,8 +13,9 @@ namespace Beached.Content
 			ammoniaLiquid = ToHash("AmmoniaLiquid"),
 			aquamarine = ToHash("Aquamarine"),
 			ash = ToHash("Ash"),
+			bambooStem = ToHash("BambooStem"),
 			basalt = ToHash("Basalt"),
-			beryllium = ToHash("Beryllium"), // no ore, it comes from beryl
+			beryllium = ToHash("Beryllium"),
 			berylliumGas = ToHash("BerylliumGas"),
 			berylliumMolten = ToHash("BerylliumMolten"),
 			bismuth = ToHash("Bismuth"),
@@ -30,6 +31,8 @@ namespace Beached.Content
 			calciumGas = ToHash("CalciumGas"),
 			coquina = ToHash("Coquina"),
 			crackedNeutronium = ToHash("CrackedNeutronium"),
+			fuzz = ToHash("Fuzz"),
+			galena = ToHash("Galena"),
 			gravel = ToHash("Gravel"),
 			iridium = ToHash("Iridium"),
 			moltenIridium = ToHash("MoltenIridium"),
@@ -97,6 +100,7 @@ namespace Beached.Content
 			{ sulfurousIce, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
 			{ SimHashes.Tungsten, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
 			{ SimHashes.Wolframite, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
+			{ zirconium, CONSTS.CORROSION_VULNERABILITY.NONREACTIVE },
 
 			// very reactive
 			{ SimHashes.Algae, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
@@ -248,6 +252,7 @@ namespace Beached.Content
 			var lime = ElementLoader.GetElement(SimHashes.Lime.CreateTag());
 			var diamond = ElementLoader.GetElement(SimHashes.Diamond.CreateTag());
 			var abyssalite = ElementLoader.GetElement(SimHashes.Katairite.CreateTag());
+			var woodLog = ElementLoader.GetElement(SimHashes.WoodLog.CreateTag());
 
 			if (isBeachedWorld || Mod.settings.CrossWorld.Elements.CrystalCategory)
 			{
@@ -270,6 +275,9 @@ namespace Beached.Content
 				lime.highTemp = Mod.settings.CrossWorld.Elements.originalLimeHighTemp;
 				lime.highTempTransition = ElementLoader.GetElement(Mod.settings.CrossWorld.Elements.originalLimeHighTempTarget);
 			}
+
+			// todo: settings specific
+			woodLog.highTempTransition = ElementLoader.FindElementByHash(ash);
 
 			var substanceTable = Assets.instance.substanceTable;
 			substanceTable.GetSubstance(SimHashes.Water).colour = ModAssets.Colors.water;

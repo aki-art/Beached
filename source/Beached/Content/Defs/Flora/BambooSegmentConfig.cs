@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities.Plant;
+﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.SegmentedEntities;
 using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
@@ -36,10 +37,10 @@ namespace Beached.Content.Defs.Flora
 				ObjectLayer.Plants
 			];
 
-			/*			var randomAnimSelector = prefab.AddOrGet<RandomSymbolVisible>();
-						randomAnimSelector.targetSymbols = liveSegmentAnims;
-						randomAnimSelector.minVisibleSymbols = 1;
-						randomAnimSelector.maxVisibleSymbols = 3;*/
+			var randomAnimSelector = prefab.AddOrGet<RandomSymbolVisible>();
+			randomAnimSelector.targetSymbols = liveSegmentAnims;
+			randomAnimSelector.minVisibleSymbols = 1;
+			randomAnimSelector.maxVisibleSymbols = 3;
 			/*
 						var stackable = prefab.AddOrGet<Stackable>();
 						stackable.stackTag = BTags.bamboo;
@@ -47,9 +48,17 @@ namespace Beached.Content.Defs.Flora
 						stackable.allowMerging = true;
 						stackable.lethalHighTemperatureK = GameUtil.GetTemperatureConvertedToKelvin(70, GameUtil.TemperatureUnit.Celsius);*/
 
-			var segment = prefab.AddOrGet<LongPlantSegment>();
-			segment.animFileRoot = "beached_bamboo";
-			segment.checkDirectionOnSpawn = Direction.Down;
+			/*			var segment = prefab.AddOrGet<LongPlantSegment>();
+						segment.animFileRoot = "beached_bamboo";
+						segment.isRoot = false;
+						segment.checkDirectionOnSpawn = Direction.Down;
+			*/
+			var ladder = prefab.AddOrGet<Ladder>();
+			ladder.isPole = true;
+			ladder.downwardsMovementSpeedMultiplier = 1.5f;
+			ladder.upwardsMovementSpeedMultiplier = 0.5f;
+
+			prefab.AddOrGet<EntitySegment>();
 
 			prefab.AddTag(BTags.bamboo);
 

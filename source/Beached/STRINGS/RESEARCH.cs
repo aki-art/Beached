@@ -1,6 +1,4 @@
-﻿using FUtility.FLocalization;
-
-namespace Beached
+﻿namespace Beached
 {
 	public partial class STRINGS
 	{

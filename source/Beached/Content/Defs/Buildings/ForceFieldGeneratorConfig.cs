@@ -32,10 +32,11 @@ namespace Beached.Content.Defs.Buildings
 
 		public override void DoPostConfigureComplete(GameObject go)
 		{
-			ForceField forceField = go.AddComponent<ForceField>();
+			var forceField = go.AddComponent<ForceField>();
 			forceField.offset = new Vector3(2.5f, 2.75f);
 			forceField.radiusMultiplier = 1.1f;
 			forceField.distanceFromWorldTop = -20;
+			forceField.cometExplosionMargin = 2f;
 		}
 	}
 }

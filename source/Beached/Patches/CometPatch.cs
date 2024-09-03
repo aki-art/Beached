@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.Scripts;
+using HarmonyLib;
 
 namespace Beached.Patches
 {
@@ -15,23 +16,10 @@ namespace Beached.Patches
 
 				var myWorldId = __instance.GetMyWorldId();
 
-				if (!Beached_Grid.forceFieldLevelPerWorld.TryGetValue(myWorldId, out var forceFieldY))
-					return;
-
-				if (forceFieldY == Beached_Grid.INVALID_FORCEFIELD_OFFSET)
-					return;
-
-				Grid.PosToXY(__instance.transform.position, out _, out var y);
-
-				if (y <= forceFieldY && __instance.TryGetComponent(out PrimaryElement primaryElement))
+				if (Beached_Mod.Instance.forceFields.TryGetValue(myWorldId, out var forceField)
+					&& forceField.IsIntersecting(__instance.gameObject))
 				{
-					var cell = Grid.PosToCell(__instance);
-					var previousCell = Grid.PosToCell(__instance.previousPosition);
-					__instance.Explode(__instance.transform.GetPosition(), cell, previousCell, primaryElement.Element);
-					__instance.hasExploded = true;
-
-					if (__instance.destroyOnExplode)
-						Util.KDestroyGameObject(__instance.gameObject);
+					__instance.Explode();
 				}
 			}
 		}

@@ -19,6 +19,8 @@
 			lifeGoalTrackerUpdate = new("LifeGoalTrackerUpdate"),
 			wishingStarEvent = new("WishingStarEvent"),
 			debugDataChange = new("DebugDataChange"),
+
+			segmentedEntityUpdate = new("SegmentedEntityUpdate"),
 			critterTraitAdded = new("CritterTraitAdded");
 
 		private readonly int value;

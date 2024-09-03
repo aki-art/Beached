@@ -148,6 +148,8 @@ namespace Beached
 		public static class Colors
 		{
 			public static Color
+				beached = Util.ColorFromHex("e99d7f"),
+
 				// elements
 				amber = Util.ColorFromHex("f98f1e"),
 				ammonia = Util.ColorFromHex("4d3b9b"),
@@ -194,7 +196,7 @@ namespace Beached
 				// germs
 				plankton = new Color32(0, 0, 255, 255),
 				limpetEggs = new Color32(255, 225, 185, 255),
-				capSpores = Color.red,
+				capSpores = Util.ColorFromHex("3db1ff"),
 				poffSpores = Color.white,
 				fur = new Color32(210, 40, 180, 255),
 
@@ -307,6 +309,14 @@ namespace Beached
 		private static void LoadSetpieces(AssetBundle bundle)
 		{
 			Prefabs.setpieces = [];
+			var defaultShader = Shader.Find("Sprites/Default");
+			var genericSingleSpriteVista = bundle.LoadAsset<GameObject>("Assets/Prefabs/GenericVista.prefab");
+			var genericSpriteRenderer = genericSingleSpriteVista.transform.Find("Bg").GetComponent<SpriteRenderer>();
+
+			genericSpriteRenderer.material = new Material(defaultShader);
+			genericSpriteRenderer.sprite = Assets.GetSprite("unknown");
+
+			Prefabs.setpieces.Add("generic", genericSingleSpriteVista);
 
 			var beachSetPiece = bundle.LoadAsset<GameObject>("Assets/Prefabs/BeachVista.prefab");
 			//beachSetPiece.GetComponent<Transform>().localScale *= 2f;
@@ -318,7 +328,7 @@ namespace Beached
 				if (renderer.gameObject.name == "bg 1")
 				{
 					var texture = renderer.material.mainTexture;
-					renderer.material.shader = Shader.Find("Sprites/Default");
+					renderer.material.shader = defaultShader;
 					renderer.material.mainTexture = texture;
 				}
 

@@ -5,7 +5,8 @@ Shader "Unlit/Beached_Parallax"
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		_Distance("Distance", Range(0, 1)) = 0.5
+		_Distance("Distance", Range(-1, 1)) = 0.5
+		_ColorOverlay("Color Overlay", Color) = (1.0, 1.0, 1.0, 1.0)
 	}
 
 		SubShader
@@ -38,6 +39,7 @@ Shader "Unlit/Beached_Parallax"
 				sampler2D _MainTex;
 				float4 _MainTex_ST;
 				float _Distance;
+				fixed4 _ColorOverlay;
 
 				half4 matrixPos(half4 vertexPos, half3 vertexWorld, half3 cam)
 				{
@@ -62,11 +64,12 @@ Shader "Unlit/Beached_Parallax"
 					return o;
 				}
 
+				uniform float4 _Beached_TimeOfDayColor;
 
 				fixed4 frag(v2f i) : SV_Target
 				{
 					fixed4 col = tex2D(_MainTex, i.uv);
-					return col;
+					return col * _Beached_TimeOfDayColor;
 				}
 				ENDCG
 			}

@@ -23,8 +23,12 @@ namespace Beached.Content.Scripts.Entities
 		[Serialize] public int length;
 
 		public int topCell;
+		public int baseCell;
+		private HashSet<int> cells = [];
 
 		private int debugPreviousLength; // to check if the length was set from debug window
+
+		public HashSet<int> GetCells() => cells;
 
 		public SegmentedPlant()
 		{
@@ -85,7 +89,9 @@ namespace Beached.Content.Scripts.Entities
 			var cellOffsets = new CellOffset[length];
 			for (int y = 0; y < length; y++)
 			{
-				cellOffsets[y] = new CellOffset(0, y);
+				var cellOffset = new CellOffset(0, y);
+				cellOffsets[y] = cellOffset;
+				cells.Add(Grid.OffsetCell(baseCell, cellOffset));
 			}
 
 			occupyArea.SetCellOffsets(cellOffsets);
@@ -106,6 +112,7 @@ namespace Beached.Content.Scripts.Entities
 
 		public override void OnSpawn()
 		{
+			baseCell = Grid.PosToCell(this);
 			segments ??= [];
 			base.OnSpawn();
 
@@ -164,7 +171,9 @@ namespace Beached.Content.Scripts.Entities
 				segment.animLink = new KAnimLink(animController, segment.animController);
 			}
 
-			segment.animController.Play(GetSegmentAnim(segment, length));
+			var speed = Random.Range(0.8f, 1.0f);
+
+			segment.animController.Play(GetSegmentAnim(segment, length), KAnim.PlayMode.Loop, speed);
 		}
 
 		protected abstract string GetSegmentAnim(SegmentInfo segment, int totalDistance);
@@ -200,6 +209,7 @@ namespace Beached.Content.Scripts.Entities
 			];
 
 			animController.initialAnim = GetSegmentAnim(info, length);
+			animController.randomiseLoopedOffset = true;
 
 			go.SetActive(true);
 

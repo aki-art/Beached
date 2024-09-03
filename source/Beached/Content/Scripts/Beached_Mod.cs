@@ -1,12 +1,14 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿using Beached.Content.Scripts.Buildings;
+using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Fx;
 using KSerialization;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
 	[SerializationConfig(MemberSerialization.OptIn)]
-	public class Beached_Mod : KMonoBehaviour
+	public class Beached_Mod : KMonoBehaviour, IRender200ms
 	{
 		public static Beached_Mod Instance;
 
@@ -22,7 +24,17 @@ namespace Beached.Content.Scripts
 		public Camera waterCamera;
 		private RenderTexture waterTarget;
 		private Texture2D debugWaterTex;
-		private CameraRenderTexture render;
+
+		public bool isDampWorld;
+		private bool shaderPropertyUpdated;
+
+		public static float tempDayTimeProgress;
+
+		[Serialize] public int tallestBambooGrown;
+		[Serialize] public bool rareJewelleryObjectiveComplete;
+		private Gradient overlayGradient;
+
+		public Dictionary<int, ForceField> forceFields = [];
 
 		public override void OnPrefabInit()
 		{
@@ -43,8 +55,24 @@ namespace Beached.Content.Scripts
 			treasury.Configure();
 
 			childGo.AddOrGet<KelpSubmersionMonitorUpdater>();
-
 			childGo.AddOrGet<TileUpdater>();
+
+			// todo: maybe a simple lerp is good enough here
+			var dayTime = Util.ColorFromHex("C8AB9B");
+			var nightTime = Util.ColorFromHex("A5CAFF");
+
+			overlayGradient = new Gradient
+			{
+				colorKeys =
+				[
+					new GradientColorKey(dayTime, 0f),
+					new GradientColorKey(nightTime, 1f),
+				],
+				alphaKeys =
+				[
+					new GradientAlphaKey(1f, 0f)
+				]
+			};
 		}
 
 		public void InitWaterCamera(Camera reference)
@@ -71,29 +99,24 @@ namespace Beached.Content.Scripts
 			waterCamera.cullingMask = LayerMask.GetMask(cullingMask);
 		}
 
-		/*		public void RenderDebugWater()
-				{
-					RenderTexture.active = waterTarget;
-
-					GL.Clear(true, true, Color.clear);
-
-					waterCamera.Render();
-
-					var rect = new Rect(0, 0, debugWaterTex.width, debugWaterTex.height);
-					debugWaterTex.ReadPixels(rect, 0, 0);
-					debugWaterTex.Apply();
-
-					ModAssets.SaveImage(debugWaterTex, "watertest_");
-
-					RenderTexture.active = null;
-				}
-		*/
 		public override void OnCleanUp()
 		{
 			Instance = null;
 
 			if (iridescenceEffect != null)
 				Util.KDestroyGameObject(iridescenceEffect.gameObject);
+		}
+
+		public void Render200ms(float dt)
+		{
+			if (Game.Instance == null)
+				return;
+
+			if (Game.Instance.IsPaused && shaderPropertyUpdated)
+				return;
+
+			Shader.SetGlobalColor("_Beached_TimeOfDayColor", overlayGradient.Evaluate(TimeOfDay.Instance.scale));
+			shaderPropertyUpdated = true;
 		}
 	}
 }

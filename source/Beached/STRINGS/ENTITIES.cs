@@ -21,10 +21,31 @@
 				}
 			}
 
+			public class SET_PIECES
+			{
+				public class BEACHED_BEACHSETPIECE
+				{
+					public static LocString NAME = "Cave Vista";
+					public static LocString DESCRIPTION = "A large empty cave system stretches into the far side of the Asteroid. While looking impressive, it has few valuable resources, and it is far too unstable to build inside. There is a faint but constant stream of Oxygen flowing out.";
+				}
+
+				public class BEACHED_ZEOLITESETPIECE
+				{
+					public static LocString NAME = "Geode Vista";
+					public static LocString DESCRIPTION = "A small indent on the wall, filled with green crystals of Zeolite.";
+				}
+			}
+
 			public class BEACHED_UNCONSCIOUS_CRITTERS
 			{
 				public static LocString NAME = "Unconscious Critters";
 				public static LocString DESCRIPTION = "Two sleeping creatures were thawed from the ice.";
+			}
+
+			public class BEACHED_SKELETON_CHAIR
+			{
+				public static LocString NAME = "Skeleton";
+				public static LocString DESCRIPTION = "These bones have the shape and proportions of an average Duplicant... it's probably a coincidence.";
 			}
 		}
 	}

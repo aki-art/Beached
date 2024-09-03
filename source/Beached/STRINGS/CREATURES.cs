@@ -33,6 +33,12 @@ namespace Beached
 					public static LocString GLOBAL = "It will leave {MinCount} total critters alive in it's encluse, regardless of species.";
 				}
 
+				public class BEACHED_CULTIVATINGGERMS
+				{
+					public static LocString NAME = "{Germ} Habitat";
+					public static LocString TOOLTIP = "This object is providing an ideal environment to {Germ}, boosting their reproduction rate.";
+				}
+
 				public class BEACHED_GENETICALLYMODIFIED
 				{
 					public static LocString NAME = "Genetically Altered";
@@ -249,7 +255,7 @@ namespace Beached
 
 					public class BEACHED_CELLALGAE
 					{
-						public static LocString NAME = FormatAsLink("Small Cell", CellAlgaeConfig.ID);
+						public static LocString NAME = FormatAsLink("Small Cell", Content.Defs.Flora.AlgaeCellConfig.ID);
 						public static LocString DESC = "...";
 					}
 
@@ -290,7 +296,7 @@ namespace Beached
 
 				public class BEACHED_CELLALGAE
 				{
-					public static LocString NAME = FormatAsLink("Bubble Algae", CellAlgaeConfig.ID);
+					public static LocString NAME = FormatAsLink("Bubble Algae", Content.Defs.Flora.AlgaeCellConfig.ID);
 					public static LocString DESCRIPTION = "...";
 					public static LocString DOMESTICATEDDESC = "...";
 				}
@@ -373,14 +379,14 @@ namespace Beached
 
 				public class BEACHED_KELP
 				{
-					public static LocString NAME = "Kelp";
+					public static LocString NAME = FormatAsLink("Sea Weed", KelpConfig.ID);
 					public static LocString DESC = "...";
 				}
 
 
 				public class BEACHED_WATERCUPS
 				{
-					public static LocString NAME = "Watercups";
+					public static LocString NAME = FormatAsLink("Watercups", WaterCupsConfig.ID);
 					public static LocString DESC = "...";
 					public static LocString DOMESTICATEDDESC = "...";
 				}

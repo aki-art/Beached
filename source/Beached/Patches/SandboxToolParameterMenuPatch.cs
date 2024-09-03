@@ -45,7 +45,7 @@ namespace Beached.Patches
 			StrangeMatterAmuletConfig.ID,
 
 			// Plants & Creatures
-			CellAlgaeConfig.ID,
+			Content.Defs.Flora.AlgaeCellConfig.ID,
 			GlowCapConfig.ID,
 			LeafletCoralConfig.ID,
 			MusselSproutConfig.ID,
@@ -57,17 +57,11 @@ namespace Beached.Patches
 			BambooConfig.ID,
 			PurpleHangerConfig.ID,
 
-			// setpieces
-			SetPiecesConfig.TEST,
-			SetPiecesConfig.BEACH,
-			SetPiecesConfig.ZEOLITE,
-
 			// genetic samples
 			GeneticSamplesConfig.EVERLASTING,
 			GeneticSamplesConfig.MEATY,
 
 			// misc
-			ForceFieldConfig.ID,
 			SmokerConfig.ID,
 			SandySeashellsConfig.SEASHELL,
 			SandySeashellsConfig.SLICKSHELL,
@@ -80,6 +74,7 @@ namespace Beached.Patches
 			FueNestConfig.ID,
 			FueFuzzWallConfig.ID,
 			SleepingMuffinsConfig.ID,
+			SkeletonChairConfig.ID,
 		];
 
 		private static readonly HashSet<Tag> FOOD =
@@ -96,7 +91,8 @@ namespace Beached.Patches
 			BerryJellyConfig.ID,
 			MusselTongueConfig.ID,
 			SpongeCakeConfig.ID,
-			PipShootConfig.ID
+			PipShootConfig.ID,
+			RawKelpConfig.ID,
 		];
 
 		private static readonly HashSet<Tag> FAUNA =
@@ -110,7 +106,7 @@ namespace Beached.Patches
 
 		private static readonly HashSet<Tag> FLORA =
 		[
-			CellAlgaeConfig.ID,
+			Content.Defs.Flora.AlgaeCellConfig.ID,
 			GlowCapConfig.ID,
 			LeafletCoralConfig.ID,
 			MusselSproutConfig.ID,

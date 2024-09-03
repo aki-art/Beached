@@ -31,7 +31,7 @@ namespace Beached.Content.Defs.Flora
 			prefab.AddOrGet<Prioritizable>();
 			var uprootable = prefab.AddOrGet<UprootableWithDramaticDeath>();
 			uprootable.deathAnimation = "harvest";
-			uprootable.deathSoundFx = ModAssets.Sounds.MUSSEL_SPROUT_HARVEST;
+			//uprootable.deathSoundFx = ModAssets.Sounds.MUSSEL_SPROUT_HARVEST;
 			prefab.AddOrGet<UprootedMonitor>();
 			prefab.AddOrGet<Harvestable>();
 			prefab.AddOrGet<HarvestDesignatable>();

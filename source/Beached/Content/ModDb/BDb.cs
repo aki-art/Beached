@@ -46,13 +46,26 @@ namespace Beached.Content.ModDb
 				.Build();
 			}
 
+			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, 40f)
+				.Input(Elements.aquamarine.CreateTag(), 100f)
+				.Output(Elements.beryllium.CreateTag(), 100f, ComplexRecipe.RecipeElement.TemperatureOperation.AverageTemperature)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
+				.Build();
+
+			RecipeBuilder.Create(RockCrusherConfig.ID, global::STRINGS.BUILDINGS.PREFABS.ROCKCRUSHER.METAL_RECIPE_DESCRIPTION, 40f)
+				.Input(Elements.aquamarine.CreateTag(), 100f)
+				.Output(Elements.beryllium.CreateTag(), 50f, ComplexRecipe.RecipeElement.TemperatureOperation.AverageTemperature)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
+				.Build();
+
+
 			ZincAndCopperToBrass();
 			BoneToCalcium();
 		}
 
 		private static void BoneToCalcium()
 		{
-			RecipeBuilder.Create(MetalRefineryConfig.ID, STRINGS.ELEMENTS.CALCIUMMOLTEN.DESC, 40f)
+			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, 40f)
 				.Input(Elements.bone.CreateTag(), 100f)
 				.Output(Elements.moltenCalcium.CreateTag(), 50f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
@@ -61,7 +74,7 @@ namespace Beached.Content.ModDb
 
 		private static void ZincAndCopperToBrass()
 		{
-			RecipeBuilder.Create(MetalRefineryConfig.ID, Strings.Get("STRINGS.ELEMENTS.BEACHED_BRASS.DESCRIPTION"), 40f)
+			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, 40f)
 				.Input(Elements.zinc.CreateTag(), 50f)
 				.Input(SimHashes.Copper.CreateTag(), 100f)
 				.Output(Elements.brass.CreateTag(), 150f)
@@ -88,6 +101,13 @@ namespace Beached.Content.ModDb
 				.Input(JellyConfig.ID, 1f)
 				.Input(PrickleFruitConfig.ID, 2f)
 				.Output(BerryJellyConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SALTRUBBEDJELLY.DESC, 40f)
+				.Input(JellyConfig.ID, 1f)
+				.Input(SimHashes.Salt.CreateTag(), 5f)
+				.Output(SaltRubbedJellyConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 

@@ -70,6 +70,7 @@ namespace Beached.Content.Scripts
 			pearlMat.alpha.SetColor("_ShineColour", pearlEdgeColor);
 			pearlMat.opaque.SetColor("_ShineColour", pearlCenterColor);
 		}
+
 		private static void UpdateBismuth(Dictionary<SimHashes, GroundRenderer.Materials> materials, float t)
 		{
 			var bismuthColor = Color.Lerp(Color.red, Color.green, t);

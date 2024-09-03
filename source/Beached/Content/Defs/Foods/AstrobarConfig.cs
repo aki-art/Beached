@@ -32,8 +32,8 @@ namespace Beached.Content.Defs.Foods
 
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
-		public void OnPrefabInit(GameObject inst) { }
+		public void OnPrefabInit(GameObject _) { }
 
-		public void OnSpawn(GameObject inst) { }
+		public void OnSpawn(GameObject _) { }
 	}
 }

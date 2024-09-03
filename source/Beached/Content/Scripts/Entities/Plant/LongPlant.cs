@@ -77,12 +77,15 @@ namespace Beached.Content.Scripts.Entities.Plant
 				var newSegmentGo = MiscUtil.Spawn(growPrefab, Grid.CellToPos(cell));
 				if (newSegmentGo.TryGetComponent(out LongPlantSegment newSegment))
 					Attach(newSegment);
+
+				cachedLength++;
 			}
 		}
 
 		private bool IsValidGrowthCell(int cell)
 		{
-			return Grid.IsValidCellInWorld(cell, this.GetMyWorldId()) && (Grid.IsGas(cell) || Grid.Mass[cell] == 0);
+			return Grid.IsValidCellInWorld(cell, this.GetMyWorldId())
+				&& (Grid.IsGas(cell) || Grid.Mass[cell] == 0);
 		}
 
 		public void GrowToRandomLength(int min, int max)

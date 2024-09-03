@@ -1,4 +1,4 @@
-﻿using Beached.Content.Scripts.Entities.Plant;
+﻿using Beached.Content.Scripts.SegmentedEntities;
 using TUNING;
 using UnityEngine;
 
@@ -52,22 +52,28 @@ namespace Beached.Content.Defs.Flora
 			var kbac = prefab.AddOrGet<KBatchedAnimController>();
 			kbac.randomiseLoopedOffset = true;
 
-			var segment = prefab.AddOrGet<LongPlantSegment>();
-			segment.isRoot = true;
-			segment.animFileRoot = "beached_bamboo";
+			/*			var segment = prefab.AddOrGet<LongPlantSegment>();
+						segment.isRoot = true;
+						segment.animFileRoot = "beached_bamboo";
 
-			var longPlant = prefab.AddOrGet<LongPlant>();
-			longPlant.growPrefab = BambooSegmentConfig.ID;
-			longPlant.connectTag = BTags.bamboo;
-			longPlant.maxLength = 128;
-			longPlant.growthDirection = Direction.Up;
+						var longPlant = prefab.AddOrGet<LongPlant>();
+						longPlant.growPrefab = BambooSegmentConfig.ID;
+						longPlant.connectTag = BTags.bamboo;
+						longPlant.maxLength = 128;
+						longPlant.growthDirection = Direction.Up;*/
+
+			var root = prefab.AddOrGet<BambooRoot>();
+			root.segmentPrefab = BambooSegmentConfig.ID;
+			root.maxLength = 128;
+
+			prefab.AddOrGet<EntitySegment>();
 
 			//kbac.animWidth = 0.75f;
-			/*
-						var ladder = prefab.AddOrGet<Ladder>();
-						ladder.isPole = true;
-						ladder.downwardsMovementSpeedMultiplier = 1.5f;
-						ladder.upwardsMovementSpeedMultiplier = 0.5f;*/
+
+			var ladder = prefab.AddOrGet<Ladder>();
+			ladder.isPole = true;
+			ladder.downwardsMovementSpeedMultiplier = 1.5f;
+			ladder.upwardsMovementSpeedMultiplier = 0.5f;
 
 			prefab.AddTag(BTags.bamboo);
 

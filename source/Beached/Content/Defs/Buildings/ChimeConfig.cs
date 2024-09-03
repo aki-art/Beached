@@ -1,5 +1,4 @@
-﻿using Beached.Content.Scripts;
-using Beached.Content.Scripts.Buildings;
+﻿using Beached.Content.Scripts.Buildings;
 using TUNING;
 using UnityEngine;
 
@@ -39,7 +38,12 @@ namespace Beached.Content.Defs.Buildings
 		public override void DoPostConfigureComplete(GameObject go)
 		{
 			go.AddOrGet<Chime>();
-			go.AddOrGet<CustomAudioPlayer>();
+			//go.AddOrGet<CustomAudioPlayer>();
+		}
+
+		public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
+		{
+			go.AddOrGet<LoopingSounds>();
 		}
 	}
 }
