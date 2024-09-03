@@ -101,11 +101,16 @@ namespace Beached.Content.Scripts.SegmentedEntities
 
 		public void ConnectSegment(EntitySegment segment, bool isDeserializing)
 		{
+			if (segment == null) return;
+			segments ??= [];
+
 			segments.Add(segment);
 			segment.SetRoot(this);
 
 			if (!isDeserializing && segment != this)
+			{
 				segmentsSerialized.Add(new Ref<EntitySegment>(segment));
+			}
 		}
 
 		public virtual int GetLength() => segments.Count;

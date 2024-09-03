@@ -1,0 +1,36 @@
+tags:
+  - Wet
+  - AllowExceedNodeBorders
+shape: ShortWide
+borders:
+  - 1
+  - 1
+blobSize:
+  min: 4
+  max: 7
+ElementChoiceGroups:
+  RoomCenterElements:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Ammonia
+        weight: 1.0
+      - element: Beached_Ash
+        weight: 0.1
+  RoomBorderChoices0:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Rot
+        weight: 0.7
+#        overrides:
+#          massOverride: 900
+      - element: Lime
+        weight: 0.3
+  RoomBorderChoices1:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Rot
+        weight: 0.2
+#        overrides:
+#          massOverride: 875
+      - element: Lime
+        weight: 0.8

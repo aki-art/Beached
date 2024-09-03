@@ -1,0 +1,30 @@
+tags:
+  - Wet
+  - AllowExceedNodeBorders
+shape: Circle
+borders:
+  - 2
+  - 1
+blobSize:
+  min: 4
+  max: 5
+ElementChoiceGroups:
+  RoomCenterElements:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Chlorine
+        weight: 1.0
+      - element: Beached_SulfurousWater
+        weight: 0.1
+  RoomBorderChoices0:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Zeolite
+        weight: 1
+#        overrides:
+#          massOverride: 900
+  RoomBorderChoices1:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Katairite
+        weight: 0.75

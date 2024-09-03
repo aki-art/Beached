@@ -1,0 +1,15 @@
+TerrainBiomeLookupTable:
+  add:
+    Basic:
+    - content: Dirt
+      bandSize: 0.3
+    - content: Beached_Gravel
+      bandSize: 0.2
+    - content: Beached_Galena
+      bandSize: 0.4
+    - content: Fertilizer
+      bandSize: 0.3
+    - content: Beached_Moss
+      bandSize: 0.5
+    - content: CarbonDioxide
+      bandSize: 7

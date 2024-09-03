@@ -1,0 +1,27 @@
+elements:
+  - elementId: Beached_Ash
+    name: Ash
+    color: 8a8e9d
+    unstableColorTint: 8a8e9d
+    specificHeatCapacity: 0.2
+    thermalConductivity: 2
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1000
+    strength: 0.1
+    highTemp: 1170C
+    highTempTransitionTarget: Magma
+    defaultTemperature: 26.85C
+    defaultMass: 200
+    maxMass: 800
+    hardness: 1
+    molarMass: 50
+    lightAbsorptionFactor: 1
+    minHorizontalFlow: 50
+    radiationAbsorptionFactor: 0.7
+    radiationPer1000Mass: 0
+    materialCategory: Other
+    tags:
+    - Unstable
+    buildMenuSort: 2
+    state: Solid

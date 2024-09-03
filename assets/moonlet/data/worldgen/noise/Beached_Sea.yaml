@@ -1,0 +1,167 @@
+settings:
+  zoom: 0.100000001
+  normalise: false
+  seamless: false
+  lowerBound:
+    X: 2
+    Y: 2
+  upperBound:
+    X: 4
+    Y: 4
+  name: Untitled
+  pos:
+    X: 0
+    Y: 0
+links:
+- target:
+    type: Filter
+    name: RidgedMultiFractal_mQIBucWx
+  source0:
+    type: Primitive
+    name: SimplexPerlin_bNfDPW6A
+- target:
+    type: Combiner
+    name: Add_GFhDI199
+  source0:
+    type: Filter
+    name: RidgedMultiFractal_mQIBucWx
+  source1:
+    type: Modifier
+    name: Scale2D_OPYo82dv
+- target:
+    type: Combiner
+    name: Multiply_9fOiiVkF
+  source0:
+    type: Primitive
+    name: SimplexPerlin_Yfcm4vHf
+  source1:
+    type: Primitive
+    name: Constant_Rry1SYZm
+- target:
+    type: Combiner
+    name: Add_H7s+2Zxq
+  source0:
+    type: Combiner
+    name: Add_GFhDI199
+  source1:
+    type: Primitive
+    name: Constant_kyZXe518
+- target:
+    type: Modifier
+    name: Scale2D_tuOP4OvX
+  source0:
+    type: Combiner
+    name: Add_H7s+2Zxq
+- target:
+    type: Modifier
+    name: Scale2D_OPYo82dv
+  source0:
+    type: Combiner
+    name: Multiply_9fOiiVkF
+- target:
+    type: Terminator
+    name: TERMINATOR
+  source0:
+    type: Modifier
+    name: Scale2D_tuOP4OvX
+primitives:
+  SimplexPerlin_bNfDPW6A:
+    primative: SimplexPerlin
+    quality: Fast
+    seed: 0
+    offset: 1
+    name: SimplexPerlin_bNfDPW6A
+    pos:
+      X: 117.19490998707668
+      Y: 154.5432130443958
+  Spheres_lGRhHr00:
+    primative: Spheres
+    quality: Fast
+    seed: 0
+    offset: 1
+    name: Spheres_lGRhHr00
+    pos:
+      X: 71.476068039110118
+      Y: 497.12182171591041
+  SimplexPerlin_Yfcm4vHf:
+    primative: SimplexPerlin
+    quality: Fast
+    seed: 0
+    offset: 1
+    name: SimplexPerlin_Yfcm4vHf
+    pos:
+      X: 473.51813554651682
+      Y: 975.62833137455414
+  Constant_Rry1SYZm:
+    primative: Constant
+    quality: Fast
+    seed: 0
+    offset: 0.150000006
+    name: Constant_Rry1SYZm
+    pos:
+      X: 495.17345008270649
+      Y: 1341.1372823683496
+  Constant_kyZXe518:
+    primative: Constant
+    quality: Fast
+    seed: 0
+    offset: -0.400000006
+    name: Constant_kyZXe518
+    pos:
+      X: 1344.6775346329748
+      Y: 1153.121288188838
+filters:
+  RidgedMultiFractal_mQIBucWx:
+    filter: RidgedMultiFractal
+    frequency: 0.200000003
+    lacunarity: 3
+    octaves: 10
+    offset: 1
+    gain: 0
+    exponent: 1
+    name: RidgedMultiFractal_mQIBucWx
+    pos:
+      X: 715.47520570165682
+      Y: 323.74075322492951
+transformers: {}
+selectors: {}
+modifiers:
+  Scale2D_tuOP4OvX:
+    modifyType: Scale2d
+    scale2d:
+      X: 2
+      Y: 2
+    name: Scale2D_tuOP4OvX
+    pos:
+      X: 1852.7360478825196
+      Y: 884.29421078980704
+  Scale2D_OPYo82dv:
+    modifyType: Scale2d
+    scale2d:
+      X: 0.5
+      Y: 0.5
+    name: Scale2D_OPYo82dv
+    pos:
+      X: 1172.0362922666245
+      Y: 1356.5913238348935
+combiners:
+  Add_GFhDI199:
+    combineType: Add
+    name: Add_GFhDI199
+    pos:
+      X: 1346.9628392848847
+      Y: 810.59505204064396
+  Multiply_9fOiiVkF:
+    combineType: Multiply
+    name: Multiply_9fOiiVkF
+    pos:
+      X: 851.88618095225502
+      Y: 1108.4041357043213
+  Add_H7s+2Zxq:
+    combineType: Add
+    name: Add_H7s+2Zxq
+    pos:
+      X: 1606.1057016448767
+      Y: 954.58385946753515
+floats: {}
+controlpoints: {}

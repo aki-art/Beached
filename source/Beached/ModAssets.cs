@@ -252,7 +252,7 @@ namespace Beached
 
 			//var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
 			Log.Debug("loading set pieces");
-			LoadSetpieces(bundle2);
+			LoadSetpieces(bundle2, sharedAssetsBundle);
 
 			Log.Debug("loading 3D models");
 			Prefabs.forceFieldDome = bundle2.LoadAsset<GameObject>("Assets/Prefabs/Smaller Wider Dome.prefab");
@@ -306,7 +306,7 @@ namespace Beached
 			Log.Info($"Finished loading assets. It took {sw.ElapsedMilliseconds} ms");
 		}
 
-		private static void LoadSetpieces(AssetBundle bundle)
+		private static void LoadSetpieces(AssetBundle bundle, AssetBundle sharedAssetsBundle)
 		{
 			Prefabs.setpieces = [];
 			var defaultShader = Shader.Find("Sprites/Default");
@@ -322,19 +322,20 @@ namespace Beached
 			//beachSetPiece.GetComponent<Transform>().localScale *= 2f;
 			//var setPieceMaterial = new Material(bundle.LoadAsset<Shader>("Assets/Beached/fx/parallax/BeachedParallax.shader"));
 
-			foreach (var renderer in beachSetPiece.GetComponents<SpriteRenderer>())
-			{
-				// reference to built in shaders are lost so reassigning it here
-				if (renderer.gameObject.name == "bg 1")
-				{
-					var texture = renderer.material.mainTexture;
-					renderer.material.shader = defaultShader;
-					renderer.material.mainTexture = texture;
-				}
+			/*			foreach (var renderer in beachSetPiece.GetComponents<SpriteRenderer>())
+						{
+							// reference to built in shaders are lost so reassigning it here
+							if (renderer.gameObject.name == "bg 1")
+							{
+								var texture = renderer.material.mainTexture;
+								renderer.material.shader = defaultShader;
+							}
 
-				renderer.material.renderQueue = RenderQueues.Liquid;
-			}
+							renderer.material.renderQueue = RenderQueues.Liquid;
+						}
+			*/
 
+			//beachSetPiece.transform.Find("bg 1").GetComponent<SpriteRenderer>().sprite = Assets.GetSprite("beached_beach_cave_outline");
 			Prefabs.setpieces.Add("beach", beachSetPiece);
 		}
 

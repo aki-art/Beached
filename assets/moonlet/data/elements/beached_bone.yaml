@@ -1,0 +1,31 @@
+elements:
+  - elementId: Beached_Bone
+    name: Bone
+    descriptionText: Calcium rich remains of creatures gone.
+    color: d9c396
+    uiColor: 453e30
+    audio:
+      copyElement: Polypropylene
+    specificHeatCapacity: 0.834
+    thermalConductivity: 8
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.2
+    highTemp: 1330
+    highTempTransitionTarget: Beached_MoltenCalcium
+    highTempTransitionOreId: Carbon
+    highTempTransitionOreMassConversion: 14.16% # https://iopscience.iop.org/article/10.1088/1742-6596/1763/1/012061/pdf
+    defaultTemperature: 290
+    defaultMass: 1000
+    maxMass: 1840
+    hardness: 50
+    molarMass: 25
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.7
+    radiationPer1000Mass: 0
+    materialCategory: ConsumableOre
+    tags:
+    - BuildableAny
+    buildMenuSort: 4
+    state: Solid

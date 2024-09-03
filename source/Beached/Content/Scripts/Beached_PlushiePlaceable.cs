@@ -88,7 +88,7 @@ namespace Beached.Content.Scripts
 				link = null;
 			}
 
-			if (plushieId != null)
+			if (plushie != null)
 				Util.KDestroyGameObject(plushie);
 
 			plushieId = null;
@@ -99,6 +99,9 @@ namespace Beached.Content.Scripts
 
 		public override void OnCleanUp()
 		{
+			if (isLoadingScene || Game.IsQuitting() || App.IsExiting)
+				return;
+
 			RemovePlushie();
 			ModCmps.plushiePlaceables.Remove(this);
 			base.OnCleanUp();

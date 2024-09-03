@@ -1,0 +1,25 @@
+# meant to look identical to Frozen Core, but this one is specific to Astropelagos
+name: Frozen Core
+description: ...
+colorHex: 91D8F0
+icon: FrozenCore
+
+exclusiveWithTags:
+  - CoreTrait
+
+traitTags:
+  - VeryCold
+  - Beached_Traits
+  - DoNotGenerate # added to Astropelagos, defined in the world file
+
+additionalSubworldFiles:
+  - name: &frozenSulfur subworlds/beached_sulfur/ThermalVentsFrozen
+
+additionalUnknownCellFilters:
+  - tagcommand: DistanceFromTag
+    command: Replace
+    minDistance: 0
+    maxDistance: 1
+    tag: AtDepths
+    subworldNames:
+      - *frozenSulfur

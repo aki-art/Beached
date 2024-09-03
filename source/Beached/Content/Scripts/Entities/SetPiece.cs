@@ -61,6 +61,7 @@ namespace Beached.Content.Scripts.Entities
 		}
 
 		private static float scale;
+		private static float z;
 
 		public void OnImguiDraw()
 		{
@@ -69,11 +70,16 @@ namespace Beached.Content.Scripts.Entities
 				visualizer.transform.localScale.Set(scale, scale, 1);
 			}
 
-			this.transform.SetPosition(
-				new Vector3(
-					transform.position.x,
-					transform.position.y,
-					Grid.GetLayerZ(Grid.SceneLayer.Backwall) + 0.1f));
+			if (ImGui.DragFloat("z", ref z))
+			{
+				var position = new Vector3(
+					visualizer.transform.position.x,
+					visualizer.transform.position.y,
+					z);
+
+				visualizer.transform.position = position;
+			}
+
 
 			if (ImGui.Button("Fix layer"))
 			{

@@ -1,0 +1,25 @@
+elements:
+  - elementId: Beached_Gravel
+    name: Gravel
+    color: 0.4, 0.4, 0.4
+    specificHeatCapacity: 0.2
+    thermalConductivity: 2
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.2
+    highTemp: 1200
+    highTempTransitionTarget: Magma
+    defaultTemperature: 300
+    defaultMass: 1840
+    maxMass: 1840
+    hardness: 2
+    molarMass: 50
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.7
+    radiationPer1000Mass: 0
+    materialCategory: Filter
+    tags:
+    - Unstable
+    isDisabled: false
+    state: Solid

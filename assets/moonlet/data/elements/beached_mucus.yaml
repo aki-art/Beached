@@ -1,0 +1,65 @@
+elements:
+    - elementId: Beached_Mucus
+      name: Mucus
+      color: &color aacdaa
+      uiColor: &uiColor 455242
+      maxMass: 100
+      rotAtmosphereQuality: Contaminating
+      liquidCompression: 1.01
+      speed: 1
+      minHorizontalFlow: 10
+      minVerticalFlow: 10
+      specificHeatCapacity: 1.55
+      thermalConductivity: 0.45
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 25
+      gasSurfaceAreaMultiplier: 1
+      lowTemp: &meltingPoint 252.5
+      highTemp: 372.5
+      lowTempTransitionTarget: Beached_FrozenMucus
+      highTempTransitionTarget: Steam
+      highTempTransitionOreId: SlimeMold
+      highTempTransitionOreMassConversion: 0.3
+      defaultTemperature: 300
+      defaultMass: 100
+      molarMass: 10
+      toxicity: 0
+      lightAbsorptionFactor: 0.1
+      radiationAbsorptionFactor: 0.6
+      radiationPer1000Mass: 0
+      state: Liquid
+      composition:
+        - elementID: CrudeOil
+          percentage: 0.5
+        - elementID: SlimeMold
+          percentage: 0.3
+        - elementID: DirtyWater
+          percentage: 0.2
+  
+    - elementId: Beached_FrozenMucus
+      name: Frozen Mucus
+      color: *color
+      uiColor: *uiColor
+      specificHeatCapacity: 3.05
+      thermalConductivity: 1
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 1
+      gasSurfaceAreaMultiplier: 1
+      strength: 1
+      highTemp: *meltingPoint
+      highTempTransitionTarget: Beached_Mucus
+      defaultTemperature: 230
+      defaultMass: 500
+      maxMass: 800
+      hardness: 10
+      molarMass: 25
+      lightAbsorptionFactor: 0.8
+      radiationAbsorptionFactor: 0.75
+      radiationPer1000Mass: 0
+      materialCategory: Liquifiable
+      tags:
+      - IceOre
+      - Mixture
+      - BuildableAny
+      buildMenuSort: 5
+      state: Solid

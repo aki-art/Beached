@@ -1,0 +1,150 @@
+MobLookupTable:
+  remove: [] 
+  add:
+    Beached_MusselSprout:
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.6
+      width: 1
+      height: 1
+
+    Beached_BuriedSeashell:
+      prefabName: Beached_Seashell
+      location: Solid
+      selectMethod: Centroid
+      density:
+        min: 0.05
+        max: 0.07
+      width: 1
+      height: 1
+
+    Beached_Seas_TropicalPacu:
+      location: Water
+      selectMethod: Centroid
+      density:
+        min: 0.05
+        max: 0.05
+      width: 1
+      height: 1
+      
+    Beached_SandySeashell:
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.3
+      width: 1
+      height: 1
+
+    Beached_SandySlickshell:
+      prefabName: Beached_SlickShell
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.2
+      width: 1
+      height: 1
+
+    Beached_LeafletCoral:
+      location: LiquidFloor
+      selectMethod: Centroid
+      sampleBehaviour: UniformSpiral
+      blobSize:
+        min: 2
+        max: 5
+      density:
+        min: 0.1
+        max: 0.4
+      width: 1
+      height: 1
+
+    Beached_WaterCups:
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.05
+        max: 0.3
+      width: 1
+      height: 2
+
+    Beached_AlgaeCell:
+      location: LiquidFloor
+      selectMethod: Centroid
+      sampleBehaviour: UniformSpiral
+      blobSize:
+        min: 2
+        max: 5
+      density:
+        min: 0.1
+        max: 0.2
+      width: 1
+      height: 1
+
+    Beached_DewPalm:
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.2
+        max: 0.3
+      width: 2
+      height: 4
+
+    Beached_Bamboo:
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.6
+        max: 1.2
+      width: 1
+      height: 2
+
+    Beached_Kelp:
+      location: LiquidFloor
+      selectMethod: Centroid
+      density:
+        min: 0.4
+        max: 0.8
+      width: 1
+      height: 2
+      
+    Beached_JellyfishStrobila:
+      location: LiquidFloor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.2
+      width: 1
+      height: 2
+      
+    Beached_Jellyfish:
+      location: LiquidFloor
+      selectMethod: Centroid
+      density:
+        min: 0.4
+        max: 0.7
+      width: 1
+      height: 2
+
+    # Beached_Jellyfish_Baby:
+    #   location: Liquid
+    #   selectMethod: Centroid
+    #   density:
+    #     min: 0.2
+    #     max: 0.4
+    #   width: 1
+    #   height: 1
+
+    Beached_BambooForest_Cylindrica:
+      prefabName: Cylindrica
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.2
+      width: 1
+      height: 1
+
+

@@ -1,0 +1,37 @@
+# faster crop growth
+# more water
+# some dirt is converted into slime
+# greater ice mass
+name: Damp
+description: This world is unusually humid, with aiding plant growth.
+colorHex: 008e68
+
+exclusiveWithTags:
+  - Dry
+
+traitTags:
+  - Wet
+
+elementBandModifiers:
+  - element: Water
+    massMultiplier: 1.1
+  - element: DirtyWater
+    massMultiplier: 1.1
+  - element: Beached_MurkyBrine
+    massMultiplier: 1.1
+  - element: Brine
+    massMultiplier: 1.1
+  - element: SaltWater
+    massMultiplier: 1.1
+  - element: Beached_Mucus
+    massMultiplier: 1.1
+  - element: CrudeOil
+    massMultiplier: 1.1
+  - element: DirtyIce
+    massMultiplier: 1.1
+  - element: Snow
+    massMultiplier: 1.3
+  - element: Ice
+    massMultiplier: 1.3
+  - element: BrineIce
+    massMultiplier: 1.3

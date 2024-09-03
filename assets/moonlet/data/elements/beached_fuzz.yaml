@@ -1,0 +1,29 @@
+elements:
+  - elementId: Beached_Fuzz
+    name: Fua Fuzz
+    descriptionText: todo
+    color: c1a788
+    audio:
+      copyElement: Sand
+    specificHeatCapacity: 0.2
+    thermalConductivity: 2
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.2
+    highTemp: 325C
+    highTempTransitionTarget: Carbon
+    defaultTemperature: 290
+    defaultMass: 200
+    maxMass: 300
+    hardness: 2
+    molarMass: 4
+    lightAbsorptionFactor: 100%
+    radiationAbsorptionFactor: 65%
+    radiationPer1000Mass: 0
+    materialCategory: Organics
+    buildMenuSort: 2
+    state: Solid
+    tags:
+      - BuildingFiber
+      - IndustrialIngredient

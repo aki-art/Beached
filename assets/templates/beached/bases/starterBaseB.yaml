@@ -754,7 +754,7 @@ otherEntities:
   units: 1
   type: Other
 - id: Beached_TestSetPiece
-  location_y: 4
+  location_y: 0
   element: Creature
   temperature: 293.000275
   units: 1

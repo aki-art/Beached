@@ -1,0 +1,21 @@
+biomeNoise: noise/Beached_ThermalVents
+temperatureRange: VeryHot
+
+pdWeight: 1
+density:
+  min: 10
+  max: 15
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+
+borderOverride: hardToDig
+BorderOverridePriority: 9999
+
+biomes:
+  - name: biomes/Beached_ThermalVents/Default
+
+tags:
+  - IgnoreCaveOverride
+
+zoneType: Beached_Sulfur

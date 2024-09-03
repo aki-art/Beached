@@ -1,0 +1,118 @@
+elements:
+  - elementId: Beached_ZincOre
+    name: Zinc Ore
+    descriptionText: 'Blue Hemimorphite Zn<sub>4</sub>(Si<sub>2</sub>O<sub>7</sub>)(OH)<sub>2</sub>·H<sub>2</sub>O is an Ore of Zinc. It forms hemimorphic crystals. \n\nIt is suitable for building <link="POWER">Power</link> systems.'
+    specularColor: 02b976
+    specularTexture: beached_zincore_spec
+    color: &color 1eaaaa
+    modifiers:
+      - id: Decor
+        value: 10%
+        isMultiplier: true
+    specificHeatCapacity: &shc 0.388
+    thermalConductivity: 4.0
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.7
+    highTemp: &meltingPoint 692.88
+    highTempTransitionTarget: Beached_ZincMolten
+    defaultTemperature: 28C
+    defaultMass: 870
+    maxMass: 9970
+    hardness: 2
+    molarMass: 196.966569
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.35
+    radiationPer1000Mass: 0
+    materialCategory: Metal
+    tags:
+    - BuildableAny
+    - Moonlet_StarterMetalOre
+    - Ore
+    buildMenuSort: 1
+    state: Solid
+
+  - elementId: Beached_Zinc
+    name: Zinc
+    descriptionText: 
+    color: *color
+    specularColor: 02b976
+    specularTexture: beached_zinc_spec
+    specificHeatCapacity: *shc
+    thermalConductivity: 120
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.7
+    highTemp: *meltingPoint
+    highTempTransitionTarget: Beached_ZincMolten
+    defaultTemperature: 300
+    defaultMass: 870
+    maxMass: 9970
+    hardness: 2
+    molarMass: 196.966569
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.35
+    radiationPer1000Mass: 0
+    materialCategory: RefinedMetal
+    tags:
+    - BuildableAny
+    - Moonlet_StarterMetal
+    buildMenuSort: 3
+    state: Solid
+    
+  - elementId: Beached_ZincMolten
+    name: Molten Zinc
+    color: *color
+    maxMass: 7870
+    liquidCompression: 1.01
+    speed: 100
+    minHorizontalFlow: 30
+    minVerticalFlow: 3
+    specificHeatCapacity: *shc
+    thermalConductivity: 12
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 25
+    gasSurfaceAreaMultiplier: 1
+    lowTemp: *meltingPoint
+    highTemp: &evaporationPoint 1180
+    lowTempTransitionTarget: Beached_Zinc
+    highTempTransitionTarget: Beached_ZincGas
+    defaultTemperature: 2000
+    defaultMass: 1000
+    molarMass: 55.845
+    toxicity: 0
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.77
+    radiationPer1000Mass: 0
+    tags:
+    - Metal
+    - RefinedMetal
+    - EmitsLight
+    state: Liquid
+
+  - elementId: Beached_ZincGas
+    name: Zinc Gas
+    color: *color
+    specificHeatCapacity: *shc
+    thermalConductivity: 3
+    solidSurfaceAreaMultiplier: 25
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    flow: 0.1
+    lowTemp: *evaporationPoint
+    lowTempTransitionTarget: Beached_ZincMolten
+    defaultTemperature: 3200
+    defaultPressure: 202
+    molarMass: 63.546
+    toxicity: 0
+    lightAbsorptionFactor: 0.5
+    radiationAbsorptionFactor: 0.07
+    radiationPer1000Mass: 0
+    materialCategory: Unbreathable
+    tags:
+    - Metal
+    - RefinedMetal
+    - EmitsLight
+    state: Gas

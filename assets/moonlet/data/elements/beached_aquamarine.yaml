@@ -1,0 +1,35 @@
+elements:
+  - elementId: Beached_Aquamarine
+    name: Aquamarine
+    color: 0.05, 1.2, 2.51, 1.0
+    modifiers:
+      - id: Decor
+        value: 40%
+        isMultiplier: true
+    materialReference: Diamond
+    specularColor: 6df0ff
+    specularTexture: beached_aquamarine_spec
+    specificHeatCapacity: 0.2
+    thermalConductivity: 0.79
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 2
+    highTemp: 1650C
+    highTempTransitionTarget: Beached_BerylliumMolten
+    defaultTemperature: 26.85C
+    defaultMass: 700
+    maxMass: 1840
+    hardness: 2
+    molarMass: 50
+    lightAbsorptionFactor: 0.6
+    radiationAbsorptionFactor: 0.7
+    radiationPer1000Mass: 0
+    materialCategory: Beached_Crystal
+    tags:
+    - Transparent
+    # - Metal
+    - BuildableAny
+    - Ore
+    buildMenuSort: 2
+    state: Solid

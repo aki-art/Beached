@@ -23,15 +23,15 @@ namespace Beached.Content.Defs.Entities.SetPieces
 		{
 			return
 			[
-				CreateSetPiece(TEST, 11, 8, "test"),
+				CreateSetPiece(TEST, "farmtile_kanim", 11, 8, "test"),
 				(ConfigureBeachSetPiece()),
-				CreateSetPiece(ZEOLITE, 8, 8, "generic", "beached_zeolitebg")
+				CreateSetPiece(ZEOLITE, "beached_zeolitecave_ui_kanim", 8, 8, "generic", "beached_zeolitebg")
 			];
 		}
 
 		private GameObject ConfigureBeachSetPiece()
 		{
-			var beach = CreateSetPiece(BEACH, 17, 10, "beach");
+			var beach = CreateSetPiece(BEACH, "farmtile_kanim", 17, 10, "beach");
 
 			var emitter = beach.AddComponent<ElementEmitter>();
 			emitter.outputElement = new ElementConverter.OutputElement(0.2f, Elements.saltyOxygen, MiscUtil.CelsiusToKelvin(29));
@@ -60,14 +60,14 @@ namespace Beached.Content.Defs.Entities.SetPieces
 			return beach;
 		}
 
-		private GameObject CreateSetPiece(string ID, int width, int height, string bgPrefabID, string spriteId = null)
+		private GameObject CreateSetPiece(string ID, string uiAnim, int width, int height, string bgPrefabID, string spriteId = null)
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
 				Strings.Get($"STRINGS.ENTITIES.SET_PIECES.{ID.ToUpperInvariant()}.NAME"),
 				Strings.Get($"STRINGS.ENTITIES.SET_PIECES.{ID.ToUpperInvariant()}.DESCRIPTION"),
 				100f,
-				Assets.GetAnim("farmtile_kanim"),
+				Assets.GetAnim(uiAnim),
 				"",
 				Grid.SceneLayer.Backwall,
 				width,
