@@ -25,7 +25,7 @@ namespace Beached.Content.Defs.Foods
 				caloriesRaw = 800f,
 				qualityCooked = 2,
 				caloriesCooked = 1000f
-			}.Effects(DlcManager.AVAILABLE_ALL_VERSIONS, BEffects.OCEAN_BREEZE),
+			},
 			new PoffInfo(Elements.nitrogen)
 			{
 				qualityRaw = 0,

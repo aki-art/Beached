@@ -1,7 +1,10 @@
 elements:
   - elementId: Beached_ZincOre
     name: Zinc Ore
-    descriptionText: 'Blue Hemimorphite Zn<sub>4</sub>(Si<sub>2</sub>O<sub>7</sub>)(OH)<sub>2</sub>·H<sub>2</sub>O is an Ore of Zinc. It forms hemimorphic crystals. \n\nIt is suitable for building <link="POWER">Power</link> systems.'
+    descriptionText: |
+      'Blue Hemimorphite Zn<sub>4</sub>(Si<sub>2</sub>O<sub>7</sub>)(OH)<sub>2</sub>·H<sub>2</sub>O is an Ore of Zinc. It forms hemimorphic crystals.
+      
+      It is suitable for building <link="POWER">Power</link> systems.'
     specularColor: 02b976
     specularTexture: beached_zincore_spec
     color: &color 1eaaaa

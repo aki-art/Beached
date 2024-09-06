@@ -1,14 +1,22 @@
 {
     "GasPermeableMembrane": {
         "Beached_Bismuthinite": {
-            "MainTex": "airflow_bismuthore_main",
-            "TopTex": "airflow_bismuthore_top",
-            "MainSpecular" : "airflow_bismuthore_spec"
+            "MainTex": "airflow_bismuthore_main"
         },
         "Beached_Bismuth": {
-            "MainTex": "airflow_bismuthore_main",
-            "TopTex": "airflow_bismuthore_top",
-            "MainSpecular" : "airflow_bismuthore_spec"
+            "MainTex": "airflow_bismuthore_main"
+        },
+        "Beached_ZincOre": {
+            "MainTex": "airflow_zincore_main"
+        },
+        "Beached_Zinc": {
+            "MainTex": "airflow_zincore_main"
+        },
+        "AurichalciteOre": {
+            "MainTex": "airflow_zincore_main"
+        },
+        "SolidZinc": {
+            "MainTex": "airflow_zincore_main"
         }
     },
     
@@ -26,6 +34,34 @@
             "TopTex": "mesh_bismuthore_top",
             "MainSpecular" : "mesh_bismuthore_spec"
         },
+        "Beached_ZincOre": {
+            "MainTex": "mesh_zincore_main",
+            "TopTex": "mesh_zincore_top",
+            "MainSpecular" : "mesh_zincore_spec",
+            "MainSpecularColor": [0.416, 0.941, 0.863, 1],
+            "TopSpecularColor ": [0.416, 0.941, 0.863, 1]
+        },
+        "Beached_Zinc": {
+            "MainTex": "mesh_zincore_main",
+            "TopTex": "mesh_zincore_top",
+            "MainSpecular" : "mesh_zincore_spec",
+            "MainSpecularColor": [0.416, 0.941, 0.863, 1],
+            "TopSpecularColor ": [0.416, 0.941, 0.863, 1]
+        },
+        "AurichalciteOre": {
+            "MainTex": "mesh_zincore_main",
+            "TopTex": "mesh_zincore_top",
+            "MainSpecular" : "mesh_zincore_spec",
+            "MainSpecularColor": [0.416, 0.941, 0.863, 1],
+            "TopSpecularColor ": [0.416, 0.941, 0.863, 1]
+        },
+        "SolidZinc": {
+            "MainTex": "mesh_zincore_main",
+            "TopTex": "mesh_zincore_top",
+            "MainSpecular" : "mesh_zincore_spec",
+            "MainSpecularColor": [0.416, 0.941, 0.863, 1],
+            "TopSpecularColor ": [0.416, 0.941, 0.863, 1]
+        },
         "Beached_Bismuth": {
             "MainTex": "mesh_bismuthore_main",
             "TopTex": "mesh_bismuthore_top",
@@ -35,12 +71,7 @@
             "MainTex": "mesh_zirconium_main",
             "TopTex": "mesh_zirconium_top",
             "MainSpecular" : "mesh_zirconium_spec",
-            "MainSpecularColor": [
-              2.0,
-              0.0,
-              0.0,
-              1.0
-            ],
+            "MainSpecularColor": [2.0, 0.0, 0.0, 1.0],
             "TopSpecularColor ": [
               2.0,
               0.0,

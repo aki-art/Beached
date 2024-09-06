@@ -22,6 +22,9 @@ namespace Beached.Content.Defs.Entities.Corals
 		{
 			var name = Strings.Get("STRINGS.CORALS." + ID.ToUpperInvariant() + ".NAME");
 			var desc = Strings.Get("STRINGS.CORALS." + ID.ToUpperInvariant() + ".DESCRIPTION");
+			var seedName = Strings.Get("STRINGS.CORALS.FRAGS." + ID.ToUpperInvariant() + ".NAME");
+			var seedDesc = Strings.Get("STRINGS.CORALS.FRAGS." + ID.ToUpperInvariant() + ".DESCRIPTION");
+			var domesticatedDesc = Strings.Get("STRINGS.CORALS." + ID.ToUpperInvariant() + ".DOMESTICATED_DESCRIPTION");
 
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
@@ -76,8 +79,8 @@ namespace Beached.Content.Defs.Entities.Corals
 				prefab,
 				SeedProducer.ProductionType.DigOnly,
 				ID + "Seed",
-				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_LEAFLETCORAL.NAME,
-				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_LEAFLETCORAL.DESC,
+				seedName,
+				seedDesc,
 				Assets.GetAnim("beached_leaflet_coral_frag_kanim"),
 				additionalTags:
 				[
@@ -85,7 +88,7 @@ namespace Beached.Content.Defs.Entities.Corals
 					BTags.coralFrag
 				],
 				sortOrder: 3,
-				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_LEAFLETCORAL.DOMESTICATEDDESC,
+				domesticatedDescription: domesticatedDesc,
 				width: 0.33f,
 				height: 0.33f,
 				ignoreDefaultSeedTag: true);
@@ -124,7 +127,7 @@ namespace Beached.Content.Defs.Entities.Corals
 		public static GameObject Create(string id, float mass, string anim, int width, int height, EffectorValues decor, float defaultTemperature = 293f, string initialAnim = "idle_loop", List<Tag> additionalTags = null, SimHashes[] safeElements = null)
 		{
 			var name = Strings.Get("STRINGS.CORALS." + id.ToUpperInvariant() + ".NAME");
-			var desc = Strings.Get("STRINGS.CORALS." + id.ToUpperInvariant() + ".DESCRIPTION");
+			var desc = Strings.Get("STRINGS.CORALS." + id.ToUpperInvariant() + ".DESC");
 
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				id,
@@ -172,8 +175,8 @@ namespace Beached.Content.Defs.Entities.Corals
 			SingleEntityReceptacle.ReceptacleDirection direction = SingleEntityReceptacle.ReceptacleDirection.Top)
 		{
 			var name = Strings.Get("STRINGS.CORALS.SEED." + id.ToUpperInvariant() + ".NAME");
-			var desc = Strings.Get("STRINGS.CORALS.SEED." + id.ToUpperInvariant() + ".DESCRIPTION");
-			var domesticatedDesc = Strings.Get("STRINGS.CORALS." + id.ToUpperInvariant() + ".DOMESTICATED_DESCRIPTION");
+			var desc = Strings.Get("STRINGS.CORALS.SEED." + id.ToUpperInvariant() + ".DESC");
+			var domesticatedDesc = Strings.Get("STRINGS.CORALS." + id.ToUpperInvariant() + ".DOMESTICATED_DESC");
 
 			var prefab = EntityTemplates.CreateLooseEntity(
 				id,

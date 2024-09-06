@@ -1,4 +1,4 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿/*using Beached.Content.Scripts.Entities;
 using TUNING;
 using UnityEngine;
 
@@ -61,7 +61,8 @@ namespace Beached.Content.Defs.Entities.Corals
 				STRINGS.CREATURES.SPECIES.BEACHED_LEAFLETCORAL.NAME);
 
 			prefab.AddOrGet<SubmersionMonitor>();
-
+			prefab.GetComponent<UprootedMonitor>();
+			prefab.GetComponent<FoundationMonitor>();
 			prefab.AddOrGet<LoopingSounds>();
 
 			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
@@ -133,3 +134,4 @@ namespace Beached.Content.Defs.Entities.Corals
 		}
 	}
 }
+*/

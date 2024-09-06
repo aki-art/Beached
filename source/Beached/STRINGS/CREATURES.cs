@@ -291,7 +291,7 @@ namespace Beached
 				public class BEACHED_LEAFLETCORAL
 				{
 					public static LocString NAME = "Leaflet Coral";
-					public static LocString DESCRIPTION = "A coral with green capitulum resembling cabbage leaves. This coral is lined with a polymetallic outer epidermis, rich in Manganese and Iron, allowing natural slow electrolysis of Water. The plant consumes Hydrogen and releases excess Oxygen in the process.\n" +
+					public static LocString DESC = "A coral with green capitulum resembling cabbage leaves. This coral is lined with a polymetallic outer epidermis, rich in Manganese and Iron, allowing natural slow electrolysis of Water. The plant consumes Hydrogen and releases excess Oxygen in the process.\n" +
 						"\n" +
 						"Inefficiently converts Water into Oxygen.";
 					public static LocString DOMESTICATEDDESC = "...";

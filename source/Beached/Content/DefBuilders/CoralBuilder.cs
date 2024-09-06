@@ -1,6 +1,5 @@
 ﻿using Beached.Content.Defs.Entities.Corals;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.DefBuilders
@@ -23,7 +22,7 @@ namespace Beached.Content.DefBuilders
 		private SimHashes[] safeElements = CoralTemplate.ALL_WATERS;
 		private float minRadiation = 0, maxRadiation = 7500f;
 		private float minPressure = 0, lowPressure = 0.15f;
-		private bool pressureSensitive = true;
+		private bool pressureSensitive = false;
 		private float maxAge = 2400f;
 
 		private float seedW = 0.25f, seedH = 0.25f;
@@ -31,6 +30,15 @@ namespace Beached.Content.DefBuilders
 		private List<Tag> seedTags;
 		private int seedSortOrder = 0;
 		private bool harvestable = false;
+
+		private static readonly SimHashes[] waters =
+			[
+				SimHashes.Water,
+				SimHashes.SaltWater,
+				SimHashes.Brine,
+				SimHashes.DirtyWater,
+				Elements.murkyBrine
+			];
 
 		public CoralBuilder(string ID, string animName)
 		{
@@ -40,8 +48,9 @@ namespace Beached.Content.DefBuilders
 			this.animName = animName;
 			initialAnim = "idle_grown";
 			decor = TUNING.DECOR.NONE;
-			name = Strings.Get($"STRINGS.CORALS.{ID.ToUpperInvariant()}.NAME");
-			description = Strings.Get($"STRINGS.CORALS.{ID.ToUpperInvariant()}.DESCRIPTION");
+			safeElements = waters;
+			name = Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.NAME");
+			description = Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DESC");
 		}
 
 		public CoralBuilder Width(int width)
@@ -64,7 +73,7 @@ namespace Beached.Content.DefBuilders
 
 		public CoralBuilder AddTags(params Tag[] tags)
 		{
-			this.tags.AddRange(tags.ToList());
+			this.tags.AddRange([.. tags]);
 			return this;
 		}
 
@@ -178,7 +187,7 @@ namespace Beached.Content.DefBuilders
 				null,
 				false,
 				true,
-				false,
+				true,
 				true,
 				maxAge,
 				minRadiation,
@@ -188,6 +197,7 @@ namespace Beached.Content.DefBuilders
 
 			prefab.AddOrGet<SubmersionMonitor>();
 			prefab.AddOrGet<LoopingSounds>();
+			prefab.AddOrGet<Prioritizable>();
 
 			if (harvestable)
 			{
@@ -200,10 +210,6 @@ namespace Beached.Content.DefBuilders
 				var name = Strings.Get($"STRINGS.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.NAME");
 				var description = Strings.Get($"STRINGS.CREATURES.SPECIES.SEEDS.{ID.ToUpperInvariant()}.DESC");
 				var domesicatedDesc = Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DOMESTICATEDDESC");
-
-				if (name == null) Log.Warning("name is null");
-				if (description == null) Log.Warning("description is null");
-				if (domesicatedDesc == null) Log.Warning("domesicatedDesc is null");
 
 				seedPrefab = EntityTemplates.CreateAndRegisterSeedForPlant(
 					prefab,

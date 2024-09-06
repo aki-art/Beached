@@ -6,6 +6,7 @@ namespace Beached.Content.Scripts.Entities
 	{
 		[MyCmpReq] private ElementConsumer elementConsumer;
 		[MyCmpReq] private ElementConverter elementConverter;
+		[MyCmpReq] private WiltCondition wiltCondition;
 
 		[SerializeField] public Tag emitTag;
 		[SerializeField] public float emitMass;
@@ -19,6 +20,12 @@ namespace Beached.Content.Scripts.Entities
 		{
 			base.OnSpawn();
 			smi.StartSM();
+		}
+
+		protected void DestroySelf()
+		{
+			CreatureHelpers.DeselectCreature(gameObject);
+			Util.KDestroyGameObject(gameObject);
 		}
 
 		public override void OnPrefabInit()
@@ -42,23 +49,76 @@ namespace Beached.Content.Scripts.Entities
 
 		public class States : GameStateMachine<States, StatesInstance, Coral>
 		{
-			public State alive;
+			public AliveStates alive;
+			public State grow;
 			public State dead;
+			public State test;
+			public State blocked;
 
 			public override void InitializeStates(out BaseState default_state)
 			{
-				default_state = alive;
+				default_state = grow;
+
+				dead
+					.Enter(Die);
+
+				blocked
+					.ToggleStatusItem(Db.Get().MiscStatusItems.RegionIsBlocked)
+					.EventTransition(GameHashes.EntombedChanged, alive, (smi => alive.ForceUpdateStatus(smi.master.gameObject)))
+					.EventTransition(GameHashes.TooColdWarning, alive, (smi => alive.ForceUpdateStatus(smi.master.gameObject)))
+					.EventTransition(GameHashes.TooHotWarning, alive, (smi => alive.ForceUpdateStatus(smi.master.gameObject)))
+					.TagTransition(GameTags.Uprooted, dead);
+
+				grow
+					.Enter((smi =>
+					{
+						if (smi.master.receptacleMonitor.HasReceptacle() && !alive.ForceUpdateStatus(smi.master.gameObject))
+							smi.GoTo(blocked);
+					}))
+					.PlayAnim("grow", KAnim.PlayMode.Once)
+					.EventTransition(GameHashes.AnimQueueComplete, alive.mature);
 
 				alive
+					.InitializeStates(masterTarget, dead)
+					.TagTransition(GameTags.Uprooted, test)
+					.DefaultState(alive.mature);
+
+				test
+					.Enter(smi => Log.Debug("uprooted trigger"))
+					.GoTo(dead);
+
+				alive.mature
+					.EventTransition(GameHashes.Wilt, alive.wilting, (smi => smi.master.wiltCondition.IsWilting()))
 					.PlayAnim("idle_grown", KAnim.PlayMode.Loop)
 					.Update(UpdateEmission, UpdateRate.SIM_1000ms)
 					.EventHandler(GameHashes.OnStorageChange, OnStorageChanged)
-					.Enter(smi => smi.master.elementConsumer.EnableConsumption(true));
+					.Enter(smi => smi.master.elementConsumer.EnableConsumption(true))
+					.Exit(smi => smi.master.elementConsumer.EnableConsumption(false));
+
+				alive.wilting
+					.PlayAnim("wilt")
+					.EventTransition(GameHashes.WiltRecover, alive.mature, (smi => !smi.master.wiltCondition.IsWilting()));
+			}
+
+			public class AliveStates : PlantAliveSubState
+			{
+				public State mature;
+				public State wilting;
 			}
 
 			private void OnStorageChanged(StatesInstance smi)
 			{
 				smi.dirty = true;
+			}
+
+			private void Die(StatesInstance smi)
+			{
+				Log.Debug("Dying");
+				GameUtil.KInstantiate(Assets.GetPrefab(EffectConfigs.PlantDeathId), smi.master.transform.GetPosition(), Grid.SceneLayer.FXFront).SetActive(true);
+				smi.master.Trigger((int)GameHashes.Died);
+				smi.master.GetComponent<KBatchedAnimController>().StopAndClear();
+				Destroy(smi.master.GetComponent<KBatchedAnimController>());
+				smi.Schedule(0.5f, data => smi.master.DestroySelf());
 			}
 
 			private void UpdateEmission(StatesInstance smi, float dt)

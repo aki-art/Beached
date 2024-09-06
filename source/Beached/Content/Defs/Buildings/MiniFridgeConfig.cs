@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities;
 using TUNING;
 using UnityEngine;
 
@@ -49,10 +50,6 @@ namespace Beached.Content.Defs.Buildings
 		{
 			base.ConfigureBuildingTemplate(go, prefab_tag);
 			//LoreBearerUtil.AddLoreTo(go, LoreBearerUtil.UnlockSpecificEntry("pod_evacuation", "Inspect"));
-		}
-
-		public override void DoPostConfigureComplete(GameObject go)
-		{
 			var storage = go.AddOrGet<Storage>();
 			storage.showInUI = true;
 			storage.showDescriptor = true;
@@ -65,9 +62,10 @@ namespace Beached.Content.Defs.Buildings
 
 			Prioritizable.AddRef(go);
 
-			go.AddOrGet<TreeFilterable>();
+			go.AddOrGet<TreeFilterable>().allResourceFilterLabelString = global::STRINGS.UI.UISIDESCREENS.TREEFILTERABLESIDESCREEN.ALLBUTTON_EDIBLES;
 			go.AddOrGet<FoodStorage>();
 			go.AddOrGet<Refrigerator>();
+			go.AddOrGet<MiniFridge>();
 
 			var def = go.AddOrGetDef<RefrigeratorController.Def>();
 			def.powerSaverEnergyUsage = ENERGY_SAVER_POWER;
@@ -77,9 +75,13 @@ namespace Beached.Content.Defs.Buildings
 			go.AddOrGet<UserNameable>();
 			go.AddOrGet<DropAllWorkable>();
 			go.AddOrGetDef<RocketUsageRestriction.Def>().restrictOperational = false;
-			go.AddOrGetDef<StorageController.Def>();
-			go.AddOrGet<MiniFridgeShelfDisplay>();
 
+		}
+
+		public override void DoPostConfigureComplete(GameObject go)
+		{
+			go.AddOrGet<MiniFridgeShelfDisplay>();
+			go.AddOrGetDef<StorageController.Def>();
 			SymbolOverrideControllerUtil.AddToPrefab(go);
 		}
 	}

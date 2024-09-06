@@ -1011,14 +1011,14 @@ otherEntities:
   type: Other
 - id: Beached_BeachSetPiece
   location_x: 0
-  location_y: 2
+  location_y: -3
   element: Creature
   temperature: 301
   units: 1
   type: Other
 - id: Beached_SkeletonChair
   location_x: 4
-  location_y: 2
+  location_y: -2
   element: Creature
   temperature: 301
   units: 1

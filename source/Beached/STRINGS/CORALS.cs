@@ -1,4 +1,6 @@
-﻿namespace Beached
+﻿using Beached.Content.Defs.Entities.Corals;
+
+namespace Beached
 {
 	public partial class STRINGS
 	{
@@ -11,6 +13,15 @@
 					"\n" +
 					"Removes germs from liquids, and produces edible frags.";
 			}
+			public class BEACHED_LEAFLETCORAL
+			{
+				public static LocString NAME = FormatAsLink("Leaflet Coral", LeafletCoralConfig.ID);
+				public static LocString DESCRIPTION = "A coral with green capitulum resembling cabbage leaves. This coral is lined with a polymetallic outer epidermis, rich in Manganese and Iron, allowing natural slow electrolysis of Water. The plant consumes Hydrogen and releases excess Oxygen in the process.\n" +
+					"\n" +
+					"Inefficiently converts Water into Oxygen.";
+				public static LocString DOMESTICATEDDESC = "...";
+			}
+
 
 			public class BEACHED_SALTY_STICK_CORAL
 			{
@@ -29,6 +40,15 @@
 
 				public static LocString DESCRIPTION_END_NO_BITUMEN = "Converts Crude Oil into Petroleum.";
 				public static LocString DESCRIPTION_END_YES_BITUMEN = "Converts Crude Oil into Petroleum and Bitumen.";
+			}
+
+			public class FRAGS
+			{
+				public class BEACHED_LEAFLETCORAL
+				{
+					public static LocString NAME = FormatAsLink("Leaflet Coral Frag", LeafletCoralConfig.ID);
+					public static LocString DESCRIPTION = ($"The {FormatAsLink("Frag", "CORALS")} of a {CORALS.BEACHED_LEAFLETCORAL.NAME}.");
+				}
 			}
 		}
 	}
