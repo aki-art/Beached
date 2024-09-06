@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using System;
 using UnityEngine;
 
 namespace Beached.Content.ModDb
@@ -7,6 +6,7 @@ namespace Beached.Content.ModDb
 	public class BPlushies : ResourceSet<Plushie>
 	{
 		public const string
+			MUFFIN_ID = "Beached_Plushie_Muffin",
 			PACU_ID = "Beached_Plushie_Pacu",
 			PUFT_ID = "Beached_Plushie_Puft",
 			VOLE_ID = "Beached_Plushie_Vole";
@@ -16,15 +16,20 @@ namespace Beached.Content.ModDb
 
 		public BPlushies()
 		{
-			Add(PACU_ID, STRINGS.MISC.PLUSHIES.PACU, "beached_plushie_pacu_kanim", BEffects.PLUSHIE_PACU, standardOffset);
-			Add(PUFT_ID, STRINGS.MISC.PLUSHIES.PUFT, "beached_plushie_puft_kanim", BEffects.PLUSHIE_PUFT, standardOffset);
-			Add(VOLE_ID, STRINGS.MISC.PLUSHIES.PACU, "beached_plushie_vole_kanim", BEffects.PLUSHIE_VOLE, standardOffset);
+			Add(MUFFIN_ID, STRINGS.MISC.PLUSHIES.MUFFIN, "beached_plushie_muffin_kanim", BEffects.PLUSHIE_MUFFIN, standardOffset);
+			Add(PACU_ID, STRINGS.MISC.PLUSHIES.PACU, "beached_plushie_pacu_kanim", BEffects.PLUSHIE_PACU);
+			Add(PUFT_ID, STRINGS.MISC.PLUSHIES.PUFT, "beached_plushie_puft_kanim", BEffects.PLUSHIE_PUFT);
+			Add(VOLE_ID, STRINGS.MISC.PLUSHIES.PACU, "beached_plushie_vole_kanim", BEffects.PLUSHIE_VOLE);
 		}
 
-		public void Add(string ID, string name, string animFile, string effectId, Vector3 offset, Func<GameObject> onSleepingWithPlush = null)
+		public Plushie Add(string ID, string name, string animFile, string effectId) => Add(ID, name, animFile, effectId, standardOffset);
+
+		public Plushie Add(string ID, string name, string animFile, string effectId, Vector3 offset)
 		{
-			Add(new Plushie(ID, name, animFile, effectId, offset, onSleepingWithPlush));
+			var result = Add(new Plushie(ID, name, animFile, effectId, offset));
 			ids = ids.AddToArray(ID);
+
+			return result;
 		}
 	}
 }

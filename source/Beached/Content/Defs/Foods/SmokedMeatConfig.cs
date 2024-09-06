@@ -24,7 +24,7 @@ namespace Beached.Content.Defs.Foods
 				ID,
 				"beached_smoked_meat_kanim",
 				0.8f,
-				0.8f,
+				0.6f,
 				foodInfo);
 
 			prefab.AddTag(BTags.meat);

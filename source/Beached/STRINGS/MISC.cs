@@ -27,6 +27,7 @@
 				public static LocString PUFT = "Puft Plushie";
 				public static LocString PACU = "Pacu Plushie";
 				public static LocString VOLE = "Shove Vole Plushie";
+				public static LocString MUFFIN = "Muffin Plushie";
 			}
 
 			public class TAGS

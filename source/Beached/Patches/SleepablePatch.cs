@@ -1,6 +1,5 @@
 ﻿using Beached.Content.Scripts;
 using HarmonyLib;
-using Klei.AI;
 
 namespace Beached.Patches
 {
@@ -29,10 +28,8 @@ namespace Beached.Patches
 				if (__instance.worker == null)
 					return;
 
-				if (__instance.TryGetComponent(out Beached_PlushiePlaceable plushie)
-					&& plushie.HasPlushie()
-					&& __instance.worker.TryGetComponent(out Effects effects))
-					effects.Add(plushie.GetEffectId(), true);
+				if (__instance.TryGetComponent(out Beached_PlushiePlaceable plushie) && plushie.HasPlushie())
+					plushie.GetPlushie()?.OnSleptWith(__instance.worker.gameObject);
 			}
 		}
 	}

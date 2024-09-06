@@ -13,13 +13,24 @@ namespace Beached.Content.ModDb
 	public class BTraits
 	{
 		public const string
-			DEXTEROUS = "Beached_Dexterous",
+			// intrinsic trait of Vahano
+			CARNIVOROUS = "Beached_Carnivorous",
+
+			//intrinsic trait of Minnow
+			GILLS = "Beached_Gills",
+			// Minnow joy trait
+			PLUSHIE_MAKER = "Beached_PlushieMaker",
+			// Minnow stress trait
+			SIREN = "Beached_Siren",
+
+			// Brad traits
 			CLUMSY = "Beached_Clumsy",
 			FUR_ALLERGY = "Beached_FurAllergy",
-			GILLS = "Beached_Gills",
+			VEGETARIAN = "Beached_Vegetarian",
+
+			// Good traits
 			COMFORT_SEEKER = "Beached_ComfortSeeker",
-			PLUSHIE_MAKER = "Beached_PlushieMaker",
-			SIREN = "Beached_Siren";
+			DEXTEROUS = "Beached_Dexterous";
 
 		public class LIFE_GOAL_IDS
 		{
@@ -145,9 +156,19 @@ namespace Beached.Content.ModDb
 					.Build(DUPLICANTSTATS.GOODTRAITS);
 
 			new TraitBuilder(GILLS, true)
-				.OnAdd(OnAddGills)
+				.OnAdd(go => AddTag(go, BTags.amphibious))
 				.Modifier(db.Attributes.AirConsumptionRate.Id, -0.005f)
 				.ExtendedTooltip(GetGillsTooltip);
+
+			new TraitBuilder(CARNIVOROUS, true)
+				.OnAdd(go => AddTag(go, BTags.carnivorous));
+
+			new TraitBuilder(VEGETARIAN, false)
+				.OnAdd(go => AddTag(go, BTags.vegetarian))
+				.AddToTraits()
+					.Rarity(DUPLICANTSTATS.RARITY_COMMON)
+					.ExclusiveWithTraits(CARNIVOROUS)
+					.Build(DUPLICANTSTATS.BADTRAITS);
 
 			new TraitBuilder(DEXTEROUS, true, BAttributes.PRECISION_ID)
 				.Modifier(BAttributes.PRECISION_ID, TRAITS.GOOD_ATTRIBUTE_BONUS)
@@ -231,10 +252,10 @@ namespace Beached.Content.ModDb
 				.StartSM();
 		}
 
-		private static void OnAddGills(GameObject go)
+		private static void AddTag(GameObject go, Tag tag)
 		{
 			if (go.TryGetComponent(out KPrefabID kPrefabID))
-				kPrefabID.AddTag(BTags.amphibious, true);
+				kPrefabID.AddTag(tag, true);
 		}
 
 		private static void OnAddPlushieMaker(GameObject go)
@@ -249,10 +270,8 @@ namespace Beached.Content.ModDb
 				.StartSM();
 		}
 
-		private static string GetGillsTooltip()
-		{
-			return STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.WATERBREATHING;
-		}
+		private static string GetGillsTooltip() => STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.WATERBREATHING;
+
 
 		private static void AddAssignableTrait(string id, string name, string desc, Tag wantedAssignable)
 		{

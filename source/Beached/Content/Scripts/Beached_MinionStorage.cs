@@ -52,5 +52,10 @@ namespace Beached.Content.Scripts
 
 			kPrefabID.AddTag(BTags.palateCleansed, true);
 		}
+
+		public void OnUnsavoryMealConsumed()
+		{
+			effects.Add(BEffects.UNSAVORY_MEAL, true);
+		}
 	}
 }

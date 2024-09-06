@@ -36,7 +36,7 @@ namespace Beached.Content.Defs.Entities.Corals
 				decor,
 				additionalTags:
 				[
-					BTags.aquatic,
+					BTags.aquaticPlant,
 					BTags.coral,
 					BTags.smallAquariumSeed
 				]);

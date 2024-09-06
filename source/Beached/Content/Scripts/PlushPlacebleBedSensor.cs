@@ -1,19 +1,24 @@
-﻿namespace Beached.Content.Scripts
+﻿using Beached.Content.ModDb;
+using Klei.AI;
+
+namespace Beached.Content.Scripts
 {
 	public class PlushPlacebleBedSensor : Sensor
 	{
 		private Navigator navigator;
 		public Beached_PlushiePlaceable placeable;
 		private int cell;
+		private bool eligible;
 
 		public PlushPlacebleBedSensor(Sensors sensors) : base(sensors)
 		{
+			eligible = sensors.GetComponent<Traits>().HasTrait(BTraits.PLUSHIE_MAKER);
 			navigator = GetComponent<Navigator>();
 		}
 
 		public override void Update()
 		{
-			if (placeable != null)
+			if (!eligible || placeable != null)
 				return;
 
 			foreach (var bed in ModCmps.plushiePlaceables.items)

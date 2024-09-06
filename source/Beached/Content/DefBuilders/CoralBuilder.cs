@@ -13,7 +13,7 @@ namespace Beached.Content.DefBuilders
 		private string ID;
 		private int width, height;
 		private string animName, initialAnim;
-		private List<Tag> tags = [BTags.aquatic, BTags.coral];
+		private List<Tag> tags = [BTags.aquaticPlant, BTags.coral];
 		private EffectorValues decor;
 		private float
 			tempMinLethal = MiscUtil.CelsiusToKelvin(0f),
@@ -131,7 +131,7 @@ namespace Beached.Content.DefBuilders
 		{
 			seedAnimName = anim;
 			seedW = width; seedH = height;
-			seedTags = [BTags.aquatic, BTags.coral, BTags.smallAquariumSeed];
+			seedTags = [BTags.aquaticPlant, BTags.coral, BTags.smallAquariumSeed];
 			seedSortOrder = sortOrder;
 
 			if (additionalTags != null)

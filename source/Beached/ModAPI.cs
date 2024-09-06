@@ -204,17 +204,24 @@ namespace Beached
 		/// <param name="ID"></param>
 		/// <param name="animFile"></param>
 		/// <param name="effectId">This effect gets applied to the dupe when sleeping with this plushie. null for none</param>
-		/// <param name="onSleepingWithPlush">Called when a dupe goes to sleep with this plushie. The GameObject is the dupe. null for none</param>
 		/// <param name="offset">offset of the anim file for the bed. use debug tool Mods/Beached/Debug for help.</param>
+		/// <param name="onSleepingWithPlush">Called when a dupe goes to sleep with this plushie. The GameObject is the dupe. null for none</param>
+		/// <param name="canPlaceOnBed">Provides a Sleepable as a parameter, this decides if a plushie can be rolled for the specific bed.</param>
 		public static void RegisterPlushie(
 			string ID,
 			string name,
 			string animFile,
 			string effectId,
-			Func<GameObject> onSleepingWithPlush,
+			Action<GameObject> onSleepingWithPlush,
+			Func<GameObject, bool> canPlaceOnBed,
 			Vector3 offset)
 		{
-			BDb.plushies.Add(ID, name, animFile, effectId, offset, onSleepingWithPlush);
+			var plushie = BDb.plushies.Add(ID, name, animFile, effectId, offset);
+			if (onSleepingWithPlush != null)
+				plushie.OnSleptWith((GameObject go) => onSleepingWithPlush(go));
+
+			if (canPlaceOnBed != null)
+				plushie.PlaceCheck((GameObject go) => canPlaceOnBed(go));
 		}
 
 		/// <summary>

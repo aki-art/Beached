@@ -1,10 +1,8 @@
-﻿using Beached.Content;
-using Beached.Content.Defs.Duplicants;
+﻿using Beached.Content.Defs.Duplicants;
 using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
 using Beached.ModDevTools;
-using FMODUnity;
 using HarmonyLib;
 using Klei;
 using Klei.AI;
@@ -18,7 +16,7 @@ using UnityEngine;
 
 namespace Beached.Patches
 {
-	[HarmonyPatch(typeof(AmbienceManager), "OnSpawn")]
+	/*[HarmonyPatch(typeof(AmbienceManager), "OnSpawn")]
 	public class AmbienceManager_OnSpawn_Patch
 	{
 		public static void Prefix(AmbienceManager __instance)
@@ -75,6 +73,9 @@ namespace Beached.Patches
 	{
 		public static void Postfix(AmbienceManager.QuadrantDef def, AmbienceManager.Quadrant __instance)
 		{
+			if (__instance.liquidLayers.Any(layer => layer.oneShotSound.Guid == def.liquidSounds[(int)Elements.acidAmbience].Guid))
+				return;
+
 			var acidLayer = new AmbienceManager.Layer(def.liquidSounds[(int)Elements.acidAmbience]);
 			__instance.liquidLayers = __instance.liquidLayers.AddToArray(acidLayer);
 			__instance.allLayers.Add(acidLayer);
@@ -93,9 +94,10 @@ namespace Beached.Patches
 				__instance.solidLayers[index] = new AmbienceManager.Layer(new EventReference(), def.solidSounds[index]);
 				__instance.allLayers.Add(__instance.solidLayers[index]);
 				__instance.oneShotLayers.Add(__instance.solidLayers[index]);
+				__instance.solidTimers = __instance.solidTimers.AddToArray(new AmbienceManager.Quadrant.SolidTimer());
 			}
 		}
-	}
+	}*/
 
 	public class TestPatches
 	{

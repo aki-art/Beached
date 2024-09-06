@@ -317,6 +317,30 @@ namespace Beached
 				}
 			}
 
+			public class STATUSITEMS
+			{
+				public class BEACHED_MEAT
+				{
+					public static LocString NAME = "Meat";
+
+					public static LocString TOOLTIP = "This food is appropiate for Carnivorous diets, and makes vegetarian Duplicants sad.";
+				}
+
+				public class BEACHED_NONVEGETARIAN
+				{
+					public static LocString NAME = "Non-Vega";
+
+					public static LocString TOOLTIP = "This food is not eligible for Carnivorous diets, but vegetarians still find it unsavory.";
+				}
+
+				public class BEACHED_VEGETARIAN
+				{
+					public static LocString NAME = "Vegetarian";
+
+					public static LocString TOOLTIP = "This food is favored by Vegetarians. It does not count for Carnivorous diets .";
+				}
+			}
+
 			public class INDUSTRIAL_PRODUCTS
 			{
 				public class BEACHED_SLICKSHELLSHELL

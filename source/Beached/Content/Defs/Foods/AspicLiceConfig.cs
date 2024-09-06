@@ -27,6 +27,11 @@ namespace Beached.Content.Defs.Foods
 				0.5f,
 				foodInfo);
 
+			if (!Mod.settings.General.IsMealLiceMeat)
+				prefab.AddTag(BTags.meat);
+			else
+				prefab.AddTag(BTags.nonVegetarian);
+
 			return prefab;
 		}
 

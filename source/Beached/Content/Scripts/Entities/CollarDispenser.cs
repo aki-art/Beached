@@ -29,7 +29,7 @@ namespace Beached.Content.Scripts.Entities
 
 		public override void OnPrefabInit()
 		{
-			gameObject.AddTag(BTags.FastTrack.registerRoom);
+			gameObject.AddTag(BTags.FastTrack_registerRoom);
 
 			base.OnPrefabInit();
 

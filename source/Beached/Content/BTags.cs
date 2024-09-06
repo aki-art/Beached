@@ -8,15 +8,40 @@ namespace Beached.Content
 	public class BTags
 	{
 		public static readonly Tag
+			// ======= The ones potentially interesting for other mods ===========
+			// any buildig where foods are queued. meats will be scanned here, and Chef Makis can operate them
+			cookingStation = TagManager.Create("Beached_CookingStation"),
+			// do not enable traits on this geyser prefab
+			geyserNoTraits = TagManager.Create("Beached_GeyserNoTraits"),
+			// generate a blueprint for this building prefab, single time buildable
+			blueprintable = TagManager.Create("Beached_Blueprintable"),
+			// allow planting this in a small aquarium. will expect an "aquarium_loop" animation in the kanim
+			smallAquariumSeed = TagManager.Create("Beached_SmallAquariumSeed"),
+			// any food from animals.Va'Hano diet, Muffin diet, Vegetarians stress out by it
+			meat = TagManager.Create("Beached_Meat"),
+			// foods that do not count as vegetarian, but also not enough meat to be "carnivore" diet either.
+			// if the food already has Meat tag this is not neccessary
+			nonVegetarian = TagManager.Create("Beached_NonVegetarian"),
+			// triggers the Vista roomtype
+			vista = TagManager.Create("Beached_Vista"),
+			// should this critter induce small explosions when in contact with acid.
+			// (Metallic scales or metals at positions above copper in the reactivity series.)
+			sparksOnAcid = TagManager.Create("Beached_SparksOnAcid"),
+
+			// ========= Other Mods ==============================================
+			BackWalls_noBackwall = TagManager.Create("NoBackwall"),
+			MaterialColor_noPaint = TagManager.Create("NoPaint"),
+			FastTrack_registerRoom = TagManager.Create("RegisterRoom"),
+
+			// ========= Misc ====================================================
 			amphibious = TagManager.Create("Beached_Amphibious"),
 			amberInclusion = TagManager.Create("Beached_AmberInclusion"),
-			aquatic = TagManager.Create("Beached_Aquatic"),
+			aquaticPlant = TagManager.Create("Beached_AquaticPlant"),
 			aquaticFarm = TagManager.Create("Beached_AquaticFarm"),
 			bamboo = TagManager.Create("Beached_Bamboo"),
-			blueprintable = TagManager.Create("Beached_Blueprintable"),
+			carnivorous = TagManager.Create("Beached_Carnivorous"),
 			coral = TagManager.Create("Beached_Coral"),
 			coralFrag = TagManager.Create("Beached_CoralFrag"),
-			smallAquariumSeed = TagManager.Create("Beached_SmallAquariumSeed"),
 			corrodable = TagManager.Create("Beached_Corrodable"), // get damaged in acid
 			dim = TagManager.Create("Beached_Dim"),
 			furAllergic = TagManager.Create("Beached_FurAllergic"),
@@ -24,27 +49,19 @@ namespace Beached.Content
 			geneticSample = TagManager.Create("Beached_GeneticSample"),
 			heliumPoffed = TagManager.Create("Beached_HeliumPoffed"),
 			lubricated = TagManager.Create("Beached_Lubricated"),
-			meat = TagManager.Create("Beached_Meat"), // any food from animals. Va'Hano eats these
-			noBackwall = TagManager.Create("NoBackwall"), // Background Tiles mod uses this
-			noPaint = TagManager.Create("NoPaint"), // MaterialColor mod uses this
 			palateCleansed = TagManager.Create("Beached_PalateCleansed"),
 			palateCleanserFood = TagManager.Create("Beached_PalateCleanserFood"),
 			seafoodAllergic = TagManager.Create("Beached_SeafoodAllergic"),
 			setPiece = TagManager.Create("Beached_SetPiece"),
-			sparksOnAcid = TagManager.Create("Beached_SparksOnAcid"), // should this critter induce small explosions when in contact with acid. (Metallic scales or metals at positions above copper in the reactivity series.)
 			glacier = TagManager.Create("Beached_Glacier"),
-			vista = TagManager.Create("Beached_Vista"), // allows Vista rooms
-			wishingStars = TagManager.Create("Beached_WishingStars"); // used on events that should trigger the wishing star effect on dupes
+			vegetarian = TagManager.Create("Beached_Vegetarian"),
+			// used on events that should trigger the wishing star effect on dupes
+			wishingStars = TagManager.Create("Beached_WishingStars");
 
 		public static TagSet eggs =
 		[
 			GameTags.IncubatableEgg
 		];
-
-		public static class FastTrack
-		{
-			public static readonly Tag registerRoom = TagManager.Create("RegisterRoom");
-		}
 
 		public class Creatures
 		{

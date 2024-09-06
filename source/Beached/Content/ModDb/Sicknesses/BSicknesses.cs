@@ -9,6 +9,7 @@ namespace Beached.Content.ModDb.Sicknesses
 		public static Sickness limpets;
 		public static Sickness capped;
 		public static Sickness poffMouth;
+		public static Sickness iceWrath;
 
 		[DbEntry]
 		public static void Register(Database.Sicknesses __instance)
@@ -16,6 +17,7 @@ namespace Beached.Content.ModDb.Sicknesses
 			capped = __instance.Add(new CappedSickness());
 			poffMouth = __instance.Add(new PoffMouthSickness());
 			limpets = __instance.Add(new LimpetsSickness());
+			iceWrath = __instance.Add(new IceWrathSickness());
 
 			var exposures = new List<ExposureType>(TUNING.GERM_EXPOSURE.TYPES)
 			{
@@ -51,11 +53,22 @@ namespace Beached.Content.ModDb.Sicknesses
 					[
 						BEffects.POFFMOUTH_RECOVERY
 					]
+				},
+				new() {
+					germ_id = IceWrathGerms.ID,
+					sickness_id = IceWrathSickness.ID,
+					exposure_threshold = 100,
+					base_resistance = 0,
+					infect_immediately = true,
+					excluded_effects =
+					[
+						BEffects.ICEWRATH_DUPLICANT_RECOVERY
+					]
 				}
 			};
 
 
-			TUNING.GERM_EXPOSURE.TYPES = exposures.ToArray();
+			TUNING.GERM_EXPOSURE.TYPES = [.. exposures];
 		}
 	}
 }

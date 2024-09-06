@@ -24,8 +24,10 @@ namespace Beached.Content.Defs.Foods
 				ID,
 				"beached_smoked_fish_kanim",
 				0.7f,
-				0.5f,
+				0.35f,
 				foodInfo);
+
+			prefab.AddTag(BTags.meat);
 
 			return prefab;
 		}

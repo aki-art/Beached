@@ -39,7 +39,7 @@ namespace Beached.Content.Defs.Buildings
 		{
 			go.AddOrGet<BuildingComplete>().isArtable = true;
 			go.AddTag(GameTags.Decoration);
-			go.AddTag(BTags.noPaint);
+			go.AddTag(BTags.MaterialColor_noPaint);
 		}
 
 		public override void DoPostConfigureComplete(GameObject go)

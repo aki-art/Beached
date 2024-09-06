@@ -9,7 +9,7 @@
 
 		public override void OnPrefabInit()
 		{
-			gameObject.AddTag(BTags.FastTrack.registerRoom);
+			gameObject.AddTag(BTags.FastTrack_registerRoom);
 			gameObject.AddTag(BTags.vista);
 
 			if (Mod.isFastTrackHere)

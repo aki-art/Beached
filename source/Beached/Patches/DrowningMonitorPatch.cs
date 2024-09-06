@@ -9,7 +9,7 @@ namespace Beached.Patches
 		{
 			public static bool Prefix(DrowningMonitor __instance, int testCell, ref bool __result)
 			{
-				if (__instance != null && __instance.HasTag(BTags.aquatic))
+				if (__instance != null && __instance.HasTag(BTags.aquaticPlant))
 				{
 					var cellAbove = Grid.CellAbove(testCell);
 					__result = Grid.IsValidCell(testCell)

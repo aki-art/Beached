@@ -125,6 +125,18 @@ namespace Beached
 			{
 				public static LocString GENETIC_TRAIT = "This is a genetic trait always paired with a {0}.";
 
+				public class BEACHED_CARNIVOROUS
+				{
+					public static LocString NAME = "Carnivorous";
+					public static LocString DESC = "This duplicant can only digest Meats.";
+				}
+
+				public class BEACHED_VEGETARIAN
+				{
+					public static LocString NAME = "Vegetarian";
+					public static LocString DESC = "This duplicant majorly stresses out if forced to eat any Meat and will only do so if there are no other options available.";
+				}
+
 				public class BEACHED_GILLS
 				{
 					public static LocString NAME = "Gills";
@@ -196,6 +208,12 @@ namespace Beached
 					public static LocString DESCRIPTION = FormatAsLink("Tiny organisms floating in water. These microscopic " +
 						"creatures are harmless to Duplicants. " +
 						"They are too small to see by the naked eye, the Germ Overlay will reveal them instead.");
+				}
+
+				public class BEACHED_ICEWRATH
+				{
+					public static LocString NAME = FormatAsLink("Ice Wraiths", IceWrathGerms.ID);
+					public static LocString DESCRIPTION = FormatAsLink("A type of parasitic roundworm that has been frozen away in the Permafrost for many many years.");
 				}
 
 				public class BEACHED_LIMPETEGG

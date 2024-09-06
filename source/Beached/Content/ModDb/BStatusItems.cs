@@ -19,10 +19,21 @@ namespace Beached.Content.ModDb
 		public static StatusItem hunting;
 		public static StatusItem controllerByCollarDispenser;
 		public static StatusItem cultivatingGerms;
+		public static StatusItem meat;
 
 		[DbEntry]
 		public static void RegisterMiscStatusItems(MiscStatusItems __instance)
 		{
+			meat = new StatusItem(
+				"Beached_Meat",
+				"ITEMS",
+				"beached_statusitem_meat",
+				StatusItem.IconType.Custom,
+				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID,
+				false);
+
 			gunked = new(
 				"Beached_Gunked",
 				"BUILDINGS",

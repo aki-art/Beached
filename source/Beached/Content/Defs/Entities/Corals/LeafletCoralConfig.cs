@@ -29,7 +29,7 @@ namespace Beached.Content.Defs.Entities.Corals
 				DECOR.BONUS.TIER0,
 				additionalTags:
 				[
-					BTags.aquatic,
+					BTags.aquaticPlant,
 					BTags.coral
 				]);
 

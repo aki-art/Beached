@@ -22,6 +22,12 @@
 				public static LocString DESC = $"This duplicant has stepped in {ELEMENTS.MUCUS.NAME}.";
 			}
 
+			public class BEACHED_UNSAVORY_MEAL
+			{
+				public static LocString NAME = "Unsavory Meal";
+				public static LocString DESC = "This duplicant had to eat food they really don't feel good about. \n\nAte Meat as a Vegetarian.";
+			}
+
 			public class BEACHED_MUCUS_SOAKED
 			{
 				public static LocString NAME = "Slimy";
@@ -56,6 +62,12 @@
 			{
 				public static LocString NAME = "Puft Plushie";
 				public static LocString DESC = $"This duplicant owns a wonderfully round puft plushie.";
+			}
+
+			public class BEACHED_EFFECT_PLUSHIEMUFFIN
+			{
+				public static LocString NAME = "Muffin Plushie";
+				public static LocString DESC = $"This duplicant owns an unbelievable soft Muffin plushie.";
 			}
 
 			public class BEACHED_EFFECT_PLUSHIEPACU

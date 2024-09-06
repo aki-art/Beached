@@ -26,7 +26,7 @@ namespace Beached.Content.Defs.Flora
 				DECOR.BONUS.TIER0,
 				additionalTags:
 				[
-					BTags.aquatic
+					BTags.aquaticPlant
 				]);
 
 			EntityTemplates.ExtendEntityToBasicPlant(

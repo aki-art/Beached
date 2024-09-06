@@ -80,6 +80,22 @@ namespace Beached
 
 			public class TRAITS
 			{
+				public class GEYSERS
+				{
+					public class BEACHED_LARGE
+					{
+						public static LocString NAME = "Large";
+						public static LocString PREFIX = "Large";
+						public static LocString DESC = "This {GeyserType} is unusually large, with increased output.";
+					}
+
+					public class BEACHED_SMALL
+					{
+						public static LocString NAME = "Small";
+						public static LocString PREFIX = "Small";
+						public static LocString DESC = "This {GeyserType} is unusually small, with decreased output.";
+					}
+				}
 
 				public class BEACHED_GMOTRAITS_BLAND
 				{

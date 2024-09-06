@@ -1,7 +1,10 @@
-﻿using Beached.Content.ModDb;
+﻿using Beached.Content;
+using Beached.Content.ModDb;
+using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
 using HarmonyLib;
+using Klei.AI;
 using PeterHan.PLib.Core;
 
 namespace Beached.Patches
@@ -14,6 +17,7 @@ namespace Beached.Patches
 			public static void Prefix()
 			{
 				Assets.RegisterOnAddPrefab(AcidVulnerableCreature.OnAddPrefab);
+
 			}
 
 			[HarmonyPostfix]
@@ -21,9 +25,21 @@ namespace Beached.Patches
 			public static void LatePostfix()
 			{
 				BDb.AddRecipes();
+				BDb.SetMeatTags();
+
 				DNAInjector.InitializeOptions();
 
 				EdiblePatch.Edible_AddOnConsumeEffects_Patch.Patch(Mod.harmonyInstance);
+				EdiblePatch.Edible_OnSpawn_Patch.Patch(Mod.harmonyInstance);
+
+				foreach (var geyser in Assets.GetPrefabsWithComponent<Geyser>())
+				{
+					if (geyser.HasTag(BTags.geyserNoTraits))
+						continue;
+
+					geyser.AddOrGet<Traits>();
+					geyser.AddOrGet<Beached_GeyserTraits>();
+				}
 
 				PGameUtils.CopySoundsToAnim("beached_mussel_giblets_impact_kanim", "paint_impact_kanim");
 			}

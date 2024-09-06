@@ -65,9 +65,16 @@ namespace Beached.Patches
 				var isLowPriorityPoff = pickupable.pickupable.KPrefabID.HasTag(BTags.palateCleanserFood)
 					&& storage.HasTag(BTags.palateCleansed);
 
-				return (ushort)(isLowPriorityPoff
-					? originalValue * 1000
-					: originalValue);
+				if (isLowPriorityPoff)
+					return (ushort)(originalValue * 1000);
+
+				var isVegetarianLookingAtMeat = pickupable.pickupable.KPrefabID.HasTag(BTags.meat)
+					&& storage.HasTag(BTags.vegetarian);
+
+				if (isVegetarianLookingAtMeat)
+					return (ushort)(originalValue * 1000);
+
+				return originalValue;
 			}
 		}
 

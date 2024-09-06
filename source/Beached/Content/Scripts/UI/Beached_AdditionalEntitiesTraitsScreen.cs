@@ -1,11 +1,10 @@
 ﻿using Beached.Content.ModDb;
 using Klei.AI;
-using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.UI
 {
-	public class Beached_CritterTraitsScreen : KMonoBehaviour
+	public class Beached_AdditionalEntitiesTraitsScreen : KMonoBehaviour
 	{
 		private CollapsibleDetailContentPanel traitsPanel;
 		private DetailsPanelDrawer traitsDrawer;
@@ -20,7 +19,7 @@ namespace Beached.Content.Scripts.UI
 			{
 				attributesLabelTemplate = instance.attributesLabelTemplate;
 				traitsPanel = Util.KInstantiateUI<CollapsibleDetailContentPanel>(ScreenPrefabs.Instance.CollapsableContentPanel, instance.gameObject);
-				traitsDrawer = new DetailsPanelDrawer(attributesLabelTemplate, traitsPanel.GetComponent<CollapsibleDetailContentPanel>().Content.gameObject);
+				traitsDrawer = new DetailsPanelDrawer(attributesLabelTemplate, traitsPanel.Content.gameObject);
 				traitsPanel.HeaderLabel.text = global::STRINGS.UI.CHARACTERCONTAINER_TRAITS_TITLE;
 
 				initialized = true;
@@ -36,9 +35,7 @@ namespace Beached.Content.Scripts.UI
 		public void Hide()
 		{
 			if (traitsPanel != null)
-			{
 				traitsPanel.gameObject.SetActive(false);
-			}
 		}
 
 		private void Refresh()
@@ -55,33 +52,38 @@ namespace Beached.Content.Scripts.UI
 		{
 			var hasAnyTraits = false;
 
-			if (target.TryGetComponent(out Traits traits) && target.TryGetComponent(out CreatureBrain _))
+			if (target.TryGetComponent(out Traits traits))
 			{
-				var group = Db.Get().traitGroups.TryGet(BCritterTraits.GMO_GROUP);
+				var GMO = Db.Get().traitGroups.TryGet(BCritterTraits.GMO_GROUP);
+				var Geysers = Db.Get().traitGroups.TryGet(BGeyserTraits.GEYSER_GROUP);
 
-				traitsPanel.gameObject.SetActive(true);
-				traitsPanel.HeaderLabel.text = (string)global::STRINGS.UI.DETAILTABS.STATS.GROUPNAME_TRAITS;
-
-				traitsDrawer.BeginDrawing();
-
-				foreach (var trait in traits.TraitList)
-				{
-					if (!string.IsNullOrEmpty(trait.Name) && group.modifiers.Contains(trait))
-					{
-						traitsDrawer.NewLabel(trait.Name);
-						var label = traitsDrawer.labels.Last();
-						label.tooltip.SetSimpleTooltip(trait.GetTooltip());
-						hasAnyTraits = true;
-					}
-				}
-
-				traitsDrawer.EndDrawing();
+				hasAnyTraits |= DrawTraits(traits, GMO) > 0;
+				hasAnyTraits |= DrawTraits(traits, Geysers) > 0;
 			}
 
 			if (!hasAnyTraits)
-			{
 				traitsPanel.gameObject.SetActive(false);
+		}
+
+		private int DrawTraits(Traits traits, TraitGroup group)
+		{
+			var count = 0;
+			traitsPanel.gameObject.SetActive(true);
+			traitsPanel.HeaderLabel.text = (string)global::STRINGS.UI.DETAILTABS.STATS.GROUPNAME_TRAITS;
+
+			traitsDrawer.BeginDrawing();
+
+			foreach (var trait in traits.TraitList)
+			{
+				if (!string.IsNullOrEmpty(trait.Name) && group.modifiers.Contains(trait))
+				{
+					traitsPanel.SetLabel("traitLabel_" + trait.Id, trait.Name, trait.GetTooltip());
+					count++;
+				}
 			}
+
+			traitsDrawer.EndDrawing();
+			return count;
 		}
 	}
 }

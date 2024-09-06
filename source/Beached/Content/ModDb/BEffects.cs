@@ -10,6 +10,7 @@
 			SCARED_SIREN = "Beached_Scared_Siren", // +10% Stress/cycle, +5% Bladder delta
 			DIMWIT = "Beached_Dimwit",
 			LIMPETS_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
+			ICEWRATH_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
 			CAPPED_RECOVERY = "Beached_Capped_Recovery",
 			POFFMOUTH_RECOVERY = "Beached_PoffMouth_Recovery",
 			LIMPETHOST = "Beached_LimpetHost", // for critters, used for growing limpets
@@ -17,9 +18,11 @@
 			WISHING_STAR = "Beached_WishingStar", // applied when they see shooting stars
 			POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds",
 			POFF_HELIUM = "Beached_PoffHelium",
+			PLUSHIE_MUFFIN = "Beached_Effect_PlushieMuffin",
 			PLUSHIE_PACU = "Beached_Effect_PlushiePacu",
 			PLUSHIE_PUFT = "Beached_Effect_PlushiePuft",
-			PLUSHIE_VOLE = "Beached_Effect_PlushieVole";
+			PLUSHIE_VOLE = "Beached_Effect_PlushieVole",
+			UNSAVORY_MEAL = "Beached_Unsavory_Meal";
 
 		public static void Register(ModifierSet set)
 		{
@@ -32,16 +35,24 @@
 				.Modifier(Db.Get().Amounts.Maturity.deltaAttribute.Id, 0.05f, true)
 				.Add(set);
 
+			new EffectBuilder(UNSAVORY_MEAL, 200f, true)
+				.Modifier(stressDelta, 30f / CONSTS.CYCLE_LENGTH)
+				.Add(set);
+
 			new EffectBuilder(ARID_PLANTGROWTH, 0f, true)
 				.Modifier(Db.Get().Amounts.Maturity.deltaAttribute.Id, -0.05f, true)
 				.Add(set);
 
 			new EffectBuilder(PLUSHIE_PACU, CONSTS.CYCLE_LENGTH, false)
-				.Modifier(airConsumptionRate, -0.005f)
+				.Modifier(airConsumptionRate, -0.002f)
 				.Add(set);
 
 			new EffectBuilder(PLUSHIE_VOLE, CONSTS.CYCLE_LENGTH, false)
 				.Modifier(Db.Get().Attributes.Digging.Id, 2)
+				.Add(set);
+
+			new EffectBuilder(PLUSHIE_MUFFIN, CONSTS.CYCLE_LENGTH, false)
+				.Modifier(Db.Get().Attributes.ThermalConductivityBarrier.Id, 1f / 250f)
 				.Add(set);
 
 			new EffectBuilder(PLUSHIE_PUFT, CONSTS.CYCLE_LENGTH, false)
@@ -77,6 +88,11 @@
 				.Add(set);
 
 			new EffectBuilder(CAPPED_RECOVERY, 160f, false)
+				.HideInUI()
+				.HideFloatingText()
+				.Add(set);
+
+			new EffectBuilder(ICEWRATH_DUPLICANT_RECOVERY, 160f, false)
 				.HideInUI()
 				.HideFloatingText()
 				.Add(set);

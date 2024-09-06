@@ -32,6 +32,7 @@ namespace Beached.Content.Scripts
 
 		[Serialize] public int tallestBambooGrown;
 		[Serialize] public bool rareJewelleryObjectiveComplete;
+
 		private Gradient overlayGradient;
 
 		public Dictionary<int, ForceField> forceFields = [];

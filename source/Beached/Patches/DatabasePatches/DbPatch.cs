@@ -1,10 +1,10 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Flora;
-using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
 using Database;
 using HarmonyLib;
+using UnityEngine;
 
 namespace Beached.Patches.DatabasePatches
 {
@@ -17,18 +17,9 @@ namespace Beached.Patches.DatabasePatches
 			{
 				BRoomTypes.ModifyConstraintRules();
 				BDuplicants.Register(__instance.Personalities);
-
-				Log.Debug("PERSONALITIES");
-				foreach (var personality in __instance.Personalities.resources)
-				{
-					Log.Debug($"- {personality.Id} {personality.nameStringKey} {personality.congenitaltrait}");
-				}
 				BTraits.Register();
 				BCritterTraits.Register();
 				BAccessories.Register(__instance.Accessories, __instance.AccessorySlots);
-
-				AddMeatsToCarnivore(__instance);
-				AddSeedsToGMOOK(__instance);
 
 				RegisterBuildings();
 
@@ -53,6 +44,13 @@ namespace Beached.Patches.DatabasePatches
 				BTags.OnDbInit();
 			}
 
+			[HarmonyPriority(Priority.Low)]
+			public static void LatePostfix(Db __instance)
+			{
+				AddMeatsToCarnivore(__instance);
+				AddSeedsToGMOOK(__instance);
+			}
+
 			private static void AddSeedsToGMOOK(Db instance)
 			{
 				var achievement = instance.ColonyAchievements.GMOOK;
@@ -69,13 +67,29 @@ namespace Beached.Patches.DatabasePatches
 				{
 					if (requirement is EatXCaloriesFromY foodRequirement)
 					{
-						foodRequirement.fromFoodType.AddRange(
-						[
-							SmokedMeatConfig.ID,
-							SmokedFishConfig.ID,
-							HighQualityMeatConfig.ID,
-							LegendarySteakConfig.ID,
-						]);
+						var meats = Assets.GetPrefabsWithTag(BTags.meat);
+						foreach (var item in foodRequirement.fromFoodType)
+						{
+							// collect meats from other mods
+							if (Assets.TryGetPrefab(item) is GameObject prefab)
+								prefab.AddTag(BTags.meat);
+						}
+
+						foreach (var meat in meats)
+						{
+							var prefabId = meat.PrefabID().ToString();
+							if (foodRequirement.fromFoodType.Contains(prefabId))
+								foodRequirement.fromFoodType.Add(prefabId);
+						}
+
+						/*
+												foodRequirement.fromFoodType.AddRange(
+												[
+													SmokedMeatConfig.ID,
+													SmokedFishConfig.ID,
+													HighQualityMeatConfig.ID,
+													LegendarySteakConfig.ID,
+												]);*/
 
 						break;
 					}

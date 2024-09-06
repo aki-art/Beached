@@ -198,6 +198,7 @@ namespace Beached
 				limpetEggs = new Color32(255, 225, 185, 255),
 				capSpores = Util.ColorFromHex("3db1ff"),
 				poffSpores = Color.white,
+				iceWrath = Util.ColorFromHex("80b5ff"),
 				fur = new Color32(210, 40, 180, 255),
 
 				electricBlue = Util.ColorFromHex("0090ff");
