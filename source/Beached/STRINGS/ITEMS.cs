@@ -326,7 +326,7 @@ namespace Beached
 					public static LocString TOOLTIP = "This food is appropiate for Carnivorous diets, and makes vegetarian Duplicants sad.";
 				}
 
-				public class BEACHED_NONVEGETARIAN
+				public class BEACHED_NONVEGA
 				{
 					public static LocString NAME = "Non-Vega";
 

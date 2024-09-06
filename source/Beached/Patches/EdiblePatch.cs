@@ -20,8 +20,14 @@ namespace Beached.Patches
 
 			public static void Postfix(Edible __instance)
 			{
-				if (__instance.HasTag(BTags.meat))
-					__instance.GetComponent<KSelectable>().AddStatusItem(BStatusItems.meat);
+				if (__instance.TryGetComponent(out KPrefabID kPrefabID))
+				{
+					if (kPrefabID.HasTag(BTags.meat))
+						__instance.GetComponent<KSelectable>().AddStatusItem(BStatusItems.meat);
+					else if (kPrefabID.HasTag(BTags.nonVegetarian))
+						__instance.GetComponent<KSelectable>().AddStatusItem(BStatusItems.nonVega);
+
+				}
 			}
 		}
 

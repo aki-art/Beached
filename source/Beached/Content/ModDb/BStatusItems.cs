@@ -20,11 +20,12 @@ namespace Beached.Content.ModDb
 		public static StatusItem controllerByCollarDispenser;
 		public static StatusItem cultivatingGerms;
 		public static StatusItem meat;
+		public static StatusItem nonVega;
 
 		[DbEntry]
 		public static void RegisterMiscStatusItems(MiscStatusItems __instance)
 		{
-			meat = new StatusItem(
+			meat = __instance.Add(new StatusItem(
 				"Beached_Meat",
 				"ITEMS",
 				"beached_statusitem_meat",
@@ -32,44 +33,48 @@ namespace Beached.Content.ModDb
 				NotificationType.Neutral,
 				false,
 				OverlayModes.None.ID,
-				false);
+				false));
 
-			gunked = new(
+			nonVega = __instance.Add(new StatusItem(
+				"Beached_NonVega",
+				"ITEMS",
+				"beached_statusitem_nonvega",
+				StatusItem.IconType.Custom,
+				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID,
+				false));
+
+			gunked = __instance.Add(new(
 				"Beached_Gunked",
 				"BUILDINGS",
 				string.Empty,
 				StatusItem.IconType.Exclamation,
 				NotificationType.Bad,
 				false,
-				OverlayModes.None.ID);
+				OverlayModes.None.ID));
 
-			__instance.Add(gunked);
-
-			cultivatingGerms = new(
+			cultivatingGerms = __instance.Add(new(
 				"Beached_CultivatingGerms",
 				"CREATURES",
 				string.Empty,
 				StatusItem.IconType.Info,
 				NotificationType.Good,
 				false,
-				OverlayModes.None.ID);
+				OverlayModes.None.ID));
 
 			cultivatingGerms.SetResolveStringCallback(GermCultivator.ResolveStatusItemString);
 
-			__instance.Add(cultivatingGerms);
-
-
-			smoking = new(
+			smoking = __instance.Add(new(
 				"Beached_Smoking",
 				"CREATURES",
 				string.Empty,
 				StatusItem.IconType.Info,
 				NotificationType.Neutral,
 				false,
-				OverlayModes.None.ID);
+				OverlayModes.None.ID));
 
 			smoking.SetResolveStringCallback((str, data) => data is SmokeCookable smokable ? smokable.GetStatusItemTooltip(str) : str);
-			__instance.Add(smoking);
 		}
 
 		[DbEntry]
