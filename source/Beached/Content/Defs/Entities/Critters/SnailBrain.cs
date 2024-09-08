@@ -32,6 +32,8 @@ namespace Beached.Content.Defs.Entities.Critters
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());
 
+			Log.Debug("adding brain to slickshells");
+
 			EntityTemplates.AddCreatureBrain(gameObject, choreTable, species, symbolOverridePrefix);
 		}
 	}

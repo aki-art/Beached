@@ -18,6 +18,11 @@
 					public static LocString DESCRIPTION = "TODO";
 				}
 			}
+
+			public class BEACHED_SLICKSHELL
+			{
+				public static LocString TITLE = "TEST";
+			}
 		}
 	}
 }

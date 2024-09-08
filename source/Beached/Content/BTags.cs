@@ -115,6 +115,9 @@ namespace Beached.Content
 			if (index == -1) index = 0; // in case some other mod tweaked the filters and removed BuildableProcessed
 
 			STORAGEFILTERS.NOT_EDIBLE_SOLIDS.Insert(index, MaterialCategories.crystal);
+			STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE = STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE.AddToArray(MaterialCategories.crystal);
+			STORAGEFILTERS.STORAGE_LOCKERS_STANDARD.Add(MaterialCategories.crystal);
+
 			STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE = STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE.AddToArray(coralFrag);
 
 			Filterable.filterableCategories.Add(GameTags.Egg);

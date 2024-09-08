@@ -455,7 +455,7 @@ namespace Beached
 			public class FAMILY
 			{
 				[Note("A slickster in a shell, also \"slick\" as in oily/slimy. It looks like a snail.")]
-				public static LocString BEACHEDSLICKSHELL = "Slickshell";
+				public static LocString BEACHEDSLICKSHELL = FormatAsLink("Slickshell", "BEACHEDSNAILSPECIES");
 				[Note("Angler fish with angular patterns.")]
 				public static LocString BEACHEDANGULARFISH = "Angular Fish";
 				[Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]
@@ -466,7 +466,7 @@ namespace Beached
 			public class FAMILY_PLURAL
 			{
 				[Note("A slickster in a shell, also \"slick\" as in oily/slimy. It looks like a snail.")]
-				public static LocString BEACHEDSNAILSPECIES = "Slickshells";
+				public static LocString BEACHEDSNAILSPECIES = FormatAsLink("Slickshells", "BEACHEDSNAILSPECIES");
 				[Note("Angler fish with angular patterns.")]
 				public static LocString BEACHEDANGULARFISHSPECIES = "Angular Fish";
 				[Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]

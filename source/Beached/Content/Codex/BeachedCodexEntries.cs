@@ -6,7 +6,6 @@ namespace Beached.Content.Codex
 	public class BeachedCodexEntries
 	{
 		public const string BEACHED_GUIDES_CATEGORY = "BEACHEDGUIDES";
-
 		public static void Generate()
 		{
 			CritterHappinessTutorial.GenerateEntry();

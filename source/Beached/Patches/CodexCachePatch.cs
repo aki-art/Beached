@@ -18,7 +18,7 @@ namespace Beached.Patches
 			}
 		}
 
-		[HarmonyPatch(typeof(CodexCache), nameof(CodexCache.CollectEntries))]
+		//[HarmonyPatch(typeof(CodexCache), nameof(CodexCache.CollectEntries))]
 		public static class CodexCache_CollectEntries_Patch
 		{
 			public static void Postfix(string folder, List<CodexEntry> __result)
