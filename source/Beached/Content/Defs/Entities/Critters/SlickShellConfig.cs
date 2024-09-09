@@ -30,6 +30,13 @@ namespace Beached.Content.Defs.Entities.Critters
 
 			prefab.AddTag(GameTags.OriginalCreature); // gravitas critter manipulator
 
+			var diet = new Diet(SaltDiet());
+			var def = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
+			def.diet = diet;
+			def.minConsumedCaloriesBeforePooping = SlickShellTuning.CALORIES_PER_KG_OF_ORE * SlickShellTuning.MIN_POOP_SIZE_IN_KG;
+
+			prefab.AddOrGetDef<SolidConsumerMonitor.Def>().diet = diet;
+
 			return prefab;
 		}
 
@@ -79,6 +86,22 @@ namespace Beached.Content.Defs.Entities.Critters
 			trait.Add(new AttributeModifier(db.Amounts.Age.maxAttribute.Id, 100f, name));
 			trait.Add(new AttributeModifier(BAmounts.Moisture.maxAttribute.Id, 100f, name));
 			trait.Add(new AttributeModifier(BAmounts.Moisture.deltaAttribute.Id, -1000f / 600f, name));
+		}
+
+		public static Diet.Info[] SaltDiet()
+		{
+			return
+			[
+			new(
+				[
+					SimHashes.Salt.CreateTag()
+				],
+				SimHashes.Dirt.CreateTag(),
+				SlickShellTuning.CALORIES_PER_KG_OF_ORE,
+				TUNING.CREATURES.CONVERSION_EFFICIENCY.NORMAL,
+				null,
+				0)
+			];
 		}
 
 		public void OnPrefabInit(GameObject prefab) { }

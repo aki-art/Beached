@@ -2,7 +2,7 @@
 
 namespace Beached.Content.Defs.Entities
 {
-	internal class SkeletonChairConfig : IEntityConfig
+	public class SkeletonChairConfig : IEntityConfig
 	{
 		public const string ID = "Beached_SkeletonChair";
 
@@ -29,7 +29,6 @@ namespace Beached.Content.Defs.Entities
 		public void OnPrefabInit(GameObject inst)
 		{
 		}
-
 
 		public void OnSpawn(GameObject inst) { }
 	}

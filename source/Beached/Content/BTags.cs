@@ -55,6 +55,7 @@ namespace Beached.Content
 			setPiece = TagManager.Create("Beached_SetPiece"),
 			glacier = TagManager.Create("Beached_Glacier"),
 			vegetarian = TagManager.Create("Beached_Vegetarian"),
+			buildingAttachmentSmoker = TagManager.Create("Beached_BuildingAttachmentSmoker"),
 			// used on events that should trigger the wishing star effect on dupes
 			wishingStars = TagManager.Create("Beached_WishingStars");
 

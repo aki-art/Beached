@@ -29,7 +29,7 @@ namespace Beached.Content.Defs.Buildings
 
 			def.RequiresPowerInput = true;
 			def.AddLogicPowerPort = false;
-			def.EnergyConsumptionWhenActive = 120f;
+			def.EnergyConsumptionWhenActive = 60f;
 			def.SelfHeatKilowattsWhenActive = 0.125f;
 			def.ExhaustKilowattsWhenActive = 0f;
 			def.LogicOutputPorts =

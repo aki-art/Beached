@@ -139,11 +139,11 @@ namespace Beached.ModDevTools
 
 				ImGui.InputText("Mask: ", ref liquidCullingMaskLayer, 256);
 
-				if (ImGui.DragFloat("Silstone UV Scale", ref siltStoneUV))
+				if (ImGui.DragFloat("Rot UV Scale", ref siltStoneUV))
 				{
 					var materials = World.Instance.groundRenderer.elementMaterials;
-					materials[Elements.siltStone].opaque.SetFloat("_WorldUVScale", siltStoneUV);
-					materials[Elements.siltStone].alpha.SetFloat("_WorldUVScale", siltStoneUV);
+					materials[Elements.rot].opaque.SetFloat("_WorldUVScale", siltStoneUV);
+					materials[Elements.rot].alpha.SetFloat("_WorldUVScale", siltStoneUV);
 				}
 
 				var rendererGo = WaterCubes.Instance.cubes.transform.Find("WaterCubesMesh");

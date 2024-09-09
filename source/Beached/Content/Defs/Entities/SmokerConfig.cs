@@ -41,6 +41,10 @@ namespace Beached.Content.Defs.Entities
 
 			prefab.AddComponent<Smoker>();
 			prefab.AddComponent<Demolishable>();
+			prefab.AddOrGet<BuildingAttachPoint>().points =
+			[
+				new BuildingAttachPoint.HardPoint(CellOffset.none, BTags.buildingAttachmentSmoker,  null)
+			];
 
 			return prefab;
 		}

@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Scripts.Entities.Comets;
-using System.Collections.Generic;
 using UnityEngine;
 using static EdiblesManager;
 
@@ -7,6 +6,8 @@ namespace Beached.Content.Defs
 {
 	public class BEntityTemplates
 	{
+		public const string PLACEHOLDER_KANIM = "farmtile_kanim";
+
 		public static GameObject CreateSimpleItem(string ID, string name, string description, string anim, EffectorValues decor, SimHashes element, bool loop = false)
 		{
 			var prefab = EntityTemplates.CreateLooseEntity(

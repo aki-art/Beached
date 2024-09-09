@@ -20,6 +20,7 @@ namespace Beached.Patches
 				var entries = new HashSet<string>();
 
 				// need to remove the _-s and move the same entries under the fixed ID
+				// https://forums.kleientertainment.com/klei-bug-tracker/oni/codex-critter-entry-generators-ignore-_-s-but-sidescreen-links-dont-r46250/
 				foreach (var item in snails.subEntries)
 				{
 					entries.Add(item.id);

@@ -8,6 +8,7 @@ namespace Beached.Content
 	{
 		public static readonly SimHashes
 			amber = ToHash("Amber"),
+			ambergris = ToHash("Ambergris"),
 			ammonia = ToHash("Ammonia"),
 			ammoniaFrozen = ToHash("FrozenAmmonia"),
 			ammoniaLiquid = ToHash("AmmoniaLiquid"),

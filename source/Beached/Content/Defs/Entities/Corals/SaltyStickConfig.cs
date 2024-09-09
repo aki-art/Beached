@@ -60,10 +60,6 @@ namespace Beached.Content.Defs.Entities.Corals
 
 		public void OnPrefabInit(GameObject inst) { }
 
-		public void OnSpawn(GameObject inst)
-		{
-			if (inst.TryGetComponent(out PassiveElementConsumer consumer))
-				consumer.EnableConsumption(true);
-		}
+		public void OnSpawn(GameObject inst) { }
 	}
 }

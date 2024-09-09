@@ -108,9 +108,10 @@ namespace Beached.Patches.DatabasePatches
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, ChimeConfig.ID, "decor", FlowerVaseConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, SmallAquariumConfig.ID, "decor", FlowerVaseConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.REFINING, MudStomperConfig.ID, FUtility.CONSTS.SUB_BUILD_CATEGORY.Refining.MATERIALS);
-
+				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, SmokingRackConfig.ID, FUtility.CONSTS.SUB_BUILD_CATEGORY.Food.COOKING);
 
 				FUtility.BuildingUtil.AddToResearch(ChimeConfig.ID, FUtility.CONSTS.TECH.DECOR.INTERIOR_DECOR);
+				FUtility.BuildingUtil.AddToResearch(SmokingRackConfig.ID, FUtility.CONSTS.TECH.FOOD.RANCHING);
 			}
 		}
 	}
