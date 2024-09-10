@@ -25,7 +25,7 @@ namespace Beached.Content.Defs.Entities.Critters
 				.ShedFur(0.25f, Util.ColorFromHex("d7dfed"))
 				.Build();
 
-			ConfigureAI(prefab, symbolOverridePrefix, BTags.Species.snail, isBaby);
+			ConfigureAI(prefab, symbolOverridePrefix, BTags.Species.muffin, isBaby);
 			EntityTemplates.CreateAndRegisterBaggedCreature(prefab, true, true);
 
 			prefab.AddTag(GameTags.Creatures.Walker);

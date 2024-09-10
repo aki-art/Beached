@@ -70,7 +70,18 @@ namespace Beached.Patches
 					initialAnim = "splode"
 				});
 
-				___fxSpawnData = spawnData.ToArray();
+				spawnData.Add(new Game.SpawnPoolData()
+				{
+					id = ModAssets.Fx.ammoniaBubbles,
+					initialCount = 4,
+					spawnOffset = Vector3.zero,
+					spawnRandomOffset = new Vector2(0f, 0f),
+					colour = Color.white,
+					fxPrefab = GetNewPrefab(prefab, "beached_ammonia_bubbles_kanim", 1f),
+					initialAnim = "bubble"
+				});
+
+				___fxSpawnData = [.. spawnData];
 			}
 
 			private static GameObject GetNewPrefab(GameObject original, string newAnim = null, float scale = 1f)

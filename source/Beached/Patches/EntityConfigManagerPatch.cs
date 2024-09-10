@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Foods;
+﻿using Beached.Content.Defs.Entities.Critters;
+using Beached.Content.Defs.Foods;
 using HarmonyLib;
 using TUNING;
 
@@ -13,6 +14,11 @@ namespace Beached.Patches
 			{
 				CROPS.CROP_TYPES.Add(new(JellyConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
 				CROPS.CROP_TYPES.Add(new(PipShootConfig.ID, 0.6f * CONSTS.CYCLE_LENGTH));
+			}
+
+			public static void Postfix()
+			{
+				MuffinConfig.OnPostEntitiesLoaded();
 			}
 		}
 	}

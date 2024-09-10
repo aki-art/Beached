@@ -32,7 +32,7 @@ ElementChoiceGroups:
     choices:
       - element: Algae
         weight: 1
-      - element: Lime
+      - element: Beached_Coquina
         weight: 0.25
       - element: Beached_SiltStone
         weight: 1

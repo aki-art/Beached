@@ -56,6 +56,7 @@ namespace Beached.Content.ModDb
 
 		public static void SetMeatTags()
 		{
+			Log.Debug("setting meat tags");
 			HashSet<Tag> meats =
 				[
 					CookedMeatConfig.ID,

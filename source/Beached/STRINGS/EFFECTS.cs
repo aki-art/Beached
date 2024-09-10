@@ -7,19 +7,25 @@
 			public class BEACHED_DAMP_PLANTGROWTHBOOST
 			{
 				public static LocString NAME = "Damp Environment";
-				public static LocString DESC = $"This plant is enjoying a humid atmosphere, boosting its growth.(World Trait: Damp)";
+				public static LocString DESC = $"This plant is enjoying a humid atmosphere, boosting its growth. (World Trait: Damp)";
 			}
 
 			public class BEACHED_ARID_PLANTGROWTHPENALTY
 			{
 				public static LocString NAME = "Arid Environment";
-				public static LocString DESC = $"This place is too dry for plants, growth is slowed.(World Trait: Arid)";
+				public static LocString DESC = $"This place is too dry for plants, growth is slowed. (World Trait: Arid)";
 			}
 
 			public class BEACHED_STEPPEDINMUCUS
 			{
 				public static LocString NAME = "Slippery Feet";
-				public static LocString DESC = $"This duplicant has stepped in {ELEMENTS.MUCUS.NAME}.";
+				public static LocString DESC = $"This duplicant has stepped in {FormatAsLink("Mucus", "BEACHED_MUCUS")}.";
+			}
+
+			public class BEACHED_SUBMERGEDINMUCUS
+			{
+				public static LocString NAME = "Slippery Hands";
+				public static LocString DESC = $"This duplicant has touched {FormatAsLink("Mucus", "BEACHED_MUCUS")} and things just keep sliding out of their hands and pockets!";
 			}
 
 			public class BEACHED_UNSAVORY_MEAL
@@ -31,7 +37,7 @@
 			public class BEACHED_MUCUS_SOAKED
 			{
 				public static LocString NAME = "Slimy";
-				public static LocString DESC = $"This duplicant has recently submerged in {ELEMENTS.MUCUS.NAME}.";
+				public static LocString DESC = $"This duplicant has recently submerged in {ELEMENTS.BEACHED_MUCUS.NAME}.";
 			}
 
 			public class BEACHED_OCEANBREEZE

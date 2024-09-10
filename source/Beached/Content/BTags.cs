@@ -69,6 +69,7 @@ namespace Beached.Content
 			public static readonly Tag
 				secretingMucus = TagManager.Create("Beached_SecretingMucus"),
 				hunting = TagManager.Create("Beached_Hunting"),
+				// muffins will not hunt critters with this tag, regardless of collar settings
 				doNotTargetMeByCarnivores = TagManager.Create("Beached_DoNotTargetMeByCarnivores");
 		}
 
@@ -76,6 +77,10 @@ namespace Beached.Content
 		{
 			public static readonly Tag snail = TagManager.Create("BeachedSnailSpecies");
 			public static readonly Tag muffin = TagManager.Create("BeachedMuffinSpecies");
+			public static readonly Tag jellyfish = TagManager.Create("BeachedJellyFishSpecies");
+			public static readonly Tag fuafua = TagManager.Create("BeachedFuaFuaSpecies");
+			public static readonly Tag rotMonger = TagManager.Create("BeachedRotMongerSpecies");
+			public static readonly Tag angularFish = TagManager.Create("BeachedAngularFishSpecies");
 		}
 
 		public static class MaterialCategories

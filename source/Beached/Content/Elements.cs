@@ -166,6 +166,8 @@ namespace Beached.Content
 			SetAcidCorrosions();
 			SetElectricalConductivities();
 
+			ElementLoader.FindElementByHash(rot).sublimateFX = ModAssets.Fx.ammoniaBubbles;
+
 			foreach (var kvp in acidVulnerabilities)
 			{
 				var element = ElementLoader.FindElementByHash(kvp.Key);

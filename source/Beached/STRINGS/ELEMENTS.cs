@@ -189,7 +189,7 @@ namespace Beached
 				public static LocString DESC = "TODO";
 			}
 
-			public class MUCUS
+			public class BEACHED_MUCUS
 			{
 				[Note("Snail mucus")]
 				public static LocString NAME = FormatAsLink("Mucus");

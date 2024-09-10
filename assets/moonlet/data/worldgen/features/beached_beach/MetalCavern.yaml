@@ -27,10 +27,8 @@ ElementChoiceGroups:
   RoomBorderChoices1:
     selectionMethod: HorizontalSlice
     choices:
-      - element: Beached_Bismuthinite
-        weight: 0.55
       - element: Beached_ZincOre
-        weight: 0.1
+        weight: 0.12
       - element: Beached_SiltStone
         weight: 0.55
       - element: Algae

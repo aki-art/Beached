@@ -90,6 +90,7 @@ namespace Beached
 			public static SpawnFXHashes
 				saltOff = (SpawnFXHashes)"Beached_SaltOff".GetHashCode(),
 				grimcapPoff = (SpawnFXHashes)"Beached_GrimCapPoff".GetHashCode(),
+				ammoniaBubbles = (SpawnFXHashes)"Beached_AmmoniaBubbles".GetHashCode(),
 				mossplosion = (SpawnFXHashes)"Beached_Mossplosion".GetHashCode();
 
 			public static Material testMaterial;

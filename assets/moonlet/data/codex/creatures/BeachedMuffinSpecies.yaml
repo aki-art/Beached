@@ -1,0 +1,26 @@
+title: Muffins
+iconPrefabID: Beached_Muffin
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        text: Muffins
+        style: Title
+
+      - type: Text
+        textKey: STRINGS.CREATURES.CRITTER_SPECIES
+        style: SubTitle
+
+      - type: DividerLine
+        preferredWidth: -1
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        text: | 
+          Muffins are carnivorous critters adapted to a wide range of temperatures thanks to their well insulating fur.
+          
+          Muffins are proficient hunters and will catch their prey when hungry. They are also very smart creatures and can be trained by a Duplicant with appropriate skills.
+

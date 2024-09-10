@@ -461,6 +461,7 @@ namespace Beached
 				[Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]
 				public static LocString BEACHEDMAKI = "Maki";
 				public static LocString BEACHEDJELLYFISH = "Jellyfish";
+				public static LocString BEACHEDMUFFIN = FormatAsLink("Muffin", "BEACHEDMUFFINSPECIES");
 			}
 
 			public class FAMILY_PLURAL
@@ -472,6 +473,7 @@ namespace Beached
 				[Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]
 				public static LocString BEACHEDMAKISPECIES = "Makis";
 				public static LocString BEACHEDJELLYFISHSPECIS = "Jellyfish";
+				public static LocString BEACHEDMUFFINSPECIES = FormatAsLink("Muffins", "BEACHEDMUFFINSPECIES");
 			}
 		}
 	}

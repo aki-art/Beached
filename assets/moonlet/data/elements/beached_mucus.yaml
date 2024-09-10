@@ -28,6 +28,11 @@ elements:
       radiationAbsorptionFactor: 0.6
       radiationPer1000Mass: 0
       state: Liquid
+      duplicantEffects:
+        submergedIn:
+          id: Beached_SubmergedInMucus
+        steppedIn:
+          id: Beached_SteppedInMucus
       composition:
         - elementID: CrudeOil
           percentage: 0.5

@@ -3,7 +3,6 @@ using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities.AI;
 using Klei.AI;
 using UnityEngine;
-using UnityEngine.Assertions;
 using static Beached.STRINGS.CREATURES.SPECIES;
 
 namespace Beached.Content.Defs.Entities.Critters
@@ -61,7 +60,7 @@ namespace Beached.Content.Defs.Entities.Critters
 				BEACHED_SLICKSHELL.EGG_NAME,
 				BEACHED_SLICKSHELL.DESC,
 				"beached_egg_slickshell_kanim",
-				CrabTuning.EGG_MASS,
+				SlickShellTuning.EGG_MASS,
 				BabySlickShellConfig.ID,
 				60f,
 				20f,
@@ -73,17 +72,13 @@ namespace Beached.Content.Defs.Entities.Critters
 		{
 			var db = Db.Get();
 
-			Assert.IsNotNull(db, "db is null");
-			Assert.IsNotNull(db.traits, "traits is null");
-			Assert.IsNotNull(db.Amounts, "amounts is null");
-			Assert.IsNotNull(BAmounts.Moisture, "bamounts is null");
-
 			var trait = db.CreateTrait(BASE_TRAIT_ID, name, name, null, false, null, true, true);
 
-			trait.Add(new AttributeModifier(db.Amounts.Calories.maxAttribute.Id, CrabTuning.STANDARD_STOMACH_SIZE, name));
-			trait.Add(new AttributeModifier(db.Amounts.Calories.deltaAttribute.Id, -CrabTuning.STANDARD_CALORIES_PER_CYCLE / 600f, name));
+			trait.Add(new AttributeModifier(db.Amounts.Calories.maxAttribute.Id, SlickShellTuning.STANDARD_STOMACH_SIZE, name));
+			trait.Add(new AttributeModifier(db.Amounts.Calories.deltaAttribute.Id, -SlickShellTuning.STANDARD_CALORIES_PER_CYCLE / CONSTS.CYCLE_LENGTH, name));
+
 			trait.Add(new AttributeModifier(db.Amounts.HitPoints.maxAttribute.Id, 25f, name));
-			trait.Add(new AttributeModifier(db.Amounts.Age.maxAttribute.Id, 100f, name));
+			trait.Add(new AttributeModifier(db.Amounts.Age.maxAttribute.Id, 25f, name));
 			trait.Add(new AttributeModifier(BAmounts.Moisture.maxAttribute.Id, 100f, name));
 			trait.Add(new AttributeModifier(BAmounts.Moisture.deltaAttribute.Id, -1000f / 600f, name));
 		}
@@ -92,20 +87,25 @@ namespace Beached.Content.Defs.Entities.Critters
 		{
 			return
 			[
-			new(
-				[
-					SimHashes.Salt.CreateTag()
-				],
-				SimHashes.Dirt.CreateTag(),
-				SlickShellTuning.CALORIES_PER_KG_OF_ORE,
-				TUNING.CREATURES.CONVERSION_EFFICIENCY.NORMAL,
-				null,
-				0)
+				new(
+					[SimHashes.Salt.CreateTag()],
+					SimHashes.Dirt.CreateTag(),
+					SlickShellTuning.CALORIES_PER_KG_OF_ORE,
+					TUNING.CREATURES.CONVERSION_EFFICIENCY.NORMAL,
+					null,
+					0)
 			];
 		}
 
 		public void OnPrefabInit(GameObject prefab) { }
 
-		public void OnSpawn(GameObject inst) { }
+		public void OnSpawn(GameObject inst)
+		{
+			// TODO: temporary fix because i animated the snail facing the wrong way
+			inst.transform.localScale = new Vector3(
+				inst.transform.localScale.x * -1f,
+				inst.transform.localScale.y * 1,
+				inst.transform.localScale.z * 1);
+		}
 	}
 }

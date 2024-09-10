@@ -30,7 +30,6 @@ biomes:
 features:
   - type: features/beached_beach/AirPocket
   - type: features/beached_beach/MetalCavern
-  - type: features/beached_beach/LimePocket
   - type: features/beached_beach/MediumFreshwaterLake
   - type: features/beached_beach/TinyFreshWaterLake
   - type: features/beached_beach/SnailPocket

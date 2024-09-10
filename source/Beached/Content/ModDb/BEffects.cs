@@ -15,6 +15,7 @@
 			POFFMOUTH_RECOVERY = "Beached_PoffMouth_Recovery",
 			LIMPETHOST = "Beached_LimpetHost", // for critters, used for growing limpets
 			STEPPED_IN_MUCUS = "Beached_SteppedInMucus",
+			SUBMERGED_IN_MUCUS = "Beached_SubmergedInMucus",
 			WISHING_STAR = "Beached_WishingStar", // applied when they see shooting stars
 			POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds",
 			POFF_HELIUM = "Beached_PoffHelium",
@@ -74,7 +75,11 @@
 				.Modifier(peeDelta, 5f / CONSTS.CYCLE_LENGTH)
 				.Add(set);
 
-			new EffectBuilder(STEPPED_IN_MUCUS, 120f, true)
+			new EffectBuilder(STEPPED_IN_MUCUS, 1f, true)
+				.Emote(BEmotes.mucusSlip, 60f)
+				.Add(set);
+
+			new EffectBuilder(SUBMERGED_IN_MUCUS, 120f, true)
 				.Modifier(carryCapacity, -0.5f, true)
 				.Add(set);
 

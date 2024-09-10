@@ -1,0 +1,24 @@
+elements:
+  - elementId: Beached_AmberGris
+    name: Ambergris
+    color: 9274d5
+    specificHeatCapacity: 1.92
+    thermalConductivity: 1.2
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.2
+    highTemp: 110C
+    highTempTransitionTarget: CrudeOil
+    defaultTemperature: 26C
+    defaultMass: 1840
+    maxMass: 950
+    hardness: 1
+    molarMass: 50
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.7
+    radiationPer1000Mass: 0
+    materialCategory: Organics
+    tags:
+    - IndustrialIngredient
+    state: Solid

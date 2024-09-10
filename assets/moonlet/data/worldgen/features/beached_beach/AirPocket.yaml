@@ -27,5 +27,5 @@ ElementChoiceGroups:
         weight: 1
       - element: Beached_SiltStone
         weight: 2
-      - element: Lime
+      - element: Beached_Coquina
         weight: 0.4

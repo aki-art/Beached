@@ -31,7 +31,7 @@ ElementChoiceGroups:
     choices:
       - element: Algae
         weight: 1
-      - element: Lime
+      - element: Beached_Coquina
         weight: 0.25
       - element: Sand
         weight: 1

@@ -27,7 +27,6 @@ namespace Beached.Content.Defs.Entities.Critters
 			ExtendToFertileCreature(prefab);
 
 			ConfigureBaseTrait(STRINGS.CREATURES.SPECIES.BEACHED_MUFFIN.NAME);
-			var diet = ConfigureDiet(prefab);
 
 			prefab.AddTags(
 				GameTags.OriginalCreature,
@@ -40,6 +39,9 @@ namespace Beached.Content.Defs.Entities.Critters
 
 			prefab.AddComponent<CollarWearer>();
 
+			prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
+			prefab.AddOrGetDef<SolidConsumerMonitor.Def>();
+
 			return prefab;
 		}
 
@@ -51,7 +53,7 @@ namespace Beached.Content.Defs.Entities.Critters
 				EGG_ID,
 				STRINGS.CREATURES.SPECIES.BEACHED_MUFFIN.EGG_NAME,
 				STRINGS.CREATURES.SPECIES.BEACHED_MUFFIN.DESC,
-				"beached_egg_slickshell_kanim",
+				"beached_egg_muffin_kanim",
 				1f,
 				BabyJellyfishConfig.ID,
 				60f,
@@ -60,21 +62,33 @@ namespace Beached.Content.Defs.Entities.Critters
 				CrabConfig.EGG_SORT_ORDER);
 		}
 
-		private Diet ConfigureDiet(GameObject prefab)
+		private static Diet ConfigureDiet(GameObject prefab)
 		{
-			var foods = Assets
+			var meats = Assets
 				.GetPrefabsWithTag(BTags.meat)
+				.Where(prefab => !prefab.HasTag(BTags.Creatures.doNotTargetMeByCarnivores))
 				.Select(meat => meat.PrefabID())
 				.ToHashSet();
 
-			foods.Add(RawEggConfig.ID);
-			foods.Add(CookedEggConfig.ID);
+			var eggs = Assets
+				.GetPrefabsWithTag(GameTags.Egg)
+				.Where(prefab => !prefab.HasTag(BTags.Creatures.doNotTargetMeByCarnivores))
+				.Select(egg => egg.PrefabID())
+				.ToHashSet();
 
 			var diet = new Diet(
 				new Diet.Info(
-					foods,
+					meats,
 					Elements.bone.CreateTag(),
-					400_000f));
+					400_000f),
+				new Diet.Info(
+					[RawEggConfig.ID, CookedEggConfig.ID, QuicheConfig.ID],
+					null,
+					calories_per_kg: 400_000),
+				new Diet.Info(
+					eggs,
+					EggShellConfig.ID,
+					calories_per_kg: 400_000));
 
 			var creatureCalorieMonitor = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
 			creatureCalorieMonitor.diet = diet;
@@ -84,6 +98,13 @@ namespace Beached.Content.Defs.Entities.Critters
 			return diet;
 		}
 
+		public static void OnPostEntitiesLoaded()
+		{
+			Assets.GetPrefab(EGG_ID).AddTag(BTags.Creatures.doNotTargetMeByCarnivores);
+			ConfigureDiet(Assets.GetPrefab(ID));
+		}
+
+		// define it later than usual so items can be collected by tags
 		private void ConfigureBaseTrait(string name)
 		{
 			var db = Db.Get();

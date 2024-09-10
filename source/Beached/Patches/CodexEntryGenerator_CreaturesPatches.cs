@@ -12,29 +12,33 @@ namespace Beached.Patches
 		{
 			public static void Postfix()
 			{
-				List<GameObject> brains = Assets.GetPrefabsWithComponent<CreatureBrain>();
+				var brains = Assets.GetPrefabsWithComponent<CreatureBrain>();
 
-				var snails = CodexEntryGenerator_Creatures.GenerateCritterEntry(BTags.Species.snail, STRINGS.CREATURES.FAMILY.BEACHEDSLICKSHELL, brains);
-				snails.parentId = "CREATURES";
+				AddCreature(BTags.Species.snail, STRINGS.CREATURES.FAMILY.BEACHEDSLICKSHELL, brains);
+				AddCreature(BTags.Species.muffin, STRINGS.CREATURES.FAMILY.BEACHEDMUFFIN, brains);
+			}
+
+			private static void AddCreature(Tag species, string name, List<GameObject> brains)
+			{
+				var critters = CodexEntryGenerator_Creatures.GenerateCritterEntry(species, name, brains);
+				critters.parentId = "CREATURES";
 
 				var entries = new HashSet<string>();
 
-				// need to remove the _-s and move the same entries under the fixed ID
-				// https://forums.kleientertainment.com/klei-bug-tracker/oni/codex-critter-entry-generators-ignore-_-s-but-sidescreen-links-dont-r46250/
-				foreach (var item in snails.subEntries)
+				foreach (var item in critters.subEntries)
 				{
+					var oldId = item.id;
 					entries.Add(item.id);
+
+					// need to remove the _-s and move the same entries under the fixed ID
+					// https://forums.kleientertainment.com/klei-bug-tracker/oni/codex-critter-entry-generators-ignore-_-s-but-sidescreen-links-dont-r46250/
 					var correctId = CodexCache.FormatLinkID(item.id);
-					CodexCache.AddSubEntry(correctId, CodexCache.FindSubEntry(item.id));
+					CodexCache.AddSubEntry(correctId, item);
 					item.id = correctId;
+					CodexCache.subEntries.Remove(oldId);
 				}
 
-				foreach (var item in entries)
-				{
-					CodexCache.subEntries.Remove(item);
-				}
-
-				CodexCache.AddEntry(BTags.Species.snail.ToString(), snails);
+				CodexCache.AddEntry(species.ToString(), critters);
 			}
 		}
 	}

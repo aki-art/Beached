@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using Beached.Content.Defs.Items;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters
@@ -30,7 +31,7 @@ namespace Beached.Content.Defs.Entities.Critters
 				NavType.Floor,
 				16,
 				0.25f,
-				SlickShellTuning.ON_DEATH_DROP,
+				SeaShellConfig.ID,
 				1,
 				false,
 				false,
