@@ -53,7 +53,7 @@
 		</Reference>
 
 		<Reference Include="FUtility">
-		  <HintPath>D:\Modding\OxygenNotIncluded\Lib\FUtility.dll</HintPath>
+		  <HintPath>$(FUtilityPath)</HintPath>
 		</Reference>
 
 		<!--

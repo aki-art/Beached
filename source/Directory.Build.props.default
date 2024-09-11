@@ -10,5 +10,7 @@
     <GameLibsFolder>$(SteamFolder)\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed</GameLibsFolder>
     <!--OutputModFolder, adjust it to your own dev folder-->
     <ModFolder>$(UserProfile)\Documents\Klei\OxygenNotIncluded\mods\dev</ModFolder>
+    <!--FUtilitiy Library Path-->
+    <FUtilityPath>D:\Modding\OxygenNotIncluded\Lib\FUtility.dll</FUtilityPath>
   </PropertyGroup>
 </Project>
