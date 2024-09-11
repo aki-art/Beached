@@ -1,12 +1,11 @@
 ﻿using Beached.Content.Defs.Foods;
-using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-	public class MusselSproutConfig : IEntityConfig
+    public class MusselSproutConfig : IEntityConfig
 	{
 		public const string ID = "Beached_MusselSprout";
 		public const string BASE_TRAIT_ID = ID + "_BaseTrait";
