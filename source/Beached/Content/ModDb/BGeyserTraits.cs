@@ -57,7 +57,6 @@ namespace Beached.Content.ModDb
 
 		private static void ScaleAnim(GameObject geyser, float scale)
 		{
-			Log.Debug("setting anim scale " + scale);
 			if (geyser.TryGetComponent(out KBatchedAnimController kbac))
 				kbac.animScale *= scale;
 		}
