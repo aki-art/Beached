@@ -264,7 +264,6 @@ namespace Beached.Content.Defs.StarmapEntities
                 }
                 codes.Insert(poiWorldAvoidance_stfld_index, new(OpCodes.Call, m_AddSwarmBlockedLocations));
 
-                TranspilerHelper.PrintInstructions(codes);
                 return codes;
             }
         }
