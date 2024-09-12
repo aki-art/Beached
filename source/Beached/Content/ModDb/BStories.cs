@@ -1,5 +1,4 @@
 ﻿using Database;
-using HarmonyLib;
 using Klei.CustomSettings;
 using System.Collections.Generic;
 
@@ -29,7 +28,7 @@ namespace Beached.Content.ModDb
 		}
 
 
-		[HarmonyPatch(typeof(CustomGameSettings), "VerifySettingsDictionary", typeof(Dictionary<string, SettingConfig>))]
+		//[HarmonyPatch(typeof(CustomGameSettings), "VerifySettingsDictionary", typeof(Dictionary<string, SettingConfig>))]
 		public class CustomGameSettings_VerifySettingsDictionary_Patch
 		{
 			public static void Prefix(Dictionary<string, SettingConfig> configs)

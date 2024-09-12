@@ -249,8 +249,6 @@ namespace Beached.Patches
 
 				foreach (var trait in storyTraits)
 				{
-					Log.Debug("Loaded trait: " + trait.Key);
-
 					if (trait.Value.additionalWorldTemplateRules == null) continue;
 
 					foreach (var templateRule in trait.Value.additionalWorldTemplateRules)
@@ -265,9 +263,6 @@ namespace Beached.Patches
 							{
 								filter.temperatureRanges.Add(Temperature.Range.Chilly);
 							}
-
-							Log.Debug("  - " + filter.command);
-							Log.Debug("  - " + filter.temperatureRanges?.Join());
 						}
 					}
 				}

@@ -18,28 +18,6 @@ namespace Beached.Content.ModDb
 
 				Log.Debug($"{result} {ev2.isValid()}");
 
-				var desc = RuntimeManager.GetEventDescription(oceanPalace);
-				desc.getID(out var id);
-				Log.Debug("ref id: " + id);
-
-				RuntimeManager.StudioSystem.getBankList(out var loadedBanks);
-				foreach (var bank in loadedBanks)
-				{
-					bank.getPath(out var bankPath);
-					Log.Debug("bank: " + bankPath);
-
-					if (bankPath.Contains("Beached"))
-					{
-						bank.getEventList(out var eventList);
-						foreach (var ev in eventList)
-						{
-							ev.getPath(out var evPath);
-							ev.getID(out var evId);
-
-							Log.Debug($"\t{evPath} {evId}");
-						}
-					}
-				}
 				if (manager.stingers.Any(stinger => !stinger.fmodEvent.IsNull && stinger.fmodEvent.Guid == oceanPalace.Guid))
 					return;
 
