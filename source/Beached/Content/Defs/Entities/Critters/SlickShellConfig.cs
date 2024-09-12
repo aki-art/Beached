@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Items;
+﻿using Beached.Content.Defs.Foods;
+using Beached.Content.Defs.Items;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities.AI;
 using Klei.AI;
@@ -17,6 +18,8 @@ namespace Beached.Content.Defs.Entities.Critters
 		public GameObject CreatePrefab()
 		{
 			var prefab = CreateBasePrefab();
+
+			prefab.GetComponent<Butcherable>().SetDrops([SeaShellConfig.ID, RawSnailConfig.ID]);
 
 			EntityTemplates.ExtendEntityToWildCreature(prefab, CrabTuning.PEN_SIZE_PER_CREATURE);
 			ConfigureBaseTrait(BEACHED_SLICKSHELL.NAME);

@@ -1,4 +1,5 @@
 ﻿using Beached.Content;
+using Beached.Content.Defs.Entities.Critters;
 using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
 using FUtility.FLocalization;
@@ -57,16 +58,34 @@ namespace Beached
 					public static LocString DESC = "Truly, the rarest steak of them all. A wonderful cut of meat that melts in the mouth.";
 				}
 
+				public class BEACHED_JELLYBAR
+				{
+					public static LocString NAME = FormatAsLink("Jelly Brick", JellyBarConfig.ID);
+					public static LocString DESC = "A solid slab of flavored Jelly.";
+				}
+
 				public class BEACHED_BERRYJELLY
 				{
 					public static LocString NAME = FormatAsLink("Berry-Jelly", JellyConfig.ID);
 					public static LocString DESC = "A jiggly treat hiding tasty berries within.";
 				}
 
-				public class BEACHED_NUTTYDELIGHT
+				public class BEACHED_RAWSNAIL
 				{
-					public static LocString NAME = "Nutty Delight";
-					public static LocString DESC = "...";
+					public static LocString NAME = FormatAsLink("Raw Snail", RawSnailConfig.ID);
+					public static LocString DESC = "Slimy chewy meat of a Slickshell.";
+				}
+
+				public class BEACHED_COOKEDSNAIL
+				{
+					public static LocString NAME = FormatAsLink("Seared Snail", SlickShellConfig.ID);
+					public static LocString DESC = "A still chewy slab of meat, with a somewhat pleasant crispy outside.";
+				}
+
+				public class BEACHED_SCRAMBLEDSNAIL
+				{
+					public static LocString NAME = FormatAsLink("Snail Scramble", SlickShellConfig.ID);
+					public static LocString DESC = "A still chewy slab of meat, with a somewhat pleasant crispy outside.";
 				}
 
 				public class BEACHED_STUFFEDSNAIL
@@ -75,9 +94,10 @@ namespace Beached
 					public static LocString DESC = "...";
 				}
 
-				public class BEACHED_RAWSNAIL
+
+				public class BEACHED_NUTTYDELIGHT
 				{
-					public static LocString NAME = "Raw Snail";
+					public static LocString NAME = "Nutty Delight";
 					public static LocString DESC = "...";
 				}
 

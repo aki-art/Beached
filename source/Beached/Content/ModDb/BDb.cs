@@ -192,6 +192,14 @@ namespace Beached.Content.ModDb
 
 		private static void CreateFoodRecipes()
 		{
+			var jellyBarRecipe = RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_JELLYBAR.DESC, 40f)
+				.Input(JellyConfig.ID, 1f)
+				.Output(JellyBarConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+			ComplexRecipeManager.Get().GetRecipe(jellyBarRecipe.id).FabricationVisualizer = MushBarConfig.CreateFabricationVisualizer(Assets.GetPrefab(JellyBarConfig.ID));
+
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, 40f)
 				.Input(JellyConfig.ID, 1f)
 				.Input(PrickleFruitConfig.ID, 2f)
