@@ -12,9 +12,6 @@ using UnityEngine;
 
 namespace Beached.Patches.Worldgen
 {
-    /// <summary>
-    /// TODO: move to "Patches" namespace
-    /// </summary>
     internal class StarmapGenerationPatches
     {
         /// <summary>
