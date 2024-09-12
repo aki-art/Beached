@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Beached.Content.Scripts.StarmapEntities;
 using UnityEngine;
 using static KAnim;
 using static Klei.ClusterLayoutSave;

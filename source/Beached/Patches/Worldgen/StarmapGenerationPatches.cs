@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.Defs.StarmapEntities;
+using HarmonyLib;
 using ProcGen;
 using ProcGenGame;
 using System;
@@ -9,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Beached.Content.Defs.StarmapEntities
+namespace Beached.Patches.Worldgen
 {
     /// <summary>
     /// TODO: move to "Patches" namespace
@@ -195,7 +196,7 @@ namespace Beached.Content.Defs.StarmapEntities
                 var codes = orig.ToList();
 
                 var cluster_worlds = AccessTools.Field(typeof(Cluster), nameof(Cluster.worlds));
-                Type worldGenList = typeof(List<ProcGenGame.WorldGen>);
+                Type worldGenList = typeof(List<WorldGen>);
                 int getWorldsIndex = codes.FindIndex(ci => ci.LoadsField(cluster_worlds));
                 if (getWorldsIndex == -1)
                 {
