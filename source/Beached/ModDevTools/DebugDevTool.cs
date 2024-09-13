@@ -3,6 +3,7 @@ using Beached.Content;
 using Beached.Content.BWorldGen;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities;
 using FMOD.Studio;
 using FMODUnity;
 using ImGuiNET;
@@ -46,6 +47,11 @@ namespace Beached.ModDevTools
 				GroundRenderer.Materials materials = World.Instance.groundRenderer.elementMaterials[Elements.permaFrost];
 				materials.opaque.SetFloat("_WorldUVScale", uvScale);
 				materials.alpha.SetFloat("_WorldUVScale", uvScale);
+			}
+
+			if (ImGui.CollapsingHeader("Asteroid Field Settings"))
+			{
+				AsteroidBeltVisualizer.TestingInstance.OnImguiDebug();
 			}
 
 			if (ImGui.CollapsingHeader("FMOD Tests"))

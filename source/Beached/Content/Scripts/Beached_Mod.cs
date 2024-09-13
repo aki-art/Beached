@@ -12,6 +12,8 @@ namespace Beached.Content.Scripts
 	{
 		public static Beached_Mod Instance;
 
+		public AxialI beltCenter;
+
 		// a bunch of singleton components i don't want to spam on SaveGame
 		// these do not serialize, put serialialized data on this component instead
 		public IridescenceEffect iridescenceEffect;
@@ -118,6 +120,17 @@ namespace Beached.Content.Scripts
 
 			Shader.SetGlobalColor("_Beached_TimeOfDayColor", overlayGradient.Evaluate(TimeOfDay.Instance.scale));
 			shaderPropertyUpdated = true;
+		}
+
+		public void OnStarmapScreenLoadPlanets()
+		{
+
+		}
+
+		public void SetBeltOrigin(AxialI swarmOriginLocation)
+		{
+			beltCenter = swarmOriginLocation;
+
 		}
 	}
 }

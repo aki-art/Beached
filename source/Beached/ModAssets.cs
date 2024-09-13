@@ -23,6 +23,7 @@ namespace Beached
 			public static GameObject cometTrailFx;
 			public static GameObject testQuad;
 			public static GameObject forceFieldDome;
+			public static GameObject asteroidBelt;
 		}
 
 		// static hardcoded indices for my zonetypes
@@ -241,7 +242,7 @@ namespace Beached
 			Log.Debug("initiating asset bundles");
 			var bundle = LoadAssetBundle("beached_assets", platformSpecific: true);
 			var sharedAssetsBundle = LoadAssetBundle("beached_shared_assets", platformSpecific: false);
-			var bundle2 = LoadAssetBundle("beached_assets2", platformSpecific: true);
+			var bundle2 = LoadAssetBundle(NEW_ASSETBUNDLE, platformSpecific: true);
 			var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
 
 			Log.Debug("loading sounds");
@@ -295,6 +296,7 @@ namespace Beached
 				mainTexture = texture
 			};
 
+			LoadAsteroidBelt(bundle2, sharedAssetsBundle);
 
 			Log.Debug("loading liquid shader");
 			Materials.liquidRefractionMat = bundle2.LoadAsset<Material>("Assets/Materials/Beached_LiquidRefraction.mat");
@@ -306,6 +308,20 @@ namespace Beached
 
 			sw.Stop();
 			Log.Info($"Finished loading assets. It took {sw.ElapsedMilliseconds} ms");
+		}
+
+		private static void LoadAsteroidBelt(AssetBundle bundle2, AssetBundle sharedBundle)
+		{
+			Prefabs.asteroidBelt = bundle2.LoadAsset<GameObject>("Assets/Prefabs/AsteroidBeltUI.prefab");
+			var main = Prefabs.asteroidBelt.GetComponent<ParticleSystem>().main;
+			main.startLifetime = float.PositiveInfinity;
+			main.maxParticles = 300;
+
+			//var renderer = Prefabs.asteroidBelt.GetComponent<ParticleSystemRenderer>();
+			///renderer.material = new Material(Shader.Find("Klei/BatchedAnimationUI"));
+			//renderer.material.SetTexture("_MainTex", sharedBundle.LoadAsset<Texture2D>("Assets/Textures/asteroids.png"));
+
+			Prefabs.asteroidBelt.SetActive(false);
 		}
 
 		private static void LoadSetpieces(AssetBundle bundle, AssetBundle sharedAssetsBundle)
