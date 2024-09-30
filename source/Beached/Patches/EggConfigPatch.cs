@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Items;
+﻿using Beached.Content;
+using Beached.Content.Scripts.Items;
 using HarmonyLib;
 using UnityEngine;
 
@@ -22,6 +23,12 @@ namespace Beached.Patches
 		{
 			public static void Postfix(ref GameObject __result)
 			{
+				// karacoos want to sit on these
+				__result.AddTag(BTags.karacooSittable);
+				// for karacoos. Pickupable is already IApproachable but allows too much interaction range
+				__result.AddOrGet<Approachable>();
+
+				// allow genetic modification
 				__result.AddOrGet<Beached_GeneticallyModifiableEgg>();
 			}
 		}

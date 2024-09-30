@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using KSerialization;
+using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities.Plant
 {
-	public class RubberTappable : StateMachineComponent<RubberTappable.StatesInstance>
+	public class RubberTappable : StateMachineComponent<RubberTappable.StatesInstance>, ISidescreenButtonControl
 	{
 		[SerializeField] public string trackSymbol;
 		[SerializeField] public float latexPerCycle;
@@ -11,8 +12,43 @@ namespace Beached.Content.Scripts.Entities.Plant
 
 		private KBatchedAnimController bucketKbac;
 
+		[Serialize] public bool isTapped;
+		[Serialize] public bool tapOrdered;
+
+		public string SidescreenButtonText
+		{
+			get
+			{
+				if (isTapped)
+					return "Remove Tap";
+
+				if (tapOrdered)
+					return "Cancel";
+
+				return "Tap";
+			}
+		}
+
+		public string SidescreenButtonTooltip => "Collect rubber from this tree.";
+
+		public int ButtonSideScreenSortOrder() => 0;
+
+		public int HorizontalGroupID() => -1;
+
+		public void OnSidescreenButtonPressed()
+		{
+		}
+
 		public override void OnSpawn() => smi.StartSM();
 
+		public void SetButtonTextOverride(ButtonMenuTextOverride textOverride)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public bool SidescreenButtonInteractable() => true;
+
+		public bool SidescreenEnabled() => true;
 
 		public class StatesInstance : GameStateMachine<States, StatesInstance, RubberTappable, object>.GameInstance
 		{
@@ -72,6 +108,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 		public class States : GameStateMachine<States, StatesInstance, RubberTappable>
 		{
 			public State notTapped;
+			public State tapOrdered;
 			public CollectingStates collecting;
 
 			public override void InitializeStates(out BaseState default_state)

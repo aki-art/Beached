@@ -1,6 +1,5 @@
 ﻿using Beached.Content.BWorldGen;
 using Beached.Content.Defs.StarmapEntities;
-using Beached.Content.Scripts;
 using HarmonyLib;
 using ProcGen;
 using ProcGenGame;
@@ -83,8 +82,6 @@ namespace Beached.Patches.Worldgen
 
 				var rings = __instance.numRings - 1;
 				swarmOriginLocation = GetAsteroidSwarmOrigin(__instance.seed, rings);
-
-				Beached_Mod.Instance.SetBeltOrigin(swarmOriginLocation);
 
 				var center = new AxialI(0, 0);
 				var swarmOriginPos = AxialUtil.AxialToWorld(swarmOriginLocation.R, swarmOriginLocation.Q);

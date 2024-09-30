@@ -49,7 +49,7 @@ namespace Beached.Content.Defs.Flora
 			//Object.DestroyImmediate(prefab.GetComponent<MutantPlant>());
 
 			var latexStorage = prefab.AddComponent<Storage>();
-			latexStorage.storageFilters = [Elements.latex.CreateTag()];
+			latexStorage.storageFilters = [Elements.rubber.CreateTag()];
 			latexStorage.capacityKg = 5;
 			latexStorage.allowItemRemoval = true;
 
@@ -57,6 +57,7 @@ namespace Beached.Content.Defs.Flora
 			tap.trackSymbol = "bucket";
 			tap.latexStorage = latexStorage;
 			tap.latexPerCycle = 20;
+			tap.element = Elements.rubber;
 
 			return prefab;
 		}

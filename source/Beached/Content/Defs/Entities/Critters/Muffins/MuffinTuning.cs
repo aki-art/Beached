@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Beached.Content.Defs.Entities.Critters
+namespace Beached.Content.Defs.Entities.Critters.Muffins
 {
 	public class MuffinTuning
 	{
@@ -16,5 +16,7 @@ namespace Beached.Content.Defs.Entities.Critters
 		public const string ON_DEATH_DROP = MeatConfig.ID;
 		public const float MASS = 100f;
 		public const float SPEED = 1.25f;
+		public const float KCAL_PER_CYCLE = 200_000; // 1/4 meat
+
 	}
 }

@@ -5,7 +5,7 @@ namespace Beached.Content.Scripts.Entities.AI
 	public class HunterStates : GameStateMachine<HunterStates, HunterStates.Instance, IStateMachineTarget, HunterStates.Def>
 	{
 		public TargetParameter target;
-		public HuntStates protectEntity;
+		public HuntStates huntEntity;
 		public State behaviourcomplete;
 
 		private static readonly CellOffset[] offsets =
@@ -19,21 +19,22 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		public override void InitializeStates(out BaseState default_state)
 		{
-			default_state = protectEntity.moveToThreat;
+			default_state = huntEntity.moveToThreat;
 
 			root
 				.Enter(SetMainTarget)
 				.ToggleStatusItem(BStatusItems.hunting);
 
-			protectEntity.moveToThreat
-				.InitializeStates(masterTarget, target, protectEntity.attackThreat, override_offsets: offsets);
+			huntEntity.moveToThreat
+				.InitializeStates(masterTarget, target, huntEntity.attackThreat, override_offsets: offsets);
 
-			protectEntity.attackThreat
+			huntEntity.attackThreat
 				.PlayAnim("bite")
 				.ScheduleAction("Bite", 0.5f, Bite)
 				.OnAnimQueueComplete(behaviourcomplete);
 
-			behaviourcomplete.BehaviourComplete(BTags.Creatures.hunting);
+			behaviourcomplete
+				.BehaviourComplete(BTags.Creatures.hunting);
 		}
 
 		private void Bite(Instance smi)
@@ -55,6 +56,7 @@ namespace Beached.Content.Scripts.Entities.AI
 				chore.AddPrecondition(ChorePreconditions.instance.CheckBehaviourPrecondition, BTags.Creatures.hunting);
 			}
 		}
+
 		public class HuntStates : State
 		{
 			public ApproachSubState<AttackableBase> moveToThreat;

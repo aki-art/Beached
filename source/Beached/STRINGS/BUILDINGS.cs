@@ -6,7 +6,7 @@ namespace Beached
 {
 	public partial class STRINGS
 	{
-		public static string FormatAsLink(string text, string id = null)
+		public static string Link(string text, string id = null)
 		{
 			text = KLEISTRINGS.UI.StripLinkFormatting(text);
 
@@ -29,15 +29,15 @@ namespace Beached
 				public class BEACHED_AMMONIAGENERATOR
 				{
 					[Note("Generates power from ammonia")]
-					public static LocString NAME = FormatAsLink("Ammonia Generator", AmmoniaGeneratorConfig.ID);
+					public static LocString NAME = Link("Ammonia Generator", AmmoniaGeneratorConfig.ID);
 					public static LocString DESC = "Ammonia generators are not very efficient, and emit a lot of waste materials.";
-					public static LocString EFFECT = $"Converts {ELEMENTS.AMMONIA.NAME} into electrical {FormatAsLink("Power", "POWER")}, " +
+					public static LocString EFFECT = $"Converts {ELEMENTS.AMMONIA.NAME} into electrical {Link("Power", "POWER")}, " +
 													 $"{KLEISTRINGS.ELEMENTS.WATER.NAME} and {ELEMENTS.NITROGEN.NAME}.";
 				}
 
 				public class BEACHED_ATMOSPHERICFORCEFIELDGENERATOR
 				{
-					public static LocString NAME = FormatAsLink("Atmospheric Forcefield Generator", ForceFieldGeneratorConfig.ID);
+					public static LocString NAME = Link("Atmospheric Forcefield Generator", ForceFieldGeneratorConfig.ID);
 					public static LocString DESC = "...";
 					public static LocString EFFECTS = "Shields the surface of an asteroid from incoming Meteors. Does not allow rockets to pass.";
 				}
@@ -66,7 +66,7 @@ namespace Beached
 
 				public class BEACHED_DNAINJECTOR
 				{
-					public static LocString NAME = FormatAsLink("DNA Injector", ForceFieldGeneratorConfig.ID);
+					public static LocString NAME = Link("DNA Injector", ForceFieldGeneratorConfig.ID);
 					public static LocString DESC = "...";
 					public static LocString EFFECTS = "Allows administering DNA samples to Eggs, applying traits to newborn critters.";
 				}
@@ -110,21 +110,21 @@ namespace Beached
 
 				public class BEACHED_MINIFRIDGE
 				{
-					public static LocString NAME = FormatAsLink("Mini-Fridge", MiniFridgeConfig.ID);
+					public static LocString NAME = Link("Mini-Fridge", MiniFridgeConfig.ID);
 					public static LocString DESC = "A tiny fridge to store a tiny bit of food for the tiny dupes.";
 					public static LocString EFFECT = "TRANSLATION NOT NEEDED - gets copied from regular fridge";
 				}
 
 				public class BEACHED_MOSSBED
 				{
-					public static LocString NAME = FormatAsLink("Moss Frame", MossBedConfig.ID);
+					public static LocString NAME = Link("Moss Frame", MossBedConfig.ID);
 					public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a once time delivery of water; once grown the moss is converted to a natural tile.";
 					public static LocString EFFECT = "Natural tiles can be used as walls and floors or for wild planting.";
 				}
 
 				public class BEACHED_MUDSTOMER
 				{
-					public static LocString NAME = FormatAsLink("Stomper", MudStomperConfig.ID);
+					public static LocString NAME = Link("Stomper", MudStomperConfig.ID);
 					public static LocString DESC = "By repeated vertical motion of external duplicant peripherals it is possible to process several materials into one unified mush.";
 					public static LocString EFFECT = "Mixes granular and liquid materials into compound results.";
 				}
@@ -145,7 +145,7 @@ namespace Beached
 
 				public class BEACHED_CHIME
 				{
-					public static LocString NAME = FormatAsLink("Wind Chime", ChimeConfig.ID);
+					public static LocString NAME = Link("Wind Chime", ChimeConfig.ID);
 					public static LocString DESC = "Pretty things suspended in air, creating music.";
 					public static LocString EFFECT = "Emits a soothing sound when stimulated by changing air pressure, decreasing Stress of nearby Duplicants.";
 				}
@@ -160,6 +160,43 @@ namespace Beached
 					public static LocString EFFECT = "Allows critters to consume additional materials, boosting production. \n" +
 													 $"{CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES} can be fully sustained on appropiate licks.\n\n" +
 													 "Requires refilling once depleted.";
+				}
+
+				public class BEACHED_SANDBOX
+				{
+					public static LocString NAME = Link("Sand Pile", SandBoxConfig.ID);
+					public static LocString DESC = "A Duplicant can express themselves and build a sand castle... or sand cat, or a sand crab.";
+					public static LocString EFFECT = $"Does not require art skills. Duplicants will use Sand Piles during their downtime. The Sand Pile will crumble and reset to a pile of sand in a cycle, ready to be used again. Until then it will provide additional {Link("Decor")}.";
+
+					public class FACADES
+					{
+						public class CASTLE
+						{
+							public static LocString NAME = "Qaint Castle";
+							public static LocString DESC = "A classic Sand Castle by a classy dupe.";
+						}
+
+						public class TIGER_SHARK
+						{
+							public static LocString NAME = "Terrifying Tiger Shark";
+							public static LocString DESC = "A menacing creature, based on a game the dupe saw on the Arcade Machine.";
+						}
+
+						public class CASTLE2
+						{
+							public static LocString NAME = "Whimsical Castle";
+							public static LocString DESC = "A castle straight from fairy tales.";
+						}
+
+						public class CRAB
+						{
+							public static LocString NAME = "Another Dupe's Treasure";
+							public static LocString DESC = "The real treasure were the crabs we made along the way.";
+						}
+
+						// Aladdin sand tiger head
+						// some Terraria or Calamity sand boi
+					}
 				}
 
 				public class BEACHED_SMALLAQUARIUM
@@ -183,7 +220,7 @@ namespace Beached
 
 				public class BEACHED_WOODCARVING
 				{
-					public static LocString NAME = FormatAsLink("Wood Carving", WoodCarvingConfig.ID);
+					public static LocString NAME = Link("Wood Carving", WoodCarvingConfig.ID);
 					public static LocString DESC = "";
 					public static LocString EFFECT = "";
 
@@ -230,6 +267,13 @@ namespace Beached
 					public static LocString NAME = "{0} Plush";
 
 					public static LocString TOOLTIP = "A {0} has been placed on this bed.\n\n<b>Effects</b>";
+				}
+
+				public class BEACHED_SANDBOXCRUMBLE
+				{
+					public static LocString NAME = "Temporary Artwork";
+
+					public static LocString TOOLTIP = "This piece will become a blank canvas again in {0}.";
 				}
 			}
 		}

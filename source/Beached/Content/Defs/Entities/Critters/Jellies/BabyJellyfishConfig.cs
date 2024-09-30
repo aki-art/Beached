@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Beached.Content.Defs.Entities.Critters
+namespace Beached.Content.Defs.Entities.Critters.Jellies
 {
 	[EntityConfigOrder(100)]
 	public class BabyJellyfishConfig : IEntityConfig
@@ -9,13 +9,13 @@ namespace Beached.Content.Defs.Entities.Critters
 
 		public GameObject CreatePrefab()
 		{
-			var prefab = BaseSnailConfig.CreatePrefab(
+			var prefab = BaseJellyfishConfig.CreatePrefab(
 				ID,
 				STRINGS.CREATURES.SPECIES.BEACHED_JELLYFISH.BABY_NAME,
 				STRINGS.CREATURES.SPECIES.BEACHED_JELLYFISH.BABY_DESC,
 				"beached_jellyfish_kanim",
 				JellyfishConfig.BASE_TRAIT_ID,
-				[]);
+				null);
 
 			EntityTemplates.ExtendEntityToBeingABaby(prefab, JellyfishConfig.ID, null);
 

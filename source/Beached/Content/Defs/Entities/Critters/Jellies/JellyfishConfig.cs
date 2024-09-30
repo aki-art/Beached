@@ -5,7 +5,7 @@ using Klei.AI;
 using UnityEngine;
 using static Beached.STRINGS.CREATURES.SPECIES;
 
-namespace Beached.Content.Defs.Entities.Critters
+namespace Beached.Content.Defs.Entities.Critters.Jellies
 {
 	[EntityConfigOrder(0)]
 	public class JellyfishConfig : IEntityConfig

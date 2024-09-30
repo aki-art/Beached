@@ -9,18 +9,20 @@ namespace Beached.Content.ModDb
 {
 	public class BStatusItems
 	{
-		public static StatusItem desiccation;
-		public static StatusItem secretingMucus;
-		public static StatusItem lubricated;
-		public static StatusItem smoking;
-		public static StatusItem geneticallyMofidied;
-		public static StatusItem gunked;
-		public static StatusItem plushed;
-		public static StatusItem hunting;
-		public static StatusItem controllerByCollarDispenser;
-		public static StatusItem cultivatingGerms;
-		public static StatusItem meat;
-		public static StatusItem nonVega;
+		public static StatusItem
+			desiccation,
+			secretingMucus,
+			lubricated,
+			smoking,
+			geneticallyMofidied,
+			gunked,
+			plushed,
+			hunting,
+			controllerByCollarDispenser,
+			cultivatingGerms,
+			meat,
+			nonVega,
+			sandboxCrumble;
 
 		[DbEntry]
 		public static void RegisterMiscStatusItems(MiscStatusItems __instance)
@@ -34,6 +36,18 @@ namespace Beached.Content.ModDb
 				false,
 				OverlayModes.None.ID,
 				false));
+
+			sandboxCrumble = __instance.Add(new StatusItem(
+				"Beached_SandBoxCrumble",
+				"BUILDINGS",
+				string.Empty,
+				StatusItem.IconType.Info,
+				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID,
+				false));
+
+			sandboxCrumble.SetResolveStringCallback(SandBox.ResolveStatusItemString);
 
 			nonVega = __instance.Add(new StatusItem(
 				"Beached_NonVega",

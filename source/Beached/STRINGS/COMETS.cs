@@ -14,31 +14,31 @@ namespace Beached
 
 			public class BEACHED_DIAMONDCOMET
 			{
-				public static LocString NAME = FormatAsLink("Diamond Comet", DiamondCometConfig.ID);
+				public static LocString NAME = Link("Diamond Comet", DiamondCometConfig.ID);
 				public static LocString DESC = "TODO";
 			}
 
 			public class BEACHED_SPARKLINGZIRCONCOMET
 			{
-				public static LocString NAME = FormatAsLink("Sparkling Zircon Comet", SparklingZirconCometConfig.ID);
+				public static LocString NAME = Link("Sparkling Zircon Comet", SparklingZirconCometConfig.ID);
 				public static LocString DESC = "TODO";
 			}
 
 			public class BEACHED_SPARKLINGAQUAMARINECOMET
 			{
-				public static LocString NAME = FormatAsLink("Sparkling Aquamarine Comet", SparklingAquamarineCometConfig.ID);
+				public static LocString NAME = Link("Sparkling Aquamarine Comet", SparklingAquamarineCometConfig.ID);
 				public static LocString DESC = "TODO";
 			}
 
 			public class BEACHED_SPARKLINGDIAMONDCOMET
 			{
-				public static LocString NAME = FormatAsLink("Sparkling Diamond Comet", "");
+				public static LocString NAME = Link("Sparkling Diamond Comet", "");
 				public static LocString DESC = "TODO";
 			}
 
 			public class BEACHED_SPARKLINGVOIDCOMET
 			{
-				public static LocString NAME = FormatAsLink("Sparkling Void Comet", SparklingVoidCometConfig.ID);
+				public static LocString NAME = Link("Sparkling Void Comet", SparklingVoidCometConfig.ID);
 				public static LocString DESC = "TODO";
 			}
 		}

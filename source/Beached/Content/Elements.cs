@@ -168,16 +168,10 @@ namespace Beached.Content
 
 			ElementLoader.FindElementByHash(rot).sublimateFX = ModAssets.Fx.ammoniaBubbles;
 
+			ElementLoader.FindElementByHash(SimHashes.Sand).AddTag(BTags.BuildingMaterials.sand);
+
 			foreach (var kvp in acidVulnerabilities)
-			{
-				var element = ElementLoader.FindElementByHash(kvp.Key);
-				if (element != null)
-				{
-					element.oreTags = element.oreTags == null
-						? ([BTags.corrodable])
-						: element.oreTags.AddToArray(BTags.corrodable);
-				}
-			}
+				ElementLoader.FindElementByHash(kvp.Key)?.AddTag(BTags.corrodable);
 		}
 
 		private static void SetConduction(SimHashes element, float conduction)

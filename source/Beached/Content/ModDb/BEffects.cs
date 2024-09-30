@@ -23,6 +23,9 @@
 			PLUSHIE_PACU = "Beached_Effect_PlushiePacu",
 			PLUSHIE_PUFT = "Beached_Effect_PlushiePuft",
 			PLUSHIE_VOLE = "Beached_Effect_PlushieVole",
+			SANDBOX = "Beached_Effect_Sandbox",
+			SANDBOX_RECENT = "Beached_Effect_RecentlySandbox",
+			KARACOO_HUG = "Beached_KaracooHug",
 			UNSAVORY_MEAL = "Beached_Unsavory_Meal";
 
 		public static void Register(ModifierSet set)
@@ -31,6 +34,16 @@
 			var peeDelta = Db.Get().Amounts.Bladder.deltaAttribute.Id;
 			var carryCapacity = Db.Get().Attributes.CarryAmount.Id;
 			var airConsumptionRate = Db.Get().Attributes.AirConsumptionRate.Id;
+
+			new EffectBuilder(SANDBOX, 2370, false)
+				.Modifier(Db.Get().Attributes.QualityOfLife.Id, 2, false)
+				.HideInUI()
+				.Add(set);
+
+			new EffectBuilder(SANDBOX_RECENT, CONSTS.CYCLE_LENGTH / 2f, false)
+				.HideInUI()
+				.HideFloatingText()
+				.Add(set);
 
 			new EffectBuilder(DAMP_PLANTGROWTH, 0f, false)
 				.Modifier(Db.Get().Amounts.Maturity.deltaAttribute.Id, 0.05f, true)
@@ -42,6 +55,10 @@
 
 			new EffectBuilder(ARID_PLANTGROWTH, 0f, true)
 				.Modifier(Db.Get().Amounts.Maturity.deltaAttribute.Id, -0.05f, true)
+				.Add(set);
+
+			new EffectBuilder(KARACOO_HUG, 0f, false)
+				.Modifier(Db.Get().Amounts.Incubation.deltaAttribute.Id, 0.5f, true)
 				.Add(set);
 
 			new EffectBuilder(PLUSHIE_PACU, CONSTS.CYCLE_LENGTH, false)

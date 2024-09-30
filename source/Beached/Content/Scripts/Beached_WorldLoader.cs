@@ -1,12 +1,14 @@
 ﻿using Beached.Content.BWorldGen;
-using Beached.Content.Defs.Entities.Critters;
+using Beached.Content.Defs.Entities.Critters.Jellies;
+using Beached.Content.Defs.Entities.Critters.Muffins;
+using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Database;
 using ProcGenGame;
 using System.Collections.Generic;
 
 namespace Beached.Content.Scripts
 {
-	public class Beached_WorldLoader : KMonoBehaviour
+    public class Beached_WorldLoader : KMonoBehaviour
 	{
 		public static Beached_WorldLoader Instance;
 

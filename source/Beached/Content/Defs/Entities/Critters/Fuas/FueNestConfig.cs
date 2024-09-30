@@ -1,7 +1,7 @@
 ﻿using TUNING;
 using UnityEngine;
 
-namespace Beached.Content.Defs.Entities.Critters
+namespace Beached.Content.Defs.Entities.Critters.Fuas
 {
 	public class FueNestConfig : IEntityConfig
 	{

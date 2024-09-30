@@ -83,7 +83,9 @@ namespace Beached
 
 		public static class CONTEXTS
 		{
-			public static readonly HashedString HARVEST_ORANGE_SQUISH = "harvest_orangesquish";
+			public static readonly HashedString
+				HARVEST_ORANGE_SQUISH = "beached_harvest_orangesquish",
+				SAND = "beached_sand";
 		}
 
 		public static class Fx
@@ -101,24 +103,32 @@ namespace Beached
 
 			public static class Lasers
 			{
-				public const string SQUISH = "Beached_Laser_Squish";
+				public const string
+					SQUISH = "Beached_Laser_Squish",
+					SAND = "Beached_Laser_Sand";
 
-				public static void AddLaserEffect(GameObject minionPrefab)
+				public static void AddLaserEffects(GameObject minionPrefab)
 				{
 					var laserEffects = minionPrefab.transform.Find("LaserEffect").gameObject;
 					var kbatchedAnimEventToggler = laserEffects.GetComponent<KBatchedAnimEventToggler>();
 					var kbac = minionPrefab.GetComponent<KBatchedAnimController>();
 
+					AddLaserEffect(SQUISH, CONTEXTS.HARVEST_ORANGE_SQUISH, kbatchedAnimEventToggler, kbac, "beached_squish_harvest_beam_kanim", "loop");
+					AddLaserEffect(SAND, CONTEXTS.SAND, kbatchedAnimEventToggler, kbac, "beached_sand_beam_kanim", "loop");
+				}
+
+				private static void AddLaserEffect(string ID, HashedString context, KBatchedAnimEventToggler kbatchedAnimEventToggler, KBatchedAnimController kbac, string animFile, string defaultAnimation = "loop")
+				{
 					var laserEffect = new MinionConfig.LaserEffect
 					{
-						id = SQUISH,
-						animFile = "beached_squish_harvest_beam_kanim",
-						anim = "loop",
-						context = CONTEXTS.HARVEST_ORANGE_SQUISH
+						id = ID,
+						animFile = animFile,
+						anim = defaultAnimation,
+						context = context
 					};
 
 					var laserGo = new GameObject(laserEffect.id);
-					laserGo.transform.parent = laserEffects.transform;
+					laserGo.transform.parent = kbatchedAnimEventToggler.transform;
 					laserGo.AddOrGet<KPrefabID>().PrefabTag = new Tag(laserEffect.id);
 
 					var tracker = laserGo.AddOrGet<KBatchedAnimTracker>();
@@ -312,14 +322,29 @@ namespace Beached
 
 		private static void LoadAsteroidBelt(AssetBundle bundle2, AssetBundle sharedBundle)
 		{
-			Prefabs.asteroidBelt = bundle2.LoadAsset<GameObject>("Assets/Prefabs/AsteroidBeltUI.prefab");
-			var main = Prefabs.asteroidBelt.GetComponent<ParticleSystem>().main;
-			main.startLifetime = float.PositiveInfinity;
-			main.maxParticles = 300;
+			Prefabs.asteroidBelt = bundle2.LoadAsset<GameObject>("Assets/Prefabs/BeltContainer.prefab");
 
-			//var renderer = Prefabs.asteroidBelt.GetComponent<ParticleSystemRenderer>();
-			///renderer.material = new Material(Shader.Find("Klei/BatchedAnimationUI"));
-			//renderer.material.SetTexture("_MainTex", sharedBundle.LoadAsset<Texture2D>("Assets/Textures/asteroids.png"));
+			FUtility.FUI.Helper.ListChildren(Prefabs.asteroidBelt.transform);
+
+			var particles = Prefabs.asteroidBelt.transform.Find("AsteroidBelt").GetComponent<ParticleSystem>();
+
+			Log.Debug("found particles");
+
+			var refs = Prefabs.asteroidBelt.AddComponent<HierarchyReferences>();
+			refs.references = refs.references = [new ElementReference()
+			{
+				Name = "Particles",
+				behaviour = particles
+			}];
+
+			var main = particles.main;
+			main.startLifetime = 100_000;
+			main.maxParticles = 300;
+			main.playOnAwake = false;
+
+			var renderer = particles.GetComponent<ParticleSystemRenderer>();
+			renderer.material = new Material(Shader.Find("UI/Default"));
+			renderer.material.SetTexture("_MainTex", sharedBundle.LoadAsset<Texture2D>("Assets/Textures/asteroids.png"));
 
 			Prefabs.asteroidBelt.SetActive(false);
 		}

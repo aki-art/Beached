@@ -1,11 +1,11 @@
-﻿using Beached.Content.Defs.Entities.Critters;
+﻿using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.Defs.Foods;
 using HarmonyLib;
 using TUNING;
 
 namespace Beached.Patches
 {
-	public class EntityConfigManagerPatch
+    public class EntityConfigManagerPatch
 	{
 		[HarmonyPatch(typeof(EntityConfigManager), nameof(EntityConfigManager.LoadGeneratedEntities))]
 		public class EntityConfigManager_LoadGeneratedEntities_Patch

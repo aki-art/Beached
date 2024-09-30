@@ -59,55 +59,55 @@ namespace Beached
 			{
 				public class ANIMALHANDLING
 				{
-					public static LocString NAME = FormatAsLink("Animal Handling Basics", BSkills.ANIMALHANDLING_ID);
+					public static LocString NAME = Link("Animal Handling Basics", BSkills.ANIMALHANDLING_ID);
 					public static LocString DESCRIPTION = "";
 				}
 
 				public class ARCHEOLOGY
 				{
-					public static LocString NAME = FormatAsLink("Careful Excavation", BSkills.ARCHEOLOGY_ID);
+					public static LocString NAME = Link("Careful Excavation", BSkills.ARCHEOLOGY_ID);
 					public static LocString DESCRIPTION = "Allows a Duplicant to find hidden treasures while digging around in soft materials.";
 				}
 
 				public class ARCHEOLOGY2
 				{
-					public static LocString NAME = FormatAsLink("Archeology", BSkills.ARCHEOLOGY2_ID);
+					public static LocString NAME = Link("Archeology", BSkills.ARCHEOLOGY2_ID);
 					public static LocString DESCRIPTION = "Improves a Duplican't ability to find hidden treasures while digging around, and they can now find items in hard materials.";
 				}
 
 				public class AQUACULTURE1
 				{
-					public static LocString NAME = FormatAsLink("Aquaculture I", BSkills.AQUACULTURE1_ID);
+					public static LocString NAME = Link("Aquaculture I", BSkills.AQUACULTURE1_ID);
 					public static LocString DESCRIPTION = "Better harvesting gof aquatic plants, such as corals or algaes.";
 				}
 
 				public class AQUACULTURE2
 				{
-					public static LocString NAME = FormatAsLink("Aquaculture II", BSkills.AQUACULTURE1_ID);
+					public static LocString NAME = Link("Aquaculture II", BSkills.AQUACULTURE1_ID);
 					public static LocString DESCRIPTION = "Better harvesting gof aquatic plants, such as corals or algaes.";
 				}
 
 				public class MAKITRAINER1
 				{
-					public static LocString NAME = FormatAsLink("Novice Maki Trainer", BSkills.MAKITRAINING1_ID);
+					public static LocString NAME = Link("Novice Maki Trainer", BSkills.MAKITRAINING1_ID);
 					public static LocString DESCRIPTION = "Can train level 1 skills to Makis.";
 				}
 
 				public class MAKITRAINER2
 				{
-					public static LocString NAME = FormatAsLink("Master Maki Trainer", BSkills.MAKITRAINING2_ID);
+					public static LocString NAME = Link("Master Maki Trainer", BSkills.MAKITRAINING2_ID);
 					public static LocString DESCRIPTION = "Can train level 2 skills to Makis.";
 				}
 
 				public class CRYSTALLOGRAPHY
 				{
-					public static LocString NAME = FormatAsLink("Crystallography", BSkills.CRYSTALLOGRAPHY_ID);
+					public static LocString NAME = Link("Crystallography", BSkills.CRYSTALLOGRAPHY_ID);
 					public static LocString DESCRIPTION = "Allows a Duplicant to harvest a Crystal Cluster without breaking it, allowing regrowth.";
 				}
 
 				public class GEOCHEMISTRY
 				{
-					public static LocString NAME = FormatAsLink("Geo-Chemistry", BSkills.GEOCHEMISTRY_ID);
+					public static LocString NAME = Link("Geo-Chemistry", BSkills.GEOCHEMISTRY_ID);
 					public static LocString DESCRIPTION = "Enables a Duplicant to analyze crystals, allowing for synthesis of new Crystal Clusters.";
 				}
 			}
@@ -204,31 +204,31 @@ namespace Beached
 
 				public class BEACHED_PLANKTON
 				{
-					public static LocString NAME = FormatAsLink("Plankton", PlanktonGerms.ID);
-					public static LocString DESCRIPTION = FormatAsLink("Tiny organisms floating in water. These microscopic " +
+					public static LocString NAME = Link("Plankton", PlanktonGerms.ID);
+					public static LocString DESCRIPTION = Link("Tiny organisms floating in water. These microscopic " +
 						"creatures are harmless to Duplicants. " +
 						"They are too small to see by the naked eye, the Germ Overlay will reveal them instead.");
 				}
 
 				public class BEACHED_ICEWRATH
 				{
-					public static LocString NAME = FormatAsLink("Ice Wraiths", IceWrathGerms.ID);
-					public static LocString DESCRIPTION = FormatAsLink("A type of parasitic roundworm that has been frozen away in the Permafrost for many many years.");
+					public static LocString NAME = Link("Ice Wraiths", IceWrathGerms.ID);
+					public static LocString DESCRIPTION = Link("A type of parasitic roundworm that has been frozen away in the Permafrost for many many years.");
 				}
 
 				public class BEACHED_LIMPETEGG
 				{
-					public static LocString NAME = FormatAsLink("Limpet Eggs", LimpetEggGerms.ID);
+					public static LocString NAME = Link("Limpet Eggs", LimpetEggGerms.ID);
 				}
 
 				public class BEACHED_CAPSPORE
 				{
-					public static LocString NAME = FormatAsLink("Cap-Cap Spores", CapSporeGerms.ID);
+					public static LocString NAME = Link("Cap-Cap Spores", CapSporeGerms.ID);
 				}
 
 				public class BEACHED_POFFSPORE
 				{
-					public static LocString NAME = FormatAsLink("Poffshroom Spores", PoffSporeGerms.ID);
+					public static LocString NAME = Link("Poffshroom Spores", PoffSporeGerms.ID);
 				}
 
 				public class BEACHED_LIMPETS_DUPLICANT
@@ -238,17 +238,17 @@ namespace Beached
 
 				public class BEACHED_SICKNESS_CAPPED
 				{
-					public static LocString NAME = FormatAsLink("Capped", CappedSickness.ID);
+					public static LocString NAME = Link("Capped", CappedSickness.ID);
 				}
 
 				public class BEACHED_SICKNESS_POFFMOUTH
 				{
-					public static LocString NAME = FormatAsLink("Poffmouth", PoffSporeGerms.ID);
+					public static LocString NAME = Link("Poffmouth", PoffSporeGerms.ID);
 				}
 
 				public class BEACHED_SICKNESS_TELEPORTITS
 				{
-					public static LocString NAME = FormatAsLink("Teleportitis", "");
+					public static LocString NAME = Link("Teleportitis", "");
 				}
 
 				public static LocString LIGHTEXPOSURE = "Exposed to Light. Approximately {0} change per second.";

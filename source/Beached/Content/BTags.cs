@@ -11,6 +11,8 @@ namespace Beached.Content
 			// ======= The ones potentially interesting for other mods ===========
 			// any buildig where foods are queued. meats will be scanned here, and Chef Makis can operate them
 			cookingStation = TagManager.Create("Beached_CookingStation"),
+			// "eggs" Karacoos will consider an egg, but really aren't (infertile egg, egg artifact, etc.)
+			karacooSittable = TagManager.Create("Beached_KaracooSittable"),
 			// do not enable traits on this geyser prefab
 			geyserNoTraits = TagManager.Create("Beached_GeyserNoTraits"),
 			// generate a blueprint for this building prefab, single time buildable
@@ -68,19 +70,22 @@ namespace Beached.Content
 		{
 			public static readonly Tag
 				secretingMucus = TagManager.Create("Beached_SecretingMucus"),
-				hunting = TagManager.Create("Beached_Hunting"),
+				hunting = TagManager.Create("Beached_Behavior_Hunting"),
+				wantsToSitOnEgg = TagManager.Create("Beached_Behavior_WantsToSitOnEgg"),
 				// muffins will not hunt critters with this tag, regardless of collar settings
 				doNotTargetMeByCarnivores = TagManager.Create("Beached_DoNotTargetMeByCarnivores");
 		}
 
 		public static class Species
 		{
-			public static readonly Tag snail = TagManager.Create("BeachedSnailSpecies");
-			public static readonly Tag muffin = TagManager.Create("BeachedMuffinSpecies");
-			public static readonly Tag jellyfish = TagManager.Create("BeachedJellyFishSpecies");
-			public static readonly Tag fuafua = TagManager.Create("BeachedFuaFuaSpecies");
-			public static readonly Tag rotMonger = TagManager.Create("BeachedRotMongerSpecies");
-			public static readonly Tag angularFish = TagManager.Create("BeachedAngularFishSpecies");
+			public static readonly Tag
+				snail = TagManager.Create("BeachedSnailSpecies"),
+				muffin = TagManager.Create("BeachedMuffinSpecies"),
+				jellyfish = TagManager.Create("BeachedJellyFishSpecies"),
+				fuafua = TagManager.Create("BeachedFuaFuaSpecies"),
+				rotMonger = TagManager.Create("BeachedRotMongerSpecies"),
+				angularFish = TagManager.Create("BeachedAngularFishSpecies"),
+				karacoo = TagManager.Create("BeachedKaracooSpecies");
 		}
 
 		public static class MaterialCategories
@@ -91,6 +96,7 @@ namespace Beached.Content
 		public static class BuildingMaterials
 		{
 			public static Tag chime = TagManager.Create("Beached_ChimeMaterial");
+			public static Tag sand = TagManager.Create("Beached_SandMaterial");
 		}
 
 		public static class TagCollections

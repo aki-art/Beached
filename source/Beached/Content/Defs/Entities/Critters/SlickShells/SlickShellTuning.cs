@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TUNING;
 
-namespace Beached.Content.Defs.Entities.Critters
+namespace Beached.Content.Defs.Entities.Critters.SlickShells
 {
 	public class SlickShellTuning
 	{

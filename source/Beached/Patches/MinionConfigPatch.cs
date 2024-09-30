@@ -15,7 +15,7 @@ namespace Beached.Patches
 		{
 			public static void Postfix(GameObject prefab)
 			{
-				ModAssets.Fx.Lasers.AddLaserEffect(prefab);
+				ModAssets.Fx.Lasers.AddLaserEffects(prefab);
 			}
 		}
 
@@ -90,6 +90,15 @@ namespace Beached.Patches
 					automatic = false,
 					context = ModAssets.CONTEXTS.HARVEST_ORANGE_SQUISH,
 					buildFile = Assets.GetAnim("plant_harvester_gun_kanim"),
+					overrideSymbol = "snapTo_rgtHand"
+				});
+
+				snapOn.snapPoints.Add(new SnapOn.SnapPoint
+				{
+					pointName = "dig",
+					automatic = false,
+					context = ModAssets.CONTEXTS.SAND,
+					buildFile = Assets.GetAnim("beached_sand_gun_kanim"),
 					overrideSymbol = "snapTo_rgtHand"
 				});
 

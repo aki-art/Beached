@@ -1,6 +1,9 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Entities.Corals;
-using Beached.Content.Defs.Entities.Critters;
+using Beached.Content.Defs.Entities.Critters.Jellies;
+using Beached.Content.Defs.Entities.Critters.Karacoos;
+using Beached.Content.Defs.Entities.Critters.Muffins;
+using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Flora;
 using FUtility.FLocalization;
 
@@ -194,7 +197,7 @@ namespace Beached
 					public class BEACHED_MURKYBRINE
 					{
 						public static LocString NAME = "Murky Brine Geyser";
-						public static LocString DESC = $"A geyser that periodically erupts with {FormatAsLink("Murky Brine", Elements.murkyBrine.ToString())}.";
+						public static LocString DESC = $"A geyser that periodically erupts with {Link("Murky Brine", Elements.murkyBrine.ToString())}.";
 					}
 
 					public class BEACHED_BISMUTHVOLCANO
@@ -213,8 +216,8 @@ namespace Beached
 					{
 						public static LocString NAME = "Coral Reef";
 						public static LocString DESC = $"A geyser that periodically erupts with" +
-							$" {FormatAsLink("Salt Water", SimHashes.SaltWater.ToString().ToUpperInvariant())} rich in " +
-							$"{FormatAsLink("Plankton", "PlanktonGerms"/*PlanktonGerms.ID.ToUpperInvariant()*/)}.";
+							$" {Link("Salt Water", SimHashes.SaltWater.ToString().ToUpperInvariant())} rich in " +
+							$"{Link("Plankton", "PlanktonGerms"/*PlanktonGerms.ID.ToUpperInvariant()*/)}.";
 					}
 
 					public class BEACHED_BISMUTH_VOLCANO
@@ -227,8 +230,8 @@ namespace Beached
 					{
 						public static LocString NAME = "Pacu Geyser";
 						public static LocString DESC = $"A geyser that periodically erupts with" +
-							$" {FormatAsLink("Polluted Water", SimHashes.DirtyWater.ToString())} rich in " +
-							$"{FormatAsLink("Pacus", PacuConfig.ID)}.";
+							$" {Link("Polluted Water", SimHashes.DirtyWater.ToString())} rich in " +
+							$"{Link("Pacus", PacuConfig.ID)}.";
 					}
 				}
 
@@ -271,20 +274,20 @@ namespace Beached
 
 					public class BEACHED_CELLALGAE
 					{
-						public static LocString NAME = FormatAsLink("Small Cell", Content.Defs.Flora.AlgaeCellConfig.ID);
+						public static LocString NAME = Link("Small Cell", Content.Defs.Flora.AlgaeCellConfig.ID);
 						public static LocString DESC = "...";
 					}
 
 					public class BEACHED_PIPTAIL
 					{
-						public static LocString NAME = FormatAsLink("PipTail", PipTailConfig.ID);
-						public static LocString DESC = ($"The {FormatAsLink("Seed", "PLANTS")} of a {NAME}.");
+						public static LocString NAME = Link("PipTail", PipTailConfig.ID);
+						public static LocString DESC = ($"The {Link("Seed", "PLANTS")} of a {NAME}.");
 					}
 
 					public class BEACHED_LEAFLETCORAL
 					{
 						public static LocString NAME = "Leaflet Coral Frag";
-						public static LocString DESC = ($"The {FormatAsLink("Frag", "CORALS")} of a {NAME}.");
+						public static LocString DESC = ($"The {Link("Frag", "CORALS")} of a {NAME}.");
 					}
 				}
 
@@ -305,41 +308,41 @@ namespace Beached
 
 				public class BEACHED_CORAL_SALTYSTICK
 				{
-					public static LocString NAME = FormatAsLink("Salty Sticks", SaltyStickConfig.ID);
+					public static LocString NAME = Link("Salty Sticks", SaltyStickConfig.ID);
 					public static LocString DESC = "...";
 					public static LocString DOMESTICATEDDESC = "...";
 				}
 
 				public class BEACHED_CELLALGAE
 				{
-					public static LocString NAME = FormatAsLink("Bubble Algae", Content.Defs.Flora.AlgaeCellConfig.ID);
+					public static LocString NAME = Link("Bubble Algae", Content.Defs.Flora.AlgaeCellConfig.ID);
 					public static LocString DESCRIPTION = "...";
 					public static LocString DOMESTICATEDDESC = "...";
 				}
 
 				public class BEACHED_PIPTAIL
 				{
-					public static LocString NAME = FormatAsLink("Piptail", PipTailConfig.ID);
+					public static LocString NAME = Link("Piptail", PipTailConfig.ID);
 					public static LocString DESCRIPTION = "...";
 					public static LocString DOMESTICATEDDESC = "...";
 				}
 
 				public class BEACHED_SLICKSHELL
 				{
-					public static LocString NAME = FormatAsLink("Slickshell", SlickShellConfig.ID);
+					public static LocString NAME = Link("Slickshell", SlickShellConfig.ID);
 					public static LocString DESC = "...";
-					public static LocString BABY_NAME = FormatAsLink("Slickshelly", SlickShellConfig.ID);
+					public static LocString BABY_NAME = Link("Slickshelly", SlickShellConfig.ID);
 					public static LocString BABY_DESC = "...";
-					public static LocString EGG_NAME = FormatAsLink("Slickshell Egg", SlickShellConfig.ID);
+					public static LocString EGG_NAME = Link("Slickshell Egg", SlickShellConfig.ID);
 				}
 
 				public class BEACHED_JELLYFISH
 				{
-					public static LocString NAME = FormatAsLink("Jellyfish", JellyfishConfig.ID);
+					public static LocString NAME = Link("Jellyfish", JellyfishConfig.ID);
 					public static LocString DESC = "...";
-					public static LocString BABY_NAME = FormatAsLink("Jelly Ephyra", JellyfishConfig.ID);
+					public static LocString BABY_NAME = Link("Jelly Ephyra", JellyfishConfig.ID);
 					public static LocString BABY_DESC = "...";
-					public static LocString EGG_NAME = FormatAsLink("Jellyfish Egg", JellyfishConfig.ID);
+					public static LocString EGG_NAME = Link("Jellyfish Egg", JellyfishConfig.ID);
 				}
 
 				public class BEACHED_ANGULARFISH
@@ -349,6 +352,15 @@ namespace Beached
 					public static LocString BABY_NAME = "Angular Larvae";
 					public static LocString BABY_DESC = "...";
 					public static LocString EGG_NAME = "Angular Fish Egg";
+				}
+
+				public class BEACHED_KARACOO
+				{
+					public static LocString NAME = Link("Karacoo", KaracooConfig.ID);
+					public static LocString DESC = "...";
+					public static LocString BABY_NAME = Link("Karacoo hatchling", KaracooConfig.ID);
+					public static LocString BABY_DESC = "...";
+					public static LocString EGG_NAME = Link("Karacoo Egg", KaracooConfig.ID);
 				}
 
 				public class BEACHED_MAKI
@@ -362,11 +374,11 @@ namespace Beached
 
 				public class BEACHED_MUFFIN
 				{
-					public static LocString NAME = FormatAsLink("Muffin", MuffinConfig.ID);
+					public static LocString NAME = Link("Muffin", MuffinConfig.ID);
 					public static LocString DESC = "...";
-					public static LocString BABY_NAME = FormatAsLink("Muffling Whelp", MuffinConfig.ID);
+					public static LocString BABY_NAME = Link("Muffling Whelp", MuffinConfig.ID);
 					public static LocString BABY_DESC = "...";
-					public static LocString EGG_NAME = FormatAsLink("Muffling Whelp Egg", MuffinConfig.ID);
+					public static LocString EGG_NAME = Link("Muffling Whelp Egg", MuffinConfig.ID);
 				}
 
 				public class BEACHED_DEWPALM
@@ -374,6 +386,21 @@ namespace Beached
 					public static LocString NAME = "Dew Palm";
 					public static LocString DESC = "...";
 				}
+
+				public class BEACHED_SPINORILA
+				{
+					[Note("Unused")]
+					public static LocString NAME = Link("Spinorila", SpinorilaConfig.ID);
+					[Note("Unused")]
+					public static LocString DESC = "This tropical plant grows giant edible leaves, a nutritious snack for both Karacoos and Duplicants.";
+				}
+
+				public class BEACHED_GLOWYPLANT
+				{
+					public static LocString NAME = Link("Glowrid", GlowyPlantConfig.ID);
+					public static LocString DESC = ".";
+				}
+
 
 				public class BEACHED_MANGROVE
 				{
@@ -395,14 +422,14 @@ namespace Beached
 
 				public class BEACHED_KELP
 				{
-					public static LocString NAME = FormatAsLink("Sea Weed", KelpConfig.ID);
+					public static LocString NAME = Link("Sea Weed", KelpConfig.ID);
 					public static LocString DESC = "...";
 				}
 
 
 				public class BEACHED_WATERCUPS
 				{
-					public static LocString NAME = FormatAsLink("Watercups", WaterCupsConfig.ID);
+					public static LocString NAME = Link("Watercups", WaterCupsConfig.ID);
 					public static LocString DESC = "...";
 					public static LocString DOMESTICATEDDESC = "...";
 				}
@@ -455,25 +482,29 @@ namespace Beached
 			public class FAMILY
 			{
 				[Note("A slickster in a shell, also \"slick\" as in oily/slimy. It looks like a snail.")]
-				public static LocString BEACHEDSLICKSHELL = FormatAsLink("Slickshell", "BEACHEDSNAILSPECIES");
+				public static LocString BEACHEDSLICKSHELL = Link("Slickshell", "BEACHEDSNAILSPECIES");
 				[Note("Angler fish with angular patterns.")]
 				public static LocString BEACHEDANGULARFISH = "Angular Fish";
 				[Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]
 				public static LocString BEACHEDMAKI = "Maki";
+				[Note("Based on the irl species kakapo.")]
+				public static LocString BEACHEDKARACOO = "Karacoo";
 				public static LocString BEACHEDJELLYFISH = "Jellyfish";
-				public static LocString BEACHEDMUFFIN = FormatAsLink("Muffin", "BEACHEDMUFFINSPECIES");
+				public static LocString BEACHEDMUFFIN = Link("Muffin", "BEACHEDMUFFINSPECIES");
 			}
 
 			public class FAMILY_PLURAL
 			{
 				[Note("A slickster in a shell, also \"slick\" as in oily/slimy. It looks like a snail.")]
-				public static LocString BEACHEDSNAILSPECIES = FormatAsLink("Slickshells", "BEACHEDSNAILSPECIES");
+				public static LocString BEACHEDSNAILSPECIES = Link("Slickshells", "BEACHEDSNAILSPECIES");
 				[Note("Angler fish with angular patterns.")]
 				public static LocString BEACHEDANGULARFISHSPECIES = "Angular Fish";
 				[Note("A pip-cat-lemur thing. \"Maki\" means little monkey in an endearing and cute way.")]
 				public static LocString BEACHEDMAKISPECIES = "Makis";
+				[Note("Based on the irl species kakapo.")]
+				public static LocString BEACHEDKARACOOSPECIES = Link("Karacoos", "BEACHEDKARACOOSPECIES");
 				public static LocString BEACHEDJELLYFISHSPECIS = "Jellyfish";
-				public static LocString BEACHEDMUFFINSPECIES = FormatAsLink("Muffins", "BEACHEDMUFFINSPECIES");
+				public static LocString BEACHEDMUFFINSPECIES = Link("Muffins", "BEACHEDMUFFINSPECIES");
 			}
 		}
 	}

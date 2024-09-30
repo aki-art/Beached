@@ -1,7 +1,7 @@
 ﻿using Beached.Content.Defs.Foods;
 using System.Collections.Generic;
 
-namespace Beached.Content.Defs.Entities.Critters
+namespace Beached.Content.Defs.Entities.Critters.Jellies
 {
 	public class JellyfishTuning
 	{

@@ -1,4 +1,4 @@
-﻿using Beached.Content.Defs.Entities.Critters;
+﻿using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Items;
 using Beached.Content.ModDb;
 using System.Collections.Generic;

@@ -5,7 +5,7 @@ namespace Beached.Content.Scripts.Entities.AI
 {
 	public class PreyMonitor : GameStateMachine<PreyMonitor, PreyMonitor.Instance, IStateMachineTarget, PreyMonitor.Def>
 	{
-		public BoolParameter hasEggToGuard;
+		public BoolParameter hasTarget;
 		public HuntingStates hunt;
 
 		public override void InitializeStates(out BaseState default_state)

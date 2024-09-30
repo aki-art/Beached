@@ -7,16 +7,23 @@ namespace Beached.Content.Defs
 	public class BEffectConfigs : IMultiEntityConfig
 	{
 		public const string
-			MUSSEL_GIBLETS = "Beached_MusselGiblets";
+			MUSSEL_GIBLETS = "Beached_Fx_MusselGiblets",
+			SAND = "Beached_Fx_Sand";
 
 		public List<GameObject> CreatePrefabs()
 		{
 			var result = new List<GameObject>
 			{
-				CreatePrefab(MUSSEL_GIBLETS, "beached_mussel_giblets_impact_kanim", "loop", KAnim.PlayMode.Loop, false, true)
+				CreateGunImpactFx(MUSSEL_GIBLETS, "beached_mussel_giblets_impact_kanim"),
+				CreateGunImpactFx(SAND, "beached_sand_impact_kanim"),
 			};
 
 			return result;
+		}
+
+		private static GameObject CreateGunImpactFx(string id, string animFile, string initialAnim = "loop")
+		{
+			return CreatePrefab(id, animFile, initialAnim, KAnim.PlayMode.Loop, false, true);
 		}
 
 		private static GameObject CreatePrefab(string id, string animFile, string initialAnim, KAnim.PlayMode initialMode, bool destroyOnAnimComplete, bool addLoopingSounds = false)

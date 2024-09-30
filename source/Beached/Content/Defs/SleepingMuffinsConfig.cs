@@ -1,12 +1,12 @@
 ﻿using Beached.Content.Defs.Buildings;
-using Beached.Content.Defs.Entities.Critters;
+using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.Scripts;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Defs
 {
-	internal class SleepingMuffinsConfig : IEntityConfig
+    internal class SleepingMuffinsConfig : IEntityConfig
 	{
 		public const string ID = "Beached_SleepingMuffings";
 

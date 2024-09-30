@@ -1,13 +1,33 @@
 ﻿using Beached.Content.Scripts.Entities.AI;
-using UnityEngine;
+using System.Collections.Generic;
 
-namespace Beached.Content.Defs.Entities.Critters
+namespace Beached.Content.Defs.Entities.Critters.Karacoos
 {
-	public class SnailBrain
+	public abstract class BaseKaracooConfig : BaseCritterConfig
 	{
-		public static void ConfigureAI(GameObject gameObject, string symbolOverridePrefix, Tag species)
+		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
-			var choreTable = new ChoreTable.Builder()
+			return builder
+				.Decor(10, 2)
+				.TemperatureCelsius(-20, -5, 45, 60)
+				.Trappable()
+				.Baggable()
+				.SortAfter(SquirrelConfig.ID)
+				.MaxPenSize(TUNING.CREATURES.SPACE_REQUIREMENTS.TIER3)
+				.Brain(BTags.Species.karacoo)
+					.Configure(ConfigureAI)
+				.Traits()
+					.HP(50)
+					.MaxAge(60)
+					.Stomach(50_000, 5_000)
+					.Done();
+		}
+
+		protected sealed override void ConfigureAI(CritterBuilder.BrainBuilder builder, HashSet<string> conditions)
+		{
+			var isAdult = conditions.Contains(CritterBuilder.ADULT);
+
+			builder
 				.Add(new DeathStates.Def())
 				.Add(new AnimInterruptStates.Def())
 				//.Add(new GrowUpStates.Def())
@@ -22,19 +42,15 @@ namespace Beached.Content.Defs.Entities.Critters
 				//.Add(new AttackStates.Def("eat_pre", "eat_pst", null))
 				.PushInterruptGroup()
 				//.Add(new CreatureSleepStates.Def())
-				.Add(new MucusSecretionStates.Def())
 				.Add(new FixedCaptureStates.Def())
 				//.Add(new RanchedStates.Def())
-				//.Add(new LayEggStates.Def())
+				.Add(new LayEggStates.Def(), isAdult)
 				.Add(new EatStates.Def())
 				.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
 				.Add(new CallAdultStates.Def())
+				.Add(new SitOnEggStates.Def(), isAdult)
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());
-
-			Log.Debug("adding brain to slickshells");
-
-			EntityTemplates.AddCreatureBrain(gameObject, choreTable, species, symbolOverridePrefix);
 		}
 	}
 }

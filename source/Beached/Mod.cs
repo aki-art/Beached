@@ -20,8 +20,10 @@ namespace Beached
 
 #if DEBUG
 		public static bool debugMode = true;
+		public static bool speedStuffUp = true; // for debugging
 #else
 		public static bool debugMode = false;
+		public static bool speedStuffUp = false; // for debugging
 #endif
 
 		public static Config settings = new();
@@ -97,14 +99,17 @@ namespace Beached
 
 						if (attributeType == typeof(OverrideAttribute))
 						{
-							var prefix = new HarmonyMethod(methodInfo);
+							var patch = new HarmonyMethod(methodInfo);
 							var overrideAttr = (OverrideAttribute)attr;
 
 							var targetMethod = overrideAttr.parameters == null
 								? type.BaseType.GetMethod(methodInfo.Name)
 								: type.BaseType.GetMethod(methodInfo.Name, ((OverrideAttribute)attr).parameters);
 
-							harmony.Patch(targetMethod, prefix: prefix);
+							if (overrideAttr.postfix)
+								harmony.Patch(targetMethod, postfix: patch);
+							else
+								harmony.Patch(targetMethod, prefix: patch);
 						}
 					}
 				}

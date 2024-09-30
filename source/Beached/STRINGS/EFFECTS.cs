@@ -4,6 +4,12 @@
 	{
 		public class EFFECTS
 		{
+			public class BEACHED_EFFECT_SANDBOX
+			{
+				public static LocString NAME = "Built a Sand Castle";
+				public static LocString DESC = $"This Duplicant has recently played in the sand.";
+			}
+
 			public class BEACHED_DAMP_PLANTGROWTHBOOST
 			{
 				public static LocString NAME = "Damp Environment";
@@ -19,13 +25,19 @@
 			public class BEACHED_STEPPEDINMUCUS
 			{
 				public static LocString NAME = "Slippery Feet";
-				public static LocString DESC = $"This duplicant has stepped in {FormatAsLink("Mucus", "BEACHED_MUCUS")}.";
+				public static LocString DESC = $"This duplicant has stepped in {Link("Mucus", "BEACHED_MUCUS")}.";
+			}
+
+			public class BEACHED_KARACOOHUG
+			{
+				public static LocString NAME = "Coddled";
+				public static LocString DESC = $"This egg is kept warm and cozy.";
 			}
 
 			public class BEACHED_SUBMERGEDINMUCUS
 			{
 				public static LocString NAME = "Slippery Hands";
-				public static LocString DESC = $"This duplicant has touched {FormatAsLink("Mucus", "BEACHED_MUCUS")} and things just keep sliding out of their hands and pockets!";
+				public static LocString DESC = $"This duplicant has touched {Link("Mucus", "BEACHED_MUCUS")} and things just keep sliding out of their hands and pockets!";
 			}
 
 			public class BEACHED_UNSAVORY_MEAL

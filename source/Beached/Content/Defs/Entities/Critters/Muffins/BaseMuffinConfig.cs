@@ -1,39 +1,38 @@
 ﻿using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
-using TUNING;
 using UnityEngine;
 
-namespace Beached.Content.Defs.Entities.Critters
+namespace Beached.Content.Defs.Entities.Critters.Muffins
 {
-	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.ADULT + 1)]
-	public class BaseMuffinConfig
+	public abstract class BaseMuffinConfig : BaseCritterConfig
 	{
-		public static GameObject CreatePrefab(string id, string name, string desc, string animFile, bool isBaby, string symbolOverridePrefix = null)
+		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
-			var prefab = CritterBuilder.Create(id, animFile)
-				.Name(name)
-				.Description(desc)
-				.Mass(100)
+			return builder
+				.TemperatureCelsius(-40, -30, 20, 30)
 				.Size(1, 1)
-				.Navigation(CONSTS.NAV_GRID.WALKER_1X2, NavType.Floor)
-				.Temperatures(-60, -80, 50, 80)
-				.DeathDrops((MeatConfig.ID, 1), (BasicFabricConfig.ID, 1))
-				.Decor(DECOR.BONUS.TIER2)
-				.Faction(FactionManager.FactionID.Predator)
-				.CanDrown()
-				.CanEntomb()
-				.ShedFur(0.25f, Util.ColorFromHex("d7dfed"))
-				.Build();
+				.Mass(100f)
+				.Trappable()
+				.Baggable()
+				.SortAfter(SquirrelConfig.ID)
+				.MaxPenSize(32)
+				.Navigator(CritterBuilder.NAVIGATION.WALKER_1X2, 2f)
+				.Brain(BTags.Species.muffin)
+					.Configure(ConfigureAI)
+				.Traits()
+					.HP(100)
+					.MaxAge(150)
+					.Stomach(MuffinTuning.KCAL_PER_CYCLE * 10, MuffinTuning.KCAL_PER_CYCLE)
+					.Done()
+				.Tag(BTags.Creatures.doNotTargetMeByCarnivores);
+		}
 
-			ConfigureAI(prefab, symbolOverridePrefix, BTags.Species.muffin, isBaby);
-			EntityTemplates.CreateAndRegisterBaggedCreature(prefab, true, true);
-
-			prefab.AddTag(GameTags.Creatures.Walker);
-
-			prefab.AddWeapon(2f, 3f);
-			prefab.AddOrGetDef<CreatureFallMonitor.Def>();
-			prefab.AddOrGet<Trappable>();
-			//placedEntity.AddOrGetDef<ThreatMonitor.Def>().fleethresholdState = Health.HealthState.Dead;
+		public override GameObject CreatePrefab(BaseCritterConfig config)
+		{
+			var prefab = base.CreatePrefab(config);
+			prefab.AddOrGetDef<PreyMonitor.Def>().allyTags = [BTags.Creatures.doNotTargetMeByCarnivores];
+			prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
+			prefab.AddOrGetDef<SolidConsumerMonitor.Def>();
 
 			return prefab;
 		}
@@ -50,9 +49,9 @@ namespace Beached.Content.Defs.Entities.Critters
 			return prefab;
 		}
 
-		public static void ConfigureAI(GameObject gameObject, string symbolOverridePrefix, Tag species, bool isBaby)
+		protected sealed override void ConfigureAI(CritterBuilder.BrainBuilder builder, HashSet<string> conditions)
 		{
-			var choreTable = new ChoreTable.Builder()
+			builder
 				.Add(new DeathStates.Def())
 				.Add(new AnimInterruptStates.Def())
 				//.Add(new GrowUpStates.Def())
@@ -69,14 +68,12 @@ namespace Beached.Content.Defs.Entities.Critters
 				.Add(new FixedCaptureStates.Def())
 				.Add(new EatStates.Def())
 				.Add(new RanchedStates.Def())
-				.Add(new HunterStates.Def(), isBaby)
+				.Add(new HunterStates.Def())
 				//.Add(new LayEggStates.Def())
 				.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
 				.Add(new CallAdultStates.Def())
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());
-
-			EntityTemplates.AddCreatureBrain(gameObject, choreTable, species, symbolOverridePrefix);
 		}
 	}
 }

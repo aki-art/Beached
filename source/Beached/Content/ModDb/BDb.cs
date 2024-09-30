@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Corals;
-using Beached.Content.Defs.Entities.Critters;
+using Beached.Content.Defs.Entities.Critters.Jellies;
+using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Foods;
 using System.Collections.Generic;
@@ -22,7 +23,6 @@ namespace Beached.Content.ModDb
 			BGeyserTraits.Register();
 
 			TUNING.CREATURES.SORTING.CRITTER_ORDER[SlickShellConfig.ID] = BaseSnailConfig.SORTING_ORDER;
-			TUNING.CREATURES.SORTING.CRITTER_ORDER[MuffinConfig.ID] = MuffinConfig.SORTING_ORDER;
 			TUNING.CREATURES.SORTING.CRITTER_ORDER[JellyConfig.ID] = BaseJellyfishConfig.SORTING_ORDER;
 
 			HashSet<string> cookingStations =
@@ -225,6 +225,18 @@ namespace Beached.Content.ModDb
 				.Input(TableSaltConfig.ID, 1f)
 				.Output(LegendarySteakConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+
+			var eggResult = string.Format(global::STRINGS.BUILDINGS.PREFABS.EGGCRACKER.RESULT_DESCRIPTION, STRINGS.ITEMS.FOOD.BEACHED_INFERTILEEGG.NAME);
+			var eggDescription = string.Format(global::STRINGS.BUILDINGS.PREFABS.EGGCRACKER.RECIPE_DESCRIPTION, STRINGS.ITEMS.FOOD.BEACHED_INFERTILEEGG.NAME, eggResult);
+
+			// manually add this one
+			RecipeBuilder.Create(EggCrackerConfig.ID, eggDescription, 5f)
+				.Input(InfertileEggConfig.ID, 2f)
+				.Input(RawEggConfig.ID, 1f)
+				.Output(EggShellConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Ingredient)
 				.Build();
 
 			if (DlcManager.IsExpansion1Active())

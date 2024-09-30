@@ -2,7 +2,9 @@
 using Beached.Content.Defs;
 using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Corals;
-using Beached.Content.Defs.Entities.Critters;
+using Beached.Content.Defs.Entities.Critters.Fuas;
+using Beached.Content.Defs.Entities.Critters.Jellies;
+using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Entities.SetPieces;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Flora;
@@ -56,6 +58,7 @@ namespace Beached.Patches
 			BabySlickShellConfig.ID,
 			BambooConfig.ID,
 			PurpleHangerConfig.ID,
+			SpinorilaConfig.ID,
 
 			// genetic samples
 			GeneticSamplesConfig.EVERLASTING,
@@ -93,6 +96,7 @@ namespace Beached.Patches
 			SpongeCakeConfig.ID,
 			PipShootConfig.ID,
 			RawKelpConfig.ID,
+			InfertileEggConfig.ID,
 		];
 
 		private static readonly HashSet<Tag> FAUNA =
@@ -115,6 +119,7 @@ namespace Beached.Patches
 			DewPalmConfig.ID,
 			BambooConfig.ID,
 			PurpleHangerConfig.ID,
+			SpinorilaConfig.ID,
 		];
 
 		private static readonly HashSet<Tag> GEYSERS =

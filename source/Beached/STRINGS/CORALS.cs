@@ -15,7 +15,7 @@ namespace Beached
 			}
 			public class BEACHED_LEAFLETCORAL
 			{
-				public static LocString NAME = FormatAsLink("Leaflet Coral", LeafletCoralConfig.ID);
+				public static LocString NAME = Link("Leaflet Coral", LeafletCoralConfig.ID);
 				public static LocString DESCRIPTION = "A coral with green capitulum resembling cabbage leaves. This coral is lined with a polymetallic outer epidermis, rich in Manganese and Iron, allowing natural slow electrolysis of Water. The plant consumes Hydrogen and releases excess Oxygen in the process.\n" +
 					"\n" +
 					"Inefficiently converts Water into Oxygen.";
@@ -46,8 +46,8 @@ namespace Beached
 			{
 				public class BEACHED_LEAFLETCORAL
 				{
-					public static LocString NAME = FormatAsLink("Leaflet Coral Frag", LeafletCoralConfig.ID);
-					public static LocString DESCRIPTION = ($"The {FormatAsLink("Frag", "CORALS")} of a {CORALS.BEACHED_LEAFLETCORAL.NAME}.");
+					public static LocString NAME = Link("Leaflet Coral Frag", LeafletCoralConfig.ID);
+					public static LocString DESCRIPTION = ($"The {Link("Frag", "CORALS")} of a {CORALS.BEACHED_LEAFLETCORAL.NAME}.");
 				}
 			}
 		}

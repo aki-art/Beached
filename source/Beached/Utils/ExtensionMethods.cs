@@ -1,5 +1,6 @@
 ﻿using Beached.Content.Scripts.ClassExtensions;
 using Beached.Content.Scripts.Entities;
+using HarmonyLib;
 using Klei.AI;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,16 @@ namespace Beached.Utils
 {
 	public static class ExtensionMethods
 	{
-		public static Direction Opposite(this Direction direction)
+		public static void AddTag(this Element element, Tag tag)
 		{
-			return MiscUtil.GetOpposite(direction);
+			element.oreTags ??= [];
+			element.oreTags = element.oreTags.AddToArray(tag);
 		}
 
 		public static Dictionary<MinionStartingStats, MinionStartingStatsExtension> minionStartingStatsExtensions = [];
 		public static Dictionary<CavityInfo, CavityInfoExtension> cavityInfoExtensions = [];
+
+		public static Direction Opposite(this Direction direction) => MiscUtil.GetOpposite(direction);
 
 		public static void AddTags(this GameObject gameObject, params Tag[] tags)
 		{
