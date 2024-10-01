@@ -26,15 +26,12 @@ namespace Beached.Patches.Germs
 			public static void Postfix(ref DiseaseContainer container, ref float __result)
 			{
 				if (container.autoDisinfectable == null)
-				{
 					return;
-				}
 
 				var pos = Grid.PosToCell(container.autoDisinfectable);
+
 				if (Grid.LightCount[pos] == 0)
-				{
 					__result *= 100f; // ridiculous number for testins
-				}
 			}
 		}
 

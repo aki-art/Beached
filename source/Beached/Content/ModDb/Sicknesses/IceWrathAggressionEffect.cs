@@ -45,7 +45,7 @@ namespace Beached.Content.ModDb.Sicknesses
 				if (sicknessInstance == null)
 					return 30f;
 
-				return Mathf.Clamp(sicknessInstance.GetPercentCured(), 0.1f, 1f) * 10f;
+				return (1f - Mathf.Clamp(sicknessInstance.GetPercentCured(), 0.1f, 0.9f)) * 10f;
 			}
 		}
 

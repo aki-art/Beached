@@ -34,6 +34,9 @@ namespace Beached.Content
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),
 			MaterialColor_noPaint = TagManager.Create("NoPaint"),
 			FastTrack_registerRoom = TagManager.Create("RegisterRoom"),
+			// Todo: remove when twitch mod is added
+			OniTwitch_surpriseBoxForceDisabled = TagManager.Create("OniTwitchSurpriseBoxForceDisabled"),
+			OniTwitch_surpriseBoxForceEnabled = TagManager.Create("OniTwitchSurpriseBoxForceEnabled "),
 
 			// ========= Misc ====================================================
 			amphibious = TagManager.Create("Beached_Amphibious"),

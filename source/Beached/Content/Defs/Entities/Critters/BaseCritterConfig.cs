@@ -13,6 +13,7 @@ namespace Beached.Content.Defs.Entities.Critters
 
 		protected abstract CritterBuilder ConfigureCritter(CritterBuilder builder);
 
+		// Conditions just just a basic strings set where each string acts like a flag.
 		protected abstract void ConfigureAI(CritterBuilder.BrainBuilder builder, HashSet<string> conditions);
 
 		protected abstract string AnimFile { get; }

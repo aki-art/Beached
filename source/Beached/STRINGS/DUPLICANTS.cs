@@ -213,7 +213,7 @@ namespace Beached
 				public class BEACHED_ICEWRATH
 				{
 					public static LocString NAME = Link("Ice Wraiths", IceWrathGerms.ID);
-					public static LocString DESCRIPTION = Link("A type of parasitic roundworm that has been frozen away in the Permafrost for many many years.");
+					public static LocString DESCRIPTION = Link("A type of parasitic roundworm that has been frozen away in the Permafrost for many many years. It is extremely resilient to cold temperatures and has been observed to survive being frozen at near absolute zero temperatures.");
 				}
 
 				public class BEACHED_LIMPETEGG

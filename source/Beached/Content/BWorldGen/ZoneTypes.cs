@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Beached.Utils.GlobalEvents;
+using System;
 using System.Collections.Generic;
 using static ProcGen.SubWorld;
 
@@ -19,6 +20,7 @@ namespace Beached.Content.BWorldGen
 			coralReef,
 			icy;
 
+		[Subscribe(GlobalEvent.WORLD_RELOADED)]
 		public static void OnWorldLoad()
 		{
 			depths = (ZoneType)Enum.Parse(typeof(ZoneType), "Beached_Depths");

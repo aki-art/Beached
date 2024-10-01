@@ -104,7 +104,7 @@ namespace Beached.Content.DefBuilders
 				disease.AddGrowthRule(new ElementGrowthRule(element)
 				{
 					populationHalfLife = new float?(DISEASE.GROWTH_FACTOR.NONE),
-					overPopulationHalfLife = new float?(float.PositiveInfinity)
+					overPopulationHalfLife = new float?(DISEASE.GROWTH_FACTOR.NONE)
 				});
 			}
 
@@ -175,6 +175,12 @@ namespace Beached.Content.DefBuilders
 				overPopulationHalfLife = new float?(DISEASE.GROWTH_FACTOR.DEATH_MAX)
 			});
 
+			return this;
+		}
+
+		public GrowthInfoBuilder Rule(GrowthRule rule)
+		{
+			disease.AddGrowthRule(rule);
 			return this;
 		}
 

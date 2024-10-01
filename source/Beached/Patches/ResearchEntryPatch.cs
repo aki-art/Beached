@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs.Buildings;
-using HarmonyLib;
+﻿using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -61,7 +60,7 @@ namespace Beached.Patches
 
 				if (toolTip.TryGetComponent(out HierarchyReferences hierarchyRefs))
 				{
-					if (techItem.Id == ChimeConfig.ID)
+					if (techItem.Id.StartsWith("Beached_"))
 					{
 						var dlcOverlay = hierarchyRefs.GetReference<KImage>("DLCOverlay");
 						dlcOverlay.gameObject.SetActive(true);

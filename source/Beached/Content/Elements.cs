@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Beached.Utils.GlobalEvents;
+using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,6 +51,7 @@ namespace Beached.Content
 			pearl = ToHash("Pearl"),
 			rubber = ToHash("Rubber"),
 			permaFrost = ToHash("PermaFrost"),
+			permaFrost_Transitional = ToHash("PermaFrost_Transitional"),
 			rot = ToHash("Rot"),
 			saltyOxygen = ToHash("SaltyOxygen"),
 			silt = ToHash("Silt"),
@@ -245,6 +247,7 @@ namespace Beached.Content
 			customExposureRates[sulfurousWater] = CONSTS.EXPOSURE_EFFECT.OH_HECK_IT_BURNS;
 		}
 
+		[Subscribe(GlobalEvent.WORLD_RELOADED)]
 		public static void OnWorldReload(bool isBeachedWorld)
 		{
 			var lime = ElementLoader.GetElement(SimHashes.Lime.CreateTag());

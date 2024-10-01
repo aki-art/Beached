@@ -69,7 +69,7 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 				.Add(new EatStates.Def())
 				.Add(new RanchedStates.Def())
 				.Add(new HunterStates.Def())
-				//.Add(new LayEggStates.Def())
+				.Add(new LayEggStates.Def(), conditions.Contains(CritterBuilder.ADULT))
 				.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
 				.Add(new CallAdultStates.Def())
 				.PopInterruptGroup()

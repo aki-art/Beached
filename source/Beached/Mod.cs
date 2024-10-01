@@ -1,8 +1,10 @@
 ﻿global using Beached.Utils;
 using Beached.Content;
 using Beached.Content.BWorldGen;
+using Beached.Content.Scripts;
 using Beached.ModDevTools;
 using Beached.Settings;
+using Beached.Utils.GlobalEvents;
 using HarmonyLib;
 using KMod;
 using Neutronium.PostProcessing.LUT;
@@ -71,9 +73,24 @@ namespace Beached
 					{
 						var attributeType = attr.GetType();
 
-						if (attributeType == typeof(OnModLoadedAttribute))
+						if (attributeType == typeof(SubscribeAttribute))
 						{
-							methodInfo.Invoke(null, null);
+							var parameters = methodInfo.GetParameters();
+							if (parameters.Length != 1 || parameters[0].ParameterType != typeof(bool))
+							{
+								Log.Warning($"Subscribe attribute expects a single bool parameter! ({methodInfo.Name})");
+								continue;
+							}
+
+							if (methodInfo.ReturnType != typeof(void))
+							{
+								Log.Warning($"Subscribe attribute does not expect a return value! ({methodInfo.Name})");
+								continue;
+							}
+
+							var action = (Action<bool>)Delegate.CreateDelegate(typeof(Action<bool>), methodInfo);
+							Beached_WorldLoader.onWorldReloaded += action;
+
 							continue;
 						}
 

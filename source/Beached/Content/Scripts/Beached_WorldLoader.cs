@@ -1,16 +1,17 @@
-﻿using Beached.Content.BWorldGen;
-using Beached.Content.Defs.Entities.Critters.Jellies;
+﻿using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Database;
 using ProcGenGame;
+using System;
 using System.Collections.Generic;
 
 namespace Beached.Content.Scripts
 {
-    public class Beached_WorldLoader : KMonoBehaviour
+	public class Beached_WorldLoader : KMonoBehaviour
 	{
 		public static Beached_WorldLoader Instance;
+		public static Action<bool> onWorldReloaded;
 
 		public override void OnPrefabInit()
 		{
@@ -46,8 +47,10 @@ namespace Beached.Content.Scripts
 			if (IsBeachedContentActive)
 				Log.Info("Loaded Astropelagos world, initializing Beached settings.");
 
-			Elements.OnWorldReload(IsBeachedContentActive);
-			ZoneTypes.OnWorldLoad();
+			onWorldReloaded?.Invoke(IsBeachedContentActive);
+
+			//Elements.OnWorldReload(IsBeachedContentActive);
+			//ZoneTypes.OnWorldLoad();
 
 			var tameCrittersAchievement = Db.Get().ColonyAchievements.TameAllBasicCritters;
 			foreach (var item in tameCrittersAchievement.requirementChecklist)
