@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Defs.Foods;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
+using Beached.Integration;
 using Klei.AI;
 using UnityEngine;
 
@@ -10,16 +11,17 @@ namespace Beached.Content.ModDb
 	{
 		public const string GMO_GROUP = "Beached_GMOTraits";
 
-		public const string BLAND = "Beached_GMOTraits_Bland";
-		//public const string CHONKER = "Beached_GMOTraits_Chonker";
-		public const string EVERLASTING = "Beached_GMOTraits_Everlasting";
-		public const string FABULOUS = "Beached_GMOTraits_Fabulous";
-		public const string HYPOALLERGENIC = "Beached_GMOTraits_HypoAllergenic";
-		public const string LASTING = "Beached_GMOTraits_Lasting";
-		public const string MEATY = "Beached_GMOTraits_Meaty";
-		public const string PRODUCTIVE1 = "Beached_GMOTraits_Productive1";
-		public const string PRODUCTIVE2 = "Beached_GMOTraits_Productive2";
-		public const string PRODUCTIVE3 = "Beached_GMOTraits_Productive3";
+		public const string
+			BLAND = "Beached_GMOTraits_Bland",
+			CHONKER = "Beached_GMOTraits_Chonker",
+			EVERLASTING = "Beached_GMOTraits_Everlasting",
+			FABULOUS = "Beached_GMOTraits_Fabulous",
+			HYPOALLERGENIC = "Beached_GMOTraits_HypoAllergenic",
+			LASTING = "Beached_GMOTraits_Lasting",
+			MEATY = "Beached_GMOTraits_Meaty",
+			PRODUCTIVE1 = "Beached_GMOTraits_Productive1",
+			PRODUCTIVE2 = "Beached_GMOTraits_Productive2",
+			PRODUCTIVE3 = "Beached_GMOTraits_Productive3";
 
 		public static void Register()
 		{
@@ -42,9 +44,7 @@ namespace Beached.Content.ModDb
 		private static void OnHypoAllergenic(GameObject obj)
 		{
 			if (obj.TryGetComponent(out FurSource furSource))
-			{
 				furSource.RemoveReactable();
-			}
 		}
 
 		private static void OnProductive(GameObject obj, float multiplier)
@@ -68,9 +68,7 @@ namespace Beached.Content.ModDb
 			{
 				var trait = Db.Get().traits.TryGet(id);
 				if (trait != null)
-				{
 					traits.Remove(trait);
-				}
 			}
 		}
 
@@ -89,23 +87,16 @@ namespace Beached.Content.ModDb
 			{
 				for (int i = 0; i < butcherable.drops.Length; i++)
 				{
-					var drop = butcherable.drops[i];
-					if (drop == MeatConfig.ID)
-					{
+					if (butcherable.drops[i] == MeatConfig.ID)
 						butcherable.drops[i] = HighQualityMeatConfig.ID;
-					}
 				}
 			}
 
 			if (obj.TryGetComponent(out KBatchedAnimController kbac))
-			{
 				kbac.animScale *= 1.1f;
-			}
 
 			if (obj.TryGetComponent(out KBoxCollider2D collider))
-			{
 				collider.size *= 1.1f;
-			}
 		}
 
 		private static Trait CreateBasicTrait(string ID)
@@ -120,10 +111,8 @@ namespace Beached.Content.ModDb
 				true,
 				false);
 
-			if (Mod.isCritterTraitsRebornHere)
-			{
-				Integration.CritterTraitsReborn.addTraitToVisibleList(ID);
-			}
+			if (Mod.integrations.IsModPresent(Integrations.CRITTER_TRAITS_REBORN))
+				CritterTraitsReborn.addTraitToVisibleList(ID);
 
 			return trait;
 		}

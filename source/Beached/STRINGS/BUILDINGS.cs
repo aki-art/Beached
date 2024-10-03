@@ -57,6 +57,13 @@ namespace Beached
 					public static LocString EFFECT = "...";
 				}
 
+				public class BEACHED_CHIME
+				{
+					public static LocString NAME = Link("Wind Chime", ChimeConfig.ID);
+					public static LocString DESC = "Pretty things suspended in air, creating music.";
+					public static LocString EFFECT = "Emits a soothing sound when stimulated by changing air pressure, decreasing Stress of nearby Duplicants.";
+				}
+
 				public class BEACHED_CONDUITAQUARIUM
 				{
 					public static LocString NAME = "Conduit Coral Bed";
@@ -128,28 +135,6 @@ namespace Beached
 					public static LocString DESC = "By repeated vertical motion of external duplicant peripherals it is possible to process several materials into one unified mush.";
 					public static LocString EFFECT = "Mixes granular and liquid materials into compound results.";
 				}
-
-				public class BEACHED_TERRARIUM
-				{
-					public static LocString NAME = "Terrarium";
-					public static LocString DESC = "...";
-					public static LocString EFFECT = "";
-				}
-
-				public class BEACHED_TREETAP
-				{
-					public static LocString NAME = "Tree Tap";
-					public static LocString DESC = "...";
-					public static LocString EFFECT = "Collects Sap from a tree it is attached to.";
-				}
-
-				public class BEACHED_CHIME
-				{
-					public static LocString NAME = Link("Wind Chime", ChimeConfig.ID);
-					public static LocString DESC = "Pretty things suspended in air, creating music.";
-					public static LocString EFFECT = "Emits a soothing sound when stimulated by changing air pressure, decreasing Stress of nearby Duplicants.";
-				}
-
 				public class BEACHED_SALTLICK
 				{
 					[Note("Visible in UI or codex.")]
@@ -217,6 +202,31 @@ namespace Beached
 						"Uses Salt and Carbon Dioxide to smoke food, extending their shelf life and improving quality.\n\n" +
 						$"Can also use ambient Carbon Dioxide if it'a already hot enough (at least {GameUtil.GetFormattedTemperature(343.15f)}).";
 				}
+
+				public class BEACHED_SPINNER
+				{
+					[Note("\"Centrifuge\" or synonims also work")]
+					public static LocString NAME = Link("Spinner", SpinnerConfig.ID);
+					public static LocString DESC = $"Spinners use centrifugal force to spin various materials into fibers.";
+					public static LocString EFFECT = "Produces fibers from solids." +
+						"\n" +
+						"\nDuplicants will not fabricate items unless recipes are queued.";
+				}
+
+				public class BEACHED_TERRARIUM
+				{
+					public static LocString NAME = "Terrarium";
+					public static LocString DESC = "...";
+					public static LocString EFFECT = "";
+				}
+
+				public class BEACHED_TREETAP
+				{
+					public static LocString NAME = "Tree Tap";
+					public static LocString DESC = "...";
+					public static LocString EFFECT = "Collects Sap from a tree it is attached to.";
+				}
+
 
 				public class BEACHED_WOODCARVING
 				{

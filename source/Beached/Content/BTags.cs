@@ -76,7 +76,10 @@ namespace Beached.Content
 				hunting = TagManager.Create("Beached_Behavior_Hunting"),
 				wantsToSitOnEgg = TagManager.Create("Beached_Behavior_WantsToSitOnEgg"),
 				// muffins will not hunt critters with this tag, regardless of collar settings
-				doNotTargetMeByCarnivores = TagManager.Create("Beached_DoNotTargetMeByCarnivores");
+				doNotTargetMeByCarnivores = TagManager.Create("Beached_DoNotTargetMeByCarnivores"),
+
+				beingMined = TagManager.Create("Beached_BeingMined"),
+				grownShell = TagManager.Create("Beached_GrownShell");
 		}
 
 		public static class Species
@@ -84,6 +87,7 @@ namespace Beached.Content
 			public static readonly Tag
 				snail = TagManager.Create("BeachedSnailSpecies"),
 				muffin = TagManager.Create("BeachedMuffinSpecies"),
+				mite = TagManager.Create("BeachedMiteSpecies"),
 				jellyfish = TagManager.Create("BeachedJellyFishSpecies"),
 				fuafua = TagManager.Create("BeachedFuaFuaSpecies"),
 				rotMonger = TagManager.Create("BeachedRotMongerSpecies"),
@@ -100,6 +104,7 @@ namespace Beached.Content
 		{
 			public static Tag chime = TagManager.Create("Beached_ChimeMaterial");
 			public static Tag sand = TagManager.Create("Beached_SandMaterial");
+			public static Tag slag = TagManager.Create("Beached_SlagMaterial");
 		}
 
 		public static class TagCollections

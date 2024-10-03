@@ -15,7 +15,7 @@ namespace Beached.Integration
 
 				AccessTools
 					.DeclaredMethod(t_Mod, "AddPack")
-					.Invoke(null, new[] { path });
+					.Invoke(null, [path]);
 			}
 		}
 	}

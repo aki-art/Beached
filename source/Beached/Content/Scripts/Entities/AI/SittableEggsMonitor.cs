@@ -87,16 +87,12 @@ namespace Beached.Content.Scripts.Entities.AI
 				// check if our existing target is still around
 				if (this.target != null)
 				{
-					FUtility.Log.Debug("checking if target is still around");
 					var cell = Grid.PosToCell(this.target);
 					var navigationCost = navigator.GetNavigationCost(cell);
-					FUtility.Log.Debug("nav cost: " + navigationCost);
 
 					if (navigationCost != -1 && navigationCost < def.maxSearchCost)
 						return true;
 				}
-				else
-					FUtility.Log.Debug("there was no target yet");
 
 				var target = FindTarget();
 				SetNewTarget(target);
@@ -111,7 +107,6 @@ namespace Beached.Content.Scripts.Entities.AI
 
 				if (smi.CheckForTarget())
 				{
-					FUtility.Log.Debug("found target");
 					GoToTargeted();
 					return;
 				}
@@ -149,7 +144,6 @@ namespace Beached.Content.Scripts.Entities.AI
 					newTarget.AddTag(GameTags.Creatures.ReservedByCreature);
 				}
 
-				FUtility.Log.Debug("Found new target: " + newTarget?.name);
 				target = newTarget;
 			}
 		}

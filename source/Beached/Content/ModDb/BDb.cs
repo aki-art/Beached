@@ -15,11 +15,14 @@ namespace Beached.Content.ModDb
 
 		public static BPlushies plushies;
 		public static BGeyserTraits geyserTraits;
+		public static LootTables lootTables;
 
 		public static void OnDbInit()
 		{
 			plushies = new BPlushies();
 			geyserTraits = new BGeyserTraits();
+			lootTables = new LootTables();
+
 			BGeyserTraits.Register();
 
 			TUNING.CREATURES.SORTING.CRITTER_ORDER[SlickShellConfig.ID] = BaseSnailConfig.SORTING_ORDER;

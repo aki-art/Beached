@@ -1,4 +1,6 @@
-﻿namespace Beached.Content.Scripts
+﻿using Beached.Integration;
+
+namespace Beached.Content.Scripts
 {
 	// companion to Diggable, assisting Mineralogy leveled dupes to gain extra treasures when digging
 	public class TreasureHolder : KMonoBehaviour
@@ -61,7 +63,7 @@
 
 		private void SpawnNeutroniumDust()
 		{
-			if (!Mod.isRocketryExpandedHere)
+			if (!Mod.integrations.IsModPresent(Integrations.ROCKETRY_EXPANDED))
 				return;
 
 			if (diggable.originalDigElement?.id == neutroniumDust)

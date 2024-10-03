@@ -166,6 +166,53 @@ namespace Beached
 		}
 
 		/// <summary>
+		/// Add a new slagmite shell drop possibility when mined. generally common metal ores.
+		/// </summary>
+		/// <param name="tag">The item to drop</param>
+		/// <param name="amount">Mass in kg</param>
+		/// <param name="weight">Weight of chance to drop.</param>
+		/// <param name="condition">evaluate this before picking a reward. object data is the mite itself in this case</param>
+		/// <param name="overrideExistingEntry">if this tag is already dropped, override the values here.</param>
+		/// <param name="mergeExistingCondition">only relevant if `overrideExistingEntry` is set to true; in case of overriding, should we keep the original condition too.</param>
+		public static void AddSlagmiteShellDrop(string tag, float amount, float weight, Func<object, bool> condition, bool overrideExistingEntry, bool mergeExistingCondition)
+		{
+			if (BDb.lootTables == null)
+			{
+				Log.Warning("Trying to add shell drops too early, Db not initialized yet!");
+				return;
+			}
+
+			var overriddenExisting = false;
+
+			foreach (var existingEntry in BDb.lootTables.slagmiteShellDrops.options)
+			{
+				if (existingEntry.item.tag == tag)
+				{
+					if (overrideExistingEntry)
+					{
+						existingEntry.item.mass = amount;
+						existingEntry.weight = weight;
+
+						if (mergeExistingCondition)
+							existingEntry.condition += condition;
+						else
+							existingEntry.condition = condition;
+					}
+
+					overriddenExisting = true;
+				}
+			}
+
+			if (!overriddenExisting)
+				BDb.lootTables.slagmiteShellDrops.Add(new LootTable<LootTables.MaterialReward>.WeightedOption()
+				{
+					item = new LootTables.MaterialReward(tag, amount),
+					condition = condition,
+					weight = weight
+				});
+		}
+
+		/// <summary>
 		/// Makes an item smokeable.
 		/// </summary>
 		/// <param name="tag">The raw item to smoke.</param>

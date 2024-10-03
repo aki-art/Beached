@@ -19,6 +19,8 @@
 			lifeGoalTrackerUpdate = new("LifeGoalTrackerUpdate"),
 			wishingStarEvent = new("WishingStarEvent"),
 			debugDataChange = new("DebugDataChange"),
+			prePoop = new("PrePoop"),
+			critterMined = new("CritterMined"),
 
 			segmentedEntityUpdate = new("SegmentedEntityUpdate"),
 			critterTraitAdded = new("CritterTraitAdded");

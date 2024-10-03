@@ -12,27 +12,31 @@ namespace Beached.Patches
 			{
 				var groups = __instance.GetData();
 
-				var swaps = new HashSet<HashedString>()
-				{
+				AddGroup(groups, CONSTS.BATCH_TAGS.SWAPS,
+				[
 					"beached_poffmouth_mouth_kanim",
 					"beached_rubberboots_kanim",
 					"beached_zeolite_necklace_kanim",
 					"minnow_head_kanim"
-				};
-				AddSwaps(groups, swaps);
+				]);
+
+				AddGroup(groups, CONSTS.BATCH_TAGS.INTERACTS,
+				[
+					"beached_spinner_interact_kanim"
+				]);
 			}
 
-			private static void AddSwaps(List<KAnimGroupFile.Group> groups, HashSet<HashedString> swaps)
+			private static void AddGroup(List<KAnimGroupFile.Group> groups, int hash, HashSet<HashedString> items)
 			{
-				var swapAnimsGroup = KAnimGroupFile.GetGroup(new HashedString(CONSTS.BATCH_TAGS.SWAPS));
+				var swapAnimsGroup = KAnimGroupFile.GetGroup(new HashedString(hash));
 
 				// remove the wrong group
-				groups.RemoveAll(g => swaps.Contains(g.animNames[0]));
+				groups.RemoveAll(g => items.Contains(g.animNames[0]));
 
-				foreach (var swap in swaps)
+				foreach (var item in items)
 				{
 					// readd to correct group
-					var anim = Assets.GetAnim(swap);
+					var anim = Assets.GetAnim(item);
 
 					swapAnimsGroup.animFiles.Add(anim);
 					swapAnimsGroup.animNames.Add(anim.name);

@@ -6,6 +6,18 @@
 
 		public class UI
 		{
+			public static class DIET
+			{
+				public static LocString EXTRA_PRODUCE = "    • Additional excretion: {tag}";
+				public static LocString EXTRA_PRODUCE_TOOLTIP = "This critter will also \"produce\" {tag}, for {percent} of consumed mass.";
+			}
+
+			public static class MINEABLE
+			{
+				public static LocString TITLE = "Mineable";
+				public static LocString TOOLTIP = "This critters outer can be mined and harvested, without causing any harm to the creature.";
+			}
+
 			public class SANDBOX
 			{
 				public static LocString ALL = "All";

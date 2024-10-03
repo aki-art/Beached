@@ -6,7 +6,7 @@ using FUtility.FLocalization;
 
 namespace Beached
 {
-    public partial class STRINGS
+	public partial class STRINGS
 	{
 		public class ITEMS
 		{
@@ -38,6 +38,15 @@ namespace Beached
 
 			}
 
+			public class INDUSTRIAL_INGREDIENTS
+			{
+				public class BEACHED_SLAGWOOL
+				{
+					public static LocString NAME = Link("Slag Wool", SlagWoolConfig.ID);
+					public static LocString DESC = $"Fibrous material spun from Slag, used for insulation and filtration.";
+				}
+			}
+
 			public class FOOD
 			{
 				public class BEACHED_ASPICLICE
@@ -51,6 +60,16 @@ namespace Beached
 					public static LocString NAME = Link("Astrobar", AstrobarConfig.ID);
 					public static LocString DESC = "Delicious and nutritious candy bar, with a sticky and gooey filling that " +
 												   "sticks to the roof of the mouth.";
+				}
+
+				public class BEACHED_COTTONCANDY
+				{
+					public static LocString NAME = Link("Cotton Candy", CottonCandyConfig.ID);
+					public static LocString DESC = "Fruit flavored confection spun from sugars.\n" +
+						"\n" +
+						"The fluffy texture makes for a perfect treat.";
+
+					public static LocString RECIPEDESC = "Fruit flavored confection spun from sugars.";
 				}
 
 				public class BEACHED_LEGENDARYSTEAK

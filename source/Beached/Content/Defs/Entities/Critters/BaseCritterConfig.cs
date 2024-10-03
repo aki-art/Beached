@@ -23,5 +23,17 @@ namespace Beached.Content.Defs.Entities.Critters
 		public virtual string EggId => $"{Id}Egg";
 
 		public virtual string BaseTraitId => $"{Id}BaseTrait";
+
+		public GameObject SetupBasicSolidDiet(GameObject prefab, Diet.Info[] dietInfos, float referenceCaloriesPerKg, float minPoopSizeInKg)
+		{
+			var diet = new Diet(dietInfos);
+			var def = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
+			def.diet = diet;
+			def.minConsumedCaloriesBeforePooping = referenceCaloriesPerKg * minPoopSizeInKg;
+
+			prefab.AddOrGetDef<SolidConsumerMonitor.Def>().diet = diet;
+
+			return prefab;
+		}
 	}
 }

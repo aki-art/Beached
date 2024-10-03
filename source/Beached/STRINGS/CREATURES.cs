@@ -2,6 +2,7 @@
 using Beached.Content.Defs.Entities.Corals;
 using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.Karacoos;
+using Beached.Content.Defs.Entities.Critters.Mites;
 using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Flora;
@@ -78,6 +79,13 @@ namespace Beached
 				public class LIMPET_GROWTH_RATE
 				{
 					public static LocString NAME = "Growing Limpets";
+				}
+
+				public class SHELLGROWTH
+				{
+					public static LocString NAME = "Shell Growth";
+
+					public static LocString TOOLTIP = "...";
 				}
 			}
 
@@ -169,6 +177,13 @@ namespace Beached
 
 			public class STATS
 			{
+				public class SHELLGROWTH
+				{
+					public static LocString NAME = "Shell Growth";
+
+					public static LocString TOOLTIP = "The amount of time required for this critter to regrow its shell";
+				}
+
 				public class ACIDVULNERABILITY
 				{
 					public static LocString NAME = "Acid Vulnerability";
@@ -336,6 +351,15 @@ namespace Beached
 					public static LocString EGG_NAME = Link("Slickshell Egg", SlickShellConfig.ID);
 				}
 
+				public class BEACHED_SLAGMITE
+				{
+					public static LocString NAME = Link("Slagmite", SlagmiteConfig.ID);
+					public static LocString DESC = $"Slagmites eat metal rich waste procucts.\n\nTheir shells can be mined while the critter is alive, providing various metals. This does not hurt the critter, they even appeciate the lesser weight on their backs.";
+					public static LocString BABY_NAME = Link("Slagmitty", SlickShellConfig.ID);
+					public static LocString BABY_DESC = $"A cute little Slagmite.\n\nIn time it will mature into a fully grown Slagmite.";
+					public static LocString EGG_NAME = Link("Slagmitty Egg", SlickShellConfig.ID);
+				}
+
 				public class BEACHED_JELLYFISH
 				{
 					public static LocString NAME = Link("Jellyfish", JellyfishConfig.ID);
@@ -491,6 +515,7 @@ namespace Beached
 				public static LocString BEACHEDKARACOO = "Karacoo";
 				public static LocString BEACHEDJELLYFISH = "Jellyfish";
 				public static LocString BEACHEDMUFFIN = Link("Muffin", "BEACHEDMUFFINSPECIES");
+				public static LocString BEACHEDMITE = Link("Mite", "BEACHEDMITESPECIES");
 			}
 
 			public class FAMILY_PLURAL
@@ -505,6 +530,7 @@ namespace Beached
 				public static LocString BEACHEDKARACOOSPECIES = Link("Karacoos", "BEACHEDKARACOOSPECIES");
 				public static LocString BEACHEDJELLYFISHSPECIS = "Jellyfish";
 				public static LocString BEACHEDMUFFINSPECIES = Link("Muffins", "BEACHEDMUFFINSPECIES");
+				public static LocString BEACHEDMITESPECIES = Link("Mites", "BEACHEDMITESPECIES");
 			}
 		}
 	}

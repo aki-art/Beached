@@ -16,12 +16,8 @@ namespace Beached.Content.Defs.Entities
 				false,
 				Assets.GetAnim("beached_plankton_ui_kanim"),
 				"ui",
-				Grid.SceneLayer.Creatures);
-
-			if (Mod.isTwitchHere)
-			{
-				prefab.AddTag("SurpriseBoxForceDisabled");
-			}
+				Grid.SceneLayer.Creatures,
+				additionalTags: [BTags.OniTwitch_surpriseBoxForceDisabled]);
 
 			return prefab;
 		}

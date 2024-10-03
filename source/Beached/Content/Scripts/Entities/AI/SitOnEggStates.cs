@@ -67,9 +67,6 @@ namespace Beached.Content.Scripts.Entities.AI
 			var movement = Vector3.MoveTowards(smi.kbac.Offset, smi.relativePositionTarget, dt * smi.speed);
 			smi.kbac.Offset = movement;
 
-			Log.Debug("moving to position " + movement.magnitude);
-			Log.Debug("moving to position " + dt * smi.speed);
-
 			return Vector3.Distance(smi.relativePositionTarget, movement) < 0.01f;
 		}
 
@@ -123,8 +120,6 @@ namespace Beached.Content.Scripts.Entities.AI
 					float y = egg.transform.position.y;
 
 					var mesh = kbac.batch.group.mesh;
-					Log.Debug("vertices length: " + mesh.vertices.Length);
-					Log.Debug(mesh.vertices[0].ToString());
 
 					var min = instance.bboxMin * kbac.animScale;
 					var max = instance.bboxMax * kbac.animScale;
@@ -181,7 +176,6 @@ namespace Beached.Content.Scripts.Entities.AI
 				}
 			}
 
-			Log.Debug("set target to : " + smi.relativePositionTarget.ToString());
 			smi.hasSetPosition = true;
 
 		}

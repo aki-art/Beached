@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-namespace Beached.Content.Defs.Entities.Critters.Karacoos
+namespace Beached.Content.Defs.Entities.Critters.Mites
 {
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
-	public class BabyKaracooConfig : BaseKaracooConfig, IEntityConfig
+	public class BabySlagmiteConfig : BaseMiteConfig, IEntityConfig
 	{
-		public const string ID = "Beached_BabyKaracoo";
+		public const string ID = "Beached_BabySlagmite";
 
-		protected override string AnimFile => "beached_karacoo_kanim";
+		protected override string AnimFile => "beached_baby_slagmite_kanim";
 
 		protected override string Id => ID;
 
@@ -16,8 +16,9 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
-				.Baby(KaracooConfig.ID, forceNavType: true)
-				.Mass(10f)
+				.Baby(SlagmiteConfig.ID, forceNavType: true)
+				.Size(1, 1)
+				.Mass(5f)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_BABY, .75f);
 		}
 
@@ -25,10 +26,6 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 
 		public void OnPrefabInit(GameObject inst) { }
 
-		public void OnSpawn(GameObject inst)
-		{
-			// TODO: remove this when real animation is added
-			inst.GetComponent<KBatchedAnimController>().animScale *= 0.5f;
-		}
+		public void OnSpawn(GameObject inst) { }
 	}
 }

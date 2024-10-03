@@ -11,6 +11,7 @@ using Klei.AI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Beached.Content.ModDb.LootTables;
 
 namespace Beached.ModDevTools
 {
@@ -36,11 +37,28 @@ namespace Beached.ModDevTools
 			RequiresGameRunning = true;
 		}
 
+		private static string rewardTestResult;
+
 		public override void RenderTo(DevPanel panel)
 		{
 			if (ImGui.Button("Debug Data trigger"))
 				Beached_Mod.Instance.Trigger(ModHashes.debugDataChange);
 
+			if (ImGui.Button("test roll metal reward 1"))
+			{
+				BDb.lootTables.slagmiteShellDrops.TryGetItem(out var item);
+				rewardTestResult = item.tag.name;
+			}
+
+			if (ImGui.Button("test roll 2"))
+			{
+				BDb.lootTables.TryGetLoot<MaterialReward>(out var item2, BDb.lootTables.slagmiteShellDrops.Id);
+				rewardTestResult = item2.tag.name;
+			}
+
+			rewardTestResult ??= "N/A";
+
+			ImGui.Text(rewardTestResult);
 			if (ImGui.DragFloat("Permafrost UV Scale", ref uvScale))
 			{
 				//ElementLoader.GetElement(Elements.permaFrost.Tag).substance.material.SetFloat("_WorldUVScale", uvScale);

@@ -2,6 +2,7 @@
 using Beached.Content;
 using Beached.Content.BWorldGen;
 using Beached.Content.Scripts;
+using Beached.Integration;
 using Beached.ModDevTools;
 using Beached.Settings;
 using Beached.Utils.GlobalEvents;
@@ -19,6 +20,7 @@ namespace Beached
 	public class Mod : UserMod2
 	{
 		public const string STATIC_ID = "Beached";
+		public static Integrations integrations = new();
 
 #if DEBUG
 		public static bool debugMode = true;
@@ -31,12 +33,6 @@ namespace Beached
 		public static Config settings = new();
 
 		public static string folder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); // path field does not seem reliable with Local installs
-
-		public static bool
-			isFastTrackHere,
-			isCritterTraitsRebornHere,
-			isTwitchHere,
-			isRocketryExpandedHere;
 
 		public static LUT_API lutAPI;
 		public static Harmony harmonyInstance;
@@ -140,37 +136,7 @@ namespace Beached
 		public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods)
 		{
 			base.OnAllModsLoaded(harmony, mods);
-
-			foreach (var modEntry in mods)
-			{
-				if (modEntry.IsEnabledForActiveDlc())
-				{
-					switch (modEntry.staticID)
-					{
-						case "TrueTiles":
-							Integration.TrueTiles.OnAllModsLoaded();
-							break;
-						case "PeterHan.FastTrack":
-							isFastTrackHere = true;
-							break;
-						case "DecorPackA":
-							Integration.DecorPackI.RegisterTiles();
-							break;
-						case "CritterTraitsReborn":
-							isCritterTraitsRebornHere = true;
-							Integration.CritterTraitsReborn.Initialize();
-							break;
-						case "Rocketry Expanded":
-							isRocketryExpandedHere = true;
-							break;
-					}
-				}
-			}
-
-			if (!isCritterTraitsRebornHere)
-				Patches.SimpleInfoScreenPatch.Patch(harmony);
-
-			Integration.CritterShedding.Initialize();
+			integrations.OnAllModsLoaded(harmony, mods);
 		}
 	}
 }

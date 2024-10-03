@@ -7,6 +7,8 @@ namespace Beached.Content.ModDb
 		public static Amount Moisture;
 		public static Amount LimpetGrowth;
 		public static Amount Wet;
+		public static Amount ShellGrowth;
+		public static Amount ShellIntegrity;
 
 		[DbEntry]
 		public static void Register(Database.Amounts __instance)
@@ -51,6 +53,36 @@ namespace Beached.Content.ModDb
 				"beached_amount_wet");
 
 			Wet.SetDisplayer(new AsPercentAmountDisplayer(GameUtil.TimeSlice.PerCycle));
+
+			ShellGrowth = __instance.CreateAmount(
+					"Beached_ShellGrowth",
+					0f,
+					100f,
+					false,
+					Units.Flat,
+					0.35f,
+					true,
+					"STRINGS.CREATURES",
+					"ui_icon_stamina",
+					"attribute_stamina",
+					"mod_stamina");
+
+			ShellGrowth.SetDisplayer(new StandardAmountDisplayer(GameUtil.UnitClass.Percent, GameUtil.TimeSlice.PerCycle, null));
+
+			ShellIntegrity = __instance.CreateAmount(
+						"Beached_ShellIntegrity",
+						0f,
+						100f,
+						false,
+						Units.Flat,
+						0.35f,
+						true,
+						"STRINGS.CREATURES",
+						"ui_icon_stamina",
+						"attribute_stamina",
+						"mod_stamina");
+
+			ShellIntegrity.SetDisplayer(new StandardAmountDisplayer(GameUtil.UnitClass.Percent, GameUtil.TimeSlice.PerCycle, null));
 		}
 	}
 }

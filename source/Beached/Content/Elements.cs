@@ -56,6 +56,9 @@ namespace Beached.Content
 			saltyOxygen = ToHash("SaltyOxygen"),
 			silt = ToHash("Silt"),
 			siltStone = ToHash("SiltStone"),
+			slag = ToHash("Slag"),
+			slagGlass = ToHash("SlagGlass"),
+			moltenSlagGlass = ToHash("MoltenSlagGlass"),
 			sulfurousIce = ToHash("SulfurousIce"),
 			sulfurousWater = ToHash("SulfurousWater"),
 			zeolite = ToHash("Zeolite"),
@@ -69,6 +72,101 @@ namespace Beached.Content
 			zirconiumOre = ToHash("Zircon"),
 			sourBrine = ToHash("SourBrine"),
 			sourBrineIce = ToHash("SourBrineIce");
+
+		public class ChemicalProcessing
+		{
+			public static readonly SimHashes
+				ammoniaGas = ToHash("AmmoniaGas"),
+				ammoniumSalt = ToHash("AmmoniumSalt"),
+				ammoniumWater = ToHash("AmmoniumWater"),
+				argentiteOre = ToHash("ArgentiteOre"),
+				aurichalciteOre = ToHash("AurichalciteOre"),
+				baseGradeSand = ToHash("BaseGradeSand"),
+				carbonDioxide = ToHash("CarbonDioxide"),
+				carbonFiber = ToHash("CarbonFiber"),
+				chloroschist = ToHash("Chloroschist"),
+				concreteBlock = ToHash("ConcreteBlock"),
+				crudeOil = ToHash("CrudeOil"),
+				galena = ToHash("Galena"),
+				highGradeSand = ToHash("HighGradeSand"),
+				isopropaneGas = ToHash("IsopropaneGas"),
+				liquidAmmonia = ToHash("LiquidAmmonia"),
+				liquidNitric = ToHash("LiquidNitric"),
+				liquidSulfuric = ToHash("LiquidSulfuric"),
+				lowGradeSand = ToHash("LowGradeSand"),
+				meteorOre = ToHash("MeteorOre"),
+				moltenCopper = ToHash("MoltenCopper"),
+				moltenLead = ToHash("MoltenLead"),
+				moltenSilver = ToHash("MoltenSilver"),
+				moltenSlag = ToHash("MoltenSlag"),
+				moltenSteel = ToHash("MoltenSteel"),
+				moltenZinc = ToHash("MoltenZinc"),
+				phosphorBronze = ToHash("PhosphorBronze"),
+				plasteel = ToHash("Plasteel"),
+				rawNaturalGas = ToHash("RawNaturalGas"),
+				silverGas = ToHash("SilverGas"),
+				solidAmmonia = ToHash("SolidAmmonia"),
+				solidBorax = ToHash("SolidBorax"),
+				solidBrass = ToHash("SolidBrass"),
+				solidFiberglass = ToHash("SolidFiberglass"),
+				solidOilShale = ToHash("SolidOilShale"),
+				solidSilver = ToHash("SolidSilver"),
+				solidSlag = ToHash("SolidSlag"),
+				solidZinc = ToHash("SolidZinc"),
+				sourGas = ToHash("SourGas"),
+				sourWater = ToHash("SourWater"),
+				sulfuricGas = ToHash("SulfuricGas"),
+				toxicClay = ToHash("ToxicClay"),
+				toxicGas = ToHash("ToxicGas"),
+				toxicSlurry = ToHash("ToxicSlurry"),
+				zincGas = ToHash("ZincGas");
+		}
+
+		public class RocketryExpanded
+		{
+			public static readonly SimHashes
+				spaceStationForceField = ToHash("SpaceStationForceField"),
+				unobtaniumAlloy = ToHash("UnobtaniumAlloy"),
+				unobtaniumDust = ToHash("UnobtaniumDust");
+		}
+
+		public class Biochemistry
+		{
+			public static readonly SimHashes
+				bioplastic = ToHash("Bioplastic"),
+				liquidBiodiesel = ToHash("LiquidBiodiesel"),
+				liquidVegeOil = ToHash("LiquidVegeOil"),
+				solidBiodiesel = ToHash("SolidBiodiesel"),
+				solidBiomass = ToHash("SolidBiomass"),
+				solidVegeOil = ToHash("SolidVegeOil"),
+				vegeOilGas = ToHash("VegeOilGas");
+		}
+
+		public class AETE
+		{
+			public static readonly SimHashes
+				fakeLumber = ToHash("FakeLumber"),
+				frozenHoney = ToHash("FrozenHoney"),
+				frozenJello = ToHash("FrozenJello"),
+				frozenPinkSlime = ToHash("FrozenPinkSlime"),
+				honey = ToHash("Honey"),
+				jello = ToHash("Jello"),
+				pinkSlime = ToHash("PinkSlime");
+		}
+
+		public class Blood
+		{
+			public static readonly SimHashes
+				blood = ToHash("Blood"),
+				frozenBlood = ToHash("FrozenBlood");
+		}
+
+		public class TwitchMod
+		{
+			public static readonly SimHashes
+				oniTwitchIndestructibleElement = ToHash("OniTwitchIndestructibleElement"),
+				oniTwitchSuperInsulator = ToHash("OniTwitchSuperInsulator");
+		}
 
 		// setting these when loaded
 		public static SolidAmbienceType

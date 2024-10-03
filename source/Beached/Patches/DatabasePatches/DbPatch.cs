@@ -3,8 +3,11 @@ using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Flora;
 using Beached.Content.ModDb;
 using Database;
+using FUtility;
 using HarmonyLib;
 using UnityEngine;
+using static FUtility.CONSTS;
+using static FUtility.CONSTS.SUB_BUILD_CATEGORY;
 
 namespace Beached.Patches.DatabasePatches
 {
@@ -20,24 +23,6 @@ namespace Beached.Patches.DatabasePatches
 				BTraits.Register();
 				BCritterTraits.Register();
 				BAccessories.Register(__instance.Accessories, __instance.AccessorySlots);
-
-				var effect = __instance.effects.Get("MechanicalSurfboard");
-				Log.Debug("effect: " + effect.Id);
-				Log.Debug($"duration: " + effect.duration);
-				Log.Debug($"emote: " + effect.emote?.Id);
-				Log.Debug($"emote cooldown: " + effect.emoteCooldown);
-				Log.Debug($"stompGroup: " + effect.stompGroup);
-				Log.Debug($"stompPriority: " + effect.stompPriority);
-				Log.Debug($"maxInitialDelay: " + effect.maxInitialDelay);
-
-				var effect2 = __instance.effects.Get("RecentlyMechanicalSurfboard");
-				Log.Debug("effect2: " + effect2.Id);
-				Log.Debug($"duration: " + effect2.duration);
-				Log.Debug($"emote: " + effect2.emote?.Id);
-				Log.Debug($"emote cooldown: " + effect2.emoteCooldown);
-				Log.Debug($"stompGroup: " + effect2.stompGroup);
-				Log.Debug($"stompPriority: " + effect2.stompPriority);
-				Log.Debug($"maxInitialDelay: " + effect2.maxInitialDelay);
 
 				RegisterBuildings();
 
@@ -116,22 +101,25 @@ namespace Beached.Patches.DatabasePatches
 
 			private static void RegisterBuildings()
 			{
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.POWER, AmmoniaGeneratorConfig.ID, "Default", MethaneGeneratorConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.UTILITIES, MossBedConfig.ID, "Default", ExteriorWallConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, MiniFridgeConfig.ID, "Default", ExteriorWallConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, DNAInjectorConfig.ID, "Default", EggIncubatorConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, CollarDispenserConfig.ID, "Default", DNAInjectorConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.BASE, LaboratoryTileConfig.ID, "Tiles", PlasticTileConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, WoodCarvingConfig.ID, "decor", MarbleSculptureConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, SandBoxConfig.ID, "decor", WoodCarvingConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, ChimeConfig.ID, "decor", FlowerVaseConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FURNITURE, SmallAquariumConfig.ID, "decor", FlowerVaseConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.REFINING, MudStomperConfig.ID, FUtility.CONSTS.SUB_BUILD_CATEGORY.Refining.MATERIALS);
-				ModUtil.AddBuildingToPlanScreen(CONSTS.BUILD_CATEGORY.FOOD, SmokingRackConfig.ID, FUtility.CONSTS.SUB_BUILD_CATEGORY.Food.COOKING);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, AmmoniaGeneratorConfig.ID, Power.GENERATORS, MethaneGeneratorConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, MossBedConfig.ID, Utilities.OTHER_UTILITIES, ExteriorWallConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, MiniFridgeConfig.ID, Food.STORAGE, ExteriorWallConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, DNAInjectorConfig.ID, Food.RANCHING, EggIncubatorConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, CollarDispenserConfig.ID, Food.RANCHING, DNAInjectorConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, LaboratoryTileConfig.ID, Base.TILES, PlasticTileConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FURNITURE, WoodCarvingConfig.ID, Furniture.DISPALY, MarbleSculptureConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FURNITURE, SandBoxConfig.ID, Furniture.DISPALY, WoodCarvingConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FURNITURE, ChimeConfig.ID, Furniture.RECREATION, FlowerVaseConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FURNITURE, SmallAquariumConfig.ID, Furniture.DISPALY, FlowerVaseConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, MudStomperConfig.ID, Refining.MATERIALS);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, SmokingRackConfig.ID, Food.COOKING);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, SpinnerConfig.ID, Refining.MATERIALS, RockCrusherConfig.ID);
 
-				FUtility.BuildingUtil.AddToResearch(ChimeConfig.ID, FUtility.CONSTS.TECH.DECOR.INTERIOR_DECOR);
-				FUtility.BuildingUtil.AddToResearch(SandBoxConfig.ID, FUtility.CONSTS.TECH.DECOR.INTERIOR_DECOR);
-				FUtility.BuildingUtil.AddToResearch(SmokingRackConfig.ID, FUtility.CONSTS.TECH.FOOD.RANCHING);
+				BuildingUtil.AddToResearch(ChimeConfig.ID, TECH.DECOR.INTERIOR_DECOR);
+				BuildingUtil.AddToResearch(SandBoxConfig.ID, TECH.DECOR.INTERIOR_DECOR);
+				BuildingUtil.AddToResearch(SmokingRackConfig.ID, TECH.FOOD.RANCHING);
+				BuildingUtil.AddToResearch(SpinnerConfig.ID, TECH.SOLIDS.SMELTING);
+
 			}
 		}
 	}
