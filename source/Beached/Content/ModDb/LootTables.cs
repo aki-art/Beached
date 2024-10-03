@@ -4,9 +4,11 @@ namespace Beached.Content.ModDb
 {
 	public class LootTables : ResourceSet<LootTable>
 	{
+		public const string ID = "Beached_LootTables";
+
 		public LootTable<MaterialReward> slagmiteShellDrops;
 
-		public LootTables()
+		public LootTables(ResourceSet parent) : base(ID, parent)
 		{
 			ConfigureSlagmiteShell();
 			// TODO: Moonlet added stuff

@@ -43,7 +43,7 @@ namespace Beached.Patches.DatabasePatches
 					resolveStringCallback = (str, data) => str
 				};
 
-				BDb.OnDbInit();
+				BDb.OnDbInit(__instance);
 				BTags.OnDbInit();
 			}
 

@@ -17,11 +17,11 @@ namespace Beached.Content.ModDb
 		public static BGeyserTraits geyserTraits;
 		public static LootTables lootTables;
 
-		public static void OnDbInit()
+		public static void OnDbInit(Db db)
 		{
 			plushies = new BPlushies();
 			geyserTraits = new BGeyserTraits();
-			lootTables = new LootTables();
+			lootTables = new LootTables(db.Root);
 
 			BGeyserTraits.Register();
 
