@@ -216,6 +216,29 @@ namespace Beached.Content.ModDb
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_DRYNOODLES.DESC, 40f)
+				.Input(ColdWheatConfig.ID, 4f)
+				.Input(RawEggConfig.ID, 1f)
+				.Output(DryNoodlesConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SEAFOODPASTA.DESC, 40f)
+				.Input(FishMeatConfig.ID, 1f)
+				.Input(RawKelpConfig.ID, 1f)
+				.Input(DryNoodlesConfig.ID, 1f)
+				.Output(SeafoodPastaConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPAGHETTI.DESC, 40f)
+				.Input(SpiceNutConfig.ID, 4f)
+				// maybe deep grass? or some other herb
+				.Input(DryNoodlesConfig.ID, 1f)
+				.Output(SpaghettiConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_ASPICLICE.DESC, 40f)
 				.Input(JellyConfig.ID, 1f)
 				.Input(BasicPlantFoodConfig.ID, 2f)

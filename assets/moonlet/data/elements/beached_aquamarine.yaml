@@ -33,3 +33,8 @@ elements:
     - Ore
     buildMenuSort: 2
     state: Solid
+    audio:
+      copyElement: CrushedIce
+      miningSound: PhosphateNodule # gritty
+      floorEventAudioCategory: tileglass # tink tink
+      # solidAmbienceType: Beached_CrystalAmbience

@@ -5,6 +5,7 @@ elements:
       uiColor: &uiColor DDDDDD
       specificHeatCapacity: 1.01
       thermalConductivity: 0.024
+      eyeIrritationStrength: 0
       solidSurfaceAreaMultiplier: 25
       liquidSurfaceAreaMultiplier: 1
       gasSurfaceAreaMultiplier: 1

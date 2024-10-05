@@ -7,6 +7,7 @@ elements:
       speed: 100 
       minHorizontalFlow: 0.01
       minVerticalFlow: 0.01
+      eyeIrritationStrength: 0
       specificHeatCapacity: 3.4
       thermalConductivity: 0.609
       solidSurfaceAreaMultiplier: 1

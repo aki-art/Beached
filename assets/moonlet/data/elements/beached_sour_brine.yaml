@@ -54,3 +54,5 @@ elements:
     - BuildableAny
     buildMenuSort: 5
     state: Solid
+    audio:
+      copyElement: Ice

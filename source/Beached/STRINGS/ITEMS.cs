@@ -121,6 +121,12 @@ namespace Beached
 				}
 
 
+				public class BEACHED_CRACKLINGS
+				{
+					public static LocString NAME = Link("Cracklings", CracklingsConfig.ID);
+					public static LocString DESC = "Extremely crunchy.";
+				}
+
 				public class BEACHED_NUTTYDELIGHT
 				{
 					public static LocString NAME = "Nutty Delight";
@@ -174,12 +180,30 @@ namespace Beached
 					public static LocString NAME = Link("Dry Aged Meat", DryAgedMeatConfig.ID);
 					public static LocString DESC = "Soft fatty meat of an unfortunate creature.";
 				}
+
+				public class BEACHED_DRYNOODLES
+				{
+					public static LocString NAME = Link("Dry Noodles", DryNoodlesConfig.ID);
+					public static LocString DESC = ".. they don't taste very good. Unfortunately there is no flavor packet included.";
+				}
+
 				public class BEACHED_SALTRUBBEDJELLY
 				{
 					public static LocString NAME = Link("Salt Rubbed Jelly", SaltRubbedJellyConfig.ID);
 					public static LocString DESC = "A bit of salt greatly elevates raw jelly.";
 				}
 
+				public class BEACHED_SEAFOODPASTA
+				{
+					public static LocString NAME = Link("Seafood Pasta", SeafoodPastaConfig.ID);
+					public static LocString DESC = "TODO.";
+				}
+
+				public class BEACHED_SPAGHETTI
+				{
+					public static LocString NAME = Link("Spaghetti", SpaghettiConfig.ID);
+					public static LocString DESC = "The favorite meal of many duplicants and programmers alike.";
+				}
 
 				public class BEACHED_SMOKEDMEAT
 				{

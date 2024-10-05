@@ -32,3 +32,5 @@ elements:
       - PreciousRock
     buildMenuSort: 2
     state: Solid
+    audio:
+      copyElement: PhosphateNodules

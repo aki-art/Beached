@@ -3,6 +3,7 @@ elements:
       name: Ammonia
       color: &color 4d3b9b
       rotAtmosphereQuality: Sterilizing
+      eyeIrritationStrength: 1
       specificHeatCapacity: &shc 3.7
       thermalConductivity: 0.026
       solidSurfaceAreaMultiplier: 25
@@ -70,3 +71,5 @@ elements:
       materialCategory: Liquifiable
       buildMenuSort: 1
       state: Solid
+      audio:
+        copyElement: Ice

@@ -23,3 +23,5 @@ elements:
     - Unstable
     isDisabled: false
     state: Solid
+    audio:
+      copyElement: CrushedRock

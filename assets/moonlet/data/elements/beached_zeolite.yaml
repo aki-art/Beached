@@ -32,3 +32,5 @@ elements:
     - BuildableRaw
     buildMenuSort: 2
     state: Solid
+    audio: 
+      copyElement: OxyRock

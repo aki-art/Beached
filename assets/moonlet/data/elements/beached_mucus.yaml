@@ -5,6 +5,7 @@ elements:
       uiColor: &uiColor 455242
       maxMass: 100
       rotAtmosphereQuality: Contaminating
+      eyeIrritationStrength: 0
       liquidCompression: 1.01
       speed: 1
       minHorizontalFlow: 10
@@ -68,3 +69,5 @@ elements:
       - BuildableAny
       buildMenuSort: 5
       state: Solid
+      audio:
+        copyElement: DirtyIce

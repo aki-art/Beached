@@ -334,16 +334,6 @@ namespace Beached.Content
 			}
 		}
 
-		// Eye irritation
-		public static void SetExposureValues(Dictionary<SimHashes, float> customExposureRates)
-		{
-			customExposureRates[saltyOxygen] = CONSTS.EXPOSURE_EFFECT.COMFORTABLE;
-			customExposureRates[nitrogen] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
-			customExposureRates[mucus] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
-			customExposureRates[murkyBrine] = CONSTS.EXPOSURE_EFFECT.NEUTRAL;
-			customExposureRates[ammonia] = CONSTS.EXPOSURE_EFFECT.VERY_IRRITATING;
-			customExposureRates[sulfurousWater] = CONSTS.EXPOSURE_EFFECT.OH_HECK_IT_BURNS;
-		}
 
 		[Subscribe(GlobalEvent.WORLD_RELOADED)]
 		public static void OnWorldReload(bool isBeachedWorld)
@@ -376,7 +366,7 @@ namespace Beached.Content
 			}
 
 			// todo: settings specific
-			woodLog.highTempTransition = ElementLoader.FindElementByHash(ash);
+			//woodLog.highTempTransition = ElementLoader.FindElementByHash(ash);
 
 			var substanceTable = Assets.instance.substanceTable;
 			substanceTable.GetSubstance(SimHashes.Water).colour = ModAssets.Colors.water;
@@ -397,58 +387,11 @@ namespace Beached.Content
 			{
 				foreach (var def in ambianceManager.quadrantDefs)
 				{
-					Log.Debug($"- {def.name} {def.solidSounds.Length}");
-					Elements.crystalAmbiance = (SolidAmbienceType)def.solidSounds.Length;
+					crystalAmbiance = (SolidAmbienceType)def.solidSounds.Length;
 					var reference = def.solidSounds[(int)SolidAmbienceType.Ice];
 					def.solidSounds = def.solidSounds.AddToArray(reference);
 				}
 			}
-
-			var configs = new List<ElementsAudio.ElementAudioConfig>();
-
-			var ice = elementsAudio.GetConfigForElement(SimHashes.Ice);
-			var rawMetal = elementsAudio.GetConfigForElement(SimHashes.IronOre);
-			var refinedMetal = elementsAudio.GetConfigForElement(SimHashes.Iron);
-			var phosphate = elementsAudio.GetConfigForElement(SimHashes.PhosphateNodules);
-			var clay = elementsAudio.GetConfigForElement(SimHashes.Clay);
-			var rawRock = elementsAudio.GetConfigForElement(SimHashes.SandStone);
-
-			configs.Add(ElementUtil.GetCrystalAudioConfig(amber));
-			configs.Add(ElementUtil.CopyElementAudioConfig(ice, ammoniaFrozen));
-			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Snow, permaFrost));
-			configs.Add(ElementUtil.GetCrystalAudioConfig(aquamarine));
-			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Sand, ash));
-			configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, basalt));
-			configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, beryllium));
-			configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, bismuth));
-			configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, bismuthOre));
-			configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, calcium));
-			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.CrushedRock, gravel));
-			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.OxyRock, zeolite));
-			configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, iridium));
-			//configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.Algae, moss));
-			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.DirtyIce, mucusFrozen));
-			configs.Add(ElementUtil.CopyElementAudioConfig(phosphate, pearl));
-			configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, zinc));
-			configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, zincOre));
-			configs.Add(ElementUtil.CopyElementAudioConfig(refinedMetal, zirconium));
-			configs.Add(ElementUtil.CopyElementAudioConfig(rawMetal, zirconiumOre));
-			configs.Add(ElementUtil.CopyElementAudioConfig(rawRock, siltStone));
-			configs.Add(ElementUtil.CopyElementAudioConfig(SimHashes.DirtyWater, sulfurousWater));
-
-			configs.Add(new ElementsAudio.ElementAudioConfig()
-			{
-				elementID = sulfurousWater,
-				ambienceType = AmbienceType.None,
-				solidAmbienceType = SolidAmbienceType.None,
-				miningSound = null,
-				miningBreakSound = null,
-				oreBumpSound = null,
-				floorEventAudioCategory = null,
-				creatureChewSound = null
-			});
-
-			elementsAudio.elementAudioConfigs = elementsAudio.elementAudioConfigs.AddRangeToArray(configs.ToArray());
 		}
 	}
 }

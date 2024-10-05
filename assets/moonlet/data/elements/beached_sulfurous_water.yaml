@@ -33,6 +33,7 @@ elements:
       name: Acid Ice
       color: *color
       specificHeatCapacity: 3.05
+      eyeIrritationStrength: 3
       thermalConductivity: 1
       solidSurfaceAreaMultiplier: 1
       liquidSurfaceAreaMultiplier: 1
@@ -55,3 +56,5 @@ elements:
       - BuildableAny
       buildMenuSort: 5
       state: Solid
+      audio:
+        copyElement: Ice

@@ -140,7 +140,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			{
 				kbac = master.GetComponent<KBatchedAnimController>();
 				shellGrowth = BAmounts.ShellGrowth.Lookup(gameObject);
-				shellGrowth.value = 0;
+				shellGrowth.value = shellGrowth.GetMax();
 				symbolOverrideController = master.GetComponent<SymbolOverrideController>();
 
 				growingGrowthModifier = new AttributeModifier(shellGrowth.amount.deltaAttribute.Id, def.defaultGrowthRate, STRINGS.CREATURES.MODIFIERS.SHELLGROWTH.NAME);

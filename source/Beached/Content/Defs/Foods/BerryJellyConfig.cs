@@ -24,7 +24,7 @@ namespace Beached.Content.Defs.Foods
 				ID,
 				"beached_berry_jelly_kanim",
 				0.8f,
-				0.8f,
+				0.5f,
 				foodInfo);
 
 			return prefab;

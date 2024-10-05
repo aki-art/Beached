@@ -10,7 +10,8 @@ namespace Beached.Patches
 		{
 			public static void Postfix(MinionVitalsPanel __instance)
 			{
-				__instance.AddAmountLine(BAmounts.Wet);
+				//__instance.AddAmountLine(BAmounts.Wet);
+				__instance.AddAmountLine(BAmounts.ShellGrowth);
 			}
 		}
 	}

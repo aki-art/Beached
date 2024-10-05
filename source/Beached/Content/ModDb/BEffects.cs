@@ -28,6 +28,12 @@
 			KARACOO_HUG = "Beached_KaracooHug",
 			UNSAVORY_MEAL = "Beached_Unsavory_Meal";
 
+		public class VANILLA
+		{
+			public const string
+				SEAFOOD_RADIATION_RESISTANCE = "SeafoodRadiationResistance";
+		}
+
 		public static void Register(ModifierSet set)
 		{
 			var stressDelta = Db.Get().Amounts.Stress.deltaAttribute.Id;

@@ -13,6 +13,17 @@ namespace Beached
 				ADULT = 0;
 		}
 
+		// referencing the classes static will load some stuff early, this is safer
+		public static class COOKING_STATIONS
+		{
+			public const string
+				MICROBE_MUSHER = "MicrobeMusher",
+				DEEP_FRIER = "Deepfryer",
+				GRILL = "CookingStation",
+				GAS_RANGE = "GourmetCookingStation",
+				DEHYDRATOR = "FoodDehydrator";
+		}
+
 		public static class DUPLICANTS
 		{
 			public static class LIFEGOALS
@@ -79,15 +90,6 @@ namespace Beached
 			public const float REACTIVE = 0.33f;
 			public const float VERY_REACTIVE = 0.5f;
 			public const float INSTANTLY_MELT = 1f;
-		}
-		public static class EXPOSURE_EFFECT
-		{
-			public const float CLEANSING = -1f;
-			public const float COMFORTABLE = -0.25f;
-			public const float NEUTRAL = 0f;
-			public const float MILDLY_IRRITATING = 0.5f;
-			public const float VERY_IRRITATING = 1f;
-			public const float OH_HECK_IT_BURNS = 3f;
 		}
 
 		/// <see cref="Patches.MinionConfigPatch.MinionConfig_CreatePrefab_Patch />

@@ -2,6 +2,7 @@ elements:
     - elementId: Beached_SaltyOxygen
       name: Salty Oxygen
       color: 0.804, 0.667, 0.667, 1.4 # stronger alpha so it's a little more visible
+      eyeIrritationStrength: -0.25
       uiColor: d1a1a1
       descriptionText: "todo"
       gasTextureType: Safe
