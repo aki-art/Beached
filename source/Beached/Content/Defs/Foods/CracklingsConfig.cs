@@ -24,7 +24,7 @@ namespace Beached.Content.Defs.Foods
 				ID,
 				"beached_cracklings_kanim",
 				0.7f,
-				0.5f,
+				0.4f,
 				foodInfo);
 
 			return prefab;

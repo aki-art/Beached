@@ -1,6 +1,8 @@
 ﻿using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities.AI;
+using Beached.Integration;
+using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
@@ -54,8 +56,8 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 
 		public static Diet.Info[] SlagDiet()
 		{
-			return
-			[
+			var result = new List<Diet.Info>
+			{
 				new(
 					[Elements.slag.CreateTag()],
 					SimHashes.Granite.CreateTag(),
@@ -66,7 +68,19 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 					SimHashes.Granite.CreateTag(),
 					MiteTuning.BASE.CALORIES_PER_KG_OF_ORE,
 					CREATURES.CONVERSION_EFFICIENCY.GOOD_1)
-			];
+			};
+
+			if (Mod.integrations.IsModPresent(Integrations.CHEMICAL_PROCESSING))
+			{
+				result.Add(
+					new(
+						[Elements.ChemicalProcessing.solidSlag.CreateTag()],
+						SimHashes.Granite.CreateTag(),
+						MiteTuning.BASE.CALORIES_PER_KG_OF_ORE,
+						CREATURES.CONVERSION_EFFICIENCY.BAD_1));
+			}
+
+			return result.ToArray();
 		}
 
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
