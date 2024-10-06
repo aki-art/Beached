@@ -86,27 +86,12 @@ namespace Beached.Utils
 
 			var recipeID = facadeID.IsNullOrWhiteSpace() ? ComplexRecipeManager.MakeRecipeID(fabricator, i, o) : ComplexRecipeManager.MakeRecipeID(fabricator, i, o, facadeID);
 
-			recipeID = $"Beached_{recipeID}";
+			//recipeID = $"Beached_{recipeID}"; // this breaks codex recipe listings :(
+
+			recipeID = $"{recipeID}_Beached";
 
 			var obsoleteId = ComplexRecipeManager.MakeObsoleteRecipeID(fabricator, inputs[0].material);
 			ComplexRecipeManager.Get().AddObsoleteIDMapping(obsoleteId, recipeID);
-
-			if (description == null)
-			{
-				var prefab = Assets.TryGetPrefab(o[0].material);
-				if (prefab != null && prefab.TryGetComponent(out InfoDescription infoDescription))
-				{
-					description = infoDescription.description;
-				}
-				else
-				{
-					var element = ElementLoader.FindElementByTag(o[0].material);
-					if (element != null)
-					{
-						description = element.FullDescription(true);
-					}
-				}
-			}
 
 			if (description == null)
 			{

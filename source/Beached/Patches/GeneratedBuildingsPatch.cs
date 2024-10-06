@@ -26,6 +26,8 @@ namespace Beached.Patches
 					]);
 
 				TUNING.BUILDINGS.PLANORDER.Add(planInfo);
+
+				Recipes.AddRecipes();
 			}
 		}
 	}

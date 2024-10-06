@@ -24,7 +24,6 @@ namespace Beached.Patches
 			[HarmonyPriority(Priority.Last)]
 			public static void LatePostfix()
 			{
-				BDb.AddRecipes();
 				BDb.SetMeatTags();
 
 				DNAInjector.InitializeOptions();
