@@ -225,6 +225,7 @@ namespace Beached.Content
 			{ permaFrost, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 			{ rot, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 			{ SimHashes.SandStone, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
+			{ SimHashes.Sand, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 			{ SimHashes.Snow, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 			{ sourBrineIce, CONSTS.CORROSION_VULNERABILITY.VERY_REACTIVE },
 		};
@@ -300,8 +301,6 @@ namespace Beached.Content
 
 					else if (element.IsLiquid)
 						conduction = 0.5f;
-
-					acidVulnerabilities[element.id] = conduction;
 				}
 
 				SetConduction(element.id, conduction);
@@ -314,13 +313,9 @@ namespace Beached.Content
 			{
 				"Platinum",
 				"Silver",
-
-				// Chemical Processing
-				"SolidPlatinum",
-				"SolidSilver",
-
-				// Rocketry Expanded
-				"NeutroniumAlloy"
+				ChemicalProcessing.solidSilver.ToString(),
+				RocketryExpanded.unobtaniumAlloy.ToString(),
+				RocketryExpanded.spaceStationForceField.ToString(),
 			};
 
 			foreach (var element in ElementLoader.elements)

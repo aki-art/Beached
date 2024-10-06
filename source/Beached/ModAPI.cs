@@ -291,7 +291,7 @@ namespace Beached
 		/// <summary>
 		/// Set how much this element is affected by Sulfuric Acid, 0-1
 		/// Note: explosions happen to elements with Metal tag that have > 0 vulnerability.
-		/// The default is 0.
+		/// The default is 0.05 (very slowly chewed away).
 		/// </summary>
 		/// <param name="id"></param>
 		/// <param name="value">

@@ -130,6 +130,7 @@ namespace Beached.Content.Scripts
 		{
 			var cellBelow = Grid.CellBelow(cell);
 			var element = Grid.Element[cellBelow];
+			var isSolid = element.IsSolid;
 
 			if (element.HasTag(GameTags.Metal))
 			{
@@ -139,7 +140,8 @@ namespace Beached.Content.Scripts
 				var position = Grid.CellToPos(cell);
 				var hydrogenAmount = acidMass * ACID_LOSS * 0.1f;
 
-				SimMessages.ReplaceElement(cellBelow, SimHashes.Hydrogen, CellEventLogger.Instance.DebugTool, hydrogenAmount, MiscUtil.CelsiusToKelvin(500), byte.MaxValue, 0);
+				var temperature = Mathf.Min(Grid.Temperature[cellBelow], 773.15f);
+				SimMessages.ReplaceElement(cellBelow, SimHashes.Hydrogen, CellEventLogger.Instance.DebugTool, hydrogenAmount, temperature, byte.MaxValue, 0);
 
 				for (var i = 0; i < shrapnelCount; i++)
 				{
@@ -166,12 +168,16 @@ namespace Beached.Content.Scripts
 				// TODO: sound fx
 			}
 
-			var acidVulnerability = element.AcidVulnerability();
-			if (acidVulnerability > 0)
+			if (isSolid)
 			{
-				WorldDamage.Instance.ApplyDamage(cellBelow, acidVulnerability, -1);
-				Log.Debug($"applying damange:{cellBelow} {element.id} {acidVulnerability}");
-				Game.Instance.SpawnFX(SpawnFXHashes.BleachStoneEmissionBubbles, cellBelow, 0);
+				var acidVulnerability = element.AcidVulnerability();
+				Log.Debug($"{element.id} {acidVulnerability}");
+				if (acidVulnerability > 0)
+				{
+					WorldDamage.Instance.ApplyDamage(cellBelow, acidVulnerability, -1);
+					Log.Debug($"applying damange:{cellBelow} {element.id} {acidVulnerability}");
+					Game.Instance.SpawnFX(SpawnFXHashes.BleachStoneEmissionBubbles, cellBelow, 0);
+				}
 			}
 		}
 
