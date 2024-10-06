@@ -1,4 +1,5 @@
 ﻿using Beached.Content.ModDb;
+using Beached.Integration;
 using Klei.AI;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Beached.Content.Scripts.Entities
 		[MyCmpGet] private Health health;
 		[MyCmpGet] private KBatchedAnimController kbac;
 
-		[SerializeField] public float baseAcidDamage;
+		[SerializeField] public float acidDamageOnTick;
 
 		private int acidIdx;
 		public bool isHurtByAcid;
@@ -21,17 +22,28 @@ namespace Beached.Content.Scripts.Entities
 		private float flashElapsedTime = 0f;
 		private Gradient flashGradient;
 
+		public static readonly float explosiveDamageMultiplier = 10f;
+		public static readonly float damageBase = 5f;
+
 		private static readonly Dictionary<string, float> acidVulnerabilities = new()
 		{
-			{ HatchMetalConfig.ID.ToString(), CONSTS.ACID_VULNERABILITY.EXTREME },
-			{ DreckoPlasticConfig.ID, CONSTS.ACID_VULNERABILITY.IMMUNE },
-			{ "RollerSnakeSteel", CONSTS.ACID_VULNERABILITY.EXTREME },
-			{ "RollerSnake", CONSTS.ACID_VULNERABILITY.EXTREME },
+			// Immunity
+			{ DreckoPlasticConfig.ID, CONSTS.ACID_VULNERABILITY.IMMUNE }
 		};
 
-		private static HashSet<string> metallicCritters = [
-			"RollerSnakeSteel",
-			"RollerSnake",
+		// mods: just add BTags.sparksOnAcid to your prefab
+		private static readonly HashSet<string> metallicCritters = [
+			Integrations.IDS.RollerSnakes.ROLLERSNAKE,
+			Integrations.IDS.RollerSnakes.ROLLERSNAKEBABY,
+			Integrations.IDS.RollerSnakes.ROLLERSNAKESTEEL,
+			Integrations.IDS.RollerSnakes.ROLLERSNAKEBABY,
+			HatchMetalConfig.ID,
+			BabyHatchMetalConfig.ID,
+			SweepBotConfig.ID,
+			MorbRoverConfig.ID,
+			ScoutRoverConfig.ID
+			// TODO: angular fish
+			// TODO: stimbo
 		];
 
 		public static void OnAddPrefab(KPrefabID prefab)
@@ -45,11 +57,15 @@ namespace Beached.Content.Scripts.Entities
 
 				if (vulnerability > 0)
 				{
-					var acidVulnerableCreature = prefab.gameObject.AddComponent<AcidVulnerableCreature>();
-					acidVulnerableCreature.baseAcidDamage = vulnerability;
-
 					if (metallicCritters.Contains(tag))
 						prefab.AddTag(BTags.sparksOnAcid);
+
+					var damage = vulnerability * damageBase;
+					if (prefab.HasTag(BTags.sparksOnAcid))
+						damage *= explosiveDamageMultiplier;
+
+					var acidVulnerableCreature = prefab.gameObject.AddComponent<AcidVulnerableCreature>();
+					acidVulnerableCreature.acidDamageOnTick = damage;
 
 					if (prefab.TryGetComponent(out Modifiers modifiers)
 						&& prefab.TryGetComponent(out Attributes attributes))
@@ -138,9 +154,8 @@ namespace Beached.Content.Scripts.Entities
                  return;
              }*/
 
-			isHurtByAcid = baseAcidDamage > 0;
+			isHurtByAcid = acidDamageOnTick > 0;
 			sparksOnContact = gameObject.HasTag(BTags.sparksOnAcid);
-
 
 			if (TryGetComponent(out Attributes attributes) && BAttributes.Critters.acidVulnerability != null)
 			{
@@ -157,14 +172,15 @@ namespace Beached.Content.Scripts.Entities
 			if (!isHurtByAcid)
 				return;
 
-			var pos = Grid.PosToCell(transform.position);
-			if (Grid.ElementIdx[pos] == acidIdx)
+			var cell = Grid.PosToCell(transform.position);
+			if (Grid.ElementIdx[cell] == acidIdx)
 			{
 				var beforeAnim = kbac.CurrentAnim.name;
 				var beforePlaymode = kbac.PlayMode;
 
 				StartCoroutine(FlashGreen());
-				health.Damage(baseAcidDamage);
+
+				health.Damage(acidDamageOnTick);
 
 				kbac.Play("hit");
 
@@ -172,9 +188,15 @@ namespace Beached.Content.Scripts.Entities
 				{
 					kbac.Queue(beforeAnim, beforePlaymode, 1f, 0f);
 				}
+
+				if (sparksOnContact)
+				{
+					Game.Instance.SpawnFX(SpawnFXHashes.MeteorImpactDust, cell, 0);
+					FUtility.Utils.YeetRandomly(gameObject, true, 1, 2, false);
+				}
+
 				// TODO: sizzle
 				// todo: acid resistance
-				// TODO: explosions
 			}
 		}
 	}

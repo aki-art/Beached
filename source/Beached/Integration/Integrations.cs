@@ -13,6 +13,17 @@ namespace Beached.Integration
 			FAST_TRACK = "PeterHan.FastTrack",
 			ROCKETRY_EXPANDED = "Rocketry Expanded";
 
+		public class IDS
+		{
+			public class RollerSnakes
+			{
+				public const string
+					ROLLERSNAKESTEEL = "RollerSnakeSteel",
+					ROLLERSNAKESTEELBABY = "RollerSnakeSteelBaby",
+					ROLLERSNAKE = "RollerSnake",
+					ROLLERSNAKEBABY = "RollerSnakeBaby";
+			}
+		}
 		private HashSet<string> modsPresent;
 
 		public bool IsModPresent(string modId)
