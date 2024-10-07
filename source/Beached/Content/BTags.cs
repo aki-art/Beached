@@ -29,6 +29,8 @@ namespace Beached.Content
 			// should this critter induce small explosions when in contact with acid.
 			// (Metallic scales or metals at positions above copper in the reactivity series.)
 			sparksOnAcid = TagManager.Create("Beached_SparksOnAcid"),
+			// plants and critters with this trait will ignore acid and treat it as a generic liquid
+			acidImmune = TagManager.Create("Beached_AcidImmune"),
 
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),

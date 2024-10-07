@@ -28,7 +28,9 @@ namespace Beached.Content.Scripts.Entities
 		private static readonly Dictionary<string, float> acidVulnerabilities = new()
 		{
 			// Immunity
-			{ DreckoPlasticConfig.ID, CONSTS.ACID_VULNERABILITY.IMMUNE }
+			{ DreckoPlasticConfig.ID, CONSTS.ACID_VULNERABILITY.IMMUNE },
+			{ Integrations.IDS.VeryRealONIContentTheWikiSaysSo.HATCHGOLD, CONSTS.ACID_VULNERABILITY.IMMUNE },
+			{ Integrations.IDS.VeryRealONIContentTheWikiSaysSo.HATCHGOLDBABY, CONSTS.ACID_VULNERABILITY.IMMUNE }
 		};
 
 		// mods: just add BTags.sparksOnAcid to your prefab
@@ -41,7 +43,7 @@ namespace Beached.Content.Scripts.Entities
 			BabyHatchMetalConfig.ID,
 			SweepBotConfig.ID,
 			MorbRoverConfig.ID,
-			ScoutRoverConfig.ID
+			ScoutRoverConfig.ID,
 			// TODO: angular fish
 			// TODO: stimbo
 		];
