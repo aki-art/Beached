@@ -23,7 +23,15 @@ namespace Beached.Integration
 					ROLLERSNAKE = "RollerSnake",
 					ROLLERSNAKEBABY = "RollerSnakeBaby";
 			}
+
+			public class VeryRealONIContentTheWikiSaysSo
+			{
+				public const string
+					HATCHGOLD = "HatchGold",
+					HATCHGOLDBABY = "HatchGoldBaby";
+			}
 		}
+
 		private HashSet<string> modsPresent;
 
 		public bool IsModPresent(string modId)

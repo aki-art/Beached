@@ -7,6 +7,8 @@ namespace Beached.Content.Defs.Flora
 	public class BambooConfig : IEntityConfig
 	{
 		public const string ID = "Beached_Bamboo";
+		public const string SEED_ID = "Beached_BambooSeed";
+		public const string PREVIEW_ID = "Beached_Bamboo_preview";
 
 		public GameObject CreatePrefab()
 		{
@@ -21,6 +23,17 @@ namespace Beached.Content.Defs.Flora
 				1,
 				1,
 				DECOR.BONUS.TIER1);
+
+			var seedPrefab = EntityTemplates.CreateAndRegisterSeedForPlant(
+				prefab,
+				SeedProducer.ProductionType.DigOnly,
+				SEED_ID,
+				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_BAMBOO.NAME,
+				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_BAMBOO.DESC,
+				Assets.GetAnim("beached_seed_kelp_kanim"),
+				additionalTags: [GameTags.CropSeed]);
+
+			EntityTemplates.CreateAndRegisterPreviewForPlant(seedPrefab, PREVIEW_ID, Assets.GetAnim("beached_bamboo_kanim"), "place", 1, 1);
 
 			prefab.AddOrGet<SimTemperatureTransfer>();
 			prefab.AddOrGet<OccupyArea>().objectLayers =
@@ -39,8 +52,6 @@ namespace Beached.Content.Defs.Flora
 			*/
 			prefab.AddOrGet<Harvestable>();
 			prefab.AddOrGet<HarvestDesignatable>();
-			prefab.AddOrGet<SeedProducer>().Configure("BasicForagePlant", SeedProducer.ProductionType.DigOnly, 1);
-
 			//prefab.AddOrGet<Updatable>();
 
 			//prefab.AddOrGet<StackablePlant>().validFoundationTag = ID;

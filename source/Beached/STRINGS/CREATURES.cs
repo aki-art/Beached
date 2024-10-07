@@ -5,6 +5,7 @@ using Beached.Content.Defs.Entities.Critters.Karacoos;
 using Beached.Content.Defs.Entities.Critters.Mites;
 using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
+using Beached.Content.Defs.Entities.Critters.Squirrels;
 using Beached.Content.Defs.Flora;
 using FUtility.FLocalization;
 
@@ -76,14 +77,21 @@ namespace Beached
 					public static LocString NAME = "Moving";
 				}
 
-				public class LIMPET_GROWTH_RATE
+				public class BEACHED_LIMPET_GROWTH_RATE
 				{
 					public static LocString NAME = "Growing Limpets";
 				}
 
-				public class SHELLGROWTH
+				public class BEACHED_SHELLGROWTH
 				{
 					public static LocString NAME = "Shell Growth";
+
+					public static LocString TOOLTIP = "...";
+				}
+
+				public class BEACHED_LIMPETGROWTH
+				{
+					public static LocString NAME = "Limpet Growth";
 
 					public static LocString TOOLTIP = "...";
 				}
@@ -275,6 +283,18 @@ namespace Beached
 						public static LocString DESC = "...";
 					}
 
+					public class BEACHED_KELP
+					{
+						public static LocString NAME = "Kelp Seed";
+						public static LocString DESC = "...";
+					}
+
+					public class BEACHED_BAMBOO
+					{
+						public static LocString NAME = "Bamboo Shoot";
+						public static LocString DESC = "...";
+					}
+
 					public class WATERCUPS
 					{
 						public static LocString NAME = "Watercups Seed";
@@ -351,13 +371,31 @@ namespace Beached
 					public static LocString EGG_NAME = Link("Slickshell Egg", SlickShellConfig.ID);
 				}
 
+				public class BEACHED_MERPIP
+				{
+					public static LocString NAME = Link("Mer-Pip", MerpipConfig.ID);
+					public static LocString DESC = "...";
+					public static LocString BABY_NAME = Link("Mer-Pipsqueak", MerpipConfig.ID);
+					public static LocString BABY_DESC = "...";
+					public static LocString EGG_NAME = Link("Mer-Pip Egg", MerpipConfig.ID);
+				}
+
 				public class BEACHED_SLAGMITE
 				{
 					public static LocString NAME = Link("Slagmite", SlagmiteConfig.ID);
 					public static LocString DESC = $"Slagmites eat metal rich waste procucts.\n\nTheir shells can be mined while the critter is alive, providing various metals. This does not hurt the critter, they even appeciate the lesser weight on their backs.";
 					public static LocString BABY_NAME = Link("Slagmitty", SlickShellConfig.ID);
 					public static LocString BABY_DESC = $"A cute little Slagmite.\n\nIn time it will mature into a fully grown Slagmite.";
-					public static LocString EGG_NAME = Link("Slagmitty Egg", SlickShellConfig.ID);
+					public static LocString EGG_NAME = Link("Slagmite Egg", SlickShellConfig.ID);
+				}
+
+				public class BEACHED_GLEAMITE
+				{
+					public static LocString NAME = Link("Gleamite", SlagmiteConfig.ID);
+					public static LocString DESC = $"Slagmites eat metal rich waste procucts.\n\nTheir shells can be mined while the critter is alive, providing various metals. This does not hurt the critter, they even appeciate the lesser weight on their backs.";
+					public static LocString BABY_NAME = Link("Gleamitty", SlagmiteConfig.ID);
+					public static LocString BABY_DESC = $"A cute little Gleamite.\n\nIn time it will mature into a fully grown Slagmite.";
+					public static LocString EGG_NAME = Link("Gleamite Egg", SlagmiteConfig.ID);
 				}
 
 				public class BEACHED_JELLYFISH

@@ -44,6 +44,8 @@ namespace Beached.Content.Defs.Entities.Critters
 		private AttackProperties attackProperties;
 		private WeaponBuilder weapon;
 		private bool baggable;
+		private Tag condoTag = CritterCondoConfig.ID;
+		private bool condoRequiresCavity = true;
 
 		public string GetName()
 		{
@@ -58,6 +60,7 @@ namespace Beached.Content.Defs.Entities.Critters
 				? Strings.Get($"STRINGS.CREATURES.SPECIES.{parentId.ToUpperInvariant()}.BABY_DESC")
 				: Strings.Get($"STRINGS.CREATURES.SPECIES.{id.ToUpperInvariant()}.DESC");
 		}
+
 
 		public class NAVIGATION
 		{
@@ -112,6 +115,13 @@ namespace Beached.Content.Defs.Entities.Critters
 			canDrown = false;
 			return this;
 		}
+		public CritterBuilder Condo(Tag tag, bool requiresCavity)
+		{
+			condoTag = tag;
+			condoRequiresCavity = requiresCavity;
+			return this;
+		}
+
 		public CritterBuilder Decor(int value, int range) => Decor(new EffectorValues(value, range));
 
 		public CritterBuilder Decor(EffectorValues decor)
@@ -220,6 +230,13 @@ namespace Beached.Content.Defs.Entities.Critters
 			return this;
 		}
 
+		public CritterBuilder Swimmer()
+		{
+			return Tag(GameTags.SwimmingCreature)
+				.CanNotDrown()
+				.Condo(UnderwaterCritterCondoConfig.ID, false);
+		}
+
 		public CritterBuilder Tags(HashSet<Tag> tags)
 		{
 			foreach (Tag tag in tags)
@@ -227,6 +244,7 @@ namespace Beached.Content.Defs.Entities.Critters
 
 			return this;
 		}
+
 		public CritterBuilder Tag(Tag tag)
 		{
 			tags.Add(tag);
@@ -363,6 +381,13 @@ namespace Beached.Content.Defs.Entities.Critters
 				};
 			}
 
+			if (tags.Contains(GameTags.SwimmingCreature))
+			{
+				var fallMonitor = prefab.AddOrGetDef<CreatureFallMonitor.Def>();
+				fallMonitor.canSwim = true;
+				fallMonitor.checkHead = false;
+			}
+
 			babyCritterBuilder?.Build(prefab);
 
 			weapon?.Apply();
@@ -373,6 +398,13 @@ namespace Beached.Content.Defs.Entities.Critters
 			if (isBaby)
 			{
 				EntityTemplates.ExtendEntityToBeingABaby(prefab, parentId, dropOnGrowUp, forceAdultNavType, growUpOnCycle);
+			}
+
+			if (condoTag != null && condoTag.IsValid)
+			{
+				var condoMonitor = prefab.AddOrGetDef<CritterCondoInteractMontior.Def>();
+				condoMonitor.requireCavity = condoRequiresCavity;
+				condoMonitor.condoPrefabTag = condoTag;
 			}
 
 			return prefab;

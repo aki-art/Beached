@@ -14,7 +14,7 @@ namespace Beached.Content.ModDb
 		public static void Register(Database.Amounts __instance)
 		{
 			Moisture = __instance.CreateAmount(
-				"Beach_Moisture",
+				"Beached_Moisture",
 				0f,
 				100f,
 				false,
@@ -29,7 +29,7 @@ namespace Beached.Content.ModDb
 			Moisture.SetDisplayer(new StandardAmountDisplayer(GameUtil.UnitClass.Percent, GameUtil.TimeSlice.PerCycle, null));
 
 			LimpetGrowth = __instance.CreateAmount(
-				"Beach_LimpetGrowth",
+				"Beached_LimpetGrowth",
 				0f,
 				100f,
 				true,

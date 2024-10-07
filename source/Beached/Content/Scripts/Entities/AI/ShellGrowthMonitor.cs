@@ -143,8 +143,8 @@ namespace Beached.Content.Scripts.Entities.AI
 				shellGrowth.value = shellGrowth.GetMax();
 				symbolOverrideController = master.GetComponent<SymbolOverrideController>();
 
-				growingGrowthModifier = new AttributeModifier(shellGrowth.amount.deltaAttribute.Id, def.defaultGrowthRate, STRINGS.CREATURES.MODIFIERS.SHELLGROWTH.NAME);
-				stuntedGrowthModifier = new AttributeModifier(shellGrowth.amount.deltaAttribute.Id, 0, STRINGS.CREATURES.MODIFIERS.SHELLGROWTH.NAME);
+				growingGrowthModifier = new AttributeModifier(shellGrowth.amount.deltaAttribute.Id, def.defaultGrowthRate, STRINGS.CREATURES.MODIFIERS.BEACHED_SHELLGROWTH.NAME);
+				stuntedGrowthModifier = new AttributeModifier(shellGrowth.amount.deltaAttribute.Id, 0, STRINGS.CREATURES.MODIFIERS.BEACHED_SHELLGROWTH.NAME);
 
 				ApplyOverrides();
 			}

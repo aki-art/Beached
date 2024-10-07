@@ -14,6 +14,7 @@
 			CAPPED_RECOVERY = "Beached_Capped_Recovery",
 			POFFMOUTH_RECOVERY = "Beached_PoffMouth_Recovery",
 			LIMPETHOST = "Beached_LimpetHost", // for critters, used for growing limpets
+			LIMPETHOST_RECOVERY = "Beached_LimpetHost_Recovery", // for critters, used for growing limpets
 			STEPPED_IN_MUCUS = "Beached_SteppedInMucus",
 			SUBMERGED_IN_MUCUS = "Beached_SubmergedInMucus",
 			WISHING_STAR = "Beached_WishingStar", // applied when they see shooting stars
@@ -142,11 +143,16 @@
 				.Modifier(Db.Get().Attributes.QualityOfLife.Id, 1)
 				.Add(set);
 
-			/*            new EffectBuilder(LIMPETHOST, 0, false)
-                            .Modifier(BAmounts.LimpetGrowth.maxAttribute.Id, 100f)
-                            .Modifier(BAmounts.LimpetGrowth.deltaAttribute.Id, 5f / Consts.CYCLE_LENGTH * 100f)
-                            .Modifier(Db.Get().Amounts.Calories.deltaAttribute.Id, -250000 / Consts.CYCLE_LENGTH)
-                            .Add(set);*/
+			new EffectBuilder(LIMPETHOST, 0, true)
+				.Modifier(BAmounts.LimpetGrowth.maxAttribute.Id, 100f)
+				.Modifier(BAmounts.LimpetGrowth.deltaAttribute.Id, (5f / CONSTS.CYCLE_LENGTH) * 100f)
+				.Modifier(Db.Get().Amounts.Calories.deltaAttribute.Id, -250_000 / CONSTS.CYCLE_LENGTH)
+				.Add(set);
+
+			new EffectBuilder(LIMPETHOST_RECOVERY, 160f, false)
+				.HideInUI()
+				.HideFloatingText()
+				.Add(set);
 		}
 	}
 }

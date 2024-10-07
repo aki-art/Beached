@@ -2,6 +2,7 @@
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
+using Beached.Content.Scripts.Entities;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -301,6 +302,33 @@ namespace Beached
 		{
 			value = Mathf.Clamp01(value);
 			Elements.acidVulnerabilities[id] = value;
+		}
+
+		/// <summary>
+		/// Can be called at prefab creation or at Db Init postfix
+		/// </summary>
+		/// <param name="prefab"></param>
+		/// <param name="levelCount"></param>
+		/// <param name="defaultGrowthRate"></param>
+		/// <param name="itemDroppedOnShear"></param>
+		/// <param name="massDropped"></param>
+		/// <param name="diseaseCount"></param>
+		/// <param name="diseaseIdx">Provide byte.MaxValue for none</param>
+		/// <param name="germPuffCooldown"></param>
+		/// <param name="targetSymbol"></param>
+		public static void AddLimpetHost(GameObject prefab, int levelCount, float defaultGrowthRate, Tag itemDroppedOnShear,
+			float massDropped, int diseaseCount, byte diseaseIdx, float germPuffCooldown, string targetSymbol, string limpetKanim)
+		{
+			var host = prefab.AddOrGetDef<LimpetHost.Def>();
+			host.maxLevel = levelCount;
+			host.defaultGrowthRate = defaultGrowthRate;
+			host.itemDroppedOnShear = itemDroppedOnShear;
+			host.massDropped = massDropped;
+			host.diseaseIdx = diseaseIdx;
+			host.diseaseCount = diseaseCount;
+			host.germPuffCooldown = germPuffCooldown;
+			host.targetSymbol = targetSymbol ?? "beached_limpetgrowth";
+			host.limpetKanim = limpetKanim ?? "beached_pincher_limpetgrowth_kanim";
 		}
 	}
 }

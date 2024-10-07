@@ -8,6 +8,8 @@ namespace Beached.Content.Defs.Flora
 	public class KelpConfig : IEntityConfig
 	{
 		public const string ID = "Beached_Kelp";
+		public const string SEED_ID = "Beached_KelpSeed";
+		public const string PREVIEW_ID = "Beached_Kelp_preview";
 
 		public GameObject CreatePrefab()
 		{
@@ -22,6 +24,17 @@ namespace Beached.Content.Defs.Flora
 				1,
 				1,
 				DECOR.BONUS.TIER1);
+
+			var seedPrefab = EntityTemplates.CreateAndRegisterSeedForPlant(
+				prefab,
+				SeedProducer.ProductionType.Harvest,
+				SEED_ID,
+				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_KELP.NAME,
+				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_KELP.DESC,
+				Assets.GetAnim("beached_seed_kelp_kanim"),
+				additionalTags: [GameTags.CropSeed]);
+
+			EntityTemplates.CreateAndRegisterPreviewForPlant(seedPrefab, PREVIEW_ID, Assets.GetAnim("beached_kelp_kanim"), "place", 1, 1);
 
 			prefab.AddOrGet<SimTemperatureTransfer>();
 			prefab.AddOrGet<OccupyArea>().objectLayers =
@@ -40,7 +53,6 @@ namespace Beached.Content.Defs.Flora
 			*/
 			prefab.AddOrGet<Harvestable>();
 			prefab.AddOrGet<HarvestDesignatable>();
-			prefab.AddOrGet<SeedProducer>().Configure("BasicForagePlant", SeedProducer.ProductionType.DigOnly, 1);
 
 			//prefab.AddOrGet<Updatable>();
 
