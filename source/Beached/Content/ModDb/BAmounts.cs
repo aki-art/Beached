@@ -7,7 +7,7 @@ namespace Beached.Content.ModDb
 		public static Amount Moisture;
 		public static Amount LimpetGrowth;
 		public static Amount Wet;
-		public static Amount ShellGrowth;
+		public static Amount ShellGrowth; // todo: ExtendEntityToWildCreature
 		public static Amount ShellIntegrity;
 
 		[DbEntry]
@@ -34,7 +34,7 @@ namespace Beached.Content.ModDb
 				100f,
 				true,
 				Units.Flat,
-				0.1675f,
+				0,
 				true,
 				"STRINGS.CREATURES",
 				"ui_icon_scale_growth");

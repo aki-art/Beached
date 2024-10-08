@@ -15,6 +15,15 @@ namespace Beached
 	{
 		public class CREATURES
 		{
+			public class ATTRIBUTES
+			{
+				public class BEACHED_LIMPETGROWTHDELTA
+				{
+					public static LocString NAME = "Limpets";
+					public static LocString DESC = "This critter is growing Limpets on it's back.";
+				}
+			}
+
 			public class STATUSITEMS
 			{
 				public class BEACHED_DESICCATION
@@ -62,6 +71,12 @@ namespace Beached
 				{
 					public static LocString NAME = "Smoking ({0})";
 					public static LocString TOOLTIP = "This item is getting smoked in this atmosphere. Change: {0}.";
+				}
+
+				public class BEACHED_LIMPETEDCRITTER
+				{
+					public static LocString NAME = "Limpets";
+					public static LocString TOOLTIP = "This critter is growing Limpets on it's back.";
 				}
 			}
 
@@ -205,7 +220,7 @@ namespace Beached
 						"Moisture can be replenished by submerging the critter in any liquid.";
 				}
 
-				public class LIMPETGROWTH
+				public class BEACHED_LIMPETGROWTH
 				{
 					public static LocString NAME = "Limpets";
 					public static LocString TOOLTIP = "This critter is growing Limpets on it's back.";

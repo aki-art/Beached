@@ -26,6 +26,7 @@ namespace Beached.Content.Scripts.Entities
 
 			infected
 				.DefaultState(infected.growing)
+				//.ToggleStatusItem(BStatusItems.limpetedCritter, smi => smi)
 				.Enter(OnInfected)
 				.Exit(OnCured)
 				.OnSignal(sheared, healthy);
@@ -113,6 +114,7 @@ namespace Beached.Content.Scripts.Entities
 			public int maxLevel;
 			public float defaultGrowthRate;
 			public Tag itemDroppedOnShear;
+			public float metabolismModifier = 0.25f;
 			public float massDropped;
 			public int diseaseCount;
 			public byte diseaseIdx;
@@ -128,7 +130,9 @@ namespace Beached.Content.Scripts.Entities
 			public SymbolOverrideController symbolOverrideController;
 			private readonly KAnim.Build.Symbol[] symbols;
 			public AttributeModifier growingLimpetsModifier;
+			public AttributeModifier caloriesModifier;
 			public AmountInstance limpetGrowth;
+			public AmountInstance calories;
 			private HashedString targetSymbolHash;
 			public bool isInfected;
 
@@ -160,12 +164,23 @@ namespace Beached.Content.Scripts.Entities
 			public void InitLimpets()
 			{
 				var amounts = smi.gameObject.GetAmounts();
-				limpetGrowth = amounts.Add(new AmountInstance(BAmounts.LimpetGrowth, master.gameObject));
+				if (limpetGrowth == null)
+					limpetGrowth = amounts.Add(new AmountInstance(BAmounts.LimpetGrowth, master.gameObject));
+
+				limpetGrowth.hide = false;
+
+				var attributes = smi.gameObject.GetAttributes();
+
+				if (attributes.Get(BAmounts.LimpetGrowth.Id) == null)
+					attributes.Add(BAmounts.LimpetGrowth.deltaAttribute);
+
 				growingLimpetsModifier = new AttributeModifier(
 					limpetGrowth.amount.deltaAttribute.Id,
 					def.defaultGrowthRate,
 					STRINGS.CREATURES.MODIFIERS.BEACHED_LIMPET_GROWTH_RATE.NAME);
-				limpetGrowth.deltaAttribute.Add(growingLimpetsModifier);
+
+				if (DetailsScreen.Instance != null)
+					DetailsScreen.Instance.Trigger((int)GameHashes.UIRefreshData);
 			}
 
 			public bool IsInfected() => currentLimpetLevel != -1;
@@ -183,10 +198,12 @@ namespace Beached.Content.Scripts.Entities
 
 			public void ClearLimpets()
 			{
-				smi.gameObject.GetAmounts().Remove(limpetGrowth);
+				smi.gameObject.GetAmounts().Get(BAmounts.LimpetGrowth).SetValue(0);
+				limpetGrowth.hide = true;
 				currentLimpetLevel = -1;
 				UpdateSymbolOverride();
-				limpetGrowth.deltaAttribute.Remove(growingLimpetsModifier);
+
+				DetailsScreen.Instance.Trigger((int)GameHashes.UIRefreshData);
 			}
 
 			public void PuffGerms(float dt)

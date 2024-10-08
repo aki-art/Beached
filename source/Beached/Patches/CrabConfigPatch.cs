@@ -1,6 +1,8 @@
-﻿using Beached.Content.ModDb.Germs;
+﻿using Beached.Content.ModDb;
+using Beached.Content.ModDb.Germs;
 using Beached.Content.Scripts.Entities;
 using HarmonyLib;
+using Klei.AI;
 using UnityEngine;
 
 namespace Beached.Patches
@@ -20,6 +22,9 @@ namespace Beached.Patches
 				crabLimpetHost.diseaseIdx = Db.Get().Diseases.GetIndex(BDiseases.limpetEggs.id);
 				crabLimpetHost.diseaseCount = 30000;
 				crabLimpetHost.limpetKanim = "beached_pincher_limpetgrowth_kanim";
+				crabLimpetHost.metabolismModifier = 1.2f;
+
+				__result.GetComponent<Modifiers>().initialAmounts.Add(BAmounts.LimpetGrowth.Id);
 			}
 		}
 	}

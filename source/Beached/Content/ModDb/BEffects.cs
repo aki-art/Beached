@@ -2,6 +2,8 @@
 {
 	public class BEffects
 	{
+		public const float PERSISTENT = 0f;
+
 		public const string
 			DAMP_PLANTGROWTH = "Beached_Damp_PlantGrowthBoost",
 			ARID_PLANTGROWTH = "Beached_Arid_PlantGrowthPenalty",
@@ -52,7 +54,7 @@
 				.HideFloatingText()
 				.Add(set);
 
-			new EffectBuilder(DAMP_PLANTGROWTH, 0f, false)
+			new EffectBuilder(DAMP_PLANTGROWTH, PERSISTENT, false)
 				.Modifier(Db.Get().Amounts.Maturity.deltaAttribute.Id, 0.05f, true)
 				.Add(set);
 
@@ -60,11 +62,11 @@
 				.Modifier(stressDelta, 30f / CONSTS.CYCLE_LENGTH)
 				.Add(set);
 
-			new EffectBuilder(ARID_PLANTGROWTH, 0f, true)
+			new EffectBuilder(ARID_PLANTGROWTH, PERSISTENT, true)
 				.Modifier(Db.Get().Amounts.Maturity.deltaAttribute.Id, -0.05f, true)
 				.Add(set);
 
-			new EffectBuilder(KARACOO_HUG, 0f, false)
+			new EffectBuilder(KARACOO_HUG, PERSISTENT, false)
 				.Modifier(Db.Get().Amounts.Incubation.deltaAttribute.Id, 0.5f, true)
 				.Add(set);
 
@@ -143,10 +145,9 @@
 				.Modifier(Db.Get().Attributes.QualityOfLife.Id, 1)
 				.Add(set);
 
-			new EffectBuilder(LIMPETHOST, 0, true)
-				.Modifier(BAmounts.LimpetGrowth.maxAttribute.Id, 100f)
-				.Modifier(BAmounts.LimpetGrowth.deltaAttribute.Id, (5f / CONSTS.CYCLE_LENGTH) * 100f)
-				.Modifier(Db.Get().Amounts.Calories.deltaAttribute.Id, -250_000 / CONSTS.CYCLE_LENGTH)
+			new EffectBuilder(LIMPETHOST, PERSISTENT, true)
+				.Modifier(Db.Get().CritterAttributes.Metabolism.Id, 1.2f, true)
+				.Modifier(BAmounts.LimpetGrowth.deltaAttribute.Id, 100f / (3f * CONSTS.CYCLE_LENGTH))
 				.Add(set);
 
 			new EffectBuilder(LIMPETHOST_RECOVERY, 160f, false)
