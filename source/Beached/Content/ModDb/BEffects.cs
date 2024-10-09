@@ -19,6 +19,7 @@
 			LIMPETHOST_RECOVERY = "Beached_LimpetHost_Recovery", // for critters, used for growing limpets
 			STEPPED_IN_MUCUS = "Beached_SteppedInMucus",
 			SUBMERGED_IN_MUCUS = "Beached_SubmergedInMucus",
+			LUBRICATED = "Beached_Effect_Lubricated",
 			WISHING_STAR = "Beached_WishingStar", // applied when they see shooting stars
 			POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds",
 			POFF_HELIUM = "Beached_PoffHelium",
@@ -52,6 +53,12 @@
 			new EffectBuilder(SANDBOX_RECENT, CONSTS.CYCLE_LENGTH / 2f, false)
 				.HideInUI()
 				.HideFloatingText()
+				.Add(set);
+
+			new EffectBuilder(LUBRICATED, PERSISTENT, false)
+				.Modifier(Db.Get().Attributes.GeneratorOutput.Id, 0.25f, true)
+				.Modifier(BAttributes.operatingSpeed.Id, 0.5f, true)
+				.Modifier(BAttributes.doorOpeningSpeed.Id, 2f, true)
 				.Add(set);
 
 			new EffectBuilder(DAMP_PLANTGROWTH, PERSISTENT, false)

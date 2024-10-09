@@ -1,6 +1,4 @@
 ﻿using Beached.Content;
-using Beached.Content.ModDb;
-using Klei.AI;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -67,19 +65,6 @@ namespace Beached.Utils
 			{
 				material.SetTexture(property, tex);
 			}
-		}
-
-		public static void AddModifier(Element element, float decor = 0f, float overHeat = 0f, float acidResistant = 0f)
-		{
-			if (decor != 0)
-				element.attributeModifiers.Add(new AttributeModifier(Db.Get().BuildingAttributes.Decor.Id, decor, element.name, true));
-
-			if (overHeat != 0)
-				element.attributeModifiers.Add(new AttributeModifier(Db.Get().BuildingAttributes.OverheatTemperature.Id, overHeat, element.name, false));
-
-			if (acidResistant != 0)
-				element.attributeModifiers.Add(new AttributeModifier(BAttributes.Buildings.acidResistance.Id, acidResistant, element.name, false));
-
 		}
 
 		public static ElementsAudio.ElementAudioConfig GetCrystalAudioConfig(SimHashes id)

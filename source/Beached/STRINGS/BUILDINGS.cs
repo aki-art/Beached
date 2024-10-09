@@ -24,6 +24,19 @@ namespace Beached
 
 		public class BUILDINGS
 		{
+			public class ATTRIBUTES
+			{
+				public class BEACHED_BUILDING_OPERATINGSPEED
+				{
+					public static LocString NAME = "Operating Speed";
+				}
+
+				public class BEACHED_BUILDING_DOOROPENINGSPEED
+				{
+					public static LocString NAME = "Door Opening Speed";
+				}
+			}
+
 			public class PREFABS
 			{
 				public class BEACHED_AMMONIAGENERATOR
@@ -265,13 +278,6 @@ namespace Beached
 
 			public class STATUSITEMS
 			{
-				public class BEACHED_LUBRICATED
-				{
-					public static LocString NAME = "Lubricated";
-
-					public static LocString TOOLTIP = "A {0} has been placed on this bed.\n\n<b>Effects</b>";
-				}
-
 				public class BEACHED_PLUSHED
 				{
 					public static LocString NAME = "{0} Plush";

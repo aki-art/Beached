@@ -8,5 +8,10 @@
 		{
 			return Elements.acidVulnerabilities.GetOrDefault(element.id, CONSTS.CORROSION_VULNERABILITY.MEDIUM);
 		}
+
+		public static float LubricantStrength(this Element element)
+		{
+			return Elements.lubricantStrengths.GetOrDefault(element.id, 0);
+		}
 	}
 }

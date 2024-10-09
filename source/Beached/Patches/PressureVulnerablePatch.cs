@@ -13,10 +13,8 @@ namespace Beached.Patches
 				if (__instance.HasTag(BTags.acidImmune))
 					return;
 
-				Log.Debug("checking acidity on plant + " + __instance.name);
 				if (__instance.currentAtmoElement != null && __instance.currentAtmoElement.id == Elements.sulfurousWater)
 				{
-					Log.Debug("F");
 					if (__instance.TryGetComponent(out Uprootable uprootable))
 						uprootable.Uproot();
 				}

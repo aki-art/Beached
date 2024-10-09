@@ -1,6 +1,5 @@
 ﻿using Beached.Content.Defs.Buildings;
 using Beached.Content.ModDb;
-using Beached.Content.Scripts.Buildings;
 using HarmonyLib;
 
 namespace Beached.Patches
@@ -15,7 +14,7 @@ namespace Beached.Patches
 				foreach (var buildingDef in Assets.BuildingDefs)
 				{
 					if (buildingDef.BuildingComplete.TryGetComponent(out Door _))
-						Lubricatable.ConfigurePrefab(buildingDef.BuildingComplete, 10, 10f / 36f);
+						ModAPI.ExtendPrefabToLubricatable(buildingDef.BuildingComplete, 10, 10f / 36f, false);
 				}
 
 				var planInfo = new PlanScreen.PlanInfo(
@@ -28,6 +27,10 @@ namespace Beached.Patches
 				TUNING.BUILDINGS.PLANORDER.Add(planInfo);
 
 				Recipes.AddRecipes();
+
+				var stirlingEngine = Assets.GetBuildingDef("StirlingEngine");
+				if (stirlingEngine != null)
+					ModAPI.ExtendPrefabToLubricatable(stirlingEngine.BuildingComplete, 10f, 10f / CONSTS.CYCLE_LENGTH, true);
 			}
 		}
 	}

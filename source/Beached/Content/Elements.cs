@@ -179,6 +179,11 @@ namespace Beached.Content
 
 		private static SimHashes ToHashMod(string name) => (SimHashes)Hash.SDBMLower(name);
 
+		public static readonly Dictionary<SimHashes, float> lubricantStrengths = new()
+		{
+			{ mucus, 3f }
+		};
+
 		// everything not in this list will get MEDIUM (0.5f) assigned, except metals which get an INSTANTLY_MELT (1f)
 		/// <see cref="ModAPI.SetElementAcidVulnerability(SimHashes, float)"/>
 		public static readonly Dictionary<SimHashes, float> acidVulnerabilities = new()

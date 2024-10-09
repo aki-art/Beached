@@ -6,6 +6,7 @@
 		public static readonly ModHashes
 			onBeachedWorldLoaded = new("OnBeachedWorldLoaded"),
 			onBeachedWorldUnLoaded = new("OnBeachedWorldUnLoaded"),
+			usedBuilding = new("UsedBuilding"),
 			greatAirQuality = new("GreatAirQuality"),
 			producedLubricant = new("ProducedLubricant"),
 			desiccated = new("Desiccated"),

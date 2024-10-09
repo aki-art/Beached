@@ -20,6 +20,14 @@ namespace Beached.Patches
 					descriptor.IncreaseIndent();
 					__result.Add(descriptor);
 				}
+
+				if (element.LubricantStrength() > 0)
+				{
+					var descriptor = new Descriptor();
+					descriptor.SetupDescriptor("Industrial Lubricant", "Applicable to certain machinery to increase efficiency.");
+					descriptor.IncreaseIndent();
+					__result.Add(descriptor);
+				}
 			}
 		}
 

@@ -16,6 +16,17 @@ using UnityEngine;
 
 namespace Beached.Patches
 {
+
+	[HarmonyPatch(typeof(ChoreConsumer), "FindNextChore")]
+	public class ChoreConsumer_FindNextChore_Patch
+	{
+		public static void Prefix(ChoreConsumer __instance)
+		{
+			if (__instance.consumerState == null) Log.Warning($"{nameof(__instance.consumerState)} is null. object is: {__instance.name}");
+
+		}
+	}
+
 	/*[HarmonyPatch(typeof(AmbienceManager), "OnSpawn")]
 	public class AmbienceManager_OnSpawn_Patch
 	{

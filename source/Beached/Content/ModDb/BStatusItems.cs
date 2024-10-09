@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Scripts;
-using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.Items;
@@ -12,7 +11,6 @@ namespace Beached.Content.ModDb
 		public static StatusItem
 			desiccation,
 			secretingMucus,
-			lubricated,
 			smoking,
 			geneticallyMofidied,
 			gunked,
@@ -106,20 +104,6 @@ namespace Beached.Content.ModDb
 			plushed.SetResolveStringCallback(Beached_PlushiePlaceable.GetStatusItemTooltip);
 
 			__instance.Add(plushed);
-
-			lubricated = new(
-				"Beached_Lubricated",
-				"BUILDINGS",
-				string.Empty,
-				StatusItem.IconType.Info,
-				NotificationType.Good,
-				false,
-				OverlayModes.None.ID,
-				false);
-
-			lubricated.SetResolveStringCallback(GetLubricantString);
-
-			__instance.Add(lubricated);
 		}
 
 		[DbEntry]
@@ -197,13 +181,6 @@ namespace Beached.Content.ModDb
 		private static string GetCollarDispenserString(string str, object data)
 		{
 			return data is CollarDispenser dispenser ? dispenser.FormatStatusItemString(str) : str;
-		}
-
-		private static string GetLubricantString(string str, object data)
-		{
-			return data is Lubricatable lubricatable
-				? string.Format(str, lubricatable.GetUsesRemaining())
-				: str;
 		}
 	}
 }

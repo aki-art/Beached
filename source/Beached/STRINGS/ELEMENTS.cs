@@ -193,7 +193,7 @@ namespace Beached
 			{
 				[Note("Snail mucus")]
 				public static LocString NAME = Link("Mucus");
-				public static LocString DESC = "TODO";
+				public static LocString DESC = "Slimy Mucus produced by a Slickshell. This viscous material is primarily composed of oils and polysaccharide. It can be applied to most mechanical machineries for a small boost in efficiency.";
 			}
 
 			public class MUCUSFROZEN

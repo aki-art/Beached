@@ -22,6 +22,12 @@
 				public static LocString DESC = $"This place is too dry for plants, growth is slowed. (World Trait: Arid)";
 			}
 
+			public class BEACHED_EFFECT_LUBRICATED
+			{
+				public static LocString NAME = "Lubricated";
+				public static LocString DESC = $"This building is operating slippery smooth.";
+			}
+
 			public class BEACHED_STEPPEDINMUCUS
 			{
 				public static LocString NAME = "Slippery Feet";

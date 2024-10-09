@@ -16,11 +16,24 @@ namespace Beached
 					public static LocString DESC = "...";
 				}
 
+
 				// Building attributes
 				// The game expects them under DUPLICANT
 				public class BEACHED_BUILDING_ACIDVULNERABILITY
 				{
 					public static LocString NAME = "Acid Vulnerability";
+					public static LocString DESC = "...";
+				}
+
+				public class BEACHED_BUILDING_OPERATINGSPEED
+				{
+					public static LocString NAME = "Operating Speed";
+					public static LocString DESC = "...";
+				}
+
+				public class BEACHED_BUILDING_DOOROPENINGSPEED
+				{
+					public static LocString NAME = "Door Opening Speed";
 					public static LocString DESC = "...";
 				}
 			}

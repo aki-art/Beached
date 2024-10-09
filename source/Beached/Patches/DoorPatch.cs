@@ -1,5 +1,5 @@
 ﻿using Beached.Content;
-using Beached.Content.Scripts.Buildings;
+using Beached.Content.ModDb;
 using HarmonyLib;
 
 namespace Beached.Patches
@@ -11,12 +11,18 @@ namespace Beached.Patches
 		{
 			public static void Postfix(Door __instance)
 			{
-				if (__instance.HasTag(BTags.lubricated) &&
-					__instance.worker != null &&
-					__instance.TryGetComponent(out Lubricatable lubricatable))
-				{
-					lubricatable.OnUse();
-				}
+				__instance.Trigger(ModHashes.usedBuilding);
+			}
+		}
+
+		[HarmonyPatch(typeof(Door), nameof(Door.UpdateAnimAndSoundParams))]
+		public class Door_UpdateAnimAndSoundParams_Patch
+		{
+			public static void Postfix(Door __instance)
+			{
+				var speedMod = BAttributes.doorOpeningSpeed.Lookup(__instance);
+				if (speedMod != null)
+					__instance.animController.PlaySpeedMultiplier *= speedMod.GetTotalValue();
 			}
 		}
 	}

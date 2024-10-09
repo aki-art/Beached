@@ -1,100 +1,43 @@
 ﻿using Beached.Content.ModDb;
-using ImGuiNET;
+using Klei.AI;
 using KSerialization;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.Buildings
 {
-	public class Lubricatable : KMonoBehaviour, IImguiDebug
+	public class Lubricatable : StateMachineComponent<Lubricatable.StatesInstance>, IGameObjectEffectDescriptor
 	{
-		[MyCmpGet] public KPrefabID kPrefabID;
-		[MyCmpGet] public KSelectable kSelectable;
-		[MyCmpGet] public Door door;
 		[SerializeField] public Storage mucusStorage;
+		[SerializeField] public float massPerUseOrPerSecond;
+		[SerializeField] public bool isTimedUse;
 		[SerializeField] public ManualDeliveryKG delivery;
-		[SerializeField] public float massUsedEachTime;
+
+		[MyCmpGet] public Operational operational;
+
 		[Serialize] public bool mucusRequested;
-		public float originalPoweredAnimSpeed;
-		public float originalUnPoweredAnimSpeed;
+
+		public Func<Operational, bool> isInUse = operational => operational.IsActive;
+
+		public override void OnPrefabInit()
+		{
+			base.OnPrefabInit();
+
+			var attributes = gameObject.GetAttributes();
+			attributes.Add(BAttributes.doorOpeningSpeed);
+			attributes.Add(BAttributes.operatingSpeed);
+		}
 
 		public override void OnSpawn()
 		{
 			Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenu);
-			Subscribe((int)GameHashes.OnStorageChange, OnStorageChange);
+			smi.StartSM();
 
-			if (door != null)
-			{
-				originalPoweredAnimSpeed = door.poweredAnimSpeed;
-				originalUnPoweredAnimSpeed = door.unpoweredAnimSpeed;
-			}
+			if (delivery == null)
+				delivery = GetComponent<ManualDeliveryKG>();
 
-			kSelectable.AddStatusItem(BStatusItems.lubricated, this);
-			OnStorageChange(null);
 			UpdateDelivery();
-		}
-
-		private void OnStorageChange(object o)
-		{
-			var lubricated = mucusStorage.GetMassAvailable(Elements.mucus) >= massUsedEachTime;
-
-			if (lubricated)
-			{
-				kPrefabID.AddTag(BTags.lubricated);
-				if (door != null)
-				{
-					door.poweredAnimSpeed = originalPoweredAnimSpeed * 3f;
-					door.unpoweredAnimSpeed = originalUnPoweredAnimSpeed * 3f;
-				}
-			}
-			else
-			{
-				kPrefabID.RemoveTag(BTags.lubricated);
-				if (door != null)
-				{
-					door.poweredAnimSpeed = originalPoweredAnimSpeed;
-					door.unpoweredAnimSpeed = originalUnPoweredAnimSpeed;
-				}
-			}
-
-			kSelectable.ToggleStatusItem(BStatusItems.lubricated, lubricated, this);
-			UpdateDelivery();
-		}
-
-		public void OnUse()
-		{
-			mucusStorage.ConsumeIgnoringDisease(Elements.mucus.CreateTag(), massUsedEachTime);
-		}
-
-		public static Lubricatable ConfigurePrefab(GameObject prefab, float capacityKg, float massUsedEachTime)
-		{
-			if (prefab.TryGetComponent(out Lubricatable existingLubricatable))
-			{
-				existingLubricatable.mucusStorage.capacityKg = capacityKg;
-				existingLubricatable.delivery.MinimumMass = massUsedEachTime;
-				existingLubricatable.delivery.refillMass = massUsedEachTime;
-
-				return existingLubricatable;
-			}
-
-			var storage = prefab.AddComponent<Storage>();
-			storage.storageFilters = [Elements.mucus.CreateTag()];
-			storage.capacityKg = capacityKg;
-			storage.allowItemRemoval = false;
-
-			var delivery = prefab.AddComponent<ManualDeliveryKG>();
-			delivery.storage = storage;
-			delivery.RequestedItemTag = Elements.mucus.CreateTag();
-			delivery.allowPause = true;
-			delivery.MinimumMass = massUsedEachTime;
-			delivery.refillMass = massUsedEachTime;
-			delivery.choreTypeIDHash = Db.Get().ChoreTypes.MachineTinker.IdHash;
-
-			var lubricatable = prefab.AddComponent<Lubricatable>();
-			lubricatable.delivery = delivery;
-			lubricatable.mucusStorage = storage;
-			lubricatable.massUsedEachTime = massUsedEachTime;
-
-			return lubricatable;
 		}
 
 		private void OnRefreshUserMenu(object _)
@@ -121,16 +64,125 @@ namespace Beached.Content.Scripts.Buildings
 			delivery.Pause(!shouldAcceptDelivery, "user toggle");
 
 			if (!mucusRequested)
-			{
 				mucusStorage.DropAll();
+		}
+
+
+		public bool IsInUse() => (bool)isInUse?.Invoke(operational);
+
+		public List<Descriptor> GetDescriptors(GameObject go)
+		{
+			var maxUses = mucusStorage.capacityKg / massPerUseOrPerSecond;
+			var usesRemaining = mucusStorage.capacityKg / massPerUseOrPerSecond;
+			var str = "Remaining: {0}";
+
+			str = isTimedUse
+				? string.Format(str, GameUtil.GetFormattedTime(usesRemaining))
+				: string.Format(str, $"{Mathf.FloorToInt(usesRemaining)}/{maxUses}");
+
+			return
+			[
+				new("Lubricated", str)
+			];
+		}
+
+		public class StatesInstance(Lubricatable master) : GameStateMachine<States, StatesInstance, Lubricatable, object>.GameInstance(master)
+		{
+			public Storage mucusStorage = master.mucusStorage;
+			public Door door = master.GetComponent<Door>();
+		}
+
+		public class States : GameStateMachine<States, StatesInstance, Lubricatable>
+		{
+			public State idle;
+			public LubricatedStates lubricated;
+
+			public override void InitializeStates(out BaseState default_state)
+			{
+				default_state = idle;
+
+				idle
+					.EventHandlerTransition(GameHashes.OnStorageChange, lubricated, HasLubricantInStorage);
+
+				lubricated
+					.DefaultState(lubricated.waitForUse)
+					.Enter(PickState)
+					.EventHandlerTransition(GameHashes.OnStorageChange, idle, (smi, data) => !HasLubricantInStorage(smi, data))
+					.ToggleTag(BTags.lubricated)
+					.EventHandler(ModHashes.usedBuilding, OnBuildingUsed)
+					.ToggleEffect(BEffects.LUBRICATED);
+
+				lubricated.periodicResting
+					.EventHandlerTransition(GameHashes.OperationalChanged, lubricated.periodicInUse, (smi, data) => smi.master.IsInUse());
+
+				lubricated.periodicInUse
+					.EventHandlerTransition(GameHashes.OperationalChanged, lubricated.periodicResting, (smi, data) => !smi.master.IsInUse())
+					.Update(OnBuildingUsed, UpdateRate.RENDER_200ms);
+			}
+
+			private void OnBuildingUsed(StatesInstance smi) => OnBuildingUsed(smi, 1f);
+
+			private void OnBuildingUsed(StatesInstance smi, float partialAmount)
+			{
+				smi.mucusStorage.ConsumeIgnoringDisease(Elements.mucus.CreateTag(), smi.master.massPerUseOrPerSecond * partialAmount);
+			}
+
+			private void PickState(StatesInstance smi)
+			{
+				if (smi.master.isTimedUse)
+					smi.GoTo(smi.master.IsInUse() ? smi.sm.lubricated.periodicInUse : smi.sm.lubricated.periodicResting);
+
+				smi.GoTo(smi.sm.lubricated.waitForUse);
+			}
+
+			private bool HasLubricantInStorage(StatesInstance smi, object data)
+			{
+				return smi.mucusStorage.GetMassAvailable(Elements.mucus) >= smi.master.massPerUseOrPerSecond;
+			}
+
+			public class LubricatedStates : State
+			{
+				public State waitForUse;
+				public State periodicResting;
+				public State periodicInUse;
 			}
 		}
 
-		public int GetUsesRemaining() => Mathf.FloorToInt(mucusStorage.capacityKg / massUsedEachTime);
 
-		public void OnImguiDraw()
+		public static Lubricatable ConfigurePrefab(GameObject prefab, float capacityKg, float massUsedEachTime, bool isTimedUse)
 		{
-			ImGui.Text("Imgui from interface");
+			if (prefab.TryGetComponent(out Lubricatable existingLubricatable))
+			{
+				existingLubricatable.mucusStorage.capacityKg = capacityKg;
+				existingLubricatable.delivery.MinimumMass = massUsedEachTime;
+				existingLubricatable.delivery.refillMass = massUsedEachTime;
+
+				return existingLubricatable;
+			}
+
+			var storage = prefab.AddComponent<Storage>();
+			storage.storageFilters = [Elements.mucus.CreateTag()];
+			storage.capacityKg = capacityKg;
+			storage.allowItemRemoval = false;
+
+			var delivery = prefab.AddComponent<ManualDeliveryKG>();
+			delivery.storage = storage;
+			delivery.RequestedItemTag = Elements.mucus.CreateTag();
+			delivery.allowPause = false;
+			delivery.MinimumMass = massUsedEachTime;
+			delivery.refillMass = massUsedEachTime;
+			delivery.choreTypeIDHash = Db.Get().ChoreTypes.MachineTinker.IdHash;
+			delivery.Pause(true, "");
+
+			var lubricatable = prefab.AddComponent<Lubricatable>();
+			lubricatable.delivery = delivery;
+			lubricatable.mucusStorage = storage;
+			lubricatable.massPerUseOrPerSecond = massUsedEachTime;
+			lubricatable.isTimedUse = isTimedUse;
+
+			prefab.AddOrGet<Effects>();
+
+			return lubricatable;
 		}
 	}
 }

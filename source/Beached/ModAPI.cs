@@ -153,17 +153,17 @@ namespace Beached
 		/// <summary>
 		/// Make this prefab accept Mucus upgrading. (Doors are automatically recognized, no need to add them separately here,
 		/// unless you want to override the values or add custom behavior.)
-		/// You can subscribe your own component to OnStorageChange to listen to changes, and check for Mucus
-		/// in the Storage. <see cref="GameHashes.OnStorageChange"/>
+		/// Modify Beached_Effect_Lubricated effect, <see cref="BEffects.LUBRICATED"> or check for OnStorageChange event with Mucus in storage to handle custom behavior.
 		/// Overrides existing configurations, if any existed.
 		/// </summary>
 		/// <param name="prefab">The building template to apply to.</param>
 		/// <param name="mucusStorageCapacityKg"></param>
 		/// <param name="kgUsedEachTime"></param>
+		/// <param name="isTimedUse">Count down every 200ms while in use. Each time the mass will be removed.</param>
 		/// <returns>storage component for mucus</returns>
-		public static Storage ExtendPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, float kgUsedEachTime)
+		public static Storage ExtendPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, float kgUsedEachTime, bool isTimedUse)
 		{
-			return Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, kgUsedEachTime).mucusStorage;
+			return Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, kgUsedEachTime, isTimedUse).mucusStorage;
 		}
 
 		/// <summary>
