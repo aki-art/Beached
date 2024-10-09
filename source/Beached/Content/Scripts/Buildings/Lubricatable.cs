@@ -12,12 +12,19 @@ namespace Beached.Content.Scripts.Buildings
 		[SerializeField] public float massPerUseOrPerSecond;
 		[SerializeField] public bool isTimedUse;
 		[SerializeField] public ManualDeliveryKG delivery;
+		[SerializeField] public bool consumeOnFabricationOrderComplete;
+		[SerializeField] public event Func<object, bool> consumeOnComplete;
 
 		[MyCmpGet] public Operational operational;
 
 		[Serialize] public bool mucusRequested;
 
 		public Func<Operational, bool> isInUse = operational => operational.IsActive;
+
+		public Lubricatable()
+		{
+			consumeOnFabricationOrderComplete = true;
+		}
 
 		public override void OnPrefabInit()
 		{
@@ -92,8 +99,9 @@ namespace Beached.Content.Scripts.Buildings
 					.EnterTransition(PickState)
 					.EventHandlerTransition(GameHashes.OnStorageChange, idle, (smi, data) => !HasLubricantInStorage(smi, data))
 					.ToggleTag(BTags.lubricated)
-					//.EventHandler(ModHashes.usedBuilding, OnBuildingUsed)
-					.EventHandler(GameHashes.WorkableCompleteWork, OnBuildingUsedByDuplicant) // TODO. this is too unreliable go back to custom hash
+					.EventHandler(ModHashes.usedBuilding, OnBuildingUsed)
+					.EventHandler(GameHashes.FabricatorOrderCompleted, OnFabricationComplete)
+					.EventHandler(GameHashes.WorkableCompleteWork, OnWorkComplete)
 					.ToggleStatusItem(BStatusItems.lubricated, smi => smi.master)
 					.ToggleEffect(BEffects.LUBRICATED);
 
@@ -105,7 +113,23 @@ namespace Beached.Content.Scripts.Buildings
 					.Update(UseLubricant, UpdateRate.RENDER_200ms);
 			}
 
-			private void OnBuildingUsedByDuplicant(StatesInstance smi, object data)
+			private void OnWorkComplete(StatesInstance smi, object data)
+			{
+				Log.Debug("work complete check. " + smi.master.name);
+				Log.Debug(smi.master.consumeOnComplete != null);
+				if (smi.master.consumeOnComplete != null
+					&& data is Workable workable
+					&& smi.master.consumeOnComplete(workable))
+					UseLubricant(smi, 1f);
+			}
+
+			private void OnFabricationComplete(StatesInstance smi)
+			{
+				if (smi.master.consumeOnFabricationOrderComplete)
+					UseLubricant(smi, 1f);
+			}
+
+			private void OnBuildingUsed(StatesInstance smi, object data)
 			{
 				if (smi.master.isTimedUse)
 					return;
@@ -115,7 +139,6 @@ namespace Beached.Content.Scripts.Buildings
 
 			private void UseLubricant(StatesInstance smi, float partialAmount)
 			{
-				Log.Debug("building used " + partialAmount);
 				smi.mucusStorage.ConsumeIgnoringDisease(Elements.mucus.CreateTag(), smi.master.massPerUseOrPerSecond * partialAmount);
 				if (DetailsScreen.Instance != null)
 					DetailsScreen.Instance.Trigger((int)GameHashes.UIRefreshData);

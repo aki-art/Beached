@@ -151,19 +151,34 @@ namespace Beached
 		}
 
 		/// <summary>
-		/// Make this prefab accept Mucus upgrading. (Doors are automatically recognized, no need to add them separately here,
-		/// unless you want to override the values or add custom behavior.)
-		/// Modify Beached_Effect_Lubricated effect, <see cref="BEffects.LUBRICATED"> or check for OnStorageChange event with Mucus in storage to handle custom behavior.
-		/// Overrides existing configurations, if any existed.
+		/// Make this prefab accept Mucus upgrading.
 		/// </summary>
 		/// <param name="prefab">The building template to apply to.</param>
 		/// <param name="mucusStorageCapacityKg"></param>
-		/// <param name="kgUsedEachTime"></param>
-		/// <param name="isTimedUse">Count down every 200ms while in use. Each time the mass will be removed.</param>
+		/// <param name="kgUsedEachTimeOrPerSecond"></param>
+		/// <param name="isTimedUse">Count down every 200ms while in use. Each time Mucus mass will be removed. Otherwise the gameobject will wait for a <see cref="ModHashes.usedBuilding"/> trigger.</param>
 		/// <returns>storage component for mucus</returns>
-		public static Storage ExtendPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, float kgUsedEachTime, bool isTimedUse)
+		public static Storage ExtendPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, float kgUsedEachTimeOrPerSecond, bool isTimedUse)
 		{
-			return Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, kgUsedEachTime, isTimedUse).mucusStorage;
+			return Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, kgUsedEachTimeOrPerSecond, isTimedUse).mucusStorage;
+		}
+
+		/// <summary>
+		/// Make this prefab accept Mucus upgrading.
+		/// </summary>
+		/// <param name="prefab">The building template to apply to.</param>
+		/// <param name="mucusStorageCapacityKg"></param>
+		/// <param name="maxUses"></param>
+		/// <param name="workableCompleteCheckFn">Every time a Workable is complete, this check will run. if returned true, the lubricant will be used. Fabrication orders and Doors opening are handled separately. The object is the Workable component. Recommend doing a type check on this for the specific Workable component.</param>
+		/// <returns></returns>
+		public static Storage ExtentPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, int maxUses, Func<object, bool> workableCompleteCheckFn)
+		{
+			var result = Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, mucusStorageCapacityKg / maxUses, false);
+
+			if (workableCompleteCheckFn != null)
+				result.consumeOnComplete += workableCompleteCheckFn;
+
+			return result.mucusStorage;
 		}
 
 		/// <summary>
