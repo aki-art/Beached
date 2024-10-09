@@ -407,6 +407,8 @@ namespace Beached.Content.Defs.Entities.Critters
 				condoMonitor.condoPrefabTag = condoTag;
 			}
 
+			brain?.Apply();
+
 			return prefab;
 		}
 
@@ -602,20 +604,12 @@ namespace Beached.Content.Defs.Entities.Critters
 		}
 
 
-		public class BrainBuilder : ChoreTable.Builder
+		public class BrainBuilder(CritterBuilder instance, Tag species) : ChoreTable.Builder
 		{
-			public readonly CritterBuilder instance;
-			private readonly Tag species;
-			private HashSet<string> conditions = [];
-
-			public BrainBuilder(CritterBuilder instance, Tag species)
-			{
-				this.instance = instance;
-				this.species = species;
-
-				if (!instance.isBaby)
-					conditions.Add(ADULT);
-			}
+			public readonly CritterBuilder instance = instance;
+			private readonly Tag species = species;
+			private readonly HashSet<string> conditions = [];
+			public Action<BrainBuilder, HashSet<string>> brainFn;
 
 			public CritterBuilder Done() => instance;
 
@@ -623,12 +617,16 @@ namespace Beached.Content.Defs.Entities.Critters
 
 			public void Apply()
 			{
+				if (!instance.isBaby)
+					conditions.Add(ADULT);
+
+				brainFn?.Invoke(this, conditions);
 				EntityTemplates.AddCreatureBrain(instance.prefab, this, species, null);
 			}
 
 			public CritterBuilder Configure(Action<BrainBuilder, HashSet<string>> configureAI)
 			{
-				configureAI(this, conditions);
+				brainFn = configureAI;
 				return instance;
 			}
 		}
