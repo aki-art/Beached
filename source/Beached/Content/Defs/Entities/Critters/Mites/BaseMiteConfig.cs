@@ -38,15 +38,16 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 		{
 			var adult = conditions.Contains(CritterBuilder.ADULT);
 
+			Log.Debug("configuring critter " + Id + " is adult?:" + adult);
 			builder
 				.Add(new DeathStates.Def())
 				.Add(new AnimInterruptStates.Def())
-				.Add(new GrowUpStates.Def(), !adult)
+				//.Add(new GrowUpStates.Def(), !adult)
 				.Add(new TrappedStates.Def())
-				.Add(new IncubatingStates.Def(), !adult)
+				//.Add(new IncubatingStates.Def(), !adult)
 				.Add(new BaggedStates.Def())
 				.Add(new FallStates.Def())
-				.Add(new MinedStates.Def())
+				.Add(new MinedStates.Def(), adult)
 				.Add(new StunnedStates.Def())
 				.Add(new DebugGoToStates.Def())
 				.Add(new FleeStates.Def())
