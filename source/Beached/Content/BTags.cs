@@ -31,6 +31,7 @@ namespace Beached.Content
 			sparksOnAcid = TagManager.Create("Beached_SparksOnAcid"),
 			// plants and critters with this trait will ignore acid and treat it as a generic liquid
 			acidImmune = TagManager.Create("Beached_AcidImmune"),
+			mechanicalBuilding = TagManager.Create("Beached_MechanicalBuilding"),
 
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),

@@ -6,7 +6,7 @@ namespace Beached.Patches
 {
 	public class DoorPatch
 	{
-		[HarmonyPatch(typeof(Door), nameof(Door.Open))]
+		//[HarmonyPatch(typeof(Door), nameof(Door.Open))]
 		public class Door_Open_Patch
 		{
 			public static void Postfix(Door __instance)

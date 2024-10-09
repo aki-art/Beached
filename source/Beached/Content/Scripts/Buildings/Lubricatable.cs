@@ -2,12 +2,11 @@
 using Klei.AI;
 using KSerialization;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.Buildings
 {
-	public class Lubricatable : StateMachineComponent<Lubricatable.StatesInstance>, IGameObjectEffectDescriptor
+	public class Lubricatable : StateMachineComponent<Lubricatable.StatesInstance>
 	{
 		[SerializeField] public Storage mucusStorage;
 		[SerializeField] public float massPerUseOrPerSecond;
@@ -38,6 +37,7 @@ namespace Beached.Content.Scripts.Buildings
 				delivery = GetComponent<ManualDeliveryKG>();
 
 			UpdateDelivery();
+			Trigger((int)GameHashes.OnStorageChange, gameObject);
 		}
 
 		private void OnRefreshUserMenu(object _)
@@ -67,24 +67,7 @@ namespace Beached.Content.Scripts.Buildings
 				mucusStorage.DropAll();
 		}
 
-
 		public bool IsInUse() => (bool)isInUse?.Invoke(operational);
-
-		public List<Descriptor> GetDescriptors(GameObject go)
-		{
-			var maxUses = mucusStorage.capacityKg / massPerUseOrPerSecond;
-			var usesRemaining = mucusStorage.capacityKg / massPerUseOrPerSecond;
-			var str = "Remaining: {0}";
-
-			str = isTimedUse
-				? string.Format(str, GameUtil.GetFormattedTime(usesRemaining))
-				: string.Format(str, $"{Mathf.FloorToInt(usesRemaining)}/{maxUses}");
-
-			return
-			[
-				new("Lubricated", str)
-			];
-		}
 
 		public class StatesInstance(Lubricatable master) : GameStateMachine<States, StatesInstance, Lubricatable, object>.GameInstance(master)
 		{
@@ -106,10 +89,12 @@ namespace Beached.Content.Scripts.Buildings
 
 				lubricated
 					.DefaultState(lubricated.waitForUse)
-					.Enter(PickState)
+					.EnterTransition(PickState)
 					.EventHandlerTransition(GameHashes.OnStorageChange, idle, (smi, data) => !HasLubricantInStorage(smi, data))
 					.ToggleTag(BTags.lubricated)
-					.EventHandler(ModHashes.usedBuilding, OnBuildingUsed)
+					//.EventHandler(ModHashes.usedBuilding, OnBuildingUsed)
+					.EventHandler(GameHashes.WorkableCompleteWork, OnBuildingUsedByDuplicant) // TODO. this is too unreliable go back to custom hash
+					.ToggleStatusItem(BStatusItems.lubricated, smi => smi.master)
 					.ToggleEffect(BEffects.LUBRICATED);
 
 				lubricated.periodicResting
@@ -117,22 +102,31 @@ namespace Beached.Content.Scripts.Buildings
 
 				lubricated.periodicInUse
 					.EventHandlerTransition(GameHashes.OperationalChanged, lubricated.periodicResting, (smi, data) => !smi.master.IsInUse())
-					.Update(OnBuildingUsed, UpdateRate.RENDER_200ms);
+					.Update(UseLubricant, UpdateRate.RENDER_200ms);
 			}
 
-			private void OnBuildingUsed(StatesInstance smi) => OnBuildingUsed(smi, 1f);
-
-			private void OnBuildingUsed(StatesInstance smi, float partialAmount)
-			{
-				smi.mucusStorage.ConsumeIgnoringDisease(Elements.mucus.CreateTag(), smi.master.massPerUseOrPerSecond * partialAmount);
-			}
-
-			private void PickState(StatesInstance smi)
+			private void OnBuildingUsedByDuplicant(StatesInstance smi, object data)
 			{
 				if (smi.master.isTimedUse)
-					smi.GoTo(smi.master.IsInUse() ? smi.sm.lubricated.periodicInUse : smi.sm.lubricated.periodicResting);
+					return;
 
-				smi.GoTo(smi.sm.lubricated.waitForUse);
+				UseLubricant(smi, 1f);
+			}
+
+			private void UseLubricant(StatesInstance smi, float partialAmount)
+			{
+				Log.Debug("building used " + partialAmount);
+				smi.mucusStorage.ConsumeIgnoringDisease(Elements.mucus.CreateTag(), smi.master.massPerUseOrPerSecond * partialAmount);
+				if (DetailsScreen.Instance != null)
+					DetailsScreen.Instance.Trigger((int)GameHashes.UIRefreshData);
+			}
+
+			private State PickState(StatesInstance smi)
+			{
+				if (smi.master.isTimedUse)
+					return smi.master.IsInUse() ? smi.sm.lubricated.periodicInUse : smi.sm.lubricated.periodicResting;
+
+				return smi.sm.lubricated.waitForUse;
 			}
 
 			private bool HasLubricantInStorage(StatesInstance smi, object data)
@@ -147,7 +141,6 @@ namespace Beached.Content.Scripts.Buildings
 				public State periodicInUse;
 			}
 		}
-
 
 		public static Lubricatable ConfigurePrefab(GameObject prefab, float capacityKg, float massUsedEachTime, bool isTimedUse)
 		{
@@ -169,6 +162,7 @@ namespace Beached.Content.Scripts.Buildings
 			delivery.storage = storage;
 			delivery.RequestedItemTag = Elements.mucus.CreateTag();
 			delivery.allowPause = false;
+			delivery.capacity = capacityKg;
 			delivery.MinimumMass = massUsedEachTime;
 			delivery.refillMass = massUsedEachTime;
 			delivery.choreTypeIDHash = Db.Get().ChoreTypes.MachineTinker.IdHash;
@@ -183,6 +177,36 @@ namespace Beached.Content.Scripts.Buildings
 			prefab.AddOrGet<Effects>();
 
 			return lubricatable;
+		}
+
+		public static string ResolveStatusItemTooltipString(string str, object data)
+		{
+			if (data is not Lubricatable lubricatable)
+				return str;
+
+			var maxUses = lubricatable.mucusStorage.capacityKg / lubricatable.massPerUseOrPerSecond;
+			var usesRemaining = lubricatable.mucusStorage.GetMassAvailable(Elements.mucus) / lubricatable.massPerUseOrPerSecond;
+
+			str = lubricatable.isTimedUse
+				? string.Format(str, GameUtil.GetFormattedTime(usesRemaining))
+				: string.Format(str, $"{Mathf.FloorToInt(usesRemaining)}/{maxUses} uses"); // TODO: string entry
+
+			var effect = Db.Get().effects.Get(BEffects.LUBRICATED);
+			foreach (var modifier in effect.SelfModifiers)
+			{
+				var isDoor = lubricatable.smi.door != null;
+				var hasDoor = modifier.AttributeId == BAttributes.doorOpeningSpeed.Id && isDoor;
+				var hasGenerator = modifier.AttributeId == Db.Get().Attributes.GeneratorOutput.Id && lubricatable.TryGetComponent(out Tinkerable _);
+				var hasWorkable = modifier.AttributeId == BAttributes.operatingSpeed.Id && (!isDoor && lubricatable.TryGetComponent(out Workable workable));
+
+				if (hasDoor || hasGenerator || hasWorkable)
+				{
+					var modifierStr = string.Format(global::STRINGS.DUPLICANTS.MODIFIERS.MODIFIER_FORMAT, modifier.GetName(), modifier.GetFormattedString());
+					str += $"{CONSTS.DOT_PREFIX}{modifierStr}\n";
+				}
+			}
+
+			return str;
 		}
 	}
 }

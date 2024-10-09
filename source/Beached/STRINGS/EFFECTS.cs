@@ -25,7 +25,7 @@
 			public class BEACHED_EFFECT_LUBRICATED
 			{
 				public static LocString NAME = "Lubricated";
-				public static LocString DESC = $"This building is operating slippery smooth.";
+				public static LocString DESC = $"";
 			}
 
 			public class BEACHED_STEPPEDINMUCUS

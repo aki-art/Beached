@@ -278,6 +278,14 @@ namespace Beached
 
 			public class STATUSITEMS
 			{
+				public class BEACHED_LUBRICATED
+				{
+					public static LocString NAME = "Lubricated";
+					public static LocString TOOLTIP = "This building is operating slippery smooth.\n" +
+						"\n" +
+						"Remaining: {0}";
+				}
+
 				public class BEACHED_PLUSHED
 				{
 					public static LocString NAME = "{0} Plush";

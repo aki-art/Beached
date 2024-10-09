@@ -10,6 +10,32 @@ namespace Beached.Utils
 {
 	public static class ExtensionMethods
 	{
+		public static GameStateMachine<SMType, SMIType, MasterType, DefType>.State DebugStatusItem<SMType, SMIType, MasterType, DefType>(this GameStateMachine<SMType, SMIType, MasterType, DefType>.State state, object msg)
+			where SMType : GameStateMachine<SMType, SMIType, MasterType, DefType>
+			where SMIType : GameStateMachine<SMType, SMIType, MasterType, DefType>.GameInstance
+			where MasterType : IStateMachineTarget
+		{
+#if DEBUG
+			state.ToggleStatusItem(msg.ToString(), "");
+#endif
+			return state;
+		}
+
+		public static GameStateMachine<SMType, SMIType, MasterType, DefType>.State EnterTransition<SMType, SMIType, MasterType, DefType>(
+			this GameStateMachine<SMType, SMIType, MasterType, DefType>.State state,
+			Func<SMIType, GameStateMachine<SMType, SMIType, MasterType, DefType>.State> stateCallback)
+		where SMType : GameStateMachine<SMType, SMIType, MasterType, DefType>
+		where SMIType : GameStateMachine<SMType, SMIType, MasterType, DefType>.GameInstance
+		where MasterType : IStateMachineTarget
+		{
+			state.Enter(smi =>
+			{
+				smi.GoTo(stateCallback(smi));
+			});
+
+			return state;
+		}
+
 		public static void AddTag(this Element element, Tag tag)
 		{
 			element.oreTags ??= [];

@@ -59,6 +59,7 @@
 				.Modifier(Db.Get().Attributes.GeneratorOutput.Id, 0.25f, true)
 				.Modifier(BAttributes.operatingSpeed.Id, 0.5f, true)
 				.Modifier(BAttributes.doorOpeningSpeed.Id, 2f, true)
+				.HideInUI()
 				.Add(set);
 
 			new EffectBuilder(DAMP_PLANTGROWTH, PERSISTENT, false)
