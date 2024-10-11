@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
+using Beached.Content.Defs.Entities.Critters.Squirrels;
 using Beached.Content.Defs.Foods;
 using System.Collections.Generic;
 
@@ -48,6 +49,12 @@ namespace Beached.Content.ModDb
 					building.AddTag(BTags.cookingStation);
 				}
 			}
+		}
+
+
+		internal static void OnPostEntitiesLoaded()
+		{
+			MerpipConfig.ConfigureEggChancesToMerpip();
 		}
 
 		public class WearableTypes

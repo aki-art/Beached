@@ -1,10 +1,11 @@
-﻿using Beached.Content.Defs.Foods;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Foods;
 using Beached.Content.Scripts.Entities.AI;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Karacoos
 {
-	public class KaracooConfig : BaseKaracooConfig, IEntityConfig
+    public class KaracooConfig : BaseKaracooConfig, IEntityConfig
 	{
 		public const string ID = "Beached_Karacoo";
 		public const string EGG_ID = "Beached_KaracooEgg";

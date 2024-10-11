@@ -1,10 +1,11 @@
-﻿using Beached.Content.Scripts.Entities.AI;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Muffins
 {
-	public abstract class BaseMuffinConfig : BaseCritterConfig
+    public abstract class BaseMuffinConfig : BaseCritterConfig
 	{
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{

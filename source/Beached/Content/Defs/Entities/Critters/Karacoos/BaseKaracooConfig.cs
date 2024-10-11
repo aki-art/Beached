@@ -1,9 +1,10 @@
-﻿using Beached.Content.Scripts.Entities.AI;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
 
 namespace Beached.Content.Defs.Entities.Critters.Karacoos
 {
-	public abstract class BaseKaracooConfig : BaseCritterConfig
+    public abstract class BaseKaracooConfig : BaseCritterConfig
 	{
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{

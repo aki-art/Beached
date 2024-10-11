@@ -1,12 +1,13 @@
-﻿using Beached.Content.Scripts.Entities.AI;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
 {
-	// Most basic form of a Slickshell, shared by adults, babies and all morphs
-	public abstract class BaseSnailConfig : BaseCritterConfig
+    // Most basic form of a Slickshell, shared by adults, babies and all morphs
+    public abstract class BaseSnailConfig : BaseCritterConfig
 	{
 		public const int SORTING_ORDER = 83;
 

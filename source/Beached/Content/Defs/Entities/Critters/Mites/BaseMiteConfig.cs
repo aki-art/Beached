@@ -1,11 +1,12 @@
-﻿using Beached.Content.Defs.Entities.Critters.Muffins;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Mites
 {
-	public abstract class BaseMiteConfig : BaseCritterConfig
+    public abstract class BaseMiteConfig : BaseCritterConfig
 	{
 		public override GameObject CreatePrefab(BaseCritterConfig config)
 		{

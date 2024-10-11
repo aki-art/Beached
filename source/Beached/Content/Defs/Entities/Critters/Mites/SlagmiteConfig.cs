@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Foods;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Integration;

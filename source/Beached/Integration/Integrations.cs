@@ -11,7 +11,8 @@ namespace Beached.Integration
 			CRITTER_TRAITS_REBORN = "CritterTraitsReborn",
 			DECOR_PACK_I = "DecorPackA",
 			FAST_TRACK = "PeterHan.FastTrack",
-			ROCKETRY_EXPANDED = "Rocketry Expanded";
+			ROCKETRY_EXPANDED = "Rocketry Expanded",
+			PIP_MORPHS = "ONIPipMorphsELU";
 
 		public class IDS
 		{
@@ -22,6 +23,20 @@ namespace Beached.Integration
 					ROLLERSNAKESTEELBABY = "RollerSnakeSteelBaby",
 					ROLLERSNAKE = "RollerSnake",
 					ROLLERSNAKEBABY = "RollerSnakeBaby";
+			}
+
+			public class PipMorphs
+			{
+				public const string
+					SQUIRREL_AUTUMN = "SquirrelAutumn",
+					SQUIRREL_AUTUMN_BABY = "SquirrelAutumnBaby",
+					SQUIRREL_AUTUMN_EGG = "SquirrelAutumnEgg",
+					SQUIRREL_SPRING = "SquirrelSpring",
+					SQUIRREL_SPRING_BABY = "SquirrelSpringBaby",
+					SQUIRREL_SPRING_EGG = "SquirrelSpringEgg",
+					SQUIRREL_WINTER = "SquirrelWinter",
+					SQUIRREL_WINTER_BABY = "SquirrelWinterBaby",
+					SQUIRREL_WINTER_EGG = "SquirrelWinterEgg";
 			}
 
 			public class VeryRealONIContentTheWikiSaysSo

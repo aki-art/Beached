@@ -8,6 +8,11 @@ namespace Beached.Patches.DatabasePatches
 		[HarmonyPatch(typeof(ModifierSet), "Initialize")]
 		public static class ModifierSet_Initialize_Patch
 		{
+			public static void Prefix()
+			{
+				BFertilityModifiers.Register();
+			}
+
 			public static void Postfix(ModifierSet __instance)
 			{
 				BEffects.Register(__instance);

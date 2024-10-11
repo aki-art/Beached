@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Foods;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities.AI;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
 {
-	[EntityConfigOrder(0)]
+    [EntityConfigOrder(0)]
 	public class SlickShellConfig : BaseSnailConfig, IEntityConfig
 	{
 		public const string ID = "Beached_SlickShell";

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
-namespace Beached.Content.Defs.Entities.Critters
+namespace Beached.Content.DefBuilders
 {
 	public class CritterBuilder(string ID, string anim)
 	{
@@ -87,7 +87,7 @@ namespace Beached.Content.Defs.Entities.Critters
 			isBaby = true;
 			this.growUpOnCycle = growUpOnCycle;
 			this.dropOnGrowUp = dropOnGrowUp;
-			this.forceAdultNavType = forceNavType;
+			forceAdultNavType = forceNavType;
 
 			return this;
 		}
@@ -141,7 +141,7 @@ namespace Beached.Content.Defs.Entities.Critters
 
 		public CritterBuilder DefaultTemperatureK(float kelvin)
 		{
-			this.defaultTemperature = kelvin;
+			defaultTemperature = kelvin;
 			return this;
 		}
 
@@ -491,13 +491,13 @@ namespace Beached.Content.Defs.Entities.Critters
 
 			public BabyCritterBuilder Fertility(float cycles)
 			{
-				this.fertilityCycles = cycles;
+				fertilityCycles = cycles;
 				return this;
 			}
 
 			public BabyCritterBuilder Incubation(float cycles)
 			{
-				this.incubationCycles = cycles;
+				incubationCycles = cycles;
 				return this;
 			}
 
@@ -515,7 +515,7 @@ namespace Beached.Content.Defs.Entities.Critters
 
 			public BabyCritterBuilder EggChance(Tag egg, float weight)
 			{
-				this.breedingChances.Add(new FertilityMonitor.BreedingChance()
+				breedingChances.Add(new FertilityMonitor.BreedingChance()
 				{
 					weight = weight,
 					egg = egg,

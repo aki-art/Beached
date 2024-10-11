@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Beached.Content.DefBuilders;
+using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Karacoos
 {
-	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
+    [EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabyKaracooConfig : BaseKaracooConfig, IEntityConfig
 	{
 		public const string ID = "Beached_BabyKaracoo";

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Beached.Content.DefBuilders;
+using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
 {
-	[EntityConfigOrder(100)]
+    [EntityConfigOrder(100)]
 	public class BabySlickShellConfig : BaseSnailConfig, IEntityConfig
 	{
 		public const string ID = "Beached_SlickShell_Baby";

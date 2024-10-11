@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Beached.Content.DefBuilders;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters
 {
-	public abstract class BaseCritterConfig
+    public abstract class BaseCritterConfig
 	{
 		public virtual GameObject CreatePrefab(BaseCritterConfig config)
 		{

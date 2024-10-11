@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Beached.Content.DefBuilders;
+using System.Collections.Generic;
 using TUNING;
 
 namespace Beached.Content.Defs.Entities.Critters.Squirrels
 {
+	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.ADULT)]
 	public abstract class BaseMerpipConfig : BaseCritterConfig
 	{
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
@@ -49,7 +51,7 @@ namespace Beached.Content.Defs.Entities.Critters.Squirrels
 				.Add(new CreatureSleepStates.Def())
 				.Add(new FixedCaptureStates.Def())
 				//.Add(new RanchedStates.Def(), !isBaby)
-				//.Add(new LayEggStates.Def(), !isBaby)
+				.Add(new LayEggStates.Def(), !isBaby)
 				//.Add(new TreeClimbStates.Def())
 				.Add(new EatStates.Def())
 				.Add(new DrinkMilkStates.Def())

@@ -1,10 +1,11 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.Scripts.Entities;
 using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Muffins
 {
-	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY - 1)]
+    [EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY - 1)]
 	public class MuffinConfig : BaseMuffinConfig, IEntityConfig
 	{
 		public const string ID = "Beached_Muffin";

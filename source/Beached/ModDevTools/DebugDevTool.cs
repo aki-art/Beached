@@ -7,6 +7,7 @@ using Beached.Content.Scripts.Entities;
 using FMOD.Studio;
 using FMODUnity;
 using ImGuiNET;
+using Klei;
 using Klei.AI;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +39,13 @@ namespace Beached.ModDevTools
 		}
 
 		private static string rewardTestResult;
+		private static bool accelerateLifeCycles;
 
 		public override void RenderTo(DevPanel panel)
 		{
+			if (ImGui.Checkbox("Accelerated Lifecycles", ref accelerateLifeCycles))
+				GenericGameSettings.instance.acceleratedLifecycle = accelerateLifeCycles;
+
 			if (ImGui.Button("Debug Data trigger"))
 				Beached_Mod.Instance.Trigger(ModHashes.debugDataChange);
 
