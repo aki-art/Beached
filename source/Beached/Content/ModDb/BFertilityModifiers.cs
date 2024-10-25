@@ -43,11 +43,11 @@ namespace Beached.Content.ModDb
 					return string.Format(desc, tag, tag.ProperName());
 				}));
 
-			creators.Add(() => RegisterLandAccessModifier(
-				PIP_FROM_MERPIP_LANDCHECK,
-				SquirrelConfig.EGG_ID,
-				CONSTS.NAV_GRID.PIP,
-				NavType.Floor));
+			/*			creators.Add(() => RegisterLandAccessModifier(
+							PIP_FROM_MERPIP_LANDCHECK,
+							SquirrelConfig.EGG_ID,
+							CONSTS.NAV_GRID.PIP,
+							NavType.Floor));*/
 		}
 
 		private static void RegisterLandAccessModifier(string id, Tag eggTag, string navGrid, NavType navType)

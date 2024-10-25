@@ -1,11 +1,10 @@
 ﻿using Beached.Content.Scripts.Entities;
-using HarmonyLib;
 
 namespace Beached.Patches
 {
 	public class FertilityMonitor_InstancePatch
 	{
-		[HarmonyPatch(typeof(FertilityMonitor.Instance), "LayEgg")]
+		//[HarmonyPatch(typeof(FertilityMonitor.Instance), "LayEgg")]
 		public class FertilityMonitor_Instance_LayEgg_Patch
 		{
 			public static void Prefix(FertilityMonitor.Instance __instance)

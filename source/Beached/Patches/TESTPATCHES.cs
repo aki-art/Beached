@@ -160,8 +160,10 @@ namespace Beached.Patches
 		{
 			public static void Postfix(TileRenderer __instance)
 			{
+#if DEVTOOLS
 				if (!DebugDevTool.renderLiquidTexture)
 					return;
+#endif
 
 				Log.Debug("active brush count: " + __instance.ActiveBrushes.Count);
 				Log.Debug("brush count: " + __instance.Brushes.Length);
@@ -511,9 +513,9 @@ namespace Beached.Patches
 						___currentGermsPanel.SetLabel("beached_light", str, "test");
 					}
 				}
-		#endif*/
+#endif*/
 
-		//[HarmonyPatch(typeof(SkillsScreen), "RefreshSkillWidgets")]
+				//[HarmonyPatch(typeof(SkillsScreen), "RefreshSkillWidgets")]
 		public class SkillsScreen_RefreshSkillWidgets_Patch
 		{
 			public static void Postfix(Dictionary<string, int> ___skillGroupRow)

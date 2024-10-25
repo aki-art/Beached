@@ -52,6 +52,7 @@ namespace Beached
 			harmonyInstance = harmony;
 
 			ProcessAttributes(harmony);
+
 		}
 
 		private static void ProcessAttributes(Harmony harmony)

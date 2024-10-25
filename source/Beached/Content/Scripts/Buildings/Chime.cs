@@ -1,6 +1,8 @@
 ﻿using FMOD.Studio;
 using ImGuiNET;
+using System;
 using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace Beached.Content.Scripts.Buildings
 {
@@ -10,6 +12,11 @@ namespace Beached.Content.Scripts.Buildings
 		private const float SLOW_THRESHOLD = 0.002f;
 		private const float MEDIUM_THRESHOLD = 0.003f;
 		private const float VOLUME_LERP_SPEED = 2f;
+
+		public float flowTest;
+
+		public static readonly HashedString pressureChangeParameter = "Beached_PressureChange";
+
 		private EventInstance soundEvent;
 
 		public override void OnSpawn() => smi.StartSM();
@@ -32,9 +39,15 @@ namespace Beached.Content.Scripts.Buildings
 			public int cell;
 			public float flowMin;
 			public float flowMax;
+			public float flow;
+			public float targetVolume;
+			public float currentVolume;
+			public string chimeSound;
+			public float volumeChangeSpeed = 0.1f;
 
 			public StatesInstance(Chime master) : base(master)
 			{
+				chimeSound = GlobalAssets.GetSound("Beached_Chime_Loop");
 				master.TryGetComponent(out operational);
 				master.TryGetComponent(out loopingSounds);
 				cell = Grid.CellBelow(Grid.PosToCell(master));
@@ -50,7 +63,7 @@ namespace Beached.Content.Scripts.Buildings
 
 			public override void InitializeStates(out BaseState default_state)
 			{
-				default_state = notInGas;
+				default_state = flowing;
 
 				notInGas
 					.EventHandlerTransition(GameHashes.OperationalChanged, flowing, IsOperational);
@@ -59,7 +72,10 @@ namespace Beached.Content.Scripts.Buildings
 					.DefaultState(flowing.still)
 					//.Enter(smi => smi.audioPlayer.PlayLoop(ModAssets.Sounds.SHELL_CHIME_LOUD))
 					//.Exit(smi => smi.audioPlayer.StopLooping())
+					.Enter(StartSound)
+					.Exit(StopSound)
 					.Update(UpdateFlow, UpdateRate.SIM_200ms)
+					.Update(UpdateVolume, UpdateRate.SIM_200ms)
 					.EventHandlerTransition(GameHashes.OperationalChanged, flowing, (smi, _) => !IsOperational(smi, _));
 
 				flowing.still
@@ -95,32 +111,50 @@ namespace Beached.Content.Scripts.Buildings
 					.QueueAnim("hard", true);
 			}
 
+			private void StartSound(StatesInstance smi)
+			{
+				smi.loopingSounds.StartSound(smi.chimeSound);
+				smi.currentVolume = 0;
+			}
+
+			private void StopSound(StatesInstance smi)
+			{
+				smi.loopingSounds.StopSound(smi.chimeSound);
+			}
+
+			private void UpdateVolume(StatesInstance smi, float dt)
+			{
+				smi.targetVolume = smi.flow;
+
+				var strength = Mathf.Clamp01(Mathf.Lerp(smi.currentVolume, smi.targetVolume, dt * smi.volumeChangeSpeed) * 1f / 0.002f);
+				
+
+				smi.loopingSounds.UpdateFirstParameter("event:/beached/SFX/Chimes/Beached_Chime_Loop", pressureChangeParameter, strength);
+			}
+
 			private void UpdateFlow(StatesInstance smi, float _)
 			{
 				var flow = ChimePower(smi.cell);
-				if (flow < smi.flowMin || flow > smi.flowMax)
+
+				Log.Debug("updating gas flow: " +  flow);
+				switch (flow)
 				{
-					switch (flow)
-					{
-						case float i when i > STILL_THRESHOLD && i < SLOW_THRESHOLD:
-							smi.GoTo(smi.sm.flowing.mild);
-							//smi.audioPlayer.SetTargetVolume(0.2f, VOLUME_LERP_SPEED);
-							break;
-						case float i when i > SLOW_THRESHOLD && i < MEDIUM_THRESHOLD:
-							smi.GoTo(smi.sm.flowing.medium);
-							//smi.audioPlayer.SetTargetVolume(0.5f, VOLUME_LERP_SPEED);
-							break;
-						case float i when i > MEDIUM_THRESHOLD:
-							smi.GoTo(smi.sm.flowing.hard);
-							//smi.audioPlayer.SetTargetVolume(1f, VOLUME_LERP_SPEED);
-							break;
-						default:
-							smi.GoTo(smi.sm.flowing.still);
-							//smi.audioPlayer.SetTargetVolume(0f, VOLUME_LERP_SPEED);
-							break;
-					}
+					case float i when i > STILL_THRESHOLD && i < SLOW_THRESHOLD:
+						smi.GoTo(smi.sm.flowing.mild);
+						break;
+					case float i when i > SLOW_THRESHOLD && i < MEDIUM_THRESHOLD:
+						smi.GoTo(smi.sm.flowing.medium);
+						break;
+					case float i when i > MEDIUM_THRESHOLD:
+						smi.GoTo(smi.sm.flowing.hard);
+						break;
+					default:
+						smi.GoTo(smi.sm.flowing.still);
+						break;
 				}
 
+				smi.flow = flow;
+				smi.master.flowTest = flow;
 			}
 
 			// credit: Asquared

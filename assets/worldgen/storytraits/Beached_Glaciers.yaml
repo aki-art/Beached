@@ -12,13 +12,22 @@ additionalWorldTemplateRules:
     priority: 400
     useRelaxedFiltering: true
     allowedCellsFilter:
-      - command: All
+      # in cold
+      - command: Replace  
+        zoneTypes: [Beached_Icy, IceCaves]
+
+       # too close to start
+      - command: ExceptWith 
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 0
+        maxDistance: 2
+        ignoreIfMissingTag: true
+
+      # this also excludes Space
       - command: ExceptWith
         tagcommand: AtTag
-        tag: NoGlobalFeatureSpawning # this also excludes Space
-      - command: IntersectWith  # too close to start
-        temperatureRanges:
-          - ExtremelyCold
-          - VeryCold
+        tag: NoGlobalFeatureSpawning 
+
         
   # ICE PIECE

@@ -19,10 +19,10 @@ namespace Beached.Content.Scripts.Entities
 		public static Vector3[] offsets =
 		[
 			new Vector3(-0.1f, 0.1f, 0.1f), // bl
-            new Vector3(-0.1f, 0.4f, 0.2f), // tl
-            new Vector3(0.2f, 0.1f, 0.05f), // br
-            new Vector3(0.2f, 0.4f, 0.15f)  // tr
-        ];
+			new Vector3(-0.1f, 0.4f, 0.2f), // tl
+			new Vector3(0.2f, 0.1f, 0.05f), // br
+			new Vector3(0.2f, 0.4f, 0.15f)  // tr
+		];
 
 		public override void OnSpawn()
 		{
@@ -166,6 +166,5 @@ namespace Beached.Content.Scripts.Entities
 				CreateShelfItem(index, itemKbac.AnimFiles[0], true);
 			}
 		}
-
 	}
 }

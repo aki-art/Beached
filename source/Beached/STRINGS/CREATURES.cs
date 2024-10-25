@@ -261,7 +261,7 @@ namespace Beached
 					public class BEACHED_BISMUTH_VOLCANO
 					{
 						public static LocString NAME = "Bismuth Volcano";
-						public static LocString DESC = $"A large volcano that periodically erupts with {STRINGS.ELEMENTS.BISMUTHMOLTEN.NAME}";
+						public static LocString DESC = $"A large volcano that periodically erupts with {Link("Molten Bismuth", "BEACHEDBISMUTHMOLTEN")}";
 					}
 
 					public class BEACHED_PACU_GEYSER

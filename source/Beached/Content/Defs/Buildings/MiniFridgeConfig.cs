@@ -43,6 +43,8 @@ namespace Beached.Content.Defs.Buildings
 			def.ViewMode = OverlayModes.Power.ID;
 			def.AudioCategory = AUDIO.CATEGORY.METAL;
 
+			Log.Debug("creating minifridge config");
+
 			return def;
 		}
 
@@ -75,7 +77,6 @@ namespace Beached.Content.Defs.Buildings
 			go.AddOrGet<UserNameable>();
 			go.AddOrGet<DropAllWorkable>();
 			go.AddOrGetDef<RocketUsageRestriction.Def>().restrictOperational = false;
-
 		}
 
 		public override void DoPostConfigureComplete(GameObject go)

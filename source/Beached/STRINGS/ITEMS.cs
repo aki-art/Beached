@@ -371,19 +371,19 @@ namespace Beached
 				public class FLYINGCENTIPEDE
 				{
 					public static LocString NAME = "Flying Centipede";
-					public static LocString DESCRIPTION = $"And ancient centipede trapped in {ELEMENTS.AMBER.NAME}.";
+					public static LocString DESCRIPTION = $"And ancient centipede trapped in {Link("Amber", "BEACHEDAMBER")}.";
 				}
 
 				public class STRANGEHATCH
 				{
 					public static LocString NAME = "Strange Hatch";
-					public static LocString DESCRIPTION = $"And oddly smooth and tiny hatch trapped in {ELEMENTS.AMBER.NAME}.";
+					public static LocString DESCRIPTION = $"And oddly smooth and tiny hatch trapped in {Link("Amber", "BEACHEDAMBER")}.";
 				}
 
 				public class FEATHER
 				{
 					public static LocString NAME = "Preserved Feather";
-					public static LocString DESCRIPTION = $"A single feather trapped in {ELEMENTS.AMBER.NAME}.";
+					public static LocString DESCRIPTION = $"A single feather trapped in {Link("Amber", "BEACHEDAMBER")}.";
 				}
 			}
 

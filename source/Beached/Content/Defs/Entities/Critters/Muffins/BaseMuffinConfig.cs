@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Muffins
 {
-    public abstract class BaseMuffinConfig : BaseCritterConfig
+	public abstract class BaseMuffinConfig : BaseCritterConfig
 	{
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
@@ -40,6 +40,8 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 
 		protected sealed override void ConfigureAI(CritterBuilder.BrainBuilder builder, HashSet<string> conditions)
 		{
+			var isAdult = conditions.Contains(CritterBuilder.ADULT);
+
 			builder
 				.Add(new DeathStates.Def())
 				.Add(new AnimInterruptStates.Def())
@@ -56,9 +58,9 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 				//.Add(new CreatureSleepStates.Def())
 				.Add(new FixedCaptureStates.Def())
 				.Add(new EatStates.Def())
-				.Add(new RanchedStates.Def())
+				//.Add(new RanchedStates.Def(), isAdult) // needs excited_loop animation
 				.Add(new HunterStates.Def())
-				.Add(new LayEggStates.Def(), conditions.Contains(CritterBuilder.ADULT))
+				.Add(new LayEggStates.Def(), isAdult)
 				.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
 				.Add(new CallAdultStates.Def())
 				.PopInterruptGroup()

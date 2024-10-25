@@ -55,13 +55,13 @@
 			public class BEACHED_MUCUS_SOAKED
 			{
 				public static LocString NAME = "Slimy";
-				public static LocString DESC = $"This duplicant has recently submerged in {ELEMENTS.BEACHED_MUCUS.NAME}.";
+				public static LocString DESC = $"This duplicant has recently submerged in {Link("Mucus", "BEACHEDMUCUS")}.";
 			}
 
 			public class BEACHED_OCEANBREEZE
 			{
 				public static LocString NAME = "Ocean Breeze";
-				public static LocString DESC = $"Breathing in fresh {ELEMENTS.SALTYOXYGEN.NAME} is improving this duplicants mood and respiration.";
+				public static LocString DESC = $"Breathing in fresh {Link("Salty Oxygen", "BEACHEDSALTYOXYGEN")} is improving this duplicants mood and respiration.";
 			}
 
 			public class BEACHED_POFFCLEANEDTASTEBUDS

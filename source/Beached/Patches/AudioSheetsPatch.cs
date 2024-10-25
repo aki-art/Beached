@@ -23,9 +23,9 @@ namespace Beached.Patches
 					defaultType = "LoopingSoundEvent",
 					soundInfos =
 					[
-						Loop("beached_chime_kanim", "mild", "Beached_Chime_Loop", 1716),
+					/*	Loop("beached_chime_kanim", "mild", "Beached_Chime_Loop", 1716),
 						Loop("beached_chime_kanim", "medium", "Beached_Chime_Loop", 1716),
-						Loop("beached_chime_kanim", "hard", "Beached_Chime_Loop", 1716)
+						Loop("beached_chime_kanim", "hard", "Beached_Chime_Loop", 1716)*/
 					]
 				});
 			}

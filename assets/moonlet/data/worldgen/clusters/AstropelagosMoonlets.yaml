@@ -4,7 +4,7 @@ requiredDlcId: EXPANSION1_ID
 menuOrder: 0
 coordinatePrefix: BCHD
 clusterCategory: SpacedOutStyle
-disableStoryTraits: true
+disableStoryTraits: false
 difficulty: Moderate # 3
 
 # defaultSkyScape: skyScapes/

@@ -6,6 +6,7 @@ using System.Reflection.Emit;
 namespace Beached.Patches
 {
 #if TRANSPILERS
+#if DEVTOOLS
 
 	public class DevToolMenuNodeListPatch
 	{
@@ -65,5 +66,6 @@ namespace Beached.Patches
 		}
 	}
 
+#endif
 #endif
 }

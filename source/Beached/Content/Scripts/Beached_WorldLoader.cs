@@ -1,7 +1,10 @@
-﻿using Beached.Content.Defs.Entities.Critters.Jellies;
+﻿using Beached.Content.BWorldGen;
+using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
+using Beached.Content.ModDb;
 using Database;
+using Klei.CustomSettings;
 using ProcGenGame;
 using System;
 using System.Collections.Generic;
@@ -13,15 +16,11 @@ namespace Beached.Content.Scripts
 		public static Beached_WorldLoader Instance;
 		public static Action<bool> onWorldReloaded;
 
+		public ColonyDestinationSelectScreen colonyDestinationSelectScreen;
+
 		public override void OnPrefabInit()
 		{
 			Instance = this;
-			SaveLoader.Instance.OnWorldGenComplete += OnWorldgenComplete;
-		}
-
-		private void OnWorldgenComplete(Cluster cluster)
-		{
-
 		}
 
 		public override void OnCleanUp() => Instance = null;

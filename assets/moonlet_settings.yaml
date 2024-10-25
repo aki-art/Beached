@@ -5,12 +5,13 @@
 debugLogging: true
 
 # Generate a template.pot file in mods/strings_templates
-generateTranslationsTemplate: false
+generateTranslationsTemplate: true
 
-# Type target assembly qualified name to overload strings to. Only relevant if you have a C# dll with a STRING-s class.
-# overloadTranslations: Tundra.STRINGS, Tundra
+# Assembly qualified type names to overload strings entries to. Only relevant if you have a C# dll with a STRING-s like class.
+stringsOverloadTypes:
+  - Beached.STRINGS, Beached
 
-# use {platform to insert platform keyword, windows|mac|linux }
+# use {platform} to insert platform keyword, windows|mac|linux 
 # looks in moonlet/assets/assetBundles by default. use root:: for root folder of your mod
 loadAssetBundles:
   - root::assetbundles/beached_shared_assets

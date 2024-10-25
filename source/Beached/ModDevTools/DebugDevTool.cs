@@ -36,6 +36,8 @@ namespace Beached.ModDevTools
 		public DebugDevTool()
 		{
 			RequiresGameRunning = true;
+			clip = Lighting.Instance.Settings.BackgroundClip;
+			bgscale = Lighting.Instance.Settings.BackgroundUVScale;
 		}
 
 		private static string rewardTestResult;
@@ -43,6 +45,7 @@ namespace Beached.ModDevTools
 
 		public override void RenderTo(DevPanel panel)
 		{
+
 			if (ImGui.Checkbox("Accelerated Lifecycles", ref accelerateLifeCycles))
 				GenericGameSettings.instance.acceleratedLifecycle = accelerateLifeCycles;
 
@@ -159,11 +162,22 @@ namespace Beached.ModDevTools
 		}
 
 		private float siltStoneUV = 1f;
+		private static float clip;
+		private float bgscale = 1f;
 
 		private void Shaders()
 		{
 			if (ImGui.CollapsingHeader("Shader"))
 			{
+				if (ImGui.DragFloat("Lighting.Instance.Settings.BackgroundClip", ref clip))
+				{
+					Lighting.Instance.Settings.BackgroundClip = clip;
+				}
+				if (ImGui.DragFloat("Settings.BackgrounSCale", ref bgscale))
+				{
+					Lighting.Instance.Settings.BackgroundUVScale = bgscale;
+				}
+				// BackgroundUVScale
 				ImGui.DragFloat("_Beached_TimeOfDayColor", ref Beached_Mod.tempDayTimeProgress);
 
 				ImGui.InputText("Mask: ", ref liquidCullingMaskLayer, 256);

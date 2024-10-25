@@ -166,11 +166,25 @@ unknownCellsAllowedSubworlds:
     subworldNames:
       - *Surface
 
-# worldTemplateRules:
-#   - names:
-#       - beached/worldgen/beach/limpet_rock_cave
-#     listRule: GuaranteeOne
-#     priority: 100
-#     allowedCellsFilter:
-#       - command: Replace
-#         zoneTypes: [Beached_Beach]
+worldTemplateRules:
+  # - names:
+  #     - beached/storytraits/muffinglacerb
+  #   listRule: GuaranteeOne
+  #   priority: 100
+  #   allowedCellsFilter:
+  #     - command: Replace
+  #       zoneTypes: [Beached_Icy]
+  - names:
+      - beached/worldgen/beach/limpet_rock_cave
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Beach]
+  - names:
+      - beached/worldgen/coralreefsmall1
+    listRule: GuaranteeOne
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Sea]

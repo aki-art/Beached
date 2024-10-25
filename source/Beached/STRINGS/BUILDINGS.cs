@@ -44,8 +44,7 @@ namespace Beached
 					[Note("Generates power from ammonia")]
 					public static LocString NAME = Link("Ammonia Generator", AmmoniaGeneratorConfig.ID);
 					public static LocString DESC = "Ammonia generators are not very efficient, and emit a lot of waste materials.";
-					public static LocString EFFECT = $"Converts {ELEMENTS.AMMONIA.NAME} into electrical {Link("Power", "POWER")}, " +
-													 $"{KLEISTRINGS.ELEMENTS.WATER.NAME} and {ELEMENTS.NITROGEN.NAME}.";
+					public static LocString EFFECT = $"Converts {Link("Ammonia", "BEACHEDAMMONIA")} into electrical {Link("Power", "POWER")}, {Link("Water", "WATER")} and {Link("Nitrogen", "BEACHEDNITROGEN")}.";
 				}
 
 				public class BEACHED_ATMOSPHERICFORCEFIELDGENERATOR
@@ -148,6 +147,7 @@ namespace Beached
 					public static LocString DESC = "By repeated vertical motion of external duplicant peripherals it is possible to process several materials into one unified mush.";
 					public static LocString EFFECT = "Mixes granular and liquid materials into compound results.";
 				}
+
 				public class BEACHED_SALTLICK
 				{
 					[Note("Visible in UI or codex.")]

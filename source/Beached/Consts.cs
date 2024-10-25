@@ -7,6 +7,7 @@ namespace Beached
 		public const float CYCLE_LENGTH = 600f;
 
 		public const string DOT_PREFIX = "\n    • ";
+		public const string BEACHED_CLUSTER_SETTING_ID = "clusters/AstropelagosMoonlets";
 
 		public static class CRITTER_LOAD_ORDER
 		{

@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Defs.Buildings;
-using FUtility.FLocalization;
 using HarmonyLib;
 
 namespace Beached.Patches
@@ -11,14 +10,15 @@ namespace Beached.Patches
 		{
 			public static void Postfix()
 			{
-				Translations.RegisterForTranslation(typeof(STRINGS));
+				//Translations.RegisterForTranslation(typeof(STRINGS));
 
+				Log.Debug("CLASS NAME: " + typeof(STRINGS).AssemblyQualifiedName);
 				Strings.Add("STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES", STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES);
 				Strings.Add("STRINGS.DUPLICANTS.TRAITS.GILLS.SHORT_DESC", STRINGS.DUPLICANTS.TRAITS.BEACHED_GILLS.SHORT_DESC);
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MiniFridgeConfig.ID.ToUpperInvariant()}.EFFECT", global::STRINGS.BUILDINGS.PREFABS.REFRIGERATOR.EFFECT);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{AmmoniaGeneratorConfig.ID.ToUpperInvariant()}.EFFECT", global::STRINGS.BUILDINGS.PREFABS.HYDROGENGENERATOR.EFFECT);
-			}
 
+				Log.Debug($"Mini fridge string: {Strings.Get("STRINGS.BUILDINGS.PREFABS.BEACHED_MINIFRIDGE.NAME")}");
+			}
 		}
 	}
 }

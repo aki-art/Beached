@@ -9,7 +9,7 @@ blobSize:
   min: 5
   max: 6
 internalMobs:
-  # - type: Beached_SlickShell
+  # - type: Beached_SandySlickshell
   #   count:
   #     min: 2
   #     max: 4
