@@ -49,8 +49,7 @@ namespace Beached.Patches
 
 					hierarchyReferences.GetReference<MultiToggle>("checkbox").gameObject.SetActive(!dim);
 
-					var lockIcon = hierarchyReferences.GetReference<Image>("beached_lockicon");
-					if(lockIcon == null && dim)
+					if(!hierarchyReferences.TryGetReference<Image>("beached_lockicon", out var lockIcon) && dim)
 					{
 						var go = Object.Instantiate(icon);
 						go.name = "Beached_LockIcon";

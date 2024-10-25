@@ -10,6 +10,23 @@ namespace Beached.Utils
 {
 	public static class ExtensionMethods
 	{
+		public static bool TryGetReference<SpecifiedType>(this HierarchyReferences hierarchyReferences, string name, out SpecifiedType component) where SpecifiedType : Component
+		{
+			component = null;
+			var references = hierarchyReferences.references;
+			for (int i = 0; i < references.Length; i++)
+			{
+				var elementReference = references[i];
+				if (elementReference.Name == name && elementReference.behaviour is SpecifiedType type)
+				{
+					component = type;
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		public static GameStateMachine<SMType, SMIType, MasterType, DefType>.State DebugStatusItem<SMType, SMIType, MasterType, DefType>(this GameStateMachine<SMType, SMIType, MasterType, DefType>.State state, object msg)
 			where SMType : GameStateMachine<SMType, SMIType, MasterType, DefType>
 			where SMIType : GameStateMachine<SMType, SMIType, MasterType, DefType>.GameInstance
