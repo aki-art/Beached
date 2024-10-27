@@ -18,6 +18,17 @@
 				public static LocString TOOLTIP = "This critters outer can be mined and harvested, without causing any harm to the creature.";
 			}
 
+			public static class BEACHED_USERMENUACTIONS
+			{
+				public static class TAPPABLE
+				{
+					public static LocString REMOVE_TAP = "Remove Tap";
+					public static LocString CANCEL_TAP = "Cancel Tapping";
+					public static LocString TAP = "Tap";
+					public static LocString TOOLTIP = "Collect rubber from this tree.";
+				}
+			}
+
 			public class SANDBOX
 			{
 				public static LocString ALL = "All";
@@ -59,6 +70,13 @@
 					public static LocString BUTTON = "Electric Conduction Overlay";
 					public static LocString TOOLTIP = "Displays the relative electrical conductivity of materials.";
 				}
+				public class BEACHED_GENETICOVERLAY
+				{
+					public static LocString NAME = "GENETICS OVERLAY";
+					public static LocString HOVERTITLE = "GENETICS";
+					public static LocString BUTTON = "Genetics Overlay";
+					public static LocString TOOLTIP = "Displays the Genetic modifications and DNA capacity of critters on screen.";
+				}
 			}
 
 			public class SPACEDESTINATIONS
@@ -68,13 +86,19 @@
 					public class BEACHED_DIAMOND
 					{
 						public static LocString NAME = "Shooting Stars";
-						public static LocString DESCRIPTION = "TODO";
+						public static LocString DESCRIPTION = "Diamond and rare various gemstone meteors.";
 					}
 
 					public class BEACHED_ABYSSALITE
 					{
 						public static LocString NAME = "Abyssalite Meteors";
 						public static LocString DESCRIPTION = "TODO";
+					}
+
+					public class BEACHED_AMBERGREIS
+					{
+						public static LocString NAME = "Ambergreis Rain";
+						public static LocString DESCRIPTION = "Enormous droplets of Ambergreis rain down on the surface.";
 					}
 				}
 
@@ -83,7 +107,7 @@
 					public class BEACHED_HARVESTABLESPACEPOI_PEARLESCENTASTEROIDFIELD
 					{
 						public static LocString NAME = "Pearlescent Asteroid Field";
-						public static LocString DESC = "TODO";
+						public static LocString DESC = "A clump of disarrayed sand, pearls and bismuth crystals.";
 					}
 
 					public class BEACHED_HARVESTABLESPACEPOI_AMMONITE
@@ -98,12 +122,6 @@
 			public class CODEX
 			{
 				public static LocString GUIDES = "Beached Guides";
-
-				public class CRITTER_HAPPINESS
-				{
-					public static LocString TITLE = "Critter Happiness";
-					public static LocString CONTENT = "Critter Happiness";
-				}
 
 				public class SPORES
 				{

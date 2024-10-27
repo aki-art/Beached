@@ -20,7 +20,7 @@ namespace Beached.Content
 		{
 			tutorials = new Dictionary<Topic, TutorialInfo>()
 			{
-				{ Topic.CritterMorale, new TutorialInfo(CritterHappinessTutorial.ID) },
+				//{ Topic.CritterMorale, new TutorialInfo(CritterHappinessTutorial.ID) },
 				{ Topic.Mushroom, new TutorialInfo(MushroomTutorial.ID) }
 			};
 		}

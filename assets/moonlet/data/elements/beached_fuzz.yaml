@@ -1,7 +1,7 @@
 elements:
   - elementId: Beached_Fuzz
     name: Fua Fuzz
-    descriptionText: todo
+    descriptionText: Extremely fluffy and soft fibrous material, thoroughly chewed and processed by Fua Fuas who use it for nest building.  
     color: c1a788
     audio:
       copyElement: Sand

@@ -50,49 +50,132 @@ namespace Beached
 				public class BEACHED_ATMOSPHERICFORCEFIELDGENERATOR
 				{
 					public static LocString NAME = Link("Atmospheric Forcefield Generator", ForceFieldGeneratorConfig.ID);
-					public static LocString DESC = "...";
+					public static LocString DESC = "THe air feels heavy and electrifying near this machine.";
 					public static LocString EFFECTS = "Shields the surface of an asteroid from incoming Meteors. Does not allow rockets to pass.";
 				}
 
-				public class BEACHED_AQUARIUM
+				public class BEACHED_COLLARRACK
 				{
-					public static LocString NAME = "Aquarium";
-					public static LocString DESC = "";
-					public static LocString EFFECT = "Houses several aquatic critters, plants or corals. Varying effects.";
+					public static LocString NAME = Link("Collar Rack", "Beached_CollarRack");
+					public static LocString DESC = "Dispenses Collars for Muffins to wear, and provides the interface to set instructions for tamed Muffins.";
+					public static LocString EFFECTS = "A trained duplicant can equip Collars to Muffins.";
+				}
+
+				public class BEACHED_GEMCUTTER
+				{
+					public static LocString NAME = Link("Get Cutter", "Beached_GemCutter");
+					public static LocString DESC = "Cuts and shapes gemstones and other materials into jewellery.";
+					public static LocString EFFECTS = "Fabricates equippable jewellery from raw materials.";
+				}
+
+				public class BEACHED_SHELLDOOR
+				{
+					public static LocString NAME = Link("Shell Curtain", "Beached_ShellCurtain");
+					public static LocString DESC = "A curtain made of beads and shells. Duplicants can pass through without stopping.";
+					public static LocString EFFECTS = "Separates rooms without obstructing gas or liquid flow.";
+				}
+				public class BEACHED_DNAANALYZER
+				{
+					public static LocString NAME = Link("DNA Analyzer", "Beached_DNAAnalyzer");
+					public static LocString DESC = "Requires a Duplicant with Geneticist skill to operate.";
+					public static LocString EFFECTS = "Extracts Genetic Samples from various objects, eggs or critters.";
+				}
+
+				public class BEACHED_HOLOGRAPHICPROJECTOR
+				{
+					public static LocString NAME = Link("Holographic Projector", "Beached_HolographicProjector");
+					public static LocString DESC = "Projects images to thin layers of transparent materials, creating an illusion of 3-dimensional artwork.";
+					public static LocString EFFECTS = $"Majorly increases {Link("Decor", "DECOR")}, contributing to {Link("Morale", "MORALE")}." +
+						$"\n" +
+						$"\nMust be configured by a Duplicant.";
+
+					public class FACADES
+					{
+						public class SCIENTIST
+						{
+							public static LocString NAME = "Old Scientist";
+							public static LocString DESC = "A glowing presentation of an accomplished scientist.";
+						}
+
+						public class CAT
+						{
+							public static LocString NAME = "Cat Cat Cat";
+							public static LocString DESC = "Cat Cat Cat Cat Cat Cat Cat Cat Cat Cat Cat Cat";
+						}
+
+						public class ORB
+						{
+							public static LocString NAME = "Orb";
+							public static LocString DESC = "It's actually a dodecahedron.";
+						}
+
+						public class SPIGOTRIDER
+						{
+							public static LocString NAME = "Spigot Rider";
+							public static LocString DESC = "A heroic Duplicant riding a large Spigot Seal.";
+						}
+
+						public class DRAEDON
+						{
+							[Note("Terraria: Calamity reference")]
+							public static LocString NAME = "Draedon";
+							public static LocString DESC = "To any personnel engaged in the laboratories.Please wear your steel engraved ID badge at all times.It is the easiest method to discern your body if any accidents do occur.";
+						}
+					}
+				}
+
+				public class BEACHED_JUMBOGELBATTERY
+				{
+					public static LocString NAME = Link("Jumbo Gel Battery", "Beached_JumboGelBattery");
+					public static LocString DESC = "A tiny round fishbowl for corals.";
+					public static LocString EFFECT = "Houses a single Coral for decorative purposes.";
+				}
+				public class BEACHED_SMALLAQUARIUM
+				{
+					public static LocString NAME = Link("Glass Bowl", SmallAquariumConfig.ID);
+					public static LocString DESC = "A tiny round fishbowl for corals.";
+					public static LocString EFFECT = "Houses a single Coral for decorative purposes.";
+				}
+
+				public class BEACHED_LARGEAQUARIUM
+				{
+					public static LocString NAME = Link("Aquarium", "Beached_LargeAquarium");
+					public static LocString DESC = "A large container suitable for housing aquatic or terrestrial life.";
+					public static LocString EFFECT = "Houses several critters, plants or corals for decorative purposes.";
 				}
 
 
 				public class BEACHED_BAMBOOPLATFORM
 				{
-					public static LocString NAME = "Bamboo Walkway";
-					public static LocString DESC = "...";
-					public static LocString EFFECT = "...";
+					public static LocString NAME = Link("Bamboo Walkway", "Beached_BambooWalkway");
+					public static LocString DESC = "A narrow rickety walkway made of Bamboo stems.";
+					public static LocString EFFECT = "Provides floor for Duplicants to walk on. Does not prevent gas or liquid flow.";
 				}
 
 				public class BEACHED_CHIME
 				{
 					public static LocString NAME = Link("Wind Chime", ChimeConfig.ID);
 					public static LocString DESC = "Pretty things suspended in air, creating music.";
-					public static LocString EFFECT = "Emits a soothing sound when stimulated by changing air pressure, decreasing Stress of nearby Duplicants.";
+					public static LocString EFFECT = $"Emits a soothing sound when stimulated by changing air pressure, decreasing {Link("Stress", "STRESS")} of nearby Duplicants.";
 				}
 
 				public class BEACHED_CONDUITAQUARIUM
 				{
-					public static LocString NAME = "Conduit Coral Bed";
-					public static LocString DESC = "...";
-					public static LocString EFFECT = "Houses a single coral, connected to a liquid conduit.";
+					public static LocString NAME = Link("Conduit Coral Bed", "Beached_CoralConduit");
+					public static LocString DESC = "A small Coral just barely fits into this.";
+					public static LocString EFFECT = "Houses a single coral, connected to a liquid conduit input, with a gas and a liquid output.";
 				}
 
 				public class BEACHED_DNAINJECTOR
 				{
-					public static LocString NAME = Link("DNA Injector", ForceFieldGeneratorConfig.ID);
-					public static LocString DESC = "...";
-					public static LocString EFFECTS = "Allows administering DNA samples to Eggs, applying traits to newborn critters.";
+					public static LocString NAME = Link("DNA Injector", DNAInjectorConfig.ID);
+					public static LocString DESC = "The Power to alter Nature.";
+					public static LocString EFFECTS = "Allows administering DNA samples to Eggs or Critters, applying traits to newborn critters.";
 				}
 
 				public class BEACHED_INTERPLANETARYPOWEROUTLET
 				{
-					public static LocString NAME = "Interplanetary Power Outlet";
+					public static LocString NAME = Link("Interplanetary Power Outlet", "Beached_InterplanetaryPowerOutlet");
 					public static LocString DESC = "Ranged power!";
 					public static LocString EFFECT = "Provides wireless power transmission between two remote locations. The outlet is highly volatile" +
 													 "and will electrute and super-heat it's nearby area.";
@@ -100,7 +183,7 @@ namespace Beached
 
 				public class BEACHED_INTERPLANETARYPOWERINLET
 				{
-					public static LocString NAME = "Interplanetary Power Inlet";
+					public static LocString NAME = Link("Interplanetary Power Inlet", "Beached_InterplanetaryPowerInlet");
 					public static LocString DESC = "Ranged power!";
 					public static LocString EFFECT = "Receives wireless power transmission between two remote locations. The inlet is highly volatile" +
 													 "and will electrute and super-heat it's nearby area.";
@@ -108,21 +191,21 @@ namespace Beached
 
 				public class BEACHED_LABORATORYTILES
 				{
-					public static LocString NAME = "Laboratory Tile";
+					public static LocString NAME = Link(  "Laboratory Tile", LaboratoryTileConfig.ID);
 					public static LocString DESC = "...";
 					public static LocString EFFECT = "...";
 				}
 
 				public class BEACHED_MAKIHUT
 				{
-					public static LocString NAME = "Maki Hut";
+					public static LocString NAME = Link("Maki Hut", "Beached_MakiHut");
 					public static LocString DESC = "...";
 					public static LocString EFFECT = "...";
 				}
 
 				public class BEACHED_MAKITRAININGGROUND
 				{
-					public static LocString NAME = "Maki Training Ground";
+					public static LocString NAME = Link("Maki Training Ground", "Beached_MakiTrainingGround");
 					public static LocString DESC = "...";
 					public static LocString EFFECT = "...";
 				}
@@ -151,9 +234,9 @@ namespace Beached
 				public class BEACHED_SALTLICK
 				{
 					[Note("Visible in UI or codex.")]
-					public static LocString NAME = "Critter Lick";
+					public static LocString NAME = Link("Critter Lick", "Beached_CritterLick");
 					[Note("The name that appears on the actual building. ie. Salt-Lick, or Sulfur-Lick")]
-					public static LocString FORMATTED_NAME = "{Element}-Lick";
+					public static LocString FORMATTED_NAME = Link("{Element}-Lick", "Beached_CritterLick");
 					public static LocString DESC = "A block of lickable material. Delicious!";
 					public static LocString EFFECT = "Allows critters to consume additional materials, boosting production. \n" +
 													 $"{CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES} can be fully sustained on appropiate licks.\n\n" +
@@ -192,28 +275,24 @@ namespace Beached
 							public static LocString DESC = "The real treasure were the crabs we made along the way.";
 						}
 
-						// Aladdin sand tiger head
-						// some Terraria or Calamity sand boi
+						public class CAVETIGER
+						{
+							[Note("Aladdin reference")]
+							public static LocString NAME = "Wondrous Cave";
+							public static LocString DESC = "A diamond in the rough.";
+						}
 					}
 				}
 
-				public class BEACHED_SMALLAQUARIUM
-				{
-					public static LocString NAME = "Small Aquarium";
-					public static LocString DESC = "";
-
-					public static LocString EFFECT =
-						"Houses a single aquatic plant.";
-				}
 
 				public class BEACHED_SMOKINGRACK
 				{
-					public static LocString NAME = "Smoking Rack";
-					public static LocString DESC = "";
+					public static LocString NAME = Link("Smoking Rack", SmokingRackConfig.ID);
+					public static LocString DESC = "Help imbuing various meals with the flavor of smoke.";
 
 					public static LocString EFFECT =
-						"Uses Salt and Carbon Dioxide to smoke food, extending their shelf life and improving quality.\n\n" +
-						$"Can also use ambient Carbon Dioxide if it'a already hot enough (at least {GameUtil.GetFormattedTemperature(343.15f)}).";
+						"Uses Carbon Dioxide from Smokers to smoke food, extending their shelf life and improving quality.\n\n" +
+						$"Can also use ambient Carbon Dioxide if it's hot enough.";
 				}
 
 				public class BEACHED_SPINNER
@@ -225,21 +304,6 @@ namespace Beached
 						"\n" +
 						"\nDuplicants will not fabricate items unless recipes are queued.";
 				}
-
-				public class BEACHED_TERRARIUM
-				{
-					public static LocString NAME = "Terrarium";
-					public static LocString DESC = "...";
-					public static LocString EFFECT = "";
-				}
-
-				public class BEACHED_TREETAP
-				{
-					public static LocString NAME = "Tree Tap";
-					public static LocString DESC = "...";
-					public static LocString EFFECT = "Collects Sap from a tree it is attached to.";
-				}
-
 
 				public class BEACHED_WOODCARVING
 				{
@@ -284,6 +348,30 @@ namespace Beached
 					public static LocString TOOLTIP = "This building is operating slippery smooth.\n" +
 						"\n" +
 						"Remaining: {0}";
+				}
+
+				public class BEACHED_COLLECTINGRUBBER
+				{
+					public static LocString NAME = "Collecting Rubber";
+					public static LocString TOOLTIP = "This building has been tapped, and Rubber has accumulated {0} Rubber in the attached storage.";
+				}
+
+				public class BEACHED_COLLECTINGRUBBERHALTED
+				{
+					public static LocString NAME = "Rubber Collection Halted";
+					public static LocString TOOLTIP = "This tree cannot produce more rubber under the currect circumstances.";
+				}
+
+				public class BEACHED_COLLECTINGRUBBERFULL
+				{
+					public static LocString NAME = "Rubber Bucket Full";
+					public static LocString TOOLTIP = "This tree has been fully tapped for now.";
+				}
+
+				public class BEACHED_PROJECTINGFORCEFIELD1
+				{
+					public static LocString NAME = "Projecting Forcefield";
+					public static LocString TOOLTIP = "This shield generator is projecting a planet wide force field. It will break and destroy any object that enters the atmosphere.";
 				}
 
 				public class BEACHED_PLUSHED

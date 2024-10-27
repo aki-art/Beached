@@ -1,6 +1,7 @@
 elements:
     - elementId: Beached_SulfurousWater
       name: Acid
+      descriptionText: H<sub>2</sub>SO<sub>4</sub> diluted with Water, Acid burns through most minerals, violently reacts with many Metals, and can cause chemical burns for most organic beings.
       color: &color d5ff2d
       maxMass: 1200
       liquidCompression: 1.01
@@ -32,6 +33,7 @@ elements:
     - elementId: Beached_SulfurousIce
       name: Acid Ice
       color: *color
+      descriptionText: <link=\"BeachedSulfurousWater\">Acid</sub> frozen into it's <link=\"ELEMENTS_SOLID\">Solid</link> state.
       specificHeatCapacity: 3.05
       eyeIrritationStrength: 3
       thermalConductivity: 1

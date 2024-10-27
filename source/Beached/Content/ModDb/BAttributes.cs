@@ -37,9 +37,9 @@ namespace Beached.Content.ModDb
 		{
 			Critters.acidVulnerability = __instance.Add(new Attribute(
 				"Beached_AcidVulnerability",
-				STRINGS.CREATURES.STATS.ACIDVULNERABILITY.NAME,
+				STRINGS.CREATURES.STATS.BEACHED_ACIDVULNERABILITY.NAME,
 				"",
-				STRINGS.CREATURES.STATS.ACIDVULNERABILITY.TOOLTIP,
+				STRINGS.CREATURES.STATS.BEACHED_ACIDVULNERABILITY.TOOLTIP,
 				0f,
 				Attribute.Display.General,
 				false));

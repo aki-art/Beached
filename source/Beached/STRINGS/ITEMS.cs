@@ -151,12 +151,6 @@ namespace Beached
 					public static LocString DESC = "See-through edible blob. It tastes like solidified water.";
 				}
 
-				public class BEACHED_LIMPET
-				{
-					public static LocString NAME = "Raw Limpet";
-					public static LocString DESC = "...";
-				}
-
 				public class BEACHED_MUSSELTONGUE
 				{
 					public static LocString NAME = Link("Mussel Tongue", MusselTongueConfig.ID);
@@ -316,7 +310,6 @@ namespace Beached
 				public class AMBER_INCLUSION_MICRORAPTOR
 				{
 					public static LocString NAME = "Microraptor Amber Inclusion";
-					public static LocString DESCRIPTION = "...";
 				}
 
 				public class AMBER_INCLUSION_SCORPION
@@ -335,7 +328,7 @@ namespace Beached
 				public class FLAWLESS_DIAMOND
 				{
 					public static LocString NAME = "Flawless Diamond";
-					public static LocString DESCRIPTION = "...";
+					public static LocString DESCRIPTION = "A perfect Diamond sparling in every color of the rainbow.";
 				}
 
 				public class HADEAN_ZIRCON

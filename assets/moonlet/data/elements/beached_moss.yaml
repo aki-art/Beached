@@ -1,7 +1,7 @@
 elements:
   - elementId: Beached_Moss
+    descriptionText: Dense green mat of flowerless green plants. Can be grown with a Moss Frame.
     name: Moss
-    descriptionText: todo
     color: 528b35
     audio:
       copyElement: Algae

@@ -9,11 +9,6 @@ namespace Beached
 		{
 			public class PREFABS
 			{
-				public class BEACHSHIRT
-				{
-					public static LocString NAME = "Beach Shirt";
-				}
-
 				public class BEACHED_EQUIPMENT_RUBBERBOOTS
 				{
 					public static LocString NAME = Link("Rubber Boots", RubberBootsConfig.ID);
@@ -25,7 +20,7 @@ namespace Beached
 				{
 					public static LocString NAME = Link("Maxixe Pendant", MaxixePendantConfig.ID);
 					public static LocString GENERICNAME = "Maxixe Pendant";
-					public static LocString DESCRIPTION = "...";
+					public static LocString DESCRIPTION = "This pendant has a blue color reminiscent of the deep sea.";
 				}
 
 				public class BEACHED_EQUIPMENT_PEARLNECKLACE

@@ -15,15 +15,11 @@ namespace Beached.ModDevTools
 
 		public override void RenderTo(DevPanel panel)
 		{
-			if(lockIcon != null)
+			if(SelectTool.Instance.selectedCell != -1)
 			{
-				ImGui.DragFloat("X", ref lockX);
-				ImGui.DragFloat("Y", ref lockY);
-				ImGui.DragFloat("Z", ref lockZ);
-				ImGui.DragFloat("Scale", ref scale);
-
-				lockIcon.transform.localPosition = new Vector3(lockX, lockY, lockZ);
-				lockIcon.transform.localScale = Vector3.one * scale;
+				ProcGen.SubWorld.ZoneType zoneType = World.Instance.zoneRenderData.GetSubWorldZoneType(SelectTool.Instance.selectedCell);
+				
+				ImGui.Text("ZoneType: " + zoneType);
 			}
 		}
 	}

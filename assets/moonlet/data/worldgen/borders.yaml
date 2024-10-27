@@ -16,5 +16,5 @@ add:
       weight: 10
     - element: Beached_Basalt
       weight: 5
-    - element: Beached_Coquina
+    - element: CrossRoads_Coquina
       weight: 20

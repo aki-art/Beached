@@ -8,7 +8,6 @@ namespace Beached.Content.Codex
 		public const string BEACHED_GUIDES_CATEGORY = "BEACHEDGUIDES";
 		public static void Generate()
 		{
-			CritterHappinessTutorial.GenerateEntry();
 			MushroomTutorial.GenerateEntry();
 			CreateGuidesEntry(new CodexEntry(BEACHED_GUIDES_CATEGORY, [], "title"));
 		}
@@ -17,7 +16,7 @@ namespace Beached.Content.Codex
 		{
 			var results = new Dictionary<string, CodexEntry>()
 			{
-				{ CritterHappinessTutorial.ID, entry }
+				{ MushroomTutorial.ID, entry }
 			};
 
 			CreateModsCategory(BEACHED_GUIDES_CATEGORY, results);

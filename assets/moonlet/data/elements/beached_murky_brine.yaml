@@ -1,6 +1,7 @@
 elements:
     - elementId: Beached_MurkyBrine
       name: Murky Brine -- basically Polluted Brine
+      descriptionText: Water with high concentration of salt and pollutants.
       color: 3c3d37
       maxMass: 1200
       liquidCompression: 1.01

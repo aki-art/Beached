@@ -55,12 +55,6 @@ namespace Beached
 					public static LocString DESC = "Minnow's printing label actually says \"Experiment MRM8\", but she prefers to go by Minnow.";
 				}
 
-				public class BEACHED_MIKA
-				{
-					public static LocString NAME = "Mika";
-					public static LocString DESC = "It is scientifically impossible to not get along with a Mika. He's just that cool.";
-				}
-
 				public class BEACHED_VAHANO
 				{
 					public static LocString NAME = "Va'Hano";
@@ -125,15 +119,6 @@ namespace Beached
 				}
 			}
 
-			public class STATS
-			{
-				public class BEACHED_WET
-				{
-					public static LocString NAME = "Wet";
-					public static LocString TOOLTIP = "";
-				}
-			}
-
 			public class TRAITS
 			{
 				public static LocString GENETIC_TRAIT = "This is a genetic trait always paired with a {0}.";
@@ -186,7 +171,7 @@ namespace Beached
 				public class BEACHED_DEXTEROUS
 				{
 					public static LocString NAME = "Dexterous";
-					public static LocString DESC = "This duplicant can live like a fish in the water... or at least breath like one.";
+					public static LocString DESC = "This duplicant is extremely skilled with their hands.";
 				}
 
 				public class BEACHED_ASMRLOVER
@@ -204,7 +189,7 @@ namespace Beached
 				public class BEACHED_SEAFOODALLERGY
 				{
 					public static LocString NAME = "Sea-Food Allergy";
-					public static LocString DESC = "...";
+					public static LocString DESC = "Unfortunately this duplicant has a severe reaction when consuming anything that comes from the Sea.";
 				}
 			}
 
@@ -246,7 +231,7 @@ namespace Beached
 
 				public class BEACHED_LIMPETS_DUPLICANT
 				{
-					public static LocString NAME = "NA"; //KUI.FormatAsLink("Limpets", LimpetsSickness.ID);
+					public static LocString NAME = Link("Limpets", LimpetsSickness.ID);
 				}
 
 				public class BEACHED_SICKNESS_CAPPED
@@ -257,11 +242,6 @@ namespace Beached
 				public class BEACHED_SICKNESS_POFFMOUTH
 				{
 					public static LocString NAME = Link("Poffmouth", PoffSporeGerms.ID);
-				}
-
-				public class BEACHED_SICKNESS_TELEPORTITS
-				{
-					public static LocString NAME = Link("Teleportitis", "");
 				}
 
 				public static LocString LIGHTEXPOSURE = "Exposed to Light. Approximately {0} change per second.";

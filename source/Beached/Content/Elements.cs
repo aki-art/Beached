@@ -40,7 +40,6 @@ namespace Beached.Content
 			iridium = ToHash("Iridium"),
 			moltenIridium = ToHash("MoltenIridium"),
 			iridiumGas = ToHash("IridiumGas"),
-			latex = ToHash("Latex"),
 			mucus = ToHash("Mucus"),
 			mucusFrozen = ToHash("FrozenMucus"),
 			murkyBrine = ToHash("MurkyBrine"),
@@ -72,6 +71,13 @@ namespace Beached.Content
 			zirconiumOre = ToHash("Zircon"),
 			sourBrine = ToHash("SourBrine"),
 			sourBrineIce = ToHash("SourBrineIce");
+
+		public class Moonlet
+		{
+			public static readonly SimHashes
+				coquina = ToHashMod("CrossRoads_Coquina"),
+				paleOre = ToHashMod("CrossRoads_PaleOre");
+		}
 
 		public class ChemicalProcessing
 		{

@@ -1,6 +1,7 @@
 elements:
   - elementId: Beached_SourBrine
     name: Sourbrine
+    descriptionText: Brine containing high concentrations of hydrogen sulfide and methane.
     color: &color 8c5075
     maxMass: 1200
     liquidCompression: 1.01
@@ -31,6 +32,7 @@ elements:
 
   - elementId: Beached_SourBrineIce
     name: Sourbrine Ice
+    descriptionText: <link=\"BEACHEDSOURBRINE\">Sour Brine</sub> frozen into it's <link=\"ELEMENTS_SOLID\">Solid</link> state.
     color: *color
     specificHeatCapacity: 3.4
     thermalConductivity: 2.18

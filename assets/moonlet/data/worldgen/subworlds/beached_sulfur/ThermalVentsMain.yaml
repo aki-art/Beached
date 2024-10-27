@@ -18,4 +18,11 @@ biomes:
 tags:
   - IgnoreCaveOverride
 
+# subworldTemplateRules:
+#   - names:
+#       - beached/worldgen/sulfur/smoker_single_a
+#     listRule: TrySome
+#     someCount: 3
+#     allowDuplicates: true
+
 zoneType: Beached_Sulfur

@@ -73,7 +73,7 @@
 			public class BEACHED_HELIUM
 			{
 				public static LocString NAME = "High Pitched";
-				public static LocString DESC = $"This duplicant is less picky about their food.";
+				public static LocString DESC = $"This duplicant could try-out for Soprano.";
 			}
 
 			public class BEACHED_EFFECT_PLUSHIEVOLE
@@ -108,13 +108,13 @@
 						"Once fully grown, they can be sheared off for resources.";
 			}
 
-			class BEACHED_SCARED
+			public class BEACHED_SCARED
 			{
 				public static LocString NAME = "Scared";
 				public static LocString DESC = $"This duplicant has been terrified by darkness.";
 			}
 
-			class BEACHED_SCARED_SIREN
+			public class BEACHED_SCARED_SIREN
 			{
 				public static LocString NAME = "Scared";
 				public static LocString DESC = $"This duplicant has seen something really scary!";

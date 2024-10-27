@@ -1,6 +1,7 @@
 elements:
     - elementId: Beached_Iridium
       name: Iridium
+      descriptionText: An extremely dense metal with a pale glimmering appearance. It is generally only found in Meteorites. 
       color: &color b6b2fb
       uiColor: &uiColor 6a679f
       specularTexture: beached_iridium_spec
@@ -38,6 +39,7 @@ elements:
       
     - elementId: Beached_MoltenIridium
       name: Molten Iridium
+      descriptionText: Molten Iridium is <link=\"BEACHEDIRIDIUM\">Iridium</link> heated into <link=\"ELEMENTS_LIQUID\">Liquid</link> state.
       color: *color
       uiColor: *uiColor
       maxMass: 7870
@@ -72,6 +74,7 @@ elements:
       color: *color
       uiColor: *uiColor
       specificHeatCapacity: 0.131
+      descriptionText: Gas Iridium is <link=\"BEACHEDIRIDIUM\">Iridium</link> heated into <link=\"ELEMENTS_GAS\">Gaseous</link> state.
       thermalConductivity: 3.75
       solidSurfaceAreaMultiplier: 25
       liquidSurfaceAreaMultiplier: 1

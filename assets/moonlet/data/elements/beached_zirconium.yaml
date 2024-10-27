@@ -4,6 +4,7 @@ elements:
       color: &color cd0000
       specularColor: &specularColor 2, 0, 0, 1
       specularTexture: beached_zircon_spec
+      descriptionText: Deep red gemstone which yields Zirconium if molten. Zircon is a nesosilicate with the formula ZrSiO<sub>4</sub>
       modifiers:
         - id: OverheatTemperature
           value: 150
@@ -39,6 +40,7 @@ elements:
       color: *color
       specularColor: *specularColor
       specularTexture: beached_zirconium_spec
+      descriptionText: A lustrous, soft but corrosion resistant metal.
       modifiers:
         - id: OverheatTemperature
           value: 150
@@ -73,6 +75,7 @@ elements:
       color: *color
       maxMass: 7870
       liquidCompression: 1.01
+      descriptionText: Molten Zirconium is <link=\"BEACHEDZIRCONIUM\">Zirconium</link> heated into <link=\"ELEMENTS_LIQUID\">Liquid</link> state.
       speed: 100
       minHorizontalFlow: 30
       minVerticalFlow: 3
@@ -102,6 +105,7 @@ elements:
       name: Zirconium Gas
       color: *color
       specificHeatCapacity: 0.91
+      descriptionText: Gas Zirconium is <link=\"BEACHEDZIRCONIUM\">Zirconium</link> heated into <link=\"ELEMENTS_GAS\">Gaseous</link> state.
       thermalConductivity: 2.5
       solidSurfaceAreaMultiplier: 25
       liquidSurfaceAreaMultiplier: 1

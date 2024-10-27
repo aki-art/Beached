@@ -55,8 +55,8 @@ namespace Beached.Content.Defs.Flora
 
 			var tap = prefab.AddComponent<RubberTappable>();
 			tap.trackSymbol = "bucket";
-			tap.latexStorage = latexStorage;
-			tap.latexPerCycle = 20;
+			tap.materialStorage = latexStorage;
+			tap.materialPerCycle = 20;
 			tap.element = Elements.rubber;
 
 			return prefab;

@@ -1,7 +1,7 @@
 elements:
   - elementId: Beached_Amber
     name: Amber
-    descriptionText: todo
+    descriptionText: Fossilized resin of ancient trees. Occasionally contains inclusions which can be studied in the DNA Analyzer.
     modifiers:
       - id: OverheatTemperature
         value: -20

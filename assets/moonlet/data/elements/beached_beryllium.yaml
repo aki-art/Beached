@@ -1,6 +1,7 @@
 elements:
     - elementId: Beached_Beryllium
       name: Beryllium
+      descriptionText: A brittle alkaline earth metal with a silvery pale color.
       color: &color 7da39a
       specularColor: FFFFFF
       specularTexture: beached_beryllium_spec
@@ -28,6 +29,7 @@ elements:
 
     - elementId: Beached_BerylliumMolten
       name: Molten Beryllium
+      descriptionText: Molten Beryllium is <link=\"BEACHEDBERYLLIUM\">Beryllium</link> heated into <link=\"ELEMENTS_LIQUID\">Liquid</link> state.
       color: *color
       maxMass: 7870
       liquidCompression: 1.01
@@ -60,6 +62,7 @@ elements:
       name: Beryllium Gas
       color: *color
       specificHeatCapacity: 1.88
+      descriptionText: Gas Beryllium is <link=\"BEACHEDBERYLLIUM\">Beryllium</link> heated into <link=\"ELEMENTS_GAS\">Gaseous</link> state.
       thermalConductivity: *shc
       solidSurfaceAreaMultiplier: 25
       liquidSurfaceAreaMultiplier: 1

@@ -1,6 +1,7 @@
 elements:
   - elementId: Beached_Rubber
     name: Rubber
+    descriptionText: Natural rubber composed of the polymers of Isoprene.
     color: d07538
     modifiers:
       - id: OverheatTemperature

@@ -44,7 +44,7 @@
 
 			public class BEACHED_SKELETON_CHAIR
 			{
-				public static LocString NAME = "Skeleton";
+				public static LocString NAME = "Chill Skeleton";
 				public static LocString DESCRIPTION = "These bones have the shape and proportions of an average Duplicant... it's probably a coincidence.";
 			}
 		}

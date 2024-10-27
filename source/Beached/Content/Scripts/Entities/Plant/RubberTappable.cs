@@ -1,13 +1,15 @@
-﻿using KSerialization;
+﻿using Beached.Content.ModDb;
+using KSerialization;
+using System;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities.Plant
 {
-	public class RubberTappable : StateMachineComponent<RubberTappable.StatesInstance>, ISidescreenButtonControl
+	public class RubberTappable : StateMachineComponent<RubberTappable.StatesInstance>
 	{
 		[SerializeField] public string trackSymbol;
-		[SerializeField] public float latexPerCycle;
-		[SerializeField] public Storage latexStorage;
+		[SerializeField] public float materialPerCycle;
+		[SerializeField] public Storage materialStorage;
 		[SerializeField] public SimHashes element;
 
 		private KBatchedAnimController bucketKbac;
@@ -20,35 +22,60 @@ namespace Beached.Content.Scripts.Entities.Plant
 			get
 			{
 				if (isTapped)
-					return "Remove Tap";
+					return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.REMOVE_TAP;
 
 				if (tapOrdered)
-					return "Cancel";
+					return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.CANCEL_TAP;
 
-				return "Tap";
+				return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.TAP;
 			}
 		}
 
-		public string SidescreenButtonTooltip => "Collect rubber from this tree.";
-
-		public int ButtonSideScreenSortOrder() => 0;
-
-		public int HorizontalGroupID() => -1;
-
 		public void OnSidescreenButtonPressed()
 		{
+			if (tapOrdered)
+			{
+				CancelTapOrder();
+				return;
+			}
+
+			if(isTapped)
+			{
+				UnTap();
+				return;
+			}
+
+			OrderTap();
+		}
+
+		private void OrderTap()
+		{
+			smi.GoTo(smi.sm.tapOrdered);
+		}
+
+		private void UnTap()
+		{
+			smi.GoTo(smi.sm.notTapped);
+		}
+
+		private void CancelTapOrder()
+		{
+			smi.GoTo(smi.sm.notTapped);
 		}
 
 		public override void OnSpawn() => smi.StartSM();
 
-		public void SetButtonTextOverride(ButtonMenuTextOverride textOverride)
+		public static string ResolveStatusItemString(string str, object data)
 		{
-			throw new System.NotImplementedException();
+			if (data is RubberTappable tappable)
+			{
+				var mass = tappable.materialStorage.MassStored();
+				var formattedMass = GameUtil.GetFormattedMass(mass);
+				return string.Format(str, formattedMass);
+			}
+
+			return str;
 		}
-
-		public bool SidescreenButtonInteractable() => true;
-
-		public bool SidescreenEnabled() => true;
 
 		public class StatesInstance : GameStateMachine<States, StatesInstance, RubberTappable, object>.GameInstance
 		{
@@ -67,8 +94,8 @@ namespace Beached.Content.Scripts.Entities.Plant
 				master.TryGetComponent(out PrimaryElement primaryElement);
 
 				trackSymbol = master.trackSymbol;
-				latexPerSecond = smi.master.latexPerCycle / CONSTS.CYCLE_LENGTH;
-				latexStorage = master.latexStorage;
+				latexPerSecond = smi.master.materialPerCycle / CONSTS.CYCLE_LENGTH;
+				latexStorage = master.materialStorage;
 				element = ElementLoader.FindElementByHash(master.element);
 
 				kbac.SetSymbolVisiblity(master.trackSymbol, false);
@@ -109,6 +136,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 		{
 			public State notTapped;
 			public State tapOrdered;
+			public State untapping;
 			public CollectingStates collecting;
 
 			public override void InitializeStates(out BaseState default_state)
@@ -118,21 +146,33 @@ namespace Beached.Content.Scripts.Entities.Plant
 				notTapped
 					.Enter(DisableOverlay);
 
+				tapOrdered
+					.GoTo(collecting); // TODO chore
+
 				collecting
 					.Enter(EnableOverlay);
 
 				collecting.blocked
 					.EventTransition(GameHashes.WiltRecover, collecting)
-					.ToggleStatusItem("Latex collection halted.", "");
+					.ToggleStatusItem(BStatusItems.collectingRubberHalted);
 
 				collecting.running
 					.EventTransition(GameHashes.Wilt, collecting.blocked)
 					.UpdateTransition(collecting.full, FillBucket, UpdateRate.SIM_1000ms)
-					.ToggleStatusItem("Stored Latex {0}", "{0}", resolve_string_callback: (str, smi) => string.Format(str, smi.master.latexStorage.MassStored()));
+					.ToggleStatusItem(BStatusItems.collectingRubber);
 
 				collecting.full
 					.EventHandlerTransition(GameHashes.OnStorageChange, collecting.running, (smi, _) => !smi.latexStorage.IsFull())
-					.ToggleStatusItem("Latex Bucket Full", "");
+					.ToggleStatusItem(BStatusItems.collectingRubberFull);
+
+				untapping
+					.Enter(DropStorage)
+					.GoTo(notTapped);
+			}
+
+			private void DropStorage(StatesInstance smi)
+			{
+				smi.master.materialStorage.DropAll();
 			}
 
 			public class CollectingStates : State

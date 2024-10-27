@@ -25,7 +25,7 @@ namespace Beached.Content.DefBuilders
 		private bool canDrown = true;
 		private bool diesEntombed = true;
 		private ChoreTable.Builder choreTable;
-		private bool trappable;
+		private bool trappable, baggable, movable;
 		private float mass = 50f;
 		private float? defaultTemperature = 0;
 		private int width = 1, height = 1;
@@ -43,7 +43,6 @@ namespace Beached.Content.DefBuilders
 		private HashSet<Tag> tags = [];
 		private AttackProperties attackProperties;
 		private WeaponBuilder weapon;
-		private bool baggable;
 		private Tag condoTag = CritterCondoConfig.ID;
 		private bool condoRequiresCavity = true;
 
@@ -289,6 +288,12 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
+		public CritterBuilder Movable()
+		{
+			movable = true;
+			return this;
+		}
+
 		public GameObject Build()
 		{
 			if (!Assets.TryGetAnim(anim, out var animFile))
@@ -347,6 +352,9 @@ namespace Beached.Content.DefBuilders
 
 			if (trappable)
 				prefab.AddOrGet<Trappable>();
+
+			if (movable)
+				prefab.AddOrGet<Movable>();
 
 			if (mass > 0)
 				prefab.AddOrGet<PrimaryElement>().Mass = mass;

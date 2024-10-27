@@ -1,5 +1,6 @@
 elements:
   - elementId: Beached_Aquamarine
+    descriptionText: Pale blue glimmering crystal with the formula Be<sub>3</sub>Al<sub>2</sub>Si<sub>6</sub>O<sub>18</sub>. It is a type of Beryl and will melt into <link=\"BEACHEDBERYLLIUM\">Beryllium</link> if heated. Occasionally a Duplicant with good precision skills can uncover a <link=\"BEACHEDITEMMAXIXE\"">Maxixe Gem</link> when diggin up naturally formed Aquamarine.
     name: Aquamarine
     color: 0.05, 1.2, 2.51, 1.0
     modifiers:

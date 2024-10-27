@@ -1,7 +1,7 @@
 elements:
   - elementId: Beached_Pearl
     name: Pearl
-    descriptionText: "todo"
+    descriptionText: Solidified mass of pearls stuck together, forming an aesthethically very pleasing building material.
     color: c9bda6
     normalTexture: beached_pearl_normal
     specularTexture: beached_pearl_spec

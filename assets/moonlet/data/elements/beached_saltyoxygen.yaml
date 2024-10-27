@@ -1,10 +1,10 @@
 elements:
     - elementId: Beached_SaltyOxygen
       name: Salty Oxygen
+      descriptionText: Breathable Air with high concentration of suspended Salt Water vapour.
       color: 0.804, 0.667, 0.667, 1.4 # stronger alpha so it's a little more visible
       eyeIrritationStrength: -0.25
       uiColor: d1a1a1
-      descriptionText: "todo"
       gasTextureType: Safe
       specificHeatCapacity: 1.01
       thermalConductivity: 0.024

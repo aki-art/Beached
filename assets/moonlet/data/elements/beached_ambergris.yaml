@@ -1,5 +1,6 @@
 elements:
   - elementId: Beached_AmberGris
+    descriptionText: "Aromatic, waxy material left behind by Space Drales. --  Space Drale: Dragon + Whale. Might go with Spae Whagon instead."
     name: Ambergris
     color: 9274d5
     specificHeatCapacity: 1.92

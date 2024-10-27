@@ -1,14 +1,18 @@
 tags:
   - Wet
   - AllowExceedNodeBorders
+  
 shape: ShortWide
+
 borders:
   - 1
   - 1
   - 1
+
 blobSize:
   min: 5
   max: 12
+
 ElementChoiceGroups:
   RoomCenterElements:
     selectionMethod: HorizontalSlice
@@ -25,9 +29,11 @@ ElementChoiceGroups:
       - element: Beached_Ammonia
         weight: 0.3
   RoomBorderChoices1:
-    selectionMethod: HorizontalSlice
+    selectionMethod: WeightedResample
     choices:
       - element: Gold
+        weight: 0.55
+      - element: Beached_Brass
         weight: 0.55
       - element: Lime
         weight: 0.55
@@ -36,10 +42,12 @@ ElementChoiceGroups:
       - element: Beached_Ammonia
         weight: 0.45
   RoomBorderChoices2:
-    selectionMethod: HorizontalSlice
+    selectionMethod: WeightedResample
     choices:
       - element: Gold
         weight: 0.3
+      - element: Beached_Brass
+        weight: 0.55
       - element: Lime
         weight: 0.55
       - element: Fossil

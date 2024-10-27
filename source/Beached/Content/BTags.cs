@@ -77,6 +77,7 @@ namespace Beached.Content
 		{
 			public static readonly Tag
 				secretingMucus = TagManager.Create("Beached_SecretingMucus"),
+				jellyFishLure = TagManager.Create("Beached_JellyFishLure"),
 				hunting = TagManager.Create("Beached_Behavior_Hunting"),
 				wantsToSitOnEgg = TagManager.Create("Beached_Behavior_WantsToSitOnEgg"),
 				// muffins will not hunt critters with this tag, regardless of collar settings

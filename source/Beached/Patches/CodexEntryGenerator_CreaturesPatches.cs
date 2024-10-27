@@ -18,7 +18,7 @@ namespace Beached.Patches
 				AddCreature(BTags.Species.muffin, STRINGS.CREATURES.FAMILY.BEACHEDMUFFIN, brains);
 				AddCreature(BTags.Species.karacoo, STRINGS.CREATURES.FAMILY.BEACHEDKARACOO, brains);
 				AddCreature(BTags.Species.mite, STRINGS.CREATURES.FAMILY.BEACHEDMITE, brains);
-				//AddCreature(BTags.Species.jellyfish, STRINGS.CREATURES.FAMILY.BEACHEDJELLYFISH, brains);
+				AddCreature(BTags.Species.jellyfish, STRINGS.CREATURES.FAMILY.BEACHEDJELLYFISH, brains);
 			}
 
 			private static void AddCreature(Tag species, string name, List<GameObject> brains)

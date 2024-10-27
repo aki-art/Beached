@@ -1,6 +1,7 @@
 elements:
   - elementId: Beached_Gravel
     name: Gravel
+    descriptionText: Coarse loose material full of pebbles and dirt.
     color: 0.4, 0.4, 0.4
     specificHeatCapacity: 0.2
     thermalConductivity: 2

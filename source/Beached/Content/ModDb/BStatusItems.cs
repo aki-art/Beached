@@ -2,6 +2,7 @@
 using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
+using Beached.Content.Scripts.Entities.Plant;
 using Beached.Content.Scripts.Items;
 using Database;
 
@@ -13,6 +14,9 @@ namespace Beached.Content.ModDb
 			desiccation,
 			secretingMucus,
 			smoking,
+			collectingRubber,
+			collectingRubberHalted,
+			collectingRubberFull,
 			geneticallyMofidied,
 			lubricated,
 			gunked,
@@ -24,12 +28,17 @@ namespace Beached.Content.ModDb
 			nonVega,
 			sandboxCrumble;
 
+		public const string
+			ITEMS = "ITEMS",
+			BUILDINGS = "BUILDINGS",
+			CREATURES = "CREATURES";
+
 		[DbEntry]
 		public static void RegisterMiscStatusItems(MiscStatusItems __instance)
 		{
 			meat = __instance.Add(new StatusItem(
 				"Beached_Meat",
-				"ITEMS",
+				ITEMS,
 				"beached_statusitem_meat",
 				StatusItem.IconType.Custom,
 				NotificationType.Neutral,
@@ -39,7 +48,7 @@ namespace Beached.Content.ModDb
 
 			lubricated = __instance.Add(new StatusItem(
 				"Beached_Lubricated",
-				"BUILDINGS",
+				BUILDINGS,
 				"status_item_plant_liquid",
 				StatusItem.IconType.Custom,
 				NotificationType.Neutral,
@@ -51,7 +60,7 @@ namespace Beached.Content.ModDb
 
 			sandboxCrumble = __instance.Add(new StatusItem(
 				"Beached_SandBoxCrumble",
-				"BUILDINGS",
+				BUILDINGS,
 				string.Empty,
 				StatusItem.IconType.Info,
 				NotificationType.Neutral,
@@ -63,7 +72,7 @@ namespace Beached.Content.ModDb
 
 			nonVega = __instance.Add(new StatusItem(
 				"Beached_NonVega",
-				"ITEMS",
+				ITEMS,
 				"beached_statusitem_nonvega",
 				StatusItem.IconType.Custom,
 				NotificationType.Neutral,
@@ -73,7 +82,7 @@ namespace Beached.Content.ModDb
 
 			gunked = __instance.Add(new(
 				"Beached_Gunked",
-				"BUILDINGS",
+				BUILDINGS,
 				string.Empty,
 				StatusItem.IconType.Exclamation,
 				NotificationType.Bad,
@@ -82,7 +91,7 @@ namespace Beached.Content.ModDb
 
 			cultivatingGerms = __instance.Add(new(
 				"Beached_CultivatingGerms",
-				"CREATURES",
+				CREATURES,
 				string.Empty,
 				StatusItem.IconType.Info,
 				NotificationType.Good,
@@ -93,7 +102,7 @@ namespace Beached.Content.ModDb
 
 			smoking = __instance.Add(new(
 				"Beached_Smoking",
-				"CREATURES",
+				CREATURES,
 				string.Empty,
 				StatusItem.IconType.Info,
 				NotificationType.Neutral,
@@ -103,12 +112,31 @@ namespace Beached.Content.ModDb
 			smoking.SetResolveStringCallback((str, data) => data is SmokeCookable smokable ? smokable.GetStatusItemTooltip(str) : str);
 		}
 
+		private static StatusItem SimpleBuildingStatus(BuildingStatusItems __instance, string id, NotificationType notificationType = NotificationType.Neutral)
+		{
+			return __instance.Add(new StatusItem(
+				id,
+				BUILDINGS,
+				string.Empty,
+				notificationType == NotificationType.Good || notificationType == NotificationType.Neutral ? StatusItem.IconType.Info : StatusItem.IconType.Exclamation,
+				notificationType,
+				false,
+				OverlayModes.None.ID,
+				false));
+		}
+
 		[DbEntry]
 		public static void RegisterBuildingStatusItems(BuildingStatusItems __instance)
 		{
+			collectingRubber = SimpleBuildingStatus(__instance, "Beached_CollectingRubber");
+			collectingRubber.SetResolveStringCallback(RubberTappable.ResolveStatusItemString);
+
+			collectingRubberHalted = SimpleBuildingStatus(__instance, "Beached_CollectingRubberHalted", NotificationType.BadMinor);
+			collectingRubberFull = SimpleBuildingStatus(__instance, "Beached_CollectingRubberHaltedFull");
+
 			plushed = new(
 				"Beached_Plushed",
-				"BUILDINGS",
+				BUILDINGS,
 				string.Empty,
 				StatusItem.IconType.Info,
 				NotificationType.Good,
@@ -125,7 +153,7 @@ namespace Beached.Content.ModDb
 		{
 			desiccation = new(
 				"Beached_Desiccation",
-				"CREATURES",
+				CREATURES,
 				string.Empty,
 				StatusItem.IconType.Exclamation,
 				NotificationType.Bad,
@@ -139,7 +167,7 @@ namespace Beached.Content.ModDb
 
 			geneticallyMofidied = new(
 				"Beached_GeneticallyModified",
-				"CREATURES",
+				CREATURES,
 				"status_item_unknown_mutation",
 				StatusItem.IconType.Custom,
 				NotificationType.Neutral,
@@ -155,7 +183,7 @@ namespace Beached.Content.ModDb
 
 			secretingMucus = new(
 				"Beached_SecretingMucus",
-				"CREATURES",
+				CREATURES,
 				string.Empty,
 				StatusItem.IconType.Exclamation,
 				NotificationType.Neutral,
@@ -167,7 +195,7 @@ namespace Beached.Content.ModDb
 
 			hunting = new(
 				"Beached_Hunting",
-				"CREATURES",
+				CREATURES,
 				string.Empty,
 				StatusItem.IconType.Exclamation,
 				NotificationType.Neutral,
@@ -179,7 +207,7 @@ namespace Beached.Content.ModDb
 
 			controllerByCollarDispenser = new(
 				"Beached_ControllerByCollarDispenser",
-				"CREATURES",
+				CREATURES,
 				string.Empty,
 				StatusItem.IconType.Info,
 				NotificationType.Neutral,

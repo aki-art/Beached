@@ -1,6 +1,7 @@
 elements:
     - elementId: Beached_Nitrogen
       name: Nitrogen
+      descriptionText: Nitrogen is a lightweight gas and a byproduct of processing Ammonia into power.
       color: &color 0.65, 0.65, 0.65, 0.2
       uiColor: &uiColor DDDDDD
       specificHeatCapacity: 1.01
@@ -24,6 +25,7 @@ elements:
   
     - elementId: Beached_LiquidNitrogen
       name: Liquid Nitrogen
+      descriptionText: Liquid (N) Nitrogen is <link=\"BEACHEDNITROGEN\">Iridium</link> in a <link=\"ELEMENTS_LIQUID\">Liquid</link> state.
       color: *color
       uiColor: *uiColor
       maxMass: 500
@@ -51,6 +53,7 @@ elements:
   
     - elementId: Beached_FrozenNitrogen
       name: Solid Nitrogen
+      descriptionText: Solid (N) Nitrogen is <link=\"BEACHEDNITROGEN\">Iridium</link> in a <link=\"ELEMENTS_SOLID\">Solid</link> state.
       color: *color
       uiColor: *uiColor
       specificHeatCapacity: 1.01

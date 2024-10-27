@@ -1,0 +1,44 @@
+add:
+  - id: beached_bamboo
+    name: Bamboo Forest
+    description: Tall Bamboo plants and lush greenery.
+    utilityDescription: Contains an abundant source of organic materials.
+    icon: biomeIcon_beached_bamboo
+
+  - id: beached_beach
+    name: Beach
+    description: These sandy shoreslines are bountiful with useful resources, providing great supplies for a colony, although the large amount of water and sand may make excavation challenging.
+    utilityDescription: The layers of Siltstone, Salt and Sand suggest this area was once fully submerged under an ocean, luckily it is now mostly dry land. The Zinc Ore deposits will serve as a valuable metal source for my colony.
+    icon: biomeIcon_beached_bamboo
+
+  - id: beached_rot
+    name: Drale Fall
+    description: Strange twisting cavers lined with supple amounts of Bone, Lime and Rot. The local lifeforms appear to have adapted to scavenging these resources.
+    utilityDescription: The decaying corpse of an enormous animal, providing a habitat for a thriving ecosystem.
+    icon: biomeIcon_beached_bamboo
+
+  - id: beached_sea
+    name: Sea
+    description: An entirely submerged biome with an abundance of life.
+    utilityDescription: An enormous reservoir of Water, which can offset a lack of easily renewable clean Water.
+    icon: biomeIcon_beached_bamboo
+
+  - id: beached_snowy
+    name: Snowy Beach
+    description: Once warm and inviting sandy beached, now frozen over and covered in Snow. This place seems largely inhabitable, but there are many treasures hidden withing the Ice. I must be careful, there also seems to be a lot of ancient viruses and other danges wairing beneath the Ice
+    utilityDescription: This location is littered with frozen treasures and dangers.
+    icon: biomeIcon_beached_bamboo
+  
+  - id: beached_sulfur
+    name: Sulfurous Core
+    description: A hot, pungent location where only a few extremophile creatures can survive.
+    utilityDescription: This biome is a source of heat and Sulfur.
+    icon: biomeIcon_beached_bamboo
+
+  - id: beached_surface
+    name: Salt Crust
+    description: A largely inhabitable place exposed to the coldness of Space.
+    utilityDescription: Millenias of meteor showers have enriched this layer of the asteroid with valuable resources, such as Diamond and Crude Oil.
+    icon: biomeIcon_beached_bamboo
+
+# depths An unusual darkness veils the Depths, hiding dangerous creatures and traps, and scaring Duplicants. Illumination of the area is neccessary to explore, but there may be something of great value hidden deep within.

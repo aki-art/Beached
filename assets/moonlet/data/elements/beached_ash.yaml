@@ -1,6 +1,7 @@
 elements:
   - elementId: Beached_Ash
     name: Ash
+    descriptionText: Ash is a mineral containing residue left after combusiton of other materials. 
     color: 8a8e9d
     unstableColorTint: 8a8e9d
     specificHeatCapacity: 0.2

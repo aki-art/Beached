@@ -1,6 +1,7 @@
 elements:
     - elementId: Beached_Calcium
       name: Calcium
+      descriptionText: Calcium is a silver colored alkali metal. It has an important role in the biochemical processes of most organisms. 
       color: &color FFFFFF
       uiColor: &uiColor 8791a0
       specificHeatCapacity: &shc 0.63
@@ -29,6 +30,7 @@ elements:
 
     - elementId: Beached_MoltenCalcium
       name: Molten Calcium
+      descriptionText: Very hot milk. 
       color: *color
       uiColor: *uiColor
       maxMass: 7870
@@ -65,6 +67,7 @@ elements:
       specificHeatCapacity: *shc
       thermalConductivity: 2.5
       solidSurfaceAreaMultiplier: 25
+      descriptionText: Gas Calcium is <link=\"BEACHEDCALCIUM\">Calcium</link> heated into <link=\"ELEMENTS_GAS\">Gaseous</link> state.
       liquidSurfaceAreaMultiplier: 1
       gasSurfaceAreaMultiplier: 1
       flow: 0.1

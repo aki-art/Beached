@@ -1,6 +1,7 @@
 elements:
     - elementId: Beached_SiltStone
       name: Silt Stone
+      descriptionText: A type of mudrock composed primarily of Silt. 
       textureUVScale: 14
       specificHeatCapacity: 0.8
       thermalConductivity: 2.9

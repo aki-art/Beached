@@ -1,83 +1,92 @@
-﻿using Beached.Content.Scripts.Entities.AI;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Entities.Critters.Muffins;
+using Beached.Content.ModDb.Germs;
+using Beached.Content.Scripts.Entities.AI;
+using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Jellies
 {
-	public static class BaseJellyfishConfig
+	public abstract class BaseJellyfishConfig : BaseCritterConfig
 	{
 		public const int SORTING_ORDER = 53;
-		public static GameObject CreatePrefab(string id, string name, string desc, string anim_file, string traitId, string symbolOverridePrefix)
+
+		public override GameObject CreatePrefab(BaseCritterConfig config)
 		{
-			var prefab = EntityTemplates.CreatePlacedEntity(
-				id,
-				name,
-				desc,
-				JellyfishTuning.MASS,
-				Assets.GetAnim(anim_file),
-				"idle_loop",
-				Grid.SceneLayer.Creatures,
-				1,
-				2,
-				DECOR.NONE);
+			var prefab = base.CreatePrefab(config);
+			prefab.AddOrGetDef<CreatureFallMonitor.Def>().canSwim = true;
 
-			EntityTemplates.ExtendEntityToBasicCreature(
-				prefab,
-				FactionManager.FactionID.Friendly,
-				traitId,
-				CONSTS.NAV_GRID.SWIMMER,
-				NavType.Swim,
-				16,
-				0.25f,
-				JellyfishTuning.ON_DEATH_DROP,
-				1,
-				false,
-				false,
-				288.15f,
-				343.15f,
-				243.15f,
-				373.15f);
+			var planktonDiet = new Diet(new Diet.Info(
+				[PlanktonGerms.ID],
+				null,
+				100f));
 
-			prefab.AddTag(GameTags.Creatures.Swimmer);
-			prefab.AddTag(GameTags.Creatures.CrabFriend);
-			prefab.AddTag(GameTags.Amphibious);
+			var creatureCalorieMonitor = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
+			creatureCalorieMonitor.diet = planktonDiet;
 
-			ConfigureAI(prefab, symbolOverridePrefix, BTags.Species.snail);
+			var germConsumerMonitor = prefab.AddOrGetDef<GermConsumerMonitor.Def>();
+			germConsumerMonitor.diet = planktonDiet;
+			germConsumerMonitor.consumableGermIdx = Db.Get().Diseases.GetIndex(BDiseases.plankton.id);
+
+			prefab.AddOrGetDef<LureableMonitor.Def>().lures = 
+				[
+					GameTags.Creatures.FishTrapLure
+				];
 
 			return prefab;
 		}
 
-		public static void ConfigureAI(GameObject gameObject, string symbolOverridePrefix, Tag species)
+		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
-			var germSuckDef = new GermSuckStates.Def()
-			{
-			};
+			return builder
+				.TemperatureCelsius(0, 5, 55, 60)
+				.Mass(10f)
+				.Trappable()
+				.Baggable()
+				.Movable()
+				.CanNotDrown()
+				.Faction(FactionManager.FactionID.Prey)
+				.SortAfter(PacuConfig.ID)
+				.MaxPenSize(36)
+				.Navigator(CritterBuilder.NAVIGATION.SWIMMER, 0.25f)
+				.Brain(BTags.Species.jellyfish)
+					.Configure(ConfigureAI)
+				.Tag(GameTags.Creatures.CrabFriend)
+				.Traits()
+					.HP(25)
+					.MaxAge(200)
+					.Stomach(MuffinTuning.KCAL_PER_CYCLE * 10, MuffinTuning.KCAL_PER_CYCLE)
+					.Done();
+		}
 
-			var choreTable = new ChoreTable.Builder()
+		protected override void ConfigureAI(CritterBuilder.BrainBuilder builder, HashSet<string> conditions)
+		{
+			var isAdult = conditions.Contains(CritterBuilder.ADULT);
+
+			builder
 				.Add(new DeathStates.Def())
 				.Add(new AnimInterruptStates.Def())
-				//.Add(new GrowUpStates.Def())
+				.Add(new GrowUpStates.Def(), !isAdult)
 				.Add(new TrappedStates.Def())
-				//.Add(new IncubatingStates.Def())
+				.Add(new IncubatingStates.Def(), !isAdult)
 				.Add(new BaggedStates.Def())
-				//.Add(new FallStates.Def())
-				//.Add(new StunnedStates.Def())
+				.Add(new FallStates.Def())
+				.Add(new StunnedStates.Def())
 				.Add(new DebugGoToStates.Def())
 				.Add(new FleeStates.Def())
 				//.Add(new DefendStates.Def())
-				//.Add(new AttackStates.Def("eat_pre", "eat_pst", null))
+				.Add(new AttackStates.Def("eat_pre", "eat_pst", null))
 				.PushInterruptGroup()
 				//.Add(new CreatureSleepStates.Def())
 				.Add(new FixedCaptureStates.Def())
 				//.Add(new RanchedStates.Def())
-				//.Add(new LayEggStates.Def())
-				.Add(germSuckDef)
-				//.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
-				.Add(new CallAdultStates.Def())
+				.Add(new LayEggStates.Def(), isAdult)
+				.Add(new GermSuckStates.Def())
+				.AddPoopStates()
+				.Add(new CallAdultStates.Def(), !isAdult)
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());
-
-			EntityTemplates.AddCreatureBrain(gameObject, choreTable, species, symbolOverridePrefix);
 		}
 	}
 }

@@ -31,9 +31,7 @@ namespace Beached.Patches
 				if (config.id == BStories.Glaciers.Id)
 				{
 					var clusterId = __instance.newGameSettingsPanel.GetSetting(CustomGameSettingConfigs.ClusterLayout.id);
-					Log.Debug(clusterId);
 
-					SetDim(__instance.storyContentPanel.storyRows[BStories.Glaciers.Id], false);
 					if (clusterId != CONSTS.BEACHED_CLUSTER_SETTING_ID)
 						StoryContentPanelPatch.userChosenState = level.id == "Guaranteed"
 							? StoryContentPanel.StoryState.Guaranteed

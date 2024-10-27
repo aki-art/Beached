@@ -1,7 +1,7 @@
 elements:
   - elementId: Beached_CarbonDioxideSnow
     name: Carbon Dioxide Snow
-    descriptionText: todo
+    descriptionText: Small particles of <link=\"SOLIDCARBONDIOXIDE\">Carbon Dioxide Ice</link>.
     color: 727a81
     audio:
       copyElement: Snow

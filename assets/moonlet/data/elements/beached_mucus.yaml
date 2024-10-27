@@ -1,6 +1,7 @@
 elements:
     - elementId: Beached_Mucus
       name: Mucus
+      descriptionText: Slimy Mucus produced by a Slickshell. This viscous material is primarily composed of oils and polysaccharide. It can be applied to most mechanical machineries for a small boost in efficiency.
       color: &color aacdaa
       uiColor: &uiColor 455242
       maxMass: 100
@@ -44,6 +45,7 @@ elements:
   
     - elementId: Beached_FrozenMucus
       name: Frozen Mucus
+      descriptionText: <link=\"BEACHEDMUCUS\">Mucus</link> frozen solid.
       color: *color
       uiColor: *uiColor
       specificHeatCapacity: 3.05

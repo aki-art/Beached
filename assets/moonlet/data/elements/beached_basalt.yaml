@@ -1,5 +1,6 @@
 elements:
   - elementId: Beached_Basalt
+    descriptionText: Volcanic rock formed after the rapid cooling of low viscosity lava. 
     name: Basalt
     color: 1e1e26
     modifiers:

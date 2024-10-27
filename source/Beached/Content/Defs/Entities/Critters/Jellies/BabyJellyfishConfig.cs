@@ -1,25 +1,25 @@
-﻿using UnityEngine;
+﻿using Beached.Content.DefBuilders;
+using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Jellies
 {
 	[EntityConfigOrder(100)]
-	public class BabyJellyfishConfig : IEntityConfig
+	public class BabyJellyfishConfig : BaseJellyfishConfig, IEntityConfig
 	{
 		public const string ID = "Beached_Jellyfish_Baby";
 
-		public GameObject CreatePrefab()
+		protected override string AnimFile => "beached_jellyfish_kanim";
+
+		protected override string Id => ID;
+
+		public GameObject CreatePrefab() => CreatePrefab(this);
+
+		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
-			var prefab = BaseJellyfishConfig.CreatePrefab(
-				ID,
-				STRINGS.CREATURES.SPECIES.BEACHED_JELLYFISH.BABY_NAME,
-				STRINGS.CREATURES.SPECIES.BEACHED_JELLYFISH.BABY_DESC,
-				"beached_jellyfish_kanim",
-				JellyfishConfig.BASE_TRAIT_ID,
-				null);
-
-			EntityTemplates.ExtendEntityToBeingABaby(prefab, JellyfishConfig.ID, null);
-
-			return prefab;
+			return base.ConfigureCritter(builder)
+				.Size(1, 1)
+				.Baby(JellyfishConfig.ID)
+				.Speed(0.15f);
 		}
 
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;

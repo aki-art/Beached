@@ -1,7 +1,7 @@
 elements:
   - elementId: Beached_BambooStem
     name: Bamboo
-    descriptionText: todo
+    descriptionText: Dense, elastic and fibrous culm of Bamboo plants.
     color: beef5f
     audio:
       copyElement: Algae

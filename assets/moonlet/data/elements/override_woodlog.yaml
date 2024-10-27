@@ -5,4 +5,4 @@ elements:
       Beached_Cluster: 100
     highTempTransitionTarget: Beached_Ash
     removeTags:
-    - HideFromSpawnTool
+      - HideFromSpawnTool

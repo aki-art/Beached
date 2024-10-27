@@ -3,6 +3,7 @@ elements:
 # but calling it Zeolite allows for wiggleroom in uses, and it's eaiser to remember
   - elementId: Beached_Zeolite
     name: Zeolite
+    descriptionText: Green crystalline mineral primarily consisting of Heulandite-Ca, with the formula (Ca,Na)<sub>2-3</sub>Al<sub>3</sub>(Al,Si)<sub>2</sub>Si<sub>13</sub>O<sub>36</sub>·12H<sub>2</sub>O.
     color: 2aa945
     modifiers:
       - id: Decor

@@ -7,7 +7,7 @@
 			public class BEACHED_SANDY_SEASHELL
 			{
 				public static LocString NAME = "Seashell";
-				public static LocString DESCRIPTION = "";
+				public static LocString DESCRIPTION = "An abandoned shell of a sea dwelling creature.";
 			}
 
 			public class BEACHED_SANDY_SLICKSHELL
@@ -34,7 +34,7 @@
 			{
 				public static LocString BEACHED_CORAL = "Coral";
 				public static LocString BEACHED_CRYSTAL = "Crystal";
-				public static LocString BEACHED_MEAT = "Test (meats)";
+				public static LocString BEACHED_MEAT = "Meat";
 			}
 		}
 	}

@@ -2,9 +2,9 @@ elements:
   - elementId: Beached_ZincOre
     name: Zinc Ore
     descriptionText: |
-      'Blue Hemimorphite Zn<sub>4</sub>(Si<sub>2</sub>O<sub>7</sub>)(OH)<sub>2</sub>·H<sub>2</sub>O is an Ore of Zinc. It forms hemimorphic crystals.
+      Blue Hemimorphite Zn<sub>4</sub>(Si<sub>2</sub>O<sub>7</sub>)(OH)<sub>2</sub>·H<sub>2</sub>O is an Ore of Zinc. It forms hemimorphic crystals.
       
-      It is suitable for building <link="POWER">Power</link> systems.'
+      It is suitable for building <link="POWER">Power</link> systems.
     specularColor: 02b976
     specularTexture: beached_zincore_spec
     color: &color 1eaaaa
@@ -38,7 +38,7 @@ elements:
 
   - elementId: Beached_Zinc
     name: Zinc
-    descriptionText: 
+    descriptionText: Zinc is a chemical element with the symbol Zn and atomic number 30.
     color: *color
     specularColor: 02b976
     specularTexture: beached_zinc_spec
@@ -68,6 +68,7 @@ elements:
   - elementId: Beached_ZincMolten
     name: Molten Zinc
     color: *color
+    descriptionText: Molten Zinc is <link=\"BEACHEDZINC\">Zinc</link> heated into <link=\"ELEMENTS_LIQUID\">Liquid</link> state.
     maxMass: 7870
     liquidCompression: 1.01
     speed: 100
@@ -99,6 +100,7 @@ elements:
     name: Zinc Gas
     color: *color
     specificHeatCapacity: *shc
+    descriptionText: Gas Zinc is <link=\"BEACHEDZINC\">Zinc</link> heated into <link=\"ELEMENTS_GAS\">Gaseous</link> state.
     thermalConductivity: 3
     solidSurfaceAreaMultiplier: 25
     liquidSurfaceAreaMultiplier: 1

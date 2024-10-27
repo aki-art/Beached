@@ -1,6 +1,7 @@
 elements:
   - elementId: Beached_Rot
     name: Rot
+    descriptionText: Decaying organic compounds being actively broken down by micro-organisms.
     color: 404930
     textureUVScale: 12
     specificHeatCapacity: 0.2

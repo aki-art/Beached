@@ -1,6 +1,7 @@
 elements:
     - elementId: Beached_Ammonia
       name: Ammonia
+      descriptionText: Ammonia has a sharp, pungent odor. It is useful in power generation.
       color: &color 4d3b9b
       rotAtmosphereQuality: Sterilizing
       eyeIrritationStrength: 1
@@ -23,6 +24,7 @@ elements:
       state: Gas
   
     - elementId: Beached_AmmoniaLiquid
+      descriptionText: Liquid form of Ammonia Gas.
       name: Liquid Ammonia
       color: *color
       rotAtmosphereQuality: Sterilizing
@@ -50,6 +52,7 @@ elements:
       state: Liquid
 
     - elementId: Beached_FrozenAmmonia
+      descriptionText: Ammonia Gas frozen solid.
       name: Solid Ammonia
       color: *color
       specificHeatCapacity: *shc

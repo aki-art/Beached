@@ -13,6 +13,7 @@ namespace Beached.Patches
 				SideScreenUtil.AddClonedSideScreen<Beached_SampleSelectorSidesScreen>("BeachedDNAInjectorSideScreen", typeof(ConfigureConsumerSideScreen));
 				SideScreenUtil.AddCustomSideScreen<Beached_SimplifiedFilterSideScreen>("BeachedSimplifiedFilterableSideScreen", ModAssets.Prefabs.universalSidescreen);
 				SideScreenUtil.AddCustomSideScreen<Beached_CollarDispenserSidescreen>("BeachedCollarDispenserSideScreen", ModAssets.Prefabs.universalSidescreen);
+				SideScreenUtil.AddCustomSideScreen<Beached_RubberTappableSidescreen>("BeachedRubberTappableSideScreen", ModAssets.Prefabs.universalSidescreen);
 			}
 		}
 	}

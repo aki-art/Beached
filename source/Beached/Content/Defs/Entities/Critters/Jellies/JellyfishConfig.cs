@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb.Germs;
+﻿using Beached.Content.DefBuilders;
+using Beached.Content.ModDb.Germs;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
 using Klei.AI;
@@ -8,34 +9,36 @@ using static Beached.STRINGS.CREATURES.SPECIES;
 namespace Beached.Content.Defs.Entities.Critters.Jellies
 {
 	[EntityConfigOrder(0)]
-	public class JellyfishConfig : IEntityConfig
+	public class JellyfishConfig : BaseJellyfishConfig, IEntityConfig
 	{
 		public const string ID = "Beached_Jellyfish";
 		public const string EGG_ID = "Beached_Jellyfish_Egg";
 		public const string BASE_TRAIT_ID = "Beached_JellyfishTrait";
 
-		public GameObject CreatePrefab()
+		protected override string AnimFile => "beached_jellyfish_kanim";
+
+		protected override string Id => ID;
+
+		public GameObject CreatePrefab() => CreatePrefab(this);
+
+		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
-			var prefab = CreateBasePrefab();
+			return base.ConfigureCritter(builder)
+				.Size(1, 2)
+				.Speed(0.25f)
+				.Egg(BabyJellyfishConfig.ID, "beached_egg_slickshell_kanim")
+					.Incubation(20)
+					.Fertility(60)
+					.NotRanchable()
+					.EggChance(EGG_ID, 1)
+					.Mass(1)
+					.Done()
+				.Tags([GameTags.OriginalCreature]);
+		}
 
-			EntityTemplates.ExtendEntityToWildCreature(prefab, CrabTuning.PEN_SIZE_PER_CREATURE);
-			ConfigureBaseTrait(BEACHED_SLICKSHELL.NAME);
-			ExtendToFertileCreature(prefab);
-
-			var planktonDiet = new Diet(new Diet.Info(
-				[PlanktonGerms.ID],
-				null,
-				1f));
-
-			var creatureCalorieMonitor = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
-			creatureCalorieMonitor.diet = planktonDiet;
-
-			var germConsumerMonitor = prefab.AddOrGetDef<GermConsumerMonitor.Def>();
-			germConsumerMonitor.diet = planktonDiet;
-			germConsumerMonitor.consumableGermIdx = Db.Get().Diseases.GetIndex(BDiseases.plankton.id);
-
-			prefab.AddTag(GameTags.OriginalCreature); // for gravitas critter manipulator
-
+		public override GameObject CreatePrefab(BaseCritterConfig config)
+		{
+			var prefab = base.CreatePrefab(config);
 			var electricEmitter = prefab.AddComponent<ElectricEmitter>();
 			electricEmitter.maxCells = 128;
 			electricEmitter.powerLossMultiplier = 1;
@@ -46,45 +49,6 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 		}
 
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
-
-		private static GameObject CreateBasePrefab()
-		{
-			return BaseJellyfishConfig.CreatePrefab(
-				ID,
-				BEACHED_JELLYFISH.NAME,
-				BEACHED_JELLYFISH.DESC,
-				"beached_jellyfish_kanim",
-				BASE_TRAIT_ID,
-				null);
-		}
-
-		private void ExtendToFertileCreature(GameObject prefab)
-		{
-			EntityTemplates.ExtendEntityToFertileCreature(
-				prefab,
-				EGG_ID,
-				BEACHED_JELLYFISH.EGG_NAME,
-				BEACHED_JELLYFISH.DESC,
-				"beached_egg_slickshell_kanim",
-				CrabTuning.EGG_MASS,
-				BabyJellyfishConfig.ID,
-				60f,
-				20f,
-				JellyfishTuning.EGG_CHANCES_BASE,
-				CrabConfig.EGG_SORT_ORDER);
-		}
-
-		private void ConfigureBaseTrait(string name)
-		{
-			var db = Db.Get();
-
-			var trait = db.CreateTrait(BASE_TRAIT_ID, name, name, null, false, null, true, true);
-
-			trait.Add(new AttributeModifier(db.Amounts.Calories.maxAttribute.Id, CrabTuning.STANDARD_STOMACH_SIZE, name));
-			trait.Add(new AttributeModifier(db.Amounts.Calories.deltaAttribute.Id, -CrabTuning.STANDARD_CALORIES_PER_CYCLE / 600f, name));
-			trait.Add(new AttributeModifier(db.Amounts.HitPoints.maxAttribute.Id, 25f, name));
-			trait.Add(new AttributeModifier(db.Amounts.Age.maxAttribute.Id, 100f, name));
-		}
 
 		public void OnPrefabInit(GameObject prefab) { }
 

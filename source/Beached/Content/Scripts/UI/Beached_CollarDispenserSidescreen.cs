@@ -42,6 +42,7 @@ namespace Beached.Content.Scripts.UI
 			checkbox.gameObject.SetActive(true);
 			checkbox.SetLabel("Per critter type");
 
+
 			counter = Instantiate(counterPrefab);
 			counter.transform.SetParent(container);
 			container.gameObject.SetActive(true);

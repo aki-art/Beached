@@ -10,6 +10,11 @@ namespace Beached.Utils
 {
 	public static class ExtensionMethods
 	{
+		public static ChoreTable.Builder AddPoopStates(this ChoreTable.Builder builder)
+		{
+			return builder.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP));
+		}
+
 		public static bool TryGetReference<SpecifiedType>(this HierarchyReferences hierarchyReferences, string name, out SpecifiedType component) where SpecifiedType : Component
 		{
 			component = null;
