@@ -1,5 +1,6 @@
 ﻿using Beached.Content.Scripts.UI;
 using HarmonyLib;
+using UnityEngine;
 
 namespace Beached.Patches
 {
@@ -11,9 +12,10 @@ namespace Beached.Patches
 			public static void Postfix()
 			{
 				SideScreenUtil.AddClonedSideScreen<Beached_SampleSelectorSidesScreen>("BeachedDNAInjectorSideScreen", typeof(ConfigureConsumerSideScreen));
-				SideScreenUtil.AddCustomSideScreen<Beached_SimplifiedFilterSideScreen>("BeachedSimplifiedFilterableSideScreen", ModAssets.Prefabs.universalSidescreen);
-				SideScreenUtil.AddCustomSideScreen<Beached_CollarDispenserSidescreen>("BeachedCollarDispenserSideScreen", ModAssets.Prefabs.universalSidescreen);
-				SideScreenUtil.AddCustomSideScreen<Beached_RubberTappableSidescreen>("BeachedRubberTappableSideScreen", ModAssets.Prefabs.universalSidescreen);
+				SideScreenUtil.AddCustomSideScreen<Beached_SimplifiedFilterSideScreen>("BeachedSimplifiedFilterableSideScreen", Object.Instantiate(ModAssets.Prefabs.universalSidescreen));
+				SideScreenUtil.AddCustomSideScreen<Beached_CollarDispenserSidescreen>("BeachedCollarDispenserSideScreen", Object.Instantiate(ModAssets.Prefabs.universalSidescreen));
+				SideScreenUtil.AddCustomSideScreen<Beached_RubberTappableSidescreen>("BeachedRubberTappableSideScreen", Object.Instantiate(ModAssets.Prefabs.universalSidescreen));
+
 			}
 		}
 	}

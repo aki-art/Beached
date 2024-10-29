@@ -279,7 +279,8 @@ namespace Beached
 			//var universalBundle = LoadAssetBundle("akis_universal_sidesceen_v1", platformSpecific: true);
 			Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
 
-			var tmpConverter = new TMPConverter();
+			TMPConverter.ReplaceAllText(Prefabs.universalSidescreen);
+
 			//tmpConverter.ReplaceAllText(Prefabs.universalSidescreen);
 
 			/*            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));

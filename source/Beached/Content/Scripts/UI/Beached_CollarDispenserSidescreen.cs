@@ -14,6 +14,7 @@ namespace Beached.Content.Scripts.UI
 
 		public override void SetTarget(GameObject target)
 		{
+			Log.Debug("set target collar");
 			base.SetTarget(target);
 
 			if (counter == null)

@@ -129,10 +129,10 @@ namespace Beached.Content.ModDb
 		public static void RegisterBuildingStatusItems(BuildingStatusItems __instance)
 		{
 			collectingRubber = SimpleBuildingStatus(__instance, "Beached_CollectingRubber");
-			collectingRubber.SetResolveStringCallback(RubberTappable.ResolveStatusItemString);
+			collectingRubber.resolveTooltipCallback += RubberTappable.ResolveStatusItemString;
 
 			collectingRubberHalted = SimpleBuildingStatus(__instance, "Beached_CollectingRubberHalted", NotificationType.BadMinor);
-			collectingRubberFull = SimpleBuildingStatus(__instance, "Beached_CollectingRubberHaltedFull");
+			collectingRubberFull = SimpleBuildingStatus(__instance, "Beached_CollectingRubberFull");
 
 			plushed = new(
 				"Beached_Plushed",

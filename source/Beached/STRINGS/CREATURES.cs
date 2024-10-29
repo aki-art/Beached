@@ -490,7 +490,7 @@ namespace Beached
 				public class BEACHED_DEWPALM
 				{
 					public static LocString NAME = Link("Dew Palm", DewPalmConfig.ID);
-					public static LocString DESC = "...";
+					public static LocString DESC = "WORK IN PROGRESS. Currently can be tapped with a bucket for Rubber. This plant will have more uses in the coming updates.";
 				}
 
 				public class BEACHED_SPINORILA

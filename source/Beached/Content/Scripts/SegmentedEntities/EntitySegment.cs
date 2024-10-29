@@ -12,8 +12,8 @@
 
 		public void SetRoot(SegmentedEntityRoot root)
 		{
-			if (root != null)
-				Log.Warning($"Trying to set root of {name}, but it already has one!");
+			//if (root != null)
+			//	Log.Warning($"Trying to set root of {name}, but it already has one!");
 
 			this.root = root;
 		}

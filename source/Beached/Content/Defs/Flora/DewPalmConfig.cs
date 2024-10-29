@@ -50,12 +50,18 @@ namespace Beached.Content.Defs.Flora
 
 			var latexStorage = prefab.AddComponent<Storage>();
 			latexStorage.storageFilters = [Elements.rubber.CreateTag()];
-			latexStorage.capacityKg = 5;
+			latexStorage.capacityKg = 20;
 			latexStorage.allowItemRemoval = true;
+
+			var metalStorage = prefab.AddComponent<Storage>();
+			metalStorage.storageFilters = STORAGEFILTERS.NOT_EDIBLE_SOLIDS;
+			metalStorage.capacityKg = 50;
+			metalStorage.allowItemRemoval = false;
 
 			var tap = prefab.AddComponent<RubberTappable>();
 			tap.trackSymbol = "bucket";
 			tap.materialStorage = latexStorage;
+			tap.metalStorage = metalStorage;
 			tap.materialPerCycle = 20;
 			tap.element = Elements.rubber;
 

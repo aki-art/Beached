@@ -22,6 +22,7 @@
 			debugDataChange = new("DebugDataChange"),
 			prePoop = new("PrePoop"),
 			critterMined = new("CritterMined"),
+			sidesSreenRefresh = new("SideScreenRefresh"),
 
 			segmentedEntityUpdate = new("SegmentedEntityUpdate"),
 			critterTraitAdded = new("CritterTraitAdded");

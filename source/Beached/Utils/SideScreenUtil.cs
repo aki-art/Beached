@@ -66,6 +66,7 @@ namespace Beached.Utils
 
 		private static DetailsScreen.SideScreenRef CreateNewSideScreen(string name, SideScreenContent prefab)
 		{
+			prefab.name = name;
 			return new DetailsScreen.SideScreenRef
 			{
 				name = name,

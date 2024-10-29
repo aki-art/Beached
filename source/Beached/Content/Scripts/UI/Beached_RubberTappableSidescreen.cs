@@ -1,7 +1,4 @@
 ﻿using Beached.Content.Scripts.Entities.Plant;
-using Epic.OnlineServices;
-using System;
-using System.ComponentModel;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.UI
@@ -11,16 +8,26 @@ namespace Beached.Content.Scripts.UI
 		private RubberTappable target;
 		public Transform container;
 
-		private BToggle checkbox;
+		private BButton button;
+
+		public override int GetSideScreenSortOrder() => -1;
+
+		public override void OnPrefabInit()
+		{
+			base.OnPrefabInit();
+			InitializeScreen();
+		}
 
 		public override bool IsValidForTarget(GameObject target) => target.TryGetComponent(out RubberTappable _);
 
 		public override void SetTarget(GameObject target)
 		{
-			base.SetTarget(target);
+			if (target == null)
+				return;
 
-			if (checkbox == null)
-				InitializeScreen();
+			target.Subscribe(ModHashes.sidesSreenRefresh, Refresh);
+
+			InitializeScreen();
 
 			if (target.TryGetComponent(out RubberTappable tappable))
 			{
@@ -29,42 +36,64 @@ namespace Beached.Content.Scripts.UI
 			}
 		}
 
+		public override void ClearTarget()
+		{
+			if (target != null)
+				target.Unsubscribe(ModHashes.sidesSreenRefresh, Refresh);
+
+			base.ClearTarget();
+		}
+
+		private void Refresh(object _)
+		{
+			UpdateToggle();
+		}
+
 		private void UpdateToggle()
 		{
 			if (target == null)
 				return;
 
-			checkbox.SetLabel(target.SidescreenButtonText);
+			button.SetLabel(target.SidescreenButtonText);
 		}
 
-		public override int GetSideScreenSortOrder() => 0;
+
+		public override string GetTitle() => "Rubber Tap";
 
 		private void InitializeScreen()
 		{
+			if (button != null)
+				return;
+
 			transform.Find("Scroll View").gameObject.SetActive(true);
 			container = transform.Find("Scroll View/Viewport/Contents");
 
-			transform.Find("Scroll View").gameObject.SetActive(true);
-			var checkboxPrefab = transform.Find("Contents/CheckBoxPrefab").gameObject.AddOrGet<BToggle>();
+			var buttonGroupPrefab = transform.Find("Contents/ButtonGroupPrefab").transform;
+			var buttonGroup = Instantiate(buttonGroupPrefab);
+			buttonGroup.transform.SetParent(container);
 
-			checkbox = Instantiate(checkboxPrefab);
+			var buttonPrefab = buttonGroup.Find("ButtonPrefab").gameObject.AddOrGet<BButton>();
 
-			checkbox.transform.SetParent(container);
-			checkbox.gameObject.SetActive(true);
-			checkbox.SetLabel(STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.TAP);
+			buttonPrefab.gameObject.SetActive(false);
+
+			button = Instantiate(buttonPrefab);
+			button.transform.SetParent(buttonGroup);
+			button.SetLabel(STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.TAP);
+			button.name = "ToggleTapButton";
+
+			FUtility.FUI.Helper.AddSimpleToolTip(button.gameObject, STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.TOOLTIP);
+
 			container.gameObject.SetActive(true);
+			buttonGroup.gameObject.SetActive(true);
+			button.gameObject.SetActive(true);
 
-			FUtility.FUI.Helper.AddSimpleToolTip(checkbox.gameObject, STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.TOOLTIP);
-
-			checkbox.OnClick += UpdateTapOrder;
+			button.OnClick += UpdateTapOrder;
 		}
 
 		private void UpdateTapOrder()
 		{
-			if (target == null)
-				return;
-
-			target.OnSidescreenButtonPressed();
+			if (target != null)
+				target.OnSidescreenButtonPressed();
 		}
 	}
 }

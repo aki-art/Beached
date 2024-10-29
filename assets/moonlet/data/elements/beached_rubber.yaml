@@ -23,7 +23,7 @@ elements:
     lightAbsorptionFactor: 1
     radiationAbsorptionFactor: 0.75
     radiationPer1000Mass: 0
-    materialCategory: Organic
+    materialCategory: Organics
     tags:
     - BuildableAny
     - Plastic

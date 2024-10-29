@@ -1,4 +1,5 @@
 ﻿using Beached.Content.ModDb;
+using Beached.Utils;
 using KSerialization;
 using System;
 using UnityEngine;
@@ -10,9 +11,8 @@ namespace Beached.Content.Scripts.Entities.Plant
 		[SerializeField] public string trackSymbol;
 		[SerializeField] public float materialPerCycle;
 		[SerializeField] public Storage materialStorage;
+		[SerializeField] public Storage metalStorage;
 		[SerializeField] public SimHashes element;
-
-		private KBatchedAnimController bucketKbac;
 
 		[Serialize] public bool isTapped;
 		[Serialize] public bool tapOrdered;
@@ -29,6 +29,12 @@ namespace Beached.Content.Scripts.Entities.Plant
 
 				return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.TAP;
 			}
+		}
+
+		public void SetTappedState(bool tapped)
+		{
+			isTapped = tapped;
+			Trigger(ModHashes.sidesSreenRefresh);
 		}
 
 		public void OnSidescreenButtonPressed()
@@ -50,11 +56,13 @@ namespace Beached.Content.Scripts.Entities.Plant
 
 		private void OrderTap()
 		{
+			tapOrdered = true;
 			smi.GoTo(smi.sm.tapOrdered);
 		}
 
 		private void UnTap()
 		{
+			SetTappedState(false);
 			smi.GoTo(smi.sm.notTapped);
 		}
 
@@ -63,7 +71,17 @@ namespace Beached.Content.Scripts.Entities.Plant
 			smi.GoTo(smi.sm.notTapped);
 		}
 
-		public override void OnSpawn() => smi.StartSM();
+		public override void OnSpawn()
+		{
+			smi.StartSM();
+
+			if (tapOrdered)
+				smi.GoTo(smi.sm.tapOrdered);
+			else if (isTapped)
+				smi.GoTo(smi.sm.growing);
+
+			Trigger(ModHashes.sidesSreenRefresh);
+		}
 
 		public static string ResolveStatusItemString(string str, object data)
 		{
@@ -90,8 +108,8 @@ namespace Beached.Content.Scripts.Entities.Plant
 
 			public StatesInstance(RubberTappable master) : base(master)
 			{
-				master.TryGetComponent(out KBatchedAnimController kbac);
-				master.TryGetComponent(out PrimaryElement primaryElement);
+				kbac = master.GetComponent<KBatchedAnimController>();
+				primaryElement = master.GetComponent<PrimaryElement>();
 
 				trackSymbol = master.trackSymbol;
 				latexPerSecond = smi.master.materialPerCycle / CONSTS.CYCLE_LENGTH;
@@ -103,6 +121,8 @@ namespace Beached.Content.Scripts.Entities.Plant
 
 			public void SetupBucket()
 			{
+				Beached.Log.Debug("setting up bucket");
+
 				var gameObject = new GameObject("Beached_RubberBucket");
 				gameObject.SetActive(false);
 
@@ -113,7 +133,9 @@ namespace Beached.Content.Scripts.Entities.Plant
 					z = Grid.GetLayerZ(Grid.SceneLayer.BuildingFront)
 				};
 
+				gameObject.transform.SetParent(transform);
 				gameObject.transform.SetPosition(column);
+
 				bucketKbac = gameObject.AddComponent<KBatchedAnimController>();
 				bucketKbac.AnimFiles =
 				[
@@ -123,12 +145,9 @@ namespace Beached.Content.Scripts.Entities.Plant
 				tracker = gameObject.AddComponent<KBatchedAnimTracker>();
 				tracker.symbol = trackSymbol;
 				tracker.forceAlwaysVisible = true;
-
 				tracker.SetAnimControllers(bucketKbac, kbac);
 
-				bucketKbac.initialAnim = "collecting";
-
-				kbac.SetSymbolVisiblity((KAnimHashedString)trackSymbol, false);
+				bucketKbac.initialAnim = "place";
 			}
 		}
 
@@ -137,6 +156,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 			public State notTapped;
 			public State tapOrdered;
 			public State untapping;
+			public State growing;
 			public CollectingStates collecting;
 
 			public override void InitializeStates(out BaseState default_state)
@@ -144,13 +164,22 @@ namespace Beached.Content.Scripts.Entities.Plant
 				default_state = notTapped;
 
 				notTapped
+					.Exit(EnableOverlay)
 					.Enter(DisableOverlay);
 
 				tapOrdered
-					.GoTo(collecting); // TODO chore
+					.Enter(smi => smi.bucketKbac.Play("place"))
+					.Exit(smi => smi.master.tapOrdered = false)
+					.ToggleFetch(CreateFetch, growing);
+
+				growing
+					.EventHandlerTransition(GameHashes.Grow, collecting, IsGrown)
+					.EnterTransition(collecting, IsGrown);
 
 				collecting
-					.Enter(EnableOverlay);
+					.Enter(smi => smi.master.SetTappedState(true))
+					.Enter(smi => smi.bucketKbac.Play("collecting"))
+					.DefaultState(collecting.running);
 
 				collecting.blocked
 					.EventTransition(GameHashes.WiltRecover, collecting)
@@ -163,6 +192,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 
 				collecting.full
 					.EventHandlerTransition(GameHashes.OnStorageChange, collecting.running, (smi, _) => !smi.latexStorage.IsFull())
+					// todo: toggle clear chore
 					.ToggleStatusItem(BStatusItems.collectingRubberFull);
 
 				untapping
@@ -170,9 +200,27 @@ namespace Beached.Content.Scripts.Entities.Plant
 					.GoTo(notTapped);
 			}
 
+			private bool IsGrown(StatesInstance smi)
+			{
+				// TODO
+				return true;
+			}
+
+			private bool IsGrown(StatesInstance smi, object _) => IsGrown(smi);
+
+			private FetchList2 CreateFetch(StatesInstance smi)
+			{
+				// todo: pickable metal ore
+				var fetchList = new FetchList2(smi.master.metalStorage, Db.Get().ChoreTypes.Fetch);
+				fetchList.Add([Elements.zincOre.CreateTag()], amount: 50f);
+
+				return fetchList;
+			}
+
 			private void DropStorage(StatesInstance smi)
 			{
 				smi.master.materialStorage.DropAll();
+				smi.master.metalStorage.DropAll();
 			}
 
 			public class CollectingStates : State
@@ -205,17 +253,19 @@ namespace Beached.Content.Scripts.Entities.Plant
 				if (smi.bucketKbac == null)
 					smi.SetupBucket();
 
-				smi.kbac.SetSymbolVisiblity(smi.master.trackSymbol, true);
-				smi.master.bucketKbac.enabled = true;
+				//smi.kbac.SetSymbolVisiblity(smi.master.trackSymbol, true);
+				smi.bucketKbac.gameObject.SetActive(true);
+				smi.bucketKbac.enabled = true;
 			}
 
 			private void DisableOverlay(StatesInstance smi)
 			{
-				if (smi.master.bucketKbac == null)
+				if (smi.bucketKbac == null)
 					return;
 
-				smi.kbac.SetSymbolVisiblity(smi.master.trackSymbol, false);
-				smi.master.bucketKbac.enabled = false;
+				//smi.kbac.SetSymbolVisiblity(smi.master.trackSymbol, false);
+				smi.bucketKbac.gameObject.SetActive(false);
+				smi.bucketKbac.enabled = false;
 			}
 		}
 	}
