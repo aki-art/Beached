@@ -7,10 +7,11 @@ description: This world is unusually humid, with aiding plant growth.
 colorHex: 008e68
 
 exclusiveWithTags:
-  - Dry
+  - Humidity
 
 traitTags:
   - Wet
+  - Humidity
 
 elementBandModifiers:
   - element: Water

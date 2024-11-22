@@ -6,10 +6,11 @@ description: This world is unusually dry, plants have difficulty growing in this
 colorHex: bdaf8d
 
 exclusiveWithTags:
-  - Wet
+  - Humidity
 
 traitTags:
   - Dry
+  - Humidity
 
 elementBandModifiers:
   - element: Water

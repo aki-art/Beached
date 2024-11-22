@@ -1,0 +1,26 @@
+elements:
+  - elementId: Selenite
+    specificHeatCapacity: 0.2
+    thermalConductivity: 2
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 2
+    highTemp: 1560 # 2349C
+    highTempTransitionTarget: MoltenCalcium
+    defaultTemperature: 300 # 26.85
+    defaultMass: 700
+    maxMass: 1840
+    hardness: 2
+    molarMass: 50
+    lightAbsorptionFactor: 0.4
+    radiationAbsorptionFactor: 0.7
+    radiationPer1000Mass: 0
+    materialCategory: Beached_Crystal
+    tags:
+    - Transparent
+    buildMenuSort: 2
+    isDisabled: false
+    state: Solid
+    localizationID: Beached.STRINGS.ELEMENTS.SELENITE.NAME
+    dlcId: ""
