@@ -78,6 +78,7 @@ namespace Beached.Patches
 			FueFuzzWallConfig.ID,
 			SleepingMuffinsConfig.ID,
 			SkeletonChairConfig.ID,
+			SoapConfig.ID
 		];
 
 		private static readonly HashSet<Tag> FOOD =

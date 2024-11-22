@@ -3,9 +3,11 @@ using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
+using Beached.Content.WikiHelper;
 using HarmonyLib;
 using Klei.AI;
 using PeterHan.PLib.Core;
+using System.IO;
 
 namespace Beached.Patches
 {
@@ -41,6 +43,10 @@ namespace Beached.Patches
 				}
 
 				PGameUtils.CopySoundsToAnim("beached_mussel_giblets_impact_kanim", "paint_impact_kanim");
+
+#if WIKI
+				FoodGraphGenerator.Generate(Path.Combine(FUtility.Utils.ModPath, "food_graphs.txt"));
+#endif
 			}
 		}
 	}

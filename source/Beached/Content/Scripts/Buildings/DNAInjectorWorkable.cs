@@ -30,7 +30,7 @@ namespace Beached.Content.Scripts.Buildings
 			lightEfficiencyBonus = true;
 		}
 
-		public override void OnCompleteWork(Worker worker)
+		public override void OnCompleteWork(WorkerBase worker)
 		{
 			// apply gneetic trait
 			base.OnCompleteWork(worker);

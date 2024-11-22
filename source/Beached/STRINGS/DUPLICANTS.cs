@@ -8,6 +8,16 @@ namespace Beached
 	{
 		public class DUPLICANTS
 		{
+			public class STATUSITEMS
+			{
+				public class BEACHED_THAWING
+				{
+					public static LocString NAME = "Thawing";
+					public static LocString TOOLTIP = "This Duplicant is melting some Ice.";
+				}
+
+			}
+
 			public class ATTRIBUTES
 			{
 				public class BEACHED_PRECISION

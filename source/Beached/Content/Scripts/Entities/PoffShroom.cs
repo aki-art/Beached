@@ -35,7 +35,7 @@ namespace Beached.Content.Scripts.Entities
 			public Storage storage;
 			public KBatchedAnimController kbac;
 			public ElementConsumer elementConsumer;
-			public KAnimHashedString symbolName = "placeholder_filler";
+			public KAnimHashedString[] symbolNames = ["simple_ball", "bulb_back", "bulb_front"];
 
 			public StatesInstance(PoffShroom master) : base(master)
 			{
@@ -89,6 +89,7 @@ namespace Beached.Content.Scripts.Entities
 					return items[0].GetComponent<PrimaryElement>();
 				}
 
+
 				PrimaryElement result = null;
 				var mass = 0f;
 
@@ -112,7 +113,9 @@ namespace Beached.Content.Scripts.Entities
 
 				if (gas == null)
 				{
-					smi.kbac.SetSymbolTint(smi.symbolName, Color.black);
+					foreach (var symbol in smi.symbolNames)
+						smi.kbac.SetSymbolTint(symbol, Color.black);
+
 					return false;
 				}
 
@@ -125,7 +128,9 @@ namespace Beached.Content.Scripts.Entities
 				Log.Debug(fullness);
 
 				var color = Color.Lerp(Color.white, gasColor, fullness);
-				smi.kbac.SetSymbolTint(smi.symbolName, color);
+
+				foreach (var symbol in smi.symbolNames)
+					smi.kbac.SetSymbolTint(symbol, color);
 
 				return smi.storage.IsFull();
 			}

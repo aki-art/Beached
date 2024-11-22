@@ -1,5 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Target Name="WriteToFile" BeforeTargets="Build" Condition="'$(GenerateMetadata)' == 'true'">
+		<PropertyGroup>
+			<ModContent>
+				title: $(ModName)
+				description: $(ModDescription)
+				staticID: $(AssemblyName)
+			</ModContent>
+			<ModInfoContent>
+				supportedContent: $(SupportedContent)
+				minimumSupportedBuild: $(MinimumSupportedBuild)
+				version: $(FileVersion)
+				APIVersion: $(APIVersion)
+			</ModInfoContent>
+		</PropertyGroup>
+
+		<WriteLinesToFile File="$(TargetDir)/mod.yaml" Lines="$(ModContent)" Overwrite="true" />
+		<WriteLinesToFile File="$(TargetDir)/mod_info.yaml" Lines="$(ModInfoContent)" Overwrite="true" />
+	</Target>
 	
 	<Target Name="ILRepack" AfterTargets="Build" Condition="'$(IsPacked)' == 'true'">
 		<ItemGroup>

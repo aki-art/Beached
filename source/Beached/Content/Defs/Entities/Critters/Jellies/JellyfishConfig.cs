@@ -1,10 +1,7 @@
 ﻿using Beached.Content.DefBuilders;
-using Beached.Content.ModDb.Germs;
 using Beached.Content.Scripts.Entities;
-using Beached.Content.Scripts.Entities.AI;
-using Klei.AI;
+using Beached.Content.Scripts.Entities.AI.Jellyfish;
 using UnityEngine;
-using static Beached.STRINGS.CREATURES.SPECIES;
 
 namespace Beached.Content.Defs.Entities.Critters.Jellies
 {
@@ -12,7 +9,7 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 	public class JellyfishConfig : BaseJellyfishConfig, IEntityConfig
 	{
 		public const string ID = "Beached_Jellyfish";
-		public const string EGG_ID = "Beached_Jellyfish_Egg";
+		public const string EGG_ID = "Beached_JellyfishEgg";
 		public const string BASE_TRAIT_ID = "Beached_JellyfishTrait";
 
 		protected override string AnimFile => "beached_jellyfish_kanim";
@@ -26,13 +23,13 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 			return base.ConfigureCritter(builder)
 				.Size(1, 2)
 				.Speed(0.25f)
-				.Egg(BabyJellyfishConfig.ID, "beached_egg_slickshell_kanim")
-					.Incubation(20)
-					.Fertility(60)
-					.NotRanchable()
-					.EggChance(EGG_ID, 1)
-					.Mass(1)
-					.Done()
+				/*				.Egg(BabyJellyfishConfig.ID, "beached_egg_slickshell_kanim")
+									.Incubation(20)
+									.Fertility(60)
+									.NotRanchable()
+									.EggChance(EGG_ID, 1)
+									.Mass(1)
+									.Done()*/
 				.Tags([GameTags.OriginalCreature]);
 		}
 
@@ -44,6 +41,16 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 			electricEmitter.powerLossMultiplier = 1;
 			electricEmitter.minPathSecs = 0.3f;
 			electricEmitter.maxPathSecs = 2f;
+
+			var nesting = prefab.AddOrGetDef<NestingFertilityMonitor.Def>();
+			nesting.baseFertileCycles = 0.5f;
+
+			// discover baby when discovering adult
+			var kPrefabId = prefab.GetComponent<KPrefabID>();
+			kPrefabId.prefabSpawnFn += (inst =>
+			{
+				DiscoveredResources.Instance.Discover(BabyJellyfishConfig.ID, DiscoveredResources.GetCategoryForTags(kPrefabId.Tags));
+			});
 
 			return prefab;
 		}

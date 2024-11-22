@@ -22,6 +22,12 @@
 				public static LocString DESC = $"This place is too dry for plants, growth is slowed. (World Trait: Arid)";
 			}
 
+			public class BEACHED_EFFECT_DAZED
+			{
+				public static LocString NAME = "Dazed";
+				public static LocString DESC = $"This creature woke up from a long hybernation, and needs some time to readjust their metabolism.";
+			}
+
 			public class BEACHED_EFFECT_LUBRICATED
 			{
 				public static LocString NAME = "Lubricated";

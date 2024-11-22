@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -17,7 +18,6 @@ namespace Beached.Content.Scripts
 			serializable = SerializeType.ParamsOnly;
 
 			locked
-					.PlayAnim("on", KAnim.PlayMode.Loop)
 					.ParamTransition(isUnlocked, unlocked, IsTrue);
 
 			unlocked
@@ -25,7 +25,6 @@ namespace Beached.Content.Scripts
 					.ParamTransition(seenNotification, unlocked.done, IsTrue);
 
 			unlocked.notify
-					.PlayAnim("notify", KAnim.PlayMode.Loop)
 					.ToggleStatusItem(Db.Get().MiscStatusItems.AttentionRequired)
 					.ToggleNotification(smi =>
 					{
@@ -35,51 +34,41 @@ namespace Beached.Content.Scripts
 					});
 
 			unlocked.done
-					.PlayAnim("off");
+					.Enter(smi =>
+					{
+						smi.SpawnPrefabs();
+						Util.KDestroyGameObject(smi.gameObject);
+					});
 		}
 
 		private static string GetMessageBody(Instance smi)
 		{
-			string str = "";
+			var buildings = "";
 			foreach (TechItem unlockTechItem in smi.unlockTechItems)
-				str = $"{str}\n    • {unlockTechItem.Name}";
+				buildings = $"{buildings}\n    • {unlockTechItem.Name}";
 
-			return string.Format(global::STRINGS.MISC.NOTIFICATIONS.POIRESEARCHUNLOCKCOMPLETE.MESSAGEBODY, str);
+			return string.Format(STRINGS.MISC.NOTIFICATIONS.BEACHED_SLEEPINGMUFFINS.MESSAGEBODY, buildings);
 		}
 
 		private static EventInfoData GenerateEventPopupData(Instance smi)
 		{
 			var eventPopupData = new EventInfoData(
-				global::STRINGS.MISC.NOTIFICATIONS.POIRESEARCHUNLOCKCOMPLETE.NAME,
+				STRINGS.MISC.NOTIFICATIONS.BEACHED_SLEEPINGMUFFINS.NAME,
 				GetMessageBody(smi),
 				smi.def.animName);
 
 			var length = Mathf.Max(2, Components.LiveMinionIdentities.Count);
-			GameObject[] gameObjectArray = new GameObject[length];
 
-			// todo: actual dupe who went to unlock
-			using (IEnumerator<MinionIdentity> enumerator = Components.LiveMinionIdentities.Shuffle().GetEnumerator())
-			{
-				for (int index = 0; index < length; ++index)
-				{
-					if (!enumerator.MoveNext())
-					{
-						gameObjectArray = [];
-						break;
-					}
-					gameObjectArray[index] = enumerator.Current.gameObject;
-				}
-			}
+			var minions = new GameObject[length];
 
-			eventPopupData.minions = gameObjectArray;
-			if (smi.def.loreUnlockId != null)
-				eventPopupData.AddOption(global::STRINGS.MISC.NOTIFICATIONS.POIRESEARCHUNLOCKCOMPLETE.BUTTON_VIEW_LORE).callback = () =>
-				{
-					smi.sm.seenNotification.Set(true, smi);
-					smi.notificationReference = null;
-					Game.Instance.unlocks.Unlock(smi.def.loreUnlockId);
-					ManagementMenu.Instance.OpenCodexToLockId(smi.def.loreUnlockId);
-				};
+			if (length > 0)
+				minions = Components.LiveMinionIdentities
+					.Shuffle()
+					.Take(length)
+					.Select(identity => identity.gameObject)
+					.ToArray();
+
+			eventPopupData.minions = minions;
 
 			eventPopupData.AddDefaultOption(() =>
 			{
@@ -88,6 +77,7 @@ namespace Beached.Content.Scripts
 			});
 
 			eventPopupData.clickFocus = smi.gameObject.transform;
+
 			return eventPopupData;
 		}
 
@@ -115,7 +105,7 @@ namespace Beached.Content.Scripts
 					if (techItem != null)
 						unlockTechItems.Add(techItem);
 					else
-						DebugUtil.DevAssert(false, "Invalid tech item " + poiTechUnlockId + " for POI Tech Unlock");
+						Beached.Log.Warning("Invalid tech item " + poiTechUnlockId + " for POI Tech Unlock");
 				}
 			}
 
@@ -156,25 +146,26 @@ namespace Beached.Content.Scripts
 
 			public void SpawnPrefabs()
 			{
-				if (def.spawnPrefabs != null)
-				{
-					foreach (var prefab in def.spawnPrefabs)
-						FUtility.Utils.Spawn(prefab, gameObject);
-				}
+				if (def.spawnPrefabs == null)
+					return;
+
+				foreach (var prefab in def.spawnPrefabs)
+					FUtility.Utils.Spawn(prefab, gameObject);
 			}
 
 			private void UpdateUnlocked()
 			{
-				bool flag = true;
-				foreach (TechItem unlockTechItem in unlockTechItems)
+				bool stillNeedsunlocking = true;
+				foreach (var unlockTechItem in unlockTechItems)
 				{
 					if (!unlockTechItem.IsComplete())
 					{
-						flag = false;
+						stillNeedsunlocking = false;
 						break;
 					}
 				}
-				sm.isUnlocked.Set(flag, smi);
+
+				sm.isUnlocked.Set(stillNeedsunlocking, smi);
 			}
 
 			public string SidescreenButtonText
@@ -225,11 +216,11 @@ namespace Beached.Content.Scripts
 
 			private void CreateChore()
 			{
-				Workable component = smi.master.GetComponent<GenericUnlockablePOIWorkable>();
+				var workable = smi.master.GetComponent<GenericUnlockablePOIWorkable>();
 				Prioritizable.AddRef(gameObject);
 				Trigger((int)GameHashes.UIRefresh);
 
-				unlockChore = new WorkChore<GenericUnlockablePOIWorkable>(Db.Get().ChoreTypes.Research, component);
+				unlockChore = new WorkChore<GenericUnlockablePOIWorkable>(Db.Get().ChoreTypes.Research, workable);
 			}
 
 			private void CancelChore()

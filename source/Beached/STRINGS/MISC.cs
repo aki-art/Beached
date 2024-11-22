@@ -4,6 +4,18 @@
 	{
 		public class MISC
 		{
+			public class NOTIFICATIONS
+			{
+				public class BEACHED_SLEEPINGMUFFINS
+				{
+					public static LocString NAME = "Critters Discovered";
+
+					public static LocString MESSAGEBODY = "We have thawed out two creatures from the ancient block of ice. They appear to be in good health, but a little dazed, it will take a few cycles to fully regain their appetite. \n" +
+						"\n" +
+						"New buildings have become available:\n  {0}";
+				}
+			}
+
 			public class BEACHED_SANDY_SEASHELL
 			{
 				public static LocString NAME = "Seashell";

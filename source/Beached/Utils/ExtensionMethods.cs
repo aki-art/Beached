@@ -10,6 +10,15 @@ namespace Beached.Utils
 {
 	public static class ExtensionMethods
 	{
+		public static void ConfigureCelsius(this TemperatureVulnerable instance, float tempWarningLow, float tempLethalLow, float tempWarningHigh, float tempLethalHigh)
+		{
+			instance.Configure(
+				MiscUtil.CelsiusToKelvin(tempWarningLow),
+				MiscUtil.CelsiusToKelvin(tempLethalLow),
+				MiscUtil.CelsiusToKelvin(tempWarningHigh),
+				MiscUtil.CelsiusToKelvin(tempLethalHigh));
+		}
+
 		public static ChoreTable.Builder AddPoopStates(this ChoreTable.Builder builder)
 		{
 			return builder.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP));
@@ -122,8 +131,6 @@ namespace Beached.Utils
 
 		public static bool TryGetCollarDispenser(this CavityInfo cavity, out CollarDispenser dispenser)
 		{
-			Log.Debug("TryGetCollarDispenser");
-
 			dispenser = null;
 
 			if (cavityInfoExtensions.TryGetValue(cavity, out var extension))

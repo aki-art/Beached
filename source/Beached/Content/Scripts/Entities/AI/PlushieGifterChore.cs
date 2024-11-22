@@ -38,7 +38,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			AddPrecondition(ChorePreconditions.instance.CanDoWorkerPrioritizable, this);
 		}
 
-		public bool GetWorkerPriority(Worker worker, out int priority)
+		public bool GetWorkerPriority(WorkerBase worker, out int priority)
 		{
 			priority = RELAXATION.PRIORITY.TIER1;
 			return true;

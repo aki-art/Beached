@@ -46,7 +46,7 @@ namespace Beached.Content.Defs.Entities
 
 			prefab.AddOrGet<KBatchedAnimHeatPostProcessingEffect>();
 
-			prefab.AddOrGet<Meltable>().selfHeatKW = 24f;
+			prefab.AddOrGet<Meltable>().selfHeatKW = 960f;
 
 			return prefab;
 		}

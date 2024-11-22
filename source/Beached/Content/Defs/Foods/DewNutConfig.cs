@@ -1,0 +1,39 @@
+﻿using TUNING;
+using UnityEngine;
+using static EdiblesManager;
+
+namespace Beached.Content.Defs.Foods
+{
+	public class DewNutConfig : IEntityConfig
+	{
+		public const string ID = "Beached_DewNut";
+
+		public GameObject CreatePrefab()
+		{
+			var foodInfo = new FoodInfo(
+				ID,
+				DlcManager.VANILLA_ID,
+				0f,
+				FOOD.FOOD_QUALITY_TERRIBLE,
+				FOOD.DEFAULT_PRESERVE_TEMPERATURE,
+				FOOD.DEFAULT_ROT_TEMPERATURE,
+				FOOD.SPOIL_TIME.VERYSLOW,
+				false);
+
+			var prefab = BEntityTemplates.CreateFood(
+				ID,
+				"beached_dewnut_kanim",
+				0.7f,
+				0.7f,
+				foodInfo);
+
+			return prefab;
+		}
+
+		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+
+		public void OnPrefabInit(GameObject inst) { }
+
+		public void OnSpawn(GameObject inst) { }
+	}
+}

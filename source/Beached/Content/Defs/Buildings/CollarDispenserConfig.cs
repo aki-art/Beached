@@ -25,6 +25,8 @@ namespace Beached.Content.Defs.Buildings
 				DECOR.NONE,
 				NOISE_POLLUTION.NONE);
 
+			def.POIUnlockable = true;
+
 			return def;
 		}
 

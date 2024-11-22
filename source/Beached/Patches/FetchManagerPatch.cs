@@ -10,7 +10,7 @@ namespace Beached.Patches
 #if TRANSPILERS
 
 		// makes poffs the last food option to find
-		[HarmonyPatch(typeof(FetchManager), nameof(FetchManager.FindEdibleFetchTarget))]
+		[HarmonyPatch(typeof(FetchManager), nameof(FetchManager.FindEdibleFetchTarget), [typeof(Storage), typeof(HashSet<Tag>), typeof(Tag[])])]
 		public class FetchManager_FindEdibleFetchTarget_Patch
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
@@ -29,10 +29,12 @@ namespace Beached.Patches
 					typeof(Storage)
 				]);
 
+				int pickup2_Index = 5;
+
 				codes.InsertRange(index + 1,
 				[
 					// ushort on stack
-					new CodeInstruction(OpCodes.Ldloc, 5), // TODO find, pickup2
+					new CodeInstruction(OpCodes.Ldloc, pickup2_Index), // TODO find, pickup2
 					new CodeInstruction(OpCodes.Ldarg_1), // Storage storage
 					new CodeInstruction(OpCodes.Call, m_InjectedMethod)
 				]);

@@ -252,7 +252,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 			{
 				if (smi.bucketKbac == null)
 					smi.SetupBucket();
-
+				 
 				//smi.kbac.SetSymbolVisiblity(smi.master.trackSymbol, true);
 				smi.bucketKbac.gameObject.SetActive(true);
 				smi.bucketKbac.enabled = true;

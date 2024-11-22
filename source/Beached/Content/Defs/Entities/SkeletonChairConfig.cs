@@ -21,6 +21,21 @@ namespace Beached.Content.Defs.Entities
 				TUNING.DECOR.NONE,
 				defaultTemperature: MiscUtil.CelsiusToKelvin(30));
 
+			prefab.AddOrGet<Demolishable>();
+			prefab.AddOrGet<POITechItemUnlockWorkable>().workTime = 5f;
+
+			prefab.AddOrGet<OccupyArea>().objectLayers = [ObjectLayer.Building];
+
+			var unlocks = prefab.AddOrGetDef<POITechItemUnlocks.Def>();
+			unlocks.POITechUnlockIDs = [
+				IceMachineConfig.ID,
+				BeachChairConfig.ID,
+				IceCooledFanConfig.ID ];
+			unlocks.PopUpName = STRINGS.UI.BEACHED_MISC.POI_UNLOCK_TITLE;
+			unlocks.animName = "ceres_remote_archive_kanim";
+
+			prefab.AddOrGet<Prioritizable>();
+
 			return prefab;
 		}
 

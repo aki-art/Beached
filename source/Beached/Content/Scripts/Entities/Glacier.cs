@@ -165,7 +165,7 @@ namespace Beached.Content.Scripts.Entities
 			}
 		}
 
-		public override void OnCompleteWork(Worker worker)
+		public override void OnCompleteWork(WorkerBase worker)
 		{
 			Log.Debug("COMPLETE");
 

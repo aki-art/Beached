@@ -10,7 +10,7 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return builder
-				.TemperatureCelsius(-40, -30, 20, 30)
+				.TemperatureCelsius(-70, -55, 65, 80)
 				.Size(1, 1)
 				.Mass(100f)
 				.Trappable()
@@ -58,7 +58,7 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 				//.Add(new CreatureSleepStates.Def())
 				.Add(new FixedCaptureStates.Def())
 				.Add(new EatStates.Def())
-				//.Add(new RanchedStates.Def(), isAdult) // needs excited_loop animation
+				.Add(new RanchedStates.Def(), isAdult) // needs excited_loop animation
 				.Add(new HunterStates.Def())
 				.Add(new LayEggStates.Def(), isAdult)
 				.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))

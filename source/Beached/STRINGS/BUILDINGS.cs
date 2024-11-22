@@ -54,9 +54,9 @@ namespace Beached
 					public static LocString EFFECTS = "Shields the surface of an asteroid from incoming Meteors. Does not allow rockets to pass.";
 				}
 
-				public class BEACHED_COLLARRACK
+				public class BEACHED_COLLARDISPENSER
 				{
-					public static LocString NAME = Link("Collar Rack", "Beached_CollarRack");
+					public static LocString NAME = Link("Collar Rack", CollarDispenserConfig.ID);
 					public static LocString DESC = "Dispenses Collars for Muffins to wear, and provides the interface to set instructions for tamed Muffins.";
 					public static LocString EFFECTS = "A trained duplicant can equip Collars to Muffins.";
 				}
@@ -191,7 +191,7 @@ namespace Beached
 
 				public class BEACHED_LABORATORYTILES
 				{
-					public static LocString NAME = Link(  "Laboratory Tile", LaboratoryTileConfig.ID);
+					public static LocString NAME = Link("Laboratory Tile", LaboratoryTileConfig.ID);
 					public static LocString DESC = "...";
 					public static LocString EFFECT = "...";
 				}

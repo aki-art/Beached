@@ -324,6 +324,11 @@ namespace Beached
 
 				public class SEEDS
 				{
+					public class BEACHED_DEWNUT
+					{
+						public static LocString NAME = "Dewnut";
+						public static LocString DESC = ".";
+					}
 					public class BEACHED_CORAL_WASHUSPONGE
 					{
 						public static LocString NAME = "Washu Sponge Frag";

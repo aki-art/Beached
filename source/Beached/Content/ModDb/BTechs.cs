@@ -5,26 +5,20 @@ namespace Beached.Content.ModDb
 {
 	public class BTechs
 	{
-		public const string HIDDEN_ATMOSPHERIC_FORCEFIELD_GENERATOR =
-			"Beached_Tech_Hidden_AtmosphericForcefieldGenerator";
+		public const string HIDDEN =
+			"Beached_Tech_Hidden";
 
 		public static void Register(Techs techs)
 		{
 			new Tech(
-				HIDDEN_ATMOSPHERIC_FORCEFIELD_GENERATOR,
+				HIDDEN,
 				[
-					ForceFieldGeneratorConfig.ID
+					ForceFieldGeneratorConfig.ID,
+					CollarDispenserConfig.ID,
 				],
 				techs);
-		}
 
-		public static void UnlockTech(string id)
-		{
-			var tech = Db.Get().Techs.Get(id);
-			if (tech == null) return;
-
-			Research.Instance.GetOrAdd(tech).Purchased();
-			Game.Instance.Trigger((int)GameHashes.ResearchComplete, tech);
+			Beached.Log.Debug("Added tech HIDDEN");
 		}
 	}
 }

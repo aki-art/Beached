@@ -205,20 +205,20 @@ namespace Beached.Content.Scripts.Entities.AI
 			}
 		}
 
-		public override void OnStartWork(Worker worker)
+		public override void OnStartWork(WorkerBase worker)
 		{
 			Log.Debug("OnStartWork " + worker?.GetProperName());
 			kPrefabID.AddTag(GameTags.Creatures.Stunned);
 			kPrefabID.AddTag(BTags.Creatures.beingMined);
 		}
 
-		public override void OnStopWork(Worker worker)
+		public override void OnStopWork(WorkerBase worker)
 		{
 			kPrefabID.RemoveTag(GameTags.Creatures.Stunned);
 			kPrefabID.RemoveTag(BTags.Creatures.beingMined);
 		}
 
-		public override void OnCompleteWork(Worker worker)
+		public override void OnCompleteWork(WorkerBase worker)
 		{
 			Log.Debug("COMPLETE");
 
@@ -226,7 +226,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			MarkForDig(false);
 		}
 
-		public override bool OnWorkTick(Worker worker, float dt)
+		public override bool OnWorkTick(WorkerBase worker, float dt)
 		{
 			var damage = dt / workTime;
 			ApplyDamage(damage);

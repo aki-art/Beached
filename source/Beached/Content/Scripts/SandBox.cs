@@ -58,7 +58,7 @@ namespace Beached.Content.Scripts
 			effect.Play("poof");
 		}
 
-		public override void OnStartWork(Worker worker)
+		public override void OnStartWork(WorkerBase worker)
 		{
 			base.OnStartWork(worker);
 			worker.GetComponent<FaceGraph>().AddExpression(Db.Get().Expressions.Happy);
@@ -118,13 +118,13 @@ namespace Beached.Content.Scripts
 		}
 
 
-		public override void OnStopWork(Worker worker)
+		public override void OnStopWork(WorkerBase worker)
 		{
 			base.OnStopWork(worker);
 			worker.GetComponent<FaceGraph>().RemoveExpression(Db.Get().Expressions.Happy);
 		}
 
-		public override void OnCompleteWork(Worker worker)
+		public override void OnCompleteWork(WorkerBase worker)
 		{
 			if (worker != null)
 				AddEffect(worker);
@@ -230,7 +230,7 @@ namespace Beached.Content.Scripts
 			return str;
 		}
 
-		private void AddEffect(Worker worker)
+		private void AddEffect(WorkerBase worker)
 		{
 			if (worker.TryGetComponent(out Effects effects))
 			{
@@ -242,7 +242,7 @@ namespace Beached.Content.Scripts
 			}
 		}
 
-		public bool GetWorkerPriority(Worker worker, out int priority)
+		public bool GetWorkerPriority(WorkerBase worker, out int priority)
 		{
 			priority = RELAXATION.PRIORITY.TIER3;
 

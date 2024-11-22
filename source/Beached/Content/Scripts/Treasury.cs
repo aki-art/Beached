@@ -12,7 +12,7 @@ namespace Beached.Content.Scripts
 		public TreasureChances chances;
 
 		// used to keep track for the WorldDamager, so the dug mass can be adjusted
-		public static Dictionary<int, Worker> diggers;
+		public static Dictionary<int, WorkerBase> diggers;
 
 		public override void OnPrefabInit()
 		{
@@ -46,7 +46,7 @@ namespace Beached.Content.Scripts
 #endif
 		}
 
-		public void TrySpawnTreasure(Diggable diggable, Element element, Worker worker)
+		public void TrySpawnTreasure(Diggable diggable, Element element, WorkerBase worker)
 		{
 			if (!CanWorkerFindTreasure(worker))
 			{

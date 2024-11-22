@@ -1,4 +1,5 @@
-﻿using KSerialization;
+﻿using Beached.Content.ModDb;
+using KSerialization;
 using TUNING;
 using UnityEngine;
 
@@ -7,27 +8,41 @@ namespace Beached.Content.Scripts
 	public class Meltable : Workable
 	{
 		[MyCmpReq] private KSelectable kSelectable;
+		[MyCmpReq] private PrimaryElement primaryElement;
 		[MyCmpGet] private KBatchedAnimHeatPostProcessingEffect heatEffect;
+		[MyCmpGet] private SimTemperatureTransfer temperatureTransfer;
 		private WorkChore<Meltable> chore;
 		private HandleVector<int>.Handle structureTemperature;
 		[Serialize] protected bool isMarkedForThawing;
 		[Serialize] protected bool harvestWhenReady;
+		[Serialize] protected float startTemperature;
 
 		[SerializeField] public float selfHeatKW;
+
+		private static float MELT = 273.2f;
 
 		protected Meltable()
 		{
 			faceTargetWhenWorking = true;
+			SetOffsetTable(OffsetGroups.InvertedStandardTable);
 		}
+
+		public override float GetPercentComplete() => Mathf.Clamp01((MELT - primaryElement.Temperature) / (MELT - startTemperature));
 
 		public override void OnPrefabInit()
 		{
 			base.OnPrefabInit();
-			workerStatusItem = Db.Get().DuplicantStatusItems.Arting;
-			attributeConverter = Db.Get().AttributeConverters.ArtSpeed;
+			workerStatusItem = BStatusItems.thawing;
+
+			attributeConverter = Db.Get().AttributeConverters.TidyingSpeed;
 			attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
 			skillExperienceSkillGroup = Db.Get().SkillGroups.Basekeeping.Id;
 			skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
+
+			multitoolContext = ModAssets.CONTEXTS.THAWING;
+			multitoolHitEffectTag = EffectConfigs.BuildSplashId;
+
+			faceTargetWhenWorking = true;
 
 			SetWorkTime(80f);
 		}
@@ -83,7 +98,9 @@ namespace Beached.Content.Scripts
 
 		private float AddSelfHeat(float dt)
 		{
-			GameComps.StructureTemperatures.ProduceEnergy(structureTemperature, selfHeatKW * dt, global::STRINGS.BUILDINGS.PREFABS.STEAMTURBINE2.HEAT_SOURCE, dt);
+			//temperatureTransfer.ModifyEnergy(selfHeatKW * dt);
+
+			primaryElement.SetTemperature((selfHeatKW * dt) + primaryElement.Temperature);
 
 			if (heatEffect != null)
 				heatEffect.SetHeatBeingProducedValue(selfHeatKW);
@@ -91,13 +108,19 @@ namespace Beached.Content.Scripts
 			return selfHeatKW;
 		}
 
-		public override bool OnWorkTick(Worker worker, float dt)
+		public override void OnStartWork(WorkerBase worker)
+		{
+			base.OnStartWork(worker);
+			startTemperature = primaryElement.Temperature;
+		}
+
+		public override bool OnWorkTick(WorkerBase worker, float dt)
 		{
 			AddSelfHeat(dt);
 			return base.OnWorkTick(worker, dt);
 		}
 
-		public override void OnStopWork(Worker worker)
+		public override void OnStopWork(WorkerBase worker)
 		{
 			base.OnStopWork(worker);
 

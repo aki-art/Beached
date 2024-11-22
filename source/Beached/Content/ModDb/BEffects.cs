@@ -29,8 +29,10 @@
 			PLUSHIE_VOLE = "Beached_Effect_PlushieVole",
 			SANDBOX = "Beached_Effect_Sandbox",
 			SANDBOX_RECENT = "Beached_Effect_RecentlySandbox",
+			DAZED = "Beached_Effect_Dazed",
 			KARACOO_HUG = "Beached_KaracooHug",
-			UNSAVORY_MEAL = "Beached_Unsavory_Meal";
+			UNSAVORY_MEAL = "Beached_Unsavory_Meal",
+			NICE_SCENT = "Beached_Effect_NiceScent"; // shower with soap
 
 		public class VANILLA
 		{
@@ -44,6 +46,7 @@
 			var peeDelta = Db.Get().Amounts.Bladder.deltaAttribute.Id;
 			var carryCapacity = Db.Get().Attributes.CarryAmount.Id;
 			var airConsumptionRate = Db.Get().Attributes.AirConsumptionRate.Id;
+			var morale = Db.Get().Attributes.QualityOfLife.Id;
 
 			new EffectBuilder(SANDBOX, 2370, false)
 				.Modifier(Db.Get().Attributes.QualityOfLife.Id, 2, false)
@@ -53,6 +56,10 @@
 			new EffectBuilder(SANDBOX_RECENT, CONSTS.CYCLE_LENGTH / 2f, false)
 				.HideInUI()
 				.HideFloatingText()
+				.Add(set);
+
+			new EffectBuilder(NICE_SCENT, CONSTS.CYCLE_LENGTH, false)
+				.Modifier(morale, 2, false)
 				.Add(set);
 
 			new EffectBuilder(LUBRICATED, PERSISTENT, false)
@@ -156,6 +163,10 @@
 			new EffectBuilder(LIMPETHOST, PERSISTENT, true)
 				.Modifier(Db.Get().CritterAttributes.Metabolism.Id, 1.2f, true)
 				.Modifier(BAmounts.LimpetGrowth.deltaAttribute.Id, 100f / (3f * CONSTS.CYCLE_LENGTH))
+				.Add(set);
+
+			new EffectBuilder(DAZED, 3f * CONSTS.CYCLE_LENGTH, false)
+				.Modifier(Db.Get().CritterAttributes.Metabolism.Id, -0.9f, true)
 				.Add(set);
 
 			new EffectBuilder(LIMPETHOST_RECOVERY, 160f, false)

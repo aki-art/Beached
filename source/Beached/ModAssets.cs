@@ -1,4 +1,5 @@
 ﻿using Beached.Content.BWorldGen;
+using Beached.Content.Scripts;
 using FUtility.FUI;
 using Newtonsoft.Json;
 using System;
@@ -85,7 +86,8 @@ namespace Beached
 		{
 			public static readonly HashedString
 				HARVEST_ORANGE_SQUISH = "beached_harvest_orangesquish",
-				SAND = "beached_sand";
+				SAND = "beached_sand",
+				THAWING = "beached_thawing";
 		}
 
 		public static class Fx
@@ -101,11 +103,19 @@ namespace Beached
 			public static GameObject darkVeilOverlay;
 			public static GameObject test;
 
+			public struct ParticleFxSet
+			{
+				public static ParticleSystemPlayer ammoniaBubblesUp;
+				public static ParticleSystemPlayer ammoniaBubblesDown;
+				public static ParticleSystemPlayer ammoniaBubblesSide;
+			}
+
 			public static class Lasers
 			{
 				public const string
 					SQUISH = "Beached_Laser_Squish",
-					SAND = "Beached_Laser_Sand";
+					SAND = "Beached_Laser_Sand",
+					FLAMETHROWER = "Beached_Laser_FlameThrower";
 
 				public static void AddLaserEffects(GameObject minionPrefab)
 				{
@@ -115,11 +125,12 @@ namespace Beached
 
 					AddLaserEffect(SQUISH, CONTEXTS.HARVEST_ORANGE_SQUISH, kbatchedAnimEventToggler, kbac, "beached_squish_harvest_beam_kanim", "loop");
 					AddLaserEffect(SAND, CONTEXTS.SAND, kbatchedAnimEventToggler, kbac, "beached_sand_beam_kanim", "loop");
+					AddLaserEffect(FLAMETHROWER, CONTEXTS.THAWING, kbatchedAnimEventToggler, kbac, "beached_flamethrower_beam_kanim", "loop");
 				}
 
 				private static void AddLaserEffect(string ID, HashedString context, KBatchedAnimEventToggler kbatchedAnimEventToggler, KBatchedAnimController kbac, string animFile, string defaultAnimation = "loop")
 				{
-					var laserEffect = new MinionConfig.LaserEffect
+					var laserEffect = new BaseMinionConfig.LaserEffect
 					{
 						id = ID,
 						animFile = animFile,
@@ -254,6 +265,10 @@ namespace Beached
 			var sharedAssetsBundle = LoadAssetBundle("beached_shared_assets", platformSpecific: false);
 			var bundle2 = LoadAssetBundle(NEW_ASSETBUNDLE, platformSpecific: true);
 			var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
+
+			var up = bundle2.LoadAsset<GameObject>("Assets/Prefabs/AmmoniaBubbles/AmmoniaBubbles.prefab");
+			Fx.ParticleFxSet.ammoniaBubblesUp = up.AddComponent<ParticleSystemPlayer>();
+			Fx.ParticleFxSet.ammoniaBubblesUp.duration = 1f;
 
 			Log.Debug("loading sounds");
 			LoadSounds(Path.Combine(assets, "sounds"));

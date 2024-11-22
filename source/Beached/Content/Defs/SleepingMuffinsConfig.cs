@@ -1,7 +1,6 @@
 ﻿using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Entities.Critters.Muffins;
-using Beached.Content.Scripts;
-using System.Collections.Generic;
+using Beached.Content.Scripts.Entities;
 using UnityEngine;
 
 namespace Beached.Content.Defs
@@ -24,16 +23,14 @@ namespace Beached.Content.Defs
 				1,
 				TUNING.DECOR.BONUS.TIER1);
 
-			prefab.AddOrGet<GenericUnlockablePOIWorkable>().workTime = 5f;
-			var def = prefab.AddOrGetDef<GenericUnlockablePOI.Def>();
+			var def = prefab.AddOrGetDef<UnconsciousCritters.Def>();
 			def.techUnlockIDs =
 			[
 				CollarDispenserConfig.ID
 			];
 
 			def.popUpName = global::STRINGS.BUILDINGS.PREFABS.DLC2POITECHUNLOCKS.NAME;
-			def.animName = "ceres_remote_archive_kanim";
-			def.loreUnlockId = "notes_welcometoceres";
+			def.animName = "beached_glaciermuffinsunlock_kanim";
 			def.spawnPrefabs =
 			[
 				MuffinConfig.ID,

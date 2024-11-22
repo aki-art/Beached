@@ -2,7 +2,6 @@
 using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
-using static ResearchTypes;
 
 namespace Beached.Patches
 {
@@ -15,7 +14,7 @@ namespace Beached.Patches
 			{
 				__result.Add(ClusterMapMeteorShowerConfig.CreateClusterMeteor(
 					"Beached_Diamond",
-					BGameplayEvents.DIAMOND_METEOREVENTID,
+					BGameplayEvents.DIAMOND_SHOWER,
 					STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.BEACHED_DIAMOND.NAME,
 					STRINGS.UI.SPACEDESTINATIONS.CLUSTERMAPMETEORSHOWERS.BEACHED_DIAMOND.DESCRIPTION,
 					"beached_shower_diamond_kanim",

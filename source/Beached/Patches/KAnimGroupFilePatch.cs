@@ -22,7 +22,8 @@ namespace Beached.Patches
 
 				AddGroup(groups, CONSTS.BATCH_TAGS.INTERACTS,
 				[
-					"beached_spinner_interact_kanim"
+					"beached_spinner_interact_kanim",
+					"beached_glaciermuffinsunlock_kanim"
 				]);
 			}
 

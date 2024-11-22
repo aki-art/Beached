@@ -33,6 +33,8 @@ namespace Beached.Content
 			acidImmune = TagManager.Create("Beached_AcidImmune"),
 			preventLubrication = TagManager.Create("Beached_PreventLubrication"),
 			mechanicalBuilding = TagManager.Create("Beached_MechanicalBuilding"),
+			// used for showers or sinks to track if it has soap supplied
+			soaped = TagManager.Create("Beached_Soaped"),
 
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),

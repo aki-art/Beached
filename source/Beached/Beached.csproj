@@ -9,7 +9,7 @@
 		<RootNamespace>Beached</RootNamespace>
 		<IsMod>true</IsMod>
 		<IsPacked>true</IsPacked>
-		<DefineConstants>ELEMENTS,TRANSPILERS, DEVTOOLS</DefineConstants>
+		<DefineConstants>ELEMENTS,TRANSPILERS, DEVTOOLS, _WIKI</DefineConstants>
 		<Publicised>true</Publicised>
 		<CopyFiles>true</CopyFiles>
 		<DebugType>Portable</DebugType>
@@ -23,7 +23,7 @@
 	<!-- General Package Properties -->
 	<PropertyGroup>
 		<PackageId>Beached</PackageId>
-		<Version>0.2.0</Version>
+		<Version>0.2.0.0</Version>
 		<Authors>Aki</Authors>
 		<Copyright>2021 Aki</Copyright>
 		<RepositoryUrl>https://github.com/aki-art/ONI-Mods</RepositoryUrl>
@@ -77,7 +77,7 @@
 			<HintPath>$(GameLibsFolder)\LibNoiseDotNet.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		
+
 		<Reference Include="Unity.TextMeshPro">
 			<HintPath>$(GameLibsFolder)\Unity.TextMeshPro.dll</HintPath>
 			<Private>false</Private>
@@ -131,7 +131,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Content\Scripts\Entities\AI\Jellyfish\" />
 	  <Folder Include="Utils\WaveFunctionCollapse\" />
 	</ItemGroup>
 

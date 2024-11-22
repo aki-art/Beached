@@ -43,6 +43,10 @@
       <HintPath>$(GameLibsFolder)/Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
+	  <Reference Include="netstandard">
+		  <HintPath>$(GameLibsFolder)/netstandard.dll</HintPath>
+		  <Private>False</Private>
+	  </Reference>
   </ItemGroup>
   
 </Project>

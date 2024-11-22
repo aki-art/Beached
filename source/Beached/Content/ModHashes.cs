@@ -23,6 +23,7 @@
 			prePoop = new("PrePoop"),
 			critterMined = new("CritterMined"),
 			sidesSreenRefresh = new("SideScreenRefresh"),
+			builtNest = new("BuiltNest"),
 
 			segmentedEntityUpdate = new("SegmentedEntityUpdate"),
 			critterTraitAdded = new("CritterTraitAdded");

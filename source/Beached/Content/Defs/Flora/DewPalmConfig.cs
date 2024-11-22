@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities.Plant;
+﻿using Beached.Content.Defs.Items;
+using Beached.Content.Scripts.Entities.Plant;
 using TUNING;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Beached.Content.Defs.Flora
 	{
 		public const string ID = "Beached_DewPalm";
 		public const string SEED_ID = "Beached_DewPalmSeed";
+		public const string PREVIEW_ID = "Beached_DewPalmPreview";
 		public const string BASE_TRAIT_ID = "Beached_DewPalmTrait";
 
 		public GameObject CreatePrefab()
@@ -35,16 +37,40 @@ namespace Beached.Content.Defs.Flora
 				false,
 				0f,
 				0.15f,
-				"PlantMeat",
+				PalmLeafConfig.ID,
 				true,
 				true,
 				true,
 				false,
-				2400f,
+				150f / 600f,
 				0f,
 				2200f,
 				BASE_TRAIT_ID,
 				STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.NAME);
+
+			prefab.AddOrGet<StandardCropPlant>();
+
+			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
+				prefab,
+				SeedProducer.ProductionType.Harvest,
+				SEED_ID,
+				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_DEWNUT.NAME,
+				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_DEWNUT.DESC,
+				Assets.GetAnim("beached_dewnut_kanim"),
+				numberOfSeeds: 3,
+				additionalTags: [GameTags.CropSeed],
+				sortOrder: 3,
+				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_CELLALGAE.DOMESTICATEDDESC,
+				width: 0.33f,
+				height: 0.33f);
+
+			EntityTemplates.CreateAndRegisterPreviewForPlant(
+				seed,
+				PREVIEW_ID,
+				Assets.GetAnim("beached_small_cell_kanim"),
+				"place",
+				1,
+				1);
 
 			//Object.DestroyImmediate(prefab.GetComponent<MutantPlant>());
 

@@ -2,8 +2,8 @@
 using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.Scripts.Entities.AI;
+using Beached.Content.Scripts.Entities.AI.Jellyfish;
 using System.Collections.Generic;
-using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Jellies
@@ -29,7 +29,7 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 			germConsumerMonitor.diet = planktonDiet;
 			germConsumerMonitor.consumableGermIdx = Db.Get().Diseases.GetIndex(BDiseases.plankton.id);
 
-			prefab.AddOrGetDef<LureableMonitor.Def>().lures = 
+			prefab.AddOrGetDef<LureableMonitor.Def>().lures =
 				[
 					GameTags.Creatures.FishTrapLure
 				];
@@ -81,7 +81,8 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 				//.Add(new CreatureSleepStates.Def())
 				.Add(new FixedCaptureStates.Def())
 				//.Add(new RanchedStates.Def())
-				.Add(new LayEggStates.Def(), isAdult)
+				//.Add(new LayEggStates.Def(), isAdult)
+				.Add(new StrobilaLayingStates.Def(), isAdult)
 				.Add(new GermSuckStates.Def())
 				.AddPoopStates()
 				.Add(new CallAdultStates.Def(), !isAdult)

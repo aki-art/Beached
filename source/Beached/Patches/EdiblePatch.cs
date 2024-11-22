@@ -36,13 +36,13 @@ namespace Beached.Patches
 			// patched later, because his method calls a static property with a getter that references Db.Get(), which crashes if called too early
 			public static void Patch(Harmony harmony)
 			{
-				var targetMethod = AccessTools.Method("Edible:AddOnConsumeEffects", [typeof(Worker)]);
+				var targetMethod = AccessTools.Method("Edible:AddOnConsumeEffects", [typeof(WorkerBase)]);
 				var postfix = AccessTools.Method(typeof(Edible_AddOnConsumeEffects_Patch), nameof(Postfix));
 
 				harmony.Patch(targetMethod, postfix: new HarmonyMethod(postfix));
 			}
 
-			public static void Postfix(Edible __instance, Worker worker)
+			public static void Postfix(Edible __instance, WorkerBase worker)
 			{
 				if (worker == null)
 					return;

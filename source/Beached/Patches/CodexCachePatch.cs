@@ -66,6 +66,14 @@ namespace Beached.Patches
 			public static void Postfix()
 			{
 				BeachedCodexEntries.Generate();
+
+			}
+
+			[HarmonyPostfix]
+			[HarmonyPriority(Priority.Last)]
+			public static void LatePostfix()
+			{
+				//FoodGraphGenerator.Generate(Path.Combine(FUtility.Utils.ModPath, "food_graphs.txt"));
 			}
 
 			/*		private static string FormatUse(Tag tag, float amount, bool continous)

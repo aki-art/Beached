@@ -37,7 +37,6 @@ namespace Beached.Content.Defs.Buildings
 			go.AddOrGet<Prioritizable>();
 			Prioritizable.AddRef(go);
 
-
 			var fabricator = go.AddOrGet<ComplexFabricator>();
 			fabricator.heatedTemperature = 318.15f;
 			fabricator.sideScreenStyle = ComplexFabricatorSideScreen.StyleSetting.ListQueueHybrid;
@@ -68,6 +67,7 @@ namespace Beached.Content.Defs.Buildings
 			CreateStandardSmokedRecipe(fabricationTime, amountAtOnce, BasicPlantFoodConfig.ID, SmokedLiceConfig.ID);
 			CreateStandardSmokedRecipe(fabricationTime, amountAtOnce, TofuConfig.ID, SmokedTofuConfig.ID);
 			CreateStandardSmokedRecipe(fabricationTime, amountAtOnce, FishMeatConfig.ID, SmokedFishConfig.ID);
+			CreateStandardSmokedRecipe(fabricationTime, amountAtOnce, RawSnailConfig.ID, SmokedSnailConfig.ID);
 		}
 
 		private static void CreateStandardSmokedRecipe(float fabricationTime, float amountAtOnce, Tag input, Tag output)

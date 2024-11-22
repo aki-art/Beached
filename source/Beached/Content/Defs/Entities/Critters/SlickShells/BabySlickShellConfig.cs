@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
 {
-    [EntityConfigOrder(100)]
+	[EntityConfigOrder(100)]
 	public class BabySlickShellConfig : BaseSnailConfig, IEntityConfig
 	{
 		public const string ID = "Beached_SlickShell_Baby";
 
-		protected override string AnimFile => "beached_snail_kanim";
+		protected override string AnimFile => "beached_baby_slickshell_kanim";
 
 		protected override string Id => ID;
 

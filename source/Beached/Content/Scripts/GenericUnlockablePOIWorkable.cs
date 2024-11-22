@@ -16,13 +16,12 @@
 			synchronizeAnims = true;
 		}
 
-		public override void OnCompleteWork(Worker worker)
+		public override void OnCompleteWork(WorkerBase worker)
 		{
 			base.OnCompleteWork(worker);
 
 			var smi = this.GetSMI<GenericUnlockablePOI.Instance>();
 			smi.UnlockTechItems();
-			smi.SpawnPrefabs();
 			smi.sm.pendingChore.Set(false, smi);
 
 			gameObject.Trigger((int)GameHashes.UIRefresh);

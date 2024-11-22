@@ -1,5 +1,6 @@
 ﻿using Beached.Content.Defs.Entities.Corals;
-using Beached.Content.Scripts.Entities;
+using Beached.Content.Scripts.Entities.AI.Strobila;
+using Klei.AI;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities
@@ -26,20 +27,29 @@ namespace Beached.Content.Defs.Entities
 				default,
 				SimHashes.Creature);
 
+			// survival
 			prefab.AddOrGet<EntombVulnerable>();
+			prefab.AddOrGet<SubmersionMonitor>();
+			prefab.AddOrGet<UprootedMonitor>();
+			prefab.AddOrGet<TemperatureVulnerable>().ConfigureCelsius(10, 0, 65, 80);
+			prefab.AddOrGet<WiltCondition>();
+			prefab.AddOrGetDef<DeathMonitor.Def>();
+
+			prefab.AddOrGet<Traits>();
+			//prefab.AddOrGet<Health>();
+			prefab.AddOrGet<CharacterOverlay>();
+			//prefab.AddOrGet<RangedAttackable>();
+
+
+			prefab.AddOrGetDef<AnimInterruptMonitor.Def>();
+
+			prefab.AddTag(GameTags.Creature);
 
 			var pressureVulnerable = prefab.AddOrGet<PressureVulnerable>();
 			pressureVulnerable.Configure(CoralTemplate.ALL_WATERS);
 
-			prefab.AddOrGet<WiltCondition>();
 			prefab.AddOrGet<Prioritizable>();
 			prefab.AddOrGet<Uprootable>();
-			prefab.AddOrGet<UprootedMonitor>();
-			prefab.AddOrGet<TemperatureVulnerable>().Configure(
-				MiscUtil.CelsiusToKelvin(10),
-				MiscUtil.CelsiusToKelvin(0),
-				MiscUtil.CelsiusToKelvin(65),
-				MiscUtil.CelsiusToKelvin(80));
 
 			prefab.AddOrGet<OccupyArea>().objectLayers =
 			[

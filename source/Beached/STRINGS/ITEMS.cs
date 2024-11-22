@@ -12,10 +12,22 @@ namespace Beached
 		{
 			public class MISC
 			{
+				public class BEACHED_SOAP
+				{
+					public static LocString NAME = Link("Soap", SoapConfig.ID);
+					public static LocString DESC = "An aromatic block of waxy soap.";
+				}
+
 				public class BEACHED_GENETIC_SAMPLE
 				{
 					public static LocString NAME = "{0} Genetic Sample";
 					public static LocString DESC = "...";
+				}
+
+				public class BEACHED_PALMLEAF
+				{
+					public static LocString NAME = Link("Palm Leaf", PalmLeafConfig.ID);
+					public static LocString DESC = "The lead of a Dew Palm tree, it is very energy dense and makes for an excellent Bio-Fuel source.";
 				}
 
 				public class BEACHED_PALATECLEANSERFOOD
@@ -32,7 +44,7 @@ namespace Beached
 
 				public class BEACHED_SEASHELL
 				{
-					public static LocString NAME = "Seashell";
+					public static LocString NAME = Link("Seashell", SeaShellConfig.ID);
 					public static LocString DESC = "...";
 				}
 
@@ -90,6 +102,30 @@ namespace Beached
 					public static LocString DESC = "A jiggly treat hiding tasty berries within.";
 				}
 
+				public class BEACHED_CRABCAKES
+				{
+					public static LocString NAME = Link("Crab Cakes", CrabCakesConfig.ID);
+					public static LocString DESC = "Cruchy crabby bites.";
+				}
+
+				public class BEACHED_GLAZEDDEWNUT
+				{
+					public static LocString NAME = Link("Glazed Dewnut", GlazedDewnutConfig.ID);
+					public static LocString DESC = ".";
+				}
+
+				public class BEACHED_SUFFEDSNAILS
+				{
+					public static LocString NAME = Link("Stuffed Snails", StuffedSnailsConfig.ID);
+					public static LocString DESC = ".";
+				}
+
+				public class BEACHED_HARDBOILEDEGG
+				{
+					public static LocString NAME = Link("Hard Boiled Egg", HardBoiledEggConfig.ID);
+					public static LocString DESC = "An unlucky egg that will never hatch.";
+				}
+
 				public class BEACHED_RAWSNAIL
 				{
 					public static LocString NAME = Link("Raw Snail", RawSnailConfig.ID);
@@ -114,7 +150,7 @@ namespace Beached
 					public static LocString DESC = "A still chewy slab of meat, with a somewhat pleasant crispy outside.";
 				}
 
-				public class BEACHED_STUFFEDSNAIL
+				public class BEACHED_STUFFEDSNAILS
 				{
 					public static LocString NAME = "Stuffed Snail";
 					public static LocString DESC = "...";
@@ -157,16 +193,40 @@ namespace Beached
 					public static LocString DESC = "Edible tongue of a Mussel Sprout. It has a somewhat bitter, green flavour, and the consistency of fresh clam.";
 				}
 
-				public class BEACHED_GLAZEDDEWNUT
-				{
-					public static LocString NAME = "Glazed Dewnut";
-					public static LocString DESC = "...";
-				}
-
 				public class BEACHED_HIGHQUALITYMEAT
 				{
 					public static LocString NAME = Link("High Quality Meat", HighQualityMeatConfig.ID);
 					public static LocString DESC = "...";
+				}
+
+				public class BEACHED_FOULPOFF
+				{
+					public static LocString NAME = Link("Foul Poff", FoulPoffConfig.ID);
+					public static LocString DESC = "An inedible chunk of fungal material. It has an offensive smell of mould and ash.";
+				}
+
+				public class BEACHED_SMOKEDSNAIL
+				{
+					public static LocString NAME = Link("Smoked Snail", SmokedSnailConfig.ID);
+					public static LocString DESC = ".";
+				}
+
+				public class BEACHED_SPICYCRACKLINGS
+				{
+					public static LocString NAME = Link("Spicy Cracklings", SpicyCracklingsConfig.ID);
+					public static LocString DESC = ".";
+				}
+
+				public class BEACHEDDEWNUT
+				{
+					public static LocString NAME = Link("Dew Nut", DewNutConfig.ID);
+					public static LocString DESC = "An oddly round seed of Dew Palms.";
+				}
+
+				public class BEACHED_SCRAMBLEDSNAILS
+				{
+					public static LocString NAME = Link("Snail Scramble", ScrambledSnailsConfig.ID);
+					public static LocString DESC = "The yolk was left extra runny to match the slimy texture of Slickshell Meat.";
 				}
 
 				public class BEACHED_DRYAGEDMEAT
@@ -220,12 +280,6 @@ namespace Beached
 				public class BEACHED_SMOKEDPLANTMEAT
 				{
 					public static LocString NAME = "Smoked PLant Meat";
-					public static LocString DESC = "...";
-				}
-
-				public class BEACHED_SMOKEDSNAIL
-				{
-					public static LocString NAME = "Smoked Snail";
 					public static LocString DESC = "...";
 				}
 

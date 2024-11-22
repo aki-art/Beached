@@ -10,7 +10,7 @@ namespace Beached.Patches
 	public class MinionConfigPatch
 	{
 
-		[HarmonyPatch(typeof(MinionConfig), nameof(MinionConfig.SetupLaserEffects))]
+		[HarmonyPatch(typeof(BaseMinionConfig), nameof(BaseMinionConfig.SetupLaserEffects))]
 		public class MinionConfig_SetupLaserEffects_Patch
 		{
 			public static void Postfix(GameObject prefab)
@@ -20,7 +20,7 @@ namespace Beached.Patches
 		}
 
 
-		[HarmonyPatch(typeof(MinionConfig), nameof(MinionConfig.AddMinionAmounts))]
+		[HarmonyPatch(typeof(BaseMinionConfig), nameof(BaseMinionConfig.AddMinionAmounts))]
 		public class MinionConfig_AddMinionAmounts_Patch
 		{
 			public static void Postfix(Modifiers modifiers)
@@ -99,6 +99,15 @@ namespace Beached.Patches
 					automatic = false,
 					context = ModAssets.CONTEXTS.SAND,
 					buildFile = Assets.GetAnim("beached_sand_gun_kanim"),
+					overrideSymbol = "snapTo_rgtHand"
+				});
+
+				snapOn.snapPoints.Add(new SnapOn.SnapPoint
+				{
+					pointName = "dig",
+					automatic = false,
+					context = ModAssets.CONTEXTS.THAWING,
+					buildFile = Assets.GetAnim("beached_flamethrower_gun_kanim"),
 					overrideSymbol = "snapTo_rgtHand"
 				});
 

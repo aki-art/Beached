@@ -8,7 +8,7 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 	{
 		public const string ID = "Beached_Jellyfish_Baby";
 
-		protected override string AnimFile => "beached_jellyfish_kanim";
+		protected override string AnimFile => "beached_baby_jellyfish_kanim";
 
 		protected override string Id => ID;
 
@@ -26,12 +26,6 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 
 		public void OnPrefabInit(GameObject prefab) { }
 
-		public void OnSpawn(GameObject inst)
-		{
-			if (inst.TryGetComponent(out KBatchedAnimController kbac))
-			{
-				kbac.animScale *= 0.5f; // TODO: custom anim
-			}
-		}
+		public void OnSpawn(GameObject inst) { }
 	}
 }

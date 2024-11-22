@@ -9,7 +9,7 @@ namespace Beached.ModDevTools
 		public override void RenderTo(DevPanel panel)
 		{
 			var techs = Db.Get().Techs;
-			var forceFieldTech = techs.Get(BTechs.HIDDEN_ATMOSPHERIC_FORCEFIELD_GENERATOR);
+			var forceFieldTech = techs.Get(BTechs.HIDDEN);
 
 			ImGui.Text("Forcefield researched: " + forceFieldTech.IsComplete());
 

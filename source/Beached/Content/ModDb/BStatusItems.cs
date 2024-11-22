@@ -10,6 +10,8 @@ namespace Beached.Content.ModDb
 {
 	public class BStatusItems
 	{
+		// StatusItem.ALL_OVERLAYS
+
 		public static StatusItem
 			desiccation,
 			secretingMucus,
@@ -19,6 +21,7 @@ namespace Beached.Content.ModDb
 			collectingRubberFull,
 			geneticallyMofidied,
 			lubricated,
+			thawing,
 			gunked,
 			plushed,
 			hunting,
@@ -31,7 +34,8 @@ namespace Beached.Content.ModDb
 		public const string
 			ITEMS = "ITEMS",
 			BUILDINGS = "BUILDINGS",
-			CREATURES = "CREATURES";
+			CREATURES = "CREATURES",
+			DUPLICANTS = "DUPLICANTS";
 
 		[DbEntry]
 		public static void RegisterMiscStatusItems(MiscStatusItems __instance)
@@ -110,6 +114,20 @@ namespace Beached.Content.ModDb
 				OverlayModes.None.ID));
 
 			smoking.SetResolveStringCallback((str, data) => data is SmokeCookable smokable ? smokable.GetStatusItemTooltip(str) : str);
+		}
+
+		[DbEntry]
+		public static void RegisterDuplicantStatisItems(DuplicantStatusItems __instance)
+		{
+			thawing = __instance.Add(new StatusItem(
+				"Beached_Thawing",
+				DUPLICANTS,
+				"",
+				StatusItem.IconType.Info,
+				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID,
+				status_overlays: (int)StatusItem.StatusItemOverlays.None));
 		}
 
 		private static StatusItem SimpleBuildingStatus(BuildingStatusItems __instance, string id, NotificationType notificationType = NotificationType.Neutral)
