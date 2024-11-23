@@ -6,7 +6,6 @@ namespace Beached.Content.ModDb
 	{
 		public static Amount Moisture;
 		public static Amount LimpetGrowth;
-		public static Amount Wet;
 		public static Amount ShellGrowth; // todo: ExtendEntityToWildCreature
 		public static Amount ShellIntegrity;
 
@@ -40,19 +39,6 @@ namespace Beached.Content.ModDb
 				"ui_icon_scale_growth");
 
 			LimpetGrowth.SetDisplayer(new AsPercentAmountDisplayer(GameUtil.TimeSlice.PerCycle));
-
-			Wet = __instance.CreateAmount(
-				"Beached_Wet",
-				0f,
-				100f,
-				true,
-				Units.Flat,
-				0.1675f,
-				true,
-				"STRINGS.DUPLICANTS",
-				"beached_amount_wet");
-
-			Wet.SetDisplayer(new AsPercentAmountDisplayer(GameUtil.TimeSlice.PerCycle));
 
 			ShellGrowth = __instance.CreateAmount(
 					"Beached_ShellGrowth",

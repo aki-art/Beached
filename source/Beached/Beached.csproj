@@ -9,23 +9,18 @@
 		<RootNamespace>Beached</RootNamespace>
 		<IsMod>true</IsMod>
 		<IsPacked>true</IsPacked>
-		<DefineConstants>ELEMENTS,TRANSPILERS, DEVTOOLS, _WIKI</DefineConstants>
+		<DefineConstants>ALPHA_EXCLUDE,TRANSPILERS, DEVTOOLS, _WIKI</DefineConstants>
 		<Publicised>true</Publicised>
 		<CopyFiles>true</CopyFiles>
 		<DebugType>Portable</DebugType>
-		<!--
-		constants:
-			ELEMENTS
-			TRANSPILERS
-		-->
 	</PropertyGroup>
 
 	<!-- General Package Properties -->
 	<PropertyGroup>
 		<PackageId>Beached</PackageId>
-		<Version>0.2.0.0</Version>
+		<Version>0.2.1.0</Version>
 		<Authors>Aki</Authors>
-		<Copyright>2021 Aki</Copyright>
+		<Copyright>2021-2024 Aki</Copyright>
 		<RepositoryUrl>https://github.com/aki-art/ONI-Mods</RepositoryUrl>
 	</PropertyGroup>
 
