@@ -6,6 +6,7 @@ elements:
     audio:
       copyElement: Algae
     specificHeatCapacity: 0.2
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_bamboostem.png
     thermalConductivity: 2
     solidSurfaceAreaMultiplier: 1
     liquidSurfaceAreaMultiplier: 1

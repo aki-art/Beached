@@ -21,4 +21,10 @@ tags:
   - Beached_SandBeds
   - NoGlobalFeatureSpawning
 
+subworldTemplateRules:
+  - names:
+      - beached/pois/subnautica_pod
+    listRule: TrySome
+    someCount: 1
+
 zoneType: Beached_Sea

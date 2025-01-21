@@ -35,6 +35,7 @@ elements:
     descriptionText: <link=\"BEACHEDSOURBRINE\">Sour Brine</sub> frozen into it's <link=\"ELEMENTS_SOLID\">Solid</link> state.
     color: *color
     specificHeatCapacity: 3.4
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_sourbrineice.png
     thermalConductivity: 2.18
     solidSurfaceAreaMultiplier: 1
     liquidSurfaceAreaMultiplier: 1

@@ -4,6 +4,7 @@ elements:
     descriptionText: Decaying organic compounds being actively broken down by micro-organisms.
     color: 404930
     textureUVScale: 12
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_rot.png
     specificHeatCapacity: 0.2
     thermalConductivity: 2
     solidSurfaceAreaMultiplier: 1

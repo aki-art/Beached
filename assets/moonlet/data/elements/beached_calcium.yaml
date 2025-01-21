@@ -5,7 +5,8 @@ elements:
       color: &color FFFFFF
       uiColor: &uiColor 8791a0
       specificHeatCapacity: &shc 0.63
-      specularTexture: beached_calcium_spec
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_calcium.png
+      specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_calcium_spec.png
       specularColor: 6a679f
       thermalConductivity: 200
       solidSurfaceAreaMultiplier: 1

@@ -4,7 +4,8 @@ elements:
     descriptionText: Solidified mass of pearls stuck together, forming an aesthethically very pleasing building material.
     color: c9bda6
     normalTexture: beached_pearl_normal
-    specularTexture: beached_pearl_spec
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_pearl.png
+    specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_pearl_spec.png
     specularColor: FFFFFF # controlled from script
     modifiers:
     - id: Decor

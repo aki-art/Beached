@@ -9,9 +9,10 @@ elements:
       - id: Decor
         value: 20%
         isMultiplier: true
-    specularTexture: beached_amber_spec
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_amber.png
+    specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_amber_spec.png
     specularColor: ffc000
-    normalMapTexture: beached_amber_normal
+    normalMapTexture: beached_shared_assets::Assets/moonlet/elements/beached_amber_normal.png
     specificHeatCapacity: 0.2
     thermalConductivity: 2
     solidSurfaceAreaMultiplier: 1

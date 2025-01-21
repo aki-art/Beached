@@ -5,6 +5,7 @@ elements:
     descriptionText: This Neutronium has been shattered loose by unknown forces. It is highly unstable, and attempting to mine it will yield nothing.
     specificHeatCapacity: 0
     thermalConductivity: 0
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_crackedneutronium.png
     solidSurfaceAreaMultiplier: 0
     liquidSurfaceAreaMultiplier: 0
     gasSurfaceAreaMultiplier: 0

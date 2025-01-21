@@ -1476,6 +1476,17 @@ buildings:
   location_x: 2
   element: Beached_SiltStone
   temperature: 300.925018
+  storage:
+  - id: FieldRation
+    element: Creature
+    units: 15
+    temperature: 295
+    rottable: {}
+  - id: Beached_Astrobar
+    element: Creature
+    units: 3
+    temperature: 295
+    rottable: {}
 - id: Headquarters
   location_x: 4
   element: Beached_Iridium

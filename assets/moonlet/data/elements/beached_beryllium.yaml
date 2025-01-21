@@ -4,7 +4,8 @@ elements:
       descriptionText: A brittle alkaline earth metal with a silvery pale color.
       color: &color 7da39a
       specularColor: FFFFFF
-      specularTexture: beached_beryllium_spec
+      specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_beryllium_spec.png
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_beryllium.png
       specificHeatCapacity: &shc 1.88
       thermalConductivity: 200
       solidSurfaceAreaMultiplier: 1

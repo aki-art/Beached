@@ -25,7 +25,7 @@ TerrainBiomeLookupTable:
     - content: Beached_Bismuthinite
       bandSize: 0.3
     - content: Beached_Moss
-      bandSize: 1.5
+      bandSize: 2
     - content: Helium
       bandSize: 7
     - content: ChlorineGas

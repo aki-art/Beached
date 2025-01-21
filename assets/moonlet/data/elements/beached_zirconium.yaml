@@ -3,7 +3,8 @@ elements:
       name: Zircon
       color: &color cd0000
       specularColor: &specularColor 2, 0, 0, 1
-      specularTexture: beached_zircon_spec
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_zircon.png
+      specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_zircon_spec.png
       descriptionText: Deep red gemstone which yields Zirconium if molten. Zircon is a nesosilicate with the formula ZrSiO<sub>4</sub>
       modifiers:
         - id: OverheatTemperature
@@ -39,7 +40,8 @@ elements:
       name: Zirconium
       color: *color
       specularColor: *specularColor
-      specularTexture: beached_zirconium_spec
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_zirconium.png
+      specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_zirconium_spec.png
       descriptionText: A lustrous, soft but corrosion resistant metal.
       modifiers:
         - id: OverheatTemperature

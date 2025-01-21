@@ -3,6 +3,7 @@ elements:
     descriptionText: Volcanic rock formed after the rapid cooling of low viscosity lava. 
     name: Basalt
     color: 1e1e26
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_basalt.png
     modifiers:
       - id: OverheatTemperature
         value: 100

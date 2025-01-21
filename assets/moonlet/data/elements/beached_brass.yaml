@@ -7,7 +7,8 @@ elements:
       - id: Decor
         value: 50%
         isMultiplier: true
-    specularTexture: beached_brass_spec
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_brass.png
+    specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_brass_spec.png
     specularColor: e9dc77
     specificHeatCapacity: &shc 0.386
     thermalConductivity: 80

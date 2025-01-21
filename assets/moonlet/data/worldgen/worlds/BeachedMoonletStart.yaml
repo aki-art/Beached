@@ -213,3 +213,12 @@ worldTemplateRules:
     allowedCellsFilter:
       - command: Replace
         zoneTypes: [Beached_Bamboo]
+
+  # helium vent
+  - names:
+      - beached/worldgen/bamboo/helium_vent_b
+    listRule: GuaranteeOne
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Bamboo]

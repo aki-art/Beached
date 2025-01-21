@@ -3,6 +3,7 @@ elements:
     descriptionText: Slag is a byproduct of Metal refining processes.
     name: Slag
     color: 302c2c
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_slag.png
     modifiers:
       - id: Decor
         value: -20%
@@ -46,7 +47,8 @@ elements:
         value: 15%
         isMultiplier: true
     materialReference: Diamond
-    specularTexture: beached_slagglass_spec
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_slagglass.png
+    specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_slagglass_spec.png
     specularColor: 002aff
     specificHeatCapacity: 0.625
     thermalConductivity: 8

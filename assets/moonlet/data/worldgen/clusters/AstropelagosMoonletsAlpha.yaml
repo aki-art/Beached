@@ -1,0 +1,47 @@
+name: Astropelagos Cluster ALPHA
+description: A world of warm sandy shores and glimmering oceans.
+requiredDlcId: EXPANSION1_ID
+menuOrder: 0
+coordinatePrefix: BCHD
+clusterCategory: SpacedOutStyle
+disableStoryTraits: true
+difficulty: Moderate # 3
+
+# defaultSkyScape: skyScapes/
+
+numRings: 12
+startWorldIndex: 0 
+
+worldPlacements:
+- world: worlds/BeachedMoonletStartAlpha
+  allowedRings:
+    min: 0
+    max: 0
+  buffer: 2
+  locationType: Startworld
+  startWorld: true
+
+clusterTags:
+  - BeachedCluster
+
+poiPlacements:
+  - pois:
+      - TemporalTear
+    numToSpawn: 1
+    avoidClumping: false
+    allowedRings:
+      min: 8
+      max: 11
+
+  - pois: 
+      - Beached_HarvestableSpacePOI_PearlescentAsteroidField # renewable pearls, bismuth and some sand
+    numToSpawn: 1
+    allowedRings:
+      min: 2
+      max: 5
+  - pois: 
+      - Beached_HarvestableSpacePOI_Ammonite # Lime & Rot
+    numToSpawn: 1
+    allowedRings:
+      min: 2
+      max: 9

@@ -2,6 +2,7 @@ elements:
   - elementId: Beached_Bone
     name: Bone
     descriptionText: Calcium rich remains of creatures gone.
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_bone.png
     color: d9c396
     uiColor: 453e30
     audio:

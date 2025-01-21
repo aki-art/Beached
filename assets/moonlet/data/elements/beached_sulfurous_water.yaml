@@ -36,6 +36,7 @@ elements:
       descriptionText: <link=\"BeachedSulfurousWater\">Acid</sub> frozen into it's <link=\"ELEMENTS_SOLID\">Solid</link> state.
       specificHeatCapacity: 3.05
       eyeIrritationStrength: 3
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_sulfurousice.png
       thermalConductivity: 1
       solidSurfaceAreaMultiplier: 1
       liquidSurfaceAreaMultiplier: 1

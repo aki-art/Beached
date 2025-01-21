@@ -3,6 +3,7 @@ elements:
     name: Rubber
     descriptionText: Natural rubber composed of the polymers of Isoprene.
     color: d07538
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_rubber.png
     modifiers:
       - id: OverheatTemperature
         value: -50

@@ -6,6 +6,7 @@ elements:
     audio:
       copyElement: Snow
     specificHeatCapacity: 0.846
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_carbondioxidesnow.png
     thermalConductivity: 1.46
     solidSurfaceAreaMultiplier: 1
     liquidSurfaceAreaMultiplier: 1

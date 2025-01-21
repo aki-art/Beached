@@ -21,6 +21,7 @@ MobLookupTable:
       height: 1
 
     Beached_Seas_TropicalPacu:
+      prefabName: PacuTropical
       location: Water
       selectMethod: Centroid
       density:
@@ -28,7 +29,27 @@ MobLookupTable:
         max: 0.05
       width: 1
       height: 1
+    
+    Beached_Karacoo:
+      prefabName: Beached_Karacoo
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.3
+        max: 0.4
+      width: 1
+      height: 1
       
+    Beached_MossyDrecko:
+      prefabName: Beached_MossyDrecko
+      location: Air
+      selectMethod: Centroid
+      density:
+        min: 0.015
+        max: 0.020   
+      width: 1
+      height: 1
+
     Beached_SandySeashell:
       location: Floor
       selectMethod: Centroid
@@ -43,8 +64,8 @@ MobLookupTable:
       location: Floor
       selectMethod: Centroid
       density:
-        min: 0.1
-        max: 0.2
+        min: 0.2
+        max: 0.4
       width: 1
       height: 2
 

@@ -4,7 +4,8 @@ elements:
       descriptionText: An extremely dense metal with a pale glimmering appearance. It is generally only found in Meteorites. 
       color: &color b6b2fb
       uiColor: &uiColor 6a679f
-      specularTexture: beached_iridium_spec
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_iridium.png
+      specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_iridium_spec.png
       specularColor: 6a679f
       textureUVScale: 10
       modifiers:

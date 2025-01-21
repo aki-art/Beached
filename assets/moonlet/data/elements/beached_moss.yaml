@@ -5,6 +5,7 @@ elements:
     color: 528b35
     audio:
       copyElement: Algae
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_moss.png
     specificHeatCapacity: 0.2
     thermalConductivity: 2
     solidSurfaceAreaMultiplier: 1
@@ -24,6 +25,8 @@ elements:
     materialCategory: Organics
     buildMenuSort: 2
     state: Solid
+    tags:
+      - Beached_MossMaterial
     duplicantEffects:
       walkedOn:
         id: CarpetFeet

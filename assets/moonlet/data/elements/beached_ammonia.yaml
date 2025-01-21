@@ -53,6 +53,7 @@ elements:
 
     - elementId: Beached_FrozenAmmonia
       descriptionText: Ammonia Gas frozen solid.
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_frozenammonia.png
       name: Solid Ammonia
       color: *color
       specificHeatCapacity: *shc

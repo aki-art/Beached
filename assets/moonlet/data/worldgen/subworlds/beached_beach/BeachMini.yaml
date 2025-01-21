@@ -48,7 +48,13 @@ subworldTemplateRules:
       - beached/worldgen/beach/simplepalm4
       - beached/worldgen/beach/simplepalm5
     listRule: TrySome
-    someCount: 2
+    someCount: 3
+    allowDuplicates: false
+
+  - names:
+      - beached/pois/sandy_vending_machine
+    listRule: TrySome
+    someCount: 1
     allowDuplicates: false
 
 zoneType: Beached_Beach

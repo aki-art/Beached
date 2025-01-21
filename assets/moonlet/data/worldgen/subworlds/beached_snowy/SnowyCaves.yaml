@@ -9,19 +9,21 @@ density:
 avoidRadius: 20.0
 minChildCount: 2
 sampleBehaviour: PoissonDisk
+
 borderOverride: hardToDig
+BorderOverridePriority: 9999
 
 biomes:
   - name: biomes/Beached_Beach/SnowyBase
     weight: 2
     tags:
       - ColdBreather
-      - Beached_Slagmites
+      - Beached_Slagmite
   - name: biomes/Beached_Beach/SnowyCarbon
     weight: 1
     tags:
       - ColdBreather
-      - Beached_Slagmites
+      - Beached_Slagmite
 tags:
   - IgnoreCaveOverride
 
@@ -29,16 +31,13 @@ zoneType: Beached_Icy
 
 features:
   - type: features/beached_snowy/SnowCavern
-  - type: features/beached_snowy/SnowCavern
-  - type: features/beached_snowy/SnowCavern
-  - type: features/beached_snowy/SnowCavern
-  - type: features/beached_snowy/SnowCavern
-  - type: features/beached_snowy/SnowCavern
-  - type: features/beached_snowy/SnowCavern
+  - type: features/beached_snowy/WolframiteCavern
+  - type: features/beached_snowy/NitrePatch
 
-# subworldTemplateRules:
-#   - names:
-#       - beached/worldgen/snowy/sleetwheatcave
-#     listRule: TrySome
-#     someCount: 3
-#     allowDuplicates: true
+subworldTemplateRules:
+  - names:
+      - beached/worldgen/snowy/sleetwheatcave
+      - beached/worldgen/snowy/slagmite_cave_1
+    listRule: TrySome
+    someCount: 10
+    allowDuplicates: true

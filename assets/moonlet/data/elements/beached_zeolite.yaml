@@ -10,6 +10,7 @@ elements:
         value: 25%
         isMultiplier: true
     specificHeatCapacity: 0.2
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_zeolite.png
     thermalConductivity: 2
     solidSurfaceAreaMultiplier: 1
     liquidSurfaceAreaMultiplier: 1

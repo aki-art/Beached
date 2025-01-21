@@ -6,7 +6,8 @@ elements:
       
       It is suitable for building <link="POWER">Power</link> systems.
     specularColor: 02b976
-    specularTexture: beached_zincore_spec
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_zincore.png
+    specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_zincore_spec.png
     color: &color 1eaaaa
     modifiers:
       - id: Decor
@@ -41,7 +42,8 @@ elements:
     descriptionText: Zinc is a chemical element with the symbol Zn and atomic number 30.
     color: *color
     specularColor: 02b976
-    specularTexture: beached_zinc_spec
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_zinc.png
+    specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_zinc_spec.png
     specificHeatCapacity: *shc
     thermalConductivity: 120
     solidSurfaceAreaMultiplier: 1

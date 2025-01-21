@@ -29,6 +29,8 @@ TerrainBiomeLookupTable:
       bandSize: 0.7
     - content: Wolframite
       bandSize: 0.05
+    - content: Beached_Nitrogen
+      bandSize: 5
     SnowyCarbon:
     - content: Ice
       bandSize: 0.35
@@ -42,7 +44,7 @@ TerrainBiomeLookupTable:
       bandSize: 0.05
     - content: IgneousRock
       bandSize: 0.5
-    - content: Beached_SaltyOxygen
+    - content: Beached_Nitrogen
       bandSize: 0.1
     Start:
     - content: Beached_SiltStone

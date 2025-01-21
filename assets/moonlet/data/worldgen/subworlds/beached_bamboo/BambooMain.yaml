@@ -20,6 +20,8 @@ biomes:
     tags:
       - Beached_Bamboo
       - Beached_BambooForest_Cylindrica
+      - Beached_Karacoo
+      - Beached_MossyDrecko
 tags:
   - IgnoreCaveOverride
   - NoGlobalFeatureSpawning
@@ -28,5 +30,8 @@ tags:
 
 features:
   - type: features/beached_bamboo/BismuthCave
+  - type: features/beached_bamboo/MossCave
+  - type: features/beached_bamboo/SucroseCave
+  - type: features/beached_bamboo/AmberBlob
 
 zoneType: Beached_Bamboo

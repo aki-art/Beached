@@ -3,6 +3,7 @@ elements:
     name: Permafrost
     descriptionText: A clump of ancient fossil and other materials frozen in Ice and compacted Snow. Melting the ice will awaken the ancient parasites within, immediately infecting nearby air.
     color: c5e4fc
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_permafrost.png
     uiColor: 527289
     textureUVScale: 18.0
     specificHeatCapacity: lerp(2.05, 0.91, 0.7) # 0.798, aka 70% between snow and fossil. also just flexing lerp function being available :D

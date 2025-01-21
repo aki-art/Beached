@@ -2,7 +2,6 @@ elements:
     - elementId: Beached_Bismuthinite
       name: Bismuth Ore
       descriptionText: Bismuthinite is an ore of Bismuth, a mineral consisting of bismuth sulfide (Bi<sub>2</sub>S<sub>3</sub>).
-      specularTexture: beached_bismuthinite_spec
       color: &color 75a66c
       modifiers:
         - id: OverheatTemperature
@@ -12,6 +11,8 @@ elements:
           value: 25%
           isMultiplier: true
       specificHeatCapacity: 0.129
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_bismuthinite.png
+      specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_bismuthinite_spec.png
       thermalConductivity: 7.97
       solidSurfaceAreaMultiplier: 1
       liquidSurfaceAreaMultiplier: 1
@@ -38,7 +39,8 @@ elements:
       name: Bismuth
       color: *color
       descriptionText: A lustrous, coarsely crystalline metal with an unusually low thermal conductivity. 
-      specularTexture: beached_bismuth_spec
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_bismuth.png
+      specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_bismuth_spec.png
       modifiers:
         - id: OverheatTemperature
           value: -10

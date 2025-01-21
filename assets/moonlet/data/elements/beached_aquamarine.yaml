@@ -8,8 +8,9 @@ elements:
         value: 40%
         isMultiplier: true
     materialReference: Diamond
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_aquamarine.png
+    specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_aquamarine_spec.png
     specularColor: 6df0ff
-    specularTexture: beached_aquamarine_spec
     specificHeatCapacity: 0.2
     thermalConductivity: 0.79
     solidSurfaceAreaMultiplier: 1

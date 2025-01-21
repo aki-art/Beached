@@ -8,6 +8,7 @@ elements:
         value: 700
         isMultiplier: false
     specificHeatCapacity: 30
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_electrogel.png
     thermalConductivity: 280
     solidSurfaceAreaMultiplier: 1
     liquidSurfaceAreaMultiplier: 1

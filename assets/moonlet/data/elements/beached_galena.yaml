@@ -2,6 +2,7 @@ elements:
   - elementId: Beached_Galena 
     name: Galena
     descriptionText: Galena is a significant ore of Lead.
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_galena.png
     color: ba9b62
     specificHeatCapacity: 0.91
     thermalConductivity: 2.3
@@ -22,7 +23,7 @@ elements:
     - Solids_LeadOre
     buildMenuSort: 3
     state: Solid
-    specularTexture: beached_galena_specular
+    specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_galena_spec.png
     specularColor: 968562
     audio:
       copyElement: Lead

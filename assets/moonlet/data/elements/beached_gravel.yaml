@@ -3,6 +3,7 @@ elements:
     name: Gravel
     descriptionText: Coarse loose material full of pebbles and dirt.
     color: 0.4, 0.4, 0.4
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_gravel.png
     specificHeatCapacity: 0.2
     thermalConductivity: 2
     solidSurfaceAreaMultiplier: 1
