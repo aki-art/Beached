@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb;
+﻿#if TRANSPILERS
+using Beached.Content.ModDb;
 using HarmonyLib;
 using Klei.CustomSettings;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace Beached.Patches
 			private static int GetMaxTraitCount(int maxTraits, StoryContentPanel instance)
 			{
 				var clusterId = instance.mainScreen.newGameSettingsPanel.GetSetting(CustomGameSettingConfigs.ClusterLayout);
-				return clusterId == CONSTS.BEACHED_CLUSTER_SETTING_ID ? maxTraits + 1 : maxTraits;
+				return WorldgenUtil.IsBeachedWorld(clusterId) ? maxTraits + 1 : maxTraits;
 			}
 		}
 
@@ -53,7 +54,7 @@ namespace Beached.Patches
 				if (storyId == BStories.Glaciers.Id)
 				{
 					var clusterId = __instance.mainScreen.newGameSettingsPanel.GetSetting(CustomGameSettingConfigs.ClusterLayout);
-					if (clusterId == CONSTS.BEACHED_CLUSTER_SETTING_ID)
+					if (WorldgenUtil.IsBeachedWorld(clusterId))
 					{
 						__state = true;
 						return false;
@@ -84,7 +85,7 @@ namespace Beached.Patches
 			{
 				var clusterId = __instance.mainScreen.newGameSettingsPanel.GetSetting(CustomGameSettingConfigs.ClusterLayout);
 
-				if (clusterId == CONSTS.BEACHED_CLUSTER_SETTING_ID)
+				if (WorldgenUtil.IsBeachedWorld(clusterId))
 				{
 					if (__instance.storyStates[BStories.Glaciers.Id] == StoryContentPanel.StoryState.Guaranteed)
 						return;
@@ -101,3 +102,4 @@ namespace Beached.Patches
 		}
 	}
 }
+#endif

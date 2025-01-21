@@ -18,6 +18,12 @@ namespace Beached
 					public static LocString DESC = "An aromatic block of waxy soap.";
 				}
 
+				public class BEACHED_OXYLITEPUFT
+				{
+					public static LocString NAME = Link("Oxylite Buddy", OxylitePuftConfig.ID);
+					public static LocString DESC = "A sculpture made in the image of a Dense Puft. Unfortunately it is made out of Oxylite and will slowly sublimate away.";
+				}
+
 				public class BEACHED_GENETIC_SAMPLE
 				{
 					public static LocString NAME = "{0} Genetic Sample";

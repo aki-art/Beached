@@ -1,5 +1,4 @@
 ﻿using Database;
-using System.Collections.Generic;
 
 namespace Beached.Content.ModDb
 {
@@ -40,7 +39,8 @@ namespace Beached.Content.ModDb
 					"skillbadge_role_mining1",
 					BSkillGroups.PRECISION_ID,
 					[
-						BSkillPerks.CanFindTreasures
+						BSkillPerks.CanFindTreasures,
+						BSkillPerks.IncreasePrecisionSmall
 					], null));
 
 			archeology2 = __instance.Add(new Skill(
@@ -53,7 +53,8 @@ namespace Beached.Content.ModDb
 					"skillbadge_role_mining1",
 					BSkillGroups.PRECISION_ID,
 					[
-						BSkillPerks.CanFindMoreTreasures
+						BSkillPerks.CanFindMoreTreasures,
+						BSkillPerks.IncreasePrecisionMedium
 					],
 					[
 						ARCHEOLOGY_ID,
@@ -70,7 +71,8 @@ namespace Beached.Content.ModDb
 					"skillbadge_role_mining1",
 					BSkillGroups.PRECISION_ID,
 					[
-						BSkillPerks.CanFindTreasures
+						BSkillPerks.CanSafelyHarvestClusters,
+						BSkillPerks.IncreasePrecisionLarge
 					],
 					[
 						ARCHEOLOGY_ID
@@ -86,7 +88,7 @@ namespace Beached.Content.ModDb
 					"skillbadge_role_mining1",
 					BSkillGroups.PRECISION_ID,
 					[
-						BSkillPerks.CanFindTreasures
+						BSkillPerks.CanAnalyzeClusters
 					],
 					[
 						CRYSTALLOGRAPHY_ID,

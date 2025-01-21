@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities.AI
 {
-
 	public class SitOnEggStates : GameStateMachine<SitOnEggStates, SitOnEggStates.Instance, IStateMachineTarget, SitOnEggStates.Def>
 	{
 		private const float ANIM_OFFSET = 0.07f;
+		public static bool DRAW_DEBUG = false;
 
 		public ApproachSubState<Approachable> moveToEgg;
 		public State placeButtPre;
@@ -86,8 +86,13 @@ namespace Beached.Content.Scripts.Entities.AI
 			if (egg == null)
 				return;
 
-			var debug = ModDebug.AddSimpleLineRenderer(egg.transform, Color.magenta, Color.green, 0.03f);
-			var debug2 = ModDebug.AddSimpleLineRenderer(egg.transform, Color.red, Color.blue, 0.03f);
+			LineRenderer debug = null, debug2 = null;
+
+			if (DRAW_DEBUG)
+			{
+				debug = ModDebug.AddSimpleLineRenderer(egg.transform, Color.magenta, Color.green, 0.03f);
+				debug2 = ModDebug.AddSimpleLineRenderer(egg.transform, Color.red, Color.blue, 0.03f);
+			}
 
 			if (egg.TryGetComponent(out KBatchedAnimController kbac))
 			{
@@ -146,32 +151,38 @@ namespace Beached.Content.Scripts.Entities.AI
 						y = egg.transform.position.y - minT.y;
 					}
 
+					if (DRAW_DEBUG)
+					{
 
-
-					debug2.positionCount = 4;
-					debug2.SetPositions([
-						egg.transform.position + new Vector3(minT.x, minT.y),
+						debug2.positionCount = 4;
+						debug2.SetPositions([
+							egg.transform.position + new Vector3(minT.x, minT.y),
 						egg.transform.position + new Vector3(maxT.x, minT.y),
 						egg.transform.position + new Vector3(maxT.x, maxT.y),
 						egg.transform.position + new Vector3(minT.x, maxT.y),
 											]);
 
+					}
+
 					smi.relativePositionTarget = new Vector3(0, egg.transform.position.y - y);
 
-					var debugPoint = (egg.transform.position + smi.relativePositionTarget) with { z = egg.transform.position.z };
-					debug.positionCount = 4;
-					debug.SetPositions([
-						egg.transform.position,
+					if (DRAW_DEBUG)
+					{
+						var debugPoint = (egg.transform.position + smi.relativePositionTarget) with { z = egg.transform.position.z };
+						debug.positionCount = 4;
+						debug.SetPositions([
+							egg.transform.position,
 						debugPoint,
 						debugPoint with { x = debugPoint.x - 0.3f},
 						debugPoint with { x = debugPoint.x + 0.3f},
 						]);
 
-					debug.loop = false;
-					debug2.loop = true;
+						debug.loop = false;
+						debug2.loop = true;
 
-					debug.gameObject.SetActive(true);
-					debug2.gameObject.SetActive(true);
+						debug.gameObject.SetActive(true);
+						debug2.gameObject.SetActive(true);
+					}
 
 				}
 			}

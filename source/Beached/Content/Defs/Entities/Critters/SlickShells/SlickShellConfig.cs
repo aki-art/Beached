@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
 {
-    [EntityConfigOrder(0)]
+	[EntityConfigOrder(0)]
 	public class SlickShellConfig : BaseSnailConfig, IEntityConfig
 	{
 		public const string ID = "Beached_SlickShell";
@@ -30,7 +30,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.Tag(GameTags.OriginalCreature)
 				.Egg(BabySlickShellConfig.ID, "beached_egg_slickshell_kanim")
 					.Mass(0.3f)
-					.Fertility(5)
+					.Fertility(10)
 					.Incubation(20)
 					.EggChance(EggId, 100f)
 					.Done();
@@ -42,7 +42,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 
 			var moistureMonitor = prefab.AddOrGetDef<MoistureMonitor.Def>();
 			moistureMonitor.lubricant = Elements.mucus;
-			moistureMonitor.lubricantMassKg = 0.1f;
+			moistureMonitor.defaultMucusRate = 30f / 600f;
 			moistureMonitor.lubricantTemperatureKelvin = 300;
 
 			var diet = new Diet(SaltDiet());

@@ -20,7 +20,7 @@ namespace Beached.Patches
 							tag = Elements.slag.CreateTag(),
 							ratioToOutput = 1f/3f
 						}];
-				tags.displayMassMultiplier = 0.25f;
+				tags.totalMassPercent01 = 0.25f;
 			}
 		}
 	}

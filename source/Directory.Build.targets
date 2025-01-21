@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	
+	<!-- Generate mod.yaml and mod_info.yaml -->
 	<Target Name="WriteToFile" BeforeTargets="Build" Condition="'$(GenerateMetadata)' == 'true'">
 		<PropertyGroup>
 			<ModContent>
@@ -22,24 +24,23 @@
 	<Target Name="ILRepack" AfterTargets="Build" Condition="'$(IsPacked)' == 'true'">
 		<ItemGroup>
 			<InputAssemblies
-			  Include="$(TargetDir)\*.dll"
-			  Exclude="**/0Harmony.dll; **/System.*; **/Microsoft.*" />
+				Include="$(TargetDir)\*.dll"
+				Exclude="**/0Harmony.dll; **/System.*; **/Microsoft.*" />
 		</ItemGroup>
 
 		<ILRepack
-		  TargetPlatformVersion="v4"
-		  TargetKind="SameAsPrimaryAssembly"
-		  InputAssemblies="@(InputAssemblies)"
-		  Wildcards="true"
-		  LibraryPath="$(GameLibsFolder)"
-		  Parallel="true"
-		  OutputFile="$(TargetPath)"/>
+			TargetPlatformVersion="v4"
+			TargetKind="SameAsPrimaryAssembly"
+			InputAssemblies="@(InputAssemblies)"
+			Wildcards="true"
+			LibraryPath="$(GameLibsFolder)"
+			Parallel="true"
+			OutputFile="$(TargetPath)"/>
 	</Target>
 
 	<Target Name="CopyModFiles" AfterTargets="ILRepack" Condition="'$(CopyFiles)' == 'true'">
 		<Exec Command="xcopy /yqsr &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(ModFolder)\$(TargetName)\&quot;"/>
 		<Exec Command="xcopy /yqsr &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(ModFolder)\$(TargetName)\&quot;"/>
-		<!-- <Exec Command='xcopy "$(SolutionDir)..\assets" "$(ModFolder)\$(TargetName)" /s /i /y /d' ContinueOnError='true' /> -->
 	</Target>
 
 	<!-- Publiciser makes fields public, super handy for large mods like this one. https://github.com/AzeTheGreat/Publicise -->

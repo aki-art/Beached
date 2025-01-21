@@ -74,7 +74,6 @@ namespace Beached.Content.Scripts.UI
 
 			var buttonPrefab = buttonGroup.Find("ButtonPrefab").gameObject.AddOrGet<BButton>();
 
-			buttonPrefab.gameObject.SetActive(false);
 
 			button = Instantiate(buttonPrefab);
 			button.transform.SetParent(buttonGroup);
@@ -86,6 +85,7 @@ namespace Beached.Content.Scripts.UI
 			container.gameObject.SetActive(true);
 			buttonGroup.gameObject.SetActive(true);
 			button.gameObject.SetActive(true);
+			buttonPrefab.gameObject.SetActive(false);
 
 			button.OnClick += UpdateTapOrder;
 		}

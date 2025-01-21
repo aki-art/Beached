@@ -58,21 +58,18 @@ namespace Beached.Content.ModDb.Germs
 				.DiesIn(Element.State.Liquid)
 				.DiesAndSlowsOnSolid();
 
-#if ELEMENTS
 			growth
 				.GrowsIn(PoffConfig.configs.Select(c => c.elementID).ToArray())
 				.DisinfectedBy(Elements.sourBrine)
 				.DiesIn(Elements.murkyBrine, SimHashes.Brine, SimHashes.SaltWater)
 				.InstantlyDiesIn(Elements.sulfurousWater);
-#endif
 
 			var exposure = new ExposureRuleBuilder(this)
 				.DefaultHalfLife(float.PositiveInfinity);
-#if ELEMENTS
+
 			exposure
 				.DisinfectedBy(Elements.sourBrine, Elements.murkyBrine, SimHashes.Brine, SimHashes.SaltWater)
 				.InstantlyDiesIn(Elements.sulfurousWater);
-#endif
 		}
 	}
 }

@@ -15,8 +15,8 @@ namespace Beached.Content.Scripts
 		{
 			if (!hasInitializedTrait)
 			{
-				if (!this.HasTag(BTags.geyserNoTraits))
-					RollTrait();
+				//if (!this.HasTag(BTags.geyserNoTraits))
+				//	RollTrait();
 
 				hasInitializedTrait = true;
 			}
@@ -39,7 +39,6 @@ namespace Beached.Content.Scripts
 					}
 				}
 
-				Log.Debug("set name to " + name);
 				userNameable.SetName(name);
 			}
 		}

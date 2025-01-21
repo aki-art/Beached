@@ -1,8 +1,7 @@
-﻿using Beached.Content.BWorldGen;
+﻿
+#if !NO_MINNOW
 using Beached.Content.Defs.Duplicants;
 using HarmonyLib;
-using Klei.CustomSettings;
-using ProcGen;
 using System.Collections;
 
 namespace Beached.Patches
@@ -24,9 +23,7 @@ namespace Beached.Patches
 			{
 				yield return SequenceUtil.WaitForNextFrame;
 
-				var currentQualitySetting = CustomGameSettings.Instance.GetCurrentQualitySetting(CustomGameSettingConfigs.ClusterLayout);
-
-				if (SettingsCache.clusterLayouts.GetClusterData(currentQualitySetting.id).clusterTags.Contains(BWorldGenTags.BeachedCluster.ToString()))
+				if (WorldgenUtil.IsCurrentBeachedWorld())
 				{
 					((CharacterContainer)minionSelectScreen.containers[2]).SetMinion(new MinionStartingStats(Db.Get().Personalities.Get(MinnowConfig.ID)));
 					((CharacterContainer)minionSelectScreen.containers[1]).GenerateCharacter(true);
@@ -36,3 +33,4 @@ namespace Beached.Patches
 		}
 	}
 }
+#endif

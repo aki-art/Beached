@@ -17,7 +17,7 @@ namespace Beached.Content.Defs.Entities.Corals
 				.Age(6 * CONSTS.CYCLE_LENGTH)
 				.SafeTemperaturesCelsius(0, 5, 42, 50)
 				.InitialAnim("idle_grown")
-				.Frag("beached_leaflet_coral_frag_kanim")
+				.Frag("beached_leaflet_coral_frag_kanim", additionalTags: [GameTags.WaterSeed])
 				.Build().entityPrefab;
 
 			var storage = prefab.AddOrGet<Storage>();

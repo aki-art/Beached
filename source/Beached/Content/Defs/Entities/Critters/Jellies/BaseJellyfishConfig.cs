@@ -85,6 +85,7 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 				.Add(new StrobilaLayingStates.Def(), isAdult)
 				.Add(new GermSuckStates.Def())
 				.AddPoopStates()
+				.Add(new EnergizedStates.Def(), isAdult)
 				.Add(new CallAdultStates.Def(), !isAdult)
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());

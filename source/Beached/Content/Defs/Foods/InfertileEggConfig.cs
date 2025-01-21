@@ -26,6 +26,8 @@ namespace Beached.Content.Defs.Foods
 			prefab.AddTag(BTags.karacooSittable);
 			prefab.AddTag(GameTags.Organics);
 
+			SymbolOverrideControllerUtil.AddToPrefab(prefab);
+
 			return prefab;
 		}
 
@@ -36,7 +38,6 @@ namespace Beached.Content.Defs.Foods
 		public void OnSpawn(GameObject inst)
 		{
 			DiscoveredResources.Instance.Discover(ID.ToTag(), DiscoveredResources.GetCategoryForTags(inst.GetComponent<KPrefabID>().Tags));
-			SymbolOverrideControllerUtil.AddToPrefab(inst);
 		}
 	}
 }

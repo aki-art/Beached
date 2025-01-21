@@ -1,4 +1,5 @@
-﻿using Beached.Content;
+﻿#if TRANSPILERS
+using Beached.Content;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,3 +56,4 @@ namespace Beached.Patches
 		}
 	}
 }
+#endif

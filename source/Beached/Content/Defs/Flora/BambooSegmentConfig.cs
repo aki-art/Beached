@@ -1,4 +1,4 @@
-﻿using Beached.Content.Scripts;
+﻿using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.SegmentedEntities;
 using System.Collections.Generic;
 using TUNING;
@@ -9,7 +9,7 @@ namespace Beached.Content.Defs.Flora
 	public class BambooSegmentConfig : IEntityConfig
 	{
 		public const string ID = "Beached_BambooSegment";
-		private static readonly List<KAnimHashedString> liveSegmentAnims =
+		private static readonly List<string> liveSegmentAnims =
 		[
 			"leaf_a",
 			"leaf_b",
@@ -20,7 +20,7 @@ namespace Beached.Content.Defs.Flora
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				"segment",//STRINGS.CREATURES.SPECIES.BAMBOO.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_BAMBOO.NAME,
 				STRINGS.CREATURES.SPECIES.BEACHED_BAMBOO.DESC,
 				100f,
 				Assets.GetAnim("beached_bamboo_kanim"),
@@ -37,10 +37,12 @@ namespace Beached.Content.Defs.Flora
 				ObjectLayer.Plants
 			];
 
-			var randomAnimSelector = prefab.AddOrGet<RandomSymbolVisible>();
-			randomAnimSelector.targetSymbols = liveSegmentAnims;
-			randomAnimSelector.minVisibleSymbols = 1;
-			randomAnimSelector.maxVisibleSymbols = 3;
+			/*			var randomAnimSelector = prefab.AddOrGet<RandomSymbolVisible>();
+						randomAnimSelector.targetSymbols = liveSegmentAnims;
+						randomAnimSelector.minVisibleSymbols = 1;
+						randomAnimSelector.maxVisibleSymbols = 3;*/
+
+
 			/*
 						var stackable = prefab.AddOrGet<Stackable>();
 						stackable.stackTag = BTags.bamboo;
@@ -61,6 +63,8 @@ namespace Beached.Content.Defs.Flora
 			prefab.AddOrGet<EntitySegment>();
 
 			prefab.AddTag(BTags.bamboo);
+
+			prefab.AddComponent<DropStuffOnDeath>().drop = Elements.bambooStem.CreateTag();
 
 			return prefab;
 		}

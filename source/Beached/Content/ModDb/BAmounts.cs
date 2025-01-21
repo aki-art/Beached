@@ -8,6 +8,7 @@ namespace Beached.Content.ModDb
 		public static Amount LimpetGrowth;
 		public static Amount ShellGrowth; // todo: ExtendEntityToWildCreature
 		public static Amount ShellIntegrity;
+		public static Amount Mucus;
 
 		[DbEntry]
 		public static void Register(Database.Amounts __instance)
@@ -26,6 +27,21 @@ namespace Beached.Content.ModDb
 				"mod_stamina");
 
 			Moisture.SetDisplayer(new StandardAmountDisplayer(GameUtil.UnitClass.Percent, GameUtil.TimeSlice.PerCycle, null));
+
+			Mucus = __instance.CreateAmount(
+				"Beached_Mucus",
+				0f,
+				10f,
+				false,
+				Units.Flat,
+				0.35f,
+				true,
+				"STRINGS.CREATURES",
+				"ui_icon_stamina",
+				"attribute_stamina",
+				"mod_stamina");
+
+			Mucus.SetDisplayer(new StandardAmountDisplayer(GameUtil.UnitClass.Mass, GameUtil.TimeSlice.PerCycle, null));
 
 			LimpetGrowth = __instance.CreateAmount(
 				"Beached_LimpetGrowth",

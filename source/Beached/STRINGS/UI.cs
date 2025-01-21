@@ -20,6 +20,11 @@
 
 			public static class BEACHED_USERMENUACTIONS
 			{
+				public static class READLORE
+				{
+					public static LocString SEARCH_WRECKEDHABITAT = "Most of the resources have been destroyed in the crash, but my Duplicants were able to recover some Oxylite from the remnants of the oxidizer tank.";
+				}
+
 				public static class TAPPABLE
 				{
 					public static LocString REMOVE_TAP = "Remove Tap";

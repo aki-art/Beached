@@ -1,4 +1,5 @@
-﻿using Beached.Content.Overlays;
+﻿#if TRANSPILERS
+using Beached.Content.Overlays;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,20 @@ namespace Beached.Patches
 {
 	public class SimDebugViewPatch
 	{
+		/*
+				[HarmonyPatch(typeof(SimDebugView), "GetDiseaseColour")]
+				public class SimDebugView_GetDiseaseColour_Patch
+				{
+					public void Postfix(int cell, ref Color __result)
+					{
+						if (__result.a == 0)
+						{
+							if (Grid.Element[cell].id == Elements.permaFrost)
+								__result = ModAssets.Colors.iceWrath;
+						}
+					}
+				}*/
+
 		[HarmonyPatch(typeof(SimDebugView), nameof(SimDebugView.OnPrefabInit))]
 		public static class SimDebugView_OnPrefabInit_Patch
 		{
@@ -46,15 +61,16 @@ namespace Beached.Patches
 				codes.InsertRange(index + 1, new[]
 				{
 					new CodeInstruction(OpCodes.Ldsfld, f_Element), // Grid.Element
-                    new CodeInstruction(OpCodes.Ldarg_1), // cell
-                    new CodeInstruction(OpCodes.Ldelem_Ref), // Grid.Element[cell]
-                    new CodeInstruction(OpCodes.Ldsfld, f_Breathable), // GameTags.Breathable
-                    new CodeInstruction(OpCodes.Call, m_HasTag), // Grid.Element[cell].HasTag
-                    new CodeInstruction(OpCodes.Brtrue, EnoughMassLabel), // Grid.Element[cell].id
-                });
+					new CodeInstruction(OpCodes.Ldarg_1), // cell
+					new CodeInstruction(OpCodes.Ldelem_Ref), // Grid.Element[cell]
+					new CodeInstruction(OpCodes.Ldsfld, f_Breathable), // GameTags.Breathable
+					new CodeInstruction(OpCodes.Call, m_HasTag), // Grid.Element[cell].HasTag
+					new CodeInstruction(OpCodes.Brtrue, EnoughMassLabel), // Grid.Element[cell].id
+				});
 
 				return codes;
 			}
 		}
 	}
 }
+#endif

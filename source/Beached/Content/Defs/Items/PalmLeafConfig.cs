@@ -12,7 +12,7 @@ namespace Beached.Content.Defs.Items
 				ID,
 				STRINGS.ITEMS.MISC.BEACHED_PALMLEAF.NAME,
 				STRINGS.ITEMS.MISC.BEACHED_PALMLEAF.DESC,
-				6f,
+				1f,
 				false,
 				Assets.GetAnim("beached_palmleaf_kanim"),
 				"object",
@@ -20,7 +20,8 @@ namespace Beached.Content.Defs.Items
 				EntityTemplates.CollisionShape.RECTANGLE,
 				0.8f,
 				0.4f,
-				true);
+				true,
+				additionalTags: [GameTags.IndustrialIngredient]);
 
 			return prefab;
 		}

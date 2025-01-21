@@ -1,6 +1,7 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Corals;
+using Beached.Content.Defs.Entities.Critters.Dreckos;
 using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.Karacoos;
 using Beached.Content.Defs.Entities.Critters.Mites;
@@ -302,6 +303,24 @@ namespace Beached
 						public static LocString DESC = $"A large volcano that periodically erupts with {Link("Molten Bismuth", "BEACHEDBISMUTHMOLTEN")}";
 					}
 
+					public class BEACHED_SALT
+					{
+						public static LocString NAME = "Molten Salt Volcano";
+						public static LocString DESC = $"A large volcano that periodically erupts with {Link("Molten Salt", "SALT")}";
+					}
+
+					public class BEACHED_HELIUM
+					{
+						public static LocString NAME = "Hot Helium Vent";
+						public static LocString DESC = $"This vent periodically releases scorcing hot {Link("Helium", "HELIUM")}";
+					}
+
+					public class BEACHED_CORALREEF
+					{
+						public static LocString NAME = "Coral Reef";
+						public static LocString DESC = $"This geyser peridocially emits a small amount of {Link("Salt Water", SimHashes.SaltWater.ToString())} rich in {Link("Plankton", PlanktonGerms.ID)}.";
+					}
+
 					public class BEACHED_PACU_GEYSER
 					{
 						public static LocString NAME = "Pacu Geyser";
@@ -328,6 +347,11 @@ namespace Beached
 					{
 						public static LocString NAME = "Dewnut";
 						public static LocString DESC = ".";
+					}
+					public class BEACHED_SIDEWAYSPLANT
+					{
+						public static LocString NAME = "Ath-Wart Seed";
+						public static LocString DESC = "TODO.";
 					}
 					public class BEACHED_CORAL_WASHUSPONGE
 					{
@@ -483,6 +507,21 @@ namespace Beached
 					public static LocString EGG_NAME = Link("Karacoo Egg", KaracooConfig.ID);
 				}
 
+				public class BEACHED_MOSSYDRECKO
+				{
+					public static LocString NAME = Link("Mossy Drecko", MossyDreckoConfig.ID);
+					public static LocString DESC = $"Mossy Dreckos are nonhostile critters that graze on {Link("Spinorila", SpinorilaConfig.ID)}, {Link("Pincha Pepperplants", SpiceVineConfig.ID)}, {Link("Balm Lily", SwampLilyConfig.ID)} or {Link("Mealwood Plants", BasicSingleHarvestPlantConfig.ID)}.\n" +
+						$"\n" +
+						$"Their backsides are covered in moss that only grow in {Link("Helium", SimHashes.Helium)} climates.";
+
+					public static LocString BABY_NAME = Link("Mossy Drecklet", MossyDreckoConfig.ID);
+					public static LocString BABY_DESC = $"A tiny Mossy Drecklet.\n" +
+						$"\n" +
+						$"In time it will mature into a fully grown {Link("Mossy Drecko", MossyDreckoConfig.ID)}.";
+
+					public static LocString EGG_NAME = Link("Mossy Drecklet Egg", MossyDreckoConfig.ID);
+				}
+
 				public class BEACHED_MUFFIN
 				{
 					public static LocString NAME = Link("Muffin", MuffinConfig.ID);
@@ -496,6 +535,14 @@ namespace Beached
 				{
 					public static LocString NAME = Link("Dew Palm", DewPalmConfig.ID);
 					public static LocString DESC = "WORK IN PROGRESS. Currently can be tapped with a bucket for Rubber. This plant will have more uses in the coming updates.";
+					public static LocString DOMESTICATEDDESC = "TODO.";
+				}
+
+				public class BEACHED_SIDEWAYSPLANT
+				{
+					public static LocString NAME = Link("Ath-Wart", SidewaysPlantConfig.ID);
+					public static LocString DESC = "TODO.";
+					public static LocString DOMESTICATEDDESC = "TODO.";
 				}
 
 				public class BEACHED_SPINORILA

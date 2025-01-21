@@ -1,4 +1,5 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Buildings;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI.Jellyfish;
 using UnityEngine;
@@ -44,6 +45,12 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 
 			var nesting = prefab.AddOrGetDef<NestingFertilityMonitor.Def>();
 			nesting.baseFertileCycles = 0.5f;
+
+			var jellyFish = prefab.AddOrGet<Jellyfish>();
+			jellyFish.connectorDefId = JellyfishGeneratorConfig.ID;
+			jellyFish.pulseDurationSeconds = 10;
+
+			prefab.AddOrGetDef<PulseMonitor.Def>();
 
 			// discover baby when discovering adult
 			var kPrefabId = prefab.GetComponent<KPrefabID>();

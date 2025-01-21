@@ -14,8 +14,7 @@ namespace Beached.Content.Defs.Entities.Corals
 			SimHashes.SaltWater,
 			SimHashes.Brine,
 			SimHashes.DirtyWater,
-			Elements.murkyBrine,
-			Elements.sulfurousWater
+			Elements.murkyBrine
 		];
 
 		public GameObject CreatePrefab(string ID, string anim, string initialAnim, int width, int height, EffectorValues decor)

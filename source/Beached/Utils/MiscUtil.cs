@@ -21,6 +21,8 @@ namespace Beached.Utils
 			};
 		}
 
+		public static float PerCycle(float amount) => amount / CONSTS.CYCLE_LENGTH;
+
 		public static void AddSimpleButton(GameObject target, string icon, string text, string tooltip, System.Action onClick, bool isInteractable = true)
 		{
 			Game.Instance.userMenu.AddButton(

@@ -19,7 +19,7 @@ namespace Beached.Content.ModDb
 			accessories.AddCustomAccessories(Assets.GetAnim("beached_poffmouth_mouth"), accessories, slots);
 			var limpetFace = Assets.GetAnim("limpet_face_kanim");
 
-
+#if !NO_MINNOW
 			Log.Debug("Loading accessories for Minnow");
 			var minnowHead = Assets.GetAnim("minnow_head_kanim");
 			var hairSwapAnim = Assets.GetAnim("hair_swap_kanim");
@@ -28,8 +28,9 @@ namespace Beached.Content.ModDb
 			AddAccessories(minnowHead, slots.HatHair, accessories);
 			AddAccessories(minnowHead, slots.Mouth, accessories);
 			AddAccessories(minnowHead, slots.HeadShape, accessories);
+#endif
 
-
+#if !NO_VAHANO
 			Log.Debug("Loading accessories for Vahano");
 			var vahanoHead = Assets.GetAnim("beached_vahano_head_kanim");
 			Log.Debug((vahanoHead != null).ToString());
@@ -39,6 +40,7 @@ namespace Beached.Content.ModDb
 			AddAccessories(vahanoHead, slots.Mouth, accessories);
 			AddAccessories(vahanoHead, slots.HeadShape, accessories);
 			AddAccessories(vahanoHead, slots.Eyes, accessories);
+#endif
 
 			AddAccessories(limpetFace, slots.HeadEffects, accessories);
 		}

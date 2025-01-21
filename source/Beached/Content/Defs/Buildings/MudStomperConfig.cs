@@ -51,7 +51,7 @@ namespace Beached.Content.Defs.Buildings
 		{
 			RecipeBuilder.Create(ID, global::STRINGS.ELEMENTS.DIRT.DESC, 40)
 				.Input(Elements.mucus.CreateTag(), 10)
-				.Input(Elements.silt.CreateTag(), 90)
+				.Input(SimHashes.Sand.CreateTag(), 90)
 				.Output(SimHashes.Dirt.CreateTag(), 100)
 				.Build();
 

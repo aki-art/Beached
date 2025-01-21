@@ -13,16 +13,29 @@ namespace Beached.Content.Scripts.Entities.AI
 		{
 			default_state = wet;
 
+			root
+				.EventHandler(GameHashes.Happy, smi => ToggleUnhappyModifier(smi, true))
+				.EventHandler(GameHashes.Unhappy, smi => ToggleUnhappyModifier(smi, false))
+				.EventHandler(GameHashes.TagsChanged, UpdateTags)
+				.Enter(smi =>
+				{
+					if (smi.HasTag(GameTags.Creatures.Wild))
+						smi.attributes.Add(smi.wildMucusModifier);
+				});
+
 			wet
 				.Enter(Moisturize)
-				.Transition(dry.damp, Not(IsInLiquid));
+				.Enter(smi => SetMucusDelta(smi, 0))
+				.ToggleAttributeModifier("producing mucus", smi => smi.wetMucusModifier)
+				.UpdateTransition(dry.damp, (smi, dt) => !IsInLiquid(smi, dt));
 
 			dry
 				.DefaultState(dry.damp)
+				.ToggleAttributeModifier("producing mucus", smi => smi.dryMucusModifier)
 				.ToggleStateMachine(smi => new LubricatedMovementMonitor.Instance(smi.master))
 				.ToggleAttributeModifier("DryingOut", smi => smi.baseMoistureModifier, null)
-				.Transition(wet, IsInLiquid)
-				.Transition(dry.desiccating, IsCompletelyDry)
+				.UpdateTransition(wet, IsInLiquid, UpdateRate.SIM_200ms)
+				.UpdateTransition(dry.desiccating, IsCompletelyDry, UpdateRate.SIM_1000ms)
 				.EventTransition(ModHashes.producedLubricant, dry.damp);
 
 			dry.damp
@@ -35,21 +48,50 @@ namespace Beached.Content.Scripts.Entities.AI
 
 			dry.desiccating
 				.Enter(smi => SetSpeedModifier(smi, 0.33f))
+				.ToggleBehaviour(BTags.Creatures.secretingMucus, CanProduceLubricant)
 				.ToggleStatusItem(BStatusItems.desiccation, smi => smi)
-				.Update(CheckDying)
-				.Transition(wet, IsInLiquid);
+				.Update(CheckDying);
 		}
 
+		private void UpdateTags(Instance smi, object data)
+		{
+			if (data is TagChangedEventData tagData && tagData.tag == GameTags.Creatures.Wild)
+			{
+				if (tagData.added)
+					smi.attributes.Add(smi.wildMucusModifier);
+				else
+					smi.attributes.Remove(smi.wildMucusModifier);
+			}
+		}
+
+		private void ToggleUnhappyModifier(Instance smi, bool enabled)
+		{
+			if (enabled)
+				smi.attributes.Add(smi.unhappyMucusModifier);
+			else
+				smi.attributes.Remove(smi.unhappyMucusModifier);
+		}
+
+		private void SetMucusDelta(Instance smi, float value)
+		{
+			smi.wetMucusModifier.SetValue(value);
+		}
 
 		private static void CheckDying(Instance smi, float dt)
 		{
 			smi.timeUntilDeath -= dt;
 
-			if (!(smi.timeUntilDeath <= 0f)) return;
+			if (smi.timeUntilDeath <= 0f)
+			{
+				Log.Debug("DEATH");
+				var deathMonitor = smi.GetSMI<DeathMonitor.Instance>();
+				if (deathMonitor != null)
+					deathMonitor.Kill(BDeaths.desiccation);
+				else
+					Log.Warning("no death monitor on slickshell");
 
-			var deathMonitor = smi.GetSMI<DeathMonitor.Instance>();
-			deathMonitor?.Kill(BDeaths.desiccation);
-			smi.Trigger((int)ModHashes.desiccated);
+				smi.Trigger((int)ModHashes.desiccated);
+			}
 		}
 
 		private static bool UpdateDrying(Instance smi, float dt)
@@ -85,27 +127,22 @@ namespace Beached.Content.Scripts.Entities.AI
 			smi.navigator.defaultSpeed = smi.originalSpeed;
 		}
 
-		private static bool IsCompletelyDry(Instance smi)
-		{
-			return smi.moisture.value <= 0;
-		}
+		private static bool IsCompletelyDry(Instance smi, float _) => smi.moisture.value <= 0;
 
-		private static bool IsInLiquid(Instance smi)
-		{
-			var cell = Grid.PosToCell(smi);
-			return Grid.Element[cell].IsLiquid;
-		}
+		private static bool IsInLiquid(Instance smi, float _) => Grid.IsSubstantialLiquid(Grid.PosToCell(smi), 0.05f);
 
 		public class Def : BaseDef//, IGameObjectEffectDescriptor
 		{
 			public float defaultDryRate = -30f / CONSTS.CYCLE_LENGTH;
+			public float defaultMucusRate = 30f / CONSTS.CYCLE_LENGTH;
 			public SimHashes lubricant;
-			public float lubricantMassKg;
 			public float lubricantTemperatureKelvin;
 
 			public override void Configure(GameObject prefab)
 			{
-				prefab.GetComponent<Modifiers>().initialAmounts.Add(BAmounts.Moisture.Id);
+				var initialAmounts = prefab.GetComponent<Modifiers>().initialAmounts;
+				initialAmounts.Add(BAmounts.Moisture.Id);
+				initialAmounts.Add(BAmounts.Mucus.Id);
 			}
 		}
 
@@ -118,9 +155,18 @@ namespace Beached.Content.Scripts.Entities.AI
 			public float hasBeenDryFor;
 			public float timeUntilDeath;
 			public float maxTimeUntilDeath = 60f;
+			public AmountInstance mucusAmount;
+			public AttributeModifier wetMucusModifier;
+			public AttributeModifier dryMucusModifier;
+			public AttributeModifier wildMucusModifier;
+			public AttributeModifier unhappyMucusModifier;
+			public Attributes attributes;
+			public WildnessMonitor.Instance wildnessMonitor;
 
 			public Instance(IStateMachineTarget master, Def def) : base(master, def)
 			{
+				attributes = master.gameObject.GetAttributes();
+
 				moisture = BAmounts.Moisture.Lookup(gameObject);
 				moisture.value = moisture.GetMax();
 
@@ -129,20 +175,54 @@ namespace Beached.Content.Scripts.Entities.AI
 					def.defaultDryRate,
 					STRINGS.CREATURES.MODIFIERS.MOISTURE_LOSS_RATE.NAME);
 
+				mucusAmount = BAmounts.Mucus.Lookup(gameObject);
+				mucusAmount.value = 0;
+
+				dryMucusModifier = new AttributeModifier(
+					mucusAmount.amount.deltaAttribute.Id,
+					def.defaultMucusRate,
+					"Mucus Accumulation");
+
+				wetMucusModifier = new AttributeModifier(
+					mucusAmount.amount.deltaAttribute.Id,
+					0,
+					"Mucus Accumulation");
+
+				unhappyMucusModifier = new AttributeModifier(
+					mucusAmount.amount.deltaAttribute.Id,
+					-0.5f,
+					"Mucus Accumulation",
+					true);
+
+				wildMucusModifier = new AttributeModifier(
+					mucusAmount.amount.deltaAttribute.Id,
+					-0.75f,
+					"Wild Mucus Accumulation",
+					true);
+
 				navigator = smi.GetComponent<Navigator>();
 				originalSpeed = navigator.defaultSpeed;
 			}
 
 			public void ProduceLubricant()
 			{
-				BubbleManager.instance.SpawnBubble(
-					transform.GetPosition(),
-					Vector2.zero,
-					def.lubricant,
-					def.lubricantMassKg,
-					def.lubricantTemperatureKelvin);
+				var mass = mucusAmount.value;
 
-				Trigger(ModHashes.producedLubricant);
+				Beached.Log.Debug("mass: " + mass);
+
+				if (mass > 0)
+				{
+					BubbleManager.instance.SpawnBubble(
+						transform.GetPosition(),
+						Vector2.zero,
+						def.lubricant,
+						mass,
+						def.lubricantTemperatureKelvin);
+
+					Trigger(ModHashes.producedLubricant);
+
+					mucusAmount.value = 0;
+				}
 			}
 		}
 	}

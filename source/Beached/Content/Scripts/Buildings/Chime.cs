@@ -1,6 +1,5 @@
 ﻿using FMOD.Studio;
 using ImGuiNET;
-using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -127,16 +126,16 @@ namespace Beached.Content.Scripts.Buildings
 				smi.targetVolume = smi.flow;
 
 				var strength = Mathf.Clamp01(Mathf.Lerp(smi.currentVolume, smi.targetVolume, dt * smi.volumeChangeSpeed) * 1f / 0.002f);
-				
 
-				smi.loopingSounds.UpdateFirstParameter("event:/beached/SFX/Chimes/Beached_Chime_Loop", pressureChangeParameter, strength);
+
+				smi.loopingSounds.UpdateFirstParameter("event:/beached/SFX/Chimes/Beached_Chime_Loop", pressureChangeParameter, strength * 0.01f);
 			}
 
 			private void UpdateFlow(StatesInstance smi, float _)
 			{
 				var flow = ChimePower(smi.cell);
 
-				Log.Debug("updating gas flow: " +  flow);
+				Log.Debug("updating gas flow: " + flow);
 				switch (flow)
 				{
 					case float i when i > STILL_THRESHOLD && i < SLOW_THRESHOLD:

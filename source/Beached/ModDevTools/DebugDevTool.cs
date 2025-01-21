@@ -9,6 +9,7 @@ using FMODUnity;
 using ImGuiNET;
 using Klei;
 using Klei.AI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -45,6 +46,28 @@ namespace Beached.ModDevTools
 
 		public override void RenderTo(DevPanel panel)
 		{
+
+			if (ImGui.Button("Spawn Oxygen"))
+				ElementLoader.FindElementByHash(SimHashes.Oxygen).substance.SpawnResource(GameUtil.GetActiveTelepad().transform.position, 1f, 315, 255, 0);
+
+			if (ImGui.Button("Spawn Chemical Ammonia"))
+				ElementLoader.FindElementByHash(Elements.ChemicalProcessing.ammoniaGas)?.substance.SpawnResource(GameUtil.GetActiveTelepad().transform.position, 1f, 315, 255, 0);
+
+			if (ImGui.Button("Spawn Ammonia"))
+			{
+				try
+				{
+
+					ElementLoader.FindElementByHash(Elements.ammonia).substance.SpawnResource(GameUtil.GetActiveTelepad().transform.position, 1f, 315, 255, 0);
+				}
+				catch (Exception e)
+				{
+					Log.Debug($"failed to spawn ammonia: {e.GetType().FullName} {e.Message} {e.StackTrace}");
+				}
+			}
+
+			if (ImGui.Button("Spawn Salty Oxygen"))
+				ElementLoader.FindElementByHash(Elements.saltyOxygen).substance.SpawnResource(GameUtil.GetActiveTelepad().transform.position, 1f, 315, 255, 0);
 
 			if (ImGui.Checkbox("Accelerated Lifecycles", ref accelerateLifeCycles))
 				GenericGameSettings.instance.acceleratedLifecycle = accelerateLifeCycles;
@@ -92,8 +115,7 @@ namespace Beached.ModDevTools
 					MusicManager.instance.PlaySong(Assets.GetSimpleSoundEventName("event:/beached/Music/ocean_palace"));
 			}
 
-			HandleSelectedObject();
-			FoulingPlane();
+			HandleSelectedObject(); ;
 			Seasons();
 			Notifications();
 			Audio();
@@ -114,6 +136,12 @@ namespace Beached.ModDevTools
 				ImGui.Separator();
 				ImGui.Text($"Selected object: {selectedObject.GetProperName()}");
 				ImGui.Separator();
+
+				if (selectedObject.TryGetComponent(out BuildingHP buildingHP))
+				{
+					if (ImGui.Button("Break Building"))
+						buildingHP.DoDamage(100);
+				}
 
 				foreach (var imguiDebug in debugs)
 				{
@@ -366,20 +394,6 @@ namespace Beached.ModDevTools
 			{
 				if (ImGui.Button("Start meteor season"))
 					ClusterManager.Instance.activeWorld.GetSMI<GameplaySeasonManager.Instance>().StartNewSeason(BGameplaySeasons.astropelagosMoonletMeteorShowers);
-			}
-		}
-
-		private static void FoulingPlane()
-		{
-			if (ImGui.CollapsingHeader("Fouling Plane"))
-			{
-				var foulingPlane = Beached_Mod.Instance.foulingPlane;
-
-				if (ImGui.DragFloat("Z", ref foulingPlaneZ))
-					foulingPlane.plane.transform.position = foulingPlane.plane.transform.position with { z = foulingPlaneZ };
-
-				if (ImGui.DragInt("Layer", ref foulingPlaneLayer))
-					foulingPlane.material.renderQueue = foulingPlaneLayer;
 			}
 		}
 

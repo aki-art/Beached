@@ -23,7 +23,7 @@ namespace Beached.Content.Defs.Buildings
 				],
 				[
 					GameTags.Farmable.ToString(),
-					Elements.moss.ToString()
+					BTags.BuildingMaterials.moss.ToString()
 				],
 				BUILDINGS.MELTING_POINT_KELVIN.TIER1,
 				BuildLocationRule.NotInTiles,

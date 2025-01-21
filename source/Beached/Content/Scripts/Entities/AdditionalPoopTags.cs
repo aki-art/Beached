@@ -4,13 +4,15 @@ using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities
 {
+	// Allows a critter to have multiple different resources as excretion
 	public class AdditionalPoopTags : KMonoBehaviour
 	{
-		[SerializeField] public Entry[] entries;
+		[SerializeField] public Entry[] entries; // TODO: unimplemented
 		[SerializeField] public Vector3 offset;
-		[SerializeField] public float massMultiplier;
-		[SerializeField] public float displayMassMultiplier;
+		[Tooltip("The final ratio of the resulting poop, where 100% includes the poop.")]
+		[SerializeField] public float totalMassPercent01;
 
+		private float massMultiplier;
 		private float lastKnownPoopSize;
 
 		public override void OnPrefabInit()
@@ -18,6 +20,12 @@ namespace Beached.Content.Scripts.Entities
 			base.OnPrefabInit();
 			Subscribe((int)ModHashes.prePoop, BeforePoop);
 			Subscribe((int)GameHashes.Poop, AfterPoop);
+		}
+
+		public override void OnSpawn()
+		{
+			base.OnSpawn();
+			massMultiplier = 1f / ((1f / totalMassPercent01) - 1f);
 		}
 
 		private float GetTotalPoop() => Game.Instance.savedInfo.creaturePoopAmount.GetOrDefault(this.PrefabID(), 0);
@@ -54,7 +62,7 @@ namespace Beached.Content.Scripts.Entities
 						.Replace("{tag}", slag),
 					STRINGS.UI.DIET.EXTRA_PRODUCE_TOOLTIP
 						.Replace("{tag}", slag)
-						.Replace("{percent}", GameUtil.GetFormattedPercent(displayMassMultiplier * 100f))));
+						.Replace("{percent}", GameUtil.GetFormattedPercent(totalMassPercent01 * 100f))));
 			}
 		}
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Beached.Content.Defs.Buildings;
+using UnityEngine;
 
 namespace Beached.Content.Defs.Entities
 {
@@ -27,10 +28,11 @@ namespace Beached.Content.Defs.Entities
 			prefab.AddOrGet<OccupyArea>().objectLayers = [ObjectLayer.Building];
 
 			var unlocks = prefab.AddOrGetDef<POITechItemUnlocks.Def>();
-			unlocks.POITechUnlockIDs = [
-				IceMachineConfig.ID,
-				BeachChairConfig.ID,
-				IceCooledFanConfig.ID ];
+			unlocks.POITechUnlockIDs =
+				[
+					AquaticFarmTileConfig.ID,
+					BeachChairConfig.ID
+				];
 			unlocks.PopUpName = STRINGS.UI.BEACHED_MISC.POI_UNLOCK_TITLE;
 			unlocks.animName = "ceres_remote_archive_kanim";
 

@@ -36,18 +36,15 @@ namespace Beached.Content.ModDb.Germs
 				.DiesAndSlowsOnSolid()
 				.GrowsIn(GameTags.AnyWater)
 				.DisinfectedBy(SimHashes.ChlorineGas, SimHashes.BleachStone, SimHashes.Ethanol);
-#if ELEMENTS
+
 			growth
 				.InstantlyDiesIn(Elements.sulfurousWater);
-#endif
 
 			var exposure = new ExposureRuleBuilder(this)
 				.DefaultHalfLife(DISEASE.GROWTH_FACTOR.DEATH_3)
 				.DisinfectedBy(SimHashes.ChlorineGas, SimHashes.Ethanol);
-#if ELEMENTS
 			exposure
 				.InstantlyDiesIn(Elements.sulfurousWater);
-#endif
 		}
 	}
 }

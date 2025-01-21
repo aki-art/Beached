@@ -32,16 +32,16 @@ namespace Beached.Content.Tuning
 				go => go.TryGetComponent(out DecorProvider decorProvider) && decorProvider.baseDecor > 0
 			},
 			{
-			   RULE_FURRY,
-			   go =>
-			   {
-				   if(go.TryGetComponent(out CreatureBrain brain))
-				   {
-					   return brain.species == GameTags.Creatures.Species.SquirrelSpecies; // TODO: Maki
-                   }
+				RULE_FURRY,
+				go =>
+				{
+					if(go.TryGetComponent(out CreatureBrain brain))
+					{
+						return brain.species == GameTags.Creatures.Species.SquirrelSpecies; // TODO: Maki
+					}
 
-				   return false;
-			   }
+					return false;
+				}
 			}
 		};
 	}

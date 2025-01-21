@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Entities.Critters.Squirrels;
+﻿using Beached.Content.Defs.Entities.Critters.Karacoos;
+using Beached.Content.Defs.Entities.Critters.Squirrels;
 using Beached.Content.Scripts.Entities;
 using System;
 using TUNING;
@@ -10,6 +11,7 @@ namespace Beached.Content.ModDb
 		public const string
 			MERPIP_FROM_PIP = "Beached_Merpip_From_Pip",
 			PIP_FROM_MERPIP = "Beached_Pip_From_MerPip",
+			AGING_KARACOO = "Beached_Aging_Karacoo",
 			PIP_FROM_MERPIP_LANDCHECK = "Beached_Pip_From_MerPip_LandCheck";
 
 		public static void Register()
@@ -43,6 +45,19 @@ namespace Beached.Content.ModDb
 					return string.Format(desc, tag, tag.ProperName());
 				}));
 
+			creators.Add(() => RegisterAgingModifier(
+				AGING_KARACOO,
+				KaracooConfig.EGG_ID,
+				15,
+				1f,
+				"Aging"));
+
+			/*			creators.Add(CREATURES.EGG_CHANCE_MODIFIERS.CreateDietaryModifier(
+							MossyDreckoConfig.ID,
+							MossyDreckoConfig.EGG_ID,
+							SpinorilaConfig.ID,
+							0.025f / DreckoTuning.STANDARD_CALORIES_PER_CYCLE));
+			*/
 			/*			creators.Add(() => RegisterLandAccessModifier(
 							PIP_FROM_MERPIP_LANDCHECK,
 							SquirrelConfig.EGG_ID,
@@ -60,6 +75,30 @@ namespace Beached.Content.ModDb
 					checker.SetNavigationType(navGrid, navType);
 				});
 
+		}
+
+
+		private static void RegisterAgingModifier(string id, Tag eggTag, float ageThreshold, float modifierPerSecond, string name)
+		{
+			var description = modifierPerSecond < 0 ? "Is younger than {0} cycles." : "Is older than {0} cycles.";
+
+			Db.Get().CreateFertilityModifier(id, eggTag, name, description, str => string.Format(description, ageThreshold), (inst, eggType) =>
+			{
+				var instance = inst.gameObject.GetSMI<Beached_AgeFertilityMonitor.Instance>();
+				if (instance == null)
+				{
+					instance = new Beached_AgeFertilityMonitor.Instance(inst.master);
+					instance.StartSM();
+				}
+
+				instance.OnAged += (dt, age) =>
+				{
+					var isOld = age > ageThreshold;
+
+					if (isOld)
+						inst.AddBreedingChance(eggType, dt * modifierPerSecond);
+				};
+			});
 		}
 
 		private static void RegisterNearbyPlantWithTagModifier(string id, Tag eggTag, Tag nearbyRequiredTag, float modifierPerSecond, bool alsoInvert, string name, Func<string, Tag, string> descriptionCb = null)

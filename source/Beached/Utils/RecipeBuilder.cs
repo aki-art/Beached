@@ -13,6 +13,7 @@ namespace Beached.Utils
 		private string requiredTech;
 		private int sortOrder;
 		private int visualizerIdx = -1;
+		private bool inheritElement;
 
 		private List<RecipeElement> inputs;
 		private List<RecipeElement> outputs;
@@ -55,9 +56,9 @@ namespace Beached.Utils
 			return this;
 		}
 
-		public RecipeBuilder Output(Tag tag, float amount = 1f, TemperatureOperation tempOp = TemperatureOperation.AverageTemperature)
+		public RecipeBuilder Output(Tag tag, float amount = 1f, TemperatureOperation tempOp = TemperatureOperation.AverageTemperature, bool store = false)
 		{
-			outputs.Add(new RecipeElement(tag, amount, tempOp));
+			outputs.Add(new RecipeElement(tag, amount, tempOp, store));
 			return this;
 		}
 

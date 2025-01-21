@@ -1,11 +1,9 @@
-﻿using Beached.Content.BWorldGen;
-using Beached.Content.Defs.Entities.Critters.Jellies;
+﻿using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
-using Beached.Content.ModDb;
+using Beached.Content.ModDb.Germs;
 using Database;
-using Klei.CustomSettings;
-using ProcGenGame;
+using ProcGen;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +15,8 @@ namespace Beached.Content.Scripts
 		public static Action<bool> onWorldReloaded;
 
 		public ColonyDestinationSelectScreen colonyDestinationSelectScreen;
+
+		public static byte iceWraithIndex;
 
 		public override void OnPrefabInit()
 		{
@@ -41,15 +41,16 @@ namespace Beached.Content.Scripts
 
 		public void WorldLoaded(string clusterId)
 		{
-			IsBeachedContentActive = clusterId == CONSTS.WORLDGEN.CLUSTERS.BEACHED;
+			var clusterData = SettingsCache.clusterLayouts.GetClusterData(clusterId);
+			if (clusterData == null)
+				return;
+
+			IsBeachedContentActive = WorldgenUtil.IsBeachedWorld(clusterId); //clusterId == CONSTS.WORLDGEN.CLUSTERS.BEACHED;
 
 			if (IsBeachedContentActive)
 				Log.Info("Loaded Astropelagos world, initializing Beached settings.");
 
 			onWorldReloaded?.Invoke(IsBeachedContentActive);
-
-			//Elements.OnWorldReload(IsBeachedContentActive);
-			//ZoneTypes.OnWorldLoad();
 
 			var tameCrittersAchievement = Db.Get().ColonyAchievements.TameAllBasicCritters;
 			foreach (var item in tameCrittersAchievement.requirementChecklist)
@@ -64,8 +65,9 @@ namespace Beached.Content.Scripts
 							critterTypesWithTraits.critterTypesToCheck.Remove(mob);
 					}
 				}
-
 			}
+
+			iceWraithIndex = Db.Get().Diseases.GetIndex(BDiseases.iceWrath.id);
 		}
 	}
 }

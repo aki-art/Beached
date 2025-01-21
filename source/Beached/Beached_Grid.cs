@@ -2,35 +2,47 @@
 using KSerialization;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using static ProcGen.SubWorld;
 
 namespace Beached
 {
 	[SerializationConfig(MemberSerialization.OptIn)]
+	[DefaultExecutionOrder(1)]
+	[DisallowMultipleComponent]
 	public class Beached_Grid : KMonoBehaviour
 	{
 		public const int INVALID_FORCEFIELD_OFFSET = -1;
 
-		[Serialize]
-		private Dictionary<int, NaturalTileInfo> naturalTiles = [];
+		[Serialize] private Dictionary<int, NaturalTileInfo> naturalTiles = [];
+		[Serialize] public Dictionary<int, ZoneType> zoneTypeOverrides = [];
+		[Serialize] private bool initialized;
 
-		[Serialize]
-		public Dictionary<int, ZoneType> zoneTypeOverrides = [];
+		public float[] electricity;
 
 		public static Dictionary<Vector2I, ZoneType> worldgenZoneTypes;
 		public static Dictionary<int, int> forceFieldLevelPerWorld = [];
 
-		[Serialize]
-		private bool initialized;
-
 		public static Beached_Grid Instance;
 
+		public delegate void OnElectricChargeAddedEventHandler(int cell, float power);
+
+		public OnElectricChargeAddedEventHandler OnElectricChargeAdded;
+
 		public override void OnPrefabInit() => Instance = this;
+
+		public void AddElectricCharge(int cell, float power)
+		{
+			electricity[cell] += power;
+			OnElectricChargeAdded?.Invoke(cell, power);
+		}
 
 		public override void OnCleanUp() => Instance = null;
 
 		public override void OnSpawn()
 		{
+			electricity = new float[Grid.CellCount];
+
 			if (worldgenZoneTypes != null)
 			{
 				Log.Debug("beachedgrid has worldgen data " + worldgenZoneTypes.Count);

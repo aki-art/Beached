@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Muffins
 {
-    [EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY - 1)]
+	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY - 1)]
 	public class MuffinConfig : BaseMuffinConfig, IEntityConfig
 	{
 		public const string ID = "Beached_Muffin";
@@ -20,6 +20,11 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 		{
 			return base.ConfigureCritter(builder)
 				.Drops(MeatConfig.ID, BasicFabricConfig.ID)
+				.Egg(BabyMuffinConfig.ID, "beached_egg_muffin_kanim")
+					.Fertility(30)
+					.Incubation(10)
+					.EggChance(EGG_ID, 1)
+					.Done()
 				.Weapon()
 					.Damage(2f, 3f)
 					.Done()

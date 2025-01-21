@@ -25,6 +25,15 @@ namespace Beached.Content.ModDb
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
+			var suit = RecipeBuilder.Create(SuitFabricatorConfig.ID, global::STRINGS.EQUIPMENT.PREFABS.ATMO_SUIT.RECIPE_DESC, TUNING.EQUIPMENT.SUITS.ATMOSUIT_FABTIME)
+				.Input(Elements.zinc.CreateTag(), 300f, true)
+				.Input(Elements.fuzz.CreateTag(), 2f)
+				.Output(AtmoSuitConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.ResultWithIngredient)
+				.Build();
+
+			suit.RequiresAllIngredientsDiscovered = true;
+
 			if (DlcManager.FeatureRadiationEnabled())
 			{
 				RecipeBuilder.Create(

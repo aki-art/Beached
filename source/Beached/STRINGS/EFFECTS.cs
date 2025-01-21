@@ -1,4 +1,6 @@
-﻿namespace Beached
+﻿using Beached.Content;
+
+namespace Beached
 {
 	public partial class STRINGS
 	{
@@ -34,10 +36,10 @@
 				public static LocString DESC = $"";
 			}
 
-			public class BEACHED_STEPPEDINMUCUS
+			public class BEACHED_FLUMMOXED
 			{
-				public static LocString NAME = "Slippery Feet";
-				public static LocString DESC = $"This duplicant has stepped in {Link("Mucus", "BEACHED_MUCUS")}.";
+				public static LocString NAME = "Flummoxed";
+				public static LocString DESC = $"This duplicant came into contact with {Link("Perplexium", Elements.perplexium)}, and isn't really sure what is up or down.";
 			}
 
 			public class BEACHED_KARACOOHUG

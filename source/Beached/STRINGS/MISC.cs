@@ -47,6 +47,7 @@
 				public static LocString BEACHED_CORAL = "Coral";
 				public static LocString BEACHED_CRYSTAL = "Crystal";
 				public static LocString BEACHED_MEAT = "Meat";
+				public static LocString BEACHED_MOSSMATERIAL = "Moss";
 			}
 		}
 	}

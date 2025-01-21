@@ -14,8 +14,16 @@ namespace Beached.Content.Defs.Entities
 
 		public List<GameObject> CreatePrefabs() =>
 		[
-			CreatePrefab(MUFFINS, 7, 3, "beached_glacier_muffins_kanim",[SleepingMuffinsConfig.ID])
+			CreateMuffins()
 		];
+
+		private static GameObject CreateMuffins()
+		{
+			var prefab = CreatePrefab(MUFFINS, 7, 3, "beached_glacier_muffins_kanim", [SleepingMuffinsConfig.ID]);
+
+			prefab.AddOrGetDef<GlacierStoryTraitInitializer.Def>();
+			return prefab;
+		}
 
 		private static GameObject CreatePrefab(string id, int width, int height, string anim, Tag[] rewardDrops = null, Vector3 rewardDropOffset = default)
 		{

@@ -1,5 +1,4 @@
-﻿using Beached.Content.ModDb;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities.AI
 {
@@ -12,14 +11,6 @@ namespace Beached.Content.Scripts.Entities.AI
 		public override void InitializeStates(out BaseState default_state)
 		{
 			default_state = secretePre;
-
-			Log.Debug("MucusSecretionStates.InitializeStates ------------------------------------");
-			Log.Debug("IS BStatusItems.secretingMucus null");
-			Log.Debug(BStatusItems.secretingMucus == null);
-			/*            Log.Debug(BStatusItems.secretingMucus.Id);
-
-						root
-							.ToggleStatusItem(BStatusItems.secretingMucus);*/
 
 			secretePre
 				.Enter(Secrete)
@@ -36,6 +27,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static void Secrete(Instance smi)
 		{
+			Beached.Log.Debug("secreting");
 			smi.position = smi.transform.GetPosition();
 			smi.GetSMI<MoistureMonitor.Instance>().ProduceLubricant();
 		}

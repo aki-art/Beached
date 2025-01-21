@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.SegmentedEntities;
+﻿using Beached.Content.Scripts.Entities;
+using Beached.Content.Scripts.SegmentedEntities;
 using TUNING;
 using UnityEngine;
 
@@ -76,6 +77,7 @@ namespace Beached.Content.Defs.Flora
 			var root = prefab.AddOrGet<BambooRoot>();
 			root.segmentPrefab = BambooSegmentConfig.ID;
 			root.maxLength = 128;
+			root.growthTimer = CONSTS.CYCLE_LENGTH;
 
 			prefab.AddOrGet<EntitySegment>();
 
@@ -87,6 +89,8 @@ namespace Beached.Content.Defs.Flora
 			ladder.upwardsMovementSpeedMultiplier = 0.5f;
 
 			prefab.AddTag(BTags.bamboo);
+
+			prefab.AddComponent<DropStuffOnDeath>().drop = Elements.bambooStem.CreateTag();
 
 			return prefab;
 		}

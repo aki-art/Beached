@@ -25,6 +25,7 @@ namespace Beached
 			public static GameObject testQuad;
 			public static GameObject forceFieldDome;
 			public static GameObject asteroidBelt;
+			public static GameObject critterIdentitySidescreen;
 		}
 
 		// static hardcoded indices for my zonetypes
@@ -96,7 +97,8 @@ namespace Beached
 				saltOff = (SpawnFXHashes)"Beached_SaltOff".GetHashCode(),
 				grimcapPoff = (SpawnFXHashes)"Beached_GrimCapPoff".GetHashCode(),
 				ammoniaBubbles = (SpawnFXHashes)"Beached_AmmoniaBubbles".GetHashCode(),
-				mossplosion = (SpawnFXHashes)"Beached_Mossplosion".GetHashCode();
+				mossplosion = (SpawnFXHashes)"Beached_Mossplosion".GetHashCode(),
+				mossplosionRed = (SpawnFXHashes)"Beached_MossplosionRed".GetHashCode();
 
 			public static Material testMaterial;
 			public static Material darkVeilPostFxMaterial;
@@ -293,8 +295,12 @@ namespace Beached
 			Log.Debug("loading UI");
 			//var universalBundle = LoadAssetBundle("akis_universal_sidesceen_v1", platformSpecific: true);
 			Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
+			Prefabs.critterIdentitySidescreen = bundle2.LoadAsset<GameObject>("Assets/UI/CritterIdentityScreen.prefab");
+			Prefabs.critterIdentitySidescreen.gameObject.SetActive(false);
+			Prefabs.critterIdentitySidescreen.AddOrGet<RectTransform>();
 
 			TMPConverter.ReplaceAllText(Prefabs.universalSidescreen);
+			TMPConverter.ReplaceAllText(Prefabs.critterIdentitySidescreen);
 
 			//tmpConverter.ReplaceAllText(Prefabs.universalSidescreen);
 

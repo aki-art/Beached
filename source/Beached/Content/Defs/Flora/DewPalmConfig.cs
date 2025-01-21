@@ -10,7 +10,7 @@ namespace Beached.Content.Defs.Flora
 		public const string ID = "Beached_DewPalm";
 		public const string SEED_ID = "Beached_DewPalmSeed";
 		public const string PREVIEW_ID = "Beached_DewPalmPreview";
-		public const string BASE_TRAIT_ID = "Beached_DewPalmTrait";
+		public const string BASE_TRAIT_ID = "Beached_DewPalmOriginal";
 
 		public GameObject CreatePrefab()
 		{
@@ -22,7 +22,7 @@ namespace Beached.Content.Defs.Flora
 				Assets.GetAnim("beached_dewpalm_kanim"),
 				"idle",
 				Grid.SceneLayer.BuildingBack,
-				2,
+				3,
 				4,
 				DECOR.BONUS.TIER2,
 				defaultTemperature: CREATURES.TEMPERATURE.HOT_1);
@@ -34,19 +34,45 @@ namespace Beached.Content.Defs.Flora
 				CREATURES.TEMPERATURE.HOT_2,
 				CREATURES.TEMPERATURE.HOT_3,
 				null,
-				false,
+				true,
 				0f,
 				0.15f,
 				PalmLeafConfig.ID,
 				true,
 				true,
 				true,
-				false,
-				150f / 600f,
+				true,
+				2400f,
 				0f,
 				2200f,
 				BASE_TRAIT_ID,
 				STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.NAME);
+
+			var ediblePlant = prefab.AddOrGet<DirectlyEdiblePlant_TreeBranches>();
+			ediblePlant.overrideCropID = PalmLeafConfig.ID;
+			ediblePlant.MinimumEdibleMaturity = 1f;
+
+			prefab.UpdateComponentRequirement<Harvestable>(false);
+
+			var branchGrower = prefab.AddOrGetDef<PlantBranchGrower.Def>();
+			branchGrower.BRANCH_OFFSETS =
+			[
+				new CellOffset(-1, 2)
+			];
+			branchGrower.BRANCH_PREFAB_NAME = DewPalmLeafConfig.ID;
+			branchGrower.harvestOnDrown = true;
+			branchGrower.propagateHarvestDesignation = false;
+			branchGrower.MAX_BRANCH_COUNT = 1;
+
+			prefab.AddOrGet<BuddingTrunk>();
+
+			var dirt = new PlantElementAbsorber.ConsumeInfo()
+			{
+				tag = GameTags.Dirt,
+				massConsumptionRate = 7f / 600f
+			};
+
+			EntityTemplates.ExtendPlantToFertilizable(prefab, [dirt]);
 
 			prefab.AddOrGet<StandardCropPlant>();
 
@@ -60,7 +86,7 @@ namespace Beached.Content.Defs.Flora
 				numberOfSeeds: 3,
 				additionalTags: [GameTags.CropSeed],
 				sortOrder: 3,
-				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_CELLALGAE.DOMESTICATEDDESC,
+				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.DOMESTICATEDDESC,
 				width: 0.33f,
 				height: 0.33f);
 

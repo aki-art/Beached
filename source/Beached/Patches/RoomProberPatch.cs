@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿#if TRANSPILERS
+using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,3 +54,4 @@ namespace Beached.Patches
 		}
 	}
 }
+#endif

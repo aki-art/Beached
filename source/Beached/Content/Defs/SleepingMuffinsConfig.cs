@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs
 {
-    internal class SleepingMuffinsConfig : IEntityConfig
+	internal class SleepingMuffinsConfig : IEntityConfig
 	{
 		public const string ID = "Beached_SleepingMuffings";
 
@@ -23,7 +23,7 @@ namespace Beached.Content.Defs
 				1,
 				TUNING.DECOR.BONUS.TIER1);
 
-			var def = prefab.AddOrGetDef<UnconsciousCritters.Def>();
+			var def = prefab.AddOrGetDef<UnlockableStuff.Def>();
 			def.techUnlockIDs =
 			[
 				CollarDispenserConfig.ID

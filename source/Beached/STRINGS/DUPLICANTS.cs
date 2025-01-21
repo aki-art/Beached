@@ -119,7 +119,7 @@ namespace Beached
 				public class CRYSTALLOGRAPHY
 				{
 					public static LocString NAME = Link("Crystallography", BSkills.CRYSTALLOGRAPHY_ID);
-					public static LocString DESCRIPTION = "Allows a Duplicant to harvest a Crystal Cluster without breaking it, allowing regrowth.";
+					public static LocString DESCRIPTION = "Allows a Duplicant to harvest a Crystal Cluster without breaking it.";
 				}
 
 				public class GEOCHEMISTRY

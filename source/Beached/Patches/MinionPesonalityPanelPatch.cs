@@ -1,4 +1,6 @@
-﻿using Beached.Content.ModDb;
+﻿#if TRANSPILERS
+
+using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using HarmonyLib;
 using Klei.AI;
@@ -65,3 +67,4 @@ namespace Beached.Patches
 		}
 	}
 }
+#endif

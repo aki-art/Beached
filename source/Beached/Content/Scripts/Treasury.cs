@@ -24,7 +24,6 @@ namespace Beached.Content.Scripts
 		{
 			chances = [];
 
-#if ELEMENTS
 			chances.CreateTreasureEntry(SimHashes.Diamond, 0.1f)
 				.Add(RareGemsConfig.FLAWLESS_DIAMOND, 1, 1f, true);
 
@@ -43,7 +42,11 @@ namespace Beached.Content.Scripts
 
 			chances.CreateTreasureEntry(Elements.siltStone, 0.1f)
 				.Add(SlickShellConfig.EGG_ID);
-#endif
+
+			chances.CreateTreasureEntry(Elements.amber, 0.1f)
+				.Add(AmberInclusionsConfig.STRANGE_HATCH, 1, 1, notifyPlayer: true)
+				.Add(AmberInclusionsConfig.FLYING_CENTIPEDE, 1, 1, notifyPlayer: true)
+				.Add(AmberInclusionsConfig.FEATHER, 1, 1, notifyPlayer: true);
 		}
 
 		public void TrySpawnTreasure(Diggable diggable, Element element, WorkerBase worker)
@@ -80,8 +83,8 @@ namespace Beached.Content.Scripts
 		private static bool CanWorkerFindTreasure(Component worker)
 		{
 			return worker != null &&
-				   worker.TryGetComponent(out MinionResume resume) &&
-				   resume.HasPerk(BSkillPerks.CanFindTreasures);
+					worker.TryGetComponent(out MinionResume resume) &&
+					resume.HasPerk(BSkillPerks.CanFindTreasures);
 		}
 	}
 }

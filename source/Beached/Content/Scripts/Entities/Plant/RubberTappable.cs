@@ -1,7 +1,5 @@
 ﻿using Beached.Content.ModDb;
-using Beached.Utils;
 using KSerialization;
-using System;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities.Plant
@@ -22,10 +20,12 @@ namespace Beached.Content.Scripts.Entities.Plant
 			get
 			{
 				if (isTapped)
-					return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.REMOVE_TAP;
+					return "Remove Tap";
+				//return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.REMOVE_TAP;
 
 				if (tapOrdered)
-					return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.CANCEL_TAP;
+					return "Cancel";
+				//return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.CANCEL_TAP;
 
 				return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.TAP;
 			}
@@ -45,7 +45,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 				return;
 			}
 
-			if(isTapped)
+			if (isTapped)
 			{
 				UnTap();
 				return;
@@ -252,7 +252,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 			{
 				if (smi.bucketKbac == null)
 					smi.SetupBucket();
-				 
+
 				//smi.kbac.SetSymbolVisiblity(smi.master.trackSymbol, true);
 				smi.bucketKbac.gameObject.SetActive(true);
 				smi.bucketKbac.enabled = true;

@@ -5,34 +5,34 @@
 		public const float PERSISTENT = 0f;
 
 		public const string
-			DAMP_PLANTGROWTH = "Beached_Damp_PlantGrowthBoost",
 			ARID_PLANTGROWTH = "Beached_Arid_PlantGrowthPenalty",
-			OCEAN_BREEZE = "Beached_OceanBreeze", // -5% stress/cycle, -10g Oxygen
-			SCARED = "Beached_Scared", // +10% Stress/cycle, +5% Bladder delta
-			SCARED_SIREN = "Beached_Scared_Siren", // +10% Stress/cycle, +5% Bladder delta
-			DIMWIT = "Beached_Dimwit",
-			LIMPETS_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
-			ICEWRATH_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
 			CAPPED_RECOVERY = "Beached_Capped_Recovery",
-			POFFMOUTH_RECOVERY = "Beached_PoffMouth_Recovery",
+			DAMP_PLANTGROWTH = "Beached_Damp_PlantGrowthBoost",
+			DAZED = "Beached_Effect_Dazed",
+			DIMWIT = "Beached_Dimwit",
+			FLUMMOXED = "Beached_Flummoxed",
+			ICEWRATH_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
+			KARACOO_HUG = "Beached_KaracooHug",
 			LIMPETHOST = "Beached_LimpetHost", // for critters, used for growing limpets
 			LIMPETHOST_RECOVERY = "Beached_LimpetHost_Recovery", // for critters, used for growing limpets
-			STEPPED_IN_MUCUS = "Beached_SteppedInMucus",
-			SUBMERGED_IN_MUCUS = "Beached_SubmergedInMucus",
+			LIMPETS_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
 			LUBRICATED = "Beached_Effect_Lubricated",
-			WISHING_STAR = "Beached_WishingStar", // applied when they see shooting stars
-			POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds",
-			POFF_HELIUM = "Beached_PoffHelium",
+			NICE_SCENT = "Beached_Effect_NiceScent", // shower with soap
+			OCEAN_BREEZE = "Beached_OceanBreeze", // -5% stress/cycle, -10g Oxygen
 			PLUSHIE_MUFFIN = "Beached_Effect_PlushieMuffin",
 			PLUSHIE_PACU = "Beached_Effect_PlushiePacu",
 			PLUSHIE_PUFT = "Beached_Effect_PlushiePuft",
 			PLUSHIE_VOLE = "Beached_Effect_PlushieVole",
+			POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds",
+			POFF_HELIUM = "Beached_PoffHelium",
+			POFFMOUTH_RECOVERY = "Beached_PoffMouth_Recovery",
 			SANDBOX = "Beached_Effect_Sandbox",
 			SANDBOX_RECENT = "Beached_Effect_RecentlySandbox",
-			DAZED = "Beached_Effect_Dazed",
-			KARACOO_HUG = "Beached_KaracooHug",
+			SCARED = "Beached_Scared", // +10% Stress/cycle, +5% Bladder delta
+			SCARED_SIREN = "Beached_Scared_Siren", // +10% Stress/cycle, +5% Bladder delta
+			SUBMERGED_IN_MUCUS = "Beached_SubmergedInMucus",
 			UNSAVORY_MEAL = "Beached_Unsavory_Meal",
-			NICE_SCENT = "Beached_Effect_NiceScent"; // shower with soap
+			WISHING_STAR = "Beached_WishingStar"; // applied when they see shooting stars
 
 		public class VANILLA
 		{
@@ -56,6 +56,9 @@
 			new EffectBuilder(SANDBOX_RECENT, CONSTS.CYCLE_LENGTH / 2f, false)
 				.HideInUI()
 				.HideFloatingText()
+				.Add(set);
+
+			new EffectBuilder(FLUMMOXED, 200, false)
 				.Add(set);
 
 			new EffectBuilder(NICE_SCENT, CONSTS.CYCLE_LENGTH, false)
@@ -114,10 +117,6 @@
 			new EffectBuilder(SCARED_SIREN, 60f, true)
 				.Modifier(stressDelta, 10f / CONSTS.CYCLE_LENGTH)
 				.Modifier(peeDelta, 5f / CONSTS.CYCLE_LENGTH)
-				.Add(set);
-
-			new EffectBuilder(STEPPED_IN_MUCUS, 1f, true)
-				.Emote(BEmotes.mucusSlip, 60f)
 				.Add(set);
 
 			new EffectBuilder(SUBMERGED_IN_MUCUS, 120f, true)

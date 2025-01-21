@@ -20,6 +20,8 @@ namespace Beached.Content
 			beryllium = ToHash("Beryllium"),
 			berylliumGas = ToHash("BerylliumGas"),
 			berylliumMolten = ToHash("BerylliumMolten"),
+			bioFuel = ToHash("BioFuel"),
+			bioFuelFrozen = ToHash("SolidBioFuel"),
 			bismuth = ToHash("Bismuth"),
 			bismuthGas = ToHash("BismuthGas"),
 			bismuthMolten = ToHash("BismuthMolten"),
@@ -34,6 +36,7 @@ namespace Beached.Content
 			carbonDioxideSnow = ToHash("CarbonDioxideSnow"),
 			coquina = ToHash("Coquina"),
 			crackedNeutronium = ToHash("CrackedNeutronium"),
+			fireMoss = ToHash("FireMoss"),
 			fuzz = ToHash("Fuzz"),
 			galena = ToHash("Galena"),
 			gravel = ToHash("Gravel"),
@@ -49,6 +52,7 @@ namespace Beached.Content
 			nitrogenLiquid = ToHash("LiquidNitrogen"),
 			pearl = ToHash("Pearl"),
 			rubber = ToHash("Rubber"),
+			perplexium = ToHash("Perplexium"),
 			permaFrost = ToHash("PermaFrost"),
 			permaFrost_Transitional = ToHash("PermaFrost_Transitional"),
 			rot = ToHash("Rot"),
@@ -151,13 +155,13 @@ namespace Beached.Content
 		public class AETE
 		{
 			public static readonly SimHashes
-				fakeLumber = ToHashMod("FakeLumber"),
-				frozenHoney = ToHashMod("FrozenHoney"),
-				frozenJello = ToHashMod("FrozenJello"),
-				frozenPinkSlime = ToHashMod("FrozenPinkSlime"),
-				honey = ToHashMod("Honey"),
-				jello = ToHashMod("Jello"),
-				pinkSlime = ToHashMod("PinkSlime");
+				fakeLumber = ToHashMod("AETE_FakeLumber"),
+				frozenHoney = ToHashMod("AETE_FrozenHoney"),
+				frozenJello = ToHashMod("AETE_FrozenJello"),
+				frozenPinkSlime = ToHashMod("AETE_FrozenPinkSlime"),
+				honey = ToHashMod("AETE_Honey"),
+				jello = ToHashMod("AETE_Jello"),
+				pinkSlime = ToHashMod("AETE_PinkSlime");
 		}
 
 		public class Blood

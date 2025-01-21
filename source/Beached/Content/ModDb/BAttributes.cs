@@ -45,6 +45,8 @@ namespace Beached.Content.ModDb
 				false));
 
 			Critters.acidVulnerability.SetFormatter(new StandardAttributeFormatter(GameUtil.UnitClass.SimpleFloat, GameUtil.TimeSlice.None));
+
+			Critters.acidVulnerability.SetFormatter(new StandardAttributeFormatter(GameUtil.UnitClass.SimpleFloat, GameUtil.TimeSlice.None));
 		}
 
 		[DbEntry]

@@ -9,7 +9,7 @@ namespace Beached.Content.Scripts.Buildings
 			base.OnPrefabInit();
 
 			choreType = Db.Get().ChoreTypes.Compound;
-			fetchChoreTypeIdHash = Db.Get().ChoreTypes.DoctorFetch.IdHash;
+			fetchChoreTypeIdHash = Db.Get().ChoreTypes.FabricateFetch.IdHash;
 			sideScreenStyle = ComplexFabricatorSideScreen.StyleSetting.ListQueueHybrid;
 			duplicantOperated = true;
 			heatedTemperature = 400f;
@@ -27,10 +27,7 @@ namespace Beached.Content.Scripts.Buildings
 			workable.AttributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.PART_DAY_EXPERIENCE;
 			workable.SkillExperienceSkillGroup = Db.Get().SkillGroups.Technicals.Id;
 			workable.SkillExperienceMultiplier = SKILLS.PART_DAY_EXPERIENCE;
-			workable.overrideAnims =
-			[
-				Assets.GetAnim("beached_spinner_interact_kanim")
-			];
+			workable.overrideAnims = [Assets.GetAnim("beached_spinner_interact_kanim")];
 		}
 	}
 }

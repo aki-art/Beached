@@ -1,18 +1,26 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Scripts;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Karacoos
 {
-    [EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
+	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabyKaracooConfig : BaseKaracooConfig, IEntityConfig
 	{
 		public const string ID = "Beached_BabyKaracoo";
 
-		protected override string AnimFile => "beached_karacoo_kanim";
+		protected override string AnimFile => "beached_baby_karacoo_kanim";
 
 		protected override string Id => ID;
 
-		public GameObject CreatePrefab() => CreatePrefab(this);
+		public GameObject CreatePrefab()
+		{
+			var prefab = base.CreatePrefab(this);
+
+			prefab.GetComponent<Karacoo>().randomizeColors = false;
+
+			return prefab;
+		}
 
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
@@ -26,10 +34,6 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 
 		public void OnPrefabInit(GameObject inst) { }
 
-		public void OnSpawn(GameObject inst)
-		{
-			// TODO: remove this when real animation is added
-			inst.GetComponent<KBatchedAnimController>().animScale *= 0.5f;
-		}
+		public void OnSpawn(GameObject inst) { }
 	}
 }

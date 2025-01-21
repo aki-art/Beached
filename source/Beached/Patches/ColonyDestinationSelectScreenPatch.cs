@@ -14,9 +14,10 @@ namespace Beached.Patches
 		{
 			public static void Postfix(ColonyDestinationSelectScreen __instance, SettingConfig config, SettingLevel level)
 			{
+#if TRANSPILERS
 				if (config.id == CustomGameSettingConfigs.ClusterLayout.id)
 				{
-					if (level.id == CONSTS.BEACHED_CLUSTER_SETTING_ID)
+					if (WorldgenUtil.IsBeachedWorld(level.id))
 					{
 						__instance.storyContentPanel.SetStoryState(BStories.Glaciers.Id, StoryContentPanel.StoryState.Guaranteed);
 						SetDim(__instance.storyContentPanel.storyRows[BStories.Glaciers.Id], true);
@@ -32,22 +33,23 @@ namespace Beached.Patches
 				{
 					var clusterId = __instance.newGameSettingsPanel.GetSetting(CustomGameSettingConfigs.ClusterLayout.id);
 
-					if (clusterId != CONSTS.BEACHED_CLUSTER_SETTING_ID)
+					if (!WorldgenUtil.IsBeachedWorld(clusterId))
 						StoryContentPanelPatch.userChosenState = level.id == "Guaranteed"
 							? StoryContentPanel.StoryState.Guaranteed
 							: StoryContentPanel.StoryState.Forbidden;
 				}
+#endif
 			}
 
 			private static void SetDim(GameObject gameObject, bool dim)
 			{
-				if(gameObject.TryGetComponent(out HierarchyReferences hierarchyReferences))
+				if (gameObject.TryGetComponent(out HierarchyReferences hierarchyReferences))
 				{
 					var icon = hierarchyReferences.GetReference<Image>("Icon");
 
 					hierarchyReferences.GetReference<MultiToggle>("checkbox").gameObject.SetActive(!dim);
 
-					if(!hierarchyReferences.TryGetReference<Image>("beached_lockicon", out var lockIcon) && dim)
+					if (!hierarchyReferences.TryGetReference<Image>("beached_lockicon", out var lockIcon) && dim)
 					{
 						var go = Object.Instantiate(icon);
 						go.name = "Beached_LockIcon";
@@ -74,7 +76,7 @@ namespace Beached.Patches
 						});
 					}
 
-					if(lockIcon != null)
+					if (lockIcon != null)
 						lockIcon.gameObject.SetActive(dim);
 				}
 			}

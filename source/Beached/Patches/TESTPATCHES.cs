@@ -3,6 +3,7 @@ using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
 using Beached.ModDevTools;
+using Database;
 using HarmonyLib;
 using Klei;
 using Klei.AI;
@@ -16,6 +17,46 @@ using UnityEngine;
 
 namespace Beached.Patches
 {
+
+	[HarmonyPatch(typeof(SandboxStoryTraitTool), "OnLeftClickDown")]
+	public class SandboxStoryTraitTool_OnLeftClickDown_Patch
+	{
+		public static bool Prefix(SandboxStoryTraitTool __instance, Vector3 cursor_pos)
+		{
+			Log.Debug("OnLeftClickDown pre");
+
+			Log.AssertNotNull(__instance, "_instance is null");
+
+			if (__instance.isPlacingTemplate)
+				return false;
+
+			Log.Debug("not placing template");
+			var error = __instance.GetError(cursor_pos, out Story story, out TemplateContainer stampTemplate);
+			if (error != null)
+			{
+				Log.Debug($"error: {error}");
+				return false;
+			}
+
+			__instance.isPlacingTemplate = true;
+			SandboxStoryTraitTool.Stamp((Vector2)cursor_pos, stampTemplate, (System.Action)(() =>
+			{
+				__instance.isPlacingTemplate = false;
+				StoryInstance storyInstance = StoryManager.Instance.GetStoryInstance(story);
+
+				Log.AssertNotNull(storyInstance, "storyInstance");
+
+				StoryInstance.State currentState = storyInstance.CurrentState;
+				storyInstance.CurrentState = StoryInstance.State.RETROFITTED;
+				storyInstance.CurrentState = currentState;
+				Log.Debug("steamp complete");
+			}));
+
+			Log.Debug("OnLeftClickDown pst");
+
+			return false;
+		}
+	}
 
 	[HarmonyPatch(typeof(ChoreConsumer), "FindNextChore")]
 	public class ChoreConsumer_FindNextChore_Patch
@@ -134,7 +175,7 @@ namespace Beached.Patches
 		}
 
 		public static Texture2D testMask;
-
+#if !NO_MINNOW
 		[HarmonyPatch(typeof(Accessorizer), "OnDeserialized")]
 		public class Accessorizer_OnDeserialized_Patch
 		{
@@ -154,6 +195,7 @@ namespace Beached.Patches
 				}
 			}
 		}
+#endif
 
 		[HarmonyPatch(typeof(TileRenderer), "LateUpdate")]
 		public class TileRenderer_LateUpdate_Patch
@@ -432,9 +474,9 @@ namespace Beached.Patches
 		[HarmonyPatch(typeof(MinionPathFinderAbilities), "Refresh")]
 		public class MinionPathFinderAbilities_Refresh_Patch
 		{
-			public static void Postfix(Navigator navigator, int ___proxyID)
+			public static void Postfix(MinionPathFinderAbilities __instance, Navigator navigator)
 			{
-				Capped.dupesWithCaps[___proxyID] = navigator.GetSicknesses().Has(BSicknesses.capped);
+				Capped.dupesWithCaps[__instance.proxyID] = navigator.GetSicknesses().Has(BSicknesses.capped);
 			}
 		}
 
@@ -460,9 +502,9 @@ namespace Beached.Patches
 		[HarmonyPatch(typeof(MinionPathFinderAbilities), "TraversePath")]
 		public class MinionPathFinderAbilities_TraversePath_Patch
 		{
-			public static void Postfix(ref PathFinder.PotentialPath path, int from_cell, int ___proxyID, ref bool __result)
+			public static void Postfix(MinionPathFinderAbilities __instance, ref PathFinder.PotentialPath path, int from_cell, ref bool __result)
 			{
-				if (__result && Capped.dupesWithCaps.TryGetValue(___proxyID, out var isCapped) && isCapped)
+				if (__result && Capped.dupesWithCaps.TryGetValue(__instance.proxyID, out var isCapped) && isCapped)
 				{
 					Grid.SuitMarker.Flags flags = 0;
 					var needsSuitCheck = path.HasFlag(PathFinder.PotentialPath.Flags.PerformSuitChecks) && Grid.TryGetSuitMarkerFlags(from_cell, out flags, out _) && (flags & Grid.SuitMarker.Flags.Operational) > 0;
@@ -502,8 +544,7 @@ namespace Beached.Patches
 			}
 		}
 		// todo: refactored screens
-		/*#if ELEMENTS
-				[HarmonyPatch(typeof(DiseaseInfoScreen), "BuildFactorsStrings")]
+		/*		[HarmonyPatch(typeof(DiseaseInfoScreen), "BuildFactorsStrings")]
 				public class DiseaseInfoScreen_BuildFactorsStrings_Patch
 				{
 					public static void Postfix(CollapsibleDetailContentPanel ___currentGermsPanel)
@@ -512,10 +553,9 @@ namespace Beached.Patches
 						var str = $"    • Exposed to Light: ~{changeRate}/s";
 						___currentGermsPanel.SetLabel("beached_light", str, "test");
 					}
-				}
-#endif*/
+				}*/
 
-				//[HarmonyPatch(typeof(SkillsScreen), "RefreshSkillWidgets")]
+		//[HarmonyPatch(typeof(SkillsScreen), "RefreshSkillWidgets")]
 		public class SkillsScreen_RefreshSkillWidgets_Patch
 		{
 			public static void Postfix(Dictionary<string, int> ___skillGroupRow)

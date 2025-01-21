@@ -27,7 +27,7 @@ namespace Beached.Content.Scripts.SegmentedEntities
 		[SerializeField]
 		public Tag segmentPrefab;
 
-		private List<EntitySegment> segments = [];
+		protected List<EntitySegment> segments = [];
 
 		[Serialize]
 		private readonly List<Ref<EntitySegment>> segmentsSerialized = [];

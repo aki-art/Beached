@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Buildings;
+﻿using Beached.Content;
+using Beached.Content.Defs.Buildings;
 using FUtility.FLocalization;
 using KLEISTRINGS = STRINGS;
 
@@ -6,6 +7,8 @@ namespace Beached
 {
 	public partial class STRINGS
 	{
+		public static string Link(string text, SimHashes element) => Link(text, element.CreateTag().ToString());
+
 		public static string Link(string text, string id = null)
 		{
 			text = KLEISTRINGS.UI.StripLinkFormatting(text);
@@ -47,12 +50,36 @@ namespace Beached
 					public static LocString EFFECT = $"Converts {Link("Ammonia", "BEACHEDAMMONIA")} into electrical {Link("Power", "POWER")}, {Link("Water", "WATER")} and {Link("Nitrogen", "BEACHEDNITROGEN")}.";
 				}
 
+				public class BEACHED_AQUATICFARMTILE
+				{
+					public static LocString NAME = Link("Aquatic Farm Tile", AquaticFarmTileConfig.ID);
+					public static LocString DESC = "Duplicants can deliver fertilizer to farm aquatic tiles, accelerating plant growth. Required liwuids will be soaked up by the tile as needed.";
+					public static LocString EFFECT = $"Grows one {Link("Plant", "PLANTS")} from a {Link("Seed", "PLANTS")}.\n" +
+						$"\n" +
+						$"Can be used as floor tile and rotated before construction.";
+				}
+
 				public class BEACHED_ATMOSPHERICFORCEFIELDGENERATOR
 				{
 					public static LocString NAME = Link("Atmospheric Forcefield Generator", ForceFieldGeneratorConfig.ID);
-					public static LocString DESC = "THe air feels heavy and electrifying near this machine.";
-					public static LocString EFFECTS = "Shields the surface of an asteroid from incoming Meteors. Does not allow rockets to pass.";
+					public static LocString DESC = "The air feels heavy and electrifying near this machine.";
+					public static LocString EFFECT = "Shields the surface of an asteroid from incoming Meteors. Does not allow rockets to pass.";
 				}
+
+				public class BEACHED_BIOFUELGENERATOR
+				{
+					public static LocString NAME = Link("Bio-Fuel Generator", BioFuelGeneratorConfig.ID);
+					public static LocString DESC = "Generates a small amount of power by burning Bio-Fuel.";
+					public static LocString EFFECT = $"Burns {Link("Bio-Fuel", Elements.bioFuel)}, producing electrical {Link("Power", "POWER")} and {Link("Nitrogen", "BEACHEDNITROGEN")}.";
+				}
+
+				public class BEACHED_BIOFUELMAKER
+				{
+					public static LocString NAME = Link("Bio-Fuel Reactor", BioFuelMakerConfig.ID);
+					public static LocString DESC = "Processes organic material into Bio-Fuel.";
+					public static LocString EFFECT = $"Converts organics into {Link("Bio-Fuel", Elements.bioFuel)}, which can be burnt in a {Link("Bio-Fuel Generator", BioFuelGeneratorConfig.ID)}.";
+				}
+
 
 				public class BEACHED_COLLARDISPENSER
 				{
@@ -68,12 +95,18 @@ namespace Beached
 					public static LocString EFFECTS = "Fabricates equippable jewellery from raw materials.";
 				}
 
+				public class BEACHED_DECONSTRUCTABLEROCKETTILE
+				{
+					public static LocString NAME = Link("Rocket Panel", DeconstructableRocketTileConfig.ID);
+				}
+
 				public class BEACHED_SHELLDOOR
 				{
 					public static LocString NAME = Link("Shell Curtain", "Beached_ShellCurtain");
 					public static LocString DESC = "A curtain made of beads and shells. Duplicants can pass through without stopping.";
 					public static LocString EFFECTS = "Separates rooms without obstructing gas or liquid flow.";
 				}
+
 				public class BEACHED_DNAANALYZER
 				{
 					public static LocString NAME = Link("DNA Analyzer", "Beached_DNAAnalyzer");

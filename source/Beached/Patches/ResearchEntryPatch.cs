@@ -43,7 +43,7 @@ namespace Beached.Patches
 				[
 					// dup tooltip component on stack
 					new CodeInstruction(OpCodes.Dup),
-					new CodeInstruction(OpCodes.Ldloc, 6),
+					new CodeInstruction(OpCodes.Ldloc, 6), //  TODO 12 if this breaks
 					new CodeInstruction(OpCodes.Call, m_ModifyDLCIcon)
 				]);
 

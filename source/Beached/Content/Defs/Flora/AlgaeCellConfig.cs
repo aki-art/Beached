@@ -1,6 +1,8 @@
-﻿using Beached.Content.Defs.Foods;
+﻿using Beached.Content.Defs.Entities.Corals;
+using Beached.Content.Defs.Foods;
 using TUNING;
 using UnityEngine;
+using static PlantElementAbsorber;
 
 namespace Beached.Content.Defs.Flora
 {
@@ -26,7 +28,8 @@ namespace Beached.Content.Defs.Flora
 				DECOR.BONUS.TIER0,
 				additionalTags:
 				[
-					BTags.aquaticPlant
+					BTags.aquaticPlant,
+					BTags.selfIrrigating
 				]);
 
 			EntityTemplates.ExtendEntityToBasicPlant(
@@ -35,20 +38,14 @@ namespace Beached.Content.Defs.Flora
 				MiscUtil.CelsiusToKelvin(0f),
 				MiscUtil.CelsiusToKelvin(32f),
 				MiscUtil.CelsiusToKelvin(40f),
-				[
-					SimHashes.Water,
-					SimHashes.SaltWater,
-					SimHashes.Brine,
-					SimHashes.DirtyWater,
-					Elements.murkyBrine
-				],
+				CoralTemplate.ALL_WATERS,
 				false,
 				0f,
 				0.15f,
 				JellyConfig.ID,
 				false,
 				true,
-				false,
+				true,
 				true,
 				2400f,
 				0f,
@@ -58,13 +55,11 @@ namespace Beached.Content.Defs.Flora
 
 			prefab.AddOrGet<SubmersionMonitor>();
 			prefab.AddOrGet<StandardCropPlant>();
-
-			EntityTemplates.ExtendPlantToIrrigated(prefab,
-			[
-				new PlantElementAbsorber.ConsumeInfo(GameTags.Water, WATER_RATE)
-			]);
-
 			prefab.AddOrGet<LoopingSounds>();
+
+			//EntityTemplates.ExtendPlantToIrrigated(prefab, new ConsumeInfo(GameTags.Water, WATER_RATE));
+
+			BEntityTemplates.ExtendPlantToSelfIrrigated(prefab, new ConsumeInfo(GameTags.Water, WATER_RATE));
 
 			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
 				prefab,
@@ -73,7 +68,7 @@ namespace Beached.Content.Defs.Flora
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_CELLALGAE.NAME,
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_CELLALGAE.DESC,
 				Assets.GetAnim("beached_small_cell_kanim"),
-				additionalTags: [GameTags.CropSeed],
+				additionalTags: [BTags.aquaticSeed],
 				sortOrder: 3,
 				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_CELLALGAE.DOMESTICATEDDESC,
 				width: 0.33f,

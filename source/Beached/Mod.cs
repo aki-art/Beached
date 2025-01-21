@@ -1,6 +1,7 @@
 ﻿global using Beached.Utils;
 using Beached.Content;
 using Beached.Content.BWorldGen;
+using Beached.Content.Defs.Entities;
 using Beached.Content.Scripts;
 using Beached.Integration;
 using Beached.ModDevTools;
@@ -52,7 +53,6 @@ namespace Beached
 			harmonyInstance = harmony;
 
 			ProcessAttributes(harmony);
-
 		}
 
 		private static void ProcessAttributes(Harmony harmony)
@@ -137,6 +137,7 @@ namespace Beached
 		public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods)
 		{
 			base.OnAllModsLoaded(harmony, mods);
+			BEntities.ConfigureCrops();
 			integrations.OnAllModsLoaded(harmony, mods);
 		}
 	}

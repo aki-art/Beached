@@ -1,7 +1,6 @@
 ﻿using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
-using Beached.Content.Defs.Entities.Critters.Squirrels;
 using Beached.Content.Defs.Foods;
 using System.Collections.Generic;
 
@@ -15,12 +14,14 @@ namespace Beached.Content.ModDb
 		public static BPlushies plushies;
 		public static BGeyserTraits geyserTraits;
 		public static LootTables lootTables;
+		public static BKaracooSkins karacooSkins;
 
 		public static void OnDbInit(Db db)
 		{
 			plushies = new BPlushies();
 			geyserTraits = new BGeyserTraits();
 			lootTables = new LootTables(db.Root);
+			karacooSkins = new BKaracooSkins(db.Root);
 
 			BGeyserTraits.Register();
 
@@ -54,7 +55,7 @@ namespace Beached.Content.ModDb
 
 		internal static void OnPostEntitiesLoaded()
 		{
-			MerpipConfig.ConfigureEggChancesToMerpip();
+			BEntities.OnPostEntitiesLoaded();
 		}
 
 		public class WearableTypes

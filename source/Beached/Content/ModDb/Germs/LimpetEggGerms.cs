@@ -26,7 +26,7 @@ namespace Beached.Content.ModDb.Germs
 		{
 			InitializeElemGrowthArray(ref elemGrowthInfo, DEFAULT_GROWTH_INFO);
 
-			var growth = new GrowthInfoBuilder(this)
+			new GrowthInfoBuilder(this)
 				.DefaultBehavior(
 					DISEASE.UNDERPOPULATION_DEATH_RATE.NONE,
 					1.4f,

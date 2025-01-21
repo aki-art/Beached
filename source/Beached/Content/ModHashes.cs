@@ -24,6 +24,8 @@
 			critterMined = new("CritterMined"),
 			sidesSreenRefresh = new("SideScreenRefresh"),
 			builtNest = new("BuiltNest"),
+			medusaSignal = new("MedusaSignal"),
+			depleted = new("Depleted"),
 
 			segmentedEntityUpdate = new("SegmentedEntityUpdate"),
 			critterTraitAdded = new("CritterTraitAdded");

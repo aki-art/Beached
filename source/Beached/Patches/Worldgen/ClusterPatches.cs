@@ -1,4 +1,5 @@
-﻿using Beached.Content.BWorldGen;
+﻿#if TRANSPILERS
+using Beached.Content.BWorldGen;
 using Beached.Content.Defs.StarmapEntities;
 using HarmonyLib;
 using ProcGen;
@@ -46,7 +47,7 @@ namespace Beached.Patches.Worldgen
 			{
 				Log.Debug($"cluster init id: {__instance.Id}");
 				Log.Debug($"cluster init id: {__instance.clusterLayout.name}");
-				if (__instance.clusterLayout.name != CONSTS.BEACHED_CLUSTER_SETTING_ID)
+				if (!WorldgenUtil.IsBeachedWorld(__instance.clusterLayout.name))
 					return;
 
 				__instance.poiPlacements.Add(swarmOriginLocation, MeteorSwarmVisualPOIConfig.ID);
@@ -256,3 +257,5 @@ namespace Beached.Patches.Worldgen
 		}
 	}
 }
+
+#endif

@@ -6,6 +6,8 @@ using TUNING;
 
 namespace Beached.Content.ModDb.Germs
 {
+	/// <see cref="SimDebugViewPatch"/>
+	/// <see cref="SimDebugViewPatch"/>
 	public class IceWrathGerms : Disease
 	{
 		public const string ID = "Beached_IceWrath";

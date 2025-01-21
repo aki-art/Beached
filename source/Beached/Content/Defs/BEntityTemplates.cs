@@ -1,4 +1,6 @@
-﻿using Beached.Content.Scripts.Entities.Comets;
+﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities.Comets;
+using System.Collections.Generic;
 using UnityEngine;
 using static EdiblesManager;
 
@@ -8,7 +10,56 @@ namespace Beached.Content.Defs
 	{
 		public const string PLACEHOLDER_KANIM = "farmtile_kanim";
 
-		public static GameObject CreateSimpleItem(string ID, string name, string description, string anim, EffectorValues decor, SimHashes element, bool loop = false)
+		public static GameObject CreateSimpleItem(string ID, string anim, EffectorValues decor, SimHashes element = SimHashes.Creature, bool loop = false)
+		{
+			var name = Strings.Get($"STRINGS.ITEMS.MISC.{ID.ToUpperInvariant()}.NAME");
+			var desc = Strings.Get($"STRINGS.ITEMS.MISC.{ID.ToUpperInvariant()}.DESC");
+
+			return CreateSimpleItem(ID, name, desc, anim, decor, element, loop);
+		}
+
+		public static Diet.Info[] SimpleDiet(Tag from, Tag to, float kcalPerKg, float rate = 0.5f)
+		{
+			return SimpleDiet([from], to, kcalPerKg, rate);
+		}
+
+		public static Diet.Info[] SimpleDiet(HashSet<Tag> from, Tag to, float kcalPerKg, float rate = 0.5f)
+		{
+			return
+			[
+				new(
+					from,
+					to,
+					kcalPerKg,
+					rate,
+					null,
+					0)
+			];
+		}
+
+		public static GameObject ExtendPlantToSelfIrrigated(GameObject prefab, PlantElementAbsorber.ConsumeInfo consumeInfo)
+		{
+			EntityTemplates.ExtendPlantToIrrigated(prefab, [consumeInfo]);
+
+			prefab.AddOrGet<SelfIrrigator>();
+
+			var passiveElementConsumer = prefab.AddOrGet<PassiveElementConsumer>();
+			passiveElementConsumer.elementToConsume = ElementLoader.GetElementID(consumeInfo.tag);
+			passiveElementConsumer.consumptionRate = consumeInfo.massConsumptionRate;
+			passiveElementConsumer.capacityKG = consumeInfo.massConsumptionRate * CONSTS.CYCLE_LENGTH * 3.0f;
+			passiveElementConsumer.consumptionRadius = 3;
+			passiveElementConsumer.showInStatusPanel = true;
+			passiveElementConsumer.sampleCellOffset = new Vector3(0f, 0f, 0f);
+			passiveElementConsumer.isRequired = false;
+			passiveElementConsumer.storeOnConsume = true;
+			passiveElementConsumer.showDescriptor = false;
+
+			passiveElementConsumer.EnableConsumption(false);
+
+			return prefab;
+		}
+
+		public static GameObject CreateSimpleItem(string ID, string name, string description, string anim, EffectorValues decor, SimHashes element = SimHashes.Creature, bool loop = false)
 		{
 			var prefab = EntityTemplates.CreateLooseEntity(
 				ID,

@@ -32,7 +32,7 @@ namespace Beached.Content.DefBuilders
 		private BabyCritterBuilder babyCritterBuilder;
 		private BrainBuilder brain;
 		private TraitsBuilder traitsBuilder;
-		private int maxPenSize;
+		private int spaceRequiredPerCritter;
 		private string parentId;
 		private bool isBaby;
 		private int growUpOnCycle;
@@ -172,9 +172,9 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
-		public CritterBuilder MaxPenSize(int maxCritterPerPen)
+		public CritterBuilder MaxPenSize(int spaceRequiredPerCritter)
 		{
-			maxPenSize = maxCritterPerPen;
+			this.spaceRequiredPerCritter = spaceRequiredPerCritter;
 			return this;
 		}
 		public CritterBuilder Navigator(string navigationGrid, float speed = 2f)
@@ -344,8 +344,8 @@ namespace Beached.Content.DefBuilders
 				tempMinLethal,
 				tempMaxLethal);
 
-			if (maxPenSize > 0)
-				EntityTemplates.ExtendEntityToWildCreature(prefab, maxPenSize);
+			if (spaceRequiredPerCritter > 0)
+				EntityTemplates.ExtendEntityToWildCreature(prefab, spaceRequiredPerCritter);
 
 			if (drops != null)
 				prefab.AddOrGet<Butcherable>().SetDrops(drops);

@@ -38,7 +38,10 @@ namespace Beached.Patches
 				var useCustomLUT = Beached_WorldLoader.Instance.IsBeachedContentActive || Mod.settings.CrossWorld.UseVibrantLUTEverywhere;
 
 				if (useCustomLUT)
+				{
+					Log.Debug("applied custom LUT");
 					Mod.lutAPI.RegisterLUT("Beached_VibrantDayLUT", LUTSlot.Day, 300, Textures.LUTDay);
+				}
 				else
 					Mod.lutAPI.UnregisterLUT("Beached_VibrantDayLUT");
 			}

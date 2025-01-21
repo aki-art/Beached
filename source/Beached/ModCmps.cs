@@ -5,7 +5,7 @@ using Beached.Content.Scripts.SegmentedEntities;
 
 namespace Beached
 {
-    public class ModCmps
+	public class ModCmps
 	{
 		public static Components.Cmps<Beached_PlushiePlaceable> plushiePlaceables = [];
 		public static Components.Cmps<ForceField> forceFields = [];

@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb;
+﻿#if TRANSPILERS
+using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using HarmonyLib;
 using System.Collections.Generic;
@@ -25,11 +26,11 @@ namespace Beached.Patches
 					nameof(GetActualMassMultiplier));
 
 				// inject right after the found index
-				codes.InsertRange(index + 1, new[]
-				{
+				codes.InsertRange(index + 1,
+				[
 					new CodeInstruction(OpCodes.Ldarg_1), // cell
-                    new CodeInstruction(OpCodes.Call, m_getActualMassMultiplier)
-				});
+					new CodeInstruction(OpCodes.Call, m_getActualMassMultiplier)
+				]);
 
 				return codes;
 			}
@@ -56,3 +57,4 @@ namespace Beached.Patches
 		}
 	}
 }
+#endif

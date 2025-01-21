@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HarmonyLib;
+using System;
+using System.Diagnostics;
 
 namespace Beached
 {
@@ -8,7 +10,9 @@ namespace Beached
 		{
 			if (Mod.debugMode)
 			{
-				global::Debug.Log($"[Beached]: {msg}");
+				var stackTrace = new StackTrace();
+				var name = stackTrace.GetFrame(1).GetMethod().FullDescription();
+				global::Debug.Log($"[Beached]: {name} - {msg}");
 			}
 		}
 
@@ -32,6 +36,14 @@ namespace Beached
 		public static void Warning(object msg)
 		{
 			global::Debug.Log($"[Beached] [WARNING]: {msg}");
+		}
+
+		public static void TranspilerIssue(object msg)
+		{
+			var stackTrace = new StackTrace();
+			var name = stackTrace.GetFrame(1).GetMethod().FullDescription();
+
+			global::Debug.Log($"[Beached] [TRANSPILER]: {name} - {msg}");
 		}
 	}
 }

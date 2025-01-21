@@ -6,10 +6,13 @@ namespace Beached.Content.Defs
 {
 	public class GeyserConfigs
 	{
-		public const string AMMONIA_VENT = "Beached_Ammonia";
-		public const string MURKY_BRINE_GEYSER = "Beached_MurkyBrine";
-		public const string BISMUTH_VOLCANO = "Beached_Bismuth";
-		public const string CORAL_REEF = "Beached_CoralReef";
+		public const string
+			AMMONIA_VENT = "Beached_Ammonia",
+			BISMUTH_VOLCANO = "Beached_Bismuth",
+			CORAL_REEF = "Beached_CoralReef",
+			HELIUM_VENT = "Beached_Helium",
+			SALT_VOLCANO = "Beached_Salt",
+			MURKY_BRINE_GEYSER = "Beached_MurkyBrine";
 
 		public static void GenerateConfigs(List<GeyserGenericConfig.GeyserPrefabParams> list)
 		{
@@ -18,6 +21,21 @@ namespace Beached.Content.Defs
 				Log.Warning("geyser configs list is null");
 				return;
 			}
+
+			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
+				"beached_salt_volcano_kanim",
+				3,
+				3,
+				new GeyserConfigurator.GeyserType(
+					SALT_VOLCANO,
+					SimHashes.MoltenSalt,
+					GeyserConfigurator.GeyserShape.Liquid,
+					MiscUtil.CelsiusToKelvin(1050),
+					1000f,
+					2000f,
+					500f,
+					geyserTemperature: 263f),
+				true));
 
 			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
 				"beached_murkywater_geyser_kanim",
@@ -32,6 +50,22 @@ namespace Beached.Content.Defs
 					2000f,
 					500f,
 					geyserTemperature: 263f),
+				true));
+
+
+			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
+				"beached_helium_vent_kanim",
+				2,
+				4,
+				new GeyserConfigurator.GeyserType(
+					HELIUM_VENT,
+					SimHashes.Helium,
+					GeyserConfigurator.GeyserShape.Gas,
+					MiscUtil.CelsiusToKelvin(450),
+					70f,
+					140f,
+					5f,
+					60f),
 				true));
 
 

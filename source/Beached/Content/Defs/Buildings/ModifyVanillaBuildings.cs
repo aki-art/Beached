@@ -17,10 +17,18 @@ namespace Beached.Content.Defs.Buildings
 			Shower();
 			ConfigureSoapHolder("SgtImalas_BathTub");
 			WoodGasGenerator();
+			FarmTile();
 
 			AddPOIUnlockable(IceCooledFanConfig.ID);
 			AddPOIUnlockable(IceMachineConfig.ID);
 			AddPOIUnlockable(BeachChairConfig.ID);
+		}
+
+		private static void FarmTile()
+		{
+			var def = Assets.GetBuildingDef(FarmTileConfig.ID);
+			def.PermittedRotations = PermittedRotations.R360;
+			def.BuildingUnderConstruction.GetComponent<Rotatable>().permittedRotations = PermittedRotations.R360;
 		}
 
 		private static void AddPOIUnlockable(string ID) => Db.Get().TechItems.Get(ID).isPOIUnlock = true;
@@ -68,11 +76,11 @@ namespace Beached.Content.Defs.Buildings
 		// remove mucus effects on shower + add soap holder
 		public static void Shower()
 		{
-			if (!global::Shower.EffectsRemoved.Contains(BEffects.STEPPED_IN_MUCUS))
+			if (!global::Shower.EffectsRemoved.Contains(BEffects.SUBMERGED_IN_MUCUS))
 			{
 				MiscUtil.AddToStaticReadonlyArray<string, Shower>(
 					nameof(global::Shower.EffectsRemoved),
-					BEffects.STEPPED_IN_MUCUS, BEffects.SUBMERGED_IN_MUCUS);
+					BEffects.SUBMERGED_IN_MUCUS);
 			}
 
 			// add soap deliverable

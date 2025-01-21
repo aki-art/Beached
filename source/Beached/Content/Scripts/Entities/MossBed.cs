@@ -10,14 +10,12 @@ namespace Beached.Content.Scripts.Entities
 		public const float WATER_REQUIREMENT_KG = 100f;
 		public const float GROWTH_TIME_SECONDS = 10f; //(CONSTS.CYCLE_LENGTH * 2f) / MAX_LEVEL;
 
-		[Serialize]
-		public float totalConsumedMass;
+		[Serialize] public float totalConsumedMass;
 
-		[MyCmpReq]
-		private ElementConverter converter;
+		[MyCmpReq] private KBatchedAnimController kbac;
+		[MyCmpReq] private ElementConverter converter;
 
-		[MyCmpReq]
-		private KBatchedAnimController kbac;
+		public SpawnFXHashes fxHash;
 
 		private static readonly KAnimHashedString[] anims =
 		[
@@ -56,21 +54,32 @@ namespace Beached.Content.Scripts.Entities
 			var diseaseIdx = pe.DiseaseIdx;
 			var diseaseCount = pe.DiseaseCount;
 
+			var elementId = Elements.moss;
+
+			var constructionElements = GetComponent<Deconstructable>().constructionElements;
+
+			if (constructionElements != null && constructionElements.Length == 2)
+				elementId = ElementLoader.GetElement(constructionElements[1]).id;
+			else
+				Log.Warning($"Moss bed expected a secondary building material, but it wasn't defined for {gameObject.name}.");
+
 			Util.KDestroyGameObject(this);
 
-#if ELEMENTS
 			SimMessages.AddRemoveSubstance(
 				cell,
-				Elements.moss,
+				elementId,
 				null,
-				255,
+				byte.MaxValue,
 				temp,
 				diseaseIdx,
 				diseaseCount);
 
-#endif
-			Game.Instance.SpawnFX(ModAssets.Fx.mossplosion, cell, 0);
+			Game.Instance.SpawnFX(GetFx(elementId), cell, 0);
 		}
+
+		private static SpawnFXHashes GetFx(SimHashes element) => element == Elements.moss
+			? ModAssets.Fx.mossplosion
+			: ModAssets.Fx.mossplosionRed;
 
 		private void UpdateAnimation(float progress)
 		{

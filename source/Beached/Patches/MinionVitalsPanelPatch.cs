@@ -14,6 +14,9 @@ namespace Beached.Patches
 				__instance.AddAmountLine(BAmounts.ShellGrowth);
 				__instance.AddAmountLine(BAmounts.LimpetGrowth);
 				__instance.AddAmountLine(BAmounts.Moisture);
+
+				if (Mod.debugMode)
+					__instance.AddAmountLine(BAmounts.Mucus);
 			}
 		}
 	}

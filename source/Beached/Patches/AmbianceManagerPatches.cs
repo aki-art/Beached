@@ -37,6 +37,7 @@ namespace Beached.Patches
 				}
 			}
 		}
+#if TRANSPILERS
 
 		[HarmonyPatch(typeof(AmbienceManager.Quadrant), MethodType.Constructor, [typeof(AmbienceManager.QuadrantDef)])]
 		public class AmbienceManager_Quadrant_Ctor_Patch
@@ -82,5 +83,6 @@ namespace Beached.Patches
 				Array.Resize(ref instance.solidLayers, instance.solidLayers.Length + additionalLayers);
 			}
 		}
+#endif
 	}
 }

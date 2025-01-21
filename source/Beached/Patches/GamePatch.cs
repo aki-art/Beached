@@ -1,5 +1,4 @@
-﻿using Beached.Content.Scripts;
-using HarmonyLib;
+﻿using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,16 +6,6 @@ namespace Beached.Patches
 {
 	public class GamePatch
 	{
-
-		[HarmonyPatch(typeof(Game), nameof(Game.OnSpawn))]
-		public class Game_OnSpawn_Patch
-		{
-			public static void Postfix()
-			{
-				Beached_Mod.Instance.foulingPlane.Init();
-			}
-		}
-
 		[HarmonyPatch(typeof(Game), nameof(Game.InitializeFXSpawners))]
 		public class Game_InitializeFXSpawners_Patch
 		{
@@ -63,9 +52,20 @@ namespace Beached.Patches
 				{
 					id = ModAssets.Fx.mossplosion,
 					initialCount = 4,
-					spawnOffset = Vector3.zero,
+					spawnOffset = new Vector2(0f, 0.5f),
 					spawnRandomOffset = new Vector2(0f, 0f),
-					colour = Color.white,
+					colour = Util.ColorFromHex("314f22"),
+					fxPrefab = GetNewPrefab(prefab, "beached_mossplosion_kanim", 0.45f),
+					initialAnim = "splode"
+				});
+
+				spawnData.Add(new Game.SpawnPoolData()
+				{
+					id = ModAssets.Fx.mossplosionRed,
+					initialCount = 4,
+					spawnOffset = new Vector2(0f, 0.5f),
+					spawnRandomOffset = new Vector2(0f, 0f),
+					colour = Util.ColorFromHex("ba452b"),
 					fxPrefab = GetNewPrefab(prefab, "beached_mossplosion_kanim", 0.45f),
 					initialAnim = "splode"
 				});

@@ -18,10 +18,10 @@ namespace Beached.Content.Scripts.Entities
 		[Serialize] public List<int> targetCells = [];
 		private readonly List<int> affectedCells = [];
 		private float remainingPower;
-		public static List<CellOffset> offsets = MiscUtil.MakeCellOffsetsFromMap(false,
+		public static List<CellOffset> offsets = [.. MiscUtil.MakeCellOffsetsFromMap(false,
 			"XXX",
 			"XOX",
-			"XXX").ToList();
+			"XXX")];
 
 		private List<NeighborEntry> neighborCells;
 		private int currentCell;
@@ -45,12 +45,12 @@ namespace Beached.Content.Scripts.Entities
 
 		public void Pulse(float duration, float power, int strokeCount)
 		{
-			foreach(var renderer in lineRenderers)
+			foreach (var renderer in lineRenderers)
 				Util.KDestroyGameObject(renderer.gameObject);
 
 			lineRenderers.Clear();
 
-			for(var i = 0; i < strokeCount; i++)
+			for (var i = 0; i < strokeCount; i++)
 			{
 				affectedCells.Clear();
 				GenerateStroke(power);
@@ -60,6 +60,11 @@ namespace Beached.Content.Scripts.Entities
 					DrawDebugStroke(lineRenderer);
 
 				lineRenderers.Add(lineRenderer);
+
+				foreach (var cell in affectedCells)
+				{
+
+				}
 			}
 		}
 

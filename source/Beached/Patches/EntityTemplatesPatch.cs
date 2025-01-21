@@ -1,5 +1,6 @@
 ﻿using Beached.Content;
 using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,9 @@ namespace Beached.Patches
 			{
 				if (FurSource.furries.Contains(template.PrefabID().ToString()))
 					template.AddOrGet<FurSource>();
+
+				if (!template.HasTag(BTags.electricInvulnerable))
+					template.AddOrGet<Electrocutable>();
 			}
 		}
 

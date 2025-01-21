@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Mites
 {
-    public abstract class BaseMiteConfig : BaseCritterConfig
+	public abstract class BaseMiteConfig : BaseCritterConfig
 	{
 		public override GameObject CreatePrefab(BaseCritterConfig config)
 		{
@@ -18,7 +18,7 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return builder
-				.TemperatureCelsius(-50, -40, 35, 42)
+				.TemperatureCelsius(-80, -65, 10, 15)
 				.Mass(30f)
 				.Trappable()
 				.Baggable()

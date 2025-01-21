@@ -35,13 +35,22 @@ namespace Beached.Content.Scripts.Items
 		public List<Descriptor> GetDescriptors(GameObject go)
 		{
 			var descriptors = new List<Descriptor>();
-			foreach (var traitId in traitIds)
+
+			if (traitIds == null)
+				return descriptors;
+
+			var traits = Db.Get().traits;
+
+			if (traits != null)
 			{
-				var trait = Db.Get().traits.TryGet(traitId);
-				if (trait != null)
+				foreach (var traitId in traitIds)
 				{
-					descriptors.Add(new Descriptor("•   " + trait.Name, "desc"));
+					var trait = traits.TryGet(traitId);
+					if (trait != null)
+						descriptors.Add(new Descriptor($"•   {trait.Name}", "desc"));
 				}
+
+				return descriptors;
 			}
 
 			return descriptors;

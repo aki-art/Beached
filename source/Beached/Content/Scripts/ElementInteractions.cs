@@ -171,11 +171,10 @@ namespace Beached.Content.Scripts
 			if (isSolid)
 			{
 				var acidVulnerability = element.AcidVulnerability();
-				Log.Debug($"{element.id} {acidVulnerability}");
+
 				if (acidVulnerability > 0)
 				{
 					WorldDamage.Instance.ApplyDamage(cellBelow, acidVulnerability, -1);
-					Log.Debug($"applying damange:{cellBelow} {element.id} {acidVulnerability}");
 					Game.Instance.SpawnFX(SpawnFXHashes.BleachStoneEmissionBubbles, cellBelow, 0);
 				}
 			}
@@ -183,8 +182,6 @@ namespace Beached.Content.Scripts
 
 		private void UpdateSpores(int cell, int diseaseCount)
 		{
-
-
 			if (diseaseCount > 0)
 			{
 				var germIdx = Grid.DiseaseIdx[cell];

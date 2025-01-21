@@ -9,8 +9,11 @@ namespace Beached.Content
 	{
 		public static readonly Tag
 			// ======= The ones potentially interesting for other mods ===========
+			aquaticSeed = TagManager.Create("Beached_AquaticSeed"),
 			// any buildig where foods are queued. meats will be scanned here, and Chef Makis can operate them
 			cookingStation = TagManager.Create("Beached_CookingStation"),
+			// add this to a creature to ignore electricity
+			electricInvulnerable = TagManager.Create("Beached_ElectricInvulnerable"),
 			// "eggs" Karacoos will consider an egg, but really aren't (infertile egg, egg artifact, etc.)
 			karacooSittable = TagManager.Create("Beached_KaracooSittable"),
 			// do not enable traits on this geyser prefab
@@ -24,6 +27,8 @@ namespace Beached.Content
 			// foods that do not count as vegetarian, but also not enough meat to be "carnivore" diet either.
 			// if the food already has Meat tag this is not neccessary
 			nonVegetarian = TagManager.Create("Beached_NonVegetarian"),
+			// when submerged in a pot, this plant will take the liquid in for itself
+			selfIrrigating = TagManager.Create("Beached_SelfIrrigating"),
 			// triggers the Vista roomtype
 			vista = TagManager.Create("Beached_Vista"),
 			// should this critter induce small explosions when in contact with acid.
@@ -35,6 +40,7 @@ namespace Beached.Content
 			mechanicalBuilding = TagManager.Create("Beached_MechanicalBuilding"),
 			// used for showers or sinks to track if it has soap supplied
 			soaped = TagManager.Create("Beached_Soaped"),
+			underWater = TagManager.Create("Beached_UnderWater"),
 
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),
@@ -112,6 +118,7 @@ namespace Beached.Content
 			public static Tag chime = TagManager.Create("Beached_ChimeMaterial");
 			public static Tag sand = TagManager.Create("Beached_SandMaterial");
 			public static Tag slag = TagManager.Create("Beached_SlagMaterial");
+			public static Tag moss = TagManager.Create("Beached_MossMaterial");
 		}
 
 		public static class TagCollections
@@ -146,13 +153,20 @@ namespace Beached.Content
 			STORAGEFILTERS.STORAGE_LOCKERS_STANDARD.Add(MaterialCategories.crystal);
 
 			STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE = STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE.AddToArray(coralFrag);
+			STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE = STORAGEFILTERS.SOLID_TRANSFER_ARM_CONVEYABLE.AddToArray(aquaticSeed);
 
 			Filterable.filterableCategories.Add(GameTags.Egg);
 			GameTags.AllCategories.Add(GameTags.Egg);
 			GameTags.IgnoredMaterialCategories.Remove(GameTags.Egg);
 
 			GameTags.AllCategories.Add(coralFrag);
+			GameTags.AllCategories.Add(aquaticSeed);
 			Filterable.filterableCategories.Add(coralFrag);
+			Filterable.filterableCategories.Add(aquaticSeed);
+
+
+			//GameTags.AllCategories.Add(PalmLeafConfig.ID);
+			//GameTags.AllCategories.Add(BioFuelConfig.ID);
 		}
 	}
 }

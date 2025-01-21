@@ -1,5 +1,6 @@
-﻿using Beached.Content;
+﻿using Beached.Content.Defs.Duplicants;
 using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using UnityEngine;
 
@@ -14,11 +15,19 @@ namespace Beached.Patches
 			{
 				var sensors = go.GetComponent<Sensors>();
 				sensors.Add(new PlushPlacebleBedSensor(sensors));
+#if !NO_MINNOW && BIONIC
+				if (go.GetComponent<MinionIdentity>().nameStringKey == MinnowConfig.ID)
+				{
+					var breather = go.GetComponent<OxygenBreather>();
+					breather.RemoveGasProvider(breather.gasProviders[0]);
+					breather.AddGasProvider(new AmphibiousOxygenBreatherProvider());
+				}
+#endif
 			}
 		}
 
-		[HarmonyPatch(typeof(MinionConfig), nameof(MinionConfig.CreatePrefab))]
-		public class MinionConfig_CreatePrefab_Patch
+		[HarmonyPatch(typeof(BaseMinionConfig), nameof(BaseMinionConfig.BaseMinion))]
+		public class BaseMinionConfig_BaseMinion_Patch
 		{
 			public static void Postfix(GameObject __result)
 			{
@@ -27,8 +36,7 @@ namespace Beached.Patches
 				__result.AddOrGet<Beached_MinionStorage>();
 				__result.AddOrGet<Beached_LifeGoalTracker>();
 				__result.AddOrGet<Beached_MinionEvents>();
-
-				__result.AddTag(BTags.Creatures.doNotTargetMeByCarnivores);
+				__result.AddOrGet<Electrocutable>();
 			}
 
 			private static void ConfigureSnapons(GameObject __result)

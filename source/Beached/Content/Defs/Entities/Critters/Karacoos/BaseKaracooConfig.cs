@@ -1,15 +1,18 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Karacoos
 {
-    public abstract class BaseKaracooConfig : BaseCritterConfig
+	public abstract class BaseKaracooConfig : BaseCritterConfig
 	{
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return builder
 				.Decor(10, 2)
+				.Navigator(CritterBuilder.NAVIGATION.WALKER_1X2, 1f)
 				.TemperatureCelsius(-20, -5, 45, 60)
 				.Trappable()
 				.Baggable()
@@ -24,6 +27,13 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 					.Done();
 		}
 
+		public override GameObject CreatePrefab(BaseCritterConfig config)
+		{
+			return base.CreatePrefab(config)
+				.AddComponent<Karacoo>()
+				.gameObject;
+		}
+
 		protected sealed override void ConfigureAI(CritterBuilder.BrainBuilder builder, HashSet<string> conditions)
 		{
 			var isAdult = conditions.Contains(CritterBuilder.ADULT);
@@ -36,7 +46,7 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 				//.Add(new IncubatingStates.Def())
 				.Add(new BaggedStates.Def())
 				.Add(new FallStates.Def())
-				//.Add(new StunnedStates.Def())
+				.Add(new StunnedStates.Def())
 				.Add(new DebugGoToStates.Def())
 				.Add(new FleeStates.Def())
 				//.Add(new DefendStates.Def())

@@ -32,9 +32,9 @@ namespace Beached.Content.ModDb
 		public static void Register()
 		{
 			var large = CreateBasicTrait(LARGE, true);
-			large.OnAddTrait += go => ScaleAnim(go, 1.3f);
+			large.OnAddTrait += go => ScaleAnim(go, 1.1f);
 
-			CreateBasicTrait(SMALL, false).OnAddTrait += go => ScaleAnim(go, 0.8f);
+			CreateBasicTrait(SMALL, false).OnAddTrait += go => ScaleAnim(go, 0.95f);
 		}
 
 		private class TraitOption(string traitId, float weight = 1f, Func<Geyser, bool> isAvailable = null) : IWeighted

@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using Beached.Content.Scripts.Entities.AI.Fua;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Fuas
@@ -11,8 +12,10 @@ namespace Beached.Content.Defs.Entities.Critters.Fuas
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				"Fue Nest",
-				"",
+				"Fua Nest",
+				"<b>WORK IN PROGRESS</b>\n" +
+				"\n" +
+				"For now this will periodically provide some fiber, in a future update please look forward to a precious new creature to inhabit this nest.",
 				30f,
 				Assets.GetAnim("beached_fue_nest_kanim"),
 				"idle",
@@ -20,6 +23,12 @@ namespace Beached.Content.Defs.Entities.Critters.Fuas
 				2,
 				1,
 				DECOR.BONUS.TIER2);
+
+			var storage = prefab.AddComponent<Storage>();
+			storage.capacityKg = 1f;
+
+			var nest = prefab.AddComponent<FuaNest>();
+			nest.furPerCycle = 5f;
 
 			return prefab;
 		}

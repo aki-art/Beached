@@ -25,12 +25,6 @@ namespace Beached.Patches
 		[
 			CrystalConfig.ID,
 
-			// Geysers
-			"GeyserGeneric_" + GeyserConfigs.AMMONIA_VENT,
-			"GeyserGeneric_" + GeyserConfigs.MURKY_BRINE_GEYSER,
-			"GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO,
-			"GeyserGeneric_" + GeyserConfigs.CORAL_REEF,
-
 			// Gems
 			RareGemsConfig.FLAWLESS_DIAMOND,
 			RareGemsConfig.HADEAN_ZIRCON,
@@ -78,7 +72,11 @@ namespace Beached.Patches
 			FueFuzzWallConfig.ID,
 			SleepingMuffinsConfig.ID,
 			SkeletonChairConfig.ID,
-			SoapConfig.ID
+			SoapConfig.ID,
+			PalmLeafConfig.ID,
+			WreckageHabitatConfig.ID,
+			WreckageNoseConfig.ID,
+			OxylitePuftConfig.ID,
 		];
 
 		private static readonly HashSet<Tag> FOOD =
@@ -111,7 +109,7 @@ namespace Beached.Patches
 
 		private static readonly HashSet<Tag> FLORA =
 		[
-			Content.Defs.Flora.AlgaeCellConfig.ID,
+			AlgaeCellConfig.ID,
 			GlowCapConfig.ID,
 			LeafletCoralConfig.ID,
 			MusselSproutConfig.ID,
@@ -121,6 +119,7 @@ namespace Beached.Patches
 			BambooConfig.ID,
 			PurpleHangerConfig.ID,
 			SpinorilaConfig.ID,
+			SidewaysPlantConfig.ID,
 		];
 
 		private static readonly HashSet<Tag> GEYSERS =
@@ -129,6 +128,8 @@ namespace Beached.Patches
 			"GeyserGeneric_" + GeyserConfigs.MURKY_BRINE_GEYSER,
 			"GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO,
 			"GeyserGeneric_" + GeyserConfigs.CORAL_REEF,
+			"GeyserGeneric_" + GeyserConfigs.HELIUM_VENT,
+			"GeyserGeneric_" + GeyserConfigs.SALT_VOLCANO,
 		];
 
 		private static readonly HashSet<Tag> GEMS =

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Beached.Content.ModDb;
+using UnityEngine;
 
 namespace Beached
 {
@@ -27,6 +28,16 @@ namespace Beached
 				DEHYDRATOR = "FoodDehydrator";
 		}
 
+		// weirdly off named things
+		public static class PLANTS
+		{
+			public static readonly string
+				MEALWOOD = BasicSingleHarvestPlantConfig.ID,
+				THIMBLE_REED = BasicFabricMaterialPlantConfig.ID,
+				MUCKROOT = BasicForagePlantPlantedConfig.ID,
+				HEXALENT = ForestForagePlantPlantedConfig.ID;
+		}
+
 		public static class DUPLICANTS
 		{
 			public static class LIFEGOALS
@@ -38,36 +49,54 @@ namespace Beached
 
 			public static class GENDER
 			{
-				public const string FEMALE = "Female";
-				public const string MALE = "Male";
-				public const string NONBINARY = "Nb"; // displays as X on UI
-			}
-
-			public static class PERSONALITY_TYPE
-			{
-
+				public const string
+					FEMALE = "Female",
+					MALE = "Male",
+					NONBINARY = "Nb"; // displays as X on UI
 			}
 
 			public static class JOY_TRAITS
 			{
-				public const string BALLOONARTIST = "BalloonArtist";
-				public const string SPARKLESTREAKER = "SparkleStreaker";
-				public const string STICKERBOMBER = "StickerBomber";
-				public const string SUPERPRODUCTIVE = "SuperProductive";
-				public const string HAPPYSINGER = "HappySinger";
+				public const string
+					BALLOONARTIST = "BalloonArtist",
+					SPARKLESTREAKER = "SparkleStreaker",
+					STICKERBOMBER = "StickerBomber",
+					SUPERPRODUCTIVE = "SuperProductive",
+					HAPPYSINGER = "HappySinger",
+
+					// Bionic
+					DATA_RAINER = "DataRainer",
+					ROBO_DANCER = "RoboDancer",
+
+					// BEACHED
+					PLUSHIEMAKER = BTraits.PLUSHIE_MAKER;
 			}
 
 			public static class STRESS_TRAIT
 			{
-				public const string AGGRESSIVE = "Aggressive";
-				public const string STRESSVOMITER = "StressVomiter";
-				public const string UGLYCRIER = "UglyCrier";
-				public const string BINGEEATER = "BingeEater";
+				public const string
+					AGGRESSIVE = "Aggressive",
+					STRESSVOMITER = "StressVomiter",
+					UGLYCRIER = "UglyCrier",
+					BINGEEATER = "BingeEater",
+
+					// Bionic
+					STRESSSHOCKER = "StressShocker",
+
+					// Beached
+					SIREN = BTraits.SIREN;
 			}
 
-			public static class SKIN_COLORS
+			public static class BIONIC_BUGS
 			{
-
+				public const string
+					RIGIDTHINKING_LEARNING_STRENGTH = "BionicBug1",
+					DISSOCIATIVE_RANCHING_CARING = "BionicBug2",
+					ALLTHUMBS_DIGGING_MACHINERY = "BionicBug3",
+					OVERENGINEERED_CONSTRUCTION_ART = "BionicBug4",
+					LATEBLOOMER_ATHLETICS_BOTANIST = "BionicBug5",
+					URBANITE_COOKING_BOTANIST = "BionicBug6",
+					ERRORPRONE_CARING_LEARNING = "BionicBug7";
 			}
 		}
 
@@ -121,36 +150,39 @@ namespace Beached
 
 		public class COLORS
 		{
-			public static Color KLEI_PINK = new Color32(127, 61, 94, 255);
-			public static Color KLEI_BLUE = new Color32(62, 67, 87, 255);
+			public static readonly Color
+				KLEI_PINK = new Color32(127, 61, 94, 255),
+				KLEI_BLUE = new Color32(62, 67, 87, 255);
 		}
 
 		// TUNING is missing half of these
 		public static class AUDIO_CATEGORY
 		{
-			public const string METAL = "Metal";
-			public const string GLASS = "Glass";
-			public const string HOLLOWMETAL = "HollowMetal";
-			public const string PLASTIC = "Plastic";
-			public const string SOLIDMETAL = "SolidMetal";
+			public const string
+				METAL = "Metal",
+				GLASS = "Glass",
+				HOLLOWMETAL = "HollowMetal",
+				PLASTIC = "Plastic",
+				SOLIDMETAL = "SolidMetal";
 		}
 
 		public static class NAV_GRID
 		{
-			public const string WALKER_BABY = "WalkerBabyNavGrid";
-			public const string WALKER_1X1 = "WalkerNavGrid1x1";
-			public const string WALKER_1X2 = "WalkerNavGrid1x2";
-			public const string MINION = "MinionNavGrid";
-			public const string ROBOT = "RobotNavGrid";
-			public const string DIGGER = "DiggerNavGrid";
-			public const string DRECKO = "DreckoNavGrid";
-			public const string DRECKO_BABY = "DreckoBabyNavGrid";
-			public const string FLYER_1X1 = "FlyerNavGrid1x1";
-			public const string FLYER_1X2 = "FlyerNavGrid1x2";
-			public const string FLYER_2X2 = "FlyerNavGrid2x2";
-			public const string SLICKSTER = "FloaterNavGrid";
-			public const string SWIMMER = "SwimmerNavGrid";
-			public const string PIP = "SquirrelNavGrid";
+			public const string
+				WALKER_BABY = "WalkerBabyNavGrid",
+				WALKER_1X1 = "WalkerNavGrid1x1",
+				WALKER_1X2 = "WalkerNavGrid1x2",
+				MINION = "MinionNavGrid",
+				ROBOT = "RobotNavGrid",
+				DIGGER = "DiggerNavGrid",
+				DRECKO = "DreckoNavGrid",
+				DRECKO_BABY = "DreckoBabyNavGrid",
+				FLYER_1X1 = "FlyerNavGrid1x1",
+				FLYER_1X2 = "FlyerNavGrid1x2",
+				FLYER_2X2 = "FlyerNavGrid2x2",
+				SLICKSTER = "FloaterNavGrid",
+				SWIMMER = "SwimmerNavGrid",
+				PIP = "SquirrelNavGrid";
 		}
 
 		public static class WORLDGEN
@@ -160,54 +192,5 @@ namespace Beached
 				public const string BEACHED = "clusters/AstropelagosMoonlets";
 			}
 		}
-
-		public static class BUILD_CATEGORY
-		{
-			///<summary>Base</summary>
-			public const string BASE = "Base";
-
-			///<summary>Oxygen</summary>
-			public const string OXYGEN = "Oxygen";
-
-			///<summary>Power</summary>
-			public const string POWER = "Power";
-
-			///<summary>Food</summary>
-			public const string FOOD = "Food";
-
-			///<summary>Plumbing</summary>
-			public const string PLUMBING = "Plumbing";
-
-			///<summary>Ventilation</summary>
-			public const string HVAC = "HVAC";
-
-			///<summary>Refinement</summary>
-			public const string REFINING = "Refining";
-
-			///<summary>Medicine</summary>
-			public const string MEDICAL = "Medical";
-
-			///<summary>Furniture</summary>
-			public const string FURNITURE = "Furniture";
-
-			///<summary>Stations</summary>
-			public const string EQUIPMENT = "Equipment";
-
-			///<summary>Utilities</summary>
-			public const string UTILITIES = "Utilities";
-
-			///<summary>Automation</summary>
-			public const string AUTOMATION = "Automation";
-
-			///<summary>Shipping</summary>
-			public const string CONVEYANCE = "Conveyance";
-
-			///<summary>Rocketry</summary>
-			public const string ROCKETRY = "Rocketry";
-
-			///<summary>Radiation</summary>
-			public const string HEP = "HEP";
-		}
-
 	}
 }

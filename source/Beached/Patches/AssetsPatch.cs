@@ -1,13 +1,12 @@
 ﻿using Beached.Content;
+using Beached.Content.Defs.Entities;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
-using Beached.Content.WikiHelper;
 using HarmonyLib;
 using Klei.AI;
 using PeterHan.PLib.Core;
-using System.IO;
 
 namespace Beached.Patches
 {
@@ -18,8 +17,8 @@ namespace Beached.Patches
 		{
 			public static void Prefix()
 			{
+				BEntities.ModifyBaseEggChances();
 				Assets.RegisterOnAddPrefab(AcidVulnerableCreature.OnAddPrefab);
-
 			}
 
 			[HarmonyPostfix]
