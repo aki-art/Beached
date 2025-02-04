@@ -23,7 +23,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return builder
-				.TemperatureCelsius(0, 10, 40, 50)
+				.TemperatureCelsius(10, 20, 40, 50)
 				.Size(1, 1)
 				.Mass(50f)
 				.Trappable()
@@ -31,7 +31,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.CanNotDrown()
 				.SortAfter(CrabConfig.ID)
 				.MaxPenSize(CREATURES.SPACE_REQUIREMENTS.TIER3)
-				.Navigator(CritterBuilder.NAVIGATION.WALKER_1X1, NavType.Floor, 0.25f, 16)
+				.Navigator(CritterBuilder.NAVIGATION.FLOOR_NOJUMP_1X1, NavType.Floor, 0.25f, 16)
 				.Brain(BTags.Species.snail)
 					.Configure(ConfigureAI)
 				.Traits()

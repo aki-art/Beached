@@ -7,7 +7,7 @@ namespace Beached.Content.ModDb.Sicknesses
 	{
 		public const string ID = "Beached_Sickness_Limpets_Duplicant";
 		public const float IMMUNE_ATTACK_STRENGTH = TUNING.DISEASE.IMMUNE_ATTACK_STRENGTH_PERCENT.SLOW_3;
-		public static float duration = 0.05f * CONSTS.CYCLE_LENGTH;
+		public static float duration = 7f * CONSTS.CYCLE_LENGTH;
 
 		public static List<InfectionVector> limpetsInfectionVectors =
 		[

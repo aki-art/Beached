@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
 {
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
-	public class BabySlickShellConfig : BaseSnailConfig, IEntityConfig
+	public class BabyIronShellConfig : BaseSnailConfig, IEntityConfig
 	{
-		public const string ID = "Beached_SlickShell_Baby";
+		public const string ID = "Beached_IronShell_Baby";
 
 		protected override string AnimFile => "beached_baby_slickshell_kanim";
 
@@ -17,7 +17,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
-				.Baby(SlickShellConfig.ID)
+				.Baby(IronShellConfig.ID)
 				.Mass(25f)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_BABY, .75f);
 		}

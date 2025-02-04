@@ -453,6 +453,15 @@ namespace Beached
 					public static LocString EGG_NAME = Link("Slickshell Egg", SlickShellConfig.ID);
 				}
 
+				public class BEACHED_IRONSHELL
+				{
+					public static LocString NAME = Link("Ironshell", IronShellConfig.ID);
+					public static LocString DESC = "...";
+					public static LocString BABY_NAME = Link("Ironshelly", IronShellConfig.ID);
+					public static LocString BABY_DESC = "...";
+					public static LocString EGG_NAME = Link("Ironshell Egg", IronShellConfig.ID);
+				}
+
 				public class BEACHED_MERPIP
 				{
 					public static LocString NAME = Link("Mer-Pip", MerpipConfig.ID);

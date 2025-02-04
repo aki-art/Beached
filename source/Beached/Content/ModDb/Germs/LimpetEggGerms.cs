@@ -38,7 +38,7 @@ namespace Beached.Content.ModDb.Germs
 					1)
 				.DiesIn(Element.State.Liquid)
 				.DiesAndSlowsOnSolid()
-				.GrowsFastIn(SimHashes.Oxygen, Elements.saltyOxygen, SimHashes.ContaminatedOxygen)
+				.GrowsIn([SimHashes.Oxygen, Elements.saltyOxygen, SimHashes.ContaminatedOxygen], 100_000)
 				.DisinfectedBy(SimHashes.ChlorineGas, SimHashes.BleachStone, SimHashes.Ethanol)
 				.DiesIn(Elements.murkyBrine, SimHashes.Brine, Elements.sulfurousWater, Elements.sourBrine);
 

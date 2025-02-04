@@ -9,10 +9,10 @@ using UnityEngine;
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
 {
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.ADULT)]
-	public class SlickShellConfig : BaseSnailConfig, IEntityConfig
+	public class IronShellConfig : BaseSnailConfig, IEntityConfig
 	{
-		public const string ID = "Beached_SlickShell";
-		public const string EGG_ID = "Beached_SlickShellEgg";
+		public const string ID = "Beached_IronShell";
+		public const string EGG_ID = "Beached_IronShellEgg";
 
 		protected override string AnimFile => "beached_snail_kanim";
 
@@ -23,13 +23,14 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
+				.TemperatureCelsius(50, 70, 270, 310)
 				.Drops(SeaShellConfig.ID, RawSnailConfig.ID)
+				.SymbolPrefix("iron_")
 				.Traits()
 					.Add(BAmounts.Moisture.maxAttribute.Id, 100f)
 					.Add(BAmounts.Moisture.deltaAttribute.Id, -1000f / CONSTS.CYCLE_LENGTH)
 					.Done()
-				.Tag(GameTags.OriginalCreature)
-				.Egg(BabySlickShellConfig.ID, "beached_egg_slickshell_kanim")
+				.Egg(BabyIronShellConfig.ID, "beached_egg_slickshell_kanim")
 					.Mass(0.3f)
 					.Fertility(10)
 					.Incubation(20)
@@ -46,7 +47,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			moistureMonitor.defaultMucusRate = 30f / 600f;
 			moistureMonitor.lubricantTemperatureKelvin = 300;
 
-			var diet = new Diet(SaltDiet());
+			var diet = new Diet(SulfurDiet());
 			var def = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
 			def.diet = diet;
 			def.minConsumedCaloriesBeforePooping = SlickShellTuning.CALORIES_PER_KG_OF_ORE * SlickShellTuning.MIN_POOP_SIZE_IN_KG;
@@ -56,10 +57,10 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			var host = prefab.AddOrGetDef<LimpetHost.Def>();
 			host.maxLevel = 3;
 			host.defaultGrowthRate = 0.025f;
-			host.itemDroppedOnShear = SimHashes.Lime.CreateTag();
-			host.massDropped = 5f;
+			host.itemDroppedOnShear = SimHashes.FoolsGold.CreateTag();
+			host.massDropped = 10f;
 			host.targetSymbol = "beached_limpetgrowth";
-			host.limpetKanim = "beached_slickshell_limpetgrowthh_kanim";
+			host.limpetKanim = "beached_ironhell_limpetgrowth_kanim";
 			host.metabolismModifier = 1.2f;
 
 			return prefab;
@@ -67,13 +68,13 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
-		public static Diet.Info[] SaltDiet()
+		public static Diet.Info[] SulfurDiet()
 		{
 			return
 			[
 				new(
-					[SimHashes.Salt.CreateTag()],
-					SimHashes.Dirt.CreateTag(),
+					[SimHashes.Sulfur.CreateTag()],
+					SimHashes.Obsidian.CreateTag(),
 					SlickShellTuning.CALORIES_PER_KG_OF_ORE,
 					TUNING.CREATURES.CONVERSION_EFFICIENCY.NORMAL,
 					null,
