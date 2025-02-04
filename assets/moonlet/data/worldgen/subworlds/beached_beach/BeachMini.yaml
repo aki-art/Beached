@@ -1,5 +1,5 @@
-biomeNoise: noise/Beached_Beach_Solid
-temperatureRange: Beached_SummerDay
+biomeNoise: Beached:noise/Beach_Solid
+temperatureRange: Beached:SummerDay
 
 pdWeight: 4
 
@@ -11,29 +11,29 @@ avoidRadius: 5.0
 minChildCount: 4
 sampleBehaviour: PoissonDisk
 borderOverride: beachedDirty
-BorderOverridePriority: 20
+borderOverridePriority: 20
 
 biomes:
-  - name: biomes/Beached_Beach/Solid
+  - name: Beached:biomes/Beach/Solid
     weight: 3
     tags:
-      - Beached_Seas_TropicalPacu
-      - Beached_MusselSprout
-      - Beached_AlgaeCell
-      - Beached_WaterCups
-      - Beached_DewPalm
-      - Beached_LeafletCoral
-      - Beached_SandySeashell
-      - Beached_SandySlickshell
-      - Beached_BuriedSeashell
+      - Beached:Beached_Seas_TropicalPacu
+      - Beached:Beached_MusselSprout
+      - Beached:Beached_AlgaeCell
+      - Beached:Beached_WaterCups
+      - Beached:Beached_DewPalm
+      - Beached:Beached_LeafletCoral
+      - Beached:Beached_SandySeashell
+      - Beached:Beached_SandySlickshell
+      - Beached:Beached_BuriedSeashell
 
 features:
-  - type: features/beached_beach/AirPocket
-  - type: features/beached_beach/MetalCavern
-  - type: features/beached_beach/MediumFreshwaterLake
-  - type: features/beached_beach/TinyFreshWaterLake
-  - type: features/beached_beach/SnailPocket
-  - type: features/beached_beach/PalmyShore
+  - type: Beached:features/beach/AirPocket
+  - type: Beached:features/beach/MetalCavern
+  - type: Beached:features/beach/MediumFreshwaterLake
+  - type: Beached:features/beach/TinyFreshWaterLake
+  - type: Beached:features/beach/SnailPocket
+  - type: Beached:features/beach/PalmyShore
 
 tags:
   - IgnoreCaveOverride

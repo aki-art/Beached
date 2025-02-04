@@ -111,14 +111,15 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
-		public GrowthInfoBuilder GrowsIn(params SimHashes[] elements)
+		public GrowthInfoBuilder GrowsIn(SimHashes[] elements, int maxCount = 10000)
 		{
 			foreach (var element in elements)
 			{
 				disease.AddGrowthRule(new ElementGrowthRule(element)
 				{
 					populationHalfLife = new float?(DISEASE.GROWTH_FACTOR.GROWTH_4),
-					overPopulationHalfLife = new float?(DISEASE.GROWTH_FACTOR.GROWTH_4)
+					overPopulationHalfLife = new float?(DISEASE.GROWTH_FACTOR.GROWTH_4),
+					maxCountPerKG = maxCount
 				});
 			}
 

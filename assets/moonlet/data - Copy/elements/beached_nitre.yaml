@@ -1,0 +1,58 @@
+elements:
+  - elementId: Beached_Nitre
+    name: Saltpeter
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_nitre.png
+    descriptionText: TODO
+    textureUVScale: 5
+    color: aacdd1
+    specificHeatCapacity: 0.2
+    thermalConductivity: 2
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 2
+    highTemp: 334C
+    highTempTransitionTarget: Beached_MoltenNitre
+    defaultTemperature: 26.85C
+    defaultMass: 700
+    maxMass: 1840
+    hardness: 2
+    molarMass: 50
+    lightAbsorptionFactor: 0.4
+    radiationAbsorptionFactor: 0.7
+    radiationPer1000Mass: 0
+    materialCategory: Agriculture
+    tags:
+      - Oxidizer
+    buildMenuSort: 2
+    state: Solid
+    audio:
+      copyElement: PhosphateNodules
+
+
+  - elementId: Beached_MoltenNitre
+    name: Molten Potassium Nitrate
+    descriptionText: TODO
+    color: aacdd1
+    maxMass: 1840
+    liquidCompression: 1.01
+    speed: 60
+    minHorizontalFlow: 50
+    minVerticalFlow: 20
+    specificHeatCapacity: 0.2
+    thermalConductivity: 1
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 25
+    gasSurfaceAreaMultiplier: 1
+    lowTemp: 334C
+    highTemp: 440C
+    lowTempTransitionTarget: Beached_Nitre
+    highTempTransitionTarget: Beached_Nitrogen
+    defaultTemperature: 390C
+    defaultMass: 200
+    molarMass: 50
+    toxicity: 0
+    lightAbsorptionFactor: 0.7
+    radiationAbsorptionFactor: 0.65
+    radiationPer1000Mass: 0
+    state: Liquid

@@ -18,7 +18,7 @@ namespace Beached.Content.Scripts.UI
 			InitializeScreen();
 		}
 
-		public override bool IsValidForTarget(GameObject target) => target.TryGetComponent(out RubberTappable _);
+		public override bool IsValidForTarget(GameObject target) => target.TryGetComponent(out RubberTappable tappable) && tappable.SideScreenVisible();
 
 		public override void SetTarget(GameObject target)
 		{
@@ -44,10 +44,7 @@ namespace Beached.Content.Scripts.UI
 			base.ClearTarget();
 		}
 
-		private void Refresh(object _)
-		{
-			UpdateToggle();
-		}
+		private void Refresh(object _) => UpdateToggle();
 
 		private void UpdateToggle()
 		{
@@ -85,7 +82,9 @@ namespace Beached.Content.Scripts.UI
 			container.gameObject.SetActive(true);
 			buttonGroup.gameObject.SetActive(true);
 			button.gameObject.SetActive(true);
+
 			buttonPrefab.gameObject.SetActive(false);
+			buttonGroupPrefab.gameObject.SetActive(false);
 
 			button.OnClick += UpdateTapOrder;
 		}

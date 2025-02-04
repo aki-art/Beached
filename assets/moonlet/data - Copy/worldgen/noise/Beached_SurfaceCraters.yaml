@@ -1,0 +1,77 @@
+settings:
+  zoom: 0.100000001
+  normalise: false
+  seamless: false
+  lowerBound:
+    X: 2
+    Y: 2
+  upperBound:
+    X: 4
+    Y: 4
+  name: Untitled
+  pos:
+    X: 0
+    Y: 0
+links:
+- target:
+    type: Modifier
+    name: Scale2D_kvKRBE1S
+  source0:
+    type: Primitive
+    name: SimplexPerlin_4KweYeLb
+- target:
+    type: Combiner
+    name: Add_0gByVyBe
+  source0:
+    type: Modifier
+    name: Scale2D_kvKRBE1S
+  source1:
+    type: Primitive
+    name: Offset
+- target:
+    type: Terminator
+    name: TERMINATOR
+  source0:
+    type: Combiner
+    name: Add_0gByVyBe
+primitives:
+  SimplexPerlin_4KweYeLb:
+    primative: SimplexPerlin
+    quality: Fast
+    seed: 0
+    offset: 1
+    name: SimplexPerlin_4KweYeLb
+    pos:
+      X: -78.666666666666742
+      Y: 175.03999999999999
+  Offset:
+    primative: Constant
+    quality: Fast
+    seed: 0
+    offset: 0.5
+    name: Offset
+    pos:
+      X: 333.33333333333326
+      Y: 619.03999999999996
+filters: {}
+transformers: {}
+selectors: {}
+modifiers:
+  Scale2D_kvKRBE1S:
+    modifyType: Scale2d
+    scale2d:
+      X: 0.699999988
+      Y: 0.699999988
+    name: Scale2D_kvKRBE1S
+    pos:
+      X: 275.33333333333326
+      Y: 278.04000000000002
+combiners:
+  Add_0gByVyBe:
+    combineType: Add
+    name: Add_0gByVyBe
+    pos:
+      X: 565.33333333333326
+      Y: 336.03999999999996
+floats: {}
+controlpoints: {}

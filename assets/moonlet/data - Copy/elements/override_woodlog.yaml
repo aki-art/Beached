@@ -1,0 +1,8 @@
+elements:
+  - elementId: WoodLog
+    priority: 5
+    priorityPerClusterTag:
+      Beached_Cluster: 100
+    highTempTransitionTarget: Beached_Ash
+    removeTags:
+      - HideFromSpawnTool

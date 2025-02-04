@@ -1,0 +1,28 @@
+biomeNoise: Beached:noise/Depths
+temperatureRange: Hot
+
+pdWeight: 1
+density:
+  min: 10
+  max: 15
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+
+borderOverride: hardToDig
+borderOverridePriority: 9999
+
+biomes:
+  - name: Beached:biomes/Depths/Default
+
+tags:
+  - IgnoreCaveOverride
+
+# subworldTemplateRules:
+#   - names:
+#       - beached/worldgen/sulfur/smoker_single_a
+#     listRule: TrySome
+#     someCount: 3
+#     allowDuplicates: true
+
+zoneType: Beached_Depths

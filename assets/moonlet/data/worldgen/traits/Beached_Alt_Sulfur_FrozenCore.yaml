@@ -13,7 +13,7 @@ traitTags:
   - DoNotGenerate # added to Astropelagos, defined in the world file
 
 additionalSubworldFiles:
-  - name: &frozenSulfur subworlds/beached_sulfur/ThermalVentsFrozen
+  - name: &frozenSulfur Beached:subworlds/beached_sulfur/ThermalVentsFrozen
 
 additionalUnknownCellFilters:
   - tagcommand: DistanceFromTag

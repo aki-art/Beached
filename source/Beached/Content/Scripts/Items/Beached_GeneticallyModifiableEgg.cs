@@ -36,6 +36,9 @@ namespace Beached.Content.Scripts.Items
 		{
 			var descriptors = new List<Descriptor>();
 
+			if (!Game.Instance.GameStarted())
+				return descriptors;
+
 			if (traitIds == null)
 				return descriptors;
 
@@ -49,8 +52,6 @@ namespace Beached.Content.Scripts.Items
 					if (trait != null)
 						descriptors.Add(new Descriptor($"•   {trait.Name}", "desc"));
 				}
-
-				return descriptors;
 			}
 
 			return descriptors;

@@ -45,6 +45,7 @@ namespace Beached.Content.DefBuilders
 		private WeaponBuilder weapon;
 		private Tag condoTag = CritterCondoConfig.ID;
 		private bool condoRequiresCavity = true;
+		private string symbolPrefix = null;
 
 		public string GetName()
 		{
@@ -77,7 +78,8 @@ namespace Beached.Content.DefBuilders
 				FLYER_2X2 = "FlyerNavGrid2x2",
 				SLICKSTER = "FloaterNavGrid",
 				SWIMMER = "SwimmerNavGrid",
-				PIP = "SquirrelNavGrid";
+				PIP = "SquirrelNavGrid",
+				FLOOR_NOJUMP_1X1 = BNavGrids.WALKER_NOJUMP_1X1;
 		}
 
 		public CritterBuilder Baby(string parentId, int growUpOnCycle = 5, string dropOnGrowUp = null, bool forceNavType = false)
@@ -236,6 +238,12 @@ namespace Beached.Content.DefBuilders
 				.Condo(UnderwaterCritterCondoConfig.ID, false);
 		}
 
+		public CritterBuilder SymbolPrefix(string prefix)
+		{
+			symbolPrefix = prefix;
+			return this;
+		}
+
 		public CritterBuilder Tags(HashSet<Tag> tags)
 		{
 			foreach (Tag tag in tags)
@@ -343,6 +351,9 @@ namespace Beached.Content.DefBuilders
 				tempMaxWarning,
 				tempMinLethal,
 				tempMaxLethal);
+
+			if (symbolPrefix != null)
+				prefab.AddOrGet<SymbolOverrideController>().ApplySymbolOverridesByAffix(animFile, symbolPrefix);
 
 			if (spaceRequiredPerCritter > 0)
 				EntityTemplates.ExtendEntityToWildCreature(prefab, spaceRequiredPerCritter);
@@ -549,8 +560,6 @@ namespace Beached.Content.DefBuilders
 				var parentId = prefab.PrefabID().ToString();
 				var id = $"{parentId}Egg";
 
-				Log.Debug("Added Egg: " + Strings.Get($"STRINGS.CREATURES.SPECIES.{parentId.ToUpperInvariant()}.EGG_NAME"));
-
 				if (!Assets.TryGetAnim(eggKanim, out var _))
 					Log.Warning($"Error configuring {parentId} {id}");
 
@@ -629,7 +638,7 @@ namespace Beached.Content.DefBuilders
 					conditions.Add(ADULT);
 
 				brainFn?.Invoke(this, conditions);
-				EntityTemplates.AddCreatureBrain(instance.prefab, this, species, null);
+				EntityTemplates.AddCreatureBrain(instance.prefab, this, species, instance.symbolPrefix);
 			}
 
 			public CritterBuilder Configure(Action<BrainBuilder, HashSet<string>> configureAI)

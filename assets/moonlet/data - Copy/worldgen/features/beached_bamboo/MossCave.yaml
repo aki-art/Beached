@@ -1,0 +1,29 @@
+tags:
+  - AllowExceedNodeBorders
+shape: Circle
+borders:
+  - 1
+  - 2
+blobSize:
+  min: 2
+  max: 4
+ElementChoiceGroups:
+  RoomCenterElements:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Helium
+        weight: 1.0
+      - element: Chlorine
+        weight: 0.3
+  RoomBorderChoices0:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Moss
+        weight: 1
+      - element: Chlorine
+        weight: 0.25
+  RoomBorderChoices1:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Moss
+        weight: 1

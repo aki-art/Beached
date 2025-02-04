@@ -40,7 +40,7 @@ namespace Beached.Content.Defs.Flora
 				PalmLeafConfig.ID,
 				true,
 				true,
-				true,
+				false,
 				true,
 				2400f,
 				0f,
@@ -52,7 +52,19 @@ namespace Beached.Content.Defs.Flora
 			prefab.AddOrGet<StandardCropPlant>();
 			prefab.AddOrGet<BudUprootedMonitor>();
 
-			AddLeaf("a", -1, +2);
+			anims = [];
+
+			foreach (var leaf in ModTuning.DewPalm.Leafs())
+			{
+				anims[leaf.Value] = new StandardCropPlant.AnimSet()
+				{
+					grow = $"branch_{leaf.Key}_grow",
+					grow_pst = $"branch_{leaf.Key}_grow_pst",
+					idle_full = $"branch_{leaf.Key}_idle_full",
+					wilt_base = $"branch_{leaf.Key}_wilt",
+					harvest = $"branch_{leaf.Key}_harvest"
+				};
+			}
 
 			var def = prefab.AddOrGetDef<PlantBranch.Def>();
 			def.animationSetupCallback += AdjustAnimation;
@@ -69,19 +81,6 @@ namespace Beached.Content.Defs.Flora
 			kbac.Offset = (-1 * offset).ToVector3();
 			kbac.Play(crop.anims.grow, KAnim.PlayMode.Loop);
 			crop.RefreshPositionPercent();
-		}
-
-		private void AddLeaf(string character, int x, int y)
-		{
-			anims ??= [];
-			anims[new CellOffset(x, y)] = new StandardCropPlant.AnimSet()
-			{
-				grow = $"branch_{character}_grow",
-				grow_pst = $"branch_{character}_grow_pst",
-				idle_full = $"branch_{character}_idle_full",
-				wilt_base = $"branch_{character}_wilt",
-				harvest = $"branch_{character}_harvest"
-			};
 		}
 
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;

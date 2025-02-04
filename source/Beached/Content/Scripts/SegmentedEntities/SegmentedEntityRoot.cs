@@ -151,7 +151,7 @@ namespace Beached.Content.Scripts.SegmentedEntities
 
 		protected Vector3 GetSegmentPosition(int index) => index * growthVector;
 
-		public Vector3 GetLastSegmentPosition() => segments.Last().transform.position + growthVector;
+		public Vector3 GetLastSegmentPosition() => (segments.Count == 0 ? transform.position : segments.Last().transform.position) + growthVector;
 
 		public virtual int Grow(int times = 1)
 		{

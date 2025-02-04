@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using Beached.Content.Defs.Foods;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
@@ -32,7 +33,7 @@ namespace Beached.Content.Defs.Flora
 				false,
 				0f,
 				0.15f,
-				"PlantMeat",
+				RawKelpConfig.ID,
 				true,
 				true,
 				true,

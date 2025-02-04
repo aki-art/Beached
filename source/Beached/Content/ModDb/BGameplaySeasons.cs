@@ -28,8 +28,31 @@ namespace Beached.Content.ModDb
 		public const string ASTROPELAGOS = "Beached_AstropelagosMoonletMeteorShowers";
 		public static GameplaySeason astropelagosMoonletMeteorShowers;
 
+		public const string VANILLA_ASTROPELAGOS = "Beached_AstropelagoMeteorShowers";
+		public static GameplaySeason vanillaAstropelagosMeteorShowers;
+
 		[DbEntry]
 		public static void Register(GameplaySeasons __instance)
+		{
+			VanillaSeasons(__instance);
+			SpacedOutSeasons(__instance);
+			//.AddEvent(BGameplayEvents.ClusterAbyssaliteShower);
+		}
+
+		private static void VanillaSeasons(GameplaySeasons __instance)
+		{
+			astropelagosMoonletMeteorShowers = __instance.Add(new MeteorShowerSeason(
+				VANILLA_ASTROPELAGOS,
+				GameplaySeason.Type.World,
+				DlcManager.VANILLA_ID,
+				20f,
+				false,
+				-1f,
+				true)
+				.AddEvent(BGameplayEvents.VanillaDiamondShower));
+		}
+
+		private static void SpacedOutSeasons(GameplaySeasons __instance)
 		{
 			astropelagosMoonletMeteorShowers = __instance.Add(new MeteorShowerSeason(
 				ASTROPELAGOS,
@@ -46,7 +69,6 @@ namespace Beached.Content.ModDb
 				true,
 				300f)
 				.AddEvent(BGameplayEvents.ClusterDiamondShower));
-			//.AddEvent(BGameplayEvents.ClusterAbyssaliteShower);
 		}
 	}
 }

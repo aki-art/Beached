@@ -1,0 +1,86 @@
+elements:
+  - elementId: Beached_Brass
+    name: Brass
+    descriptionText: 'A <link="COPPER">Copper</link> and <link="BEACHED_ZINC">Zinc</link> alloy.'
+    color: &color ca8426
+    modifiers:
+      - id: Decor
+        value: 50%
+        isMultiplier: true
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_brass.png
+    specularTexture: beached_shared_assets::Assets/moonlet/elements/beached_brass_spec.png
+    specularColor: e9dc77
+    specificHeatCapacity: &shc 0.386
+    thermalConductivity: 80
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.7
+    highTemp: &meltingPoint 900C
+    highTempTransitionTarget: Beached_BrassMolten
+    defaultTemperature: 300
+    defaultMass: 870
+    maxMass: 9970
+    hardness: 2
+    molarMass: 196.966569
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.35
+    radiationPer1000Mass: 0
+    materialCategory: RefinedMetal
+    tags:
+    - BuildableAny
+    buildMenuSort: 3
+    state: Solid
+    
+  - elementId: Beached_BrassMolten
+    name: Molten Brass
+    color: *color
+    maxMass: 7870
+    liquidCompression: 1.01
+    speed: 100
+    minHorizontalFlow: 30
+    minVerticalFlow: 3
+    specificHeatCapacity: *shc
+    thermalConductivity: 12
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 25
+    gasSurfaceAreaMultiplier: 1
+    lowTemp: *meltingPoint
+    highTemp: &boilingPoint 1035C
+    lowTempTransitionTarget: Beached_Brass
+    highTempTransitionTarget: Beached_BrassGas
+    defaultTemperature: 2000
+    defaultMass: 1000
+    molarMass: 55.845
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.77
+    radiationPer1000Mass: 0
+    tags:
+    - Metal
+    - RefinedMetal
+    - EmitsLight
+    state: Liquid
+
+  - elementId: Beached_BrassGas
+    name: Brass Gas
+    color: *color
+    specificHeatCapacity: *shc
+    thermalConductivity: 3
+    solidSurfaceAreaMultiplier: 25
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    flow: 0.1
+    lowTemp: *boilingPoint
+    lowTempTransitionTarget: Beached_BrassMolten
+    defaultTemperature: 3200
+    defaultPressure: 202
+    molarMass: 63.546
+    lightAbsorptionFactor: 0.5
+    radiationAbsorptionFactor: 0.07
+    radiationPer1000Mass: 0
+    materialCategory: Unbreathable
+    tags:
+    - Metal
+    - RefinedMetal
+    - EmitsLight
+    state: Gas

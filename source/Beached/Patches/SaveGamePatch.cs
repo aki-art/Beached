@@ -12,6 +12,7 @@ namespace Beached.Patches
 			{
 				__instance.gameObject.AddOrGet<Beached_Mod>();
 				__instance.gameObject.AddOrGet<Beached_Grid>();
+				__instance.gameObject.AddOrGet<DepthsVeil>();
 			}
 		}
 	}

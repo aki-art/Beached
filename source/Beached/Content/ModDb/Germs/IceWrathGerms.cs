@@ -74,7 +74,7 @@ namespace Beached.Content.ModDb.Germs
 					diffusionScale = 0,
 					minDiffusionCount = int.MaxValue
 				})
-				.GrowsIn(SimHashes.Oxygen, SimHashes.ContaminatedOxygen)
+				.GrowsIn([SimHashes.Oxygen, SimHashes.ContaminatedOxygen])
 				.StagnatesIn(Element.State.Solid)
 				.DiesIn(Element.State.Liquid)
 				.InstantlyDiesIn(Elements.sulfurousWater)

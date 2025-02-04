@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Jellies
 {
-	[EntityConfigOrder(0)]
+	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.ADULT)]
 	public class JellyfishConfig : BaseJellyfishConfig, IEntityConfig
 	{
 		public const string ID = "Beached_Jellyfish";

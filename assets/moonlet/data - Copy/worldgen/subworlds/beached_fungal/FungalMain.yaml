@@ -1,0 +1,22 @@
+biomeNoise: noise/Beached_Bamboo
+temperatureRange: Beached:SummerDay
+density:
+  min: 20
+  max: 25
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+borderOverride: rocky
+borderOverridePriority: 100
+
+biomes:
+  - name: Beached:biomes/Fungal/Basic
+    weight: 2
+
+tags:
+  - IgnoreCaveOverride
+  - NoGlobalFeatureSpawning
+  - Beached_SmoothNoise
+  - Beached_AllowCritterManipulator
+
+zoneType: Beached_FungalJungle

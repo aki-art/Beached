@@ -1,0 +1,63 @@
+elements:
+    - elementId: Beached_SulfurousWater
+      name: Acid
+      descriptionText: H<sub>2</sub>SO<sub>4</sub> diluted with Water, Acid burns through most minerals, violently reacts with many Metals, and can cause chemical burns for most organic beings.
+      color: &color d5ff2d
+      maxMass: 1200
+      liquidCompression: 1.01
+      speed: 100
+      minHorizontalFlow: 0.01
+      minVerticalFlow: 0.01
+      specificHeatCapacity: 3.4
+      thermalConductivity: 0.609
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 25
+      gasSurfaceAreaMultiplier: 1
+      lowTemp: 250.65
+      highTemp: 375.9
+      lowTempTransitionTarget: Beached_SulfurousIce
+      highTempTransitionTarget: Steam
+      highTempTransitionOreId: Sulfur
+      highTempTransitionOreMassConversion: 0.3
+      defaultTemperature: 282.15
+      defaultMass: 1200
+      molarMass: 22
+      toxicity: 0
+      lightAbsorptionFactor: 0.8
+      radiationAbsorptionFactor: 0.8
+      radiationPer1000Mass: 0
+      tags:
+      - AnyWater
+      state: Liquid
+        
+    - elementId: Beached_SulfurousIce
+      name: Acid Ice
+      color: *color
+      descriptionText: <link=\"BeachedSulfurousWater\">Acid</sub> frozen into it's <link=\"ELEMENTS_SOLID\">Solid</link> state.
+      specificHeatCapacity: 3.05
+      eyeIrritationStrength: 3
+      mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_sulfurousice.png
+      thermalConductivity: 1
+      solidSurfaceAreaMultiplier: 1
+      liquidSurfaceAreaMultiplier: 1
+      gasSurfaceAreaMultiplier: 1
+      strength: 1
+      highTemp: 250.65
+      highTempTransitionTarget: Beached_SulfurousWater
+      defaultTemperature: 230
+      defaultMass: 500
+      maxMass: 800
+      hardness: 10
+      molarMass: 25
+      lightAbsorptionFactor: 0.8
+      radiationAbsorptionFactor: 0.75
+      radiationPer1000Mass: 0
+      materialCategory: Liquifiable
+      tags:
+      - IceOre
+      - Mixture
+      - BuildableAny
+      buildMenuSort: 5
+      state: Solid
+      audio:
+        copyElement: Ice

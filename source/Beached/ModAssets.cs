@@ -71,6 +71,7 @@ namespace Beached
 			public static Material forceField;
 			public static Material liquidRefractionMat;
 			public static Material forceField2;
+			public static Material darkVeil;
 		}
 
 		public static class Sprites
@@ -283,8 +284,6 @@ namespace Beached
 			//var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
 			Log.Debug("loading set pieces");
 			LoadSetpieces(bundle2, sharedAssetsBundle);
-
-			Log.Debug("loading 3D models");
 			Prefabs.forceFieldDome = bundle2.LoadAsset<GameObject>("Assets/Prefabs/Smaller Wider Dome.prefab");
 
 			foreach (var asset in bundle.GetAllAssetNames())
@@ -338,6 +337,9 @@ namespace Beached
 			Materials.liquidRefractionMat.SetFloat("_EdgeMultiplier", 2f);
 			Materials.liquidRefractionMat.SetFloat("_ZoomMagicNumber", 20f);
 
+			Materials.darkVeil = shadersBundle.LoadAsset<Material>("Assets/Materials/Shader Graphs_DarkVeilShaderv2.mat");
+			Fx.darkVeilOverlay = bundle2.LoadAsset<GameObject>("Assets/Prefabs/DarkVeilQuad.prefab");
+
 			sw.Stop();
 			Log.Info($"Finished loading assets. It took {sw.ElapsedMilliseconds} ms");
 		}
@@ -346,11 +348,7 @@ namespace Beached
 		{
 			Prefabs.asteroidBelt = bundle2.LoadAsset<GameObject>("Assets/Prefabs/BeltContainer.prefab");
 
-			FUtility.FUI.Helper.ListChildren(Prefabs.asteroidBelt.transform);
-
 			var particles = Prefabs.asteroidBelt.transform.Find("AsteroidBelt").GetComponent<ParticleSystem>();
-
-			Log.Debug("found particles");
 
 			var refs = Prefabs.asteroidBelt.AddComponent<HierarchyReferences>();
 			refs.references = refs.references = [new ElementReference()

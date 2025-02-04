@@ -1,0 +1,288 @@
+name: Astropelagos Asteroid
+description: > 
+  A favored holiday destination, these shores feature all things 
+  desirable! Sandy beaches, warm oceans, caves glimmering with crystals, 
+  carnivorous predators, ancient deadly diseases, and so much more!
+disableWorldTraits: false
+asteroidIcon: beached_asteroid_astropelagos_kanim
+iconScale: 1
+namePrefixes: [Oca,Salt,Marin,Deep,Brin,Blu,Salin,Coral,Aq,Pelag,Naut,Nav,Astro,Pela]
+
+worldTraitScale: 1 # Adjust with worldSize. Traits are tuned to base game world sizes.
+worldsize:
+  X: 304
+  Y: 304
+layoutMethod: PowerTree
+
+seasons:
+  - Beached_AstropelagosMoonletMeteorShowers # Diamond and gemstones
+
+worldTags:
+  - Beached_FrozenSulfurAltCore
+
+worldTraitRules:
+  - min: 1
+    max: 4
+    # replace these trait with custom variants on this world
+    alternativeTraits:
+      traits/FrozenCore: traits/Beached_Alt_Sulfur_FrozenCore 
+
+    forbiddenTags:
+      - Germs # slime molds
+      - Oil
+      - LargeWorld
+      - Surface
+      - Crust
+      - Challenge
+      - GenericGeysers
+      - StartChange
+      - Geodes # i add my own variety
+
+defaultsOverrides:
+  data:
+    DrawWorldBorder: true
+    DrawWorldBorderForce: false
+    WorldBorderThickness: 6
+    WorldBorderRange: 3
+    OverworldDensityMin: 17
+    OverworldDensityMax: 17
+    OverworldSampleBehaviour: PoissonDisk
+    OverworldMinNodes: 1
+    IsBeachedWorld: true
+
+# List all the subworld files to load
+# root and reefs are added from features
+subworldFiles:
+  # beach
+  - name: &Start subworlds/beached_beach/BeachStart 
+    overridePower: 3
+  - name: &BeachMini subworlds/beached_beach/BeachMini
+    overridePower: 1
+  - name: &BeachPalms subworlds/beached_beach/BeachPalmyShores
+    overridePower: 1
+
+  # snowy
+  - name: &Snowy subworlds/beached_snowy/SnowyCaves 
+    overridePower: 1.5
+    minCount: 2
+
+  # bamboo
+  - name: &BambooMain subworlds/beached_bamboo/BambooMain
+    overridePower: 2
+    minCount: 2
+
+  # rot
+  - name: &RotMain subworlds/beached_rot/RotMain
+    overridePower: 2
+    minCount: 2
+
+  # core
+  - name: &Sulfur subworlds/beached_sulfur/ThermalVentsMain
+    overridePower: 0.9
+  
+  - name: &Depths subworlds/beached_depths/DepthsMain
+    overridePower: 0.9
+
+  # edges
+  - name: &Sea subworlds/beached_sea/SeaMain
+    overridePower: 1
+  - name: &Jellies subworlds/beached_sea/JellyFish
+    overridePower: 1
+    weight: 0.3
+    minCount: 1
+    maxCount: 3
+
+  # space
+  - name: &Space subworlds/space/Space
+    overridePower: 0.8
+  - name: &Surface subworlds/beached_surface/DiamondAndCrudeOilCrust
+    overridePower: 0.6
+
+startSubworldName: *Start
+startingBaseTemplate: beached/bases/startingBaseCCenteredB
+startingBasePositionHorizontal:
+  min: 0.5
+  max: 0.5
+startingBasePositionVertical:
+  min: 0.45
+  max: 0.45
+
+unknownCellsAllowedSubworlds: 
+# world fill
+  - tagcommand: Default
+    command: Replace
+    subworldNames:
+      - *BambooMain
+      - *RotMain
+      - *Snowy
+# start
+  - tagcommand: AtTag
+    tag: AtStart
+    command: Replace
+    subworldNames:
+      - *Start
+
+# near start
+  - tagcommand: DistanceFromTag
+    tag: AtStart
+    minDistance: 1
+    maxDistance: 1
+    command: Replace
+    subworldNames:
+      - *BeachMini
+#      - *BeachPalms
+
+# sides
+  - tagcommand: DistanceFromTag
+    tag: AtEdge
+    minDistance: 0
+    maxDistance: 2
+    command: Replace
+    subworldNames:
+      - *Sea
+      - *Jellies
+
+# core 
+  - tagcommand: DistanceFromTag
+    minDistance: 0
+    maxDistance: 1
+    tag: Beached_AtSideADepth
+    command: Replace
+    subworldNames:
+      - *Sulfur
+
+  - tagcommand: DistanceFromTag
+    minDistance: 0
+    maxDistance: 1
+    tag: Beached_AtSideBDepth
+    command: Replace
+    subworldNames:
+      - *Depths
+
+# space
+  - tagcommand: DistanceFromTag
+    tag: AtSurface
+    minDistance: 0
+    maxDistance: 1
+    command: Replace
+    subworldNames:
+      - *Space
+
+# surface
+  - tagcommand: DistanceFromTag
+    tag: AtSurface
+    minDistance: 2
+    maxDistance: 3
+    command: Replace
+    subworldNames:
+      - *Surface
+
+worldTemplateRules:
+  # limpet cave
+  - names:
+      - beached/worldgen/beach/limpet_rock_cave
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Beach]
+
+  # coral reef
+  - names:
+      - beached/worldgen/coralreefsmall1b
+    listRule: GuaranteeOne
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Sea]
+
+  # ammonia vent
+  - names:
+      - beached/worldgen/rot/ammoniav2
+    listRule: GuaranteeOne
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Bone]
+  
+  # zeolite geode
+  - names:
+      - beached/worldgen/zeoliteGeode1
+    listRule: GuaranteeSomeTryMore
+    someCount: 1
+    moreCount: 1
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Bamboo]
+  
+  # chlorine vent
+  - names:
+      - beached/worldgen/bamboo_clgeyser3
+    listRule: GuaranteeOne
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Bamboo]
+
+  # helium vent
+  - names:
+      - beached/worldgen/bamboo/helium_vent_b
+    listRule: GuaranteeOne
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Bamboo]
+
+  # salt volcano
+  - names:
+      - beached/worldgen/salt_geyser_buried
+    listRule: GuaranteeOne
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Sea]
+
+  # forcefield gen
+  - names:
+      - beached/pois/forcefield_generator_room
+    listRule: GuaranteeOne
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Barren]
+        
+  # Iridium Gas Trap
+  - names:
+      - beached/pois/iridium_chamber_base
+    listRule: GuaranteeOne
+    priority: 1200
+    # allowExtremeTemperatureOverlap: false
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Depths]
+        
+  # # TEMPORARY glacier
+  # - names:
+  #     - beached/storytraits/muffinglacerb
+  #   listRule: GuaranteeOne
+  #   priority: 700
+  #   allowedCellsFilter:
+  #     - command: Replace
+  #       zoneTypes: [Beached_Icy]
+        
+  # TEMPORARY fuzz
+  - names:
+      - beached/worldgen/rot/fua_nest_temp
+      - beached/worldgen/rot/fua_nest_temp
+      - beached/worldgen/rot/fua_nest_temp
+    listRule: GuaranteeAll
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        # tag: AtStart
+        # tagcommand: DistanceFromTag
+        # minDistance: 1
+        # maxDistance: 4
+        zoneTypes: [Beached_Bone]
+        

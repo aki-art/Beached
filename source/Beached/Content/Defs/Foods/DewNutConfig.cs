@@ -23,8 +23,8 @@ namespace Beached.Content.Defs.Foods
 			var prefab = BEntityTemplates.CreateFood(
 				ID,
 				"beached_dewnut_kanim",
-				0.7f,
-				0.7f,
+				0.55f,
+				0.55f,
 				foodInfo);
 
 			return prefab;

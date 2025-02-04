@@ -22,8 +22,8 @@ namespace Beached.Content.Defs.Flora
 				Assets.GetAnim("beached_dewpalm_kanim"),
 				"idle",
 				Grid.SceneLayer.BuildingBack,
+				1,
 				3,
-				4,
 				DECOR.BONUS.TIER2,
 				defaultTemperature: CREATURES.TEMPERATURE.HOT_1);
 
@@ -54,15 +54,14 @@ namespace Beached.Content.Defs.Flora
 
 			prefab.UpdateComponentRequirement<Harvestable>(false);
 
+			var leafs = ModTuning.DewPalm.Leafs().Values;
+
 			var branchGrower = prefab.AddOrGetDef<PlantBranchGrower.Def>();
-			branchGrower.BRANCH_OFFSETS =
-			[
-				new CellOffset(-1, 2)
-			];
+			branchGrower.BRANCH_OFFSETS = [.. leafs];
 			branchGrower.BRANCH_PREFAB_NAME = DewPalmLeafConfig.ID;
 			branchGrower.harvestOnDrown = true;
 			branchGrower.propagateHarvestDesignation = false;
-			branchGrower.MAX_BRANCH_COUNT = 1;
+			branchGrower.MAX_BRANCH_COUNT = leafs.Count;
 
 			prefab.AddOrGet<BuddingTrunk>();
 

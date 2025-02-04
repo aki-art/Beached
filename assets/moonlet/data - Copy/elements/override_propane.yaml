@@ -1,0 +1,27 @@
+elements:
+  - elementId: Propane
+    isDisabled: false
+    priority: 5
+    priorityPerClusterTag:
+      Beached_Cluster: 100
+    removeTags:
+      - HideFromSpawnTool
+      - HideFromCodex
+
+  - elementId: LiquidPropane
+    isDisabled: false
+    priority: 5
+    priorityPerClusterTag:
+      Beached_Cluster: 100
+    removeTags:
+      - HideFromSpawnTool
+      - HideFromCodex
+
+  - elementId: SolidPropane
+    isDisabled: false
+    priority: 5
+    priorityPerClusterTag:
+      Beached_Cluster: 100
+    removeTags:
+      - HideFromSpawnTool
+      - HideFromCodex

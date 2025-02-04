@@ -1,4 +1,4 @@
-biomeNoise: noise/Beached_SnowyBeach
+biomeNoise: Beached:noise/SnowyBeach
 
 temperatureRange: VeryCold
 
@@ -11,28 +11,28 @@ minChildCount: 2
 sampleBehaviour: PoissonDisk
 
 borderOverride: hardToDig
-BorderOverridePriority: 9999
+borderOverridePriority: 9999
 
 biomes:
-  - name: biomes/Beached_Beach/SnowyBase
+  - name: Beached:biomes/Beach/SnowyBase
     weight: 2
     tags:
       - ColdBreather
-      - Beached_Slagmite
-  - name: biomes/Beached_Beach/SnowyCarbon
+      - Beached:Beached_Slagmite
+  - name: Beached:biomes/Beach/SnowyCarbon
     weight: 1
     tags:
       - ColdBreather
-      - Beached_Slagmite
+      - Beached:Beached_Slagmite
 tags:
   - IgnoreCaveOverride
 
 zoneType: Beached_Icy
 
 features:
-  - type: features/beached_snowy/SnowCavern
-  - type: features/beached_snowy/WolframiteCavern
-  - type: features/beached_snowy/NitrePatch
+  - type: Beached:features/snowy/SnowCavern
+  - type: Beached:features/snowy/WolframiteCavern
+  - type: Beached:features/snowy/NitrePatch
 
 subworldTemplateRules:
   - names:

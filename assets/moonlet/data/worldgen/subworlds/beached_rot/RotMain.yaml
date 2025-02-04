@@ -1,4 +1,4 @@
-biomeNoise: noise/Beached_Rot
+biomeNoise: Beached:noise/Rot
 temperatureRange: HumanHot
 
 density:
@@ -12,19 +12,19 @@ sampleBehaviour: PoissonDisk
 borderOverride: hardToDig
 
 biomes:
-  - name: biomes/Beached_Rot/Default
+  - name: Beached:biomes/Rot/Default
 
 tags:
   - IgnoreCaveOverride
 
 features:
-  - type: features/beached_rot/RotPocket
-  - type: features/beached_rot/SimpleCave
-  - type: features/beached_rot/SimpleCave
-  - type: features/beached_rot/SimpleCave
-  - type: features/beached_rot/SimpleCave
-  - type: features/beached_rot/SimpleCave
-#  - type: features/beached_rot/GoldCavern
+  - type: Beached:features/rot/RotPocket
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+#  - type: Beached:features/rot/GoldCavern
 
 subworldTemplateRules:
   - names:

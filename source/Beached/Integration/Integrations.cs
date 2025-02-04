@@ -7,6 +7,7 @@ namespace Beached.Integration
 	public class Integrations
 	{
 		public const string
+			MOONLET = "Moonlet",
 			CHEMICAL_PROCESSING = "Ronivan.ChemProcessing",
 			CRITTER_TRAITS_REBORN = "CritterTraitsReborn",
 			DECOR_PACK_I = "DecorPackA",

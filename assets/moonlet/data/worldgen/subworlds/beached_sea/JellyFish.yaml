@@ -1,4 +1,4 @@
-biomeNoise: noise/Beached_Sea
+biomeNoise: Beached:noise/Sea
 temperatureRange: HumanWarm
 density:
   min: 10
@@ -9,13 +9,13 @@ sampleBehaviour: PoissonDisk
 pdWeight: 1
 
 biomes:
-  - name: biomes/Beached_Sea/Basic
+  - name: Beached:biomes/Sea/Basic
     weight: 2
     tags:
-      - Beached_Seas_TropicalPacu
-      - Beached_JellyfishStrobila
-      - Beached_Jellyfish
-      - Beached_Kelp
+      - Beached:Beached_Seas_TropicalPacu
+      - Beached:Beached_JellyfishStrobila
+      - Beached:Beached_Jellyfish
+      - Beached:Beached_Kelp
 tags:
   - IgnoreCaveOverride
   - NoGravitasFeatures

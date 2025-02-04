@@ -6,6 +6,10 @@
 
 		public class UI
 		{
+			public static LocString BEACHED_ALPHA_MESSAGE = $"Crashes, bugs and MISSING. ahead!\n" +
+				$"\n" +
+				$"Beached is currently in Alpha Play Test, and there are a lot ";
+
 			public static class DIET
 			{
 				public static LocString EXTRA_PRODUCE = "    • Additional excretion: {tag}";

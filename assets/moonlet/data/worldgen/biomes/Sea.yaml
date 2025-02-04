@@ -1,0 +1,65 @@
+TerrainBiomeLookupTable:
+  # keys to remove from in-memory structure when this file is loaded
+  remove: [] 
+  # elements to add from in-memory structure when this file is loaded
+  add:
+    Basic:
+    - content: SaltWater
+      bandSize: 0.4
+    - content: Sand
+      bandSize: 0.1
+    - content: Salt
+      bandSize: 0.3
+    - content: Beached_Aquamarine
+      bandSize: 0.4
+    - content: Lime
+      bandSize: 0.3
+    - content: Sand
+      bandSize: 0.9
+    - content: Obsidian
+      bandSize: 1.2
+    - content: Beached_Pearl
+      bandSize: 1
+    # BasicOld:
+    # - content: SaltWater
+    #   bandSize: 0.4
+    # - content: Salt
+    #   bandSize: 0.3
+    # - content: Cobaltite
+    #   bandSize: 0.6
+    # - content: Sand
+    #   bandSize: 0.9
+    # - content: Obsidian
+    #   bandSize: 1.2
+    Reefs:
+    - content: IgneousRock
+      bandSize: 0.1
+    - content: Sand
+      bandSize: 0.1
+    - content: SaltWater
+      bandSize: 0.84
+    Frozen:
+    - content: Ice
+      bandSize: 0.1
+    - content: BrineIce
+      bandSize: 0.08
+    - content: Ice
+      bandSize: 0.07
+    - content: Salt
+      bandSize: 0.05
+    - content: Snow
+      bandSize: 0.05
+    - content: Salt
+      bandSize: 0.05
+    - content: Snow
+      bandSize: 0.05
+    - content: BrineIce
+      bandSize: 0.04
+    - content: Salt
+      bandSize: 0.04
+    - content: Ice
+      bandSize: 0.12
+    - content: Snow
+      bandSize: 0.2
+    - content: BrineIce
+      bandSize: 0.7

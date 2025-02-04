@@ -1,0 +1,22 @@
+name: Sulfurous Core
+description: "This world has a core of molten Sulfur. And snails.
+colorHex: ffc834
+
+exclusiveWithTags:
+  - CoreTrait
+
+traitTags:
+  - VeryHot
+  - Core
+
+additionalSubworldFiles:
+  - name: subworlds/beached/thermalvents/ThermalVentsMain
+
+additionalUnknownCellFilters:
+  - tagcommand: DistanceFromTag
+    tag: AtDepths
+    minDistance: 0
+    maxDistance: 0
+    command: Replace
+    subworldNames:
+      - subworlds/beached/thermalvents/ThermalVentsMain

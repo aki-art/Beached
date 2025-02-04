@@ -8,7 +8,7 @@ additionalWorldTemplateRules:
   # MAIN
   - names:
       - beached/storytraits/muffinglacerb
-    listRule: GuaranteeOne
+    listRule: TryOne
     priority: 400
     useRelaxedFiltering: true
     allowedCellsFilter:
@@ -24,10 +24,41 @@ additionalWorldTemplateRules:
         maxDistance: 2
         ignoreIfMissingTag: true
 
+      - command: ExceptWith 
+        tagcommand: DistanceFromTag
+        tag: AtSurface
+        minDistance: 0
+        maxDistance: 2
+      
       # this also excludes Space
       - command: ExceptWith
         tagcommand: AtTag
         tag: NoGlobalFeatureSpawning 
 
+#fallback
+  # MAIN
+  - names:
+      - beached/storytraits/muffinglacerb
+    listRule: GuaranteeOne
+    priority: 200
+    useRelaxedFiltering: true
+    allowedCellsFilter:
+       # too close to start
+      - command: ExceptWith 
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 0
+        maxDistance: 2
+        ignoreIfMissingTag: true
+
+      - command: ExceptWith 
+        tagcommand: DistanceFromTag
+        tag: AtSurface
+        minDistance: 0
+        maxDistance: 2
+
+      # this also excludes Space
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGlobalFeatureSpawning 
         
-  # ICE PIECE

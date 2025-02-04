@@ -20,16 +20,16 @@ namespace Beached.Content.Scripts.Entities.Plant
 			get
 			{
 				if (isTapped)
-					return "Remove Tap";
-				//return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.REMOVE_TAP;
+					return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.REMOVE_TAP;
 
 				if (tapOrdered)
-					return "Cancel";
-				//return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.CANCEL_TAP;
+					return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.CANCEL_TAP;
 
 				return STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.TAP;
 			}
 		}
+
+		public bool SideScreenVisible() => smi.sm.IsGrown(smi);
 
 		public void SetTappedState(bool tapped)
 		{
@@ -105,11 +105,13 @@ namespace Beached.Content.Scripts.Entities.Plant
 			public HashedString trackSymbol;
 			public float latexPerSecond;
 			public Element element;
+			public Growing growing;
 
 			public StatesInstance(RubberTappable master) : base(master)
 			{
 				kbac = master.GetComponent<KBatchedAnimController>();
 				primaryElement = master.GetComponent<PrimaryElement>();
+				growing = master.GetComponent<Growing>();
 
 				trackSymbol = master.trackSymbol;
 				latexPerSecond = smi.master.materialPerCycle / CONSTS.CYCLE_LENGTH;
@@ -163,30 +165,35 @@ namespace Beached.Content.Scripts.Entities.Plant
 			{
 				default_state = notTapped;
 
+				growing
+					.EventHandlerTransition(GameHashes.Grow, notTapped, IsGrown)
+					.EnterTransition(notTapped, IsGrown);
+
 				notTapped
+					.TriggerOnEnter(ModHashes.sidesSreenRefresh)
 					.Exit(EnableOverlay)
 					.Enter(DisableOverlay);
 
 				tapOrdered
+					.TriggerOnEnter(ModHashes.sidesSreenRefresh)
 					.Enter(smi => smi.bucketKbac.Play("place"))
 					.Exit(smi => smi.master.tapOrdered = false)
-					.ToggleFetch(CreateFetch, growing);
-
-				growing
-					.EventHandlerTransition(GameHashes.Grow, collecting, IsGrown)
-					.EnterTransition(collecting, IsGrown);
+					.ToggleFetch(CreateFetch, collecting);
 
 				collecting
+					.TriggerOnEnter(ModHashes.sidesSreenRefresh)
 					.Enter(smi => smi.master.SetTappedState(true))
 					.Enter(smi => smi.bucketKbac.Play("collecting"))
+					.Update(UpdateBucketAnim)
 					.DefaultState(collecting.running);
 
-				collecting.blocked
+				collecting.wilted
+					.Enter(smi => smi.bucketKbac.Play("blocked"))
 					.EventTransition(GameHashes.WiltRecover, collecting)
 					.ToggleStatusItem(BStatusItems.collectingRubberHalted);
 
 				collecting.running
-					.EventTransition(GameHashes.Wilt, collecting.blocked)
+					.EventTransition(GameHashes.Wilt, collecting.wilted)
 					.UpdateTransition(collecting.full, FillBucket, UpdateRate.SIM_1000ms)
 					.ToggleStatusItem(BStatusItems.collectingRubber);
 
@@ -196,15 +203,17 @@ namespace Beached.Content.Scripts.Entities.Plant
 					.ToggleStatusItem(BStatusItems.collectingRubberFull);
 
 				untapping
+					.TriggerOnEnter(ModHashes.sidesSreenRefresh)
 					.Enter(DropStorage)
 					.GoTo(notTapped);
 			}
 
-			private bool IsGrown(StatesInstance smi)
+			private void UpdateBucketAnim(StatesInstance smi, float dt)
 			{
-				// TODO
-				return true;
+				//
 			}
+
+			public bool IsGrown(StatesInstance smi) => smi.growing.IsGrown();
 
 			private bool IsGrown(StatesInstance smi, object _) => IsGrown(smi);
 
@@ -226,7 +235,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 			public class CollectingStates : State
 			{
 				public State running;
-				public State blocked;
+				public State wilted;
 				public State full;
 			}
 

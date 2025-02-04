@@ -1,0 +1,61 @@
+elements:
+  - elementId: Beached_SourBrine
+    name: Sourbrine
+    descriptionText: Brine containing high concentrations of hydrogen sulfide and methane.
+    color: &color 8c5075
+    maxMass: 1200
+    liquidCompression: 1.01
+    speed: 100
+    minHorizontalFlow: 0.01
+    minVerticalFlow: 0.01
+    specificHeatCapacity: 3.4
+    thermalConductivity: 0.609
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 25
+    gasSurfaceAreaMultiplier: 1
+    lowTemp: 260.65
+    highTemp: 375.9
+    lowTempTransitionTarget: Beached_SourBrineIce
+    highTempTransitionTarget: SourGas
+    highTempTransitionOreId: Brine ## immediately turns into salt & water
+    highTempTransitionOreMassConversion: 0.6
+    defaultTemperature: 282.15
+    defaultMass: 1200
+    molarMass: 22
+    toxicity: 0
+    lightAbsorptionFactor: 0.8
+    radiationAbsorptionFactor: 0.8
+    radiationPer1000Mass: 0
+    tags:
+    - AnyWater
+    state: Liquid
+
+  - elementId: Beached_SourBrineIce
+    name: Sourbrine Ice
+    descriptionText: <link=\"BEACHEDSOURBRINE\">Sour Brine</sub> frozen into it's <link=\"ELEMENTS_SOLID\">Solid</link> state.
+    color: *color
+    specificHeatCapacity: 3.4
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_sourbrineice.png
+    thermalConductivity: 2.18
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 1
+    highTemp: 260.65
+    highTempTransitionTarget: Beached_SourBrine
+    defaultTemperature: 232.15
+    defaultMass: 1000
+    maxMass: 1100
+    hardness: 25
+    molarMass: 18.01528
+    lightAbsorptionFactor: 0.33333
+    radiationAbsorptionFactor: 0.8
+    radiationPer1000Mass: 0
+    materialCategory: Liquifiable
+    tags:
+    - IceOre
+    - BuildableAny
+    buildMenuSort: 5
+    state: Solid
+    audio:
+      copyElement: Ice

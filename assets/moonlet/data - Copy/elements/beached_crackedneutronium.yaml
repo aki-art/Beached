@@ -1,0 +1,25 @@
+elements:
+  - elementId: Beached_CrackedNeutronium
+    name: Cracked Neutronium
+    color: 000000
+    descriptionText: This Neutronium has been shattered loose by unknown forces. It is highly unstable, and attempting to mine it will yield nothing.
+    specificHeatCapacity: 0
+    thermalConductivity: 0
+    mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_crackedneutronium.png
+    solidSurfaceAreaMultiplier: 0
+    liquidSurfaceAreaMultiplier: 0
+    gasSurfaceAreaMultiplier: 0
+    strength: 0
+    highTemp: 10000 ## non-meltable
+    highTempTransitionTarget: Unobtanium
+    defaultTemperature: 300
+    defaultMass: 250000
+    maxMass: 250000
+    hardness: 230
+    molarMass: 50
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.9
+    radiationPer1000Mass: 0
+    materialCategory: Special
+    buildMenuSort: 1
+    state: Solid

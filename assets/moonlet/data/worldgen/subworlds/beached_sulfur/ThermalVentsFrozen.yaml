@@ -1,4 +1,4 @@
-biomeNoise: noise/Beached_ThermalVents
+biomeNoise: Beached:noise/ThermalVents
 temperatureRange: VeryVeryCold
 
 pdWeight: 1
@@ -10,10 +10,10 @@ minChildCount: 2
 sampleBehaviour: PoissonDisk
 
 borderOverride: hardToDig
-BorderOverridePriority: 9999
+borderOverridePriority: 9999
 
 biomes:
-  - name: biomes/Beached_ThermalVents/Frozen
+  - name: Beached:biomes/ThermalVents/Frozen
 
 tags:
   - IgnoreCaveOverride

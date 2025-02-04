@@ -1,4 +1,4 @@
-biomeNoise: noise/Beached_Bamboo
+biomeNoise: Beached:noise/Bamboo
 temperatureRange: Room
 density:
   min: 20
@@ -7,15 +7,15 @@ avoidRadius: 20.0
 minChildCount: 2
 sampleBehaviour: PoissonDisk
 borderOverride: rocky
-BorderOverridePriority: 100
+borderOverridePriority: 100
 
 biomes:
-  - name: biomes/Beached_Bamboo/Basic
+  - name: Beached:biomes/Bamboo/Basic
     weight: 2
     tags:
       - Beached_Bamboo
       - Beached_BambooForest_Cylindrica
-  - name: biomes/Beached_Bamboo/Mossy
+  - name: Beached:biomes/Bamboo/Mossy
     weight: 1
     tags:
       - Beached_Bamboo
@@ -26,12 +26,11 @@ tags:
   - IgnoreCaveOverride
   - NoGlobalFeatureSpawning
   - Beached_SmoothNoise
-  - Beached_AllowCritterManipulator
 
 features:
-  - type: features/beached_bamboo/BismuthCave
-  - type: features/beached_bamboo/MossCave
-  - type: features/beached_bamboo/SucroseCave
-  - type: features/beached_bamboo/AmberBlob
+  - type: Beached:features/bamboo/BismuthCave
+  - type: Beached:features/bamboo/MossCave
+  - type: Beached:features/bamboo/SucroseCave
+  - type: Beached:features/bamboo/AmberBlob
 
 zoneType: Beached_Bamboo

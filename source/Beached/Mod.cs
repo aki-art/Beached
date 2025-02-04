@@ -139,6 +139,9 @@ namespace Beached
 			base.OnAllModsLoaded(harmony, mods);
 			BEntities.ConfigureCrops();
 			integrations.OnAllModsLoaded(harmony, mods);
+
+			if (!integrations.IsModPresent(Integrations.MOONLET))
+				throw new MoonletMissingException();
 		}
 	}
 }

@@ -1,0 +1,58 @@
+name: Astropelagos Cluster
+description: An oddly cold world.
+requiredDlcId: EXPANSION1_ID
+menuOrder: 0
+coordinatePrefix: BCHD
+clusterCategory: SpacedOutStyle
+disableStoryTraits: true
+difficulty: Moderate # 3
+skip: Always
+
+welcomeMessage: |
+  Hello There!
+
+# defaultSkyScape: skyScapes/
+
+numRings: 12
+startWorldIndex: 0 
+
+worldPlacements:
+- world: Beached:worlds/BeachedMoonletStart
+  allowedRings:
+    min: 0
+    max: 0
+  buffer: 2
+  locationType: Startworld
+  startWorld: true
+
+- world: Beached:worlds/BeachedFungalJungle
+  allowedRings:
+    min: 2
+    max: 4
+  buffer: 4
+  locationType: InnerCluster
+
+clusterTags:
+  - BeachedCluster
+
+poiPlacements:
+  - pois:
+      - TemporalTear
+    numToSpawn: 1
+    avoidClumping: false
+    allowedRings:
+      min: 8
+      max: 11
+
+  - pois: 
+      - Beached_HarvestableSpacePOI_PearlescentAsteroidField # renewable pearls, bismuth and some sand
+    numToSpawn: 1
+    allowedRings:
+      min: 2
+      max: 5
+  - pois: 
+      - Beached_HarvestableSpacePOI_Ammonite # Lime & Rot
+    numToSpawn: 1
+    allowedRings:
+      min: 2
+      max: 9

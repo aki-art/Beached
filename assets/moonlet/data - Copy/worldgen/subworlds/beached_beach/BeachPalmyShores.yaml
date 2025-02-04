@@ -1,0 +1,49 @@
+biomeNoise: noise/Beached_Beach_Solid
+temperatureRange: Beached:SummerDay
+pdWeight: 1
+density:
+  min: 5
+  max: 10
+avoidRadius: 5.0
+minChildCount: 4
+sampleBehaviour: PoissonDisk
+
+borderOverride: beachedDirty
+borderOverridePriority: 20
+
+biomes:
+  - name: Beached:biomes/Beach/Solid
+    weight: 2
+    tags:
+      - Beached_Seas_TropicalPacu
+      - Beached_MusselSprout
+      - Beached_AlgaeCell
+      - Beached_WaterCups
+      - Beached_DewPalm
+      - Beached_LeafletCoral
+      - Beached_SandySeashell
+      - Beached_SandySlickshell
+      - Beached_BuriedSeashell
+
+features:
+  - type: features/beached_beach/AirPocket
+  - type: features/beached_beach/MetalCavern
+  - type: features/beached_beach/MediumFreshwaterLake
+  - type: features/beached_beach/TinyFreshWaterLake
+  
+tags:
+  - IgnoreCaveOverride
+  - NoGlobalFeatureSpawning
+
+subworldTemplateRules:
+  - names:
+      - beached/worldgen/beach/simplepalm1
+      - beached/worldgen/beach/simplepalm2
+      - beached/worldgen/beach/simplepalm3
+      - beached/worldgen/beach/simplepalm4
+      - beached/worldgen/beach/simplepalm5
+    listRule: TrySome
+    someCount: 4
+    allowDuplicates: false
+
+zoneType: Beached_Beach

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Unlit_DarkVeilShader
+  m_Shader: {fileID: 4800000, guid: 21d540a5e33815d40bf95dd2e5067523, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _LightOverlay:
+        m_Texture: {fileID: 2800000, guid: efcd4b36caca89c41930783324154be0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 38b75178256c084499a2de5c150bd778, type: 3}
+        m_Scale: {x: 2.11, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TendrilTex:
+        m_Texture: {fileID: 2800000, guid: 78b32e09a52563c43acff5e3d8d8fbb2, type: 3}
+        m_Scale: {x: 34.12, y: 20}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Amount: -0.08
+    - _Amplitude: 50
+    - _BrightenLight: 0.59
+    - _CutoutThresh: 0.861
+    - _DepthsIndex: 18
+    - _Distance: 0.27
+    - _Speed: 0.63
+    - _Strength: 0.79
+    - _TendrilFade: 3.54
+    - _Zoom: 4.35
+    m_Colors: []
+  m_BuildTextureStacks: []

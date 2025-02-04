@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -85,6 +86,7 @@ namespace Beached.Content.Defs.Entities.SetPieces
 			setPiece.sprite = spriteId;
 
 			prefab.AddComponent<Vista>();
+			prefab.AddComponent<TintFarBgForSky>();
 
 			return prefab;
 		}

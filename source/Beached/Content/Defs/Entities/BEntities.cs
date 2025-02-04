@@ -25,7 +25,8 @@ namespace Beached.Content.Defs.Entities
 		{
 			CROPS.CROP_TYPES.Add(new(JellyConfig.ID, 3f * CONSTS.CYCLE_LENGTH));
 			CROPS.CROP_TYPES.Add(new(PipShootConfig.ID, 0.6f * CONSTS.CYCLE_LENGTH));
-			CROPS.CROP_TYPES.Add(new(PalmLeafConfig.ID, 0.05f * CONSTS.CYCLE_LENGTH, 6));
+			CROPS.CROP_TYPES.Add(new(PalmLeafConfig.ID, 12f * CONSTS.CYCLE_LENGTH, 6));
+			CROPS.CROP_TYPES.Add(new(RawKelpConfig.ID, 3f * CONSTS.CYCLE_LENGTH, 1));
 		}
 
 		public static void ModifyBaseEggChances()

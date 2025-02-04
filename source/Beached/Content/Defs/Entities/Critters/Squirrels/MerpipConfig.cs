@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Squirrels
 {
+	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.ADULT)]
 	public class MerpipConfig : BaseMerpipConfig, IEntityConfig
 	{
 		public const string ID = "Beached_MerPip";

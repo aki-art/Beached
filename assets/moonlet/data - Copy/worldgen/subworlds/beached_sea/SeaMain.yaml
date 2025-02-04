@@ -1,0 +1,30 @@
+biomeNoise: noise/Beached_Sea
+temperatureRange: HumanWarm
+density:
+  min: 10
+  max: 15
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+pdWeight: 1
+
+biomes:
+  - name: Beached:biomes/Sea/Basic
+    weight: 2
+    tags:
+      - Beached_Seas_TropicalPacu
+      - Crab
+      - Beached_Kelp
+tags:
+  - IgnoreCaveOverride
+  - NoGravitasFeatures
+  - Beached_SandBeds
+  - NoGlobalFeatureSpawning
+
+subworldTemplateRules:
+  - names:
+      - beached/pois/subnautica_pod
+    listRule: TrySome
+    someCount: 1
+
+zoneType: Beached_Sea

@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.ModDb;
+using HarmonyLib;
 
 namespace Beached.Patches
 {
@@ -7,14 +8,11 @@ namespace Beached.Patches
 		[HarmonyPatch(typeof(MusicManager), "ConfigureSongs")]
 		public class MusicManager_ConfigureSongs_Patch
 		{
-			public static void Postfix(MusicManager __instance)
+			public static void Prefix(MusicManager __instance)
 			{
-				Log.Debug("SONGS QUEUED:");
-				foreach (var song in __instance.songMap)
-				{
-					Log.Debug(song.Key);
-				}
+				BSongs.OnConfigureSongsPre(__instance);
 			}
 		}
+
 	}
 }

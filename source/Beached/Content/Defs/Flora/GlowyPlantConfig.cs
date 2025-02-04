@@ -32,20 +32,18 @@ namespace Beached.Content.Defs.Flora
 				CREATURES.TEMPERATURE.FREEZING_9,
 				CREATURES.TEMPERATURE.HOT_2,
 				CREATURES.TEMPERATURE.HOT_3,
-				null,
-				false,
-				0f,
-				0.15f,
-				"PlantMeat",
-				true,
-				true,
-				true,
-				false,
-				2400f,
-				0f,
-				2200f,
-				ID + "Original",
-				STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.NAME);
+				[
+					SimHashes.Oxygen,
+					Elements.saltyOxygen,
+					SimHashes.ContaminatedOxygen,
+					SimHashes.CarbonDioxide,
+					SimHashes.Helium,
+					SimHashes.Hydrogen,
+					SimHashes.Chlorine,
+				],
+				can_tinker: false,
+				baseTraitId: ID + "Original",
+				baseTraitName: STRINGS.CREATURES.SPECIES.BEACHED_GLOWYPLANT.NAME);
 
 			var decorPlant = prefab.AddOrGet<PrickleGrass>();
 			decorPlant.positive_decor_effect = POSITIVE_DECOR_EFFECT;

@@ -1,0 +1,59 @@
+biomeNoise: noise/Beached_Rot
+temperatureRange: HumanHot
+
+density:
+  min: 20
+  max: 25
+
+avoidRadius: 20.0
+minChildCount: 2
+sampleBehaviour: PoissonDisk
+
+borderOverride: hardToDig
+
+biomes:
+  - name: Beached:biomes/Rot/Default
+
+tags:
+  - IgnoreCaveOverride
+
+features:
+  - type: features/beached_rot/RotPocket
+  - type: features/beached_rot/SimpleCave
+  - type: features/beached_rot/SimpleCave
+  - type: features/beached_rot/SimpleCave
+  - type: features/beached_rot/SimpleCave
+  - type: features/beached_rot/SimpleCave
+#  - type: features/beached_rot/GoldCavern
+
+subworldTemplateRules:
+  - names:
+      - beached/worldgen/rot/whalebones
+      - beached/worldgen/rot/whale_skeleton
+      - beached/worldgen/rot/rot_ribcage
+      - beached/worldgen/rot/brass_wingarmor
+    listRule: TrySome
+    someCount: 3
+    allowDuplicates: true
+
+  - names:
+      - beached/worldgen/rot/fua_nest_temp
+    listRule: TrySome
+    someCount: 5
+    priority: 300
+    allowDuplicates: true
+
+  - names:
+      - beached/worldgen/rot/whale_skeleton
+    listRule: TrySome
+    someCount: 1
+    priority: 700
+    allowDuplicates: true
+
+  - names:
+      - beached/pois/fancy_brain_room
+    listRule: TrySome
+    someCount: 3
+    allowDuplicates: true
+
+zoneType: Beached_Bone

@@ -1,0 +1,31 @@
+shape: ShortWide
+
+borders:
+  - 2
+
+blobSize:
+  min: 3
+  max: 7
+
+# internalMobs:
+#   - type: ColdBreather
+#     count:
+#       min: 2
+#       max: 4
+ElementChoiceGroups:
+
+  RoomCenterElements:
+    selectionMethod: WeightedResample
+    choices:
+      - element: Beached_Nitrogen
+        weight: 10
+      - element: Snow
+        weight: 2
+
+  RoomBorderChoices0:
+    selectionMethod: WeightedResample
+    choices:
+      - element: IgneousRock
+        weight: 1
+      - element: Ice
+        weight: 1
