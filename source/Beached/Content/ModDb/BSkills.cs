@@ -72,7 +72,8 @@ namespace Beached.Content.ModDb
 					BSkillGroups.PRECISION_ID,
 					[
 						BSkillPerks.CanSafelyHarvestClusters,
-						BSkillPerks.IncreasePrecisionLarge
+						BSkillPerks.CanCutGems,
+						BSkillPerks.IncreasePrecisionLarge,
 					],
 					[
 						ARCHEOLOGY_ID

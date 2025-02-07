@@ -23,7 +23,8 @@ namespace Beached.Content.Defs.Items
 				BEntityTemplates.CreateSimpleItem(FLAWLESS_DIAMOND, STRINGS.ITEMS.GEMS.FLAWLESS_DIAMOND.NAME, STRINGS.ITEMS.GEMS.FLAWLESS_DIAMOND.DESCRIPTION, "beached_flawless_diamond_kanim", DECOR.BONUS.TIER2, SimHashes.Diamond),
 				BEntityTemplates.CreateSimpleItem(HADEAN_ZIRCON, STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.NAME, STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.DESCRIPTION, "beached_hadean_zircon_kanim", DECOR.BONUS.TIER2, Elements.zirconiumOre),
 				BEntityTemplates.CreateSimpleItem(MAXIXE, STRINGS.ITEMS.GEMS.MAXIXE.NAME, STRINGS.ITEMS.GEMS.MAXIXE.DESCRIPTION, "beached_maxixe_kanim", DECOR.BONUS.TIER2, Elements.aquamarine),
-				BEntityTemplates.CreateSimpleItem(STRANGE_MATTER, STRINGS.ITEMS.GEMS.STRANGE_MATTER.NAME, STRINGS.ITEMS.GEMS.STRANGE_MATTER.DESCRIPTION, "beached_strange_matter_kanim", DECOR.BONUS.TIER2, SimHashes.Unobtanium)
+				BEntityTemplates.CreateSimpleItem(STRANGE_MATTER, STRINGS.ITEMS.GEMS.STRANGE_MATTER.NAME, STRINGS.ITEMS.GEMS.STRANGE_MATTER.DESCRIPTION, "beached_strange_matter_kanim", DECOR.BONUS.TIER2, SimHashes.Unobtanium),
+				BEntityTemplates.CreateSimpleItem(MOTHER_PEARL, STRINGS.ITEMS.GEMS.MOTHER_PEARL.NAME, STRINGS.ITEMS.GEMS.MOTHER_PEARL.DESCRIPTION, "beached_strange_matter_kanim", DECOR.BONUS.TIER5, Elements.pearl)
 			];
 
 		public void OnPrefabInit(GameObject inst)

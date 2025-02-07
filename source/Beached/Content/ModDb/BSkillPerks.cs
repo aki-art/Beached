@@ -11,6 +11,7 @@ namespace Beached.Content.ModDb
 		public static SkillPerk CanFindMoreTreasures;
 		public static SkillPerk CanSafelyHarvestClusters;
 		public static SkillPerk CanAnalyzeClusters;
+		public static SkillPerk CanCutGems;
 		public static SkillPerk AquaCulture1;
 		public static SkillPerk AquaCulture2;
 		public static SkillPerk AnimalHandling;
@@ -24,6 +25,7 @@ namespace Beached.Content.ModDb
 		public const string CANFINDMORETREASURES_ID = "Beached_SkillPerk_CanFindMoreTreasures";
 		public const string CANSAFELYHARVESTCLUSTERS_ID = "Beached_SkillPerk_CanSafelyHarvestClusters";
 		public const string CANANALYZECLUSTERS_ID = "Beached_SkillPerk_CanAnalyzeClusters";
+		public const string CANCUTGEMS_ID = "Beached_SkillPerk_CanCutGems";
 		public const string ANIMALHANDLING_ID = "Beached_SkillPerk_AnimalHandling";
 		public const string AQUACULTURE1_ID = "Beached_SkillPerk_AquaCulture1";
 		public const string AQUACULTURE2_ID = "Beached_SkillPerk_AquaCulture2";
@@ -38,6 +40,10 @@ namespace Beached.Content.ModDb
 			CanFindMoreTreasures = __instance.Add(new SimpleSkillPerk(
 				CANFINDMORETREASURES_ID,
 				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY2.DESCRIPTION));
+
+			CanCutGems = __instance.Add(new SimpleSkillPerk(
+				CANCUTGEMS_ID,
+				STRINGS.DUPLICANTS.ROLES.CRYSTALLOGRAPHY.CAN_CUT_GEMS));
 
 			IncreasePrecisionSmall = __instance.Add(new SkillAttributePerk(
 				INCREASEPRECISIONSMALL_ID,

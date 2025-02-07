@@ -8,6 +8,7 @@ namespace Beached.Content.Scripts.Entities
 		private LineRenderer originLineRenderer;
 		private LineRenderer foundationRenderer;
 		private LineRenderer lineOfSightCheckRenderer;
+
 		private Text foundationText;
 
 		[MyCmpReq]

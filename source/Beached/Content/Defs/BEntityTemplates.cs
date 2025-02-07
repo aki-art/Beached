@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.Comets;
 using System.Collections.Generic;
 using UnityEngine;
@@ -156,5 +157,74 @@ namespace Beached.Content.Defs
 
 			return gameObject;
 		}
+
+		public static GameObject CreateAndRegisterClusterForCrystal(
+			GameObject crystal,
+			string id,
+			KAnimFile anim,
+			string initialAnim = "object",
+			float kgPerHarvest = 30f,
+			List<Tag> additionalTags = null,
+			Tag replantGroundTag = default,
+			int sortOrder = 0,
+			EntityTemplates.CollisionShape collisionShape = EntityTemplates.CollisionShape.CIRCLE,
+			float width = 0.25f,
+			float height = 0.25f,
+			string[] dlcIds = null)
+		{
+			var name = Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{id.ToUpperInvariant()}.CLUSTER_NAME");
+			var desc = Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{id.ToUpperInvariant()}.DESCRIPTION");
+
+			var prefab = EntityTemplates.CreateLooseEntity(
+				id,
+				name,
+				desc,
+				1f,
+				true,
+				anim,
+				initialAnim,
+				Grid.SceneLayer.Front,
+				collisionShape,
+				width,
+				height,
+				true,
+				1000 + sortOrder);
+
+			prefab.AddOrGet<EntitySplitter>();
+
+			var cluster = prefab.AddOrGet<CrystalCluster>();
+			cluster.crystalId = crystal.PrefabID();
+
+			var kprefabId = prefab.GetComponent<KPrefabID>();
+
+			if (additionalTags != null)
+			{
+				foreach (Tag additionalTag in additionalTags)
+					kprefabId.AddTag(additionalTag);
+			}
+
+			kprefabId.requiredDlcIds = dlcIds ?? DlcManager.AVAILABLE_ALL_VERSIONS;
+			kprefabId.AddTag(BTags.crystalCluster);
+			kprefabId.AddTag(GameTags.PedestalDisplayable);
+
+			Assets.AddPrefab(kprefabId);
+
+			return prefab;
+		}
+
+		public static GameObject CreateAndRegisterPreviewForCluster(
+			GameObject cluster,
+			string id,
+			KAnimFile anim,
+			string initialAnim = "crystal_place",
+			int width = 1,
+			int height = 1)
+		{
+			var previewGo = EntityTemplates.CreateAndRegisterPreview(id, anim, initialAnim, ObjectLayer.Building, width, height);
+			cluster.AddOrGet<CrystalCluster>().previewID = TagManager.Create(id);
+
+			return previewGo;
+		}
+
 	}
 }

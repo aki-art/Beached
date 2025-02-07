@@ -59,7 +59,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			host.itemDroppedOnShear = SimHashes.Lime.CreateTag();
 			host.massDropped = 5f;
 			host.targetSymbol = "beached_limpetgrowth";
-			host.limpetKanim = "beached_slickshell_limpetgrowthh_kanim";
+			host.limpetKanim = "beached_slickshell_limpetgrowth_kanim";
 			host.metabolismModifier = 1.2f;
 
 			return prefab;

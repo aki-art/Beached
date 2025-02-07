@@ -151,8 +151,7 @@ namespace Beached.Content.Scripts.Entities
 				symbols = new KAnim.Build.Symbol[def.maxLevel + 1];
 				for (int i = 0; i < symbols.Length; i++)
 				{
-					HashedString symbolName = $"beached_limpetgrowth_{i}";
-					symbols[i] = anim.GetData().build.GetSymbol(symbolName);
+					symbols[i] = anim.GetData().build.GetSymbol((HashedString)$"beached_limpetgrowth_{i}");
 				}
 
 				symbolOverrideController = master.GetComponent<SymbolOverrideController>();

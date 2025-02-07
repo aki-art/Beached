@@ -26,6 +26,8 @@
 			builtNest = new("BuiltNest"),
 			medusaSignal = new("MedusaSignal"),
 			depleted = new("Depleted"),
+			crystalRotated = new("CrystalRotated"),
+			crystalHarvested = new("CrystalHarvested"),
 
 			segmentedEntityUpdate = new("SegmentedEntityUpdate"),
 			critterTraitAdded = new("CritterTraitAdded");

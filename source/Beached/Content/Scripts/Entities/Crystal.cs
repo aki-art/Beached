@@ -1,23 +1,19 @@
-﻿using KSerialization;
+﻿using ImGuiNET;
+using KSerialization;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities
 {
-	public class Crystal : KMonoBehaviour
+	public class Crystal : KMonoBehaviour, IImguiDebug
 	{
-		[Serialize]
-		[SerializeField]
-		public Direction growthDirection;
+		[Serialize][SerializeField] public Direction growthDirection;
 
-		[Serialize]
-		public float angle;
+		[Serialize] public float angleDeg;
+		[SerializeField] public float initialAngleTreshold;
 
-		[MyCmpGet]
-		private CrystalDebug debugger;
-
-		[MyCmpReq]
-		private KBatchedAnimController kbac;
+		[MyCmpGet] private CrystalDebug debugger;
+		[MyCmpReq] private KBatchedAnimController kbac;
 
 		[SerializeField]
 		public List<Direction> validFoundationDirections =
@@ -31,6 +27,11 @@ namespace Beached.Content.Scripts.Entities
 		private static Vector3 leftOffset = new(-0.5f, 0.5f);
 		private static Vector3 rightOffset = new(0.5f, 0.5f);
 
+		public Crystal()
+		{
+			initialAngleTreshold = 45f;
+		}
+
 		public override void OnSpawn()
 		{
 			base.OnSpawn();
@@ -41,11 +42,13 @@ namespace Beached.Content.Scripts.Entities
 			}
 
 			SnapToTerrain();
+			SetRotation(angleDeg);
 		}
 
-		private void Rotate(float angle)
+		private void SetRotation(float angle)
 		{
 			kbac.Rotation = angle;
+			Trigger(ModHashes.crystalRotated, angle);
 		}
 
 		private void SnapToTerrain()
@@ -77,13 +80,11 @@ namespace Beached.Content.Scripts.Entities
 				if (Grid.IsSolidCell(cell))
 				{
 					growthDirection = MiscUtil.GetOpposite(direction);
-					angle = GetRandomGrowthAngle(direction);
-					Rotate(angle);
+					angleDeg = GetRandomGrowthAngle(direction);
+					SetRotation(angleDeg);
 
 					if (debugger != null)
-					{
 						debugger.UpdateVisualizers();
-					}
 
 					return;
 				}
@@ -92,29 +93,26 @@ namespace Beached.Content.Scripts.Entities
 
 		private float GetRandomGrowthAngle(Direction growthDirection)
 		{
-			float angle;
-
-			switch (growthDirection)
+			var angle = growthDirection switch
 			{
-				case Direction.Up:
-					angle = 0f;
-					break;
-				case Direction.Left:
-					angle = 90f;
-					break;
-				case Direction.Down:
-					angle = 180f;
-					break;
-				case Direction.Right:
-				default:
-					angle = 270f;
-					break;
-			}
+				Direction.Up => 0f,
+				Direction.Left => 90f,
+				Direction.Down => 180f,
+				_ => 270f,
+			};
 
-			angle += Random.Range(-45f, 45f);
-			angle -= 90f;
+			angle += Random.Range(-initialAngleTreshold, initialAngleTreshold);
+			//angle -= 90f;
 
 			return angle;
+		}
+
+		public void OnImguiDraw()
+		{
+			if (ImGui.SliderFloat("rotation", ref angleDeg, 0, 360))
+			{
+				SetRotation(angleDeg);
+			}
 		}
 	}
 }

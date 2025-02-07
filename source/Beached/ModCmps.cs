@@ -11,5 +11,6 @@ namespace Beached
 		public static Components.Cmps<ForceField> forceFields = [];
 		public static Components.Cmps<SegmentedEntityRoot> segmentedEntityRoots = [];
 		public static Components.Cmps<Strobila> jellyfishStrobilas = [];
+		public static Components.CmpsByWorld<CrystalGrower> crystalGrowers = new();
 	}
 }

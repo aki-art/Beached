@@ -191,7 +191,8 @@ namespace Beached.Content
 
 		public static readonly Dictionary<SimHashes, float> lubricantStrengths = new()
 		{
-			{ mucus, 3f }
+			{ mucus, 3f },
+			{ SimHashes.PhytoOil, 5f }
 		};
 
 		// everything not in this list will get MEDIUM (0.5f) assigned, except metals which get an INSTANTLY_MELT (1f)

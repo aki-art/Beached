@@ -9,10 +9,26 @@ namespace Beached.Content.ModDb
 		public static Amount ShellGrowth; // todo: ExtendEntityToWildCreature
 		public static Amount ShellIntegrity;
 		public static Amount Mucus;
+		public static Amount CrystalGrowth;
 
 		[DbEntry]
 		public static void Register(Database.Amounts __instance)
 		{
+			CrystalGrowth = __instance.CreateAmount(
+				"Beached_CrystalGrowth",
+				0f,
+				100f,
+				false,
+				Units.Flat,
+				0.35f,
+				true,
+				"STRINGS.CREATURES",
+				"ui_icon_stamina",
+				"attribute_stamina",
+				"mod_stamina");
+
+			CrystalGrowth.SetDisplayer(new StandardAmountDisplayer(GameUtil.UnitClass.Percent, GameUtil.TimeSlice.PerCycle, null));
+
 			Moisture = __instance.CreateAmount(
 				"Beached_Moisture",
 				0f,

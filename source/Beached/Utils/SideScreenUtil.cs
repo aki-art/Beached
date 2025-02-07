@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 namespace Beached.Utils
@@ -19,7 +20,7 @@ namespace Beached.Utils
 			}
 		}
 
-		public static void AddClonedSideScreen<T>(string name, Type originalType)
+		public static void AddClonedSideScreen<T>(string name, Type originalType, bool keepValuesForInheritedClass = false)
 		{
 			if (DetailsScreen.Instance == null) return;
 
@@ -29,7 +30,10 @@ namespace Beached.Utils
 			if (screens == null || contentBody == null) return;
 
 			var oldPrefab = FindOriginal(originalType, screens);
-			var newPrefab = Copy<T>(oldPrefab, contentBody, name, originalType);
+
+			var newPrefab = keepValuesForInheritedClass
+				? CopyWithInheritor<T>(oldPrefab, contentBody, name, originalType)
+				: Copy<T>(oldPrefab, contentBody, name, originalType);
 
 			screens.Add(CreateNewSideScreen(name, newPrefab));
 		}
@@ -54,6 +58,7 @@ namespace Beached.Utils
 
 		private static SideScreenContent Copy<T>(SideScreenContent original, GameObject contentBody, string name, Type originalType)
 		{
+			Log.Debug($"Copy {original.name} {name}");
 			var screen = Util.KInstantiateUI<SideScreenContent>(original.gameObject, contentBody).gameObject;
 			UnityEngine.Object.Destroy(screen.GetComponent(originalType));
 
@@ -61,6 +66,33 @@ namespace Beached.Utils
 			prefab.name = name.Trim();
 
 			screen.SetActive(false);
+			return prefab;
+		}
+
+		private static SideScreenContent CopyWithInheritor<T>(SideScreenContent original, GameObject contentBody, string name, Type originalType)
+		{
+			var screen = Util.KInstantiateUI<SideScreenContent>(original.gameObject, contentBody).gameObject;
+
+			var originalComponent = screen.GetComponent(originalType);
+
+			var flags = BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+			var fields = originalType.GetFields(flags).Select(f => (info: f, value: f.GetValue(originalComponent)));
+			var properties = originalType.GetProperties(flags).Select(p => (info: p, value: p.GetValue(originalComponent)));
+
+			UnityEngine.Object.Destroy(originalComponent);
+
+			var newComponent = screen.AddComponent(typeof(T));
+			var prefab = newComponent as SideScreenContent;
+			prefab.name = name.Trim();
+
+			foreach (var (info, value) in fields)
+				info?.SetValue(newComponent, value);
+
+			foreach (var (info, value) in properties)
+				info?.SetValue(newComponent, value);
+
+			screen.SetActive(false);
+
 			return prefab;
 		}
 

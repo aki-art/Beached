@@ -41,6 +41,7 @@ namespace Beached.Content
 			// used for showers or sinks to track if it has soap supplied
 			soaped = TagManager.Create("Beached_Soaped"),
 			underWater = TagManager.Create("Beached_UnderWater"),
+			crystalCluster = TagManager.Create("Beached_CrystalCluster"),
 
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),

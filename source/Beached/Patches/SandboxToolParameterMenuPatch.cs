@@ -23,7 +23,13 @@ namespace Beached.Patches
 	{
 		private static readonly HashSet<Tag> TAGS =
 		[
-			CrystalConfig.ID,
+			CrystalConfig.TEST_ID,
+			CrystalConfig.ZEOLITE,
+			CrystalConfig.ZEOLITE + "Cluster",
+			CrystalConfig.KARAIRITE,
+			CrystalConfig.AQUAMARINE,
+			CrystalConfig.SALT,
+			CrystalConfig.SUCROSE,
 
 			// Gems
 			RareGemsConfig.FLAWLESS_DIAMOND,

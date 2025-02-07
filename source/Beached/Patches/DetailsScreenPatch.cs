@@ -15,7 +15,7 @@ namespace Beached.Patches
 				SideScreenUtil.AddCustomSideScreen<Beached_SimplifiedFilterSideScreen>("BeachedSimplifiedFilterableSideScreen", Object.Instantiate(ModAssets.Prefabs.universalSidescreen));
 				SideScreenUtil.AddCustomSideScreen<Beached_CollarDispenserSidescreen>("BeachedCollarDispenserSideScreen", Object.Instantiate(ModAssets.Prefabs.universalSidescreen));
 				SideScreenUtil.AddCustomSideScreen<Beached_RubberTappableSidescreen>("BeachedRubberTappableSideScreen", Object.Instantiate(ModAssets.Prefabs.universalSidescreen));
-
+				SideScreenUtil.AddClonedSideScreen<Beached_CrystalClusterSideScreen>("BeachedCrystalClusterSideScreen", typeof(ReceptacleSideScreen), true);
 			}
 		}
 	}

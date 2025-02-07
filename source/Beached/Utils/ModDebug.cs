@@ -26,6 +26,10 @@ namespace Beached.Utils
 
 			debugLineRenderer.GetComponent<LineRenderer>().material.renderQueue = RenderQueues.Liquid;
 
+			var canvasGroup = debugLineRenderer.gameObject.AddOrGet<CanvasGroup>();
+			canvasGroup.blocksRaycasts = false;
+			canvasGroup.interactable = false;
+
 			return debugLineRenderer;
 		}
 
@@ -59,6 +63,10 @@ namespace Beached.Utils
 			text2.horizontalOverflow = HorizontalWrapMode.Overflow;
 			text2.verticalOverflow = VerticalWrapMode.Overflow;
 			text2.alignment = TextAnchor.MiddleCenter;
+
+			var canvasGroup = gameObject.AddOrGet<CanvasGroup>();
+			canvasGroup.blocksRaycasts = false;
+			canvasGroup.interactable = false;
 
 			return text2;
 		}
