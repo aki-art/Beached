@@ -6,6 +6,11 @@ namespace Beached.Content.ModDb
 	{
 		public const string POFFMOUTH = "beached_poffmouth";
 
+		public static class WearableTypes
+		{
+			public static readonly WearableAccessorizer.WearableType necklace = (WearableAccessorizer.WearableType)Hash.SDBMLower("Beached_necklace");
+		}
+
 		// must start with hat_ 
 		public const string ARCHEOLOGY_HAT = "hat_role_beached_archeology";
 

@@ -23,11 +23,12 @@ namespace Beached.Content.Defs.Equipment
 				BAssignableSlots.JEWELLERY_ID,
 				Elements.pearl,
 				30f,
-				TUNING.EQUIPMENT.VESTS.WARM_VEST_ICON0,
+				"beached_maxixe_necklace_kanim",
 				CONSTS.SNAPONS.JEWELLERIES.MAXIXE,
 				"beached_maxixe_necklace_kanim",
 				4,
 				attributeModifiers,
+				height: 0.25f,
 				additional_tags:
 				[
 					GameTags.PedestalDisplayable

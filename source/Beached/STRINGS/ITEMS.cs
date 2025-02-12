@@ -158,7 +158,7 @@ namespace Beached
 
 				public class BEACHED_STUFFEDSNAILS
 				{
-					public static LocString NAME = "Stuffed Snail";
+					public static LocString NAME = Link("Stuffed Snail", StuffedSnailsConfig.ID);
 					public static LocString DESC = "...";
 				}
 
@@ -177,7 +177,7 @@ namespace Beached
 
 				public class BEACHED_SPONGECAKE
 				{
-					public static LocString NAME = "Sponge Cake";
+					public static LocString NAME = Link("Sponge Cake", SpongeCakeConfig.ID);
 					public static LocString DESC = "Fluffy and delighful, with a hint of seafood flavor.";
 				}
 
@@ -355,59 +355,29 @@ namespace Beached
 				[Note("Attached to the descriptions of each gems.")]
 				public static LocString CUTTING = "Can be cut in a Gem Cutter.";
 
-				public class AMBER_INCLUSION_BUG
-				{
-					public static LocString NAME = "Bug Amber Inclusion";
-					public static LocString DESCRIPTION = "...";
-				}
-
-				public class AMBER_INCLUSION_HATCH
-				{
-					public static LocString NAME = "Hatch Amber Inclusion";
-					public static LocString DESCRIPTION = "...";
-				}
-
-				public class AMBER_INCLUSION_MICRORAPTOR
-				{
-					public static LocString NAME = "Microraptor Amber Inclusion";
-				}
-
-				public class AMBER_INCLUSION_SCORPION
-				{
-					public static LocString NAME = "Scorpion Amber Inclusion";
-					public static LocString DESCRIPTION = "...";
-				}
-
-				public class AMBER_INCLUSION_ANCIENT_FOSSIL_FRAGMENT
-				{
-					public static LocString NAME = "Ancient Fossil Fragment Inclusion";
-					public static LocString DESCRIPTION = "...";
-				}
-
-
 				public class FLAWLESS_DIAMOND
 				{
-					public static LocString NAME = "Flawless Diamond";
+					public static LocString NAME = Link("Flawless Diamond", RareGemsConfig.FLAWLESS_DIAMOND);
 					public static LocString DESCRIPTION = "A perfect Diamond sparling in every color of the rainbow.";
 				}
 
 				public class HADEAN_ZIRCON
 				{
 					[Note("Hadean Zircon is a specific type of real life Zircon, from the Hadean period from 4 billion years ago.")]
-					public static LocString NAME = "Hadean Zircon";
+					public static LocString NAME = Link("Hadean Zircon", RareGemsConfig.HADEAN_ZIRCON);
 					public static LocString DESCRIPTION = "The estimated age of this gemstone is 4 billion years old.";
 				}
 
 				public class MAXIXE
 				{
 					[Note("Maxixe beryl is a real gemstone, but probably has little direct translations. \"Blue Beryl\" works too. https://en.wikipedia.org/wiki/Beryl")]
-					public static LocString NAME = "Maxixe";
+					public static LocString NAME = Link("Maxixe", RareGemsConfig.MAXIXE);
 					public static LocString DESCRIPTION = "A beryl gemstone with a captivatingly dark blue shade.";
 				}
 
 				public class MOTHER_PEARL
 				{
-					public static LocString NAME = "Mother Pearl";
+					public static LocString NAME = Link("Mother Pearl", RareGemsConfig.MOTHER_PEARL);
 					public static LocString DESCRIPTION = "An enormous, perfectly round pearl with a pearlescent sheen.";
 				}
 
@@ -423,19 +393,19 @@ namespace Beached
 			{
 				public class FLYINGCENTIPEDE
 				{
-					public static LocString NAME = "Flying Centipede";
+					public static LocString NAME = Link("Flying Centipede", AmberInclusionsConfig.FLYING_CENTIPEDE);
 					public static LocString DESCRIPTION = $"And ancient centipede trapped in {Link("Amber", "BEACHEDAMBER")}.";
 				}
 
 				public class STRANGEHATCH
 				{
-					public static LocString NAME = "Strange Hatch";
+					public static LocString NAME = Link("Strange Hatch", AmberInclusionsConfig.STRANGE_HATCH);
 					public static LocString DESCRIPTION = $"And oddly smooth and tiny hatch trapped in {Link("Amber", "BEACHEDAMBER")}.";
 				}
 
 				public class FEATHER
 				{
-					public static LocString NAME = "Preserved Feather";
+					public static LocString NAME = Link("Preserved Feather", AmberInclusionsConfig.FEATHER);
 					public static LocString DESCRIPTION = $"A single feather trapped in {Link("Amber", "BEACHEDAMBER")}.";
 				}
 			}

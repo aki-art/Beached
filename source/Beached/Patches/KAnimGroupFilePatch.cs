@@ -17,6 +17,8 @@ namespace Beached.Patches
 					"beached_poffmouth_mouth_kanim",
 					"beached_rubberboots_kanim",
 					"beached_zeolite_necklace_kanim",
+					"beached_maxixe_necklace_kanim",
+					"beached_hematite_necklace_kanim",
 					"minnow_head_kanim"
 				]);
 

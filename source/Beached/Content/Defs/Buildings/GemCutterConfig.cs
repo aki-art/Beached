@@ -59,6 +59,21 @@ namespace Beached.Content.Defs.Buildings
 		{
 			float standardTime = 60f;
 
+			// tier 1
+			RecipeBuilder.Create(ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_HEMATITENECKLACE.DESCRIPTION, standardTime)
+				.Input(SimHashes.IronOre.CreateTag(), 50f)
+				.Output(HematiteNecklaceConfig.ID, 1)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.SortOrder(5)
+				.Build();
+
+			RecipeBuilder.Create(ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_ZEOLITEPENDANT.DESCRIPTION, standardTime)
+				.Input(Elements.zeolite.CreateTag(), 50f)
+				.Output(ZeolitePendantConfig.ID, 1)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.SortOrder(10)
+				.Build();
+
 			// tier 2
 			RecipeBuilder.Create(ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_HADEANZIRCONAMULET.DESCRIPTION, standardTime)
 				.Input(RareGemsConfig.HADEAN_ZIRCON, 1f)
@@ -71,6 +86,7 @@ namespace Beached.Content.Defs.Buildings
 				.Input(RareGemsConfig.MAXIXE, 1f)
 				.Input(SimHashes.Gold.CreateTag(), 50f)
 				.Output(MaxixePendantConfig.ID, 1)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.SortOrder(100)
 				.Build();
 
@@ -78,6 +94,7 @@ namespace Beached.Content.Defs.Buildings
 				.Input(RareGemsConfig.STRANGE_MATTER, 1f)
 				.Input(SimHashes.Niobium.CreateTag(), 50f)
 				.Output(StrangeMatterAmuletConfig.ID, 1)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.SortOrder(110)
 				.Build();
 
@@ -85,20 +102,8 @@ namespace Beached.Content.Defs.Buildings
 				.Input(RareGemsConfig.MOTHER_PEARL, 1f)
 				.Input(Elements.pearl.CreateTag(), 50f)
 				.Output(PearlNecklaceConfig.ID, 1)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.SortOrder(110)
-				.Build();
-
-			// tier 1
-			RecipeBuilder.Create(ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_HEMATITENECKLACE.DESCRIPTION, standardTime)
-				.Input(SimHashes.IronOre.CreateTag(), 50f)
-				.Output(HematiteNecklaceConfig.ID, 1)
-				.SortOrder(5)
-				.Build();
-
-			RecipeBuilder.Create(ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_ZEOLITEPENDANT.DESCRIPTION, standardTime)
-				.Input(Elements.zeolite.CreateTag(), 50f)
-				.Output(ZeolitePendantConfig.ID, 1)
-				.SortOrder(10)
 				.Build();
 		}
 
@@ -112,7 +117,7 @@ namespace Beached.Content.Defs.Buildings
 				workable.AttributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.PART_DAY_EXPERIENCE;
 				workable.SkillExperienceSkillGroup = Db.Get().SkillGroups.Technicals.Id;
 				workable.SkillExperienceMultiplier = SKILLS.PART_DAY_EXPERIENCE;
-				workable.requiredSkillPerk = BSkillPerks.CANCUTGEMS_ID;
+				workable.requiredSkillPerk = BSkillPerks.CAN_CUT_GEMS_ID;
 			};
 		}
 	}

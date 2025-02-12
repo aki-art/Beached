@@ -22,9 +22,9 @@ namespace Beached.Content.Defs.Equipment
 				BAssignableSlots.JEWELLERY_ID,
 				Elements.zeolite,
 				30f,
-				TUNING.EQUIPMENT.VESTS.WARM_VEST_ICON0,
+				"beached_hematite_necklace_kanim",
 				CONSTS.SNAPONS.JEWELLERIES.HEMATITE,
-				"peached_hematite_necklace_kanim",
+				"beached_hematite_necklace_kanim",
 				99,
 				attributeModifiers,
 				additional_tags:

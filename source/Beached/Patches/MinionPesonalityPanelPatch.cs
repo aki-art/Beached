@@ -36,13 +36,13 @@ namespace Beached.Patches
 					typeof(GameObject)
 				]);
 
-				codes.InsertRange(index + 1, new[]
-				{
+				codes.InsertRange(index + 1,
+				[
 					new CodeInstruction(OpCodes.Ldloc_3), // trait (iterator) was 1
-                    new CodeInstruction(OpCodes.Ldarg_0), // this
-                    new CodeInstruction(OpCodes.Ldfld, f_selectedTarget), // .selectedTarget
-                    new CodeInstruction(OpCodes.Call, m_GetToolTip) // GetToolTip(str, trait, this.selectedTarget);
-                });
+					new CodeInstruction(OpCodes.Ldarg_0), // this
+					new CodeInstruction(OpCodes.Ldfld, f_selectedTarget), // .selectedTarget
+					new CodeInstruction(OpCodes.Call, m_GetToolTip) // GetToolTip(str, trait, this.selectedTarget);
+				]);
 
 				return codes;
 			}

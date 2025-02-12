@@ -4,76 +4,78 @@ namespace Beached.Content.ModDb
 {
 	public class BSkillPerks
 	{
-		public static SkillPerk IncreasePrecisionSmall;
-		public static SkillPerk IncreasePrecisionMedium;
-		public static SkillPerk IncreasePrecisionLarge;
-		public static SkillPerk CanFindTreasures;
-		public static SkillPerk CanFindMoreTreasures;
-		public static SkillPerk CanSafelyHarvestClusters;
-		public static SkillPerk CanAnalyzeClusters;
-		public static SkillPerk CanCutGems;
-		public static SkillPerk AquaCulture1;
-		public static SkillPerk AquaCulture2;
-		public static SkillPerk AnimalHandling;
-		public static SkillPerk MakiTrainer1;
-		public static SkillPerk MakiTrainer2;
+		public static SkillPerk
+			IncreasePrecisionSmall,
+			IncreasePrecisionMedium,
+			IncreasePrecisionLarge,
+			CanFindTreasures,
+			CanFindMoreTreasures,
+			CanSafelyHarvestClusters,
+			CanAnalyzeClusters,
+			CanCutGems,
+			AquaCulture1,
+			AquaCulture2,
+			AnimalHandling,
+			MakiTrainer1,
+			MakiTrainer2;
 
-		public const string INCREASEPRECISIONSMALL_ID = "Beached_SkillPerk_IncreasePrecisionSmall";
-		public const string INCREASEPRECISIONMEDIUM_ID = "Beached_SkillPerk_IncreasePrecisionMedium";
-		public const string INCREASEPRECISIONLARGE_ID = "Beached_SkillPerk_IncreasePrecisionLarge";
-		public const string CANFINDTREASURES_ID = "Beached_SkillPerk_CanFindTreasures";
-		public const string CANFINDMORETREASURES_ID = "Beached_SkillPerk_CanFindMoreTreasures";
-		public const string CANSAFELYHARVESTCLUSTERS_ID = "Beached_SkillPerk_CanSafelyHarvestClusters";
-		public const string CANANALYZECLUSTERS_ID = "Beached_SkillPerk_CanAnalyzeClusters";
-		public const string CANCUTGEMS_ID = "Beached_SkillPerk_CanCutGems";
-		public const string ANIMALHANDLING_ID = "Beached_SkillPerk_AnimalHandling";
-		public const string AQUACULTURE1_ID = "Beached_SkillPerk_AquaCulture1";
-		public const string AQUACULTURE2_ID = "Beached_SkillPerk_AquaCulture2";
-		public const string MAKITRAINER1_ID = "Beached_SkillPerk_MakiTrainer1";
-		public const string MAKITRAINER2_ID = "Beached_SkillPerk_MakiTrainer2";
+		public const string
+			INCREASE_PRECISION_SMALL_ID = "Beached_SkillPerk_IncreasePrecisionSmall",
+			INCREASE_PRECISION_MEDIUM_ID = "Beached_SkillPerk_IncreasePrecisionMedium",
+			INCREASE_PRECISION_LARGE_ID = "Beached_SkillPerk_IncreasePrecisionLarge",
+			CAN_FIND_TREASURES_ID = "Beached_SkillPerk_CanFindTreasures",
+			CAN_FIND_MORE_TREASURES_ID = "Beached_SkillPerk_CanFindMoreTreasures",
+			CAN_SAFELY_HARVEST_CLUSTERS_ID = "Beached_SkillPerk_CanSafelyHarvestClusters",
+			CAN_ANALYZE_CLUSTERS_ID = "Beached_SkillPerk_CanAnalyzeClusters",
+			CAN_CUT_GEMS_ID = "Beached_SkillPerk_CanCutGems",
+			ANIMAL_HANDLING_ID = "Beached_SkillPerk_AnimalHandling",
+			AQUACULTURE1_ID = "Beached_SkillPerk_AquaCulture1",
+			AQUACULTURE2_ID = "Beached_SkillPerk_AquaCulture2",
+			MAKITRAINER1_ID = "Beached_SkillPerk_MakiTrainer1",
+			MAKITRAINER2_ID = "Beached_SkillPerk_MakiTrainer2";
 
 		[DbEntry]
 		public static void Register(SkillPerks __instance)
 		{
-			CanFindTreasures = __instance.Add(new SimpleSkillPerk(CANFINDTREASURES_ID, STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.DESCRIPTION));
+			CanFindTreasures = __instance.Add(new SimpleSkillPerk(CAN_FIND_TREASURES_ID, STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.DESCRIPTION));
 
 			CanFindMoreTreasures = __instance.Add(new SimpleSkillPerk(
-				CANFINDMORETREASURES_ID,
+				CAN_FIND_MORE_TREASURES_ID,
 				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY2.DESCRIPTION));
 
 			CanCutGems = __instance.Add(new SimpleSkillPerk(
-				CANCUTGEMS_ID,
+				CAN_CUT_GEMS_ID,
 				STRINGS.DUPLICANTS.ROLES.CRYSTALLOGRAPHY.CAN_CUT_GEMS));
 
 			IncreasePrecisionSmall = __instance.Add(new SkillAttributePerk(
-				INCREASEPRECISIONSMALL_ID,
+				INCREASE_PRECISION_SMALL_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.NAME));
 
 			IncreasePrecisionMedium = __instance.Add(new SkillAttributePerk(
-				INCREASEPRECISIONMEDIUM_ID,
+				INCREASE_PRECISION_MEDIUM_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY2.NAME));
 
 			IncreasePrecisionMedium = __instance.Add(new SkillAttributePerk(
-				INCREASEPRECISIONMEDIUM_ID,
+				INCREASE_PRECISION_MEDIUM_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.GEOCHEMISTRY.NAME));
 
 
 			IncreasePrecisionLarge = __instance.Add(new SkillAttributePerk(
-				INCREASEPRECISIONLARGE_ID,
+				INCREASE_PRECISION_LARGE_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.NAME));
 
-			CanSafelyHarvestClusters = __instance.Add(new SimpleSkillPerk(CANSAFELYHARVESTCLUSTERS_ID, STRINGS.DUPLICANTS.ROLES.CRYSTALLOGRAPHY.DESCRIPTION));
+			CanSafelyHarvestClusters = __instance.Add(new SimpleSkillPerk(CAN_SAFELY_HARVEST_CLUSTERS_ID, STRINGS.DUPLICANTS.ROLES.CRYSTALLOGRAPHY.DESCRIPTION));
 
 			CanAnalyzeClusters = __instance.Add(new SkillAttributePerk(
-				CANANALYZECLUSTERS_ID,
+				CAN_ANALYZE_CLUSTERS_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.GEOCHEMISTRY.NAME));

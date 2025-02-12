@@ -39,7 +39,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			resetProgressOnStop = true;
 			faceTargetWhenWorking = true;
 
-			requiredSkillPerk = BSkillPerks.CANSAFELYHARVESTCLUSTERS_ID;
+			requiredSkillPerk = BSkillPerks.CAN_SAFELY_HARVEST_CLUSTERS_ID;
 			shouldShowSkillPerkStatusItem = true;
 
 			attributeConverter = Db.Get().AttributeConverters.DiggingSpeed; // TODO?
@@ -111,22 +111,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private void RefreshSymbols(float progress)
 		{
-			kbac.SetBlendValue(progress);
-
-			/*			//var symbolIdx = progress >= 1f ? 0 : Mathf.FloorToInt(symbols.Length * (1f - progress));
-						var symbolIdx = (int)(symbols.Length * progress);
-
-						if (symbolIdx != currentBreakingStage)
-						{
-							var index = Mathf.Clamp(symbolIdx, 0, symbols.Length - 1);
-							var symbol = kbac.AnimFiles[0].GetData().build.GetSymbol(symbols[index]);
-							if (symbol != null)
-							{
-								symbolOverrideController.AddSymbolOverride("shell_breaking_0", symbol);
-							}
-
-							currentBreakingStage = symbolIdx;
-						}*/
+			growingCrystal.shaftKbac.SetBlendValue(progress);
 		}
 
 		private void MarkForDig(bool dig)
@@ -264,5 +249,6 @@ namespace Beached.Content.Scripts.Entities.AI
 
 			return descriptors;
 		}
+
 	}
 }

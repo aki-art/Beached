@@ -13,10 +13,8 @@ namespace Beached.Content.Scripts.Entities
 		[MyCmpReq] public Crystal crystal;
 		[MyCmpReq] public KBatchedAnimController kbac;
 
-		private KBatchedAnimController crystalShaftKbac;
-
 		private KAnimLink link;
-		private KBatchedAnimController shaftController;
+		public KBatchedAnimController shaftKbac;
 		private GameObject shaftGo;
 		private Vector3 growthVectorNormalized;
 
@@ -58,11 +56,11 @@ namespace Beached.Content.Scripts.Entities
 			shaftGo.transform.parent = kbac.transform;
 
 			shaftGo.AddComponent<KPrefabID>().PrefabTag = new Tag(name);
-			shaftController = shaftGo.AddComponent<KBatchedAnimController>();
-			shaftController.AnimFiles = [kbac.AnimFiles[0]];
-			shaftController.initialAnim = "crystal";
-			shaftController.isMovable = true;
-			shaftController.sceneLayer = Grid.SceneLayer.BuildingBack;
+			shaftKbac = shaftGo.AddComponent<KBatchedAnimController>();
+			shaftKbac.AnimFiles = [kbac.AnimFiles[0]];
+			shaftKbac.initialAnim = "crystal";
+			shaftKbac.isMovable = true;
+			shaftKbac.sceneLayer = Grid.SceneLayer.BuildingBack;
 
 			kbac.SetSymbolVisiblity("crystal_main", false);
 
@@ -73,7 +71,7 @@ namespace Beached.Content.Scripts.Entities
 
 			shaftGo.SetActive(true);
 
-			link = new KAnimLink(kbac, shaftController);
+			link = new KAnimLink(kbac, shaftKbac);
 
 
 			kbac.enabled = false;
@@ -87,12 +85,12 @@ namespace Beached.Content.Scripts.Entities
 			length *= maxLength;
 
 			// set position of tip to where we are growing
-			shaftController.Offset = growthVectorNormalized * length;
+			shaftKbac.Offset = growthVectorNormalized * length;
 
 			Log.Debug($"length: {length}");
 
-			var position = shaftController.PositionIncludingOffset;
-			shaftController.GetBatchInstanceData().SetClipRadius(position.x, position.y, length * length, true);
+			var position = shaftKbac.PositionIncludingOffset;
+			shaftKbac.GetBatchInstanceData().SetClipRadius(position.x, position.y, length * length, true);
 		}
 
 		public void OnImguiDraw()
