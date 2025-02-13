@@ -56,6 +56,7 @@ namespace Beached.Content.Scripts.StarmapEntities
 			var radiusHexes = clusterRadius;  //radius of the circle in hexes
 			float segmentLength = 6.4f; //the actual length of one segment, used in calculating the segment count, determined by anim
 			float segmentScale = 6f; //anim scale of one segment
+			float offGridThreshold = 4; //distance to hex grid where it stops spawning anim slices
 
 
 			AxialI offsetPoint = originPoint;
@@ -99,7 +100,7 @@ namespace Beached.Content.Scripts.StarmapEntities
 				var slicePos = new Vector3(rotatedX, rotatedY);
 
 				//not beautiful or efficient but it get the job done
-				if (AllGridHexPos.Any(pos => Vector3.Distance(pos, slicePos) < 3))
+				if (AllGridHexPos.Any(pos => Vector3.Distance(pos, slicePos) < offGridThreshold)) 
 					outsideOfHexGrid = false;
 
 				if (outsideOfHexGrid) continue;
