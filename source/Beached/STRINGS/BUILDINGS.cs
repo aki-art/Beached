@@ -53,7 +53,7 @@ namespace Beached
 				public class BEACHED_AQUATICFARMTILE
 				{
 					public static LocString NAME = Link("Aquatic Farm Tile", AquaticFarmTileConfig.ID);
-					public static LocString DESC = "Duplicants can deliver fertilizer to farm aquatic tiles, accelerating plant growth. Required liwuids will be soaked up by the tile as needed.";
+					public static LocString DESC = "Duplicants can deliver fertilizer to farm aquatic tiles, accelerating plant growth. Required liquids will be soaked up by the tile as needed.";
 					public static LocString EFFECT = $"Grows one {Link("Plant", "PLANTS")} from a {Link("Seed", "PLANTS")}.\n" +
 						$"\n" +
 						$"Can be used as floor tile and rotated before construction.";
