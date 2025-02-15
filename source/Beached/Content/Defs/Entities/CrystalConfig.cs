@@ -25,6 +25,7 @@ namespace Beached.Content.Defs.Entities
 			NITRE = "Beached_NitreCrystal",
 			BORAX = "Beached_ChemicalProcessing_BoraxCrystal";
 
+		public static string GetClusterId(string crystal) => $"{crystal}Cluster";
 		public List<GameObject> CreatePrefabs()
 		{
 			var result = new List<GameObject>()
@@ -53,9 +54,9 @@ namespace Beached.Content.Defs.Entities
 				return null;
 
 			var prefab = EntityTemplates.CreatePlacedEntity(
-				ID,
-				$"{element.tag.ProperName()} Crystal",
-				$"A large crystal composed of {element.tag.ProperName()}",
+			ID,
+				Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{ID.ToUpperInvariant()}.NAME"),
+				Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{ID.ToUpperInvariant()}.DESCRIPTION"),
 				100f,
 				anim,
 				"growing",
@@ -66,14 +67,15 @@ namespace Beached.Content.Defs.Entities
 				default,
 				elementId);
 
-			//prefab.AddOrGet<GeoFormation>().allowDiagonalGrowth = true;
 			var modifiers = prefab.AddOrGet<Modifiers>();
 
 			modifiers.initialAmounts.Add(BAmounts.CrystalGrowth.Id);
 
 			prefab.AddOrGet<Effects>();
 			prefab.AddOrGet<Crystal>().growthDirection = growth;
-			prefab.AddOrGet<CrystalDebug>();
+
+			/*	if (Mod.debugMode)
+					prefab.AddOrGet<CrystalDebug>();*/
 			//prefab.AddOrGet<CrystalFoundationMonitor>().needsFoundation = false;
 
 			var growingCrystal = prefab.AddOrGet<GrowingCrystal>();
@@ -88,7 +90,7 @@ namespace Beached.Content.Defs.Entities
 			{
 				var clusterPrefab = BEntityTemplates.CreateAndRegisterClusterForCrystal(
 					prefab,
-					ID + "Cluster",
+					GetClusterId(ID),
 					Assets.GetAnim(itemKanim));
 
 				BEntityTemplates.CreateAndRegisterPreviewForCluster(
@@ -100,10 +102,7 @@ namespace Beached.Content.Defs.Entities
 			return prefab;
 		}
 
-		public string[] GetDlcIds()
-		{
-			return DlcManager.AVAILABLE_ALL_VERSIONS;
-		}
+		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
 		public void OnPrefabInit(GameObject inst)
 		{
@@ -111,7 +110,6 @@ namespace Beached.Content.Defs.Entities
 
 		public void OnSpawn(GameObject inst)
 		{
-			//inst.GetComponent<GeoFormation>();
 		}
 	}
 }

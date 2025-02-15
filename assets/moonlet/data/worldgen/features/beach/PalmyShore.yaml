@@ -13,7 +13,7 @@ internalMobs:
   #   count:
   #     min: 2
   #     max: 4
-  - type: Beached_DewPalm
+  - type: Beached:Beached_DewPalm
     count:
       min: 2
       max: 3

@@ -10,6 +10,8 @@ namespace Beached.Content.Scripts
 
 		private GameObject veil;
 		private Material material;
+		private Material zoneTypeMaterial;
+		public RenderTexture renderTexture;
 
 		public override void OnPrefabInit()
 		{
@@ -41,17 +43,37 @@ namespace Beached.Content.Scripts
 		{
 			base.OnSpawn();
 
-			/*			veil = Instantiate(ModAssets.Fx.darkVeilOverlay);
-						material = veil.GetComponent<MeshRenderer>().material;
+			veil = Instantiate(ModAssets.Fx.darkVeilOverlay);
+			zoneTypeMaterial = ModAssets.Materials.zoneTypeMaskMaterial;
+			material = veil.GetComponent<MeshRenderer>().material;
 
-						veil.transform.localScale = new Vector3(Grid.WidthInMeters, Grid.HeightInMeters, 1);
-						veil.transform.position = new Vector3(Grid.WidthInMeters / 2f, Grid.HeightInMeters / 2f, Grid.GetLayerZ(Grid.SceneLayer.FXFront2));
+			veil.transform.localScale = new Vector3(Grid.WidthInMeters, Grid.HeightInMeters, 1);
+			veil.transform.position = new Vector3(Grid.WidthInMeters / 2f, Grid.HeightInMeters / 2f, Grid.GetLayerZ(Grid.SceneLayer.FXFront2) - 3f);
 
-						material.renderQueue = RenderQueues.WorldTransparent;
-						material.SetTexture("_ZoneTypeTex", World.Instance.zoneRenderData.indexTex);
-						material.SetColor("_OverlayColor", new Color(0.2f, 0.2f, 0.3f));
+			OnShadersReloaded();
+			ShaderReloader.Register(OnShadersReloaded);
 
-						veil.SetActive(true);*/
+			veil.SetActive(true);
+		}
+
+		public void OnShadersReloaded()
+		{
+			var indexTex = World.Instance.zoneRenderData.indexTex;
+			renderTexture = new RenderTexture(indexTex.width, indexTex.height, 0);
+			zoneTypeMaterial = ModAssets.Materials.zoneTypeMaskMaterial;
+			zoneTypeMaterial.SetTexture("_ZoneIndices", World.Instance.zoneRenderData.indexTex);
+
+			material.renderQueue = RenderQueues.WorldTransparent;
+			material.SetTexture("_ZoneTypes", renderTexture);
+			material.SetColor("_OverlayColor", Util.ColorFromHex("161722"));
+			material.SetTexture("_LightBuffer", LightBuffer.Instance.Texture);
+			material.SetFloat("_ScrollSpeed", -0.008f);
+		}
+
+		private void LateUpdate()
+		{
+			if (renderTexture != null && zoneTypeMaterial != null)
+				Graphics.Blit(World.Instance.zoneRenderData.indexTex, renderTexture, zoneTypeMaterial, 0);
 		}
 
 		public void SetZoneType(ZoneType zoneType)
@@ -66,6 +88,7 @@ namespace Beached.Content.Scripts
 			}
 
 			material.SetInt("_DepthsIndex", indices[zone]);
+			zoneTypeMaterial.SetInt("_DepthsIndex", indices[zone]);
 		}
 	}
 }

@@ -80,6 +80,13 @@ namespace Beached
 					public static LocString EFFECT = $"Converts organics into {Link("Bio-Fuel", Elements.bioFuel)}, which can be burnt in a {Link("Bio-Fuel Generator", BioFuelGeneratorConfig.ID)}.";
 				}
 
+				public class BEACHED_CRYSTALSYNTHETIZER
+				{
+					public static LocString NAME = Link("Crystal Synthetizer", CrystalSynthetizerConfig.ID);
+					public static LocString DESC = "Allows fabrication of Crystal Clusters, which can be placed in a Crystal Grower for renewable resources.";
+					public static LocString EFFECTS = "A Duplicant with the Crystallograpy skill is required to operte this building.";
+				}
+
 
 				public class BEACHED_COLLARDISPENSER
 				{

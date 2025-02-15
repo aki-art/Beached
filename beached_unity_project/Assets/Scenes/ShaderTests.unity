@@ -206,6 +206,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &171848682
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 359606831470878695, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: renderTexture
+      value: 
+      objectReference: {fileID: 1153956828}
+    - target: {fileID: 1251552572420386002, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_Name
+      value: DarkVeilQuad (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715692371406963197, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1609376027}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -164.6606
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -103.57611
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
 --- !u!1 &474027484
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +797,44 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 453931563572862047, guid: 14f33f3e877b8ca43804801f32335c02, type: 3}
   m_PrefabInstance: {fileID: 453931563775269538}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &1153956828
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 460
+  m_Height: 453
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &1185138318
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +941,90 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1292455613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1292455615}
+  - component: {fileID: 1292455614}
+  m_Layer: 0
+  m_Name: 20241020002801_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1292455614
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292455613}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: d9c001df3891fb04c8d587f1a8a1d434, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 19.2, y: 10.17}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1292455615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292455613}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -149.69, y: -96.01, z: 0}
+  m_LocalScale: {x: 3.1599507, y: 3.1599507, z: 93.79362}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1303976739
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,6 +1056,154 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1609376027
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_DarkVeilShaderv2 (Instance)
+  m_Shader: {fileID: -6465566751694194690, guid: 3813137ce106d7741830aa3e9f076987, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FogTex:
+        m_Texture: {fileID: 2800000, guid: 9a7ba2f893cddce4b82c25c25c1d6612, type: 3}
+        m_Scale: {x: 33.7, y: 30}
+        m_Offset: {x: 0, y: 0}
+    - _LightBuffer:
+        m_Texture: {fileID: 2800000, guid: efcd4b36caca89c41930783324154be0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ZoneTypes:
+        m_Texture: {fileID: 1153956828}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _DepthsIndex: 18
+    - _InputClampMax: 1.1
+    - _LightBufferBrightnessMod: 0.1
+    - _LightBufferSaturationMod: 1.1
+    - _NoiseMult: 1.1
+    - _NoiseScale: 400
+    - _ScrollSpeed: 0.005
+    - _WaveAmplitude: 0.001
+    - _WaveFrequency: 1.52
+    - _WaveSpeed: -0.6
+    m_Colors:
+    - _OverlayColor: {r: 0.13050628, g: 0.06341225, b: 0.23584908, a: 1}
+    - _SecondaryWaveOffset: {r: 2.72, g: 1.28, b: 0, a: 0}
+    - _SineInterference: {r: 0.1, g: 0.1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!21 &1788394205
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_DarkVeilShaderv2 (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance)
+  m_Shader: {fileID: -6465566751694194690, guid: 3813137ce106d7741830aa3e9f076987, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FogTex:
+        m_Texture: {fileID: 2800000, guid: 9a7ba2f893cddce4b82c25c25c1d6612, type: 3}
+        m_Scale: {x: 33.7, y: 30}
+        m_Offset: {x: 0, y: 0}
+    - _LightBuffer:
+        m_Texture: {fileID: 2800000, guid: efcd4b36caca89c41930783324154be0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ZoneTypes:
+        m_Texture: {fileID: 1845099388}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _DepthsIndex: 18
+    - _InputClampMax: 1.1
+    - _LightBufferBrightnessMod: 0.1
+    - _LightBufferSaturationMod: 1.1
+    - _NoiseMult: 1.1
+    - _NoiseScale: 400
+    - _ScrollSpeed: 0.005
+    - _WaveAmplitude: 0.001
+    - _WaveFrequency: 1.52
+    - _WaveSpeed: -0.6
+    m_Colors:
+    - _OverlayColor: {r: 0.13050628, g: 0.06341225, b: 0.23584908, a: 1}
+    - _SecondaryWaveOffset: {r: 2.72, g: 1.28, b: 0, a: 0}
+    - _SineInterference: {r: 0.1, g: 0.1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!84 &1845099388
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 460
+  m_Height: 453
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &1860812112
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +1267,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 54.01
+  orthographic size: 54.66
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -989,6 +1324,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1860812114}
+--- !u!84 &2101355499
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 736
+  m_Height: 304
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!4 &21984869995990442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1917462330207576426, guid: 95bfa5ec0d21cdc4694dd3e76e0546e4, type: 3}
@@ -3992,17 +4365,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 359606831470878695, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: renderTexture
+      value: 
+      objectReference: {fileID: 2101355499}
     - target: {fileID: 1251552572420386002, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
       propertyPath: m_Name
       value: DarkVeilQuad
       objectReference: {fileID: 0}
+    - target: {fileID: 1251552572420386002, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715692371406963197, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1788394205}
     - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 112
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8458943393269223341, guid: 28b3d82d733c7674a842ec6725e43d12, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5974,3 +6359,5 @@ SceneRoots:
   - {fileID: 599168548}
   - {fileID: 799366051}
   - {fileID: 1303976740}
+  - {fileID: 1292455615}
+  - {fileID: 171848682}

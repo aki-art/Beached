@@ -20,6 +20,17 @@ namespace Beached.Content.Scripts.Entities
 
 		private float overrideLength = -1;
 
+		public override void OnPrefabInit()
+		{
+			Subscribe((int)GameHashes.NewGameSpawn, OnGameSpawn);
+		}
+
+		private void OnGameSpawn(object _)
+		{
+			var length = Random.Range(0, maxLength) * (100f / maxLength);
+			smi.growth.value = length;
+		}
+
 		public override void OnSpawn()
 		{
 			overrideLength = -1;
@@ -80,6 +91,9 @@ namespace Beached.Content.Scripts.Entities
 
 		public void UpdateShaftLength()
 		{
+			if (smi == null || smi.growth == null)
+				return;
+
 			var length = overrideLength == -1 ? (smi.growth.value / 100f) : overrideLength;
 			length = Mathf.Clamp01(length);
 			length *= maxLength;
@@ -115,17 +129,9 @@ namespace Beached.Content.Scripts.Entities
 
 			public void InitGrowth()
 			{
-				var amounts = smi.gameObject.GetAmounts();
-
-				if (growth == null)
-					growth = amounts.Add(new AmountInstance(BAmounts.CrystalGrowth, gameObject));
+				growth = BAmounts.CrystalGrowth.Lookup(gameObject);
 
 				growth.hide = false;
-
-				var attributes = smi.gameObject.GetAttributes();
-
-				if (attributes.Get(BAmounts.CrystalGrowth.Id) == null)
-					attributes.Add(BAmounts.CrystalGrowth.deltaAttribute);
 
 				defaultGrowthModifier = new AttributeModifier(
 					growth.amount.deltaAttribute.Id,

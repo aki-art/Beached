@@ -172,7 +172,7 @@ namespace Beached.Content.Defs
 			float height = 0.25f,
 			string[] dlcIds = null)
 		{
-			var name = Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{id.ToUpperInvariant()}.CLUSTER_NAME");
+			var name = Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{id.ToUpperInvariant()}.NAME");
 			var desc = Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{id.ToUpperInvariant()}.DESCRIPTION");
 
 			var prefab = EntityTemplates.CreateLooseEntity(

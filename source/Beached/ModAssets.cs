@@ -72,6 +72,7 @@ namespace Beached
 			public static Material liquidRefractionMat;
 			public static Material forceField2;
 			public static Material darkVeil;
+			public static Material zoneTypeMaskMaterial;
 		}
 
 		public static class Sprites
@@ -336,6 +337,11 @@ namespace Beached
 			Materials.liquidRefractionMat.SetFloat("_EdgeSize", 0.55f);
 			Materials.liquidRefractionMat.SetFloat("_EdgeMultiplier", 2f);
 			Materials.liquidRefractionMat.SetFloat("_ZoomMagicNumber", 20f);
+
+			Materials.zoneTypeMaskMaterial = shadersBundle.LoadAsset<Material>("Assets/Shaders/BiomeMaskMaterial.mat");
+
+			if (Materials.zoneTypeMaskMaterial == null)
+				Log.Warning("zone type mat null");
 
 			Materials.darkVeil = shadersBundle.LoadAsset<Material>("Assets/Materials/Shader Graphs_DarkVeilShaderv2.mat");
 			Fx.darkVeilOverlay = bundle2.LoadAsset<GameObject>("Assets/Prefabs/DarkVeilQuad.prefab");

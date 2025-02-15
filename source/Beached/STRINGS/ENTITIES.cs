@@ -1,4 +1,6 @@
-﻿namespace Beached
+﻿using Beached.Content;
+
+namespace Beached
 {
 	public partial class STRINGS
 	{
@@ -8,6 +10,22 @@
 			{
 				public static LocString NAME = "Limpet Rock";
 				public static LocString DESCRIPTION = "This boulder has been completely overtaken by a colony of Limpets. The inhabitants wil perioically release a small amount of gas saturated with Limpet Eggs.";
+			}
+
+			public class BEACHED_CRYSTALS
+			{
+				public static class BEACHED_ZEOLITECRYSTAL
+				{
+					public static LocString NAME = "Zeolite Crystal";
+					public static LocString DESCRIPTION = $"A large crystal composed of {Link("Zeolite", Elements.zeolite)}.";
+					public static LocString CLUSTER_NAME = "Zeolite Cluster";
+				}
+
+				public static class BEACHED_ZEOLITECRYSTALCLUSTER
+				{
+					public static LocString NAME = "Zeolite Cluster";
+					public static LocString DESCRIPTION = $"A small cluster of green opaque crystals.";
+				}
 			}
 
 			public class GLACIERS

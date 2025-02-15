@@ -36,14 +36,34 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _FogTex:
+        m_Texture: {fileID: 2800000, guid: 9a7ba2f893cddce4b82c25c25c1d6612, type: 3}
+        m_Scale: {x: 33.7, y: 30}
+        m_Offset: {x: 0, y: 0}
+    - _LightBuffer:
+        m_Texture: {fileID: 2800000, guid: efcd4b36caca89c41930783324154be0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ZoneTypes:
-        m_Texture: {fileID: 2800000, guid: f7f037906612c7349a9342238e7bf304, type: 3}
+        m_Texture: {fileID: 2800000, guid: 38b75178256c084499a2de5c150bd778, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _DepthsIndex: 18
+    - _InputClampMax: 1.1
+    - _LightBufferBrightnessMod: 0.1
+    - _LightBufferSaturationMod: 1.1
+    - _NoiseMult: 1.1
+    - _NoiseScale: 400
+    - _ScrollSpeed: 0.005
+    - _WaveAmplitude: 0.001
+    - _WaveFrequency: 1.52
+    - _WaveSpeed: -0.6
     m_Colors:
-    - _OverlayColor: {r: 1, g: 0.2028302, b: 0.9117798, a: 0}
+    - _OverlayColor: {r: 0.13050628, g: 0.06341225, b: 0.23584908, a: 1}
+    - _SecondaryWaveOffset: {r: 2.72, g: 1.28, b: 0, a: 0}
+    - _SineInterference: {r: 0.1, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
