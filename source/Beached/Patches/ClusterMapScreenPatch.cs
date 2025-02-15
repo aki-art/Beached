@@ -12,6 +12,9 @@ namespace Beached.Patches
 		[HarmonyPatch(typeof(ClusterMapScreen), "SetupVisGameObjects")]
 		public class ClusterMapScreen_SetupVisGameObjects_Patch
 		{
+			[HarmonyPrepare]
+			public static bool Prepare()=> DlcManager.IsExpansion1Active();
+
 			public static void Postfix(ClusterMapScreen __instance)
 			{
 				foreach(var entityGroup in ClusterGrid.Instance.cellContents)

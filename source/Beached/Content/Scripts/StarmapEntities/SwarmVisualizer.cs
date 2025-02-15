@@ -47,7 +47,7 @@ namespace Beached.Content.Scripts.StarmapEntities
 				return;
 
 			if (clusterRadius < 0)
-				clusterRadius = ClusterGrid.Instance.numRings-1; //-2 for inner ring, +-0 for outer ring
+				clusterRadius = ClusterGrid.Instance.numRings - 1; //-2 for inner ring, +-0 for outer ring
 
 			var clustermap = ClusterMapScreen.Instance;
 			KbacContainer = UnityEngine.Object.Instantiate<ClusterMapVisualizer>(clustermap.staticVisPrefab, clustermap.POIVisContainer.transform);
@@ -56,7 +56,7 @@ namespace Beached.Content.Scripts.StarmapEntities
 			var radiusHexes = clusterRadius;  //radius of the circle in hexes
 			float segmentLength = 6.4f; //the actual length of one segment, used in calculating the segment count, determined by anim
 			float segmentScale = 6f; //anim scale of one segment
-			float offGridThreshold = 4; //distance to hex grid where it stops spawning anim slices
+			float offGridThreshold = 3.5f; //distance to hex grid where it stops spawning anim slices
 
 
 			AxialI offsetPoint = originPoint;
@@ -83,7 +83,7 @@ namespace Beached.Content.Scripts.StarmapEntities
 			Debug.Log("Number of Segments: " + numberOfSlices);
 
 			//cache all world positions of all hexes to check later if the position is near the hex grid (somewhat inefficient, but it runs only once on load)
-			var AllGridHexPos = ClusterGrid.Instance.cellContents.Keys.Select(hexCell => AxialUtil.AxialToWorld(hexCell.R, hexCell.Q)).ToArray();
+			var AllGridHexPos = ClusterGrid.Instance.cellContents.Keys.Select(hexCell => AxialUtil.AxialToWorld(hexCell.R - 0.33f, hexCell.Q - 0.33f)).ToArray();
 
 			KbacContainer.gameObject.SetActive(true);
 			var containerRectTransform = KbacContainer.rectTransform();
@@ -100,7 +100,7 @@ namespace Beached.Content.Scripts.StarmapEntities
 				var slicePos = new Vector3(rotatedX, rotatedY);
 
 				//not beautiful or efficient but it get the job done
-				if (AllGridHexPos.Any(pos => Vector3.Distance(pos, slicePos) < offGridThreshold)) 
+				if (AllGridHexPos.Any(pos => Vector3.Distance(pos, slicePos) < offGridThreshold))
 					outsideOfHexGrid = false;
 
 				if (outsideOfHexGrid) continue;
