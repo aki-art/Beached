@@ -18,7 +18,9 @@ namespace Beached.Patches
 			typeof(int),
 			typeof(float),
 			typeof(string[]),
+			typeof(string[]),
 		])]
+
 		public class EggConfig_CreateEgg_Patch
 		{
 			public static void Postfix(ref GameObject __result)

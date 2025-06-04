@@ -48,7 +48,7 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 				.CanNotDrown()
 				.Faction(FactionManager.FactionID.Prey)
 				.SortAfter(PacuConfig.ID)
-				.MaxPenSize(36)
+				.CritterDensityTolerance(36)
 				.Navigator(CritterBuilder.NAVIGATION.SWIMMER, 0.25f)
 				.Brain(BTags.Species.jellyfish)
 					.Configure(ConfigureAI)

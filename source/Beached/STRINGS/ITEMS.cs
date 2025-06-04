@@ -1,5 +1,6 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
+using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
 using FUtility.FLocalization;
@@ -69,8 +70,8 @@ namespace Beached
 			{
 				public class BEACHED_ASPICLICE
 				{
-					public static LocString NAME = Link("Aspic Lice", JellyConfig.ID);
-					public static LocString DESC = "Lice suspended in jello.";
+					public static LocString NAME = Link("Aspic Lice", AspicLiceConfig.ID);
+					public static LocString DESC = $"Some {Link("Meal Lice", BasicPlantFoodConfig.ID)} suspended in jello.";
 				}
 
 				public class BEACHED_ASTROBAR
@@ -104,7 +105,7 @@ namespace Beached
 
 				public class BEACHED_BERRYJELLY
 				{
-					public static LocString NAME = Link("Berry-Jelly", JellyConfig.ID);
+					public static LocString NAME = Link("Berry-Jelly", BerryJellyConfig.ID);
 					public static LocString DESC = "A jiggly treat hiding tasty berries within.";
 				}
 
@@ -117,13 +118,13 @@ namespace Beached
 				public class BEACHED_GLAZEDDEWNUT
 				{
 					public static LocString NAME = Link("Glazed Dewnut", GlazedDewnutConfig.ID);
-					public static LocString DESC = ".";
+					public static LocString DESC = "Baking the Dewnut causes it to form bubbles of air inside, giving it an unexpectedly soft texture. Topped with colored sugar frosting and sprinkles, this is delightfully sweet treat.";
 				}
 
 				public class BEACHED_SUFFEDSNAILS
 				{
 					public static LocString NAME = Link("Stuffed Snails", StuffedSnailsConfig.ID);
-					public static LocString DESC = ".";
+					public static LocString DESC = "Pieces of snail cooked tender, drenched in butter, stuffed into small decorative edible snail shells.";
 				}
 
 				public class BEACHED_HARDBOILEDEGG
@@ -134,8 +135,8 @@ namespace Beached
 
 				public class BEACHED_RAWSNAIL
 				{
-					public static LocString NAME = Link("Raw Snail", RawSnailConfig.ID);
-					public static LocString DESC = "Slimy chewy meat of a Slickshell.";
+					public static LocString NAME = Link("Slimy Meat", RawSnailConfig.ID);
+					public static LocString DESC = "Chewy meat of a Slickshell dripping with mucus.";
 				}
 
 				public class BEACHED_COOKEDSNAIL
@@ -196,7 +197,7 @@ namespace Beached
 				public class BEACHED_MUSSELTONGUE
 				{
 					public static LocString NAME = Link("Mussel Tongue", MusselTongueConfig.ID);
-					public static LocString DESC = "Edible tongue of a Mussel Sprout. It has a somewhat bitter, green flavour, and the consistency of fresh clam.";
+					public static LocString DESC = $"Edible tongue of a {Link("Mussel Sprout", MusselSproutConfig.ID)}. It has a somewhat bitter, green flavour, and the consistency of fresh clam.";
 				}
 
 				public class BEACHED_HIGHQUALITYMEAT
@@ -365,7 +366,7 @@ namespace Beached
 				{
 					[Note("Hadean Zircon is a specific type of real life Zircon, from the Hadean period from 4 billion years ago.")]
 					public static LocString NAME = Link("Hadean Zircon", RareGemsConfig.HADEAN_ZIRCON);
-					public static LocString DESCRIPTION = "The estimated age of this gemstone is 4 billion years old.";
+					public static LocString DESCRIPTION = "A 4 billion years old piece of pristine Zircon. \n\nA long time ago a Hadean Zircon of this size and purity would have sent the global scientific community into an upheaval, shaking the very foundation of humanity's understanding of geology and the Earth's formation. Nowadays, it makes for a neat necklace.";
 				}
 
 				public class MAXIXE

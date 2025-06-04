@@ -15,6 +15,7 @@ namespace Beached.Patches
 			public static void Prefix()
 			{
 				AddMenus();
+				AddTechs();
 			}
 
 			public static void Postfix()
@@ -27,7 +28,6 @@ namespace Beached.Patches
 					]);
 
 				TUNING.BUILDINGS.PLANORDER.Add(planInfo);
-				AddTechs();
 				ModifyVanillaBuildings.Run();
 				Recipes.AddRecipes();
 			}

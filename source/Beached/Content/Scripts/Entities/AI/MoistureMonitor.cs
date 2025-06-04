@@ -122,6 +122,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static void Moisturize(Instance smi)
 		{
+			Log.Debug("moisturizing");
 			smi.moisture.SetValue(100f);
 			smi.timeUntilDeath = smi.maxTimeUntilDeath;
 			smi.navigator.defaultSpeed = smi.originalSpeed;

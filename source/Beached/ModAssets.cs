@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static ProcGen.SubWorld;
 using Object = UnityEngine.Object;
 
@@ -17,6 +19,8 @@ namespace Beached
 		public const string BASE_FOLDER = "assets/textures";
 		public const string NEW_ASSETBUNDLE = "beached_assets2";
 
+		public const string SHIRT2_SNAP = "beached_snapto_shirt2";
+
 		public static class Prefabs
 		{
 			public static Dictionary<string, GameObject> setpieces;
@@ -26,6 +30,7 @@ namespace Beached
 			public static GameObject forceFieldDome;
 			public static GameObject asteroidBelt;
 			public static GameObject critterIdentitySidescreen;
+			public static GameObject muffinSideScreen;
 		}
 
 		// static hardcoded indices for my zonetypes
@@ -293,16 +298,29 @@ namespace Beached
 			}
 
 			Log.Debug("loading UI");
-			//var universalBundle = LoadAssetBundle("akis_universal_sidesceen_v1", platformSpecific: true);
 			Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
 			Prefabs.critterIdentitySidescreen = bundle2.LoadAsset<GameObject>("Assets/UI/CritterIdentityScreen.prefab");
 			Prefabs.critterIdentitySidescreen.gameObject.SetActive(false);
 			Prefabs.critterIdentitySidescreen.AddOrGet<RectTransform>();
+			Prefabs.muffinSideScreen = bundle2.LoadAsset<GameObject>("Assets/UI/MuffinSideScreen_tmpconverted.prefab");
 
 			TMPConverter.ReplaceAllText(Prefabs.universalSidescreen);
 			TMPConverter.ReplaceAllText(Prefabs.critterIdentitySidescreen);
+			TMPConverter.ReplaceAllText(Prefabs.muffinSideScreen);
 
-			//tmpConverter.ReplaceAllText(Prefabs.universalSidescreen);
+			// very important to do this as early as possible, if these references are not found Unity will CTD (native crash), with no log.
+			var dropDownGo = Prefabs.muffinSideScreen.transform.Find("Scroll View/Viewport/Contents/FilterCategory/CritterFilterPrefab/Dropdown").gameObject;
+			dropDownGo.SetActive(true);
+			var dropdown = dropDownGo.AddComponent<TMP_Dropdown>();
+
+			// when converting to LocText these references were lost, so they need to be rebound
+			var item = dropdown.transform.Find("Template/Viewport/Content/Item");
+			dropdown.itemText = item.Find("Item Label").GetComponent<LocText>();
+			dropdown.itemImage = item.transform.Find("UIImage").GetComponent<Image>();
+			dropdown.captionText = dropdown.transform.Find("Label").GetComponent<LocText>();
+			dropdown.captionImage = dropdown.transform.Find("UIImage").GetComponent<Image>();
+			dropdown.template = dropdown.transform.Find("Template").GetComponent<RectTransform>();
+			dropdown.options = [];
 
 			/*            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
                         Materials.forceField = new(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"))

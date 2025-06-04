@@ -18,6 +18,11 @@ namespace Beached.Content.ModDb
 			CreateEquipmentRecipes();
 			AddBismuthRecipes();
 
+			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.GREEN);
+			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.BLUE);
+			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.BLACK);
+			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.RETRO);
+
 			RecipeBuilder.Create(MudStomperConfig.ID, STRINGS.ITEMS.MISC.BEACHED_SOAP.DESC, 40f)
 				.Input(Elements.ambergris.CreateTag(), 25f)
 				.Input(Elements.ash.CreateTag(), 25f)
@@ -105,12 +110,22 @@ namespace Beached.Content.ModDb
 				.Build()
 				.id;
 
-			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, 40f)
+			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, 40f)
 				.Input(JellyConfig.ID, 1f)
-				.Input(PrickleFruitConfig.ID, 2f)
+				.Input(PrickleFruitConfig.ID, 1f)
 				.Output(BerryJellyConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
+
+			if (DlcManager.IsContentSubscribed(DlcManager.DLC2_ID))
+			{
+				RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, 40f)
+					.Input(JellyConfig.ID, 1f)
+					.Input(HardSkinBerryConfig.ID, 0.5f)
+					.Output(BerryJellyConfig.ID, 1f)
+					.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+					.Build();
+			}
 
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SALTRUBBEDJELLY.DESC, 40f)
 				.Input(JellyConfig.ID, 1f)
@@ -136,7 +151,7 @@ namespace Beached.Content.ModDb
 
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SCRAMBLEDSNAILS.DESC, 40f)
 				.Input(RawSnailConfig.ID, 3f)
-				.Input(RawEggConfig.ID, 3f)
+				.Input(RawEggConfig.ID, 0.5f)
 				.Output(ScrambledSnailsConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
@@ -179,7 +194,7 @@ namespace Beached.Content.ModDb
 
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_ASPICLICE.DESC, 40f)
 				.Input(JellyConfig.ID, 1f)
-				.Input(BasicPlantFoodConfig.ID, 2f)
+				.Input(BasicPlantFoodConfig.ID, 1f)
 				.Output(AspicLiceConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
@@ -193,10 +208,18 @@ namespace Beached.Content.ModDb
 				.Build();
 
 			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_STUFFEDSNAILS.DESC, 40f)
-				.Input(RawSnailConfig.ID, 3f)
+				.Input(RawSnailConfig.ID, 2f)
 				.Input(RawKelpConfig.ID, 1f)
 				.Input(SimHashes.MilkFat.CreateTag(), 10f)
 				.Output(StuffedSnailsConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_ASTROBAR.DESC, 40f)
+				.Input(SpongeCakeConfig.ID, 1f) // 1900 KCal
+				.Input(SpiceNutConfig.ID, 4f)
+				.Input(SimHashes.Sucrose.CreateTag(), 15f)
+				.Output(AstrobarConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
@@ -261,6 +284,19 @@ namespace Beached.Content.ModDb
 
 			CloneRecipes(refinedStarters, Elements.zinc.ToString());
 			CloneRecipes(oreStarters, Elements.zincOre.ToString());
+		}
+
+		private static void AddBeachShirtCostumeRecipe(string facadeID)
+		{
+			RecipeBuilder
+				.Create(ClothingFabricatorConfig.ID, global::STRINGS.EQUIPMENT.PREFABS.CUSTOMCLOTHING.RECIPE_DESC, TUNING.EQUIPMENT.VESTS.CUSTOM_CLOTHING_FABTIME)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+
+				.Input(BasicFabricConfig.ID, 3f)
+
+				.FacadeOutput(BeachShirtConfig.ID, 1f, facadeID)
+
+				.Build(facadeID);
 		}
 
 		// TODO: move to Moonlet

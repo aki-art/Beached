@@ -22,6 +22,7 @@ namespace Beached.Content.Defs.Buildings
 			AddPOIUnlockable(IceCooledFanConfig.ID);
 			AddPOIUnlockable(IceMachineConfig.ID);
 			AddPOIUnlockable(BeachChairConfig.ID);
+			AddPOIUnlockable(WaterCoolerConfig.ID);
 		}
 
 		private static void FarmTile()

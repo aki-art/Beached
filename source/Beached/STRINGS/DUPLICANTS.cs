@@ -16,6 +16,11 @@ namespace Beached
 					public static LocString TOOLTIP = "This Duplicant is melting some Ice.";
 				}
 
+				public class BEACHED_SIREN
+				{
+					public static LocString NAME = "Siren";
+					public static LocString TOOLTIP = "This Duplicant became very scary since stressed out.";
+				}
 			}
 
 			public class ATTRIBUTES
@@ -133,6 +138,42 @@ namespace Beached
 			public class TRAITS
 			{
 				public static LocString GENETIC_TRAIT = "This is a genetic trait always paired with a {0}.";
+
+				public class LIFE_GOALS
+				{
+					public class BEACHED_MINNOW
+					{
+						public static LocString NAME = "Surfin' and Snoozin'";
+						public static LocString DESCRIPTION = $"This duplicant cannot stop talking about how cool it would be to have a {Link("Mechanical Surfboard", MechanicalSurfboardConfig.ID)} in their bedroom.";
+					}
+
+					public class FASHION_IDOL
+					{
+						public static LocString NAME = "Fashion Idol";
+						public static LocString DESCRIPTION = "This duplicant's dream is to be as slick as it can get. Achieve 50 additional decor with equipment to achieve their life goal.";
+					}
+
+					public class GOLDEN_LAVATORY
+					{
+						public static LocString NAME = "Golden Lavatory";
+						public static LocString DESCRIPTION = $"This duplicant wishes to own their very own golden {Link("Lavatory", FlushToiletConfig.ID)} assigned.";
+					}
+
+					public class MAXIXE_PENDANT
+					{
+						public static LocString DESCRIPTION = "This duplicant really wishes to express themselves by wearing a Maxixe Pendant.";
+					}
+
+					public class PEARL_PENDANT
+					{
+						public static LocString DESCRIPTION = "This duplicant would love to don a Pearl Necklace.";
+					}
+
+					public class STRANGE_MATTER_PENDANT
+					{
+						public static LocString DESCRIPTION = "This duplicant has a deep desire the wear a Strange Matter Amulet.";
+					}
+				}
 
 				public class BEACHED_CARNIVOROUS
 				{

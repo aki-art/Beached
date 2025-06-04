@@ -1,5 +1,4 @@
-﻿using Beached.Content.Scripts;
-using Beached.Content.Scripts.Entities;
+﻿using Beached.Content.Scripts.Entities;
 using TUNING;
 using UnityEngine;
 
@@ -32,12 +31,6 @@ namespace Beached.Content.Defs.Buildings
 
 		public override void DoPostConfigureComplete(GameObject go)
 		{
-			var treeFilterable = go.AddOrGet<TreeFilterable>();
-			treeFilterable.uiHeight = TreeFilterable.UISideScreenHeight.Short;
-
-			var flatFilterable = go.AddOrGet<SimpleFlatFilterable>();
-			flatFilterable.headerText = "test";
-
 			var dispenser = go.AddOrGet<CollarDispenser>();
 
 			go.AddComponent<Storage>();

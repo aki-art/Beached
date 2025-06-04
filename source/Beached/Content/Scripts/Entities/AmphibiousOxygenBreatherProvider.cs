@@ -170,6 +170,11 @@ namespace Beached.Content.Scripts.Entities
 			return true;
 		}
 
+		public bool ConsumeGas(OxygenBreather oxygen_breather, float amount)
+		{
+			return ConsumeGas(oxygen_breather, amount, (_, _, _, _, _) => { });
+		}
+
 		public struct BreathableCellData
 		{
 			public int cell;

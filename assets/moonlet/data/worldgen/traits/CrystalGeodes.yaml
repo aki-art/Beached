@@ -1,0 +1,72 @@
+name: Crystal Geodes
+description: Geodes of crystal clusters spawn in this world.
+colorHex: ffb3ec
+
+traitTags:
+  - LargeWorld
+  
+additionalWorldTemplateRules:
+  # try in sea or ocean first
+  - names:
+      - beached/worldgen/zeoliteGeode1
+    listRule: TryOne
+    priority: 400
+    useRelaxedFiltering: true
+    allowedCellsFilter:
+      - command: Replace  
+        zoneTypes: [Beached_Sea, Ocean]
+
+      - command: ExceptWith 
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 0
+        maxDistance: 2
+        ignoreIfMissingTag: true
+
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGlobalFeatureSpawning 
+
+  # fallback
+  - names:
+      - beached/worldgen/zeoliteGeode1
+    listRule: GuaranteeOne
+    priority: 200
+    useRelaxedFiltering: true
+    allowedCellsFilter:
+      - command: All
+      
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGlobalFeatureSpawning
+      
+       # too close to start
+      - command: ExceptWith 
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 0
+        maxDistance: 2
+        ignoreIfMissingTag: true
+      
+       # too far from start
+      - command: ExceptWith 
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 5
+        maxDistance: 99
+        ignoreIfMissingTag: true 
+      
+       # too close to surface
+      - command: ExceptWith
+        tagcommand: DistanceFromTag
+        tag: AtSurface
+        minDistance: 0
+        maxDistance: 1
+      
+      - command: ExceptWith
+        temperatureRanges:
+          - VeryHot
+          - ExtremelyHot
+      
+      - command: ExceptWith
+        zoneTypes: [OilField]

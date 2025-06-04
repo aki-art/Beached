@@ -17,7 +17,7 @@ namespace Beached.Content.Defs.Entities.Critters.Dreckos
 				.Movable()
 				.Faction(FactionManager.FactionID.Pest)
 				.SortAfter(DreckoConfig.ID)
-				.MaxPenSize(12)
+				.CritterDensityTolerance(12)
 				.Navigator(CritterBuilder.NAVIGATION.DRECKO, 1f)
 				.Brain(GameTags.Creatures.Species.DreckoSpecies)
 					.Configure(ConfigureAI)

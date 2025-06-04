@@ -18,13 +18,24 @@ namespace Beached
 				{
 					public static LocString NAME = "Zeolite Crystal";
 					public static LocString DESCRIPTION = $"A large crystal composed of {Link("Zeolite", Elements.zeolite)}.";
-					public static LocString CLUSTER_NAME = "Zeolite Cluster";
 				}
 
 				public static class BEACHED_ZEOLITECRYSTALCLUSTER
 				{
 					public static LocString NAME = "Zeolite Cluster";
 					public static LocString DESCRIPTION = $"A small cluster of green opaque crystals.";
+				}
+
+				public static class BEACHED_OXYROCKCRYSTAL
+				{
+					public static LocString NAME = "Oxylite Crystal";
+					public static LocString DESCRIPTION = $"A large crystal composed of {Link("Oxylite", SimHashes.OxyRock)}. Slowly releases it's bound Oxygen while exposed to air.";
+				}
+
+				public static class BEACHED_OXYROCKCRYSTALCLUSTER
+				{
+					public static LocString NAME = "Oxylite Cluster";
+					public static LocString DESCRIPTION = $"A small cluster ofoxylite crystals.";
 				}
 			}
 

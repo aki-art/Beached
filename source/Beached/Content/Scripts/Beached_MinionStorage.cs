@@ -72,6 +72,8 @@ namespace Beached.Content.Scripts
 
 			Subscribe((int)GameHashes.EffectAdded, OnEffectAdded);
 			Subscribe((int)GameHashes.EffectRemoved, OnEffectRemoved);
+			Subscribe((int)GameHashes.OnEquip, OnEquip);
+			Subscribe((int)GameHashes.OnUnequip, OnUnEquip);
 
 			var attributes = gameObject.GetAttributes();
 
@@ -86,6 +88,36 @@ namespace Beached.Content.Scripts
 					attributes.Add(attributeModifier);
 				}
 			}
+
+			kbac.SetSymbolTint(ModAssets.SHIRT2_SNAP, Color.red);
+		}
+
+		private void OnUnEquip(object obj)
+		{
+			bool hasComfortableClothing = false;
+			var equipment = resume.identity.GetEquipment();
+
+			if (equipment != null)
+			{
+				foreach (var slot in resume.identity.GetEquipment().slots)
+				{
+					var assignable = slot.assignable;
+					if (assignable != null && assignable.HasTag(BTags.comfortableClothing))
+					{
+						hasComfortableClothing = true;
+						break;
+					}
+				}
+			}
+
+			if (!hasComfortableClothing)
+				effects.Remove(BEffects.COMFORTABLE);
+		}
+
+		private void OnEquip(object obj)
+		{
+			if (obj is Equippable equippable && equippable.HasTag(BTags.comfortableClothing))
+				effects.Add(BEffects.COMFORTABLE, true);
 		}
 
 		private void OnEffectAdded(object obj)
@@ -157,7 +189,8 @@ namespace Beached.Content.Scripts
 			if (!effects.HasEffect(BEffects.FLUMMOXED))
 			{
 				RemoveFlummoxModifiers();
-			};
+			}
+			;
 		}
 
 		public void OnPalateCleansed()

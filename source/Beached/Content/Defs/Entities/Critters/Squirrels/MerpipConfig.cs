@@ -9,7 +9,7 @@ namespace Beached.Content.Defs.Entities.Critters.Squirrels
 	public class MerpipConfig : BaseMerpipConfig, IEntityConfig
 	{
 		public const string ID = "Beached_MerPip";
-		public const string EGG_ID = "Beached_MerPip";
+		public const string EGG_ID = "Beached_MerPipEgg";
 
 		protected override string AnimFile => "beached_merpip_kanim";
 

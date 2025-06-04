@@ -1,13 +1,9 @@
 ﻿using Beached.Content;
-using Beached.Content.Defs.Buildings;
 using Beached.Content.Defs.Flora;
 using Beached.Content.ModDb;
 using Database;
-using FUtility;
 using HarmonyLib;
 using UnityEngine;
-using static FUtility.CONSTS;
-using static FUtility.CONSTS.SUB_BUILD_CATEGORY;
 
 namespace Beached.Patches.DatabasePatches
 {
@@ -43,6 +39,9 @@ namespace Beached.Patches.DatabasePatches
 
 				BDb.OnDbInit(__instance);
 				BTags.OnDbInit();
+
+
+				BionicOilMonitor.LUBRICANT_TYPE_EFFECT[Elements.mucus] = BionicOilMonitor.CreateFreshOilEffectVariation(Elements.mucus.ToString(), -10f / CONSTS.CYCLE_LENGTH, 2f);
 			}
 
 			[HarmonyPriority(Priority.Low)]

@@ -1,0 +1,22 @@
+shape: Blob
+
+borders:
+  - 1
+
+blobSize:
+  min: 2
+  max: 5
+
+ElementChoiceGroups:
+  RoomCenterElements:
+    selectionMethod: WeightedResample
+    choices:
+      - element: Beached_Moss
+
+  RoomBorderChoices1:
+    selectionMethod: WeightedResample
+    choices:
+      - element: Beached_Moss
+        weight: 1
+      - element: Dirt
+        weight: 1

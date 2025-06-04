@@ -17,7 +17,7 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 				.Trappable()
 				.Baggable()
 				.SortAfter(SquirrelConfig.ID)
-				.MaxPenSize(TUNING.CREATURES.SPACE_REQUIREMENTS.TIER3)
+				.CritterDensityTolerance(TUNING.CREATURES.SPACE_REQUIREMENTS.TIER3)
 				.Brain(BTags.Species.karacoo)
 					.Configure(ConfigureAI)
 				.Traits()

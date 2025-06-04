@@ -6,9 +6,12 @@ using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.Karacoos;
 using Beached.Content.Defs.Entities.Critters.Mites;
 using Beached.Content.Defs.Entities.Critters.Muffins;
+using Beached.Content.Defs.Entities.Critters.Pacus;
+using Beached.Content.Defs.Entities.Critters.Rotmongers;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Entities.Critters.Squirrels;
 using Beached.Content.Defs.Flora;
+using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb.Germs;
 using FUtility.FLocalization;
 
@@ -380,7 +383,10 @@ namespace Beached
 					public class WATERCUPS
 					{
 						public static LocString NAME = "Watercups Seed";
-						public static LocString DESC = "...";
+
+						public static LocString DESC = $"The {Link("Seed", "PLANTS")} of a {BEACHED_WATERCUPS.NAME}." +
+							$"\n" +
+							$"\nDigging up Buried Objects may uncover a Watercups Seed.";
 					}
 
 					public class FILAMENT
@@ -391,8 +397,8 @@ namespace Beached
 
 					public class BEACHED_CELLALGAE
 					{
-						public static LocString NAME = Link("Small Cell", Content.Defs.Flora.AlgaeCellConfig.ID);
-						public static LocString DESC = "...";
+						public static LocString NAME = Link("Bubble Cell", AlgaeCellConfig.ID);
+						public static LocString DESC = $"A small osmosed piece of a {Link("Bubble Algae", AlgaeCellConfig.ID)}";
 					}
 
 					public class BEACHED_PIPTAIL
@@ -404,7 +410,7 @@ namespace Beached
 					public class BEACHED_LEAFLETCORAL
 					{
 						public static LocString NAME = "Leaflet Coral Frag";
-						public static LocString DESC = ($"The {Link("Frag", "CORALS")} of a {NAME}.");
+						public static LocString DESC = ($"The {Link("Frag", "CORALS")} of a {Link("Leaflet Coral", LeafletCoralConfig.ID)}.");
 					}
 				}
 
@@ -540,6 +546,24 @@ namespace Beached
 					public static LocString EGG_NAME = Link("Muffling Whelp Egg", MuffinConfig.ID);
 				}
 
+				public class BEACHED_PRINCESSPACU
+				{
+					public static LocString NAME = Link("Princess Pacu", PrincessPacuConfig.ID);
+					public static LocString DESC = "A pacu with glistening scales shining in a myriad colors, this creature brings tears to the eyes of those who catch a glimpse of it from it's sheer beauty.";
+					public static LocString BABY_NAME = Link("Princess Fry", MuffinConfig.ID);
+					public static LocString BABY_DESC = "...";
+					public static LocString EGG_NAME = Link("Princess Fry Egg", MuffinConfig.ID);
+				}
+
+				public class BEACHED_ROTMONGER
+				{
+					public static LocString NAME = Link("Rotmonger", RotmongerConfig.ID);
+					public static LocString DESC = $"Opportunist scavenger who feasts on decomposing organic materials. In it's stomach crystallizes pure {Link("Abyssalite", SimHashes.Katairite)}.";
+					public static LocString BABY_NAME = Link("Rotring", RotmongerConfig.ID);
+					public static LocString BABY_DESC = "...";
+					public static LocString EGG_NAME = Link("Rotring", RotmongerConfig.ID);
+				}
+
 				public class BEACHED_DEWPALM
 				{
 					public static LocString NAME = Link("Dew Palm", DewPalmConfig.ID);
@@ -590,8 +614,8 @@ namespace Beached
 				public class BEACHED_WATERCUPS
 				{
 					public static LocString NAME = Link("Watercups", WaterCupsConfig.ID);
-					public static LocString DESC = "...";
-					public static LocString DOMESTICATEDDESC = "...";
+					public static LocString DESC = "The blue cup part is actually a modified leaf called a \"spathe\", protecting a very fragile blue spadix inside. Despite the perfect shape for it, it is not recommended to drink from this flower as it is highly toxic.";
+					public static LocString DOMESTICATEDDESC = $"This plant improves ambient {Link("Decor", "DECOR")}.";
 				}
 
 				public class BEACHED_FILAMENT
@@ -601,11 +625,22 @@ namespace Beached
 					public static LocString DOMESTICATEDDESC = "...";
 				}
 
+				public class BEACHED_OXYBLOON
+				{
+					[Note("Oxygen + Balloon")]
+					public static LocString NAME = Link("Oxybloon", OxybloonConfig.ID);
+					public static LocString DESC = "A flowering plant with a large airsack full of breathable Oxygen. Uprooting the plant releases it's contents to the atmosphere. \n" +
+						"\n" +
+						$"Oxybloons will die when their Oxygen store is depleted. Oxybloons cannot reproduce.";
+				}
+
 				public class BEACHED_MUSSEL_SPROUT
 				{
 					[Note("From Mussel (the mollusc) and Brussel Sprout.")]
 					public static LocString NAME = Link("Mussel Sprout", MusselSproutConfig.ID);
-					public static LocString DESC = "The mussel sprout resembles a mollusc, with it's hard shell and slimy inside. When harvested it attempts to \"run\" away at speeds so slow they are difficult to observe with the naked eye, with the help of its prehensile tongue. ";
+					public static LocString DESC = "The mussel sprout resembles a mollusc, with its hard shell and slimy inside. When harvested, it attempts to \"run\" away at speeds so slow they are difficult to observe with the naked eye, with the help of its prehensile tongue. \n" +
+						"\n" +
+						$"Mussel Sprouts can be harvested for an edible {Link(MusselTongueConfig.ID)}. Mussel Sprouts cannot reproduce.";
 				}
 
 				public class BEACHED_POFFSHROOM

@@ -8,7 +8,7 @@ namespace Beached.Content.Defs.Entities.Corals
 {
 	public class CoralTemplate
 	{
-		public static readonly SimHashes[] ALL_WATERS =
+		public static SimHashes[] ALL_WATERS =
 		[
 			SimHashes.Water,
 			SimHashes.SaltWater,

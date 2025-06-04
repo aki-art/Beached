@@ -7,11 +7,13 @@ namespace Beached.Content.ModDb.Sicknesses
 	{
 		private readonly GameObject prefab;
 		private readonly Vector3 offset;
+		private readonly float disappearTime;
 
-		public ParticleEffectEffect(GameObject prefab, Vector3 offset)
+		public ParticleEffectEffect(GameObject prefab, Vector3 offset, float disappearTime)
 		{
 			this.prefab = prefab;
 			this.offset = offset;
+			this.disappearTime = disappearTime;
 		}
 
 		public override object OnInfect(GameObject go, SicknessInstance diseaseInstance)
@@ -41,7 +43,7 @@ namespace Beached.Content.ModDb.Sicknesses
 				var emission = particles.emission;
 				emission.rateOverTime = 0;
 
-				GameScheduler.Instance.Schedule("remove particles", 5f, _ => particles.Stop());
+				GameScheduler.Instance.Schedule("remove particles", disappearTime, _ => particles.Stop());
 			}
 		}
 	}

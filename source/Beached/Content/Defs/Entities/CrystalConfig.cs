@@ -18,6 +18,7 @@ namespace Beached.Content.Defs.Entities
 			AQUAMARINE = "Beached_AquamarineCrystal",
 			SUCROSE = "Beached_SucroseCrystal",
 			SALT = "Beached_SaltCrystal",
+			OXYROCK = "Beached_OxyRockCrystal",
 
 			// not implemented
 			SELENITE = "Beached_SeleniteCrystal",
@@ -35,7 +36,8 @@ namespace Beached.Content.Defs.Entities
 				CreatePrefab(KARAIRITE, SimHashes.Katairite, "beached_katairite_crystal_kanim", null,  5, 10, 200),
 				CreatePrefab(SUCROSE, SimHashes.Sucrose, "beached_sucrose_crystal_kanim", null,  5, 30, 200),
 				CreatePrefab(SALT, SimHashes.Salt, "beached_salt_crystal_kanim", null,  5, 30, 200),
-				CreatePrefab(AQUAMARINE, Elements.aquamarine, "beached_aquamarine_crystal_kanim", null,  5, 30, 200),
+				CreatePrefab(AQUAMARINE, Elements.aquamarine, "beached_aquamarine_crystal_kanim", null,  5, 30, growthPercentPerCycle: 200),
+				CreatePrefab(OXYROCK, SimHashes.OxyRock, "beached_oxylite_crystal_kanim", null,  5, 30, 200),
 			};
 
 			if (Mod.integrations.IsModPresent(Integrations.CHEMICAL_PROCESSING))

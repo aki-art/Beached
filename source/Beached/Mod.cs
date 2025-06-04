@@ -41,6 +41,9 @@ namespace Beached
 
 		public override void OnLoad(Harmony harmony)
 		{
+			Log.Debug($"loading assembly from {Path.Combine(Mod.folder, "lib", "BeachedUnityBridge.dll")}");
+			Assembly.LoadFrom(Path.Combine(folder, "lib", "BeachedUnityBridge.dll"));
+
 			base.OnLoad(harmony);
 
 			BTags.OnModLoad();

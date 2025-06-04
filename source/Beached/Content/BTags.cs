@@ -12,6 +12,8 @@ namespace Beached.Content
 			aquaticSeed = TagManager.Create("Beached_AquaticSeed"),
 			// any buildig where foods are queued. meats will be scanned here, and Chef Makis can operate them
 			cookingStation = TagManager.Create("Beached_CookingStation"),
+			// triggers comfort seeker trait morale bonus when on a clothing item
+			comfortableClothing = TagManager.Create("Beached_ComfortableCooking"),
 			// add this to a creature to ignore electricity
 			electricInvulnerable = TagManager.Create("Beached_ElectricInvulnerable"),
 			// "eggs" Karacoos will consider an egg, but really aren't (infertile egg, egg artifact, etc.)
@@ -42,6 +44,7 @@ namespace Beached.Content
 			soaped = TagManager.Create("Beached_Soaped"),
 			underWater = TagManager.Create("Beached_UnderWater"),
 			crystalCluster = TagManager.Create("Beached_CrystalCluster"),
+			userNamedCritter = TagManager.Create("Beached_UserNamedCritter"),
 
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),

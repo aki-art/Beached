@@ -13,6 +13,7 @@
 		<Publicised>true</Publicised>
 		<CopyFiles>true</CopyFiles>
 		<DebugType>Portable</DebugType>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<!-- General Package Properties -->
@@ -31,7 +32,6 @@
 		<SupportedContent>ALL</SupportedContent>
 		<MinimumSupportedBuild>486499</MinimumSupportedBuild>
 		<APIVersion>2</APIVersion>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 	
 	<ItemGroup>
@@ -41,6 +41,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+
+		<Reference Include="BeachedUnityBridge">
+		  <HintPath>..\..\beached_unity_bridge_source\BeachedUnityBridge\bin\Debug\net48\BeachedUnityBridge.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
 		<Reference Include="FMODUnity">
 			<HintPath>$(GameLibsFolder)\FMODUnity.dll</HintPath>
@@ -133,6 +138,10 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="WorldGen\ComplexFeatures\" />
 	</ItemGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

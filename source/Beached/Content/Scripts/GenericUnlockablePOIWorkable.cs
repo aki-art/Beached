@@ -8,12 +8,6 @@
 			workerStatusItem = Db.Get().DuplicantStatusItems.ResearchingFromPOI;
 			alwaysShowProgressBar = true;
 			resetProgressOnStop = false;
-			overrideAnims =
-			[
-				Assets.GetAnim( "anim_interacts_research_unlock_kanim")
-			];
-
-			synchronizeAnims = true;
 		}
 
 		public override void OnCompleteWork(WorkerBase worker)

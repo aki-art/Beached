@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Beached.Patches
 {
-	internal class CodexEntryGenerator_CreaturesPatches
+	public class CodexEntryGenerator_CreaturesPatches
 	{
 		[HarmonyPatch(typeof(CodexEntryGenerator_Creatures), "GenerateEntries")]
 		public class CodexEntryGenerator_Creatures_GenerateEntries_Patch

@@ -13,15 +13,22 @@ biomes:
   - name: Beached:biomes/Bamboo/Basic
     weight: 2
     tags:
-      - Beached_Bamboo
-      - Beached_BambooForest_Cylindrica
+      - Beached:Bamboo_Sparse
+      - Beached:BambooForest_Cylindrica
+  - name: Beached:biomes/Bamboo/Basic
+    weight: 1
+    tags:
+      - Beached:Beached_Karacoo
+      - Beached:BambooForest_Cylindrica
+      - Beached:Beached_Bamboo
   - name: Beached:biomes/Bamboo/Mossy
     weight: 1
     tags:
-      - Beached_Bamboo
-      - Beached_BambooForest_Cylindrica
-      - Beached_Karacoo
-      - Beached_MossyDrecko
+      - Beached:Bamboo_Sparse
+      - Beached:BambooForest_Cylindrica
+      - Beached:Beached_Karacoo
+      - Beached:Beached_MossyDrecko
+
 tags:
   - IgnoreCaveOverride
   - NoGlobalFeatureSpawning
@@ -32,5 +39,12 @@ features:
   - type: Beached:features/bamboo/MossCave
   - type: Beached:features/bamboo/SucroseCave
   - type: Beached:features/bamboo/AmberBlob
+  
+subworldTemplateRules:
+  - names:
+      - beached/worldgen/bamboo/dasha_cave
+    listRule: TrySome
+    someCount: 4
+    allowDuplicates: true
 
 zoneType: Beached_Bamboo

@@ -1,6 +1,7 @@
 ﻿using Beached.Content;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
+using Beached.Content.Scripts.UI;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,16 @@ namespace Beached.Patches
 
 				if (!template.HasTag(BTags.electricInvulnerable))
 					template.AddOrGet<Electrocutable>();
+			}
+
+			[HarmonyPostfix]
+			[HarmonyPriority(Priority.Low)]
+			public static void LatePostfix(GameObject template)
+			{
+				template.AddOrGet<UserNameable>();
+				var characterOverlay = template.AddOrGet<CharacterOverlay>();
+				template.AddComponent<Beached_CritterNameOverlay>().disableScreenControl = characterOverlay.shouldShowName;
+				characterOverlay.shouldShowName = true;
 			}
 		}
 

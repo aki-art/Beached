@@ -27,6 +27,7 @@
 			medusaSignal = new("MedusaSignal"),
 			depleted = new("Depleted"),
 			crystalRotated = new("CrystalRotated"),
+			sublimated = new("Sublimated"),
 			crystalHarvested = new("CrystalHarvested"),
 
 			segmentedEntityUpdate = new("SegmentedEntityUpdate"),

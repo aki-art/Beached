@@ -70,7 +70,7 @@ namespace Beached.Utils
 					id = id,
 					mutuallyExclusiveAptitudes = mutuallyExclusiveAptitudes,
 					mutuallyExclusiveTraits = mutuallyExclusiveTraits,
-					dlcId = dlcId,
+					requiredDlcIds = [dlcId],
 					impact = impact,
 					rarity = rarity,
 					statBonus = statBonus,

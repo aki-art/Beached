@@ -39,7 +39,7 @@ namespace Beached.Utils
 
 		public AchievementBuilder DLC(string[] dlcIds)
 		{
-			achievement.dlcIds = dlcIds;
+			achievement.requiredDlcIds = dlcIds;
 			return this;
 		}
 

@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
-	internal class GenericUnlockablePOI : GameStateMachine<GenericUnlockablePOI, GenericUnlockablePOI.Instance, IStateMachineTarget, GenericUnlockablePOI.Def>
+	// very similar to PoiUnlockable but a bit more configurable
+	public class GenericUnlockablePOI : GameStateMachine<GenericUnlockablePOI, GenericUnlockablePOI.Instance, IStateMachineTarget, GenericUnlockablePOI.Def>
 	{
 		public State locked;
 		public UnlockedStates unlocked;
@@ -47,13 +49,13 @@ namespace Beached.Content.Scripts
 			foreach (TechItem unlockTechItem in smi.unlockTechItems)
 				buildings = $"{buildings}\n    • {unlockTechItem.Name}";
 
-			return string.Format(STRINGS.MISC.NOTIFICATIONS.BEACHED_SLEEPINGMUFFINS.MESSAGEBODY, buildings);
+			return string.Format(smi.def.messageBody, buildings);
 		}
 
 		private static EventInfoData GenerateEventPopupData(Instance smi)
 		{
 			var eventPopupData = new EventInfoData(
-				STRINGS.MISC.NOTIFICATIONS.BEACHED_SLEEPINGMUFFINS.NAME,
+				smi.def.popUpName,
 				GetMessageBody(smi),
 				smi.def.animName);
 
@@ -86,8 +88,10 @@ namespace Beached.Content.Scripts
 			public List<string> techUnlockIDs;
 			public List<string> spawnPrefabs;
 			public LocString popUpName;
+			public LocString messageBody;
 			public string animName;
 			public string loreUnlockId;
+			public Action<GameObject> onSpawnFn;
 		}
 
 		public new class Instance : GameInstance, ISidescreenButtonControl
@@ -108,6 +112,7 @@ namespace Beached.Content.Scripts
 						Beached.Log.Warning("Invalid tech item " + poiTechUnlockId + " for POI Tech Unlock");
 				}
 			}
+
 
 			public override void StartSM()
 			{
@@ -150,7 +155,10 @@ namespace Beached.Content.Scripts
 					return;
 
 				foreach (var prefab in def.spawnPrefabs)
-					FUtility.Utils.Spawn(prefab, gameObject);
+				{
+					var go = FUtility.Utils.Spawn(prefab, gameObject.transform.position + Vector3.up);
+					def.onSpawnFn?.Invoke(go);
+				}
 			}
 
 			private void UpdateUnlocked()

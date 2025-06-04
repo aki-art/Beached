@@ -5,7 +5,7 @@ namespace Beached.Content.Scripts
 	public class SingleHarvestable : StateMachineComponent<SingleHarvestable.StatesInstance>
 	{
 		[MyCmpReq] public Harvestable harvestable;
-		[MyCmpReq] public SeedProducer seedProducer;
+		[MyCmpGet] public SeedProducer seedProducer;
 		[MyCmpReq] public KBatchedAnimController animController;
 
 		[SerializeField] public string deathFx;
@@ -52,18 +52,11 @@ namespace Beached.Content.Scripts
 
 				alive.harvest
 					.PlayAnim("harvest")
-					.Enter(smi =>
-					{
-						Log.Debug("ENTERED HARVEST");
-						//if (!smi.master.soundFx.IsNullOrWhiteSpace())
-						//AudioUtil.PlaySound(smi.master.soundFx, smi.transform.position, smi.master.volume);
-					})
 					.EventHandler(GameHashes.AnimQueueComplete, smi => Log.Debug("anim queue completed"))
 					.OnAnimQueueComplete(dead)
 					.Exit(smi => smi.master.seedProducer.DropSeed());
 
 				dead
-					.Enter(smi => Log.Debug("ENTERED DEAD"))
 					.Enter(Die);
 			}
 

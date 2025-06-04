@@ -1,6 +1,16 @@
 MobLookupTable:
   remove: [] 
   add:
+    Beached_Oxybloon:
+      prefabName: Beached_Oxybloon
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.05
+        max: 0.3
+      width: 1
+      height: 1
+
     Beached_MusselSprout:
       prefabName: Beached_MusselSprout
       location: Floor
@@ -146,6 +156,16 @@ MobLookupTable:
       density:
         min: 0.6
         max: 1.2
+      width: 1
+      height: 2
+
+    Bamboo_Sparse:
+      prefabName: Beached_Bamboo
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.3
       width: 1
       height: 2
 

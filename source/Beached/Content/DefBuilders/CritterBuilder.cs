@@ -45,6 +45,7 @@ namespace Beached.Content.DefBuilders
 		private WeaponBuilder weapon;
 		private Tag condoTag = CritterCondoConfig.ID;
 		private bool condoRequiresCavity = true;
+		private bool isFish = false;
 		private string symbolPrefix = null;
 
 		public string GetName()
@@ -96,6 +97,12 @@ namespace Beached.Content.DefBuilders
 		public CritterBuilder Baggable()
 		{
 			baggable = true;
+			return this;
+		}
+
+		public CritterBuilder Fish()
+		{
+			isFish = true;
 			return this;
 		}
 
@@ -174,7 +181,7 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
-		public CritterBuilder MaxPenSize(int spaceRequiredPerCritter)
+		public CritterBuilder CritterDensityTolerance(int spaceRequiredPerCritter)
 		{
 			this.spaceRequiredPerCritter = spaceRequiredPerCritter;
 			return this;
@@ -313,10 +320,6 @@ namespace Beached.Content.DefBuilders
 			if (brain == null)
 				Log.Warning($"Error in configuring {id}: Brain was not set up");
 
-			Log.Debug("Adding critter");
-			Log.Debug($"Name: {GetName()}");
-			Log.Debug($"Desc: {GetDescription()}");
-
 			prefab = EntityTemplates.CreatePlacedEntity(
 				id,
 				GetName(),
@@ -351,6 +354,15 @@ namespace Beached.Content.DefBuilders
 				tempMaxWarning,
 				tempMinLethal,
 				tempMaxLethal);
+
+			if (isFish)
+			{
+				var fallMonitor = prefab.AddOrGetDef<CreatureFallMonitor.Def>();
+				fallMonitor.canSwim = true;
+				fallMonitor.checkHead = false;
+				prefab.AddOrGetDef<FlopMonitor.Def>();
+				prefab.AddOrGetDef<FishOvercrowdingMonitor.Def>();
+			}
 
 			if (symbolPrefix != null)
 				prefab.AddOrGet<SymbolOverrideController>().ApplySymbolOverridesByAffix(animFile, symbolPrefix);

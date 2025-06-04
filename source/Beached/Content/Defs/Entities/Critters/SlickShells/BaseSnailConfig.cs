@@ -30,7 +30,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.Baggable()
 				.CanNotDrown()
 				.SortAfter(CrabConfig.ID)
-				.MaxPenSize(CREATURES.SPACE_REQUIREMENTS.TIER3)
+				.CritterDensityTolerance(CREATURES.SPACE_REQUIREMENTS.TIER3)
 				.Navigator(CritterBuilder.NAVIGATION.FLOOR_NOJUMP_1X1, NavType.Floor, 0.25f, 16)
 				.Brain(BTags.Species.snail)
 					.Configure(ConfigureAI)

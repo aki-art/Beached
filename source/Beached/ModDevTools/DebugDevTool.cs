@@ -26,9 +26,6 @@ namespace Beached.ModDevTools
 		private static Dictionary<string, ShaderPropertyInfo> liquidShaderProperties;
 		private static Material mat;
 		public static bool renderLiquidTexture;
-		private static string liquidCullingMaskLayer = "Water";
-		private static float foulingPlaneZ = Grid.GetLayerZ(Grid.SceneLayer.BuildingFront);
-		private static int foulingPlaneLayer = 3500;
 		private static float uvScale = 10f;
 
 		private string[] zoneTypes;
@@ -208,7 +205,6 @@ namespace Beached.ModDevTools
 				// BackgroundUVScale
 				ImGui.DragFloat("_Beached_TimeOfDayColor", ref Beached_Mod.tempDayTimeProgress);
 
-				ImGui.InputText("Mask: ", ref liquidCullingMaskLayer, 256);
 
 				if (ImGui.DragFloat("Rot UV Scale", ref siltStoneUV))
 				{

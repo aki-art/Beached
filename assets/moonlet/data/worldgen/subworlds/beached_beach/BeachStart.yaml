@@ -1,14 +1,15 @@
 biomeNoise: Beached:noise/Beach_Solid
 temperatureRange: Beached:SummerDay
 
-pdWeight: 8
+pdWeight: 2
 density:
-  min: 20
-  max: 25
-avoidRadius: 10.0
-extraBiomeChildren: 3
-doAvoidPoints: false
+  min: 10
+  max: 15
+avoidRadius: 15.0
+minChildCount: 10
+# extraBiomeChildren: 3
 dontRelaxChildren: true
+# doAvoidPoints: false
 sampleBehaviour: PoissonDisk
 
 borderOverride: beachedDirty
@@ -27,21 +28,19 @@ biomes:
       - Beached:Beached_SandySeashell
       - Beached:Beached_SandySlickshell
       - Beached:Beached_BuriedSeashell
+      - Beached:Beached_Oxybloon
 
 centralFeature:
   type: features/generic/StartLocation
 
 features:
-  - type: Beached:features/beach/AirPocket
-  - type: Beached:features/beach/MetalCavern
-  - type: Beached:features/beach/AlgaePocket
   - type: Beached:features/beach/MediumFreshwaterLake
   - type: Beached:features/beach/TinyFreshWaterLake
   - type: Beached:features/beach/SnailPocket
 
 tags:
   - IgnoreCaveOverride
-  - NoGlobalFeatureSpawning
   - StartWorld
+  - NoGlobalFeatureSpawning
 
 zoneType: Beached_Beach

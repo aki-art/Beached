@@ -23,6 +23,8 @@ namespace Beached.Patches
 	{
 		private static readonly HashSet<Tag> TAGS =
 		[
+			BeachShirtConfig.ID,
+
 			CrystalConfig.TEST_ID,
 			CrystalConfig.ZEOLITE,
 			CrystalConfig.ZEOLITE + "Cluster",
@@ -30,6 +32,7 @@ namespace Beached.Patches
 			CrystalConfig.AQUAMARINE,
 			CrystalConfig.SALT,
 			CrystalConfig.SUCROSE,
+			CrystalConfig.OXYROCK,
 
 			// Gems
 			RareGemsConfig.FLAWLESS_DIAMOND,
@@ -59,6 +62,7 @@ namespace Beached.Patches
 			BambooConfig.ID,
 			PurpleHangerConfig.ID,
 			SpinorilaConfig.ID,
+			OxybloonConfig.ID,
 
 			// genetic samples
 			GeneticSamplesConfig.EVERLASTING,

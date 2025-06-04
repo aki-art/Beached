@@ -32,7 +32,8 @@ elements:
       state: Liquid
       tags:
         - Slippery
-        # - LubricatingOil
+        - LubricatingOil
+        - UnrefinedOil
       duplicantEffects:
         submergedIn:
           id: Beached_SubmergedInMucus

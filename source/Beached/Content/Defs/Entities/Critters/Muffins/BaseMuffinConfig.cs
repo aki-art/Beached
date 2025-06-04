@@ -16,7 +16,7 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 				.Trappable()
 				.Baggable()
 				.SortAfter(SquirrelConfig.ID)
-				.MaxPenSize(8)
+				.CritterDensityTolerance(8)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_1X2, 2f)
 				.Brain(BTags.Species.muffin)
 					.Configure(ConfigureAI)

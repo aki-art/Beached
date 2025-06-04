@@ -10,7 +10,7 @@ namespace Beached.Content.Scripts.UI
 		public BToggle checkbox;
 		private CollarDispenser target;
 
-		public override bool IsValidForTarget(GameObject target) => target.TryGetComponent(out CollarDispenser _);
+		public override bool IsValidForTarget(GameObject target) => false; // target.TryGetComponent(out CollarDispenser _);
 
 		public override void SetTarget(GameObject target)
 		{
@@ -24,6 +24,13 @@ namespace Beached.Content.Scripts.UI
 			{
 				this.target = dispenser;
 			}
+		}
+
+		public override void OnPrefabInit()
+		{
+			Log.Debug("On prefab init");
+
+			base.OnPrefabInit();
 		}
 
 		public override int GetSideScreenSortOrder() => 0;
@@ -48,6 +55,5 @@ namespace Beached.Content.Scripts.UI
 			counter.transform.SetParent(container);
 			container.gameObject.SetActive(true);
 		}
-
 	}
 }

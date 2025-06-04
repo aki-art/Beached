@@ -31,15 +31,6 @@ namespace Beached.Content.DefBuilders
 		private int seedSortOrder = 0;
 		private bool harvestable = false;
 
-		private static readonly SimHashes[] waters =
-			[
-				SimHashes.Water,
-				SimHashes.SaltWater,
-				SimHashes.Brine,
-				SimHashes.DirtyWater,
-				Elements.murkyBrine
-			];
-
 		public CoralBuilder(string ID, string animName)
 		{
 			this.ID = ID;
@@ -48,7 +39,7 @@ namespace Beached.Content.DefBuilders
 			this.animName = animName;
 			initialAnim = "idle_grown";
 			decor = TUNING.DECOR.NONE;
-			safeElements = waters;
+			safeElements = CoralTemplate.ALL_WATERS;
 			name = Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.NAME");
 			description = Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DESC");
 		}

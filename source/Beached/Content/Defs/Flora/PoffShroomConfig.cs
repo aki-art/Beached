@@ -11,6 +11,8 @@ namespace Beached.Content.Defs.Flora
 		public const string SEED_ID = "Beached_PoffShroomSeed"; // only for replanting
 		public const string BASE_TRAIT_ID = "Beached_PoffShroomOriginal";
 
+		public const float GAS_CONSUMPTION_PER_SECOND_WILD = 0.25f;
+
 		public GameObject CreatePrefab()
 		{
 			var anim = Assets.GetAnim("beached_poffshroom_kanim");
@@ -47,7 +49,7 @@ namespace Beached.Content.Defs.Flora
 			elementConsumer.configuration = ElementConsumer.Configuration.AllGas;
 			elementConsumer.elementToConsume = SimHashes.Vacuum;
 			elementConsumer.capacityKG = 2f;
-			elementConsumer.consumptionRate = 0.25f;
+			elementConsumer.consumptionRate = GAS_CONSUMPTION_PER_SECOND_WILD;
 			elementConsumer.consumptionRadius = 1;
 			elementConsumer.sampleCellOffset = new Vector3(0f, 0f);
 			elementConsumer.storage = storage;

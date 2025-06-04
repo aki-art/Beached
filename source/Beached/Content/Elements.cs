@@ -1,6 +1,8 @@
-﻿using Beached.Utils.GlobalEvents;
+﻿using Beached.Content.Defs.Entities.Corals;
+using Beached.Utils.GlobalEvents;
 using HarmonyLib;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content
@@ -178,6 +180,19 @@ namespace Beached.Content
 				oniTwitchSuperInsulator = ToHashMod("OniTwitchSuperInsulator");
 		}
 
+		public class ChaosEvents
+		{
+			public static readonly SimHashes
+				inverseWater = ToHashMod("ITCE_Inverse_Water"),
+				inverseIce = ToHashMod("ITCE_Inverse_Ice"),
+				inverseWaterPlaceholder = ToHashMod("ITCE_Inverse_Water_Placeholder"),
+				inverseSteam = ToHashMod("ITCE_Inverse_Steam"),
+				creepyLiquidGas = ToHashMod("ITCE_CreepyLiquidGas"),
+				creepyLiquid = ToHashMod("ITCE_CreepyLiquid"),
+				liquidPoop = ToHashMod("ITCE_Liquid_Poop"),
+				voidLiquid = ToHashMod("ITCE_VoidLiquid");
+		}
+
 		// setting these when loaded
 		public static SolidAmbienceType
 			crystalAmbiance = 0;
@@ -291,6 +306,13 @@ namespace Beached.Content
 
 			foreach (var kvp in acidVulnerabilities)
 				ElementLoader.FindElementByHash(kvp.Key)?.AddTag(BTags.corrodable);
+
+			if (ElementLoader.FindElementByHash(ChaosEvents.inverseWater) != null)
+			{
+				var waters = CoralTemplate.ALL_WATERS.ToHashSet();
+				waters.Add(ChaosEvents.inverseWater);
+				CoralTemplate.ALL_WATERS = [.. waters];
+			}
 		}
 
 		private static void SetConduction(SimHashes element, float conduction)

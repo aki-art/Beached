@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
 {
-    public class MusselSproutConfig : IEntityConfig
+	public class MusselSproutConfig : IEntityConfig
 	{
 		public const string ID = "Beached_MusselSprout";
 		public const string BASE_TRAIT_ID = ID + "_BaseTrait";
@@ -28,8 +28,12 @@ namespace Beached.Content.Defs.Flora
 			prefab.AddOrGet<OccupyArea>().objectLayers = [ObjectLayer.Building];
 			prefab.AddOrGet<EntombVulnerable>();
 			prefab.AddOrGet<Prioritizable>();
+
 			var uprootable = prefab.AddOrGet<UprootableWithDramaticDeath>();
 			uprootable.deathAnimation = "harvest";
+			uprootable.multitoolHitEffectTag = BEffectConfigs.MUSSEL_GIBLETS;
+			uprootable.multitoolContext = ModAssets.CONTEXTS.HARVEST_ORANGE_SQUISH;
+
 			//uprootable.deathSoundFx = ModAssets.Sounds.MUSSEL_SPROUT_HARVEST;
 			prefab.AddOrGet<UprootedMonitor>();
 			prefab.AddOrGet<Harvestable>();
