@@ -1,6 +1,7 @@
 ﻿#if DEVTOOLS
 using Beached.Content;
 using Beached.Content.BWorldGen;
+using Beached.Content.Defs.StarmapEntities;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
@@ -41,8 +42,82 @@ namespace Beached.ModDevTools
 		private static string rewardTestResult;
 		private static bool accelerateLifeCycles;
 
+
+		// TODO this is copy paste of FindAvailablePOISpawnLocations
+		private static List<AxialI> FindAvailablePOISpawnLocations(AxialI location)
+		{
+			List<AxialI> available = new List<AxialI>();
+			bool flag = IsSuitablePOISpawnLocation(location);
+			if (flag)
+			{
+				available.Add(location);
+			}
+			for (int dist = 1; dist <= 2; dist++)
+			{
+				foreach (AxialI direction in AxialI.DIRECTIONS)
+				{
+					AxialI destination = location + direction * dist;
+					bool flag2 = IsSuitablePOISpawnLocation(destination);
+					if (flag2)
+					{
+						available.Add(destination);
+					}
+				}
+			}
+			return available;
+		}
+		private static bool IsSuitablePOISpawnLocation(AxialI location)
+		{
+			bool flag = !ClusterGrid.Instance.IsValidCell(location);
+			bool result;
+			if (flag)
+			{
+				result = false;
+			}
+			else
+			{
+				List<ClusterGridEntity> entities = ClusterGrid.Instance.GetEntitiesOnCell(location);
+				foreach (ClusterGridEntity entity in entities)
+				{
+					bool flag2 = entity.Layer == EntityLayer.Asteroid || entity.Layer == EntityLayer.POI;
+					if (flag2)
+					{
+						return false;
+					}
+				}
+				result = true;
+			}
+			return result;
+		}
+
 		public override void RenderTo(DevPanel panel)
 		{
+			if (ImGui.Button("Spawn Drale"))
+			{
+				bool isPaused = SpeedControlScreen.Instance.IsPaused;
+				if (isPaused)
+				{
+					SpeedControlScreen.Instance.Unpause(false);
+					SpeedControlScreen.Instance.SetSpeed(0);
+				}
+
+				if (DlcManager.IsExpansion1Active())
+				{
+					var locations = FindAvailablePOISpawnLocations(GameUtil.GetActiveTelepad().GetMyWorldLocation());
+
+					if (locations.Count > 0)
+					{
+						GameObject prefab = Assets.GetPrefab(Drale_SpacedOutConfig.ID);
+						GameObject POIgo = Util.KInstantiate(prefab, null, null);
+						var entity = POIgo.GetComponent<ClusterGridEntity>();
+						entity.Location = locations.GetRandom();
+						POIgo.SetActive(true);
+					}
+				}
+
+				if (isPaused)
+					SpeedControlScreen.Instance.Pause();
+			}
 
 			if (ImGui.Button("Spawn Oxygen"))
 				ElementLoader.FindElementByHash(SimHashes.Oxygen).substance.SpawnResource(GameUtil.GetActiveTelepad().transform.position, 1f, 315, 255, 0);

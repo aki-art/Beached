@@ -3,6 +3,7 @@ using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Integration;
+using System;
 using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
@@ -84,6 +85,7 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 			return result.ToArray();
 		}
 
+		[Obsolete]
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
 		public void OnPrefabInit(GameObject inst) { }

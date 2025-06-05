@@ -56,6 +56,7 @@ namespace Beached.Patches
 			MusselSproutConfig.ID,
 			PoffShroomConfig.ID,
 			WaterCupsConfig.ID,
+			BonewormConfig.ID,
 			DewPalmConfig.ID,
 			SlickShellConfig.ID,
 			BabySlickShellConfig.ID,

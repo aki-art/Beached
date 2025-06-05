@@ -610,6 +610,12 @@ namespace Beached
 					public static LocString DESC = "...";
 				}
 
+				public class BEACHED_BONEWORM
+				{
+					public static LocString NAME = Link("Boneworm", BonewormConfig.ID);
+					public static LocString DESC = "Sessile bone eating worms that attach themselves to their food sourve by root like structures. Theirs  protrusions, also called parapodia, are quite mesmerizing to look at.";
+					public static LocString DOMESTICATEDDESC = $"This plant improves ambient {Link("Decor", "DECOR")}.";
+				}
 
 				public class BEACHED_WATERCUPS
 				{
