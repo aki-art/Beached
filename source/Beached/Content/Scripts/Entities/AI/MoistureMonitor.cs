@@ -103,7 +103,14 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static bool CanProduceLubricant(Instance smi)
 		{
+			if (smi.effects.HasEffect(BEffects.RECENTLY_PRODUCED_LUBRICANT))
+				return false;
+
+			if (smi.mucusAmount.value < 5f)
+				return false;
+
 			var cell = Grid.CellBelow(Grid.PosToCell(smi));
+
 			return Grid.IsValidCell(cell) && Grid.IsSolidCell(cell);
 		}
 
@@ -111,6 +118,7 @@ namespace Beached.Content.Scripts.Entities.AI
 		{
 			public State damp;
 			public State dry;
+			public State resting;
 			public State desiccating;
 			public State secreting;
 		}
@@ -153,6 +161,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			public AttributeModifier baseMoistureModifier;
 			public float originalSpeed;
 			public Navigator navigator;
+			[MyCmpReq] public Effects effects;
 			public float hasBeenDryFor;
 			public float timeUntilDeath;
 			public float maxTimeUntilDeath = 60f;
@@ -209,9 +218,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			{
 				var mass = mucusAmount.value;
 
-				Beached.Log.Debug("mass: " + mass);
-
-				if (mass > 0)
+				if (mass > 0f)
 				{
 					BubbleManager.instance.SpawnBubble(
 						transform.GetPosition(),
@@ -221,6 +228,7 @@ namespace Beached.Content.Scripts.Entities.AI
 						def.lubricantTemperatureKelvin);
 
 					Trigger(ModHashes.producedLubricant);
+					effects.Add(BEffects.RECENTLY_PRODUCED_LUBRICANT, true);
 
 					mucusAmount.value = 0;
 				}

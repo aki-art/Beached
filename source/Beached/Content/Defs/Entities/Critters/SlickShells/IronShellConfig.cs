@@ -44,7 +44,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 
 			var moistureMonitor = prefab.AddOrGetDef<MoistureMonitor.Def>();
 			moistureMonitor.lubricant = Elements.mucus;
-			moistureMonitor.defaultMucusRate = 30f / 600f;
+			moistureMonitor.defaultMucusRate = 300f / 600f;
 			moistureMonitor.lubricantTemperatureKelvin = 300;
 
 			var diet = new Diet(SulfurDiet());

@@ -68,6 +68,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.Add(new EatStates.Def())
 				.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
 				.Add(new CallAdultStates.Def(), !isAdult)
+				.Add(new CritterCondoStates.Def(), isAdult)
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());
 		}
