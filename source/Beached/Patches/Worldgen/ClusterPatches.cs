@@ -20,7 +20,7 @@ namespace Beached.Patches.Worldgen
 		public class Cluster_AssignClusterLocations_Patch
 		{
 			[HarmonyPrepare]
-			public static bool Prepare() => true;
+			public static bool Prepare() => DlcManager.IsExpansion1Active();
 
 			private static LocationType specialWorldPosition = LocationType.Cluster;
 

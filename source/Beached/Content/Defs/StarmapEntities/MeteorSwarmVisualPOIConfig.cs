@@ -16,6 +16,7 @@ namespace Beached.Content.Defs.StarmapEntities
 
 			prefab.AddOrGet<SaveLoadRoot>();
 			prefab.AddOrGet<InvisibleClusterGridEntity>()._name = "Meteor Swarm Visualizer";
+			prefab.AddOrGet<SwarmVisualizer>();
 
 			return prefab;
 		}
