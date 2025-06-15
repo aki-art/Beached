@@ -26,10 +26,9 @@ elements:
       state: Gas
   
     - elementId: Beached_PerplexiumLiquid
-      descriptionText: Liquid form of Ammonia Gas.
-      name: Liquid Ammonia
+      descriptionText: Liquid form of Perplexium Gas.
+      name: Liquid Perplexium
       color: *color
-      rotAtmosphereQuality: Sterilizing
       maxMass: 500
       liquidCompression: 1.01
       speed: 200
@@ -40,7 +39,7 @@ elements:
       solidSurfaceAreaMultiplier: 1
       liquidSurfaceAreaMultiplier: 25
       gasSurfaceAreaMultiplier: 1
-      lowTemp: &meltingPoint -77.73C
+      lowTemp: &meltingPoint -97.73C
       highTemp: *boilingPoint
       lowTempTransitionTarget: Beached_FrozenPerplexium
       highTempTransitionTarget: Beached_Perplexium
@@ -67,7 +66,7 @@ elements:
       strength: 0.5
       highTemp: *meltingPoint
       highTempTransitionTarget: Beached_PerplexiumLiquid
-      defaultTemperature: -90C
+      defaultTemperature: -110C
       defaultMass: 500 
       maxMass: 1000
       hardness: 2

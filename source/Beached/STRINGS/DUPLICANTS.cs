@@ -16,6 +16,12 @@ namespace Beached
 					public static LocString TOOLTIP = "This Duplicant is melting some Ice.";
 				}
 
+				public class BEACHED_ICEWRATHLASHOUT
+				{
+					public static LocString NAME = "Lashing Out";
+					public static LocString TOOLTIP = $"This Duplicant is agitated by their {Link("Ice Wraiths.", IceWrathSickness.ID)}";
+				}
+
 				public class BEACHED_SIREN
 				{
 					public static LocString NAME = "Siren";
@@ -255,20 +261,31 @@ namespace Beached
 				public class BEACHED_PLANKTON
 				{
 					public static LocString NAME = Link("Plankton", PlanktonGerms.ID);
-					public static LocString DESCRIPTION = Link("Tiny organisms floating in water. These microscopic " +
+					public static LocString DESC = "Tiny organisms floating in water. These microscopic " +
 						"creatures are harmless to Duplicants. " +
-						"They are too small to see by the naked eye, the Germ Overlay will reveal them instead.");
+						"They are too small to see by the naked eye, the Germ Overlay will reveal them instead.";
 				}
 
 				public class BEACHED_ICEWRATH
 				{
 					public static LocString NAME = Link("Ice Wraiths", IceWrathGerms.ID);
-					public static LocString DESCRIPTION = Link("A type of parasitic roundworm that has been frozen away in the Permafrost for many many years. It is extremely resilient to cold temperatures and has been observed to survive being frozen at near absolute zero temperatures.");
+					public static LocString DESC = "A type of parasitic roundworm that has been frozen away in the Permafrost for many many years. It is extremely resilient to cold temperatures and has been observed to survive being frozen at near absolute zero temperatures.";
+				}
+
+				public class BEACHED_SICKNESS_ICEWRATH
+				{
+					public static LocString NAME = Link("Ice Wrath", IceWrathSickness.ID);
+				}
+
+				public class BEACHED_SICKNESS_LIMPETS_DUPLICANT
+				{
+					public static LocString NAME = Link("Limpets", LimpetsSickness.ID);
 				}
 
 				public class BEACHED_LIMPETEGG
 				{
 					public static LocString NAME = Link("Limpet Eggs", LimpetEggGerms.ID);
+					public static LocString DESC = $"Very small eggs of a Limpet colony. Limpets can latch onto various shells and carapaces, and the adult limpets will form shells of their surrounding material around themselves. When infecting a critters, these materials can be shorn off later at a {Link("Shearing Station", ShearingStationConfig.ID)}. When a Duplicant is infected, no useful material is produced.";
 				}
 
 				public class BEACHED_CAPSPORE

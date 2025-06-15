@@ -13,7 +13,7 @@ namespace Beached.Patches
 		public static StoryContentPanel.StoryState userChosenState;
 
 
-		[HarmonyPatch(typeof(StoryContentPanel), "GetTraitsString")]
+		//[HarmonyPatch(typeof(StoryContentPanel), "GetTraitsString")]
 		public class StoryContentPanel_GetTraitsString_Patch
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)

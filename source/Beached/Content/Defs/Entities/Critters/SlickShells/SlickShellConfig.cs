@@ -55,7 +55,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 
 			var host = prefab.AddOrGetDef<LimpetHost.Def>();
 			host.maxLevel = 3;
-			host.defaultGrowthRate = 0.025f;
+			host.defaultGrowthRate = LimpetHost.GROWTH_RATE_4_CYCLES;
 			host.itemDroppedOnShear = SimHashes.Lime.CreateTag();
 			host.massDropped = 5f;
 			host.targetSymbol = "beached_limpetgrowth";

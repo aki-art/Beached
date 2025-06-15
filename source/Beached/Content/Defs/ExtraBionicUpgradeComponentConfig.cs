@@ -5,12 +5,15 @@ using UnityEngine;
 
 namespace Beached.Content.Defs
 {
-	public class ExtraBionicUpgradeComponentConfig
+	public class ExtraBionicUpgradeComponentConfig : IHasDlcRestrictions
 	{
 		public const string PRECISION_ID = "Beached_Booster_Precision1";
 
 		public static void AddPrefabs(BionicUpgradeComponentConfig original, List<GameObject> prefabs)
 		{
+			if (!Game.IsCorrectDlcActiveForCurrentSave(new ExtraBionicUpgradeComponentConfig()))
+				return;
+
 			CreatePrecision1Booster(original, prefabs);
 		}
 
@@ -44,5 +47,9 @@ namespace Beached.Content.Defs
 
 			prefabs.Add(item);
 		}
+
+		public string[] GetForbiddenDlcIds() => null;
+
+		public string[] GetRequiredDlcIds() => DlcManager.DLC3;
 	}
 }

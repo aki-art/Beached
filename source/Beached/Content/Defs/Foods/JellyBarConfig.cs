@@ -1,5 +1,4 @@
-﻿using Beached.Content.ModDb;
-using TUNING;
+﻿using TUNING;
 using UnityEngine;
 using static EdiblesManager;
 
@@ -27,8 +26,6 @@ namespace Beached.Content.Defs.Foods
 				0.8f,
 				0.55f,
 				foodInfo);
-
-			ComplexRecipeManager.Get().GetRecipe(Recipes.jellyBarRecipeID).FabricationVisualizer = MushBarConfig.CreateFabricationVisualizer(prefab);
 
 			return prefab;
 		}

@@ -18,6 +18,12 @@ namespace Beached
 				public static LocString DESC = $"This Duplicant is super cozy wearing this outfit.";
 			}
 
+			public class BEACHED_SUPERALLERGEMED
+			{
+				public static LocString NAME = "Extended Antihistamines";
+				public static LocString DESC = $"This Duplicant's allergic reactions have been suppressed by medication";
+			}
+
 			public class BEACHED_DAMP_PLANTGROWTHBOOST
 			{
 				public static LocString NAME = "Damp Environment";

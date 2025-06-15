@@ -1,4 +1,5 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Foods;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Mites
@@ -18,6 +19,7 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 		{
 			return base.ConfigureCritter(builder)
 				.Baby(SlagmiteConfig.ID, forceNavType: true)
+				.Drops(CracklingsConfig.ID, 1f)
 				.Size(1, 1)
 				.Mass(5f)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_BABY, .75f);

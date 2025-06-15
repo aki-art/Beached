@@ -45,14 +45,14 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 		{
 			return base.ConfigureCritter(builder)
 				.Size(1, 3)
-				.Drops(CracklingsConfig.ID, CracklingsConfig.ID, CracklingsConfig.ID, CracklingsConfig.ID)
+				.Drops(CracklingsConfig.ID, 4f)
 				.Tag(GameTags.OriginalCreature)
 				.Egg(BabySlagmiteConfig.ID, "beached_egg_slagmite_kanim")
 					.Fertility(10f)
 					.Incubation(1)
 					.Mass(1f)
-					.EggChance(EGG_ID, 1f)
-					//.EggChance(GleamiteConfig.EGG_ID, 0.2f)
+					.EggChance(EGG_ID, 0.98f)
+					.EggChance(GleamiteConfig.EGG_ID, 0.02f)
 					.Done();
 		}
 

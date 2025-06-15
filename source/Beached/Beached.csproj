@@ -42,11 +42,6 @@
 
 	<ItemGroup>
 
-		<Reference Include="BeachedUnityBridge">
-		  <HintPath>..\..\beached_unity_bridge_source\BeachedUnityBridge\bin\Debug\net48\BeachedUnityBridge.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-
 		<Reference Include="FMODUnity">
 			<HintPath>$(GameLibsFolder)\FMODUnity.dll</HintPath>
 			<Private>false</Private>

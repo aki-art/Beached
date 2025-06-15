@@ -80,7 +80,7 @@ namespace Beached.Content.Scripts.Buildings
 
         public override void OnSpawn()
         {
-            smi.StartSM();
+            telepadInstance.StartSM();
             Log.Debug("treefilterable target: " + treeFilterable.storage.storageFilters.Join(t => t.ToString(), ", "));
             var storages = GetComponents<Storage>();
             eggStorage = storages[0];

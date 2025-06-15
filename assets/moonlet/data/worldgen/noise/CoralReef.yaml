@@ -1,0 +1,95 @@
+settings:
+  zoom: 0.100000001
+  normalise: false
+  seamless: false
+  lowerBound:
+    X: 2
+    Y: 2
+  upperBound:
+    X: 4
+    Y: 4
+  name: Untitled
+  pos:
+    X: 0
+    Y: 0
+links:
+- target:
+    type: Filter
+    name: RidgedMultiFractal_ACu/qGxY
+  source0:
+    type: Primitive
+    name: SimplexPerlin_pKdCWS6G
+- target:
+    type: Modifier
+    name: Scale2D_5x2PM9g4
+  source0:
+    type: Filter
+    name: RidgedMultiFractal_ACu/qGxY
+- target:
+    type: Combiner
+    name: Add_2mQjCFbL
+  source0:
+    type: Modifier
+    name: Scale2D_5x2PM9g4
+  source1:
+    type: Primitive
+    name: Constant_J9SgVAo6
+- target:
+    type: Terminator
+    name: TERMINATOR
+  source0:
+    type: Combiner
+    name: Add_2mQjCFbL
+primitives:
+  SimplexPerlin_pKdCWS6G:
+    primative: SimplexPerlin
+    quality: Fast
+    seed: 0
+    offset: 1
+    name: SimplexPerlin_pKdCWS6G
+    pos:
+      X: 38.333333333333258
+      Y: 199.03999999999999
+  Constant_J9SgVAo6:
+    primative: Constant
+    quality: Fast
+    seed: 0
+    offset: 0
+    name: Constant_J9SgVAo6
+    pos:
+      X: 994.36829304251137
+      Y: 697.84414918299615
+filters:
+  RidgedMultiFractal_ACu/qGxY:
+    filter: RidgedMultiFractal
+    frequency: 3
+    lacunarity: 2
+    octaves: 4
+    offset: 1
+    gain: 2
+    exponent: 1
+    name: RidgedMultiFractal_ACu/qGxY
+    pos:
+      X: 479.0776609558738
+      Y: 250.23146471785168
+transformers: {}
+selectors: {}
+modifiers:
+  Scale2D_5x2PM9g4:
+    modifyType: Scale2d
+    scale2d:
+      X: 0.25
+      Y: 0.25
+    name: Scale2D_5x2PM9g4
+    pos:
+      X: 1001.5443988650981
+      Y: 361.57072834540816
+combiners:
+  Add_2mQjCFbL:
+    combineType: Add
+    name: Add_2mQjCFbL
+    pos:
+      X: 1318.8338726907639
+      Y: 522.31358970115457
+floats: {}
+controlpoints: {}

@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿#if TRANSPILERS
+using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -6,7 +7,6 @@ using System.Reflection.Emit;
 
 namespace Beached.Patches
 {
-#if TRANSPILERS
 	public class AssignableSideScreenRowPatch
 	{
 		[HarmonyPatch(typeof(AssignableSideScreenRow), nameof(AssignableSideScreenRow.GetTooltip))]
@@ -48,6 +48,6 @@ namespace Beached.Patches
 			}
 		}
 	}
+}
 
 #endif
-}

@@ -19,14 +19,15 @@ namespace Beached.Patches
 			typeof(float),
 			typeof(string[]),
 			typeof(string[]),
+			typeof(bool),
 		])]
-
 		public class EggConfig_CreateEgg_Patch
 		{
 			public static void Postfix(ref GameObject __result)
 			{
 				// karacoos want to sit on these
 				__result.AddTag(BTags.karacooSittable);
+
 				// for karacoos. Pickupable is already IApproachable but allows too much interaction range
 				__result.AddOrGet<Approachable>();
 

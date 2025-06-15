@@ -40,7 +40,6 @@ namespace Beached.Patches.DatabasePatches
 				BDb.OnDbInit(__instance);
 				BTags.OnDbInit();
 
-
 				BionicOilMonitor.LUBRICANT_TYPE_EFFECT[Elements.mucus] = BionicOilMonitor.CreateFreshOilEffectVariation(Elements.mucus.ToString(), -10f / CONSTS.CYCLE_LENGTH, 2f);
 			}
 

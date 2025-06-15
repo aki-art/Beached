@@ -99,6 +99,10 @@ namespace Beached.Content.Defs.Buildings
 			GeneratedBuildings.RemoveLoopingSounds(go);
 			go.GetComponent<KPrefabID>().AddTag(GameTags.FarmTiles);
 			FarmTileConfig.SetUpFarmPlotTags(go);
+
+
+			Tinkerable.MakePowerTinkerable(go);
+			go.AddOrGetDef<PoweredActiveController.Def>();
 		}
 	}
 }

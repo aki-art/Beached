@@ -262,7 +262,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 				if (smi.bucketKbac == null)
 					smi.SetupBucket();
 
-				//smi.kbac.SetSymbolVisiblity(smi.master.trackSymbol, true);
+				//telepadInstance.kbac.SetSymbolVisiblity(telepadInstance.master.trackSymbol, true);
 				smi.bucketKbac.gameObject.SetActive(true);
 				smi.bucketKbac.enabled = true;
 			}
@@ -272,7 +272,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 				if (smi.bucketKbac == null)
 					return;
 
-				//smi.kbac.SetSymbolVisiblity(smi.master.trackSymbol, false);
+				//telepadInstance.kbac.SetSymbolVisiblity(telepadInstance.master.trackSymbol, false);
 				smi.bucketKbac.gameObject.SetActive(false);
 				smi.bucketKbac.enabled = false;
 			}

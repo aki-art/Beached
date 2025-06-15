@@ -3,6 +3,7 @@ using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+
 namespace Beached.Patches
 {
 	public class FetchManagerPatch
@@ -25,18 +26,33 @@ namespace Beached.Patches
 				var m_InjectedMethod = AccessTools.Method(typeof(FetchManager_FindEdibleFetchTarget_Patch), nameof(GetPathCost),
 				[
 					typeof(ushort),
-					typeof(FetchManager.Pickup),
-					typeof(Storage)
+						typeof(FetchManager.Pickup),
+						typeof(Storage)
 				]);
 
-				int pickup2_Index = 5;
+				var f_pickupable = typeof(FetchManager.Pickup).GetField("pickupable");
+
+				var localTypeIndex = codes.FindIndex(c => c.LoadsField(f_pickupable));
+
+				if (localTypeIndex == -1)
+				{
+					Log.TranspilerIssue("pickupable not found");
+					return codes;
+				}
+
+				var localIndex = MiscUtil.GetLocalIndex(codes[localTypeIndex - 1]);
+				if (localIndex == -1)
+				{
+					Log.TranspilerIssue("pickup local operand returned unexpected result");
+					return codes;
+				}
 
 				codes.InsertRange(index + 1,
 				[
 					// ushort on stack
-					new CodeInstruction(OpCodes.Ldloc, pickup2_Index), // TODO find, pickup2
-					new CodeInstruction(OpCodes.Ldarg_1), // Storage storage
-					new CodeInstruction(OpCodes.Call, m_InjectedMethod)
+					new CodeInstruction(OpCodes.Ldloc, localIndex),
+						new CodeInstruction(OpCodes.Ldarg_1), // Storage storage
+						new CodeInstruction(OpCodes.Call, m_InjectedMethod)
 				]);
 
 				return codes;

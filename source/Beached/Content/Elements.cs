@@ -36,6 +36,7 @@ namespace Beached.Content
 			moltenCalcium = ToHash("MoltenCalcium"),
 			calciumGas = ToHash("CalciumGas"),
 			carbonDioxideSnow = ToHash("CarbonDioxideSnow"),
+			corallium = ToHash("Corallium"),
 			coquina = ToHash("Coquina"),
 			crackedNeutronium = ToHash("CrackedNeutronium"),
 			fireMoss = ToHash("FireMoss"),

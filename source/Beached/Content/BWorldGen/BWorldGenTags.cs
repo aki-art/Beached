@@ -14,8 +14,6 @@ namespace Beached.Content.BWorldGen
 			AtSideBCorner = TagManager.Create("Beached_AtSideBCorner"),
 
 			// if a template is tagged with this, it turns into a Reef Biome
-			// TODO: Moonlet will support biomed templates so this is unneccessary
-			Reefify = TagManager.Create("Beached_Reefify"),
 			// spawns a layer of sand above all solids
 			SandBeds = TagManager.Create("Beached_SandBeds"),
 			// turns some tiles into their crushed variant

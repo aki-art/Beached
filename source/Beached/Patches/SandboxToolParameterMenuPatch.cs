@@ -24,6 +24,7 @@ namespace Beached.Patches
 		private static readonly HashSet<Tag> TAGS =
 		[
 			BeachShirtConfig.ID,
+			SulfurGlandConfig.ID,
 
 			CrystalConfig.TEST_ID,
 			CrystalConfig.ZEOLITE,
@@ -50,20 +51,21 @@ namespace Beached.Patches
 			StrangeMatterAmuletConfig.ID,
 
 			// Plants & Creatures
-			Content.Defs.Flora.AlgaeCellConfig.ID,
+			AlgaeCellConfig.ID,
+			BabySlickShellConfig.ID,
+			BambooConfig.ID,
+			BonewormConfig.ID,
+			DewPalmConfig.ID,
+			FilamentConfig.ID,
 			GlowCapConfig.ID,
 			LeafletCoralConfig.ID,
 			MusselSproutConfig.ID,
-			PoffShroomConfig.ID,
-			WaterCupsConfig.ID,
-			BonewormConfig.ID,
-			DewPalmConfig.ID,
-			SlickShellConfig.ID,
-			BabySlickShellConfig.ID,
-			BambooConfig.ID,
-			PurpleHangerConfig.ID,
-			SpinorilaConfig.ID,
 			OxybloonConfig.ID,
+			PoffShroomConfig.ID,
+			PurpleHangerConfig.ID,
+			SlickShellConfig.ID,
+			SpinorilaConfig.ID,
+			WaterCupsConfig.ID,
 
 			// genetic samples
 			GeneticSamplesConfig.EVERLASTING,

@@ -140,12 +140,23 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static bool IsInLiquid(Instance smi, float _) => Grid.IsSubstantialLiquid(Grid.PosToCell(smi), 0.05f);
 
-		public class Def : BaseDef//, IGameObjectEffectDescriptor
+		public class Def : BaseDef, ICodexEntry//, IGameObjectEffectDescriptor
 		{
 			public float defaultDryRate = -30f / CONSTS.CYCLE_LENGTH;
 			public float defaultMucusRate = 30f / CONSTS.CYCLE_LENGTH;
 			public SimHashes lubricant;
 			public float lubricantTemperatureKelvin;
+
+			public void AddCodexEntries(CodexEntryGenerator_Elements.ElementEntryContext context, KPrefabID prefab)
+			{
+				var conversionEntry = CodexUtil.SimpleConversionBase(context, prefab.gameObject);
+				var use = CodexUtil.UsageMassPerCycle(lubricant.CreateTag(), defaultMucusRate);
+
+				conversionEntry.outSet.Add(use);
+				context.madeMap.Add(lubricant.CreateTag(), conversionEntry);
+			}
+
+			public int CodexEntrySortOrder() => 15;
 
 			public override void Configure(GameObject prefab)
 			{

@@ -68,6 +68,8 @@ namespace Beached.Content.Scripts
 			material.SetColor("_OverlayColor", Util.ColorFromHex("161722"));
 			material.SetTexture("_LightBuffer", LightBuffer.Instance.Texture);
 			material.SetFloat("_ScrollSpeed", -0.008f);
+
+			SetZoneType(BWorldGen.ZoneTypes.depths);
 		}
 
 		private void LateUpdate()

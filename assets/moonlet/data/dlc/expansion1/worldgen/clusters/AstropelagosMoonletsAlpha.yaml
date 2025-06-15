@@ -1,10 +1,10 @@
-name: Astropelagos ALPHA
+name: Astropelagos Cluster
 description: A world of warm sandy shores and glimmering oceans.
 requiredDlcId: EXPANSION1_ID
 menuOrder: 0
 coordinatePrefix: BCHD
 clusterCategory: SpacedOutStyle
-disableStoryTraits: false
+disableStoryTraits: true
 difficulty: Moderate
 
 numRings: 12

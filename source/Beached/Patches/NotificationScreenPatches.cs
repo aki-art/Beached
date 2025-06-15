@@ -61,11 +61,11 @@ namespace Beached.Patches
 				{
 					if (___label.TryGetComponent(out HierarchyReferences hierarchyReferences))
 					{
-						var button = hierarchyReferences.GetReference<Button>("MainButton");
-						var icon = hierarchyReferences.GetReference<KImage>("Icon");
-						var text = hierarchyReferences.GetReference<LocText>("Text");
+						Button button = hierarchyReferences.GetReference<Button>("MainButton");
+						KImage icon = hierarchyReferences.GetReference<KImage>("Icon");
+						LocText text = hierarchyReferences.GetReference<LocText>("Text");
 
-						var colors = button.colors;
+						ColorBlock colors = button.colors;
 						colors.normalColor = ModAssets.Colors.UI.beachedTutorialBG;
 						colors.selectedColor = Color.cyan;
 
@@ -80,23 +80,23 @@ namespace Beached.Patches
 		}
 
 #if TRANSPILERS
-		[HarmonyPatch(typeof(NotificationScreen), "AddNotification")]
+		//[HarmonyPatch(typeof(NotificationScreen), "AddNotification")]
 		public class NotificationScreen_AddNotification_Patch
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
 			{
-				var codes = orig.ToList();
+				List<CodeInstruction> codes = orig.ToList();
 
-				var p_colors = AccessTools.PropertySetter(typeof(Selectable), "colors");
+				System.Reflection.MethodInfo p_colors = AccessTools.PropertySetter(typeof(Selectable), "colors");
 
-				var index = codes.FindLastIndex(ci => ci.Calls(p_colors));
+				int index = codes.FindLastIndex(ci => ci.Calls(p_colors));
 
 				if (index == -1)
 				{
 					return codes;
 				}
 
-				var m_GetColor = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetColor",
+				System.Reflection.MethodInfo m_GetColor = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetColor",
 				[
 					typeof(ColorBlock),
 					typeof(Notification),
@@ -109,34 +109,34 @@ namespace Beached.Patches
 					new CodeInstruction(OpCodes.Call, m_GetColor)
 				});
 
-				var f_LabelPrefab = AccessTools.Field(typeof(NotificationScreen), "LabelPrefab");
-				var f_MessagesPrefab = AccessTools.Field(typeof(NotificationScreen), "MessagesPrefab");
+				System.Reflection.FieldInfo f_LabelPrefab = AccessTools.Field(typeof(NotificationScreen), "LabelPrefab");
+				System.Reflection.FieldInfo f_MessagesPrefab = AccessTools.Field(typeof(NotificationScreen), "MessagesPrefab");
 
-				var index2 = codes.FindLastIndex(ci => ci.LoadsField(f_LabelPrefab));
+				int index2 = codes.FindLastIndex(ci => ci.LoadsField(f_LabelPrefab));
 
 				if (index2 == -1)
 				{
 					return codes;
 				}
 
-				var f_LabelsFolder = AccessTools.Field(typeof(NotificationScreen), "LabelsFolder");
-				var f_MessagesFolder = AccessTools.Field(typeof(NotificationScreen), "MessagesFolder");
+				System.Reflection.FieldInfo f_LabelsFolder = AccessTools.Field(typeof(NotificationScreen), "LabelsFolder");
+				System.Reflection.FieldInfo f_MessagesFolder = AccessTools.Field(typeof(NotificationScreen), "MessagesFolder");
 
-				var index3 = codes.FindIndex(index2, ci => ci.LoadsField(f_LabelsFolder));
+				int index3 = codes.FindIndex(index2, ci => ci.LoadsField(f_LabelsFolder));
 
 				if (index3 == -1)
 				{
 					return codes;
 				}
 
-				var m_GetPrefab = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetPrefab",
+				System.Reflection.MethodInfo m_GetPrefab = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetPrefab",
 				[
 					typeof(GameObject),
 					typeof(NotificationScreen),
 					typeof(Notification),
 				]);
 
-				var m_GetParent = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetParent",
+				System.Reflection.MethodInfo m_GetParent = AccessTools.Method(typeof(NotificationScreen_AddNotification_Patch), "GetParent",
 				[
 					typeof(GameObject),
 					typeof(NotificationScreen),

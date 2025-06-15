@@ -35,6 +35,7 @@ namespace Beached.Patches
 			private static void AddMenus()
 			{
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, AmmoniaGeneratorConfig.ID, Power.GENERATORS, MethaneGeneratorConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, WaterGeneratorConfig.ID, Power.GENERATORS, GeneratorConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, MossBedConfig.ID, Utilities.OTHER_UTILITIES, ExteriorWallConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, MiniFridgeConfig.ID, Food.STORAGE, ExteriorWallConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, DNAInjectorConfig.ID, Food.RANCHING, EggIncubatorConfig.ID);
@@ -67,6 +68,7 @@ namespace Beached.Patches
 				BuildingUtil.AddToResearch(BioFuelGeneratorConfig.ID, TECH.POWER.COMBUSTION);
 				BuildingUtil.AddToResearch(AquaticFarmTileConfig.ID, TECH.FOOD.AGRICULTURE);
 				BuildingUtil.AddToResearch(DeconstructableRocketTileConfig.ID, TECH.SOLIDS.REFINED_OBJECTS);
+				BuildingUtil.AddToResearch(WaterGeneratorConfig.ID, TECH.POWER.PRETTY_GOOD_CONDUCTORS);
 			}
 		}
 	}

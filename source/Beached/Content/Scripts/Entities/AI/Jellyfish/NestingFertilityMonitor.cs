@@ -48,7 +48,7 @@ namespace Beached.Content.Scripts.Entities.AI.Jellyfish
 		private bool HasNoMoreThan2NestsNearby(Instance smi)
 		{
 			return true;
-			/*var room = Game.Instance.roomProber.GetRoomOfGameObject(smi.gameObject);
+			/*var room = Game.Instance.roomProber.GetRoomOfGameObject(telepadInstance.gameObject);
 			if (room == null)
 				return true;
 
@@ -61,7 +61,7 @@ namespace Beached.Content.Scripts.Entities.AI.Jellyfish
 
 			var cellCount = room.cavity.numCells;
 
-			return (float)cellCount / count <= smi.def.minCellPerStrobila;*/
+			return (float)cellCount / count <= telepadInstance.def.minCellPerStrobila;*/
 		}
 
 		public static bool IsFertile(Instance smi)

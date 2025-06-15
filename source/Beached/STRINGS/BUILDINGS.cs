@@ -97,9 +97,9 @@ namespace Beached
 
 				public class BEACHED_GEMCUTTER
 				{
-					public static LocString NAME = Link("Get Cutter", "Beached_GemCutter");
-					public static LocString DESC = "Cuts and shapes gemstones and other materials into jewellery.";
-					public static LocString EFFECTS = "Fabricates equippable jewellery from raw materials.";
+					public static LocString NAME = Link("Gem Cutter", GemCutterConfig.ID);
+					public static LocString DESC = "Cuts and shapes gemstones and other materials into jewelry.";
+					public static LocString EFFECTS = "Fabricates equippable jewelry from raw materials.";
 				}
 
 				public class BEACHED_DECONSTRUCTABLEROCKETTILE
@@ -264,7 +264,7 @@ namespace Beached
 					public static LocString EFFECT = "Natural tiles can be used as walls and floors or for wild planting.";
 				}
 
-				public class BEACHED_MUDSTOMER
+				public class BEACHED_MUDSTOMPER
 				{
 					public static LocString NAME = Link("Stomper", MudStomperConfig.ID);
 					public static LocString DESC = "By repeated vertical motion of external duplicant peripherals it is possible to process several materials into one unified mush.";

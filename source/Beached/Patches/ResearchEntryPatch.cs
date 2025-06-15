@@ -6,19 +6,18 @@ using UnityEngine;
 
 namespace Beached.Patches
 {
-	internal class ResearchEntryPatch
+	public class ResearchEntryPatch
 	{
-
 		[HarmonyPatch(typeof(ResearchEntry), "SetTech")]
 		public class ResearchEntry_SetTech_Patch
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
 			{
-				var codes = orig.ToList();
+				List<CodeInstruction> codes = orig.ToList();
 
-				var m_GetFreeIcon = AccessTools.Method(typeof(ResearchEntry), nameof(ResearchEntry.GetFreeIcon), []);
+				System.Reflection.MethodInfo m_GetFreeIcon = AccessTools.Method(typeof(ResearchEntry), nameof(ResearchEntry.GetFreeIcon), []);
 
-				var index = codes.FindIndex(ci => ci.Calls(m_GetFreeIcon));
+				int index = codes.FindIndex(ci => ci.Calls(m_GetFreeIcon));
 
 				if (index == -1)
 				{
@@ -26,9 +25,9 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				var m_GetComponent = AccessTools.Method(typeof(Component), nameof(Component.GetComponent), [], [typeof(ToolTip)]);
+				System.Reflection.MethodInfo m_GetComponent = AccessTools.Method(typeof(Component), nameof(Component.GetComponent), [], [typeof(ToolTip)]);
 
-				var index2 = codes.FindIndex(index, ci => ci.Calls(m_GetComponent));
+				int index2 = codes.FindIndex(index, ci => ci.Calls(m_GetComponent));
 
 				if (index2 == -1)
 				{
@@ -36,14 +35,31 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				var m_ModifyDLCIcon = AccessTools.DeclaredMethod(typeof(ResearchEntry_SetTech_Patch), "ModifyDLCIcon");
+				System.Reflection.MethodInfo m_ModifyDLCIcon = AccessTools.DeclaredMethod(typeof(ResearchEntry_SetTech_Patch), "ModifyDLCIcon");
+
+				System.Reflection.FieldInfo f_description = typeof(TechItem).GetField("description");
+				int anchorIndex = codes.FindIndex(c => c.LoadsField(f_description));
+
+				if (anchorIndex == -1)
+				{
+					Log.TranspilerIssue("Could not patch ResearchEntry.SetTech. (3)");
+					return codes;
+				}
+
+				int localIndex = MiscUtil.GetLocalIndex(codes[anchorIndex]);
+
+				if (localIndex == -1)
+				{
+					Log.TranspilerIssue("Could not patch ResearchEntry.SetTech. (3)");
+					return codes;
+				}
 
 				// inject right after the found index
 				codes.InsertRange(index2 + 1,
 				[
 					// dup tooltip component on stack
 					new CodeInstruction(OpCodes.Dup),
-					new CodeInstruction(OpCodes.Ldloc, 6), //  TODO 12 if this breaks
+					new CodeInstruction(OpCodes.Ldloc, localIndex),
 					new CodeInstruction(OpCodes.Call, m_ModifyDLCIcon)
 				]);
 
@@ -62,7 +78,7 @@ namespace Beached.Patches
 				{
 					if (techItem.Id.StartsWith("Beached_"))
 					{
-						var dlcOverlay = hierarchyRefs.GetReference<KImage>("DLCOverlay");
+						KImage dlcOverlay = hierarchyRefs.GetReference<KImage>("DLCOverlay");
 						dlcOverlay.gameObject.SetActive(true);
 						//dlcOverlay.sprite = Assets.GetSprite("beached_tech_banner");
 						dlcOverlay.color = ModAssets.Colors.beached;

@@ -6,6 +6,17 @@ namespace Beached.Patches
 {
 	public class ElementLoaderPatch
 	{
+
+		[HarmonyPatch(typeof(ElementLoader), "FinaliseElementsTable")]
+		public class ElementLoader_FinaliseElementsTable_Patch
+		{
+			public static void Postfix()
+			{
+				var corallium = ElementLoader.FindElementByHash(Elements.corallium);
+				corallium.lowTempTransition = ElementLoader.FindElementByHash(corallium.lowTempTransitionTarget);
+			}
+		}
+
 		[HarmonyPatch(typeof(ElementLoader), nameof(ElementLoader.Load))]
 		public class ElementLoader_Load_Patch
 		{

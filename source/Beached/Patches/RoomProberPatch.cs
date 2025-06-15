@@ -1,11 +1,4 @@
 ﻿#if TRANSPILERS
-using Beached.Content.Scripts.Entities;
-using HarmonyLib;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using UnityEngine;
-
 namespace Beached.Patches
 {
 	public class RoomProberPatch
@@ -13,6 +6,7 @@ namespace Beached.Patches
 		// tracks vista pois and which rooms contain them
 		// Fast Track skips this method!!
 		// TODO: transpiler
+		/*
 		//[HarmonyPatch(typeof(RoomProber), "RebuildDirtyCavities")]
 		public class RoomProber_RebuildDirtyCavities_Patch
 		{
@@ -52,6 +46,7 @@ namespace Beached.Patches
 				}
 			}
 		}
+		*/
 	}
 }
 #endif

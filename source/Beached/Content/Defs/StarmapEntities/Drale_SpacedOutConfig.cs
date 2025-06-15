@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Scripts;
-using HarmonyLib;
 using Klei.AI;
 using System;
 using UnityEngine;
@@ -34,12 +33,12 @@ namespace Beached.Content.Defs.StarmapEntities
 			visualizer.p_name = name;
 			visualizer.clusterAnimName = "beached_drale_kanim";
 			visualizer.revealed = true;
-			//visualizer.forceRevealed = true;
+			visualizer.forceRevealed = true;
 			visualizer.isWorldEntity = true;
 
 			var traveler = prefab.AddOrGet<ClusterTraveler>();
 			traveler.revealsFogOfWarAsItTravels = true;
-			//traveler.peekRadius = 0;
+			traveler.peekRadius = 0;
 			traveler.quickTravelToAsteroidIfInOrbit = false;
 
 			var kPrefabId = prefab.AddOrGet<KPrefabID>();
@@ -64,21 +63,6 @@ namespace Beached.Content.Defs.StarmapEntities
 			prefab.AddOrGetDef<Drale.Def>();
 
 			return prefab;
-		}
-
-		// TODO: remove with dino dlc and set forceRevealed instead
-
-		[HarmonyPatch(typeof(ClusterMapMeteorShowerVisualizer))]
-		[HarmonyPatch("clusterCellRevealLevel", MethodType.Getter)]
-		public class ClusterMapMeteorShowerVisualizer_clusterCellRevealLevel_Patch
-		{
-			public static void Postfix(ClusterMapMeteorShowerVisualizer __instance, ref ClusterRevealLevel __result)
-			{
-				if (__result != ClusterRevealLevel.Visible && __instance.gameObject.IsPrefabID(ID))
-				{
-					__result = ClusterRevealLevel.Visible;
-				}
-			}
 		}
 
 		public string[] GetForbiddenDlcIds() => null;

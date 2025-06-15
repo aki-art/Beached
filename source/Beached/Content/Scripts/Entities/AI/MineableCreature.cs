@@ -208,13 +208,13 @@ namespace Beached.Content.Scripts.Entities.AI
 		public override void OnStartWork(WorkerBase worker)
 		{
 			Log.Debug("OnStartWork " + worker?.GetProperName());
-			kPrefabID.AddTag(GameTags.Creatures.Stunned);
+			kPrefabID.AddTag(GameTags.Creatures.StunnedForCapture);
 			kPrefabID.AddTag(BTags.Creatures.beingMined);
 		}
 
 		public override void OnStopWork(WorkerBase worker)
 		{
-			kPrefabID.RemoveTag(GameTags.Creatures.Stunned);
+			kPrefabID.RemoveTag(GameTags.Creatures.StunnedForCapture);
 			kPrefabID.RemoveTag(BTags.Creatures.beingMined);
 		}
 

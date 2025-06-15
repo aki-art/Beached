@@ -32,7 +32,7 @@ elements:
     materialCategory: Metal
     tags:
     - BuildableAny
-    - Moonlet_StarterMetalOre
+    - StartingMetalOre
     - Ore
     buildMenuSort: 1
     state: Solid
@@ -63,7 +63,7 @@ elements:
     materialCategory: RefinedMetal
     tags:
     - BuildableAny
-    - Moonlet_StarterMetal
+    - StartingRefinedMetal
     buildMenuSort: 3
     state: Solid
     

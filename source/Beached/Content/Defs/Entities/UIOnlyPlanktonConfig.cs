@@ -11,7 +11,7 @@ namespace Beached.Content.Defs.Entities
 			var prefab = EntityTemplates.CreateBasicEntity(
 				PlanktonGerms.ID,
 				STRINGS.DUPLICANTS.DISEASES.BEACHED_PLANKTON.NAME,
-				STRINGS.DUPLICANTS.DISEASES.BEACHED_PLANKTON.DESCRIPTION,
+				STRINGS.DUPLICANTS.DISEASES.BEACHED_PLANKTON.DESC,
 				1f,
 				false,
 				Assets.GetAnim("beached_plankton_ui_kanim"),

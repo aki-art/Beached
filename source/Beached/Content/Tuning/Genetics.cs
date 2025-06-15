@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.Tuning
@@ -21,11 +20,11 @@ namespace Beached.Content.Tuning
 			},
 			{
 				RULE_MEATDROPPERS,
-				go => go.TryGetComponent(out Butcherable butcherable)  && butcherable.drops.Contains(MeatConfig.ID)
+				go => go.TryGetComponent(out Butcherable butcherable)  && butcherable.drops.ContainsKey(MeatConfig.ID)
 			},
 			{
 				RULE_DROPSANYTHING,
-				go => go.TryGetComponent(out Butcherable butcherable)  && butcherable.drops.Length > 0
+				go => go.TryGetComponent(out Butcherable butcherable)  && butcherable.drops.Count > 0
 			},
 			{
 				RULE_DECORPROVIDERS,

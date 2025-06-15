@@ -4,6 +4,7 @@ using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
+using Beached.Content.Defs.Medicines;
 using System.Collections.Generic;
 
 namespace Beached.Content.ModDb
@@ -15,8 +16,16 @@ namespace Beached.Content.ModDb
 		public static void AddRecipes()
 		{
 			CreateFoodRecipes();
+			CreateMedicineRecipes();
 			CreateEquipmentRecipes();
-			AddBismuthRecipes();
+			AddBismuthToLeadSuit();
+
+			RecipeBuilder.Create(MudStomperConfig.ID, STRINGS.ITEMS.MISC.BEACHED_SOAP.DESC, 40f)
+				.Input(Elements.ambergris.CreateTag(), 25f)
+				.Input(Elements.ash.CreateTag(), 25f)
+				.Output(SoapConfig.ID, 5f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
 
 			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.GREEN);
 			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.BLUE);
@@ -29,15 +38,6 @@ namespace Beached.Content.ModDb
 				.Output(SoapConfig.ID, 5f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
-
-			var suit = RecipeBuilder.Create(SuitFabricatorConfig.ID, global::STRINGS.EQUIPMENT.PREFABS.ATMO_SUIT.RECIPE_DESC, TUNING.EQUIPMENT.SUITS.ATMOSUIT_FABTIME)
-				.Input(Elements.zinc.CreateTag(), 300f, true)
-				.Input(Elements.fuzz.CreateTag(), 2f)
-				.Output(AtmoSuitConfig.ID, 1f)
-				.NameDisplay(ComplexRecipe.RecipeNameDisplay.ResultWithIngredient)
-				.Build();
-
-			suit.RequiresAllIngredientsDiscovered = true;
 
 			if (DlcManager.FeatureRadiationEnabled())
 			{
@@ -67,6 +67,55 @@ namespace Beached.Content.ModDb
 
 			ZincAndCopperToBrass();
 			BoneToCalcium();
+		}
+
+		private static void AddBismuthToLeadSuit()
+		{
+			var leadSuitRecipe = ComplexRecipeManager.Get().GetRecipe($"SuitFabricator_I_Lead_Glass_O_Lead_Suit");
+
+			if (leadSuitRecipe != null)
+			{
+				var ingredients = new List<Tag>();
+				List<float> amounts = null;
+
+				var ingredient = leadSuitRecipe.ingredients[0];
+
+				if (ingredient.possibleMaterials != null)
+					ingredients.AddRange(ingredient.possibleMaterials);
+
+				ingredient.material = null;
+
+				// if another mod messed with this
+				if (ingredient.possibleMaterialAmounts != null && ingredient.possibleMaterialAmounts.Length == ingredient.possibleMaterials.Length)
+				{
+					amounts = [.. ingredient.possibleMaterialAmounts, 200f];
+				}
+
+				ingredients.Add(Elements.bismuth.CreateTag());
+
+				ingredient.possibleMaterials = ingredients.ToArray();
+
+				if (amounts != null)
+					ingredient.possibleMaterialAmounts = amounts.ToArray();
+
+				leadSuitRecipe.nameDisplay = ComplexRecipe.RecipeNameDisplay.Result;
+			}
+			else
+			{
+				Log.Warning("Could not find Lead Suit recipe entry, cannot add Bismuth as an option.");
+			}
+		}
+
+		private static void CreateMedicineRecipes()
+		{
+			RecipeBuilder.Create(ApothecaryConfig.ID, STRINGS.ITEMS.PILLS.BEACHED_SUPERALLERGYMEDICATION.RECIPEDESC, 100f)
+				.Input(SwampLilyFlowerConfig.ID, 3f)
+				.Input(PoffConfig.GetRawId(Elements.nitrogen), 1f)
+				.Output(SuperAllergyMedicationConfig.ID, 1f, ComplexRecipe.RecipeElement.TemperatureOperation.AverageTemperature)
+				.SortOrder(11)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
 		}
 
 		private static void BoneToCalcium()
@@ -104,14 +153,15 @@ namespace Beached.Content.ModDb
 		private static void CreateFoodRecipes()
 		{
 			jellyBarRecipeID = RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_JELLYBAR.DESC, 40f)
-				.Input(JellyConfig.ID, 1f)
+				.Input(BTags.Groups.jellies, 1f)
 				.Output(JellyBarConfig.ID, 1f)
+				.Visualizer("beached_jellybar_kanim")
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build()
 				.id;
 
 			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, 40f)
-				.Input(JellyConfig.ID, 1f)
+				.Input(BTags.Groups.jellies, 1f)
 				.Input(PrickleFruitConfig.ID, 1f)
 				.Output(BerryJellyConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
@@ -120,7 +170,7 @@ namespace Beached.Content.ModDb
 			if (DlcManager.IsContentSubscribed(DlcManager.DLC2_ID))
 			{
 				RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, 40f)
-					.Input(JellyConfig.ID, 1f)
+					.Input(BTags.Groups.jellies, 1f)
 					.Input(HardSkinBerryConfig.ID, 0.5f)
 					.Output(BerryJellyConfig.ID, 1f)
 					.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
@@ -128,14 +178,14 @@ namespace Beached.Content.ModDb
 			}
 
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SALTRUBBEDJELLY.DESC, 40f)
-				.Input(JellyConfig.ID, 1f)
+				.Input(BTags.Groups.jellies, 1f)
 				.Input(SimHashes.Salt.CreateTag(), 5f)
 				.Output(SaltRubbedJellyConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_DRYNOODLES.DESC, 40f)
-				.Input(ColdWheatConfig.SEED_ID, 4f)
+				.Input(BTags.Groups.grains, 4f)
 				.Input(RawEggConfig.ID, 1f)
 				.Output(DryNoodlesConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
@@ -167,7 +217,7 @@ namespace Beached.Content.ModDb
 			{
 				RecipeBuilder.Create(DeepfryerConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_CRABCAKES.DESC, 40f)
 					.Input(ShellfishMeatConfig.ID, 1f)
-					.Input(ColdWheatConfig.ID, 3f)
+					.Input(BTags.Groups.grains, 3f)
 					.Input(RawEggConfig.ID, 3f)
 					.Input(SimHashes.Tallow.CreateTag(), 1f)
 					.Output(CrabCakesConfig.ID, 1f)
@@ -178,7 +228,7 @@ namespace Beached.Content.ModDb
 			{
 				RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_CRABCAKES.DESC, 40f)
 					.Input(ShellfishMeatConfig.ID, 1f)
-					.Input(ColdWheatConfig.ID, 3f)
+					.Input(BTags.Groups.grains, 3f)
 					.Input(RawEggConfig.ID, 3f)
 					.Output(CrabCakesConfig.ID, 1f)
 					.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
@@ -193,7 +243,7 @@ namespace Beached.Content.ModDb
 				.Build();
 
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_ASPICLICE.DESC, 40f)
-				.Input(JellyConfig.ID, 1f)
+				.Input(BTags.Groups.jellies, 1f)
 				.Input(BasicPlantFoodConfig.ID, 1f)
 				.Output(AspicLiceConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
@@ -263,134 +313,17 @@ namespace Beached.Content.ModDb
 			}
 		}
 
-		// Tries to find all recipes that use "starter metals", and then inserts Bismuth
-		private static void AddBismuthRecipes()
-		{
-			var refinedStarters = new List<string>()
-			{
-				SimHashes.Copper.ToString(),
-				SimHashes.Cobalt.ToString(),
-				SimHashes.Aluminum.ToString(),
-				SimHashes.Iron.ToString(),
-			};
-
-			var oreStarters = new List<string>()
-			{
-				SimHashes.Cuprite.ToString(),
-				SimHashes.Cobaltite.ToString(),
-				SimHashes.AluminumOre.ToString(),
-				SimHashes.IronOre.ToString(),
-			};
-
-			CloneRecipes(refinedStarters, Elements.zinc.ToString());
-			CloneRecipes(oreStarters, Elements.zincOre.ToString());
-		}
-
 		private static void AddBeachShirtCostumeRecipe(string facadeID)
 		{
 			RecipeBuilder
 				.Create(ClothingFabricatorConfig.ID, global::STRINGS.EQUIPMENT.PREFABS.CUSTOMCLOTHING.RECIPE_DESC, TUNING.EQUIPMENT.VESTS.CUSTOM_CLOTHING_FABTIME)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 
-				.Input(BasicFabricConfig.ID, 3f)
+				.Input(GameTags.Fabrics, 3f)
 
 				.FacadeOutput(BeachShirtConfig.ID, 1f, facadeID)
 
 				.Build(facadeID);
-		}
-
-		// TODO: move to Moonlet
-		private static void CloneRecipes(List<string> starters, string newElement)
-		{
-			var referenceElement = starters[0];
-			var manager = ComplexRecipeManager.Get();
-
-			for (int i = 0; i < manager.recipes.Count; i++)
-			{
-				var recipe = manager.recipes[i];
-				var newRecipeId = recipe.id.Replace(referenceElement.ToString(), newElement);
-
-				// already exists
-				if (manager.GetRecipe(newRecipeId) != null) continue;
-
-				var index = GetIndexForElement(starters, referenceElement, manager, recipe);
-
-				// Does not have required starter elements as ingredients
-				if (index == -1) continue;
-
-				// create new input list
-				var inputs = new List<ComplexRecipe.RecipeElement>(recipe.ingredients) { }.ToArray();
-				var referenceIngredient = inputs[index];
-
-				inputs[index] = new ComplexRecipe.RecipeElement(newElement, referenceIngredient.amount)
-				{
-					temperatureOperation = referenceIngredient.temperatureOperation,
-					storeElement = referenceIngredient.storeElement,
-					facadeID = referenceIngredient.facadeID,
-					inheritElement = referenceIngredient.inheritElement
-				};
-
-				// create new recipe
-				var referenceName = ElementLoader.GetElement(referenceElement).name;
-				var newElementName = ElementLoader.GetElement(newElement).name;
-				var description = recipe.description.Replace(referenceName, newElementName);
-
-				foreach (var fabricator in recipe.fabricators) // usually just one but just to be safe
-				{
-					var id = ComplexRecipeManager.MakeRecipeID(fabricator.ToString(), inputs, recipe.results);
-					new ComplexRecipe(id, inputs, recipe.results)
-					{
-						time = recipe.time,
-						nameDisplay = recipe.nameDisplay,
-						description = description,
-						fabricators =
-						[
-							fabricator
-						]
-					};
-
-					var obsoleteId = ComplexRecipeManager.MakeObsoleteRecipeID(fabricator.ToString(), newRecipeId);
-					manager.AddObsoleteIDMapping(obsoleteId, id);
-				}
-			}
-		}
-
-		private static int GetIndexForElement(List<string> starters, string referenceElement, ComplexRecipeManager manager, ComplexRecipe recipe)
-		{
-			var index = -1;
-
-			for (int i = 0; i < starters.Count; i++)
-			{
-				if (!HasRecipeWith(starters[i], referenceElement, recipe.id, manager))
-				{
-					return -1;
-				}
-
-				if (i == 0)
-				{
-					index = FindIndexOfMaterial(recipe.ingredients, starters[i]);
-				}
-			}
-
-			return index;
-		}
-
-		private static bool HasRecipeWith(string element, string original, string recipe, ComplexRecipeManager manager)
-		{
-			return manager.GetRecipe(recipe.Replace(original, element)) != null;
-		}
-
-		private static int FindIndexOfMaterial(ComplexRecipe.RecipeElement[] ingredients, Tag material)
-		{
-			for (int i = 0; i < ingredients.Length; i++)
-			{
-				if (ingredients[i].material == material)
-				{
-					return i;
-				}
-			}
-
-			return -1;
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Beached.Patches
 			{
 				__instance.alive
 					.ToggleStateMachine(smi => new FreshAirMonitor.Instance(smi.master));
-				//.ToggleStateMachine(smi => new ScaredMonitor.Instance(smi.master));
+				//.ToggleStateMachine(telepadInstance => new ScaredMonitor.Instance(telepadInstance.master));
 			}
 		}
 	}

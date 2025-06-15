@@ -1,9 +1,15 @@
 ﻿using Beached.Content;
+using Beached.Content.Defs.Entities.Critters.Mites;
 using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
+using Beached.Content.ModDb;
+using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
+using Beached.Content.Scripts.Entities.AI;
 using HarmonyLib;
 using System.Collections.Generic;
+using System.Linq;
+using static Beached.Content.ModDb.LootTables;
 
 namespace Beached.Patches
 {
@@ -24,6 +30,68 @@ namespace Beached.Patches
 
 				AddPoffEntries(__result);
 				AddLubricatableEntries(__result);
+				AddSlagmiteMiningResults(__result, SlagmiteConfig.ID);
+				AddSlagmiteMiningResults(__result, GleamiteConfig.ID);
+				AdditionalEntries(__result);
+			}
+
+			private static void AdditionalEntries(CodexEntryGenerator_Elements.ElementEntryContext context)
+			{
+				List<(int order, System.Action fn)> entries = [];
+
+				foreach (var prefab in Assets.Prefabs)
+				{
+					foreach (var entry in prefab.GetComponents<ICodexEntry>())
+						entries.Add((entry.CodexEntrySortOrder(), () => entry.AddCodexEntries(context, prefab)));
+
+					foreach (var entry in prefab.GetDefs<ICodexEntry>())
+						entries.Add((entry.CodexEntrySortOrder(), () => entry.AddCodexEntries(context, prefab)));
+				}
+
+				entries
+					.OrderBy(e => e.order)
+					.Do(e => e.fn?.Invoke());
+			}
+
+			private static void AddSlagmiteMiningResults(CodexEntryGenerator_Elements.ElementEntryContext context, string critterId)
+			{
+				var prefab = Assets.GetPrefab(critterId);
+				var shellMonitor = prefab.GetDef<ShellGrowthMonitor.Def>();
+
+				if (shellMonitor == null)
+					return;
+
+				var autoMiner = Assets.GetPrefab(AutoMinerConfig.ID);
+
+				var dropsTable = BDb.lootTables.Get(shellMonitor.lootTableId) as LootTable<MaterialReward>;
+				var totalWeight = dropsTable.options.Sum(o => o.weight);
+
+				foreach (var loot in dropsTable.options)
+				{
+					var conversionEntry = new CodexEntryGenerator_Elements.ConversionEntry()
+					{
+						title = autoMiner.GetProperName(),
+						prefab = autoMiner,
+						inSet = []
+					};
+
+					conversionEntry.inSet.Add(new ElementUsage(prefab.PrefabID(), 1f, false));
+					context.usedMap.Add(prefab.PrefabID(), conversionEntry);
+
+					var percentChance = loot.weight / totalWeight;
+					var applyTo = new HashSet<ElementUsage>();
+					var use = new ElementUsage(loot.item.tag, loot.item.mass, false)
+					{
+						customFormating = (tag, amount, continous) =>
+						{
+							var percentChanceStr = $"{STRINGS.CREATURES.SPECIES.BEACHED_SLAGMITE.ODDS} {GameUtil.GetStandardPercentageFloat(percentChance * 100f)}{(global::STRINGS.UI.UNITSUFFIXES.PERCENT)}";
+							return $"{percentChanceStr}\n{GameUtil.GetFormattedMass(amount)}";
+						}
+					};
+
+					conversionEntry.outSet.Add(use);
+					context.madeMap.Add(loot.item.tag, conversionEntry);
+				}
 			}
 
 			private static void AddLubricatableEntries(CodexEntryGenerator_Elements.ElementEntryContext __result)

@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.Defs.Foods;
+using Beached.Content.Defs.Items;
+using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using TUNING;
@@ -7,6 +9,32 @@ namespace Beached.Content
 {
 	public class BTags
 	{
+		public static class Groups
+		{
+			public static Tag[] jellies =
+			[
+				JellyConfig.ID
+			];
+
+			public static Tag[] mosses =
+			[
+				Elements.moss.CreateTag(),
+				Elements.fireMoss.CreateTag()
+			];
+
+			public static Tag[] grains =
+			[
+				ColdWheatConfig.SEED_ID,
+				FernFoodConfig.ID
+			];
+
+			public static Tag[] sulfurs =
+			[
+				SulfurGlandConfig.ID,
+				SimHashes.Sulfur.CreateTag()
+			];
+		}
+
 		public static readonly Tag
 			// ======= The ones potentially interesting for other mods ===========
 			aquaticSeed = TagManager.Create("Beached_AquaticSeed"),
@@ -45,6 +73,8 @@ namespace Beached.Content
 			underWater = TagManager.Create("Beached_UnderWater"),
 			crystalCluster = TagManager.Create("Beached_CrystalCluster"),
 			userNamedCritter = TagManager.Create("Beached_UserNamedCritter"),
+			dnaAnalyzable = TagManager.Create("Beached_DNAAnalyzable"),
+			markedForDNAAnalysis = TagManager.Create("Beached_MarkedForDNAAnalysis"),
 
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),
@@ -168,6 +198,7 @@ namespace Beached.Content
 			Filterable.filterableCategories.Add(coralFrag);
 			Filterable.filterableCategories.Add(aquaticSeed);
 
+			GameTags.Fabrics = GameTags.Fabrics.AddToArray(Elements.fuzz.CreateTag());
 
 			//GameTags.AllCategories.Add(PalmLeafConfig.ID);
 			//GameTags.AllCategories.Add(BioFuelConfig.ID);

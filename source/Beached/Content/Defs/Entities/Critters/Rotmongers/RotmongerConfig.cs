@@ -39,7 +39,6 @@ namespace Beached.Content.Defs.Entities.Critters.Rotmongers
 					.Incubation(1)
 					.Mass(1f)
 					.EggChance(EGG_ID, 1f)
-					//.EggChance(GleamiteConfig.EGG_ID, 0.2f)
 					.Done();
 		}
 

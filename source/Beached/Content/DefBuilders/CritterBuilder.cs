@@ -16,7 +16,7 @@ namespace Beached.Content.DefBuilders
 
 		private GameObject prefab;
 		private KPrefabID kPrefabID;
-		private string[] drops;
+		private Dictionary<string, float> drops;
 		private string navigationGrid = NAVIGATION.WALKER_1X1;
 		private NavType navType = NavType.Floor;
 		private FactionManager.FactionID faction = FactionManager.FactionID.Prey;
@@ -138,10 +138,21 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
+		public CritterBuilder Drops(string tag, float amount)
+		{
+			drops ??= [];
+			drops[tag] = amount;
+			return this;
+		}
 
 		public CritterBuilder Drops(params string[] tags)
 		{
-			drops = tags;
+			drops ??= [];
+			foreach (var tag in tags)
+			{
+				drops[tag] = 1f;
+			}
+
 			return this;
 		}
 
@@ -253,7 +264,7 @@ namespace Beached.Content.DefBuilders
 
 		public CritterBuilder Tags(HashSet<Tag> tags)
 		{
-			foreach (Tag tag in tags)
+			foreach (var tag in tags)
 				this.tags.Add(tag);
 
 			return this;
@@ -370,9 +381,10 @@ namespace Beached.Content.DefBuilders
 			if (spaceRequiredPerCritter > 0)
 				EntityTemplates.ExtendEntityToWildCreature(prefab, spaceRequiredPerCritter);
 
-			if (drops != null)
-				prefab.AddOrGet<Butcherable>().SetDrops(drops);
+			prefab.AddOrGet<Butcherable>().SetDrops(drops ?? []);
+			kPrefabID.prefabInitFn += go => go.AddOrGet<Butcherable>().SetDrops(drops ?? []);
 
+			//	Log.Debug($"set drops of {id} to {drops?.Keys.Join()}");
 			if (trappable)
 				prefab.AddOrGet<Trappable>();
 
@@ -626,12 +638,11 @@ namespace Beached.Content.DefBuilders
 			public TraitsBuilder Stomach(float calCapacity, float dailyCal)
 			{
 				return Add(db.Amounts.Calories.maxAttribute.Id, calCapacity)
-					.Add(db.Amounts.Calories.deltaAttribute.Id, dailyCal / CONSTS.CYCLE_LENGTH);
+					.Add(db.Amounts.Calories.deltaAttribute.Id, -dailyCal / CONSTS.CYCLE_LENGTH);
 			}
 
 			public CritterBuilder Done() => instance;
 		}
-
 
 		public class BrainBuilder(CritterBuilder instance, Tag species) : ChoreTable.Builder
 		{

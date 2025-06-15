@@ -1,4 +1,5 @@
 ﻿#if TRANSPILERS
+using Beached.Content;
 using Beached.Content.Overlays;
 using HarmonyLib;
 using System;
@@ -11,19 +12,18 @@ namespace Beached.Patches
 {
 	public class SimDebugViewPatch
 	{
-		/*
-				[HarmonyPatch(typeof(SimDebugView), "GetDiseaseColour")]
-				public class SimDebugView_GetDiseaseColour_Patch
+		[HarmonyPatch(typeof(SimDebugView), "GetDiseaseColour")]
+		public class SimDebugView_GetDiseaseColour_Patch
+		{
+			public static void Postfix(int cell, ref Color __result)
+			{
+				if (__result.a == 0)
 				{
-					public void Postfix(int cell, ref Color __result)
-					{
-						if (__result.a == 0)
-						{
-							if (Grid.Element[cell].id == Elements.permaFrost)
-								__result = ModAssets.Colors.iceWrath;
-						}
-					}
-				}*/
+					if (Grid.Element[cell].id == Elements.permaFrost)
+						__result = ModAssets.Colors.iceWrath;
+				}
+			}
+		}
 
 		[HarmonyPatch(typeof(SimDebugView), nameof(SimDebugView.OnPrefabInit))]
 		public static class SimDebugView_OnPrefabInit_Patch
@@ -40,23 +40,23 @@ namespace Beached.Patches
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator generator, IEnumerable<CodeInstruction> orig)
 			{
-				var codes = orig.ToList();
+				List<CodeInstruction> codes = orig.ToList();
 
-				var index = codes.FindIndex(ci => ci.opcode == OpCodes.Ble_Un_S); // <=
+				int index = codes.FindIndex(ci => ci.opcode == OpCodes.Ble_Un_S); // <=
 
 				if (index == -1)
 					return codes;
 
-				var targetIndex = codes.FindIndex(index, ci => ci.opcode == OpCodes.Beq_S); // ==
+				int targetIndex = codes.FindIndex(index, ci => ci.opcode == OpCodes.Beq_S); // ==
 
 				if (targetIndex == -1)
 					return codes;
 
-				var f_Element = AccessTools.Field(typeof(Grid), "Element");
-				var f_Breathable = AccessTools.Field(typeof(GameTags), "Breathable");
-				var m_HasTag = AccessTools.Method(typeof(Element), "HasTag", [typeof(Tag)]);
+				System.Reflection.FieldInfo f_Element = AccessTools.Field(typeof(Grid), "Element");
+				System.Reflection.FieldInfo f_Breathable = AccessTools.Field(typeof(GameTags), "Breathable");
+				System.Reflection.MethodInfo m_HasTag = AccessTools.Method(typeof(Element), "HasTag", [typeof(Tag)]);
 
-				var EnoughMassLabel = codes[targetIndex].operand;
+				object EnoughMassLabel = codes[targetIndex].operand;
 
 				codes.InsertRange(index + 1, new[]
 				{

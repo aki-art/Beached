@@ -65,6 +65,11 @@ subworldFiles:
   - name: &BeachPalms Beached:subworlds/beached_beach/BeachPalmyShores
     overridePower: 1
 
+  # coral reefs
+  - name: &CoralReefs Beached:subworlds/beached_coral/CoralReefs
+    minCount: 2
+    maxCount: 5
+
   # snowy
   - name: &Snowy Beached:subworlds/beached_snowy/SnowyCaves 
     overridePower: 1.5
@@ -118,6 +123,7 @@ unknownCellsAllowedSubworlds:
     subworldNames:
       - *BambooMain
       - *RotMain
+      - *CoralReefs
       - *Snowy
 # start
   - tagcommand: AtTag
@@ -206,12 +212,12 @@ worldTemplateRules:
 
   # coral reef
   - names:
-      - beached/worldgen/coralreefsmall1b
+      - beached/worldgen/coral/reef_geyser
     listRule: GuaranteeOne
     priority: 700
     allowedCellsFilter:
       - command: Replace
-        zoneTypes: [Beached_Sea]
+        zoneTypes: [Beached_Coral]
 
   # ammonia vent
   - names:

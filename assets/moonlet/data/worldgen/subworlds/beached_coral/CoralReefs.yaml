@@ -1,0 +1,66 @@
+biomeNoise: Beached:noise/CoralReef
+temperatureRange: Beached:SummerDay
+
+pdWeight: 4
+
+density:
+  min: 5
+  max: 10
+
+avoidRadius: 5.0
+minChildCount: 4
+sampleBehaviour: PoissonDisk
+borderOverride: hardToDig
+borderOverridePriority: 20
+
+biomes:
+  - name: Beached:biomes/CoralReef/Solid
+    weight: 3
+    tags:
+      - SwampLily
+      - Beached:Beached_Coral_FireCoral
+      - Beached:Beached_Coral_Filament
+      - Beached:Beached_Coral_PrincessPacu
+
+features:
+  - type: Beached:features/coral/MetalCavern
+  - type: Beached:features/coral/MetalCavern
+  - type: Beached:features/coral/MetalCavern
+  - type: Beached:features/coral/CoralliumLake
+  - type: Beached:features/coral/CoralliumLake
+  - type: Beached:features/coral/CoralliumLake
+  - type: Beached:features/coral/CoralliumLake
+  - type: Beached:features/coral/CoralliumLake
+  - type: Beached:features/coral/CoralliumLake
+
+subworldTemplateRules:
+  - names:
+      - beached/worldgen/coral/3lakes
+      - beached/worldgen/coral/coral_cave
+    listRule: TrySome
+    someCount: 6
+    allowDuplicates: true
+
+tags:
+  - IgnoreCaveOverride
+  - NoGlobalFeatureSpawning
+  - StartWorld
+  
+# subworldTemplateRules:
+#   - names:
+#       - beached/worldgen/beach/simplepalm1
+#       - beached/worldgen/beach/simplepalm2
+#       - beached/worldgen/beach/simplepalm3
+#       - beached/worldgen/beach/simplepalm4
+#       - beached/worldgen/beach/simplepalm5
+#     listRule: TrySome
+#     someCount: 3
+#     allowDuplicates: false
+
+#   - names:
+#       - beached/pois/sandy_vending_machine
+#     listRule: TrySome
+#     someCount: 1
+#     allowDuplicates: false
+
+zoneType: Beached_Coral

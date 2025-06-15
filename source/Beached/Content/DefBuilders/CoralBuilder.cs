@@ -30,6 +30,7 @@ namespace Beached.Content.DefBuilders
 		private List<Tag> seedTags;
 		private int seedSortOrder = 0;
 		private bool harvestable = false;
+		private float defaultTemperaure = 293f;
 
 		public CoralBuilder(string ID, string animName)
 		{
@@ -121,6 +122,12 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
+		public CoralBuilder DefaultTemperatureCelsius(float temp)
+		{
+			defaultTemperaure = MiscUtil.CelsiusToKelvin(temp);
+			return this;
+		}
+
 		public CoralBuilder Harvestable()
 		{
 			harvestable = true;
@@ -163,7 +170,8 @@ namespace Beached.Content.DefBuilders
 				width,
 				height,
 				decor,
-				additionalTags: tags);
+				additionalTags: tags,
+				defaultTemperature: defaultTemperaure);
 
 			EntityTemplates.ExtendEntityToBasicPlant(
 				prefab,

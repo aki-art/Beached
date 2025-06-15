@@ -1,4 +1,5 @@
 ﻿using Beached.Content;
+using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,44 @@ namespace Beached.Patches
 {
 	public class CodexEntryGenerator_CreaturesPatches
 	{
+		[HarmonyPatch(typeof(CodexEntryGenerator_Creatures), "GenerateCreatureDescriptionContainers")]
+		public class CodexEntryGenerator_Creatures_GenerateCreatureDescriptionContainers_Patch
+		{
+			public static void Postfix(GameObject creature, List<ContentContainer> containers)
+			{
+				if (creature.TryGetComponent(out AdditionalPoopTags additionalPoopTags))
+				{
+					var dietEntriesContainer = containers.Find(container => container.content != null
+						&& container.content.Count >= 2
+						&& container.content[1] is CodexCollapsibleHeader header
+						&& header.label == (string)global::STRINGS.CODEX.HEADERS.DIET);
+
+					if (dietEntriesContainer == null)
+						return;
+
+					var contents = (dietEntriesContainer.content[1] as CodexCollapsibleHeader).contents;
+
+					if (contents == null)
+						return;
+
+					foreach (var content in contents.content)
+					{
+						if (content is CodexConversionPanel dietPanel)
+						{
+							foreach (var entry in additionalPoopTags.entries)
+							{
+								if (dietPanel.outs == null || dietPanel.outs.Length == 0)
+									continue;
+
+								var originalOut = dietPanel.outs[0];
+								dietPanel.outs = dietPanel.outs.AddToArray(new ElementUsage(entry.tag, entry.ratioToOutput * originalOut.amount, originalOut.continuous, originalOut.customFormating));
+							}
+						}
+					}
+				}
+			}
+		}
+
 		[HarmonyPatch(typeof(CodexEntryGenerator_Creatures), "GenerateEntries")]
 		public class CodexEntryGenerator_Creatures_GenerateEntries_Patch
 		{
@@ -14,11 +53,12 @@ namespace Beached.Patches
 			{
 				var brains = Assets.GetPrefabsWithComponent<CreatureBrain>();
 
-				AddCreature(BTags.Species.snail, STRINGS.CREATURES.FAMILY.BEACHEDSLICKSHELL, brains);
-				AddCreature(BTags.Species.muffin, STRINGS.CREATURES.FAMILY.BEACHEDMUFFIN, brains);
-				AddCreature(BTags.Species.karacoo, STRINGS.CREATURES.FAMILY.BEACHEDKARACOO, brains);
-				AddCreature(BTags.Species.mite, STRINGS.CREATURES.FAMILY.BEACHEDMITE, brains);
-				AddCreature(BTags.Species.jellyfish, STRINGS.CREATURES.FAMILY.BEACHEDJELLYFISH, brains);
+				AddCreature(BTags.Species.snail, STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDSNAILSPECIES, brains);
+				AddCreature(BTags.Species.muffin, STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDMUFFINSPECIES, brains);
+				AddCreature(BTags.Species.rotMonger, STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDROTMONGERSPECIES, brains);
+				AddCreature(BTags.Species.karacoo, STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDKARACOOSPECIES, brains);
+				AddCreature(BTags.Species.mite, STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDMITESPECIES, brains);
+				AddCreature(BTags.Species.jellyfish, STRINGS.CREATURES.FAMILY_PLURAL.BEACHEDJELLYFISHSPECIES, brains);
 			}
 
 			private static void AddCreature(Tag species, string name, List<GameObject> brains)

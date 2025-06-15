@@ -1,19 +1,11 @@
 ﻿#if TRANSPILERS
 
-using Beached.Content.ModDb;
-using Beached.Content.Scripts;
-using HarmonyLib;
-using Klei.AI;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using UnityEngine;
-
 namespace Beached.Patches
 {
 	public class MinionPesonalityPanelPatch
 	{
 		// TODO
+		/*
 		//[HarmonyPatch(typeof(MinionPersonalityPanel), nameof(MinionPersonalityPanel.RefreshTraits))]
 		public class MinionPersonalityPanel_RefreshTraits_Patch
 		{
@@ -36,7 +28,25 @@ namespace Beached.Patches
 					typeof(GameObject)
 				]);
 
-				codes.InsertRange(index + 1,
+
+				/*				var f_pickupable = typeof(FetchManager.Pickup).GetField("pickupable");
+
+								var localTypeIndex = codes.FindIndex(c => c.LoadsField(f_pickupable));
+
+								if (localTypeIndex == -1)
+								{
+									Log.TranspilerIssue("pickupable not found");
+									return codes;
+								}
+
+								var localIndex = MiscUtil.GetLocalIndex(codes[localTypeIndex - 1]);
+								if (localIndex == -1)
+								{
+									Log.TranspilerIssue("pickup local operand returned unexpected result");
+									return codes;
+								}*/
+		/* from here
+		codes.InsertRange(index + 1,
 				[
 					new CodeInstruction(OpCodes.Ldloc_3), // trait (iterator) was 1
 					new CodeInstruction(OpCodes.Ldarg_0), // this
@@ -48,23 +58,24 @@ namespace Beached.Patches
 			}
 
 			private static string GetToolTip(string tooltip, Trait trait, GameObject target)
+		{
+			if (BTraits.LIFE_GOALS.Contains(trait.Id))
 			{
-				if (BTraits.LIFE_GOALS.Contains(trait.Id))
+				if (target.TryGetComponent(out Beached_LifeGoalTracker storage))
 				{
-					if (target.TryGetComponent(out Beached_LifeGoalTracker storage))
+					foreach (var item in storage.fulfilledLifegoalModifiers)
 					{
-						foreach (var item in storage.fulfilledLifegoalModifiers)
-						{
-							tooltip += "\n";
-							tooltip += string.Format(global::STRINGS.UI.CHARACTERCONTAINER_SKILL_VALUE, GameUtil.AddPositiveSign(item.Value.ToString(), true), item.GetName());
-							tooltip += storage.isGoalFulfilled ? " (Active)" : " (Inactive)";
-						}
+						tooltip += "\n";
+						tooltip += string.Format(global::STRINGS.UI.CHARACTERCONTAINER_SKILL_VALUE, GameUtil.AddPositiveSign(item.Value.ToString(), true), item.GetName());
+						tooltip += storage.isGoalFulfilled ? " (Active)" : " (Inactive)";
 					}
 				}
-
-				return tooltip;
 			}
+
+			return tooltip;
 		}
+	}
+		*/
 	}
 }
 #endif

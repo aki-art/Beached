@@ -3,6 +3,7 @@ using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
+using Beached.Content.Defs.Medicines;
 using FUtility.FLocalization;
 
 namespace Beached
@@ -17,6 +18,12 @@ namespace Beached
 				{
 					public static LocString NAME = Link("Soap", SoapConfig.ID);
 					public static LocString DESC = "An aromatic block of waxy soap.";
+				}
+
+				public class BEACHED_SULFURGLAND
+				{
+					public static LocString NAME = Link("Stinky Gland", SulfurGlandConfig.ID);
+					public static LocString DESC = "Parts of digestive glands of Limpets. It reeks of Sulfur.";
 				}
 
 				public class BEACHED_OXYLITEPUFT
@@ -66,6 +73,16 @@ namespace Beached
 				}
 			}
 
+			public class PILLS
+			{
+				public class BEACHED_SUPERALLERGYMEDICATION
+				{
+					public static LocString NAME = Link("Sneeze Begone", SuperAllergyMedicationConfig.ID);
+					public static LocString DESC = "Suppresses and prevents allergic reactions.";
+					public static LocString RECIPEDESC = $"An even stronger antihistamine Duplicants can take to alleviate allergic reactions. Lasts 7 cycles.";
+				}
+			}
+
 			public class FOOD
 			{
 				public class BEACHED_ASPICLICE
@@ -112,7 +129,7 @@ namespace Beached
 				public class BEACHED_CRABCAKES
 				{
 					public static LocString NAME = Link("Crab Cakes", CrabCakesConfig.ID);
-					public static LocString DESC = "Cruchy crabby bites.";
+					public static LocString DESC = "Crunchy crabby bites.";
 				}
 
 				public class BEACHED_GLAZEDDEWNUT
@@ -203,7 +220,7 @@ namespace Beached
 				public class BEACHED_HIGHQUALITYMEAT
 				{
 					public static LocString NAME = Link("High Quality Meat", HighQualityMeatConfig.ID);
-					public static LocString DESC = "...";
+					public static LocString DESC = "Soft fatty meat of an unfortunate creature.";
 				}
 
 				public class BEACHED_FOULPOFF
@@ -308,37 +325,37 @@ namespace Beached
 					public static LocString DESC = "...";
 				}
 
-				public class BEACHED_NITROGEN_POFF_RAW
+				public class BEACHED_BEACHED_NITROGEN_POFF_RAW
 				{
 					public static LocString NAME = Link("White Poff", PoffConfig.GetRawId(Elements.nitrogen));
 					public static LocString DESC = "So bland, it sucks the taste out of the tongue.";
 				}
 
-				public class BEACHED_NITROGEN_POFF_COOKED
+				public class BEACHED_BEACHED_NITROGEN_POFF_COOKED
 				{
 					public static LocString NAME = Link("Cooked White Poff", PoffConfig.GetCookedId(Elements.nitrogen));
 					public static LocString DESC = "Still has an astonishing lack of flavor, but now it's also mushy.";
 				}
 
-				public class BEACHED_SALTYOXYGEN_POFF_RAW
+				public class BEACHED_BEACHED_SALTYOXYGEN_POFF_RAW
 				{
 					public static LocString NAME = Link("Pale Poff", PoffConfig.GetRawId(Elements.saltyOxygen));
 					public static LocString DESC = "Tastes like an eraser.";
 				}
 
-				public class BEACHED_SALTYOXYGEN_POFF_COOKED
+				public class BEACHED_BEACHED_SALTYOXYGEN_POFF_COOKED
 				{
 					public static LocString NAME = Link("Cooked Pale Poff", PoffConfig.GetCookedId(Elements.saltyOxygen));
 					public static LocString DESC = "Pleasantly chewy, with a strong flavor of salt.";
 				}
 
-				public class BEACHED_AMMONIA_POFF_RAW
+				public class BEACHED_BEACHED_AMMONIA_POFF_RAW
 				{
 					public static LocString NAME = Link("Purple Poff", PoffConfig.poffLookup[Elements.ammonia].raw);
 					public static LocString DESC = "Leaves a stinging feel in the mouth.";
 				}
 
-				public class BEACHED_AMMONIA_POFF_COOKED
+				public class BEACHED_BEACHED_AMMONIA_POFF_COOKED
 				{
 					public static LocString NAME = Link("Cooked Purple Poff", PoffConfig.poffLookup[Elements.ammonia].cooked);
 					public static LocString DESC = "Tastes alright, as long as you pinch your nose and don't smell it.";

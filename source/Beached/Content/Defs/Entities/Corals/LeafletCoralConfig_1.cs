@@ -40,6 +40,7 @@ namespace Beached.Content.Defs.Entities.Corals
 			coral.emitMass = 0.05f;
 			coral.initialVelocity = new Vector2f(0, 1);
 			coral.consumptionRate = 0.2f;
+			coral.spawnFX = SpawnFXHashes.OxygenEmissionBubbles;
 
 			CoralTemplate.AddSimpleConverter(prefab, SimHashes.Water, SUCC_RATE, SimHashes.Oxygen, SUCC_RATE * CONVERSION_RATE);
 
@@ -50,6 +51,8 @@ namespace Beached.Content.Defs.Entities.Corals
 
 		public void OnPrefabInit(GameObject inst) { }
 
-		public void OnSpawn(GameObject inst) { }
+		public void OnSpawn(GameObject inst)
+		{
+		}
 	}
 }

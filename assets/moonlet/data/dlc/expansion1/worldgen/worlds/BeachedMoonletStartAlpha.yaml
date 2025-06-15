@@ -25,7 +25,7 @@ worldTraitRules:
     max: 4
     # replace these trait with custom variants on this world
     alternativeTraits:
-      traits/FrozenCore: Beached:traits/Beached_Alt_Sulfur_FrozenCore 
+      traits/FrozenCore: Beached:traits/Alt_Sulfur_FrozenCore 
 
     forbiddenTags:
       - Germs # slime molds
@@ -60,6 +60,9 @@ subworldFiles:
     overridePower: 1
   - name: &BeachPalms Beached:subworlds/beached_beach/BeachPalmyShores
     overridePower: 1
+
+  # coral reefs
+  - name: &CoralReefs Beached:subworlds/beached_coral/CoralReefs
 
   # snowy
   - name: &Snowy Beached:subworlds/beached_snowy/SnowyCaves 
@@ -115,6 +118,7 @@ unknownCellsAllowedSubworlds:
       - *BambooMain
       - *RotMain
       - *Snowy
+      - *CoralReefs
 # start
   - tagcommand: AtTag
     tag: AtStart
@@ -194,7 +198,7 @@ worldTemplateRules:
     priority: 700
     allowedCellsFilter:
       - command: Replace
-        zoneTypes: [Beached_Sea]
+        zoneTypes: [Beached_Coral]
 
   # ammonia vent
   - names:

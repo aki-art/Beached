@@ -118,8 +118,6 @@ namespace Beached.Content.Defs.Buildings
 		// deliverable mucus for increased output/work speed/opening speed
 		private static void ConfigureLubricatableBuildingPrefabs()
 		{
-			// TODO: buildings from Chemical Processing
-
 			// generators
 			AddTimerLubricatable(HydrogenGeneratorConfig.ID);
 			AddTimerLubricatable(ManualGeneratorConfig.ID);

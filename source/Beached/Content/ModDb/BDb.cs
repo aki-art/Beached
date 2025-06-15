@@ -77,7 +77,11 @@ namespace Beached.Content.ModDb
 					DeepFriedShellfishConfig.ID,
 					DeepFriedFishConfig.ID,
 					DeepFriedMeatConfig.ID,
-					// TODO: Prehistoric 
+
+					DinosaurMeatConfig.ID,
+					SmokedDinosaurMeatConfig.ID,
+					SmokedFish.ID,
+					// TODO rest of the meats
 
 					// Twitch Integration
 					"ONITwitch.GlitterMeatConfig",

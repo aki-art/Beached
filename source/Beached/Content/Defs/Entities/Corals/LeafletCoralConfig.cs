@@ -19,7 +19,7 @@ namespace Beached.Content.Defs.Entities.Corals
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
 				STRINGS.CREATURES.SPECIES.BEACHED_LEAFLETCORAL.NAME,
-				STRINGS.CREATURES.SPECIES.BEACHED_LEAFLETCORAL.DESCRIPTION,
+				STRINGS.CREATURES.SPECIES.BEACHED_LEAFLETCORAL.DESC,
 				10f,
 				Assets.GetAnim("beached_leaflet_coral_kanim"),
 				"idle_grown",
