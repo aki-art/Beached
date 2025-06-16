@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.ClassExtensions;
+﻿using Beached.Content.Scripts.Buildings;
+using Beached.Content.Scripts.ClassExtensions;
 using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using Klei.AI;
@@ -187,6 +188,29 @@ namespace Beached.Utils
 		{
 			if (cavityInfoExtensions.TryGetValue(cavity, out var cavityInfoExtension))
 				cavityInfoExtension.collarDispensers.Remove(collarDispenser);
+		}
+
+		public static void AddMirror(this CavityInfo cavity, Mirror mirror)
+		{
+			var mirrors = cavityInfoExtensions
+				.GetOrAdd(cavity, () => new CavityInfoExtension(cavity))
+				.mirrors;
+
+			if (mirrors.Contains(mirror))
+				return;
+
+			mirrors.Add(mirror);
+		}
+
+		public static void RemoveMirror(this CavityInfo cavity, Mirror mirror)
+		{
+			if (cavityInfoExtensions.TryGetValue(cavity, out var cavityInfoExtension))
+				cavityInfoExtension.mirrors.Remove(mirror);
+		}
+
+		public static int GetMirrorCount(this CavityInfo cavity)
+		{
+			return cavityInfoExtensions.TryGetValue(cavity, out var extension) ? extension.mirrors.Count : 0;
 		}
 
 		public static List<KPrefabID> GetNaturePOIs(this CavityInfo cavity)

@@ -28,6 +28,7 @@ namespace Beached.Content.ModDb
 			controllerByCollarDispenser,
 			cultivatingGerms,
 			meat,
+			mirror,
 			nonVega,
 			iceWrathLashOut,
 			sandboxCrumble;
@@ -192,6 +193,18 @@ namespace Beached.Content.ModDb
 			desiccation.SetResolveStringCallback((str, data) => data is MoistureMonitor.Instance moistureMonitor ? string.Format(str, moistureMonitor.timeUntilDeath) : str);
 
 			__instance.Add(desiccation);
+
+			mirror = __instance.Add(new StatusItem(
+				"Beached_Mirror",
+				CREATURES,
+				"beached_statusitem_meat",
+				StatusItem.IconType.Custom,
+				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID,
+				false));
+
+			__instance.Add(mirror);
 
 
 			geneticallyMofidied = new(

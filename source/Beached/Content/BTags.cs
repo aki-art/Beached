@@ -124,6 +124,7 @@ namespace Beached.Content
 				wantsToSitOnEgg = TagManager.Create("Beached_Behavior_WantsToSitOnEgg"),
 				// muffins will not hunt critters with this tag, regardless of collar settings
 				doNotTargetMeByCarnivores = TagManager.Create("Beached_DoNotTargetMeByCarnivores"),
+				muffinThreat = TagManager.Create("Beached_MuffinThreat"),
 
 				beingMined = TagManager.Create("Beached_BeingMined"),
 				grownShell = TagManager.Create("Beached_GrownShell");

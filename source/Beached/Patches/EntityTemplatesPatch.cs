@@ -1,6 +1,7 @@
 ﻿using Beached.Content;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
+using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.UI;
 using HarmonyLib;
 using System.Collections.Generic;
@@ -11,6 +12,20 @@ namespace Beached.Patches
 {
 	public class EntityTemplatesPatch
 	{
+
+		[HarmonyPatch(typeof(EntityTemplates), "ExtendEntityToWildCreature", [
+			typeof(GameObject),
+			typeof(int),
+			typeof(bool)])]
+		public class EntityTemplates_ExtendEntityToWildCreature_Patch
+		{
+			public static void Postfix(GameObject prefab, int space_required_per_creature)
+			{
+				if (space_required_per_creature > 0)
+					prefab.AddComponent<Beached_MirrorMonitor>().originalSpaceRequirement = space_required_per_creature;
+			}
+		}
+
 		[HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicCreature), [
 			typeof(bool),
 			typeof(GameObject),

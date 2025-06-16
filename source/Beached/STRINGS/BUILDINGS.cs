@@ -257,6 +257,13 @@ namespace Beached
 					public static LocString EFFECT = "TRANSLATION NOT NEEDED - gets copied from regular fridge";
 				}
 
+				public class BEACHED_MIRROR
+				{
+					public static LocString NAME = Link("Mirror", MirrorConfig.ID);
+					public static LocString DESC = "A reflective surface with a quant frame. Tricks most critters into thinking their available space is larger.";
+					public static LocString EFFECT = "Halves the space requirement of critters. Only one mirror can affect critters, the effect does not stack.";
+				}
+
 				public class BEACHED_MOSSBED
 				{
 					public static LocString NAME = Link("Moss Frame", MossBedConfig.ID);

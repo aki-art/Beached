@@ -63,6 +63,12 @@ namespace Beached
 					public static LocString TOOLTIP = "This critter is constructing a home for itself.";
 				}
 
+				public class BEACHED_MIRROR
+				{
+					public static LocString NAME = "Fooled";
+					public static LocString TOOLTIP = "This critter has been tricked by a mirror into thinking they have access to more space.";
+				}
+
 				public class BEACHED_SINGING
 				{
 					public static LocString NAME = "Resonating";

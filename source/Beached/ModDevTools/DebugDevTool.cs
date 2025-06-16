@@ -30,7 +30,7 @@ namespace Beached.ModDevTools
 		private static float uvScale = 10f;
 
 		private string[] zoneTypes;
-		EventInstance instance;
+		private EventInstance instance;
 
 		public DebugDevTool()
 		{
@@ -46,18 +46,18 @@ namespace Beached.ModDevTools
 		// TODO this is copy paste of FindAvailablePOISpawnLocations
 		private static List<AxialI> FindAvailablePOISpawnLocations(AxialI location)
 		{
-			List<AxialI> available = new List<AxialI>();
-			bool flag = IsSuitablePOISpawnLocation(location);
+			var available = new List<AxialI>();
+			var flag = IsSuitablePOISpawnLocation(location);
 			if (flag)
 			{
 				available.Add(location);
 			}
-			for (int dist = 1; dist <= 2; dist++)
+			for (var dist = 1; dist <= 2; dist++)
 			{
-				foreach (AxialI direction in AxialI.DIRECTIONS)
+				foreach (var direction in AxialI.DIRECTIONS)
 				{
-					AxialI destination = location + direction * dist;
-					bool flag2 = IsSuitablePOISpawnLocation(destination);
+					var destination = location + direction * dist;
+					var flag2 = IsSuitablePOISpawnLocation(destination);
 					if (flag2)
 					{
 						available.Add(destination);
@@ -68,7 +68,7 @@ namespace Beached.ModDevTools
 		}
 		private static bool IsSuitablePOISpawnLocation(AxialI location)
 		{
-			bool flag = !ClusterGrid.Instance.IsValidCell(location);
+			var flag = !ClusterGrid.Instance.IsValidCell(location);
 			bool result;
 			if (flag)
 			{
@@ -76,10 +76,10 @@ namespace Beached.ModDevTools
 			}
 			else
 			{
-				List<ClusterGridEntity> entities = ClusterGrid.Instance.GetEntitiesOnCell(location);
-				foreach (ClusterGridEntity entity in entities)
+				var entities = ClusterGrid.Instance.GetEntitiesOnCell(location);
+				foreach (var entity in entities)
 				{
-					bool flag2 = entity.Layer == EntityLayer.Asteroid || entity.Layer == EntityLayer.POI;
+					var flag2 = entity.Layer == EntityLayer.Asteroid || entity.Layer == EntityLayer.POI;
 					if (flag2)
 					{
 						return false;
@@ -92,9 +92,24 @@ namespace Beached.ModDevTools
 
 		public override void RenderTo(DevPanel panel)
 		{
+			if (ImGui.CollapsingHeader("Mirrors"))
+			{
+				foreach (var info in Game.Instance.roomProber.cavityInfos)
+				{
+					var mirrorCount = info.GetMirrorCount();
+					if (mirrorCount > 0)
+					{
+						var roomType = info.room == null ? "N/A" : info.room.roomType.ToString();
+
+						ImGui.Text($"{mirrorCount} Mirrors in {roomType}");
+					}
+				}
+
+			}
+
 			if (ImGui.Button("Spawn Drale"))
 			{
-				bool isPaused = SpeedControlScreen.Instance.IsPaused;
+				var isPaused = SpeedControlScreen.Instance.IsPaused;
 				if (isPaused)
 				{
 					SpeedControlScreen.Instance.Unpause(false);
@@ -107,8 +122,8 @@ namespace Beached.ModDevTools
 
 					if (locations.Count > 0)
 					{
-						GameObject prefab = Assets.GetPrefab(Drale_SpacedOutConfig.ID);
-						GameObject POIgo = Util.KInstantiate(prefab, null, null);
+						var prefab = Assets.GetPrefab(Drale_SpacedOutConfig.ID);
+						var POIgo = Util.KInstantiate(prefab, null, null);
 						var entity = POIgo.GetComponent<ClusterGridEntity>();
 						entity.Location = locations.GetRandom();
 						POIgo.SetActive(true);
@@ -165,7 +180,7 @@ namespace Beached.ModDevTools
 			if (ImGui.DragFloat("Permafrost UV Scale", ref uvScale))
 			{
 				//ElementLoader.GetElement(Elements.permaFrost.Tag).substance.material.SetFloat("_WorldUVScale", uvScale);
-				GroundRenderer.Materials materials = World.Instance.groundRenderer.elementMaterials[Elements.permaFrost];
+				var materials = World.Instance.groundRenderer.elementMaterials[Elements.permaFrost];
 				materials.opaque.SetFloat("_WorldUVScale", uvScale);
 				materials.alpha.SetFloat("_WorldUVScale", uvScale);
 			}
@@ -387,7 +402,7 @@ namespace Beached.ModDevTools
 							if (events == null) continue;
 							for (var index = 0; index < events.Length; index++)
 							{
-								EventDescription evt = events[index];
+								var evt = events[index];
 								evt.getPath(out var path);
 								evt.getID(out var ID);
 								Log.Debug($"   - {index} \t\tevent {path} {ID}");
@@ -395,7 +410,7 @@ namespace Beached.ModDevTools
 								if (path.StartsWith("event:/expansion1/expansion1_Buildings/TemporalTearOpener"))
 								{
 									Log.Debug("Temporal tear opener time");
-									evt.getParameterDescriptionCount(out int count);
+									evt.getParameterDescriptionCount(out var count);
 									for (var i = 0; i < count; i++)
 									{
 										evt.getParameterDescriptionByIndex(i, out var parameter);

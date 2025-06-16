@@ -47,6 +47,9 @@ namespace Beached.Content.Defs.Entities
 		public static void OnPostEntitiesLoaded()
 		{
 			MerpipConfig.ConfigureEggChancesToMerpip();
+
+			if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
+				Assets.GetPrefab(RaptorConfig.ID).AddTag(BTags.Creatures.muffinThreat);
 		}
 	}
 }

@@ -52,6 +52,7 @@ namespace Beached.Patches
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, BioFuelMakerConfig.ID, Refining.MATERIALS, EthanolDistilleryConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, MossTerrariumConfig.ID, Utilities.OTHER_UTILITIES);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, AquaticFarmTileConfig.ID, Food.FARMING);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, MirrorConfig.ID, Food.RANCHING, UnderwaterCritterCondoConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, DeconstructableRocketTileConfig.ID, Base.TILES, RocketWallTileConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, CrystalGrowerConfig.ID, Utilities.OTHER_UTILITIES);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, GemCutterConfig.ID, Refining.ADVANCED);

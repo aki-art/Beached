@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿using Beached.Content.Scripts.Buildings;
+using Beached.Content.Scripts.Entities;
 using System.Collections.Generic;
 
 namespace Beached.Content.Scripts.ClassExtensions
@@ -8,5 +9,6 @@ namespace Beached.Content.Scripts.ClassExtensions
 		private CavityInfo original = original;
 		public List<KPrefabID> pois = [];
 		public List<CollarDispenser> collarDispensers = [];
+		public List<Mirror> mirrors = [];
 	}
 }
