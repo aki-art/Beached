@@ -13,6 +13,7 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 				.TemperatureCelsius(-70, -55, 65, 80)
 				.Size(1, 1)
 				.Mass(100f)
+				.Drops(MeatConfig.ID)
 				.Trappable()
 				.Baggable()
 				.SortAfter(SquirrelConfig.ID)

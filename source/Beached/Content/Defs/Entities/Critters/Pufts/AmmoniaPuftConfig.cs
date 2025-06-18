@@ -35,7 +35,6 @@ namespace Beached.Content.Defs.Entities.Critters.Pufts
 		{
 			return base.ConfigureCritter(builder)
 				.Size(1, 1)
-				.Drops(MeatConfig.ID)
 				.Egg(BabyAmmoniaPuftConfig.ID, "egg_puft_kanim")
 					.Fertility(45f)
 					.Incubation(15f)

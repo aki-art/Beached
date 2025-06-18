@@ -1,5 +1,4 @@
 ﻿using Beached.Content.DefBuilders;
-using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Integration;
@@ -45,7 +44,6 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 		{
 			return base.ConfigureCritter(builder)
 				.Size(1, 3)
-				.Drops(CracklingsConfig.ID, 4f)
 				.Tag(GameTags.OriginalCreature)
 				.Egg(BabySlagmiteConfig.ID, "beached_egg_slagmite_kanim")
 					.Fertility(10f)

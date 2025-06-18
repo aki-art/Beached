@@ -5,9 +5,9 @@ using static EdiblesManager;
 
 namespace Beached.Content.Defs.Foods
 {
-	public class JellyConfig : IEntityConfig
+	public class GelatineConfig : IEntityConfig
 	{
-		public const string ID = "Beached_Jelly";
+		public const string ID = "Beached_Gelatine";
 
 		public GameObject CreatePrefab()
 		{
@@ -23,7 +23,7 @@ namespace Beached.Content.Defs.Foods
 
 			var prefab = BEntityTemplates.CreateFood(
 				ID,
-				"beached_jelly_kanim",
+				"beached_jelly_kanim", // TODO
 				0.6f,
 				0.35f,
 				foodInfo);

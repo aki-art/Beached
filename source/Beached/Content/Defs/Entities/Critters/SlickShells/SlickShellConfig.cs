@@ -1,6 +1,5 @@
 ﻿using Beached.Content.DefBuilders;
-using Beached.Content.Defs.Foods;
-using Beached.Content.Defs.Items;
+using Beached.Content.Defs.Entities.Corals;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
@@ -23,7 +22,6 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
-				.Drops(SeaShellConfig.ID, RawSnailConfig.ID)
 				.Traits()
 					.Add(BAmounts.Moisture.maxAttribute.Id, 100f)
 					.Add(BAmounts.Moisture.deltaAttribute.Id, -1000f / CONSTS.CYCLE_LENGTH)
@@ -57,10 +55,11 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			host.maxLevel = 3;
 			host.defaultGrowthRate = LimpetHost.GROWTH_RATE_4_CYCLES;
 			host.itemDroppedOnShear = SimHashes.Lime.CreateTag();
-			host.massDropped = 5f;
+			host.massDropped = 30f;
 			host.targetSymbol = "beached_limpetgrowth";
 			host.limpetKanim = "beached_slickshell_limpetgrowth_kanim";
 			host.metabolismModifier = 1.2f;
+			host.glandMass = 5f;
 
 			return prefab;
 		}
@@ -77,7 +76,16 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 					SlickShellTuning.CALORIES_PER_KG_OF_ORE,
 					TUNING.CREATURES.CONVERSION_EFFICIENCY.NORMAL,
 					null,
-					0)
+					0),
+
+				new (
+					[SaltyStickConfig.ID],
+					SimHashes.Dirt.CreateTag(),
+					SlickShellTuning.CALORIES_PER_KG_OF_ORE,
+					TUNING.CREATURES.CONVERSION_EFFICIENCY.NORMAL,
+					null,
+					0,
+					food_type: Diet.Info.FoodType.EatPlantStorage)
 			];
 		}
 

@@ -32,7 +32,6 @@ namespace Beached.Content.Defs.Entities.Critters.Rotmongers
 		{
 			return base.ConfigureCritter(builder)
 				.Size(1, 1)
-				.Drops(MeatConfig.ID)
 				.Tag(GameTags.OriginalCreature)
 				.Egg(BabyRotmongerConfig.ID, "beached_egg_slagmite_kanim")
 					.Fertility(10f)

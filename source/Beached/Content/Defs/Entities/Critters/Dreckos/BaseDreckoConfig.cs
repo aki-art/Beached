@@ -13,6 +13,7 @@ namespace Beached.Content.Defs.Entities.Critters.Dreckos
 				.TemperatureCelsius(0, 5, 55, 60)
 				.Mass(200)
 				.Trappable()
+				.Drops(MeatConfig.ID, 2f)
 				.Baggable()
 				.Movable()
 				.Faction(FactionManager.FactionID.Pest)

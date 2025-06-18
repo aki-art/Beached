@@ -23,7 +23,7 @@ namespace Beached
 				public class BEACHED_SULFURGLAND
 				{
 					public static LocString NAME = Link("Stinky Gland", SulfurGlandConfig.ID);
-					public static LocString DESC = "Parts of digestive glands of Limpets. It reeks of Sulfur.";
+					public static LocString DESC = $"Parts of digestive glands of Limpets. It reeks of {Link("Sulfur", SimHashes.Sulfur)}, and has applications in Vulcanization processes.";
 				}
 
 				public class BEACHED_OXYLITEPUFT
@@ -47,12 +47,6 @@ namespace Beached
 				public class BEACHED_PALATECLEANSERFOOD
 				{
 					public static LocString NAME = "Palate Cleanser";
-					public static LocString DESC = "...";
-				}
-
-				public class BEACHED_BLUEPRINT
-				{
-					public static LocString NAME = "Blueprint: {0}";
 					public static LocString DESC = "...";
 				}
 

@@ -24,6 +24,7 @@ namespace Beached.Content.Defs.Entities.Critters.Pacus
 		{
 			return builder
 				.TemperatureCelsius(10, 15, 50, 60)
+				.Drops(FishMeatConfig.ID)
 				.Decor(3, 30)
 				.Fish()
 				.Size(1, 1)

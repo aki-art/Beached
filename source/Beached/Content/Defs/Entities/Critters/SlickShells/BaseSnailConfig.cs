@@ -1,4 +1,6 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Foods;
+using Beached.Content.Defs.Items;
 using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
 using TUNING;
@@ -24,6 +26,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		{
 			return builder
 				.TemperatureCelsius(10, 20, 40, 50)
+				.Drops(SeaShellConfig.ID, RawSnailConfig.ID)
 				.Size(1, 1)
 				.Mass(50f)
 				.Trappable()

@@ -1,6 +1,7 @@
 ﻿using Klei.AI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TUNING;
 using UnityEngine;
 
@@ -381,8 +382,13 @@ namespace Beached.Content.DefBuilders
 			if (spaceRequiredPerCritter > 0)
 				EntityTemplates.ExtendEntityToWildCreature(prefab, spaceRequiredPerCritter);
 
-			prefab.AddOrGet<Butcherable>().SetDrops(drops ?? []);
-			kPrefabID.prefabInitFn += go => go.AddOrGet<Butcherable>().SetDrops(drops ?? []);
+			drops ??= [];
+			drops = drops
+				//.Where(kv => Assets.TryGetPrefab(kv.Key) != null)
+				.ToDictionary(kv => kv.Key, kv => kv.Value);
+
+			prefab.AddOrGet<Butcherable>().SetDrops(drops);
+			kPrefabID.prefabInitFn += go => go.AddOrGet<Butcherable>().SetDrops(drops);
 
 			//	Log.Debug($"set drops of {id} to {drops?.Keys.Join()}");
 			if (trappable)

@@ -11,6 +11,7 @@ namespace Beached.Content.Defs.Entities.Critters.Squirrels
 		{
 			return builder
 				.TemperatureCelsius(0, 10, 35, 60)
+				.Drops(MeatConfig.ID)
 				.Size(1, 1)
 				.Mass(100f)
 				.Trappable()

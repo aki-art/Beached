@@ -24,6 +24,7 @@ namespace Beached.Content.Defs.Entities.Critters.Pufts
 			return builder
 				.TemperatureCelsius(15, 15, 55, 70)
 				.Mass(50f)
+				.Drops(MeatConfig.ID)
 				.Trappable()
 				.Baggable()
 				.Faction(FactionManager.FactionID.Pest)

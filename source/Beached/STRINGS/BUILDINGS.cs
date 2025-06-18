@@ -352,6 +352,15 @@ namespace Beached
 						"\nDuplicants will not fabricate items unless recipes are queued.";
 				}
 
+				public class BEACHED_VULCANIZER
+				{
+					public static LocString NAME = Link("Vulcanizer", VulcanizerConfig.ID);
+					public static LocString DESC = $"Hardens elastomers into {Link("Rubber", Elements.rubber)} by process of vulcanization..";
+					public static LocString EFFECT = "Produces Rubber." +
+						"\n" +
+						"\nDuplicants will not fabricate items unless recipes are queued.";
+				}
+
 				public class BEACHED_WOODCARVING
 				{
 					public static LocString NAME = Link("Wood Carving", WoodCarvingConfig.ID);

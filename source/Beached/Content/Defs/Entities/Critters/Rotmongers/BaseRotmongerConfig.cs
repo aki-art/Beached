@@ -12,6 +12,7 @@ namespace Beached.Content.Defs.Entities.Critters.Rotmongers
 			return builder
 				.TemperatureCelsius(30, 40, 80, 90)
 				.Mass(100f)
+				.Drops(MeatConfig.ID)
 				.Trappable()
 				.Baggable()
 				.Faction(FactionManager.FactionID.Pest)

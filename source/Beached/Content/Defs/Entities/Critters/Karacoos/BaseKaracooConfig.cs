@@ -10,11 +10,12 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 	{
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
-			return builder
+			builder
 				.Decor(10, 2)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_1X2, 1f)
 				.TemperatureCelsius(-20, -5, 45, 60)
 				.Trappable()
+				.Drops(MeatConfig.ID)
 				.Baggable()
 				.SortAfter(SquirrelConfig.ID)
 				.CritterDensityTolerance(TUNING.CREATURES.SPACE_REQUIREMENTS.TIER3)
@@ -25,6 +26,11 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 					.MaxAge(60)
 					.Stomach(50_000, 5_000)
 					.Done();
+
+			if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
+				builder.Drops(FeatherFabricConfig.ID, 2f);
+
+			return builder;
 		}
 
 		public override GameObject CreatePrefab(BaseCritterConfig config)

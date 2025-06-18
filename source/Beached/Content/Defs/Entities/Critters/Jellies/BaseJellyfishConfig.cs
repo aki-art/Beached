@@ -46,6 +46,7 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 				.Baggable()
 				.Movable()
 				.CanNotDrown()
+				.Drops(SimHashes.Water.ToString(), 10f)
 				.Faction(FactionManager.FactionID.Prey)
 				.SortAfter(PacuConfig.ID)
 				.CritterDensityTolerance(36)

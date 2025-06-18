@@ -12,7 +12,7 @@ namespace Beached.Patches
 {
 	public class SimDebugViewPatch
 	{
-		[HarmonyPatch(typeof(SimDebugView), "GetDiseaseColour")]
+		//[HarmonyPatch(typeof(SimDebugView), "GetDiseaseColour")]
 		public class SimDebugView_GetDiseaseColour_Patch
 		{
 			public static void Postfix(int cell, ref Color __result)
@@ -40,23 +40,23 @@ namespace Beached.Patches
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator generator, IEnumerable<CodeInstruction> orig)
 			{
-				List<CodeInstruction> codes = orig.ToList();
+				var codes = orig.ToList();
 
-				int index = codes.FindIndex(ci => ci.opcode == OpCodes.Ble_Un_S); // <=
+				var index = codes.FindIndex(ci => ci.opcode == OpCodes.Ble_Un_S); // <=
 
 				if (index == -1)
 					return codes;
 
-				int targetIndex = codes.FindIndex(index, ci => ci.opcode == OpCodes.Beq_S); // ==
+				var targetIndex = codes.FindIndex(index, ci => ci.opcode == OpCodes.Beq_S); // ==
 
 				if (targetIndex == -1)
 					return codes;
 
-				System.Reflection.FieldInfo f_Element = AccessTools.Field(typeof(Grid), "Element");
-				System.Reflection.FieldInfo f_Breathable = AccessTools.Field(typeof(GameTags), "Breathable");
-				System.Reflection.MethodInfo m_HasTag = AccessTools.Method(typeof(Element), "HasTag", [typeof(Tag)]);
+				var f_Element = AccessTools.Field(typeof(Grid), "Element");
+				var f_Breathable = AccessTools.Field(typeof(GameTags), "Breathable");
+				var m_HasTag = AccessTools.Method(typeof(Element), "HasTag", [typeof(Tag)]);
 
-				object EnoughMassLabel = codes[targetIndex].operand;
+				var EnoughMassLabel = codes[targetIndex].operand;
 
 				codes.InsertRange(index + 1, new[]
 				{

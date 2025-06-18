@@ -28,10 +28,22 @@ namespace Beached.Content
 				FernFoodConfig.ID
 			];
 
+			public static Tag[] elastomers =
+			[
+				Elements.mucus.CreateTag(),
+				SimHashes.Petroleum.CreateTag()
+			];
+
 			public static Tag[] sulfurs =
 			[
 				SulfurGlandConfig.ID,
 				SimHashes.Sulfur.CreateTag()
+			];
+
+			public static float[] sulfurAmounts =
+			[
+				1f,
+				5f
 			];
 		}
 

@@ -20,7 +20,6 @@ namespace Beached.Content.Defs.Entities.Critters.Squirrels
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
-				.Drops(MeatConfig.ID)
 				.Egg(BabyMerpipConfig.ID, "beached_egg_slagmite_kanim")
 					.Fertility(0.1f)
 					.Incubation(0.1f)

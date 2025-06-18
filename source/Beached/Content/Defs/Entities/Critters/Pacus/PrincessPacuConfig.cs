@@ -21,7 +21,6 @@ namespace Beached.Content.Defs.Entities.Critters.Pacus
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
-				.Drops(FishMeatConfig.ID)
 				.Egg(BabyPrincessPacuConfig.ID, "egg_pacu_kanim")
 					.Fertility(15f)
 					.Incubation(5f)

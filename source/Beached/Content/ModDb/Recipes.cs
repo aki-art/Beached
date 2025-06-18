@@ -20,37 +20,17 @@ namespace Beached.Content.ModDb
 			CreateEquipmentRecipes();
 			AddBismuthToLeadSuit();
 
-			RecipeBuilder.Create(MudStomperConfig.ID, STRINGS.ITEMS.MISC.BEACHED_SOAP.DESC, 40f)
-				.Input(Elements.ambergris.CreateTag(), 25f)
-				.Input(Elements.ash.CreateTag(), 25f)
-				.Output(SoapConfig.ID, 5f)
-				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
-				.Build();
-
 			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.GREEN);
 			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.BLUE);
 			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.BLACK);
 			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.RETRO);
 
 			RecipeBuilder.Create(MudStomperConfig.ID, STRINGS.ITEMS.MISC.BEACHED_SOAP.DESC, 40f)
-				.Input(Elements.ambergris.CreateTag(), 25f)
+				.Input([Elements.ambergris.CreateTag(), SimHashes.Tallow.CreateTag()], 25f)
 				.Input(Elements.ash.CreateTag(), 25f)
 				.Output(SoapConfig.ID, 5f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
-
-			if (DlcManager.FeatureRadiationEnabled())
-			{
-				RecipeBuilder.Create(
-					SuitFabricatorConfig.ID, global::STRINGS.EQUIPMENT.PREFABS.LEAD_SUIT.RECIPE_DESC, TUNING.EQUIPMENT.SUITS.ATMOSUIT_FABTIME)
-				.Input(Elements.bismuth.CreateTag(), 200f)
-				.Input(SimHashes.Glass.CreateTag(), 10f)
-				.Output(LeadSuitConfig.ID, 1f)
-				.NameDisplay(ComplexRecipe.RecipeNameDisplay.ResultWithIngredient)
-				.RequireTech(Db.Get().TechItems.leadSuit.parentTechId)
-				.SortOrder(6)
-				.Build();
-			}
 
 			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, 40f)
 				.Input(Elements.aquamarine.CreateTag(), 100f)
@@ -64,13 +44,15 @@ namespace Beached.Content.ModDb
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
 				.Build();
 
-
 			ZincAndCopperToBrass();
 			BoneToCalcium();
 		}
 
 		private static void AddBismuthToLeadSuit()
 		{
+			if (!DlcManager.FeatureRadiationEnabled())
+				return;
+
 			var leadSuitRecipe = ComplexRecipeManager.Get().GetRecipe($"SuitFabricator_I_Lead_Glass_O_Lead_Suit");
 
 			if (leadSuitRecipe != null)

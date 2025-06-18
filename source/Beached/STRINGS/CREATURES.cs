@@ -456,13 +456,6 @@ namespace Beached
 					public static LocString DESCRIPTION = "A bunch of neatly stacked Jellyfish babies waiting to be released and drift away.";
 				}
 
-				public class BEACHED_CORAL_SALTYSTICK
-				{
-					public static LocString NAME = Link("Salty Sticks", SaltyStickConfig.ID);
-					public static LocString DESC = "...";
-					public static LocString DOMESTICATEDDESC = "...";
-				}
-
 				public class BEACHED_CELLALGAE
 				{
 					public static LocString NAME = Link("Bubble Algae", AlgaeCellConfig.ID);
@@ -608,6 +601,15 @@ namespace Beached
 					public static LocString NAME = Link("Dew Palm", DewPalmConfig.ID);
 					public static LocString DESC = "WORK IN PROGRESS. Currently can be tapped with a bucket for Rubber. This plant will have more uses in the coming updates.";
 					public static LocString DOMESTICATEDDESC = "TODO.";
+				}
+
+
+				public class BEACHED_CORAL_SALTYSTICK
+				{
+					public static LocString NAME = Link("Salty Sticks", SaltyStickConfig.ID);
+					public static LocString DESCRIPTION = "Salty Stick Corals enjoy salt rich waters, the outside of their tube like bodies will build up with salt deposits over time which they eject periodically.\n" +
+						"\n" +
+						"Filters water saturated with Salt.";
 				}
 
 				public class BEACHED_SIDEWAYSPLANT

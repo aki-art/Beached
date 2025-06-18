@@ -1,6 +1,4 @@
 ﻿using Beached.Content.DefBuilders;
-using Beached.Content.Defs.Foods;
-using Beached.Content.Defs.Items;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
@@ -24,7 +22,6 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		{
 			return base.ConfigureCritter(builder)
 				.TemperatureCelsius(50, 70, 270, 310)
-				.Drops(SeaShellConfig.ID, RawSnailConfig.ID)
 				.SymbolPrefix("iron_")
 				.Traits()
 					.Add(BAmounts.Moisture.maxAttribute.Id, 100f)
@@ -58,10 +55,11 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			host.maxLevel = 3;
 			host.defaultGrowthRate = LimpetHost.GROWTH_RATE_4_CYCLES;
 			host.itemDroppedOnShear = SimHashes.FoolsGold.CreateTag();
-			host.massDropped = 10f;
+			host.massDropped = 50f;
 			host.targetSymbol = "beached_limpetgrowth";
 			host.limpetKanim = "beached_ironshell_limpetgrowth_kanim";
 			host.metabolismModifier = 1.2f;
+			host.glandMass = 5f;
 
 			return prefab;
 		}

@@ -23,14 +23,6 @@ namespace Beached
 			}
 
 
-			public class BEACHED_SALTY_STICK_CORAL
-			{
-				public static LocString NAME = Link("Salty Stick Coral", SaltyStickConfig.ID);
-				public static LocString DESCRIPTION = "Salty Stick Corals enjoy salt rich waters, the outside of their tube like bodies will build up with salt deposits over time which they eject periodically.\n" +
-					"\n" +
-					"Filters Salt Water or Brine, producing Salt and Water.";
-			}
-
 			public class BEACHED_VISCOUS_CORAL
 			{
 				public static LocString NAME = Link("Viscous Coral", "Beached_ViscousCoral");

@@ -120,7 +120,7 @@ namespace Beached.Content.Scripts.Entities
 			public Tag itemDroppedOnShear;
 			public float metabolismModifier = 0.25f;
 			public float massDropped;
-			public float glandMassMultiplier = 0.1f;
+			public float glandMass = 10f;
 			public int diseaseCount;
 			public byte diseaseIdx;
 			public float germPuffCooldown = CONSTS.CYCLE_LENGTH;
@@ -137,25 +137,34 @@ namespace Beached.Content.Scripts.Entities
 					inSet = []
 				};
 
+				static string GetInfectionString(Tag tag, float amount, bool continous)
+				{
+					return STRINGS.CODEX.BEACHED_MISC.OF_INFECTION
+						.Replace("{Cycles}", GameUtil.GetFormattedCycles(amount, "F1", true))
+						.Replace("{Disease}", Db.Get().Diseases.Get(LimpetEggGerms.ID).Name);
+				}
+
 				context.usedMap.Add(prefab.PrefabID(), conversionEntry);
+				context.usedMap.Add(LimpetEggGerms.ID, conversionEntry);
 
 				conversionEntry.inSet.Add(new ElementUsage(prefab.PrefabTag, amount: 1, false));
-				conversionEntry.inSet.Add(new ElementUsage(LimpetEggGerms.ID, 100f / defaultGrowthRate, false, (tag, amount, continous) => GameUtil.GetFormattedCycles(amount, "F1", true)));
+				conversionEntry.inSet.Add(new ElementUsage(LimpetEggGerms.ID, 100f / defaultGrowthRate, false, GetInfectionString));
 
 				conversionEntry.outSet.Add(new ElementUsage(itemDroppedOnShear, massDropped, false)
 				{
 					customFormating = (tag, amount, continous) => GameUtil.GetFormattedMass(amount)
 				});
 
-				if (glandMassMultiplier > 0)
+				if (glandMass > 0)
 				{
-					conversionEntry.outSet.Add(new ElementUsage(SulfurGlandConfig.ID, massDropped * glandMassMultiplier, false)
+					conversionEntry.outSet.Add(new ElementUsage(SulfurGlandConfig.ID, glandMass, false)
 					{
 						customFormating = (tag, amount, continous) => GameUtil.GetFormattedMass(amount)
 					});
 				}
 
 				context.madeMap.Add(itemDroppedOnShear, conversionEntry);
+				context.madeMap.Add(SulfurGlandConfig.ID, conversionEntry);
 			}
 
 			public int CodexEntrySortOrder() => 10;
@@ -284,8 +293,8 @@ namespace Beached.Content.Scripts.Entities
 
 				SpawnItem(pe, def.itemDroppedOnShear, def.massDropped);
 
-				if (def.glandMassMultiplier > 0)
-					SpawnItem(pe, SulfurGlandConfig.ID, def.massDropped * def.glandMassMultiplier);
+				if (def.glandMass > 0)
+					SpawnItem(pe, SulfurGlandConfig.ID, def.glandMass);
 			}
 
 			private void SpawnItem(PrimaryElement pe, Tag tag, float mass)

@@ -4,6 +4,10 @@
 	{
 		public class CODEX
 		{
+			public class BEACHED_MISC
+			{
+				public static LocString OF_INFECTION = "{Cycles}\n<size=70%>of {Disease} infection</size>";
+			}
 			public class STORY_TRAITS
 			{
 				public class GLACIERS

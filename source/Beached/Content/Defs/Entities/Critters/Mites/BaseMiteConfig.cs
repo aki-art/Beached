@@ -1,5 +1,6 @@
 ﻿using Beached.Content.DefBuilders;
 using Beached.Content.Defs.Entities.Critters.Muffins;
+using Beached.Content.Defs.Foods;
 using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
 
@@ -12,6 +13,7 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 			return builder
 				.TemperatureCelsius(-80, -65, 10, 15)
 				.Mass(30f)
+				.Drops(CracklingsConfig.ID, 4f)
 				.Trappable()
 				.Baggable()
 				.Faction(FactionManager.FactionID.Pest)
