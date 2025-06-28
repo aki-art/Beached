@@ -26,7 +26,7 @@ namespace Beached.Content.Scripts.Entities.AI
 				.Update(CritterUpdateTargets);
 
 			cooldown
-				//.Update((smi, dt) => smi.RefreshTarget(null), load_balance: true)
+				//.Update((telepadInstance, dt) => telepadInstance.RefreshTarget(null), load_balance: true)
 				.ScheduleGoTo(smi => smi.cooldown, idle);
 		}
 

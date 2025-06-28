@@ -24,7 +24,7 @@ namespace Beached.Content.Defs.Foods
 				ID,
 				"beached_scrambledsnails_kanim",
 				0.6f,
-				0.6f,
+				0.5f,
 				foodInfo);
 
 			prefab.AddTag(BTags.meat);

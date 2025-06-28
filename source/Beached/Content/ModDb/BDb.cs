@@ -44,7 +44,7 @@ namespace Beached.Content.ModDb
 				var prefab = Assets.TryGetPrefab(cookingStation);
 				if (prefab != null && prefab.TryGetComponent(out BuildingComplete building))
 				{
-					if (!building.Def.IsValidDLC())
+					if (!Game.IsCorrectDlcActiveForCurrentSave(building.Def))
 						continue;
 
 					building.AddTag(BTags.cookingStation);
@@ -77,6 +77,12 @@ namespace Beached.Content.ModDb
 					DeepFriedShellfishConfig.ID,
 					DeepFriedFishConfig.ID,
 					DeepFriedMeatConfig.ID,
+
+					DinosaurMeatConfig.ID,
+					SmokedDinosaurMeatConfig.ID,
+					SmokedFish.ID,
+					// TODO rest of the meats
+
 					// Twitch Integration
 					"ONITwitch.GlitterMeatConfig",
 					// Canned Food

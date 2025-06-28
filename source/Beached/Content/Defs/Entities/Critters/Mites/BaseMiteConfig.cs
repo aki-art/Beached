@@ -1,30 +1,24 @@
 ﻿using Beached.Content.DefBuilders;
 using Beached.Content.Defs.Entities.Critters.Muffins;
+using Beached.Content.Defs.Foods;
 using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Mites
 {
 	public abstract class BaseMiteConfig : BaseCritterConfig
 	{
-		public override GameObject CreatePrefab(BaseCritterConfig config)
-		{
-			var prefab = base.CreatePrefab(config);
-
-			return prefab;
-		}
-
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return builder
 				.TemperatureCelsius(-80, -65, 10, 15)
 				.Mass(30f)
+				.Drops(CracklingsConfig.ID, 4f)
 				.Trappable()
 				.Baggable()
 				.Faction(FactionManager.FactionID.Pest)
 				.SortAfter(HatchConfig.ID)
-				.MaxPenSize(12)
+				.CritterDensityTolerance(12)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_1X1, 2f)
 				.Brain(BTags.Species.mite)
 					.Configure(ConfigureAI)

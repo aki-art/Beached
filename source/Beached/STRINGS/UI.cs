@@ -4,6 +4,80 @@
 	{
 		public static LocString BEACHED_MOD_NAME = "Beached";
 
+		public static class BEACHED
+		{
+			public static class UI
+			{
+				public static class SKELETON_POI_POPUP
+				{
+					public static LocString TITLE = "Gift from the past";
+					public static LocString BODY = "My duplicants have rummaged through the remains of a long gone duplicant. The readings show that they have been here for several thousand cycles. It appears we were not the first to arrive here... \n" +
+						"\n" +
+						"New buildings have become available:\n  {0}";
+				}
+
+				public static class MUFFIN_SIDESCREEN
+				{
+					public static class CONTENTSTOP
+					{
+						public static class AGESLIDER
+						{
+							public static LocString LABEL = "Minimum Age:";
+							public static class INPUTFIELD
+							{
+								public static LocString UNIT = "%";
+							}
+						}
+
+						public static class IGNOREEGGSCHECKBOX
+						{
+							public static LocString LABEL = "Ignore Eggs";
+							public static LocString TOOLTIP = "Eggs will not be cracked";
+						}
+
+						public static class IGNORENAMEDCHECKBOX
+						{
+							public static LocString LABEL = "Ignore Named";
+							public static LocString TOOLTIP = "Critters with a unique name will not be targeted.";
+						}
+
+						public static class FILTERLESSCYCLE
+						{
+							public static LocString TITLE = "Filterless";
+							public static LocString TOOLTIP = "Critters with a unique name will not be targeted.";
+							public static LocString IGNORE = "Ignore";
+							public static LocString IGNORE_DESC = "Critter without a filter will not be hunted.";
+							public static LocString HUNT = "Always Hunt";
+							public static LocString HUNT_DESC = "Critter without a filter will be hunted.";
+							public static LocString COUNT = "Default Count";
+							public static LocString COUNT_DESC = "Leave X critter alive of each species.";
+						}
+
+						public static class TITLEPREFAB
+						{
+							public static LocString LABEL = "Keep Alive";
+						}
+
+						public static class DEFAULT
+						{
+							public static LocString LABEL = "Default";
+						}
+					}
+
+					public static class CONTENTS
+					{
+						public static class ADDBUTTON
+						{
+							public static class BUTTON
+							{
+								public static LocString LABEL = "+ Add Filter";
+							}
+						}
+					}
+				}
+			}
+		}
+
 		public class UI
 		{
 			public static LocString BEACHED_ALPHA_MESSAGE = $"Crashes, bugs and MISSING. ahead!\n" +

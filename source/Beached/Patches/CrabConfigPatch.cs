@@ -16,11 +16,12 @@ namespace Beached.Patches
 			{
 				var crabLimpetHost = __result.AddOrGetDef<LimpetHost.Def>();
 				crabLimpetHost.maxLevel = 3;
-				crabLimpetHost.defaultGrowthRate = 0.025f;
+				crabLimpetHost.defaultGrowthRate = LimpetHost.GROWTH_RATE_6_CYCLES;
 				crabLimpetHost.itemDroppedOnShear = SimHashes.Lime.CreateTag();
-				crabLimpetHost.massDropped = 30f;
+				crabLimpetHost.massDropped = 100f;
+				crabLimpetHost.glandMass = 10f;
 				crabLimpetHost.diseaseIdx = Db.Get().Diseases.GetIndex(BDiseases.limpetEggs.id);
-				crabLimpetHost.diseaseCount = 30000;
+				crabLimpetHost.diseaseCount = 30_000;
 				crabLimpetHost.limpetKanim = "beached_pincher_limpetgrowth_kanim";
 				crabLimpetHost.metabolismModifier = 1.2f;
 

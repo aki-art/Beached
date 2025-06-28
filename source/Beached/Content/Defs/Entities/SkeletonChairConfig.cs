@@ -1,4 +1,7 @@
 ﻿using Beached.Content.Defs.Buildings;
+using Beached.Content.Defs.Equipment;
+using Beached.Content.ModDb;
+using Beached.Content.Scripts;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities
@@ -23,18 +26,32 @@ namespace Beached.Content.Defs.Entities
 				defaultTemperature: MiscUtil.CelsiusToKelvin(30));
 
 			prefab.AddOrGet<Demolishable>();
-			prefab.AddOrGet<POITechItemUnlockWorkable>().workTime = 5f;
+			//prefab.AddOrGet<POITechItemUnlockWorkable>().workTime = 5f;
 
 			prefab.AddOrGet<OccupyArea>().objectLayers = [ObjectLayer.Building];
 
-			var unlocks = prefab.AddOrGetDef<POITechItemUnlocks.Def>();
-			unlocks.POITechUnlockIDs =
+			var unlockWorkable = prefab.AddOrGet<GenericUnlockablePOIWorkable>();
+			unlockWorkable.workTime = 5f;
+			unlockWorkable.overrideAnims = [Assets.GetAnim("anim_interacts_clothingfactory_kanim")];
+			unlockWorkable.synchronizeAnims = false;
+
+			var unlocks = prefab.AddOrGetDef<GenericUnlockablePOI.Def>();
+			unlocks.techUnlockIDs =
 				[
 					AquaticFarmTileConfig.ID,
+					WaterCoolerConfig.ID,
 					BeachChairConfig.ID
 				];
-			unlocks.PopUpName = STRINGS.UI.BEACHED_MISC.POI_UNLOCK_TITLE;
-			unlocks.animName = "ceres_remote_archive_kanim";
+
+			unlocks.animName = "beached_skeletonunlock_kanim";
+			unlocks.popUpName = STRINGS.BEACHED.UI.SKELETON_POI_POPUP.TITLE;
+			unlocks.messageBody = STRINGS.BEACHED.UI.SKELETON_POI_POPUP.BODY;
+			unlocks.spawnPrefabs = [BeachShirtConfig.ID, Elements.bone.ToString()];
+			unlocks.onSpawnFn += spawnedGO =>
+			{
+				if (spawnedGO.IsPrefabID(BeachShirtConfig.ID) && spawnedGO.TryGetComponent(out Equippable equippable))
+					EquippableFacade.AddFacadeToEquippable(equippable, BEquippableFacades.BEACHSHIRTS.GREEN);
+			};
 
 			prefab.AddOrGet<Prioritizable>();
 

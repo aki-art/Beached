@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Equipment;
+﻿using Beached.Content.Defs;
+using Beached.Content.Defs.Equipment;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.LifeGoals;
@@ -23,7 +24,7 @@ namespace Beached.Content.ModDb
 			// Minnow stress trait
 			SIREN = "Beached_Siren",
 
-			// Brad traits
+			// Bad traits
 			CLUMSY = "Beached_Clumsy",
 			FUR_ALLERGY = "Beached_FurAllergy",
 			VEGETARIAN = "Beached_Vegetarian",
@@ -114,7 +115,7 @@ namespace Beached.Content.ModDb
 			{ "ARI" , LIFE_GOAL_IDS.CATEGORIES.JEWELLERY },
 			{ "ELLIE" , LIFE_GOAL_IDS.CATEGORIES.JEWELLERY },
 			{ "GOSSMANN" , LIFE_GOAL_IDS.CATEGORIES.JEWELLERY },
-			{ "MINNOW" , LIFE_GOAL_IDS.CATEGORIES.MINNOW },
+			{ "BEACHED_MINNOW" , LIFE_GOAL_IDS.CATEGORIES.MINNOW },
 			{ "MEEP" , LIFE_GOAL_IDS.CATEGORIES.MEEP },
 			{ "RUBY" , LIFE_GOAL_IDS.CATEGORIES.RUBY },
 		};
@@ -180,34 +181,34 @@ namespace Beached.Content.ModDb
 			AddJewelleryTrait(
 				LIFE_GOAL_IDS.JEWELLERY_MAXIXE,
 				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_MAXIXEPENDANT.NAME,
-				"This duplicant really wishes to express themselves by wearing a Maxixe Pendant.",
+				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.MAXIXE_PENDANT.DESCRIPTION,
 				MaxixePendantConfig.ID);
 
 			AddJewelleryTrait(
 				LIFE_GOAL_IDS.JEWELLERY_PEARLS,
 				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_PEARLNECKLACE.NAME,
-				"This duplicant would love to don a Pearl Necklace.",
+				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.PEARL_PENDANT.DESCRIPTION,
 				PearlNecklaceConfig.ID);
 
 			AddJewelleryTrait(
 				LIFE_GOAL_IDS.JEWELLERY_STRANGE_MATTER,
 				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME,
-				"This duplicant has a deep desire the wear a Strange Matter Amulet.",
+				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.STRANGE_MATTER_PENDANT.DESCRIPTION,
 				StrangeMatterAmuletConfig.ID);
 
 			AddAssignableTrait(
 				LIFE_GOAL_IDS.GOLDENTHRONE,
-				"Golden Lavatory",
-				"This duplicant wishes to own their very own golden lavatory.",
+				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.GOLDEN_LAVATORY.NAME,
+				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.GOLDEN_LAVATORY.DESCRIPTION,
 				slot => slot.assignable != null
 					&& slot.assignable.PrefabID() == FlushToiletConfig.ID
 					&& slot.assignable.TryGetComponent(out PrimaryElement pe)
-					&& pe.ElementID == SimHashes.GoldAmalgam);
+					&& (pe.ElementID == SimHashes.GoldAmalgam || pe.ElementID == SimHashes.Gold));
 
 			AddAssignableTrait(
 				LIFE_GOAL_IDS.HAS_50_DECOR,
-				"Fashion Idol",
-				"This duplicants dream is to be as slick as it can get. Achieve 50 additional decor with equipment to achieve their life goal.",
+				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.FASHION_IDOL.NAME,
+				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.FASHION_IDOL.DESCRIPTION,
 				slot =>
 				{
 					var assignee = slot.assignable.assignee;
@@ -218,17 +219,19 @@ namespace Beached.Content.ModDb
 
 			AddBedroomTrait(
 				LIFE_GOAL_IDS.BEDROOM_SURFBOARD,
-				"Surfin' and Snoozin'",
-				string.Format("This duplicant sannot stop talking about how cool it would be to have a {0} in their bedroom.", global::STRINGS.BUILDINGS.PREFABS.MECHANICALSURFBOARD.NAME),
+				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.BEACHED_MINNOW.NAME,
+				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.BEACHED_MINNOW.DESCRIPTION,
 				MechanicalSurfboardConfig.ID);
+
+			DUPLICANTSTATS.ARCHETYPE_BIONIC_TRAIT_COMPATIBILITY[BSkillGroups.PRECISION_ID] = [ExtraBionicUpgradeComponentConfig.PRECISION_ID];
 		}
 
 		private static void OnAddSiren(GameObject go)
 		{
 			var statusItem = new StatusItem(
 				"Beached_StressSignalSiren",
-				"Siren",
-				"",
+				STRINGS.DUPLICANTS.STATUSITEMS.BEACHED_SIREN.NAME,
+				STRINGS.DUPLICANTS.STATUSITEMS.BEACHED_SIREN.TOOLTIP,
 				"",
 				StatusItem.IconType.Info,
 				NotificationType.BadMinor,

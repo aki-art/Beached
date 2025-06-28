@@ -3,7 +3,7 @@ using Klei.AI;
 
 namespace Beached.Content.Scripts.Entities.AI
 {
-    public class LubricatedMovementMonitor : GameStateMachine<LubricatedMovementMonitor, LubricatedMovementMonitor.Instance, IStateMachineTarget, LubricatedMovementMonitor.Def>
+	public class LubricatedMovementMonitor : GameStateMachine<LubricatedMovementMonitor, LubricatedMovementMonitor.Instance, IStateMachineTarget, LubricatedMovementMonitor.Def>
 	{
 		public State idle;
 		public State moving;
@@ -21,20 +21,7 @@ namespace Beached.Content.Scripts.Entities.AI
 				.EventHandlerTransition(GameHashes.ObjectMovementStateChanged, idle, (smi, data) => !IsMoving(smi, data));
 		}
 
-		private bool IsMoving(Instance smi, object data)
-		{
-			return data is GameHashes hash && hash == GameHashes.ObjectMovementWakeUp;
-		}
-
-		private static void ApplyModifier(Instance smi)
-		{
-			smi.moisture.deltaAttribute.Add(smi.movementMoistureModifier);
-		}
-
-		private static void RemoveModifier(Instance smi)
-		{
-			smi.moisture.deltaAttribute.Remove(smi.movementMoistureModifier);
-		}
+		private bool IsMoving(Instance smi, object data) => data is GameHashes hash && hash == GameHashes.ObjectMovementWakeUp;
 
 		public class Def : BaseDef { }
 

@@ -34,9 +34,22 @@ namespace Beached.Content.Defs.Entities.Corals
 			filteringCoral.storage = storage;
 			filteringCoral.gunkLimit = 10f;
 
-			AddConverter(prefab, SimHashes.SaltWater.CreateTag(), SimHashes.Water, 0.3f, storage);
-			AddConverter(prefab, SimHashes.Brine.CreateTag(), SimHashes.SaltWater, 0.3f, storage);
-			AddConverter(prefab, Elements.murkyBrine.CreateTag(), SimHashes.DirtyWater, 0.3f, storage);
+			var kgPerSecondConverted = 0.3f;
+
+			AddConverter(prefab, SimHashes.SaltWater.CreateTag(), SimHashes.Water, kgPerSecondConverted, storage);
+			AddConverter(prefab, SimHashes.Brine.CreateTag(), SimHashes.SaltWater, kgPerSecondConverted, storage);
+			AddConverter(prefab, Elements.murkyBrine.CreateTag(), SimHashes.DirtyWater, kgPerSecondConverted, storage);
+
+			// slickshell
+			var plantStorageElement = prefab.AddOrGet<DirectlyEdiblePlant_StorageElement>();
+			plantStorageElement.tagToConsume = SimHashes.Salt.CreateTag();
+			plantStorageElement.rateProducedPerCycle = kgPerSecondConverted * 600f;
+			plantStorageElement.storageCapacity = storage.capacityKg;
+			plantStorageElement.edibleCellOffsets =
+			[
+				CellOffset.left,
+				CellOffset.right
+			];
 
 			return prefab;
 		}

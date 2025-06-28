@@ -1,7 +1,10 @@
-﻿using HarmonyLib;
+﻿using Beached.Content;
+using Beached.Content.Scripts;
+using HarmonyLib;
 using ProcGen;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using UnityEngine;
 using static Klei.AI.Disease;
 
@@ -19,6 +22,71 @@ namespace Beached.Utils
 				Direction.Left => Direction.Right,
 				_ => Direction.None,
 			};
+		}
+
+		public static int GetLocalIndex(CodeInstruction instruction)
+		{
+			if (instruction.operand is LocalBuilder local)
+				return local.LocalIndex;
+
+			var opCode = instruction.opcode;
+
+			if (opCode == OpCodes.Ldloc_0)
+				return 0;
+			else if (opCode == OpCodes.Ldloc_1)
+				return 1;
+			else if (opCode == OpCodes.Ldloc_2)
+				return 2;
+			else if (opCode == OpCodes.Ldloc_3)
+				return 3;
+
+			return -1;
+		}
+
+		public static readonly List<CellOffset> cardinalOffsetsUnordered = [
+			CellOffset.up,
+			CellOffset.down,
+			CellOffset.right,
+			CellOffset.left,
+			];
+
+		public static void TrySpreadCoralliumToTile(int sourceCell, CellOffset direction)
+		{
+			var targetCell = Grid.OffsetCell(sourceCell, direction);
+
+			var targetElement = Grid.Element[targetCell];
+
+			if (!targetElement.IsSolid)
+				return;
+
+			if (targetElement.hardness > 50f)
+				return;
+
+			if (!targetElement.HasTag(GameTags.BuildableRaw))
+				return;
+
+
+			cardinalOffsetsUnordered.Shuffle();
+
+			foreach (var offset in cardinalOffsetsUnordered)
+			{
+				var cell = Grid.OffsetCell(targetCell, offset);
+
+				if (cell == sourceCell)
+					continue;
+
+				if (Grid.IsSubstantialLiquid(cell))
+				{
+					SimMessages.ReplaceElement(
+						targetCell,
+						Elements.corallium,
+						ElementInteractions.CoralSpread,
+						Grid.Mass[targetCell],
+						Grid.Temperature[targetCell],
+						Grid.DiseaseIdx[targetCell],
+						Grid.DiseaseCount[targetCell]);
+				}
+			}
 		}
 
 		public static float PerCycle(float amount) => amount / CONSTS.CYCLE_LENGTH;

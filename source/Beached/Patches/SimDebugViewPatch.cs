@@ -1,4 +1,5 @@
 ﻿#if TRANSPILERS
+using Beached.Content;
 using Beached.Content.Overlays;
 using HarmonyLib;
 using System;
@@ -11,19 +12,18 @@ namespace Beached.Patches
 {
 	public class SimDebugViewPatch
 	{
-		/*
-				[HarmonyPatch(typeof(SimDebugView), "GetDiseaseColour")]
-				public class SimDebugView_GetDiseaseColour_Patch
+		//[HarmonyPatch(typeof(SimDebugView), "GetDiseaseColour")]
+		public class SimDebugView_GetDiseaseColour_Patch
+		{
+			public static void Postfix(int cell, ref Color __result)
+			{
+				if (__result.a == 0)
 				{
-					public void Postfix(int cell, ref Color __result)
-					{
-						if (__result.a == 0)
-						{
-							if (Grid.Element[cell].id == Elements.permaFrost)
-								__result = ModAssets.Colors.iceWrath;
-						}
-					}
-				}*/
+					if (Grid.Element[cell].id == Elements.permaFrost)
+						__result = ModAssets.Colors.iceWrath;
+				}
+			}
+		}
 
 		[HarmonyPatch(typeof(SimDebugView), nameof(SimDebugView.OnPrefabInit))]
 		public static class SimDebugView_OnPrefabInit_Patch

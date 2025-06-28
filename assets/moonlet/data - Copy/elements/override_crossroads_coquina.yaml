@@ -1,7 +1,0 @@
-elements:
-  - elementId: CrossRoads_Coquina
-    priority: 10
-    priorityPerClusterTag:
-      Beached_Cluster: 999
-    highTemp: 1115 # 842C
-    highTempTransitionTarget: Beached_MoltenCalcium

@@ -30,8 +30,7 @@ namespace Beached.Content.Defs.Entities.Critters.Dreckos
 					.Incubation(30f)
 					.Fertility(90f)
 					.SortOrder(DreckoPlasticConfig.EGG_SORT_ORDER + 1)
-					.Done()
-				.Drops([MeatConfig.ID, MeatConfig.ID]);
+					.Done();
 		}
 
 		public override GameObject CreatePrefab(BaseCritterConfig config)

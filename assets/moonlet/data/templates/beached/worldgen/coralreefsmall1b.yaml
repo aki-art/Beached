@@ -7,7 +7,7 @@ info:
     Y: -5
   area: 141
   
-uniformZoneType: Beached_CoralReef
+# uniformZoneType: Beached_CoralReef
 
 cells:
 - element: Granite

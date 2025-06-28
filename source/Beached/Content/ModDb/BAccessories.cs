@@ -8,7 +8,9 @@ namespace Beached.Content.ModDb
 
 		public static class WearableTypes
 		{
-			public static readonly WearableAccessorizer.WearableType necklace = (WearableAccessorizer.WearableType)Hash.SDBMLower("Beached_necklace");
+			public static readonly WearableAccessorizer.WearableType
+				necklace = (WearableAccessorizer.WearableType)Hash.SDBMLower("Beached_necklace"),
+				shoes = (WearableAccessorizer.WearableType)Hash.SDBMLower("Beached_Shoes");
 		}
 
 		// must start with hat_ 

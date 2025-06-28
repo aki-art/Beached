@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs;
-using KSerialization;
+﻿using KSerialization;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -13,13 +12,6 @@ namespace Beached.Content.Scripts
 		[SerializeField] public float deathSoundVolume;
 
 		[Serialize] public bool allowUprooting;
-
-		public override void OnPrefabInit()
-		{
-			base.OnPrefabInit();
-			multitoolHitEffectTag = BEffectConfigs.MUSSEL_GIBLETS;
-			multitoolContext = ModAssets.CONTEXTS.HARVEST_ORANGE_SQUISH;
-		}
 
 		public UprootableWithDramaticDeath()
 		{

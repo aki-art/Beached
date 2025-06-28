@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using System;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Flora
@@ -53,6 +54,7 @@ namespace Beached.Content.Defs.Flora
 
 			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
 				gameObject,
+				this as IHasDlcRestrictions,
 				SeedProducer.ProductionType.Hidden,
 				SEED_ID,
 				STRINGS.CREATURES.SPECIES.SEEDS.WATERCUPS.NAME,
@@ -74,6 +76,7 @@ namespace Beached.Content.Defs.Flora
 			return gameObject;
 		}
 
+		[Obsolete]
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
 		public void OnPrefabInit(GameObject inst) { }

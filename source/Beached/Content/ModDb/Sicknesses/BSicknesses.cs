@@ -67,8 +67,13 @@ namespace Beached.Content.ModDb.Sicknesses
 				}
 			};
 
-
 			TUNING.GERM_EXPOSURE.TYPES = [.. exposures];
+
+			foreach (var type in TUNING.GERM_EXPOSURE.TYPES)
+				if (type.excluded_effects != null
+					&& type.excluded_effects.Contains("HistamineSuppression")
+					&& !type.excluded_effects.Contains(BEffects.SUPER_ALLERGY_MED))
+					type.excluded_effects.Add(BEffects.SUPER_ALLERGY_MED);
 		}
 	}
 }

@@ -85,10 +85,10 @@ namespace Beached.Content.ModDb
 		{
 			if (obj.TryGetComponent(out Butcherable butcherable))
 			{
-				for (int i = 0; i < butcherable.drops.Length; i++)
+				if (butcherable.drops.TryGetValue(MeatConfig.ID, out var amount))
 				{
-					if (butcherable.drops[i] == MeatConfig.ID)
-						butcherable.drops[i] = HighQualityMeatConfig.ID;
+					butcherable.drops.Remove(MeatConfig.ID);
+					butcherable.drops[HighQualityMeatConfig.ID] = amount;
 				}
 			}
 

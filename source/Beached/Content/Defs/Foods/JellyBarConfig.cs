@@ -1,5 +1,4 @@
-﻿using Beached.Content.ModDb;
-using TUNING;
+﻿using TUNING;
 using UnityEngine;
 using static EdiblesManager;
 
@@ -14,7 +13,7 @@ namespace Beached.Content.Defs.Foods
 			var foodInfo = new FoodInfo(
 				ID,
 				DlcManager.VANILLA_ID,
-				800_000f,
+				1000_000f,
 				FOOD.FOOD_QUALITY_TERRIBLE,
 				FOOD.DEFAULT_PRESERVE_TEMPERATURE,
 				FOOD.DEFAULT_ROT_TEMPERATURE,
@@ -27,8 +26,6 @@ namespace Beached.Content.Defs.Foods
 				0.8f,
 				0.55f,
 				foodInfo);
-
-			ComplexRecipeManager.Get().GetRecipe(Recipes.jellyBarRecipeID).FabricationVisualizer = MushBarConfig.CreateFabricationVisualizer(prefab);
 
 			return prefab;
 		}

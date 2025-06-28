@@ -2,6 +2,7 @@
 
 namespace Beached.Content.Scripts.Entities
 {
+	[DefaultExecutionOrder(0)]
 	public class Coral : StateMachineComponent<Coral.StatesInstance>
 	{
 		[MyCmpReq] private ElementConsumer elementConsumer;
@@ -9,6 +10,8 @@ namespace Beached.Content.Scripts.Entities
 		[MyCmpReq] private WiltCondition wiltCondition;
 
 		[SerializeField] public Tag emitTag;
+		[SerializeField] public Tag filter;
+		[SerializeField] public SpawnFXHashes spawnFX;
 		[SerializeField] public float emitMass;
 		[SerializeField] public Vector3 emitOffset = Vector3.zero;
 		[SerializeField] public Vector2 initialVelocity;
@@ -80,24 +83,42 @@ namespace Beached.Content.Scripts.Entities
 
 				alive
 					.InitializeStates(masterTarget, dead)
-					.TagTransition(GameTags.Uprooted, test)
+					.TagTransition(GameTags.Uprooted, dead)
 					.DefaultState(alive.mature);
-
-				test
-					.Enter(smi => Log.Debug("uprooted trigger"))
-					.GoTo(dead);
 
 				alive.mature
 					.EventTransition(GameHashes.Wilt, alive.wilting, (smi => smi.master.wiltCondition.IsWilting()))
 					.PlayAnim("idle_grown", KAnim.PlayMode.Loop)
+					.Update(UpdateConsumers)
 					.Update(UpdateEmission, UpdateRate.SIM_1000ms)
 					.EventHandler(GameHashes.OnStorageChange, OnStorageChanged)
-					.Enter(smi => smi.master.elementConsumer.EnableConsumption(true))
+					.Enter(smi => smi.master.elementConsumer.EnableConsumption(CanConsume(smi)))
 					.Exit(smi => smi.master.elementConsumer.EnableConsumption(false));
 
 				alive.wilting
 					.PlayAnim("wilt")
 					.EventTransition(GameHashes.WiltRecover, alive.mature, (smi => !smi.master.wiltCondition.IsWilting()));
+			}
+
+			private static bool CanConsume(StatesInstance smi)
+			{
+				if (smi.master.filter == Tag.Invalid)
+					return true;
+
+				var cell = Grid.PosToCell(smi);
+				return Grid.IsValidCell(cell) && Grid.Element[cell].HasTag(smi.master.filter);
+			}
+
+			private void UpdateConsumers(StatesInstance smi, float _)
+			{
+				if (smi.master.filter == Tag.Invalid)
+					return;
+
+				var consumerEnabled = smi.master.elementConsumer.consumptionEnabled;
+				var shouldConsume = CanConsume(smi);
+
+				if (consumerEnabled != shouldConsume)
+					smi.master.elementConsumer.EnableConsumption(shouldConsume);
 			}
 
 			public class AliveStates : PlantAliveSubState
@@ -138,7 +159,8 @@ namespace Beached.Content.Scripts.Entities
 					{
 						primaryElement.Mass -= emitMass;
 						BubbleManager.instance.SpawnBubble(smi.transform.position, smi.master.initialVelocity, primaryElement.ElementID, emitMass, primaryElement.Temperature);
-						Game.Instance.SpawnFX(SpawnFXHashes.OxygenEmissionBubbles, smi.transform.position, 0);
+						if (smi.master.spawnFX != SpawnFXHashes.None)
+							Game.Instance.SpawnFX(smi.master.spawnFX, smi.transform.position, 0);
 					}
 
 					smi.dirty = false;

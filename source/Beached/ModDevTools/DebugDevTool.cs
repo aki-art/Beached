@@ -1,6 +1,7 @@
 ﻿#if DEVTOOLS
 using Beached.Content;
 using Beached.Content.BWorldGen;
+using Beached.Content.Defs.StarmapEntities;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
@@ -26,13 +27,10 @@ namespace Beached.ModDevTools
 		private static Dictionary<string, ShaderPropertyInfo> liquidShaderProperties;
 		private static Material mat;
 		public static bool renderLiquidTexture;
-		private static string liquidCullingMaskLayer = "Water";
-		private static float foulingPlaneZ = Grid.GetLayerZ(Grid.SceneLayer.BuildingFront);
-		private static int foulingPlaneLayer = 3500;
 		private static float uvScale = 10f;
 
 		private string[] zoneTypes;
-		EventInstance instance;
+		private EventInstance instance;
 
 		public DebugDevTool()
 		{
@@ -44,8 +42,97 @@ namespace Beached.ModDevTools
 		private static string rewardTestResult;
 		private static bool accelerateLifeCycles;
 
+
+		// TODO this is copy paste of FindAvailablePOISpawnLocations
+		private static List<AxialI> FindAvailablePOISpawnLocations(AxialI location)
+		{
+			var available = new List<AxialI>();
+			var flag = IsSuitablePOISpawnLocation(location);
+			if (flag)
+			{
+				available.Add(location);
+			}
+			for (var dist = 1; dist <= 2; dist++)
+			{
+				foreach (var direction in AxialI.DIRECTIONS)
+				{
+					var destination = location + direction * dist;
+					var flag2 = IsSuitablePOISpawnLocation(destination);
+					if (flag2)
+					{
+						available.Add(destination);
+					}
+				}
+			}
+			return available;
+		}
+		private static bool IsSuitablePOISpawnLocation(AxialI location)
+		{
+			var flag = !ClusterGrid.Instance.IsValidCell(location);
+			bool result;
+			if (flag)
+			{
+				result = false;
+			}
+			else
+			{
+				var entities = ClusterGrid.Instance.GetEntitiesOnCell(location);
+				foreach (var entity in entities)
+				{
+					var flag2 = entity.Layer == EntityLayer.Asteroid || entity.Layer == EntityLayer.POI;
+					if (flag2)
+					{
+						return false;
+					}
+				}
+				result = true;
+			}
+			return result;
+		}
+
 		public override void RenderTo(DevPanel panel)
 		{
+			if (ImGui.CollapsingHeader("Mirrors"))
+			{
+				foreach (var info in Game.Instance.roomProber.cavityInfos)
+				{
+					var mirrorCount = info.GetMirrorCount();
+					if (mirrorCount > 0)
+					{
+						var roomType = info.room == null ? "N/A" : info.room.roomType.ToString();
+
+						ImGui.Text($"{mirrorCount} Mirrors in {roomType}");
+					}
+				}
+
+			}
+
+			if (ImGui.Button("Spawn Drale"))
+			{
+				var isPaused = SpeedControlScreen.Instance.IsPaused;
+				if (isPaused)
+				{
+					SpeedControlScreen.Instance.Unpause(false);
+					SpeedControlScreen.Instance.SetSpeed(0);
+				}
+
+				if (DlcManager.IsExpansion1Active())
+				{
+					var locations = FindAvailablePOISpawnLocations(GameUtil.GetActiveTelepad().GetMyWorldLocation());
+
+					if (locations.Count > 0)
+					{
+						var prefab = Assets.GetPrefab(Drale_SpacedOutConfig.ID);
+						var POIgo = Util.KInstantiate(prefab, null, null);
+						var entity = POIgo.GetComponent<ClusterGridEntity>();
+						entity.Location = locations.GetRandom();
+						POIgo.SetActive(true);
+					}
+				}
+
+				if (isPaused)
+					SpeedControlScreen.Instance.Pause();
+			}
 
 			if (ImGui.Button("Spawn Oxygen"))
 				ElementLoader.FindElementByHash(SimHashes.Oxygen).substance.SpawnResource(GameUtil.GetActiveTelepad().transform.position, 1f, 315, 255, 0);
@@ -93,7 +180,7 @@ namespace Beached.ModDevTools
 			if (ImGui.DragFloat("Permafrost UV Scale", ref uvScale))
 			{
 				//ElementLoader.GetElement(Elements.permaFrost.Tag).substance.material.SetFloat("_WorldUVScale", uvScale);
-				GroundRenderer.Materials materials = World.Instance.groundRenderer.elementMaterials[Elements.permaFrost];
+				var materials = World.Instance.groundRenderer.elementMaterials[Elements.permaFrost];
 				materials.opaque.SetFloat("_WorldUVScale", uvScale);
 				materials.alpha.SetFloat("_WorldUVScale", uvScale);
 			}
@@ -208,7 +295,6 @@ namespace Beached.ModDevTools
 				// BackgroundUVScale
 				ImGui.DragFloat("_Beached_TimeOfDayColor", ref Beached_Mod.tempDayTimeProgress);
 
-				ImGui.InputText("Mask: ", ref liquidCullingMaskLayer, 256);
 
 				if (ImGui.DragFloat("Rot UV Scale", ref siltStoneUV))
 				{
@@ -316,7 +402,7 @@ namespace Beached.ModDevTools
 							if (events == null) continue;
 							for (var index = 0; index < events.Length; index++)
 							{
-								EventDescription evt = events[index];
+								var evt = events[index];
 								evt.getPath(out var path);
 								evt.getID(out var ID);
 								Log.Debug($"   - {index} \t\tevent {path} {ID}");
@@ -324,7 +410,7 @@ namespace Beached.ModDevTools
 								if (path.StartsWith("event:/expansion1/expansion1_Buildings/TemporalTearOpener"))
 								{
 									Log.Debug("Temporal tear opener time");
-									evt.getParameterDescriptionCount(out int count);
+									evt.getParameterDescriptionCount(out var count);
 									for (var i = 0; i < count; i++)
 									{
 										evt.getParameterDescriptionByIndex(i, out var parameter);

@@ -1,4 +1,6 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Foods;
+using Beached.Content.Defs.Items;
 using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
 using TUNING;
@@ -24,13 +26,14 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		{
 			return builder
 				.TemperatureCelsius(10, 20, 40, 50)
+				.Drops(SeaShellConfig.ID, RawSnailConfig.ID)
 				.Size(1, 1)
 				.Mass(50f)
 				.Trappable()
 				.Baggable()
 				.CanNotDrown()
 				.SortAfter(CrabConfig.ID)
-				.MaxPenSize(CREATURES.SPACE_REQUIREMENTS.TIER3)
+				.CritterDensityTolerance(CREATURES.SPACE_REQUIREMENTS.TIER3)
 				.Navigator(CritterBuilder.NAVIGATION.FLOOR_NOJUMP_1X1, NavType.Floor, 0.25f, 16)
 				.Brain(BTags.Species.snail)
 					.Configure(ConfigureAI)
@@ -68,6 +71,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.Add(new EatStates.Def())
 				.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
 				.Add(new CallAdultStates.Def(), !isAdult)
+				.Add(new CritterCondoStates.Def(), isAdult)
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());
 		}

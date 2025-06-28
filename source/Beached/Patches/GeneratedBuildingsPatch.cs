@@ -15,6 +15,7 @@ namespace Beached.Patches
 			public static void Prefix()
 			{
 				AddMenus();
+				AddTechs();
 			}
 
 			public static void Postfix()
@@ -27,7 +28,6 @@ namespace Beached.Patches
 					]);
 
 				TUNING.BUILDINGS.PLANORDER.Add(planInfo);
-				AddTechs();
 				ModifyVanillaBuildings.Run();
 				Recipes.AddRecipes();
 			}
@@ -35,6 +35,7 @@ namespace Beached.Patches
 			private static void AddMenus()
 			{
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, AmmoniaGeneratorConfig.ID, Power.GENERATORS, MethaneGeneratorConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, WaterGeneratorConfig.ID, Power.GENERATORS, GeneratorConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, MossBedConfig.ID, Utilities.OTHER_UTILITIES, ExteriorWallConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, MiniFridgeConfig.ID, Food.STORAGE, ExteriorWallConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, DNAInjectorConfig.ID, Food.RANCHING, EggIncubatorConfig.ID);
@@ -51,9 +52,12 @@ namespace Beached.Patches
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, BioFuelMakerConfig.ID, Refining.MATERIALS, EthanolDistilleryConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, MossTerrariumConfig.ID, Utilities.OTHER_UTILITIES);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, AquaticFarmTileConfig.ID, Food.FARMING);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, MirrorConfig.ID, Food.RANCHING, UnderwaterCritterCondoConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, DeconstructableRocketTileConfig.ID, Base.TILES, RocketWallTileConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, CrystalGrowerConfig.ID, Utilities.OTHER_UTILITIES);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, GemCutterConfig.ID, Refining.ADVANCED);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, CrystalSynthetizerConfig.ID, Refining.ADVANCED);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, VulcanizerConfig.ID, Refining.MATERIALS, PolymerizerConfig.ID);
 			}
 
 			private static void AddTechs()
@@ -66,6 +70,7 @@ namespace Beached.Patches
 				BuildingUtil.AddToResearch(BioFuelGeneratorConfig.ID, TECH.POWER.COMBUSTION);
 				BuildingUtil.AddToResearch(AquaticFarmTileConfig.ID, TECH.FOOD.AGRICULTURE);
 				BuildingUtil.AddToResearch(DeconstructableRocketTileConfig.ID, TECH.SOLIDS.REFINED_OBJECTS);
+				BuildingUtil.AddToResearch(WaterGeneratorConfig.ID, TECH.POWER.PRETTY_GOOD_CONDUCTORS);
 			}
 		}
 	}

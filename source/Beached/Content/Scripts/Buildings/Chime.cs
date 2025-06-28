@@ -69,8 +69,8 @@ namespace Beached.Content.Scripts.Buildings
 
 				flowing
 					.DefaultState(flowing.still)
-					//.Enter(smi => smi.audioPlayer.PlayLoop(ModAssets.Sounds.SHELL_CHIME_LOUD))
-					//.Exit(smi => smi.audioPlayer.StopLooping())
+					//.Enter(telepadInstance => telepadInstance.audioPlayer.PlayLoop(ModAssets.Sounds.SHELL_CHIME_LOUD))
+					//.Exit(telepadInstance => telepadInstance.audioPlayer.StopLooping())
 					.Enter(StartSound)
 					.Exit(StopSound)
 					.Update(UpdateFlow, UpdateRate.SIM_200ms)

@@ -11,6 +11,6 @@
     <!--OutputModFolder, adjust it to your own dev folder-->
     <ModFolder>$(UserProfile)\Documents\Klei\OxygenNotIncluded\mods\dev</ModFolder>
     <!--FUtilitiy Library Path-->
-    <FUtilityPath>D:\Modding\OxygenNotIncluded\Lib\FUtility.dll</FUtilityPath>
+    <FUtilityPath>D:\Modding\OxygenNotIncluded\Source\ONIMods\FUtility\bin\Release\net471\FUtility.dll</FUtilityPath>
   </PropertyGroup>
 </Project>

@@ -1,6 +1,8 @@
 ﻿using Beached.Content;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
+using Beached.Content.Scripts.Entities.AI;
+using Beached.Content.Scripts.UI;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,20 @@ namespace Beached.Patches
 {
 	public class EntityTemplatesPatch
 	{
+
+		[HarmonyPatch(typeof(EntityTemplates), "ExtendEntityToWildCreature", [
+			typeof(GameObject),
+			typeof(int),
+			typeof(bool)])]
+		public class EntityTemplates_ExtendEntityToWildCreature_Patch
+		{
+			public static void Postfix(GameObject prefab, int space_required_per_creature)
+			{
+				if (space_required_per_creature > 0)
+					prefab.AddComponent<Beached_MirrorMonitor>().originalSpaceRequirement = space_required_per_creature;
+			}
+		}
+
 		[HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicCreature), [
 			typeof(bool),
 			typeof(GameObject),
@@ -36,6 +52,16 @@ namespace Beached.Patches
 
 				if (!template.HasTag(BTags.electricInvulnerable))
 					template.AddOrGet<Electrocutable>();
+			}
+
+			[HarmonyPostfix]
+			[HarmonyPriority(Priority.Low)]
+			public static void LatePostfix(GameObject template)
+			{
+				template.AddOrGet<UserNameable>();
+				var characterOverlay = template.AddOrGet<CharacterOverlay>();
+				template.AddComponent<Beached_CritterNameOverlay>().disableScreenControl = characterOverlay.shouldShowName;
+				characterOverlay.shouldShowName = true;
 			}
 		}
 

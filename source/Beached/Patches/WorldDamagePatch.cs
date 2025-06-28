@@ -16,13 +16,13 @@ namespace Beached.Patches
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
 			{
-				var codes = orig.ToList();
+				List<CodeInstruction> codes = orig.ToList();
 
-				var index = codes.FindIndex(ci => ci.LoadsConstant(0.5f));
+				int index = codes.FindIndex(ci => ci.LoadsConstant(0.5f));
 
 				if (index == -1) return codes;
 
-				var m_getActualMassMultiplier = AccessTools.DeclaredMethod(typeof(WorldDamage_OnDigComplete_Patch),
+				System.Reflection.MethodInfo m_getActualMassMultiplier = AccessTools.DeclaredMethod(typeof(WorldDamage_OnDigComplete_Patch),
 					nameof(GetActualMassMultiplier));
 
 				// inject right after the found index
@@ -38,13 +38,13 @@ namespace Beached.Patches
 			// TODO: Dwarf digging integration
 			private static float GetActualMassMultiplier(float originalValue, int cell)
 			{
-				var multiplier = originalValue;
+				float multiplier = originalValue;
 
-				if (Treasury.diggers.TryGetValue(cell, out var worker))
+				if (Treasury.diggers.TryGetValue(cell, out WorkerBase worker))
 				{
 					if (worker.TryGetComponent(out MinionResume resume))
 					{
-						if (resume.AptitudeBySkillGroup.TryGetValue(BSkillGroups.PRECISION_ID, out var mineralogySkill))
+						if (resume.AptitudeBySkillGroup.TryGetValue(BSkillGroups.PRECISION_ID, out float mineralogySkill))
 						{
 							multiplier += mineralogySkill * 0.025f;
 							multiplier = Mathf.Clamp01(multiplier);

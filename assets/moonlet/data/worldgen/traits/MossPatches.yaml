@@ -1,0 +1,6 @@
+name: Moss Patches
+description: Small cavities with moss lined walls dot this asteroid.
+colorHex: 18ad22
+
+globalFeatureMods:
+  Beached:features/traits/MossCavity: 5

@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -37,6 +38,110 @@ public class TMPConverter : MonoBehaviour
 		public float[] Color { get; set; }
 	}
 
+	private class StringEntry
+	{
+		public List<StringEntry> children;
+		public string value;
+		public string name;
+		public int parentId;
+		internal bool isClass;
+
+		public StringEntry(Transform transform, string value)
+		{
+			this.value = value;
+			children = new List<StringEntry>();
+			entries.Add(transform.GetInstanceID(), this);
+		}
+	}
+
+	private static Dictionary<int, StringEntry> entries;
+
+	private static string GetUpper(string str) => str.ToUpperInvariant()
+		.Replace(" ", "_")
+		.Replace(".", "_");
+
+	/*	private static string GenerateStringEntries(GameObject parent)
+		{
+			entries = new Dictionary<int, StringEntry>();
+			var builder = new StringBuilder();
+
+			foreach (var text in parent.GetComponentsInChildren<TextMeshProUGUI>())
+			{
+				var currentObject = text.transform;
+				int count = 0;
+
+				var currentEntry = new StringEntry(text.transform, text.text);
+				currentEntry.name = GetUpper(text.name);
+
+				bool reachedParent = false;
+				while (currentObject != null && currentObject != parent && count++ < 16)
+				{
+					currentObject = currentObject.parent;
+
+					if (currentObject == null)
+						break;
+
+					currentEntry.parentId = currentObject.GetInstanceID();
+
+					if (reachedParent)
+						break;
+
+					if (currentObject == parent)
+						reachedParent = true;
+
+					if (entries.TryGetValue(currentEntry.parentId, out var obj))
+					{
+						obj.children.Add(currentEntry);
+						currentEntry = obj;
+					}
+					else
+					{
+						var newEntry = new StringEntry(currentObject.transform, null);
+						newEntry.children.Add(currentEntry);
+						newEntry.name = GetUpper(currentObject.name);
+						newEntry.isClass = true;
+						currentEntry = newEntry;
+					}
+				}
+			}
+
+			var pool = entries.Values.ToList();
+			var parentEntry = pool.Find(e => e.parentId == 0);
+			foreach (var entry in pool)
+				Debug.Log($"{entry.parentId} {entry.name} {entry.value}");
+
+			ListChildren(builder, parentEntry);
+
+			return builder.ToString();
+		}
+
+		private static void ListChildren(StringBuilder builder, StringEntry item, int level = 0, int maxDepth = 10)
+		{
+			if (level >= maxDepth || item == null)
+			{
+				Debug.Log("reached end");
+				Debug.Log(item == null);
+				return;
+			}
+
+			var prefix = string.Concat(Enumerable.Repeat("\t", level));
+
+			if (item.isClass)
+			{
+				builder.AppendLine($"{prefix}public static class {GetUpper(item.name)}");
+				builder.AppendLine($"{prefix}{{");
+			}
+			else
+				builder.AppendLine($"public static LocString {GetUpper(item.name)} = \"{item.value}\";");
+
+			foreach (var child in item.children)
+				ListChildren(builder, child, level + 1);
+
+			if (item.isClass)
+				builder.AppendLine($"{prefix}}}");
+		}
+	*/
+
 	public static string GetGameObjectPath(GameObject obj, GameObject parent)
 	{
 		if (obj.TryGetComponent(out LocTextKeyOverride textOverride))
@@ -46,22 +151,41 @@ public class TMPConverter : MonoBehaviour
 
 		string stop = parent.name;
 		string prefix = "STRINGS.UI";
+		string path = "." + obj.name.ToUpper();
+		bool skipFirst = false;
 
-		if (parent.gameObject.TryGetComponent(out ModInfo modInfo))
+		if (parent.TryGetComponent(out ModInfo modInfo))
 		{
-			prefix = modInfo.modName + "." + prefix;
+			if (modInfo.overrideStringKeyPrefix != null)
+			{
+				prefix = modInfo.overrideStringKeyPrefix;
+				skipFirst = true;
+			}
+			else if (modInfo.modName != null)
+			{
+				prefix = $"{modInfo.modName}.{prefix}";
+			}
 		}
 
-		string path = "." + obj.name.ToUpper();
 		while (obj.transform.parent != null)
 		{
 			obj = obj.transform.parent.gameObject;
 			string parentName = obj.name;
-			if (parentName == stop) break;
-
-			path = "." + parentName.ToUpper() + path;
+			if (parentName == stop)
+				break;
+			else
+			{
+				var nextUp = obj.transform.parent.gameObject;
+				if (skipFirst && (nextUp == null || nextUp.name == stop))
+				{
+					skipFirst = false;
+				}
+				else
+					path = "." + parentName.ToUpper() + path;
+			}
 		}
-		return prefix + path;
+
+		return $"{prefix}{path}";
 	}
 
 	static void SetButtonRefs(GameObject obj)
@@ -95,6 +219,17 @@ public class TMPConverter : MonoBehaviour
 			return;
 		}
 
+		//var entries = GenerateStringEntries(original);
+
+		var textCmp = obj.transform.parent.gameObject.GetComponent<Text>();
+
+		if (textCmp == null)
+		{
+			textCmp = obj.transform.parent.gameObject.AddComponent<Text>();
+		}
+
+		//textCmp.text = entries;
+
 		foreach (TextMeshProUGUI tmp in tmps)
 		{
 			var rect = tmp.GetComponent<RectTransform>();
@@ -116,15 +251,6 @@ public class TMPConverter : MonoBehaviour
 			};
 
 
-			var textCmp = obj.transform.parent.gameObject.GetComponent<Text>();
-
-			if (textCmp == null)
-			{
-				textCmp = obj.transform.parent.gameObject.AddComponent<Text>();
-			}
-
-			textCmp.text += path + ", " + tmp.text;
-
 			string jsonData;
 			jsonData = JsonConvert.SerializeObject(settings, Formatting.Indented);
 
@@ -142,10 +268,10 @@ public class TMPConverter : MonoBehaviour
 		}
 
 		var prefabName = obj.transform.parent.gameObject.TryGetComponent(out ModInfo modInfo)
-			? $"Assets/generated assets/tmp converted ui/{modInfo.prefabPath}.prefab"
-			: $"Assets/generated assets/tmp converted ui/{obj.name}.prefab";
+			? $"Assets/generated_assets/tmp converted ui/{modInfo.prefabPath}.prefab"
+			: $"Assets/generated_assets/tmp converted ui/{obj.name}.prefab";
 
-		PrefabUtility.SaveAsPrefabAsset(obj, prefabName);
-		DestroyImmediate(obj);
+		//PrefabUtility.SaveAsPrefabAsset(obj, prefabName);
+		//DestroyImmediate(obj);
 	}
 }

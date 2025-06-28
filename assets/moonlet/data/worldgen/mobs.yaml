@@ -1,7 +1,18 @@
 MobLookupTable:
   remove: [] 
   add:
+    Beached_Oxybloon:
+      prefabName: Beached_Oxybloon
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.05
+        max: 0.3
+      width: 1
+      height: 1
+
     Beached_MusselSprout:
+      prefabName: Beached_MusselSprout
       location: Floor
       selectMethod: Centroid
       density:
@@ -15,8 +26,28 @@ MobLookupTable:
       location: Solid
       selectMethod: Centroid
       density:
+        min: 0.02
+        max: 0.04
+      width: 1
+      height: 1
+
+    Beached_BuriedCellAlgaeSeed:
+      prefabName: Beached_AlgaeCellSeed
+      location: Solid
+      selectMethod: Centroid
+      density:
+        min: 0.02
+        max: 0.04
+      width: 1
+      height: 1
+
+    Beached_Coral_PrincessPacu:
+      prefabName: Beached_PrincessPacu
+      location: Water
+      selectMethod: Centroid
+      density:
         min: 0.05
-        max: 0.07
+        max: 0.05
       width: 1
       height: 1
 
@@ -51,6 +82,7 @@ MobLookupTable:
       height: 1
 
     Beached_SandySeashell:
+      prefabName: Beached_SandySeashell
       location: Floor
       selectMethod: Centroid
       density:
@@ -80,6 +112,7 @@ MobLookupTable:
       height: 1
 
     Beached_LeafletCoral:
+      prefabName: Beached_LeafletCoral
       location: LiquidFloor
       selectMethod: Centroid
       sampleBehaviour: UniformSpiral
@@ -93,6 +126,7 @@ MobLookupTable:
       height: 1
 
     Beached_WaterCups:
+      prefabName: Beached_WaterCups
       location: Floor
       selectMethod: Centroid
       density:
@@ -102,6 +136,35 @@ MobLookupTable:
       height: 2
 
     Beached_AlgaeCell:
+      prefabName: Beached_AlgaeCell
+      location: LiquidFloor
+      selectMethod: Centroid
+      sampleBehaviour: UniformSpiral
+      blobSize:
+        min: 2
+        max: 5
+      density:
+        min: 0.1
+        max: 0.2
+      width: 1
+      height: 1
+
+    Beached_Coral_FireCoral:
+      prefabName: Beached_FireCoral
+      location: LiquidFloor
+      selectMethod: Centroid
+      sampleBehaviour: UniformSpiral
+      blobSize:
+        min: 2
+        max: 5
+      density:
+        min: 0.1
+        max: 0.2
+      width: 1
+      height: 1
+
+    Beached_Coral_Filament:
+      prefabName: Beached_Filament
       location: LiquidFloor
       selectMethod: Centroid
       sampleBehaviour: UniformSpiral
@@ -115,6 +178,7 @@ MobLookupTable:
       height: 1
 
     Beached_DewPalm:
+      prefabName: Beached_DewPalm
       location: Floor
       selectMethod: Centroid
       density:
@@ -124,6 +188,7 @@ MobLookupTable:
       height: 4
 
     Beached_Bamboo:
+      prefabName: Beached_Bamboo
       location: Floor
       selectMethod: Centroid
       density:
@@ -132,7 +197,18 @@ MobLookupTable:
       width: 1
       height: 2
 
+    Bamboo_Sparse:
+      prefabName: Beached_Bamboo
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.3
+      width: 1
+      height: 2
+
     Beached_Kelp:
+      prefabName: Beached_Kelp
       location: LiquidFloor
       selectMethod: Centroid
       density:
@@ -142,6 +218,7 @@ MobLookupTable:
       height: 2
       
     Beached_JellyfishStrobila:
+      prefabName: Beached_JellyfishStrobila
       location: LiquidFloor
       selectMethod: Centroid
       density:
@@ -151,6 +228,7 @@ MobLookupTable:
       height: 2
       
     Beached_Jellyfish:
+      prefabName: Beached_Jellyfish
       location: LiquidFloor
       selectMethod: Centroid
       density:

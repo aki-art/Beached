@@ -22,6 +22,7 @@ namespace Beached.Content.Scripts
 	{
 		private const int CHUNK_EDGE = 4;
 		private const float FUNGAL_LIGHT_KILL_RATE = 0.5f;
+		private const float CORALLIUM_SPREAD_CHANCE = 0.05f;
 		private const float SHRAPNEL_SPEED = 10f;
 		private const float ACID_LOSS = 0.25f;
 
@@ -33,10 +34,12 @@ namespace Beached.Content.Scripts
 		private static ushort saltWaterIdx;
 		private static ushort brineIdx;
 		private static ushort acidIdx;
+		private static ushort coralliumIdx;
 		private static ushort hydrogenIdx;
 		private static Element saltyOxygen;
 
 		public CellElementEvent SaltOffing;
+		public static CellElementEvent CoralSpread = new CellElementEvent("Beached_CoralSpread", "Spreading coral by ElementInteractions", false);
 
 		private readonly SpawnFXHashes saltFx = ModAssets.Fx.saltOff;
 
@@ -124,6 +127,15 @@ namespace Beached.Content.Scripts
 			}
 			else if (element.IsGas)
 				UpdateSpores(cell, diseaseCount);
+			else if (element.idx == coralliumIdx)
+				TrySpreadCorallium(cell);
+		}
+		private void TrySpreadCorallium(int cell)
+		{
+			if (Random.value < CORALLIUM_SPREAD_CHANCE)
+			{
+				MiscUtil.TrySpreadCoralliumToTile(cell, MiscUtil.cardinalOffsetsUnordered.GetRandom());
+			}
 		}
 
 		private void UpdateAcid(int cell)
@@ -294,6 +306,7 @@ namespace Beached.Content.Scripts
 			saltyOxygen = ElementLoader.FindElementByHash(Elements.saltyOxygen);
 			acidIdx = ElementLoader.GetElementIndex(Elements.sulfurousWater);
 			hydrogenIdx = ElementLoader.GetElementIndex(SimHashes.Hydrogen);
+			coralliumIdx = ElementLoader.GetElementIndex(Elements.corallium);
 		}
 
 		private int GetRandomCellInChunk(int chunk)

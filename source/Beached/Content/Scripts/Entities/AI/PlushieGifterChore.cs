@@ -65,7 +65,7 @@ namespace Beached.Content.Scripts.Entities.AI
 				idle
 					.Enter(smi => Log.Debug("PlusheGifterChore idle"))
 					.UpdateTransition(goToBed, FindBed, UpdateRate.SIM_1000ms);
-				//.EventTransition(GameHashes.NewBuilding, smi => GameplayEventManager.Instance, goToBed, FindBed);
+				//.EventTransition(GameHashes.NewBuilding, telepadInstance => GameplayEventManager.Instance, goToBed, FindBed);
 
 				goToBed
 					.UpdateTransition(idle, (smi, dt) => smi.targetBed == null)

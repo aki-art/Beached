@@ -47,7 +47,11 @@ namespace Beached.Content.Scripts.Entities
 
 		private void SetRotation(float angle)
 		{
-			kbac.Rotation = angle;
+			var oppositeAngle = angle + 180f;
+			if (angle >= 360f)
+				angle -= 360f;
+
+			kbac.Rotation = oppositeAngle;
 			Trigger(ModHashes.crystalRotated, angle);
 		}
 
@@ -102,7 +106,6 @@ namespace Beached.Content.Scripts.Entities
 			};
 
 			angle += Random.Range(-initialAngleTreshold, initialAngleTreshold);
-			//angle -= 90f;
 
 			return angle;
 		}

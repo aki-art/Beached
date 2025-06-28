@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb;
+﻿using Beached.Content.Defs.Items;
+using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Klei.AI;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace Beached.Content.Scripts.Entities
 		public State healthy;
 		public State recovering;
 		public InfectedState infected;
+
+		public const float GROWTH_RATE_4_CYCLES = 100f / (600f * 4f);
+		public const float GROWTH_RATE_6_CYCLES = 100f / (600f * 6f);
 
 		public Signal sheared;
 
@@ -26,7 +30,7 @@ namespace Beached.Content.Scripts.Entities
 
 			infected
 				.DefaultState(infected.growing)
-				//.ToggleStatusItem(BStatusItems.limpetedCritter, smi => smi)
+				//.ToggleStatusItem(BStatusItems.limpetedCritter, telepadInstance => telepadInstance)
 				.Enter(OnInfected)
 				.Exit(OnCured)
 				.OnSignal(sheared, healthy);
@@ -109,18 +113,61 @@ namespace Beached.Content.Scripts.Entities
 			public State grown;
 		}
 
-		public class Def : BaseDef
+		public class Def : BaseDef, ICodexEntry
 		{
 			public int maxLevel;
 			public float defaultGrowthRate;
 			public Tag itemDroppedOnShear;
 			public float metabolismModifier = 0.25f;
 			public float massDropped;
+			public float glandMass = 10f;
 			public int diseaseCount;
 			public byte diseaseIdx;
 			public float germPuffCooldown = CONSTS.CYCLE_LENGTH;
 			public string targetSymbol = "beached_limpetgrowth";
 			public string limpetKanim = "beached_pincher_limpetgrowth_kanim";
+
+			public void AddCodexEntries(CodexEntryGenerator_Elements.ElementEntryContext context, KPrefabID prefab)
+			{
+				var shearingStation = Assets.GetPrefab(ShearingStationConfig.ID);
+				var conversionEntry = new CodexEntryGenerator_Elements.ConversionEntry()
+				{
+					title = shearingStation.GetProperName(),
+					prefab = shearingStation,
+					inSet = []
+				};
+
+				static string GetInfectionString(Tag tag, float amount, bool continous)
+				{
+					return STRINGS.CODEX.BEACHED_MISC.OF_INFECTION
+						.Replace("{Cycles}", GameUtil.GetFormattedCycles(amount, "F1", true))
+						.Replace("{Disease}", Db.Get().Diseases.Get(LimpetEggGerms.ID).Name);
+				}
+
+				context.usedMap.Add(prefab.PrefabID(), conversionEntry);
+				context.usedMap.Add(LimpetEggGerms.ID, conversionEntry);
+
+				conversionEntry.inSet.Add(new ElementUsage(prefab.PrefabTag, amount: 1, false));
+				conversionEntry.inSet.Add(new ElementUsage(LimpetEggGerms.ID, 100f / defaultGrowthRate, false, GetInfectionString));
+
+				conversionEntry.outSet.Add(new ElementUsage(itemDroppedOnShear, massDropped, false)
+				{
+					customFormating = (tag, amount, continous) => GameUtil.GetFormattedMass(amount)
+				});
+
+				if (glandMass > 0)
+				{
+					conversionEntry.outSet.Add(new ElementUsage(SulfurGlandConfig.ID, glandMass, false)
+					{
+						customFormating = (tag, amount, continous) => GameUtil.GetFormattedMass(amount)
+					});
+				}
+
+				context.madeMap.Add(itemDroppedOnShear, conversionEntry);
+				context.madeMap.Add(SulfurGlandConfig.ID, conversionEntry);
+			}
+
+			public int CodexEntrySortOrder() => 10;
 		}
 
 		public new class Instance : GameInstance, IShearable
@@ -149,7 +196,7 @@ namespace Beached.Content.Scripts.Entities
 				var anim = Assets.GetAnim(def.limpetKanim);
 
 				symbols = new KAnim.Build.Symbol[def.maxLevel + 1];
-				for (int i = 0; i < symbols.Length; i++)
+				for (var i = 0; i < symbols.Length; i++)
 				{
 					symbols[i] = anim.GetData().build.GetSymbol((HashedString)$"beached_limpetgrowth_{i}");
 				}
@@ -244,19 +291,25 @@ namespace Beached.Content.Scripts.Entities
 			{
 				var pe = smi.GetComponent<PrimaryElement>();
 
-				var gameObject = FUtility.Utils.Spawn(def.itemDroppedOnShear, smi.master.gameObject);
+				SpawnItem(pe, def.itemDroppedOnShear, def.massDropped);
+
+				if (def.glandMass > 0)
+					SpawnItem(pe, SulfurGlandConfig.ID, def.glandMass);
+			}
+
+			private void SpawnItem(PrimaryElement pe, Tag tag, float mass)
+			{
+				var gameObject = FUtility.Utils.Spawn(tag, smi.master.gameObject);
 				gameObject.transform.SetPosition(Grid.CellToPosCCC(Grid.CellLeft(Grid.PosToCell(this)), Grid.SceneLayer.Ore));
 
 				if (gameObject.TryGetComponent(out PrimaryElement primaryElement))
 				{
 					primaryElement.Temperature = pe.Temperature;
-					primaryElement.Mass = def.massDropped;
+					primaryElement.Mass = mass;
 					primaryElement.AddDisease(pe.DiseaseIdx, pe.DiseaseCount, "Shearing");
 				}
 
 				gameObject.SetActive(true);
-
-				FUtility.Utils.YeetRandomly(gameObject, true, 1, 3, false);
 			}
 		}
 	}

@@ -27,7 +27,10 @@
 			medusaSignal = new("MedusaSignal"),
 			depleted = new("Depleted"),
 			crystalRotated = new("CrystalRotated"),
+			sublimated = new("Sublimated"),
 			crystalHarvested = new("CrystalHarvested"),
+			coralConsumptionEnabled = new("CoralStatusChanged"),
+			extraTelepadDelivery = new("ExtraTelepadDelivery"),
 
 			segmentedEntityUpdate = new("SegmentedEntityUpdate"),
 			critterTraitAdded = new("CritterTraitAdded");

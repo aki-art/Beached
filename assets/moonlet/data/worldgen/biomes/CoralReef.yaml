@@ -1,0 +1,33 @@
+TerrainBiomeLookupTable:
+  # keys to remove from in-memory structure when this file is loaded
+  remove: [] 
+  # elements to add from in-memory structure when this file is loaded
+  add:
+    Solid:
+    - content: Algae
+      bandSize: 3
+    - content: SlimeMold
+      bandSize: 4
+    - content: CrossRoads_Coquina
+      bandSize: 10
+    - content: Sand
+      bandSize: 2
+    - content: Beached_Pearl
+      bandSize: 2
+    - content: Sand
+      bandSize: 0.2
+    - content: Fertilizer
+      bandSize: 0.005
+    EthanolLakes:
+    - content: Beached_Perplexium
+      bandSize: 0.14
+    - content: Ethanol
+      bandSize: 0.25
+    - content: Beached_Corallium
+      bandSize: 0.9
+    - content: CrossRoads_Coquina
+      bandSize: 0.9
+    - content: Sand
+      bandSize: 1.1
+    - content: Algae
+      bandSize: 4

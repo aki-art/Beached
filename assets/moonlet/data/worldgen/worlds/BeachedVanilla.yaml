@@ -25,7 +25,7 @@ worldTraitRules:
     max: 4
     # replace these trait with custom variants on this world
     alternativeTraits:
-      traits/FrozenCore: Beached:traits/Beached_Alt_Sulfur_FrozenCore 
+      traits/FrozenCore: Beached:traits/Alt_Sulfur_FrozenCore 
       # expansion1::traits/LushCore
       # traits/SubsurfaceOcean
       # expansion1::traits/SubsurfaceOcean
@@ -59,11 +59,16 @@ defaultsOverrides:
 subworldFiles:
   # beach
   - name: &Start Beached:subworlds/beached_beach/BeachStart 
-    overridePower: 3
+    overridePower: 2.5
   - name: &BeachMini Beached:subworlds/beached_beach/BeachMini
     overridePower: 1
   - name: &BeachPalms Beached:subworlds/beached_beach/BeachPalmyShores
     overridePower: 1
+
+  # coral reefs
+  - name: &CoralReefs Beached:subworlds/beached_coral/CoralReefs
+    minCount: 2
+    maxCount: 5
 
   # snowy
   - name: &Snowy Beached:subworlds/beached_snowy/SnowyCaves 
@@ -103,7 +108,7 @@ subworldFiles:
     overridePower: 0.6
 
 startSubworldName: *Start
-startingBaseTemplate: beached/bases/startingBaseCCenteredB
+startingBaseTemplate: beached/bases/beach_startingbaseC
 startingBasePositionHorizontal:
   min: 0.5
   max: 0.5
@@ -118,6 +123,7 @@ unknownCellsAllowedSubworlds:
     subworldNames:
       - *BambooMain
       - *RotMain
+      - *CoralReefs
       - *Snowy
 # start
   - tagcommand: AtTag
@@ -182,23 +188,36 @@ unknownCellsAllowedSubworlds:
       - *Surface
 
 worldTemplateRules:
+  # skeleton POI
+  - names: 
+      - beached/worldgen/beach/skeleton_research
+    listRule: GuaranteeAll
+    priority: 100
+    allowNearStart: true
+    useRelaxedFiltering: true # not recommended to use with allowNearStart unless features are non-critical
+    allowedCellsFilter:
+      - command: Replace
+        subworldNames:
+          - *Start
+
   # limpet cave
   - names:
       - beached/worldgen/beach/limpet_rock_cave
     listRule: GuaranteeOne
     priority: 100
+    allowNearStart: true
     allowedCellsFilter:
       - command: Replace
         zoneTypes: [Beached_Beach]
 
   # coral reef
   - names:
-      - beached/worldgen/coralreefsmall1b
+      - beached/worldgen/coral/reef_geyser
     listRule: GuaranteeOne
     priority: 700
     allowedCellsFilter:
       - command: Replace
-        zoneTypes: [Beached_Sea]
+        zoneTypes: [Beached_Coral]
 
   # ammonia vent
   - names:
@@ -222,7 +241,7 @@ worldTemplateRules:
   
   # chlorine vent
   - names:
-      - beached/worldgen/bamboo_clgeyser3
+      - beached/worldgen/bamboo/chlorine_vent_dasha
     listRule: GuaranteeOne
     priority: 700
     allowedCellsFilter:

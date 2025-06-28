@@ -1,0 +1,52 @@
+tags:
+  - Wet
+  - AllowExceedNodeBorders
+shape: ShortWide
+borders:
+  - 1
+  - 1
+  - 1
+blobSize:
+  min: 5
+  max: 12
+ElementChoiceGroups:
+  RoomCenterElements:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Perplexium
+        weight: 1.0
+      - element: Ethanol
+        weight: 0.4
+  RoomBorderChoices0:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Zircon
+        weight: 1
+#        overrides:
+#          massOverride: 900
+      - element: Beached_Perplexium
+        weight: 0.3
+  RoomBorderChoices1:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Zircon
+        weight: 0.12
+      - element: CrossRoads_Coquina
+        weight: 0.55
+      - element: Algae
+        weight: 0.55
+      - element: Beached_Perplexium
+        weight: 0.45
+  RoomBorderChoices2:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Zircon
+        weight: 0.3
+#        overrides:
+#          massOverride: 850
+      - element: CrossRoads_Coquina
+        weight: 0.55
+      - element: Algae
+        weight: 0.15
+      - element: Beached_Perplexium
+        weight: 0.15

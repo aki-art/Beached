@@ -1,4 +1,5 @@
 ﻿using Beached.Content.ModDb;
+using Beached.Content.Scripts.Entities.AI;
 using ImGuiNET;
 using Klei.AI;
 using UnityEngine;
@@ -11,22 +12,53 @@ namespace Beached.Content.Scripts.Entities
 		[SerializeField] public float defaultGrowthRatePercentPerCycle;
 
 		[MyCmpReq] public Crystal crystal;
+		[MyCmpReq] public HarvestableCrystal harvestableCrystal;
 		[MyCmpReq] public KBatchedAnimController kbac;
+		[MyCmpReq] public PrimaryElement primaryElement;
 
 		private KAnimLink link;
 		public KBatchedAnimController shaftKbac;
 		private GameObject shaftGo;
 		private Vector3 growthVectorNormalized;
 
+		private bool isSublimator;
 		private float overrideLength = -1;
+		private float expectedMass = -1;
+		protected float fullyGrownMass;
+
+		public override void OnPrefabInit()
+		{
+			Subscribe((int)GameHashes.NewGameSpawn, OnGameSpawn);
+		}
+
+		private void OnGameSpawn(object _)
+		{
+			var length = Random.Range(0, maxLength) * (100f / maxLength);
+			smi.growth.value = length;
+		}
 
 		public override void OnSpawn()
 		{
+			isSublimator = primaryElement.Element.sublimateId != default;
+			fullyGrownMass = harvestableCrystal.crystalKgPerHarvest * maxLength;
+
+			if (isSublimator)
+			{
+				var sublimates = gameObject.AddOrGet<Sublimates>();
+				sublimates.spawnFXHash = primaryElement.Element.sublimateFX;
+				sublimates.info = new Sublimates.Info(
+					0.01f,
+					0.005f,
+					1.8f,
+					0.7f,
+					primaryElement.Element.sublimateId);
+			}
+
 			overrideLength = -1;
 			CreateCrystalShaft();
 
 			SetAngle(crystal.angleDeg);
-			UpdateShaftLength();
+			UpdateShaftLengthAndMass();
 
 			Subscribe(ModHashes.crystalRotated, data => SetAngle((float)data));
 			smi.StartSM();
@@ -43,7 +75,7 @@ namespace Beached.Content.Scripts.Entities
 
 			shaftGo.transform.rotation = quaternion;
 
-			UpdateShaftLength();
+			UpdateShaftLengthAndMass();
 		}
 
 		private void CreateCrystalShaft()
@@ -78,8 +110,11 @@ namespace Beached.Content.Scripts.Entities
 			kbac.enabled = true;
 		}
 
-		public void UpdateShaftLength()
+		public void UpdateShaftLengthAndMass()
 		{
+			if (smi == null || smi.growth == null)
+				return;
+
 			var length = overrideLength == -1 ? (smi.growth.value / 100f) : overrideLength;
 			length = Mathf.Clamp01(length);
 			length *= maxLength;
@@ -91,12 +126,15 @@ namespace Beached.Content.Scripts.Entities
 
 			var position = shaftKbac.PositionIncludingOffset;
 			shaftKbac.GetBatchInstanceData().SetClipRadius(position.x, position.y, length * length, true);
+
+			primaryElement.SetMass(Mathf.Max(1f, length * harvestableCrystal.crystalKgPerHarvest));
+			expectedMass = primaryElement.Mass;
 		}
 
 		public void OnImguiDraw()
 		{
 			if (ImGui.SliderFloat("override length", ref overrideLength, 0f, 1f))
-				UpdateShaftLength();
+				UpdateShaftLengthAndMass();
 		}
 
 		public bool IsGrown() => smi.sm.IsMaxLength(smi, 0);
@@ -115,17 +153,9 @@ namespace Beached.Content.Scripts.Entities
 
 			public void InitGrowth()
 			{
-				var amounts = smi.gameObject.GetAmounts();
-
-				if (growth == null)
-					growth = amounts.Add(new AmountInstance(BAmounts.CrystalGrowth, gameObject));
+				growth = BAmounts.CrystalGrowth.Lookup(gameObject);
 
 				growth.hide = false;
-
-				var attributes = smi.gameObject.GetAttributes();
-
-				if (attributes.Get(BAmounts.CrystalGrowth.Id) == null)
-					attributes.Add(BAmounts.CrystalGrowth.deltaAttribute);
 
 				defaultGrowthModifier = new AttributeModifier(
 					growth.amount.deltaAttribute.Id,
@@ -139,7 +169,7 @@ namespace Beached.Content.Scripts.Entities
 			public void OnHarvest()
 			{
 				smi.growth.value = 0;
-				smi.master.UpdateShaftLength();
+				smi.master.UpdateShaftLengthAndMass();
 			}
 		}
 
@@ -158,17 +188,30 @@ namespace Beached.Content.Scripts.Entities
 
 				growing
 					.ToggleAttributeModifier("Growth", smi => smi.defaultGrowthModifier)
+					.Update(CheckSublimation)
 					.Update(UpdateVisual)
 					.UpdateTransition(grown, IsMaxLength);
 
 				grown
 					.EventTransition(ModHashes.crystalHarvested, growing)
+					.EventTransition(ModHashes.sublimated, growing)
 					.ToggleStatusItem("grown", "");
+			}
+
+			private void CheckSublimation(StatesInstance smi, float arg2)
+			{
+				var master = smi.master;
+				if (master.isSublimator && master.expectedMass != -1 && master.expectedMass > master.primaryElement.Mass)
+				{
+					var difference = master.primaryElement.Mass - master.expectedMass;
+					var partialDiff = difference / master.fullyGrownMass;
+					smi.growth.value -= partialDiff;
+				}
 			}
 
 			private void UpdateVisual(StatesInstance instance, float _)
 			{
-				instance.master.UpdateShaftLength();
+				instance.master.UpdateShaftLengthAndMass();
 			}
 
 			public bool IsMaxLength(StatesInstance instance, float _)

@@ -52,3 +52,9 @@ zoneTypes:
     backgroundIndex: 8
     color: ffff00
     border: BoggyMarsh
+
+  - id: Beached_Coral
+    background: beached_shared_assets::Assets/Textures/biome_backgrounds.png
+    backgroundIndex: 3
+    color: C06410
+    border: Swamp

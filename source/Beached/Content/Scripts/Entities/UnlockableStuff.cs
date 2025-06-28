@@ -47,7 +47,7 @@ namespace Beached.Content.Scripts.Entities
 		private static string GetMessageBody(Instance smi)
 		{
 			var buildings = "";
-			foreach (var unlockTechItem in smi.unlockTechItems)
+			foreach (var unlockTechItem in smi.GetTechItems())
 				buildings = $"{buildings}\n    • {unlockTechItem.Name}";
 
 			return string.Format(STRINGS.MISC.NOTIFICATIONS.BEACHED_SLEEPINGMUFFINS.MESSAGEBODY, buildings);
@@ -95,7 +95,7 @@ namespace Beached.Content.Scripts.Entities
 
 		public new class Instance : GameInstance
 		{
-			public List<TechItem> unlockTechItems;
+			private List<TechItem> unlockTechItems;
 			public Notification notificationReference;
 
 			public Instance(IStateMachineTarget master, Def def) : base(master, def)
@@ -111,6 +111,23 @@ namespace Beached.Content.Scripts.Entities
 				}
 			}
 
+			public List<TechItem> GetTechItems()
+			{
+				if (unlockTechItems == null)
+				{
+					unlockTechItems = new List<TechItem>(def.techUnlockIDs.Count);
+					foreach (string poiTechUnlockId in def.techUnlockIDs)
+					{
+						var techItem = Db.Get().TechItems.TryGet(poiTechUnlockId);
+						if (techItem != null)
+							unlockTechItems.Add(techItem);
+						else
+							Beached.Log.Warning("Invalid tech item " + poiTechUnlockId + " for POI Tech Unlock");
+					}
+				}
+
+				return unlockTechItems;
+			}
 			public override void StartSM()
 			{
 				Subscribe((int)GameHashes.SelectObject, OnBuildingSelect);
@@ -133,7 +150,7 @@ namespace Beached.Content.Scripts.Entities
 
 			public void UnlockTechItems()
 			{
-				foreach (var unlockTechItem in unlockTechItems)
+				foreach (var unlockTechItem in GetTechItems())
 					unlockTechItem?.POIUnlocked();
 
 				MusicManager.instance.PlaySong("Stinger_ResearchComplete");

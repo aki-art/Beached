@@ -23,7 +23,7 @@ namespace Beached.Content.ModDb.Sicknesses
 		{
 			return
 			[
-				new("Destructive", "This Duplicant is compelled to periodically become destructive.")
+				new("Destructive", "This Duplicant is compelled to periodically lash out.")
 			];
 		}
 
@@ -33,8 +33,7 @@ namespace Beached.Content.ModDb.Sicknesses
 			public IceWrathAggressionEffect effect;
 			public SicknessInstance sicknessInstance;
 
-			public StatesInstance(SicknessInstance master, IceWrathAggressionEffect effect)
-			  : base(master)
+			public StatesInstance(SicknessInstance master, IceWrathAggressionEffect effect) : base(master)
 			{
 				this.effect = effect;
 				sicknessInstance = master.gameObject.GetSicknesses().Get(BSicknesses.iceWrath);
@@ -49,8 +48,7 @@ namespace Beached.Content.ModDb.Sicknesses
 			}
 		}
 
-		public class States :
-		  GameStateMachine<States, StatesInstance, SicknessInstance>
+		public class States : GameStateMachine<States, StatesInstance, SicknessInstance>
 		{
 			public State idle;
 			public State lashingOut;
@@ -63,7 +61,10 @@ namespace Beached.Content.ModDb.Sicknesses
 					.ScheduleGoTo(smi => smi.NextLashOutTimer(), lashingOut);
 
 				lashingOut
-					.ToggleChore(smi => new AggressiveChore(smi.master), idle);
+					.ToggleChore(smi => new AggressiveChore(smi.master)
+					{
+						choreType = BChoreTypes.iceWrathLashOut
+					}, idle);
 			}
 		}
 	}

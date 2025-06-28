@@ -7,7 +7,7 @@ namespace Beached.Content.Defs.Items
 	{
 		public const string
 			FLYING_CENTIPEDE = "Beached_AmberInclusion_FlyingCentipede",
-			STRANGE_HATCH = "Beached_AmberInclusion_StangeHatch",
+			STRANGE_HATCH = "Beached_AmberInclusion_StrangeHatch",
 			FEATHER = "Beached_AmberInclusion_Feather";
 
 		public static EffectorValues SMALL = new(10, 2);
@@ -30,7 +30,7 @@ namespace Beached.Content.Defs.Items
 
 			var item = BEntityTemplates.CreateSimpleItem(ID, name, desc, anim, decor, Elements.amber);
 
-			item.AddTags(BTags.amberInclusion, BTags.amberInclusion);
+			item.AddTags(BTags.amberInclusion, BTags.dnaAnalyzable);
 
 			return item;
 		}

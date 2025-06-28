@@ -11,12 +11,12 @@ namespace Beached.Content.Defs
 	{
 		public const string PLACEHOLDER_KANIM = "farmtile_kanim";
 
-		public static GameObject CreateSimpleItem(string ID, string anim, EffectorValues decor, SimHashes element = SimHashes.Creature, bool loop = false)
+		public static GameObject CreateSimpleItem(string ID, string anim, EffectorValues decor, SimHashes element = SimHashes.Creature, float width = 0.66f, float height = 0.75f, bool loop = false)
 		{
 			var name = Strings.Get($"STRINGS.ITEMS.MISC.{ID.ToUpperInvariant()}.NAME");
 			var desc = Strings.Get($"STRINGS.ITEMS.MISC.{ID.ToUpperInvariant()}.DESC");
 
-			return CreateSimpleItem(ID, name, desc, anim, decor, element, loop);
+			return CreateSimpleItem(ID, name, desc, anim, decor, element, width, height, loop);
 		}
 
 		public static Diet.Info[] SimpleDiet(Tag from, Tag to, float kcalPerKg, float rate = 0.5f)
@@ -60,7 +60,7 @@ namespace Beached.Content.Defs
 			return prefab;
 		}
 
-		public static GameObject CreateSimpleItem(string ID, string name, string description, string anim, EffectorValues decor, SimHashes element = SimHashes.Creature, bool loop = false)
+		public static GameObject CreateSimpleItem(string ID, string name, string description, string anim, EffectorValues decor, SimHashes element = SimHashes.Creature, float width = 0.66f, float height = 0.75f, bool loop = false)
 		{
 			var prefab = EntityTemplates.CreateLooseEntity(
 				ID,
@@ -172,7 +172,7 @@ namespace Beached.Content.Defs
 			float height = 0.25f,
 			string[] dlcIds = null)
 		{
-			var name = Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{id.ToUpperInvariant()}.CLUSTER_NAME");
+			var name = Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{id.ToUpperInvariant()}.NAME");
 			var desc = Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{id.ToUpperInvariant()}.DESCRIPTION");
 
 			var prefab = EntityTemplates.CreateLooseEntity(
@@ -199,7 +199,7 @@ namespace Beached.Content.Defs
 
 			if (additionalTags != null)
 			{
-				foreach (Tag additionalTag in additionalTags)
+				foreach (var additionalTag in additionalTags)
 					kprefabId.AddTag(additionalTag);
 			}
 

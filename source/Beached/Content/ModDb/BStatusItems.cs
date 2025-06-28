@@ -28,7 +28,9 @@ namespace Beached.Content.ModDb
 			controllerByCollarDispenser,
 			cultivatingGerms,
 			meat,
+			mirror,
 			nonVega,
+			iceWrathLashOut,
 			sandboxCrumble;
 
 		public const string
@@ -117,7 +119,7 @@ namespace Beached.Content.ModDb
 		}
 
 		[DbEntry]
-		public static void RegisterDuplicantStatisItems(DuplicantStatusItems __instance)
+		public static void RegisterDuplicantStatusItems(DuplicantStatusItems __instance)
 		{
 			thawing = __instance.Add(new StatusItem(
 				"Beached_Thawing",
@@ -125,6 +127,16 @@ namespace Beached.Content.ModDb
 				"",
 				StatusItem.IconType.Info,
 				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID,
+				status_overlays: (int)StatusItem.StatusItemOverlays.None));
+
+			iceWrathLashOut = __instance.Add(new StatusItem(
+				"Beached_IceWrathLashOut",
+				DUPLICANTS,
+				"",
+				StatusItem.IconType.Exclamation,
+				NotificationType.Bad,
 				false,
 				OverlayModes.None.ID,
 				status_overlays: (int)StatusItem.StatusItemOverlays.None));
@@ -181,6 +193,18 @@ namespace Beached.Content.ModDb
 			desiccation.SetResolveStringCallback((str, data) => data is MoistureMonitor.Instance moistureMonitor ? string.Format(str, moistureMonitor.timeUntilDeath) : str);
 
 			__instance.Add(desiccation);
+
+			mirror = __instance.Add(new StatusItem(
+				"Beached_Mirror",
+				CREATURES,
+				"beached_statusitem_meat",
+				StatusItem.IconType.Custom,
+				NotificationType.Neutral,
+				false,
+				OverlayModes.None.ID,
+				false));
+
+			__instance.Add(mirror);
 
 
 			geneticallyMofidied = new(

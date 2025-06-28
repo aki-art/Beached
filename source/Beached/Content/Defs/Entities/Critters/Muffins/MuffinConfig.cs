@@ -1,6 +1,7 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Foods;
 using Beached.Content.Scripts.Entities;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Muffins
@@ -19,7 +20,6 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
-				.Drops(MeatConfig.ID, BasicFabricConfig.ID)
 				.Egg(BabyMuffinConfig.ID, "beached_egg_muffin_kanim")
 					.Fertility(30)
 					.Incubation(10)
@@ -48,17 +48,22 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 
 		private static Diet ConfigureDiet(GameObject prefab)
 		{
-			var meats = Assets
-				.GetPrefabsWithTag(BTags.meat)
-				.Where(prefab => !prefab.HasTag(BTags.Creatures.doNotTargetMeByCarnivores))
-				.Select(meat => meat.PrefabID())
-				.ToHashSet();
+			HashSet<Tag> meats = [
+				MeatConfig.ID,
+				CookedMeatConfig.ID,
+				FishMeatConfig.ID,
+				SmokedFishConfig.ID,
+				RawSnailConfig.ID,
+				SmokedSnailConfig.ID
+			];
 
-			var eggs = Assets
-				.GetPrefabsWithTag(GameTags.Egg)
-				.Where(prefab => !prefab.HasTag(BTags.Creatures.doNotTargetMeByCarnivores))
-				.Select(egg => egg.PrefabID())
-				.ToHashSet();
+			if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
+			{
+				meats.Add(DinosaurMeatConfig.ID);
+				meats.Add(SmokedDinosaurMeatConfig.ID);
+				meats.Add(PrehistoricPacuFilletConfig.ID);
+				meats.Add(SmokedFish.ID);
+			}
 
 			var diet = new Diet(
 				new Diet.Info(
@@ -68,10 +73,6 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 				new Diet.Info(
 					[RawEggConfig.ID, CookedEggConfig.ID, QuicheConfig.ID],
 					null,
-					calories_per_kg: 400_000),
-				new Diet.Info(
-					eggs,
-					EggShellConfig.ID,
 					calories_per_kg: 400_000));
 
 			var creatureCalorieMonitor = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();

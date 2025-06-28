@@ -15,7 +15,6 @@ namespace Beached.Content.ModDb
 		{
 			ConfigureSlagmiteShell();
 			ConfigureGleamiteShell();
-			// TODO: Moonlet added stuff
 		}
 
 		private void ConfigureSlagmiteShell()
@@ -26,19 +25,20 @@ namespace Beached.Content.ModDb
 				.Add(new MaterialReward(SimHashes.Cuprite, defaultMass))
 				.Add(new MaterialReward(SimHashes.IronOre, defaultMass))
 				.Add(new MaterialReward(SimHashes.Wolframite, defaultMass))
+				.Add(new MaterialReward(SimHashes.Cobaltite, defaultMass))
 				.Add(new MaterialReward(SimHashes.AluminumOre, defaultMass))
 				.Add(new MaterialReward(Elements.bismuthOre, defaultMass))
 				.Add(new MaterialReward(Elements.galena, defaultMass))
 				.Add(new MaterialReward(Elements.zincOre, defaultMass))
 				.Add(new MaterialReward(Elements.zirconiumOre, defaultMass), 0.25f);
 
-			if (DlcManager.IsContentSubscribed(DlcManager.EXPANSION1_ID))
-				slagmiteShellDrops
-					.Add(new MaterialReward(SimHashes.Cobaltite, defaultMass));
-
 			if (DlcManager.IsContentSubscribed(DlcManager.DLC2_ID))
 				slagmiteShellDrops
 					.Add(new MaterialReward(SimHashes.Cinnabar, defaultMass));
+
+			if (DlcManager.IsContentSubscribed(DlcManager.EXPANSION1_ID))
+				slagmiteShellDrops
+					.Add(new MaterialReward(SimHashes.UraniumOre, defaultMass));
 
 			if (Mod.integrations.IsModPresent(Integrations.CHEMICAL_PROCESSING))
 			{
@@ -63,6 +63,7 @@ namespace Beached.Content.ModDb
 				.Add(new MaterialReward(Elements.bismuth, defaultMass))
 				.Add(new MaterialReward(SimHashes.Lead, defaultMass))
 				.Add(new MaterialReward(Elements.zinc, defaultMass))
+				.Add(new MaterialReward(SimHashes.Cobalt, defaultMass))
 				.Add(new MaterialReward(Elements.zirconium, defaultMass), rare)
 				.Add(new MaterialReward(Elements.iridium, defaultMass), rare, _ => HasDiscovered(Elements.iridium.CreateTag()))
 				.Add(new MaterialReward(SimHashes.Niobium, defaultMass), rare, critter => HighTierMetalCondition(critter, SimHashes.Niobium))
@@ -79,11 +80,11 @@ namespace Beached.Content.ModDb
 
 			if (DlcManager.IsContentSubscribed(DlcManager.EXPANSION1_ID))
 				gleamiteShellDrops
-					.Add(new MaterialReward(SimHashes.Cobalt, defaultMass));
-
-			if (DlcManager.IsContentSubscribed(DlcManager.DLC2_ID))
-				gleamiteShellDrops
-					.Add(new MaterialReward(SimHashes.Mercury, defaultMass));
+				.Add(new MaterialReward(SimHashes.EnrichedUranium, defaultMass));
+			/*
+						if (DlcManager.IsContentSubscribed(DlcManager.DLC2_ID))
+							gleamiteShellDrops
+								.Add(new MaterialReward(SimHashes.Mercury, defaultMass));*/
 
 			if (Mod.integrations.IsModPresent(Integrations.CHEMICAL_PROCESSING))
 			{

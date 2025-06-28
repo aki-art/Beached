@@ -1,6 +1,7 @@
 ﻿using Klei.AI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TUNING;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Beached.Content.DefBuilders
 
 		private GameObject prefab;
 		private KPrefabID kPrefabID;
-		private string[] drops;
+		private Dictionary<string, float> drops;
 		private string navigationGrid = NAVIGATION.WALKER_1X1;
 		private NavType navType = NavType.Floor;
 		private FactionManager.FactionID faction = FactionManager.FactionID.Prey;
@@ -45,6 +46,7 @@ namespace Beached.Content.DefBuilders
 		private WeaponBuilder weapon;
 		private Tag condoTag = CritterCondoConfig.ID;
 		private bool condoRequiresCavity = true;
+		private bool isFish = false;
 		private string symbolPrefix = null;
 
 		public string GetName()
@@ -99,6 +101,12 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
+		public CritterBuilder Fish()
+		{
+			isFish = true;
+			return this;
+		}
+
 		public BrainBuilder Brain(Tag species)
 		{
 			brain = new BrainBuilder(this, species);
@@ -131,10 +139,21 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
+		public CritterBuilder Drops(string tag, float amount)
+		{
+			drops ??= [];
+			drops[tag] = amount;
+			return this;
+		}
 
 		public CritterBuilder Drops(params string[] tags)
 		{
-			drops = tags;
+			drops ??= [];
+			foreach (var tag in tags)
+			{
+				drops[tag] = 1f;
+			}
+
 			return this;
 		}
 
@@ -174,7 +193,7 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
-		public CritterBuilder MaxPenSize(int spaceRequiredPerCritter)
+		public CritterBuilder CritterDensityTolerance(int spaceRequiredPerCritter)
 		{
 			this.spaceRequiredPerCritter = spaceRequiredPerCritter;
 			return this;
@@ -246,7 +265,7 @@ namespace Beached.Content.DefBuilders
 
 		public CritterBuilder Tags(HashSet<Tag> tags)
 		{
-			foreach (Tag tag in tags)
+			foreach (var tag in tags)
 				this.tags.Add(tag);
 
 			return this;
@@ -313,10 +332,6 @@ namespace Beached.Content.DefBuilders
 			if (brain == null)
 				Log.Warning($"Error in configuring {id}: Brain was not set up");
 
-			Log.Debug("Adding critter");
-			Log.Debug($"Name: {GetName()}");
-			Log.Debug($"Desc: {GetDescription()}");
-
 			prefab = EntityTemplates.CreatePlacedEntity(
 				id,
 				GetName(),
@@ -352,15 +367,30 @@ namespace Beached.Content.DefBuilders
 				tempMinLethal,
 				tempMaxLethal);
 
+			if (isFish)
+			{
+				var fallMonitor = prefab.AddOrGetDef<CreatureFallMonitor.Def>();
+				fallMonitor.canSwim = true;
+				fallMonitor.checkHead = false;
+				prefab.AddOrGetDef<FlopMonitor.Def>();
+				prefab.AddOrGetDef<FishOvercrowdingMonitor.Def>();
+			}
+
 			if (symbolPrefix != null)
 				prefab.AddOrGet<SymbolOverrideController>().ApplySymbolOverridesByAffix(animFile, symbolPrefix);
 
 			if (spaceRequiredPerCritter > 0)
 				EntityTemplates.ExtendEntityToWildCreature(prefab, spaceRequiredPerCritter);
 
-			if (drops != null)
-				prefab.AddOrGet<Butcherable>().SetDrops(drops);
+			drops ??= [];
+			drops = drops
+				//.Where(kv => Assets.TryGetPrefab(kv.Key) != null)
+				.ToDictionary(kv => kv.Key, kv => kv.Value);
 
+			prefab.AddOrGet<Butcherable>().SetDrops(drops);
+			kPrefabID.prefabInitFn += go => go.AddOrGet<Butcherable>().SetDrops(drops);
+
+			//	Log.Debug($"set drops of {id} to {drops?.Keys.Join()}");
 			if (trappable)
 				prefab.AddOrGet<Trappable>();
 
@@ -614,12 +644,11 @@ namespace Beached.Content.DefBuilders
 			public TraitsBuilder Stomach(float calCapacity, float dailyCal)
 			{
 				return Add(db.Amounts.Calories.maxAttribute.Id, calCapacity)
-					.Add(db.Amounts.Calories.deltaAttribute.Id, dailyCal / CONSTS.CYCLE_LENGTH);
+					.Add(db.Amounts.Calories.deltaAttribute.Id, -dailyCal / CONSTS.CYCLE_LENGTH);
 			}
 
 			public CritterBuilder Done() => instance;
 		}
-
 
 		public class BrainBuilder(CritterBuilder instance, Tag species) : ChoreTable.Builder
 		{

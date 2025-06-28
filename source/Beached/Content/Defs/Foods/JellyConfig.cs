@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using System;
+using TUNING;
 using UnityEngine;
 using static EdiblesManager;
 
@@ -30,6 +31,7 @@ namespace Beached.Content.Defs.Foods
 			return prefab;
 		}
 
+		[Obsolete]
 		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
 		public void OnPrefabInit(GameObject inst) { }

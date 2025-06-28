@@ -13,7 +13,8 @@ namespace Beached.Integration
 			DECOR_PACK_I = "DecorPackA",
 			FAST_TRACK = "PeterHan.FastTrack",
 			ROCKETRY_EXPANDED = "Rocketry Expanded",
-			PIP_MORPHS = "ONIPipMorphsELU";
+			PIP_MORPHS = "ONIPipMorphsELU",
+			PACU_MORPHS = ""; // TODO
 
 		public class IDS
 		{
@@ -75,6 +76,7 @@ namespace Beached.Integration
 			}
 
 			CritterShedding.Initialize();
+			AETE.Initialize();
 		}
 	}
 }

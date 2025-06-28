@@ -7,8 +7,9 @@
 		public const string
 			ARID_PLANTGROWTH = "Beached_Arid_PlantGrowthPenalty",
 			CAPPED_RECOVERY = "Beached_Capped_Recovery",
+			COMFORTABLE = "Beached_Comfortable",
 			DAMP_PLANTGROWTH = "Beached_Damp_PlantGrowthBoost",
-			DAZED = "Beached_Effect_Dazed",
+			DAZED = "Beached_Dazed",
 			DIMWIT = "Beached_Dimwit",
 			FLUMMOXED = "Beached_Flummoxed",
 			ICEWRATH_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
@@ -16,22 +17,24 @@
 			LIMPETHOST = "Beached_LimpetHost", // for critters, used for growing limpets
 			LIMPETHOST_RECOVERY = "Beached_LimpetHost_Recovery", // for critters, used for growing limpets
 			LIMPETS_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
-			LUBRICATED = "Beached_Effect_Lubricated",
-			NICE_SCENT = "Beached_Effect_NiceScent", // shower with soap
+			LUBRICATED = "Beached_Lubricated",
+			NICE_SCENT = "Beached_NiceScent", // shower with soap
 			OCEAN_BREEZE = "Beached_OceanBreeze", // -5% stress/cycle, -10g Oxygen
-			PLUSHIE_MUFFIN = "Beached_Effect_PlushieMuffin",
-			PLUSHIE_PACU = "Beached_Effect_PlushiePacu",
-			PLUSHIE_PUFT = "Beached_Effect_PlushiePuft",
-			PLUSHIE_VOLE = "Beached_Effect_PlushieVole",
+			PLUSHIE_MUFFIN = "Beached_PlushieMuffin",
+			PLUSHIE_PACU = "Beached_PlushiePacu",
+			PLUSHIE_PUFT = "Beached_PlushiePuft",
+			PLUSHIE_VOLE = "Beached_PlushieVole",
 			POFF_CLEANEDTASTEBUDS = "Beached_PoffCleanedTasteBuds",
 			POFF_HELIUM = "Beached_PoffHelium",
 			POFFMOUTH_RECOVERY = "Beached_PoffMouth_Recovery",
-			SANDBOX = "Beached_Effect_Sandbox",
+			RECENTLY_PRODUCED_LUBRICANT = "Beached_Recently_Produced_Lubricant",
+			SANDBOX = "Beached_Sandbox",
 			SANDBOX_RECENT = "Beached_Effect_RecentlySandbox",
 			SCARED = "Beached_Scared", // +10% Stress/cycle, +5% Bladder delta
 			SCARED_SIREN = "Beached_Scared_Siren", // +10% Stress/cycle, +5% Bladder delta
 			SUBMERGED_IN_MUCUS = "Beached_SubmergedInMucus",
 			UNSAVORY_MEAL = "Beached_Unsavory_Meal",
+			SUPER_ALLERGY_MED = "Beached_SuperAllergeMed",
 			WISHING_STAR = "Beached_WishingStar"; // applied when they see shooting stars
 
 		public class VANILLA
@@ -48,6 +51,12 @@
 			var airConsumptionRate = Db.Get().Attributes.AirConsumptionRate.Id;
 			var morale = Db.Get().Attributes.QualityOfLife.Id;
 
+			//var histamineSuppression = set.effects.Get("HistamineSuppression");
+
+			new EffectBuilder(SUPER_ALLERGY_MED, CONSTS.CYCLE_LENGTH * 7f, false)
+				.HideInUI()
+				.Add(set);
+
 			new EffectBuilder(SANDBOX, 2370, false)
 				.Modifier(Db.Get().Attributes.QualityOfLife.Id, 2, false)
 				.HideInUI()
@@ -61,8 +70,18 @@
 			new EffectBuilder(FLUMMOXED, 200, false)
 				.Add(set);
 
+			new EffectBuilder(RECENTLY_PRODUCED_LUBRICANT, 10f, false)
+				.Modifier(BAmounts.Mucus.deltaAttribute.Id, 1, true)
+				.HideInUI()
+				.Add(set);
+
 			new EffectBuilder(NICE_SCENT, CONSTS.CYCLE_LENGTH, false)
 				.Modifier(morale, 2, false)
+				.Add(set);
+
+			new EffectBuilder(COMFORTABLE, 0, false)
+				.Modifier(stressDelta, -5f / CONSTS.CYCLE_LENGTH)
+				.Modifier(morale, 6, false)
 				.Add(set);
 
 			new EffectBuilder(LUBRICATED, PERSISTENT, false)

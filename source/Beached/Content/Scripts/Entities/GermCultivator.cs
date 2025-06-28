@@ -7,7 +7,7 @@ namespace Beached.Content.Scripts.Entities
 {
 	public class GermCultivator : KMonoBehaviour, ISim200ms
 	{
-		[MyCmpReq] KSelectable kSelectable;
+		[MyCmpReq] private KSelectable kSelectable;
 
 		[SerializeField] public string germ;
 		[SerializeField] public float rate;
@@ -42,7 +42,7 @@ namespace Beached.Content.Scripts.Entities
 
 		public void Sim200ms(float dt)
 		{
-			bool isCultivatingAnything = false;
+			var isCultivatingAnything = false;
 			foreach (var cell in targetCells)
 			{
 				var diseaseOnMe = Grid.DiseaseIdx[cell];

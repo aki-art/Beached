@@ -13,6 +13,7 @@
 		<Publicised>true</Publicised>
 		<CopyFiles>true</CopyFiles>
 		<DebugType>Portable</DebugType>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<!-- General Package Properties -->
@@ -31,7 +32,6 @@
 		<SupportedContent>ALL</SupportedContent>
 		<MinimumSupportedBuild>486499</MinimumSupportedBuild>
 		<APIVersion>2</APIVersion>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 	
 	<ItemGroup>
@@ -133,6 +133,10 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="WorldGen\ComplexFeatures\" />
 	</ItemGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

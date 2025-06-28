@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.Defs.Foods;
+using Beached.Content.Defs.Items;
+using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using TUNING;
@@ -7,11 +9,51 @@ namespace Beached.Content
 {
 	public class BTags
 	{
+		public static class Groups
+		{
+			public static Tag[] jellies =
+			[
+				JellyConfig.ID
+			];
+
+			public static Tag[] mosses =
+			[
+				Elements.moss.CreateTag(),
+				Elements.fireMoss.CreateTag()
+			];
+
+			public static Tag[] grains =
+			[
+				ColdWheatConfig.SEED_ID,
+				FernFoodConfig.ID
+			];
+
+			public static Tag[] elastomers =
+			[
+				Elements.mucus.CreateTag(),
+				SimHashes.Petroleum.CreateTag()
+			];
+
+			public static Tag[] sulfurs =
+			[
+				SulfurGlandConfig.ID,
+				SimHashes.Sulfur.CreateTag()
+			];
+
+			public static float[] sulfurAmounts =
+			[
+				1f,
+				5f
+			];
+		}
+
 		public static readonly Tag
 			// ======= The ones potentially interesting for other mods ===========
 			aquaticSeed = TagManager.Create("Beached_AquaticSeed"),
 			// any buildig where foods are queued. meats will be scanned here, and Chef Makis can operate them
 			cookingStation = TagManager.Create("Beached_CookingStation"),
+			// triggers comfort seeker trait morale bonus when on a clothing item
+			comfortableClothing = TagManager.Create("Beached_ComfortableCooking"),
 			// add this to a creature to ignore electricity
 			electricInvulnerable = TagManager.Create("Beached_ElectricInvulnerable"),
 			// "eggs" Karacoos will consider an egg, but really aren't (infertile egg, egg artifact, etc.)
@@ -42,6 +84,9 @@ namespace Beached.Content
 			soaped = TagManager.Create("Beached_Soaped"),
 			underWater = TagManager.Create("Beached_UnderWater"),
 			crystalCluster = TagManager.Create("Beached_CrystalCluster"),
+			userNamedCritter = TagManager.Create("Beached_UserNamedCritter"),
+			dnaAnalyzable = TagManager.Create("Beached_DNAAnalyzable"),
+			markedForDNAAnalysis = TagManager.Create("Beached_MarkedForDNAAnalysis"),
 
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),
@@ -91,6 +136,7 @@ namespace Beached.Content
 				wantsToSitOnEgg = TagManager.Create("Beached_Behavior_WantsToSitOnEgg"),
 				// muffins will not hunt critters with this tag, regardless of collar settings
 				doNotTargetMeByCarnivores = TagManager.Create("Beached_DoNotTargetMeByCarnivores"),
+				muffinThreat = TagManager.Create("Beached_MuffinThreat"),
 
 				beingMined = TagManager.Create("Beached_BeingMined"),
 				grownShell = TagManager.Create("Beached_GrownShell");
@@ -165,6 +211,7 @@ namespace Beached.Content
 			Filterable.filterableCategories.Add(coralFrag);
 			Filterable.filterableCategories.Add(aquaticSeed);
 
+			GameTags.Fabrics = GameTags.Fabrics.AddToArray(Elements.fuzz.CreateTag());
 
 			//GameTags.AllCategories.Add(PalmLeafConfig.ID);
 			//GameTags.AllCategories.Add(BioFuelConfig.ID);

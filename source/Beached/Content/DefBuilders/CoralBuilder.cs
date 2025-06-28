@@ -30,15 +30,7 @@ namespace Beached.Content.DefBuilders
 		private List<Tag> seedTags;
 		private int seedSortOrder = 0;
 		private bool harvestable = false;
-
-		private static readonly SimHashes[] waters =
-			[
-				SimHashes.Water,
-				SimHashes.SaltWater,
-				SimHashes.Brine,
-				SimHashes.DirtyWater,
-				Elements.murkyBrine
-			];
+		private float defaultTemperaure = 293f;
 
 		public CoralBuilder(string ID, string animName)
 		{
@@ -48,7 +40,7 @@ namespace Beached.Content.DefBuilders
 			this.animName = animName;
 			initialAnim = "idle_grown";
 			decor = TUNING.DECOR.NONE;
-			safeElements = waters;
+			safeElements = CoralTemplate.ALL_WATERS;
 			name = Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.NAME");
 			description = Strings.Get($"STRINGS.CREATURES.SPECIES.{ID.ToUpperInvariant()}.DESC");
 		}
@@ -130,6 +122,12 @@ namespace Beached.Content.DefBuilders
 			return this;
 		}
 
+		public CoralBuilder DefaultTemperatureCelsius(float temp)
+		{
+			defaultTemperaure = MiscUtil.CelsiusToKelvin(temp);
+			return this;
+		}
+
 		public CoralBuilder Harvestable()
 		{
 			harvestable = true;
@@ -172,7 +170,8 @@ namespace Beached.Content.DefBuilders
 				width,
 				height,
 				decor,
-				additionalTags: tags);
+				additionalTags: tags,
+				defaultTemperature: defaultTemperaure);
 
 			EntityTemplates.ExtendEntityToBasicPlant(
 				prefab,

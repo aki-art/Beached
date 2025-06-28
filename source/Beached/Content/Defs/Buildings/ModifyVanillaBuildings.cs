@@ -22,6 +22,7 @@ namespace Beached.Content.Defs.Buildings
 			AddPOIUnlockable(IceCooledFanConfig.ID);
 			AddPOIUnlockable(IceMachineConfig.ID);
 			AddPOIUnlockable(BeachChairConfig.ID);
+			AddPOIUnlockable(WaterCoolerConfig.ID);
 		}
 
 		private static void FarmTile()
@@ -117,8 +118,6 @@ namespace Beached.Content.Defs.Buildings
 		// deliverable mucus for increased output/work speed/opening speed
 		private static void ConfigureLubricatableBuildingPrefabs()
 		{
-			// TODO: buildings from Chemical Processing
-
 			// generators
 			AddTimerLubricatable(HydrogenGeneratorConfig.ID);
 			AddTimerLubricatable(ManualGeneratorConfig.ID);

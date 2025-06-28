@@ -103,7 +103,14 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static bool CanProduceLubricant(Instance smi)
 		{
+			if (smi.effects.HasEffect(BEffects.RECENTLY_PRODUCED_LUBRICANT))
+				return false;
+
+			if (smi.mucusAmount.value < 5f)
+				return false;
+
 			var cell = Grid.CellBelow(Grid.PosToCell(smi));
+
 			return Grid.IsValidCell(cell) && Grid.IsSolidCell(cell);
 		}
 
@@ -111,6 +118,7 @@ namespace Beached.Content.Scripts.Entities.AI
 		{
 			public State damp;
 			public State dry;
+			public State resting;
 			public State desiccating;
 			public State secreting;
 		}
@@ -122,6 +130,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static void Moisturize(Instance smi)
 		{
+			Log.Debug("moisturizing");
 			smi.moisture.SetValue(100f);
 			smi.timeUntilDeath = smi.maxTimeUntilDeath;
 			smi.navigator.defaultSpeed = smi.originalSpeed;
@@ -131,12 +140,23 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static bool IsInLiquid(Instance smi, float _) => Grid.IsSubstantialLiquid(Grid.PosToCell(smi), 0.05f);
 
-		public class Def : BaseDef//, IGameObjectEffectDescriptor
+		public class Def : BaseDef, ICodexEntry//, IGameObjectEffectDescriptor
 		{
 			public float defaultDryRate = -30f / CONSTS.CYCLE_LENGTH;
 			public float defaultMucusRate = 30f / CONSTS.CYCLE_LENGTH;
 			public SimHashes lubricant;
 			public float lubricantTemperatureKelvin;
+
+			public void AddCodexEntries(CodexEntryGenerator_Elements.ElementEntryContext context, KPrefabID prefab)
+			{
+				var conversionEntry = CodexUtil.SimpleConversionBase(context, prefab.gameObject);
+				var use = CodexUtil.UsageMassPerCycle(lubricant.CreateTag(), defaultMucusRate);
+
+				conversionEntry.outSet.Add(use);
+				context.madeMap.Add(lubricant.CreateTag(), conversionEntry);
+			}
+
+			public int CodexEntrySortOrder() => 15;
 
 			public override void Configure(GameObject prefab)
 			{
@@ -152,6 +172,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			public AttributeModifier baseMoistureModifier;
 			public float originalSpeed;
 			public Navigator navigator;
+			[MyCmpReq] public Effects effects;
 			public float hasBeenDryFor;
 			public float timeUntilDeath;
 			public float maxTimeUntilDeath = 60f;
@@ -208,9 +229,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			{
 				var mass = mucusAmount.value;
 
-				Beached.Log.Debug("mass: " + mass);
-
-				if (mass > 0)
+				if (mass > 0f)
 				{
 					BubbleManager.instance.SpawnBubble(
 						transform.GetPosition(),
@@ -220,6 +239,7 @@ namespace Beached.Content.Scripts.Entities.AI
 						def.lubricantTemperatureKelvin);
 
 					Trigger(ModHashes.producedLubricant);
+					effects.Add(BEffects.RECENTLY_PRODUCED_LUBRICANT, true);
 
 					mucusAmount.value = 0;
 				}

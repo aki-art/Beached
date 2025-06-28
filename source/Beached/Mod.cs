@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using static Beached.Patches.DebugPatches.DebugPatches;
 
 namespace Beached
 {
@@ -41,6 +42,11 @@ namespace Beached
 
 		public override void OnLoad(Harmony harmony)
 		{
+
+			Mod.harmony = harmony;
+			Log.Debug($"loading assembly from {Path.Combine(Mod.folder, "lib", "BeachedUnityBridge.dll")}");
+			Assembly.LoadFrom(Path.Combine(folder, "lib", "BeachedUnityBridge.dll"));
+
 			base.OnLoad(harmony);
 
 			BTags.OnModLoad();
@@ -133,6 +139,53 @@ namespace Beached
 			Log.Debug($"Processed attributes in {stopWatch.ElapsedMilliseconds} ms");
 		}
 
+		public static bool beginLogging = false;
+		private static Harmony harmony;
+
+		private static void PrefixLog()
+		{
+			try
+			{
+				var stackTrace = new StackTrace();
+				Log.Debug(stackTrace.GetFrame(1).GetMethod().FullDescription());
+			}
+			catch (Exception e)
+			{
+				Log.Debug($"Could not log {e.StackTrace} {e.Message}");
+			}
+		}
+
+
+		//[HarmonyPatch(typeof(MainMenu), "OnPrefabInit")]
+		public class MinionStartingStats_GenerateStats_Patch
+		{
+			public static void Prefix()
+			{
+				if (beginLogging)
+					return;
+
+				beginLogging = true;
+
+				var types2 = Assembly.GetExecutingAssembly().GetTypes();
+				var prefix = new HarmonyMethod(AccessTools.DeclaredMethod(typeof(Mod), nameof(PrefixLog)));
+
+				foreach (var type in types2)
+				{
+
+					var methods = type.GetMethods();
+					foreach (var method in methods)
+					{
+						try
+						{
+							if (method.Name != "OnLoad" && method.Name != "PrefixLog" && method.Name != "Debug" && method.DeclaringType != typeof(Debug_Assert_Patch))
+								harmony.Patch(method, prefix);
+						}
+						catch { }
+					}
+				}
+
+			}
+		}
 
 		public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods)
 		{

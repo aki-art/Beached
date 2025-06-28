@@ -80,6 +80,13 @@ namespace Beached
 					public static LocString EFFECT = $"Converts organics into {Link("Bio-Fuel", Elements.bioFuel)}, which can be burnt in a {Link("Bio-Fuel Generator", BioFuelGeneratorConfig.ID)}.";
 				}
 
+				public class BEACHED_CRYSTALSYNTHETIZER
+				{
+					public static LocString NAME = Link("Crystal Synthetizer", CrystalSynthetizerConfig.ID);
+					public static LocString DESC = "Allows fabrication of Crystal Clusters, which can be placed in a Crystal Grower for renewable resources.";
+					public static LocString EFFECTS = "A Duplicant with the Crystallograpy skill is required to operte this building.";
+				}
+
 
 				public class BEACHED_COLLARDISPENSER
 				{
@@ -90,9 +97,9 @@ namespace Beached
 
 				public class BEACHED_GEMCUTTER
 				{
-					public static LocString NAME = Link("Get Cutter", "Beached_GemCutter");
-					public static LocString DESC = "Cuts and shapes gemstones and other materials into jewellery.";
-					public static LocString EFFECTS = "Fabricates equippable jewellery from raw materials.";
+					public static LocString NAME = Link("Gem Cutter", GemCutterConfig.ID);
+					public static LocString DESC = "Cuts and shapes gemstones and other materials into jewelry.";
+					public static LocString EFFECTS = "Fabricates equippable jewelry from raw materials.";
 				}
 
 				public class BEACHED_DECONSTRUCTABLEROCKETTILE
@@ -250,6 +257,13 @@ namespace Beached
 					public static LocString EFFECT = "TRANSLATION NOT NEEDED - gets copied from regular fridge";
 				}
 
+				public class BEACHED_MIRROR
+				{
+					public static LocString NAME = Link("Mirror", MirrorConfig.ID);
+					public static LocString DESC = "A reflective surface with a quant frame. Tricks most critters into thinking their available space is larger.";
+					public static LocString EFFECT = "Halves the space requirement of critters. Only one mirror can affect critters, the effect does not stack.";
+				}
+
 				public class BEACHED_MOSSBED
 				{
 					public static LocString NAME = Link("Moss Frame", MossBedConfig.ID);
@@ -257,7 +271,7 @@ namespace Beached
 					public static LocString EFFECT = "Natural tiles can be used as walls and floors or for wild planting.";
 				}
 
-				public class BEACHED_MUDSTOMER
+				public class BEACHED_MUDSTOMPER
 				{
 					public static LocString NAME = Link("Stomper", MudStomperConfig.ID);
 					public static LocString DESC = "By repeated vertical motion of external duplicant peripherals it is possible to process several materials into one unified mush.";
@@ -334,6 +348,15 @@ namespace Beached
 					public static LocString NAME = Link("Spinner", SpinnerConfig.ID);
 					public static LocString DESC = $"Spinners use centrifugal force to spin various materials into fibers.";
 					public static LocString EFFECT = "Produces fibers from solids." +
+						"\n" +
+						"\nDuplicants will not fabricate items unless recipes are queued.";
+				}
+
+				public class BEACHED_VULCANIZER
+				{
+					public static LocString NAME = Link("Vulcanizer", VulcanizerConfig.ID);
+					public static LocString DESC = $"Hardens elastomers into {Link("Rubber", Elements.rubber)} by process of vulcanization..";
+					public static LocString EFFECT = "Produces Rubber." +
 						"\n" +
 						"\nDuplicants will not fabricate items unless recipes are queued.";
 				}

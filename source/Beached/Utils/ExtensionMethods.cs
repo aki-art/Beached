@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.ClassExtensions;
+﻿using Beached.Content.Scripts.Buildings;
+using Beached.Content.Scripts.ClassExtensions;
 using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using Klei.AI;
@@ -10,6 +11,33 @@ namespace Beached.Utils
 {
 	public static class ExtensionMethods
 	{
+		public static List<InterfaceType> GetDefs<InterfaceType>(this Component component) where InterfaceType : class
+		{
+			return component.gameObject.GetDefs<InterfaceType>();
+		}
+
+		public static List<InterfaceType> GetDefs<InterfaceType>(this GameObject gameObject) where InterfaceType : class
+		{
+			List<InterfaceType> result = [];
+
+			if (gameObject.TryGetComponent(out StateMachineController smc))
+			{
+				if (!smc.defHandle.IsValid())
+					return result;
+
+				foreach (var def in smc.cmpdef.defs)
+				{
+					if (def is InterfaceType interfaceDef)
+					{
+						result ??= [];
+						result.Add(interfaceDef);
+					}
+				}
+			}
+
+			return result;
+		}
+
 		public static void ConfigureCelsius(this TemperatureVulnerable instance, float tempWarningLow, float tempLethalLow, float tempWarningHigh, float tempLethalHigh)
 		{
 			instance.Configure(
@@ -19,16 +47,11 @@ namespace Beached.Utils
 				MiscUtil.CelsiusToKelvin(tempLethalHigh));
 		}
 
-		public static ChoreTable.Builder AddPoopStates(this ChoreTable.Builder builder)
-		{
-			return builder.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP));
-		}
-
 		public static bool TryGetReference<SpecifiedType>(this HierarchyReferences hierarchyReferences, string name, out SpecifiedType component) where SpecifiedType : Component
 		{
 			component = null;
 			var references = hierarchyReferences.references;
-			for (int i = 0; i < references.Length; i++)
+			for (var i = 0; i < references.Length; i++)
 			{
 				var elementReference = references[i];
 				if (elementReference.Name == name && elementReference.behaviour is SpecifiedType type)
@@ -165,6 +188,29 @@ namespace Beached.Utils
 		{
 			if (cavityInfoExtensions.TryGetValue(cavity, out var cavityInfoExtension))
 				cavityInfoExtension.collarDispensers.Remove(collarDispenser);
+		}
+
+		public static void AddMirror(this CavityInfo cavity, Mirror mirror)
+		{
+			var mirrors = cavityInfoExtensions
+				.GetOrAdd(cavity, () => new CavityInfoExtension(cavity))
+				.mirrors;
+
+			if (mirrors.Contains(mirror))
+				return;
+
+			mirrors.Add(mirror);
+		}
+
+		public static void RemoveMirror(this CavityInfo cavity, Mirror mirror)
+		{
+			if (cavityInfoExtensions.TryGetValue(cavity, out var cavityInfoExtension))
+				cavityInfoExtension.mirrors.Remove(mirror);
+		}
+
+		public static int GetMirrorCount(this CavityInfo cavity)
+		{
+			return cavityInfoExtensions.TryGetValue(cavity, out var extension) ? extension.mirrors.Count : 0;
 		}
 
 		public static List<KPrefabID> GetNaturePOIs(this CavityInfo cavity)

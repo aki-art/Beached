@@ -1,9 +1,9 @@
 elements:
     - elementId: Beached_Mucus
       name: Mucus
-      descriptionText: Slimy Mucus produced by a Slickshell. This viscous material is primarily composed of oils and polysaccharide. It can be applied to most mechanical machineries for a small boost in efficiency.
+      descriptionText: This viscous material is primarily composed of oils and polysaccharides. It can be applied to most mechanical machineries for a small boost in efficiency, and is useful in <link=\"BEACHEDRUBBER\">Rubber</link> production.
       color: &color aacdaa
-      uiColor: &uiColor 455242
+      uiColor: &uiColor 8eae8e
       maxMass: 100
       rotAtmosphereQuality: Contaminating
       eyeIrritationStrength: 0
@@ -32,7 +32,8 @@ elements:
       state: Liquid
       tags:
         - Slippery
-        # - LubricatingOil
+        - LubricatingOil
+        - UnrefinedOil
       duplicantEffects:
         submergedIn:
           id: Beached_SubmergedInMucus

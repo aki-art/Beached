@@ -1,0 +1,36 @@
+tags:
+  - Wet
+  - AllowExceedNodeBorders
+shape: ShortWide
+borders:
+  - 1
+  - 1
+blobSize:
+  min: 7
+  max: 12
+ElementChoiceGroups:
+  RoomCenterElements:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Perplexium
+        weight: 1.0
+      - element: Ethanol
+        weight: 3.0
+  RoomBorderChoices0:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: Beached_Corallium
+        weight: 1
+      - element: Beached_Perplexium
+        weight: 0.5
+      - element: CrossRoads_Coquina
+        weight: 0.3
+      - element: Beached_Pearl
+        weight: 0.1
+  RoomBorderChoices1:
+    selectionMethod: HorizontalSlice
+    choices:
+      - element: CrossRoads_Coquina
+        weight: 2.0
+      - element: Beached_Corallium
+        weight: 0.3

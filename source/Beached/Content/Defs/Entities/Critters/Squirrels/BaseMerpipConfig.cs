@@ -11,6 +11,7 @@ namespace Beached.Content.Defs.Entities.Critters.Squirrels
 		{
 			return builder
 				.TemperatureCelsius(0, 10, 35, 60)
+				.Drops(MeatConfig.ID)
 				.Size(1, 1)
 				.Mass(100f)
 				.Trappable()
@@ -18,7 +19,7 @@ namespace Beached.Content.Defs.Entities.Critters.Squirrels
 				.Swimmer()
 				//.Condo(UnderwaterCritterCondoConfig.ID, false)
 				.Sorting(CREATURES.SORTING.CRITTER_ORDER[SquirrelConfig.ID])
-				.MaxPenSize(CREATURES.SPACE_REQUIREMENTS.TIER3)
+				.CritterDensityTolerance(CREATURES.SPACE_REQUIREMENTS.TIER3)
 				.Navigator(CritterBuilder.NAVIGATION.SWIMMER, NavType.Swim, 2f, 16)
 				.Brain(GameTags.Creatures.Species.SquirrelSpecies)
 					.Configure(ConfigureAI)

@@ -27,7 +27,6 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static void Secrete(Instance smi)
 		{
-			Beached.Log.Debug("secreting");
 			smi.position = smi.transform.GetPosition();
 			smi.GetSMI<MoistureMonitor.Instance>().ProduceLubricant();
 		}

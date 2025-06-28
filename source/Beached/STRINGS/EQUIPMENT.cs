@@ -9,6 +9,19 @@ namespace Beached
 		{
 			public class PREFABS
 			{
+				public class BEACHED_BEACHSHIRT
+				{
+					public static LocString NAME = Link("Beach Shirt", BeachShirtConfig.ID);
+					public static LocString GENERICNAME = "Beach Shirts";
+					public static LocString DESCRIPTION = "A clothing item that is cool in both ways.";
+
+					public static class FACADES
+					{
+						public static LocString GREEN = "Green Beach Shirt";
+						public static LocString GREEN_DESCRIPTION = "desc";
+					}
+				}
+
 				public class BEACHED_EQUIPMENT_RUBBERBOOTS
 				{
 					public static LocString NAME = Link("Rubber Boots", RubberBootsConfig.ID);

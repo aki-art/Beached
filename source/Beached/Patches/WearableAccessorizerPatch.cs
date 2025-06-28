@@ -12,19 +12,23 @@ namespace Beached.Patches
 		[HarmonyPatch(typeof(WearableAccessorizer), "ApplyEquipment")]
 		public static class WearableAccessorizer_ApplyEquipment_Patch
 		{
+			private static readonly Dictionary<string, WearableAccessorizer.WearableType> wearableTypes = new()
+			{
+				{ BAssignableSlots.JEWELLERY_ID, BAccessories.WearableTypes.necklace },
+				{ BAssignableSlots.SHOES_ID, BAccessories.WearableTypes.shoes },
+			};
+
 			public static void Postfix(WearableAccessorizer __instance, Equippable equippable, KAnimFile animFile)
 			{
-				if (equippable != null && equippable.def.Slot == BAssignableSlots.JEWELLERY_ID)
+				if (equippable != null && wearableTypes.TryGetValue(equippable.def.Slot, out WearableAccessorizer.WearableType type))
 				{
-					var necklace = BAccessories.WearableTypes.necklace;
-
-					if (__instance.wearables.ContainsKey(necklace))
+					if (__instance.wearables.ContainsKey(type))
 					{
-						var wearable = __instance.wearables[necklace];
+						WearableAccessorizer.Wearable wearable = __instance.wearables[type];
 						__instance.RemoveAnimBuild(wearable.BuildAnims[0], wearable.buildOverridePriority);
 					}
 
-					__instance.wearables[necklace] = new WearableAccessorizer.Wearable(animFile, equippable.def.BuildOverridePriority);
+					__instance.wearables[type] = new WearableAccessorizer.Wearable(animFile, equippable.def.BuildOverridePriority);
 
 					__instance.ApplyWearable();
 				}
@@ -36,12 +40,12 @@ namespace Beached.Patches
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
 			{
-				var codes = orig.ToList();
+				List<CodeInstruction> codes = orig.ToList();
 
-				var m_GetValues = AccessTools.Method(typeof(Enum), "GetValues", [typeof(Type)]);
+				System.Reflection.MethodInfo m_GetValues = AccessTools.Method(typeof(Enum), "GetValues", [typeof(Type)]);
 
 				// find injection point
-				var index = codes.FindIndex(ci => ci.Calls(m_GetValues));
+				int index = codes.FindIndex(ci => ci.Calls(m_GetValues));
 
 				if (index == -1)
 				{
@@ -49,19 +53,13 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				var m_AddToEnumValues = AccessTools.DeclaredMethod(typeof(WearableAccessorizer_ApplyWearable_Patch), nameof(AddToEnumValues));
-
-				if (m_AddToEnumValues == null)
-					Log.Warning("method is null");
-
+				System.Reflection.MethodInfo m_AddToEnumValues = AccessTools.DeclaredMethod(typeof(WearableAccessorizer_ApplyWearable_Patch), nameof(AddToEnumValues));
 
 				// inject right after the found index
 				codes.InsertRange(index + 1,
 				[
 					new CodeInstruction(OpCodes.Call, m_AddToEnumValues)
 				]);
-
-				FUtility.Log.PrintInstructions(codes);
 
 				return codes;
 			}
@@ -71,6 +69,7 @@ namespace Beached.Patches
 				return enums
 					.Cast<WearableAccessorizer.WearableType>()
 					.AddItem(BAccessories.WearableTypes.necklace)
+					.AddItem(BAccessories.WearableTypes.shoes)
 					.ToArray();
 			}
 		}

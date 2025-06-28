@@ -1,0 +1,9 @@
+type: Moonlet:complexFeatures/Diamond
+data:
+  Size:
+    min: 2
+    max: 5
+  Elements:
+    selectionMethod: WeightedResample
+    choices:
+      - element: Diamond

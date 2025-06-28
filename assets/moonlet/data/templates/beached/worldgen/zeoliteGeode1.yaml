@@ -5,273 +5,312 @@ info:
   min:
     X: -4
     Y: -5
-  area: 99
+  area: 98
 cells:
 - element: Katairite
   mass: 500
   temperature: 300.149994
-  location_x: -4
-  location_y: -2
+  location_x: -2
+  location_y: -4
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: -1
+  location_y: -4
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 299.602783
-  location_x: -3
-  location_y: -2
+  temperature: 298.689667
+  location_y: -4
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 297.456451
+  temperature: 298.120392
+  location_x: 1
+  location_y: -4
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: 2
+  location_y: -4
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: 3
+  location_y: -4
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: 4
+  location_y: -4
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: 5
+  location_y: -4
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 297.723358
+  location_x: -2
+  location_y: -3
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 295.450409
+  location_x: -1
+  location_y: -3
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 296.374939
+  location_y: -3
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 295.374115
+  location_x: 1
+  location_y: -3
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 294.124207
+  location_x: 2
+  location_y: -3
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 294.867371
+  location_x: 3
+  location_y: -3
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 296.672882
+  location_x: 4
+  location_y: -3
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: 5
+  location_y: -3
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 296.244934
   location_x: -2
   location_y: -2
 - element: Beached_SulfurousWater
   mass: 1200.01392
-  temperature: 283.099121
+  temperature: 283.885864
   location_x: -1
   location_y: -2
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 292.811066
+  temperature: 290.315033
   location_y: -2
 - element: Beached_SulfurousWater
   mass: 1200.01025
-  temperature: 282.656036
+  temperature: 283.085846
   location_x: 1
   location_y: -2
 - element: Beached_SulfurousWater
   mass: 1200.01086
-  temperature: 282.422699
+  temperature: 282.715179
   location_x: 2
   location_y: -2
 - element: Beached_SulfurousWater
   mass: 1200.01135
-  temperature: 282.793701
+  temperature: 283.486328
   location_x: 3
   location_y: -2
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 295.309418
+  temperature: 293.579071
   location_x: 4
   location_y: -2
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: -4
-  location_y: -1
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 299.60614
-  location_x: -3
-  location_y: -1
+  temperature: 297.039398
+  location_x: 5
+  location_y: -2
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 297.242218
+  temperature: 295.805023
   location_x: -2
   location_y: -1
 - element: Beached_SulfurousWater
   mass: 75.2136765
-  temperature: 284.040649
+  temperature: 284.88623
   location_x: -1
   location_y: -1
 - element: Beached_SulfurousWater
   mass: 75.2472916
-  temperature: 284.184692
+  temperature: 284.736786
   location_y: -1
 - element: Beached_SulfurousWater
   mass: 75.2812805
-  temperature: 283.211029
+  temperature: 284.22998
   location_x: 1
   location_y: -1
 - element: Beached_SulfurousWater
   mass: 75.3047104
-  temperature: 283.04187
+  temperature: 283.452759
   location_x: 2
   location_y: -1
 - element: Beached_SulfurousWater
   mass: 75.338707
-  temperature: 283.773071
+  temperature: 284.237457
   location_x: 3
   location_y: -1
 - element: Beached_SulfurousWater
   mass: 75.3723145
-  temperature: 284.672424
+  temperature: 285.066986
   location_x: 4
   location_y: -1
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: -4
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 300.013733
-  location_x: -3
-- element: ChlorineGas
-  mass: 0.5327999
-  temperature: 298.555847
-  location_x: -2
-- element: ChlorineGas
-  mass: 0.532799721
-  temperature: 291.984619
-  location_x: -1
+  temperature: 296.039978
+  location_x: 5
+  location_y: -1
 - element: ChlorineGas
   mass: 0.53279984
-  temperature: 286.508423
+  temperature: 297.656647
+  location_x: -2
+- element: ChlorineGas
+  mass: 0.53279984
+  temperature: 289.932922
+  location_x: -1
+- element: ChlorineGas
+  mass: 0.532800019
+  temperature: 286.212463
+- element: ChlorineGas
+  mass: 0.532800078
+  temperature: 286.36554
+  location_x: 1
+- element: ChlorineGas
+  mass: 0.53279984
+  temperature: 286.383667
+  location_x: 2
 - element: ChlorineGas
   mass: 0.532799959
-  temperature: 285.394867
-  location_x: 1
-- element: ChlorineGas
-  mass: 0.5327999
-  temperature: 286.237152
-  location_x: 2
-- element: ChlorineGas
-  mass: 0.532800138
-  temperature: 289.649384
+  temperature: 287.162109
   location_x: 3
 - element: ChlorineGas
-  mass: 0.532800138
-  temperature: 296.440491
+  mass: 0.5327999
+  temperature: 295.911743
   location_x: 4
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: -4
-  location_y: 1
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 300.066406
-  location_x: -3
-  location_y: 1
+  temperature: 298.501862
+  location_x: 5
 - element: ChlorineGas
-  mass: 0.532799721
-  temperature: 299.282318
+  mass: 0.532799959
+  temperature: 299.090332
   location_x: -2
-  location_y: 1
-- element: ChlorineGas
-  mass: 0.532799721
-  temperature: 297.660889
-  location_x: -1
-  location_y: 1
-- element: ChlorineGas
-  mass: 0.53279984
-  temperature: 298.063202
-  location_y: 1
-- element: ChlorineGas
-  mass: 0.532800078
-  temperature: 297.026245
-  location_x: 1
-  location_y: 1
-- element: ChlorineGas
-  mass: 0.532800078
-  temperature: 298.443207
-  location_x: 2
   location_y: 1
 - element: ChlorineGas
   mass: 0.532799959
-  temperature: 296.692963
-  location_x: 3
+  temperature: 296.5914
+  location_x: -1
   location_y: 1
 - element: ChlorineGas
   mass: 0.532800078
-  temperature: 299.274689
+  temperature: 295.557495
+  location_y: 1
+- element: ChlorineGas
+  mass: 0.53279984
+  temperature: 297.65799
+  location_x: 1
+  location_y: 1
+- element: ChlorineGas
+  mass: 0.5327999
+  temperature: 297.016205
+  location_x: 2
+  location_y: 1
+- element: ChlorineGas
+  mass: 0.53279984
+  temperature: 297.444733
+  location_x: 3
+  location_y: 1
+- element: ChlorineGas
+  mass: 0.53279984
+  temperature: 298.661804
   location_x: 4
   location_y: 1
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: -4
-  location_y: 2
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 299.866333
-  location_x: -3
-  location_y: 2
+  temperature: 299.685883
+  location_x: 5
+  location_y: 1
 - element: ChlorineGas
-  mass: 0.532799661
-  temperature: 299.326019
+  mass: 0.532800019
+  temperature: 299.129089
   location_x: -2
-  location_y: 2
-- element: ChlorineGas
-  mass: 0.53279984
-  temperature: 298.262787
-  location_x: -1
-  location_y: 2
-- element: ChlorineGas
-  mass: 0.5327999
-  temperature: 299.123657
-  location_y: 2
-- element: ChlorineGas
-  mass: 0.53279984
-  temperature: 298.864014
-  location_x: 1
-  location_y: 2
-- element: ChlorineGas
-  mass: 0.5327999
-  temperature: 299.227631
-  location_x: 2
-  location_y: 2
-- element: ChlorineGas
-  mass: 0.532800138
-  temperature: 299.363708
-  location_x: 3
   location_y: 2
 - element: ChlorineGas
   mass: 0.532799959
-  temperature: 299.215881
+  temperature: 298.236908
+  location_x: -1
+  location_y: 2
+- element: ChlorineGas
+  mass: 0.5327999
+  temperature: 298.839966
+  location_y: 2
+- element: ChlorineGas
+  mass: 0.532799959
+  temperature: 299.059113
+  location_x: 1
+  location_y: 2
+- element: ChlorineGas
+  mass: 0.532799959
+  temperature: 299.177155
+  location_x: 2
+  location_y: 2
+- element: ChlorineGas
+  mass: 0.5327999
+  temperature: 298.73703
+  location_x: 3
+  location_y: 2
+- element: ChlorineGas
+  mass: 0.5327999
+  temperature: 299.266632
   location_x: 4
   location_y: 2
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: -4
-  location_y: 3
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 299.522003
-  location_x: -3
-  location_y: 3
+  temperature: 300.130981
+  location_x: 5
+  location_y: 2
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 300.145172
+  temperature: 300.139557
   location_x: -2
   location_y: 3
 - element: ChlorineGas
-  mass: 0.532799721
-  temperature: 299.185638
+  mass: 0.53279984
+  temperature: 299.240479
   location_x: -1
   location_y: 3
 - element: ChlorineGas
-  mass: 0.5327999
-  temperature: 299.192505
+  mass: 0.53279984
+  temperature: 299.026733
   location_y: 3
 - element: ChlorineGas
   mass: 0.5327999
-  temperature: 299.178467
+  temperature: 299.058502
   location_x: 1
   location_y: 3
 - element: ChlorineGas
-  mass: 0.532800078
-  temperature: 299.255066
+  mass: 0.53279984
+  temperature: 299.158447
   location_x: 2
   location_y: 3
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 300.130646
+  temperature: 300.121887
   location_x: 3
   location_y: 3
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 300.137939
+  temperature: 300.137024
   location_x: 4
   location_y: 3
 - element: Katairite
   mass: 500
-  temperature: 300.149994
-  location_x: -4
-  location_y: 4
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: -3
-  location_y: 4
+  temperature: 300.140686
+  location_x: 5
+  location_y: 3
 - element: Beached_Zeolite
   mass: 1840
   temperature: 299.618011
@@ -284,16 +323,16 @@ cells:
   location_y: 4
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 299.902466
+  temperature: 299.901733
   location_y: 4
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 299.909332
+  temperature: 299.907135
   location_x: 1
   location_y: 4
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 299.908142
+  temperature: 299.907959
   location_x: 2
   location_y: 4
 - element: Beached_Zeolite
@@ -303,188 +342,237 @@ cells:
   location_y: 4
 - element: Katairite
   mass: 500
-  temperature: 300.149994
+  temperature: 300.147919
   location_x: 4
   location_y: 4
 - element: Katairite
   mass: 500
   temperature: 300.149994
-  location_x: -2
-  location_y: -4
+  location_x: 6
+  location_y: -2
 - element: Katairite
   mass: 500
-  temperature: 300.149994
-  location_x: -1
-  location_y: -4
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 299.339355
-  location_y: -4
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 299.178772
-  location_x: 1
-  location_y: -4
+  temperature: 300.139801
+  location_x: 6
+  location_y: -1
 - element: Katairite
   mass: 500
-  temperature: 300.149994
-  location_x: 2
-  location_y: -4
+  temperature: 300.148132
+  location_x: 6
 - element: Katairite
   mass: 500
-  temperature: 300.149994
-  location_x: 3
-  location_y: -4
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 299.071686
-  location_x: -2
-  location_y: -3
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 297.210327
-  location_x: -1
-  location_y: -3
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 298.210815
-  location_y: -3
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 297.183777
-  location_x: 1
-  location_y: -3
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 296.244141
-  location_x: 2
-  location_y: -3
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 296.704468
-  location_x: 3
-  location_y: -3
+  temperature: 300.147827
+  location_x: 6
+  location_y: 1
 - element: Katairite
   mass: 500
-  temperature: 300.149994
-  location_x: -2
-  location_y: 5
+  temperature: 300.131866
+  location_x: 6
+  location_y: 2
 - element: Katairite
   mass: 500
-  temperature: 300.149994
-  location_x: -1
-  location_y: 5
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_y: 5
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 1
-  location_y: 5
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 2
-  location_y: 5
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 3
-  location_y: 5
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_y: -5
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 1
-  location_y: -5
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 4
-  location_y: -4
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 5
-  location_y: -4
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 298.509979
-  location_x: 4
-  location_y: -3
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 5
-  location_y: -3
-- element: Beached_Zeolite
-  mass: 1840
-  temperature: 298.597229
-  location_x: 5
+  temperature: 300.142609
+  location_x: -4
   location_y: -2
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 297.301147
-  location_x: 5
+  temperature: 298.742096
+  location_x: -3
+  location_y: -2
+- element: Katairite
+  mass: 500
+  temperature: 300.149841
+  location_x: -4
   location_y: -1
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 299.160004
-  location_x: 5
+  temperature: 298.721375
+  location_x: -3
+  location_y: -1
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: -4
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 300.075043
-  location_x: 5
+  temperature: 299.75592
+  location_x: -3
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: -4
   location_y: 1
 - element: Beached_Zeolite
   mass: 1840
-  temperature: 300.131348
-  location_x: 5
+  temperature: 300.038361
+  location_x: -3
+  location_y: 1
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: -4
+  location_y: 2
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 299.865356
+  location_x: -3
   location_y: 2
 - element: Katairite
   mass: 500
   temperature: 300.149994
-  location_x: 5
+  location_x: -4
   location_y: 3
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 6
-  location_y: -2
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 6
-  location_y: -1
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 6
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 6
-  location_y: 1
-- element: Katairite
-  mass: 500
-  temperature: 300.149994
-  location_x: 6
-  location_y: 2
+- element: Beached_Zeolite
+  mass: 1840
+  temperature: 299.522003
+  location_x: -3
+  location_y: 3
 - element: Katairite
   mass: 500
   temperature: 300.149994
   location_x: -3
   location_y: -3
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_y: -5
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: 1
+  location_y: -5
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: -3
+  location_y: 4
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: -2
+  location_y: 5
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: -1
+  location_y: 5
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_y: 5
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: 1
+  location_y: 5
+- element: Katairite
+  mass: 500
+  temperature: 300.149994
+  location_x: 2
+  location_y: 5
+- element: Katairite
+  mass: 500
+  temperature: 300.147034
+  location_x: 3
+  location_y: 5
 otherEntities:
-- id: Beached_ZeoliteSetPiece
+- id: Beached_ZeoliteCrystal
   location_x: 1
   location_y: 3
+  element: Beached_Zeolite
+  temperature: 293.032227
+  units: 1
+  type: Other
+  amounts:
+  - id: Beached_CrystalGrowth
+    value: 4.39999866
+  - id: Beached_CrystalGrowth
+    value: 4.39999866
+- id: Beached_ZeoliteCrystal
+  location_x: 4
+  element: Beached_Zeolite
+  temperature: 293.014496
+  units: 1
+  type: Other
+  amounts:
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+- id: Beached_ZeoliteCrystal
+  location_x: -2
+  element: Beached_Zeolite
+  temperature: 293.314301
+  units: 1
+  type: Other
+  amounts:
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+- id: Beached_ZeoliteCrystal
+  location_x: -2
+  location_y: 1
+  element: Beached_Zeolite
+  temperature: 293.040253
+  units: 1
+  type: Other
+  amounts:
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+- id: Beached_ZeoliteCrystal
+  location_x: -2
+  location_y: 2
+  element: Beached_Zeolite
+  temperature: 293.042084
+  units: 1
+  type: Other
+  amounts:
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+- id: Beached_ZeoliteCrystal
+  location_y: 3
+  element: Beached_Zeolite
+  temperature: 293.040833
+  units: 1
+  type: Other
+  amounts:
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+- id: Beached_ZeoliteCrystal
+  location_x: 2
+  location_y: 3
+  element: Beached_Zeolite
+  temperature: 293.041931
+  units: 1
+  type: Other
+  amounts:
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+- id: Beached_ZeoliteCrystal
+  location_x: 4
+  location_y: 1
+  element: Beached_Zeolite
+  temperature: 293.03833
+  units: 1
+  type: Other
+  amounts:
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+  - id: Beached_CrystalGrowth
+    value: 5.59999752
+- id: Beached_ZeoliteSetPiece
+  location_x: 1
+  location_y: -4
   element: Creature
-  temperature: 293.046783
+  temperature: 293.168518
   units: 1
   type: Other

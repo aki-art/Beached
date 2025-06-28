@@ -1,0 +1,24 @@
+title: Rotmongers
+iconPrefabID: Beached_Rotmonger
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        text: Rotmongers
+        style: Title
+
+      - type: Text
+        textKey: STRINGS.CREATURES.CRITTER_SPECIES
+        style: SubTitle
+
+      - type: DividerLine
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        text: | 
+          Rotmongers are semi-aquatic isopods who scavenge for decaying matter for food. The hairs on their tails are highly sensitive sensors that allow them to detect any movement in their surrounding. 
+
+

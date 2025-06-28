@@ -6,10 +6,22 @@ namespace Beached
 	{
 		public class EFFECTS
 		{
-			public class BEACHED_EFFECT_SANDBOX
+			public class BEACHED_SANDBOX
 			{
 				public static LocString NAME = "Built a Sand Castle";
 				public static LocString DESC = $"This Duplicant has recently played in the sand.";
+			}
+
+			public class BEACHED_COMFORTABLE
+			{
+				public static LocString NAME = "Comfy";
+				public static LocString DESC = $"This Duplicant is super cozy wearing this outfit.";
+			}
+
+			public class BEACHED_SUPERALLERGEMED
+			{
+				public static LocString NAME = "Extended Antihistamines";
+				public static LocString DESC = $"This Duplicant's allergic reactions have been suppressed by medication";
 			}
 
 			public class BEACHED_DAMP_PLANTGROWTHBOOST
@@ -24,13 +36,13 @@ namespace Beached
 				public static LocString DESC = $"This place is too dry for plants, growth is slowed. (World Trait: Arid)";
 			}
 
-			public class BEACHED_EFFECT_DAZED
+			public class BEACHED_DAZED
 			{
 				public static LocString NAME = "Dazed";
 				public static LocString DESC = $"This creature woke up from a long hybernation, and needs some time to readjust their metabolism.";
 			}
 
-			public class BEACHED_EFFECT_LUBRICATED
+			public class BEACHED_LUBRICATED
 			{
 				public static LocString NAME = "Lubricated";
 				public static LocString DESC = $"";
@@ -84,25 +96,25 @@ namespace Beached
 				public static LocString DESC = $"This duplicant could try-out for Soprano.";
 			}
 
-			public class BEACHED_EFFECT_PLUSHIEVOLE
+			public class BEACHED_PLUSHIEVOLE
 			{
 				public static LocString NAME = "Shove-Vole Plushie";
 				public static LocString DESC = $"This duplicant owns an adorable pup plush.";
 			}
 
-			public class BEACHED_EFFECT_PLUSHIEPUFT
+			public class BEACHED_PLUSHIEPUFT
 			{
 				public static LocString NAME = "Puft Plushie";
 				public static LocString DESC = $"This duplicant owns a wonderfully round puft plushie.";
 			}
 
-			public class BEACHED_EFFECT_PLUSHIEMUFFIN
+			public class BEACHED_PLUSHIEMUFFIN
 			{
 				public static LocString NAME = "Muffin Plushie";
 				public static LocString DESC = $"This duplicant owns an unbelievable soft Muffin plushie.";
 			}
 
-			public class BEACHED_EFFECT_PLUSHIEPACU
+			public class BEACHED_PLUSHIEPACU
 			{
 				public static LocString NAME = "Pacu Plushie";
 				public static LocString DESC = $"This duplicant owns a soft and squishy Pacu plushie.";

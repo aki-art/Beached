@@ -26,6 +26,7 @@ biomes:
       - Beached:Beached_SandySeashell
       - Beached:Beached_SandySlickshell
       - Beached:Beached_BuriedSeashell
+      - Beached:Beached_Oxybloon
 
 features:
   - type: Beached:features/beach/AirPocket

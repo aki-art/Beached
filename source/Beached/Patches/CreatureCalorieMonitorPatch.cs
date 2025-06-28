@@ -17,7 +17,7 @@ namespace Beached.Patches
 	}
 
 	[HarmonyPatch(typeof(CreatureCalorieMonitor.Stomach), "Poop")]
-	public static class CreatureCalorieMonitor_Stomach_Poop_Transpiler
+	public static class CreatureCalorieMonitor_Stomach_Poop_Patch
 	{
 		public static void Prefix(CreatureCalorieMonitor.Stomach __instance)
 		{

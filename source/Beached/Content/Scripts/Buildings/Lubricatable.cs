@@ -33,6 +33,7 @@ namespace Beached.Content.Scripts.Buildings
 			var attributes = gameObject.GetAttributes();
 			attributes.Add(BAttributes.doorOpeningSpeed);
 			attributes.Add(BAttributes.operatingSpeed);
+			//attributes.Add(Db.Get().Attributes.GeneratorOutput);
 		}
 
 		public override void OnSpawn()

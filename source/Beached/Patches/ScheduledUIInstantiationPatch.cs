@@ -8,6 +8,8 @@ namespace Beached.Patches
 {
 	public class ScheduledUIInstantiationPatch
 	{
+		private static GameObject critterIdentityScreen;
+
 		[HarmonyPatch(typeof(ScheduledUIInstantiation), "OnPrefabInit")]
 		public class ScheduledUIInstantiation_OnPrefabInit_Patch
 		{
@@ -25,7 +27,7 @@ namespace Beached.Patches
 					return;
 				}
 
-				var critterIdentityScreen = Object.Instantiate(ModAssets.Prefabs.critterIdentitySidescreen);
+				critterIdentityScreen = Object.Instantiate(ModAssets.Prefabs.critterIdentitySidescreen);
 				critterIdentityScreen.AddOrGet<CanvasScaler>();
 				critterIdentityScreen.AddComponent<KCanvasScaler>();
 

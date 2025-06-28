@@ -2,7 +2,6 @@
 using Beached.Content.Defs.Entities.Critters.Karacoos;
 using Beached.Content.Defs.Entities.Critters.Mites;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
-using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
 using System;
 using System.Collections.Generic;
@@ -198,14 +197,14 @@ namespace Beached.Content.WikiHelper
 				}
 
 				var butcherable = critter.GetComponent<Butcherable>();
-				if (butcherable != null && butcherable.drops != null)
-				{
-					foreach (var drop in butcherable.drops.Distinct())
-					{
-						AppendItem(drop, butcherable.drops.Count(d => d == drop), amountMultiplier, builder, recipes, ref set);
-						builder.AppendLine($"    {drop} --> {parentTag.name}");
-					}
-				}
+				/*				if (butcherable != null && butcherable.drops != null)
+								{
+									foreach (var drop in butcherable.drops.Distinct())
+									{
+										AppendItem(drop, butcherable.drops.Count(d => d.Key == drop.Key), amountMultiplier, builder, recipes, ref set);
+										builder.AppendLine($"    {drop} --> {parentTag.name}");
+									}
+								}*/
 			}
 		}
 

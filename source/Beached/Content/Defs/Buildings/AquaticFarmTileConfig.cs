@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using STRINGS;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Buildings
@@ -16,11 +17,11 @@ namespace Beached.Content.Defs.Buildings
 				"beached_aquatic_farmtile_kanim",
 				100,
 				30f,
-				BUILDINGS.CONSTRUCTION_MASS_KG.TIER2,
+				TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER2,
 				MATERIALS.FARMABLE,
 				1600f,
 				BuildLocationRule.Tile,
-				BUILDINGS.DECOR.NONE,
+				TUNING.BUILDINGS.DECOR.NONE,
 				NOISE_POLLUTION.NONE);
 
 			BuildingTemplates.CreateFoundationTileDef(def);
@@ -36,6 +37,12 @@ namespace Beached.Content.Defs.Buildings
 			def.ConstructionOffsetFilter = BuildingDef.ConstructionOffsetFilter_OneDown;
 			def.PermittedRotations = PermittedRotations.FlipV;
 			def.DragBuild = true;
+			def.Breakable = false;
+
+			def.POIUnlockable = true;
+
+			def.AddSearchTerms(SEARCH_TERMS.FOOD);
+			def.AddSearchTerms(SEARCH_TERMS.FARM);
 
 			return def;
 		}
@@ -49,7 +56,7 @@ namespace Beached.Content.Defs.Buildings
 			var simCellOccupier = go.AddOrGet<SimCellOccupier>();
 			simCellOccupier.doReplaceElement = true;
 			simCellOccupier.notifyOnMelt = true;
-			simCellOccupier.strengthMultiplier = 3f;
+			simCellOccupier.strengthMultiplier = 20f;
 
 			go.AddOrGet<TileTemperature>();
 
@@ -92,6 +99,10 @@ namespace Beached.Content.Defs.Buildings
 			GeneratedBuildings.RemoveLoopingSounds(go);
 			go.GetComponent<KPrefabID>().AddTag(GameTags.FarmTiles);
 			FarmTileConfig.SetUpFarmPlotTags(go);
+
+
+			Tinkerable.MakePowerTinkerable(go);
+			go.AddOrGetDef<PoweredActiveController.Def>();
 		}
 	}
 }

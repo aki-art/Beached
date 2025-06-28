@@ -18,6 +18,8 @@ namespace Beached.Patches
 			typeof(int),
 			typeof(float),
 			typeof(string[]),
+			typeof(string[]),
+			typeof(bool),
 		])]
 		public class EggConfig_CreateEgg_Patch
 		{
@@ -25,6 +27,7 @@ namespace Beached.Patches
 			{
 				// karacoos want to sit on these
 				__result.AddTag(BTags.karacooSittable);
+
 				// for karacoos. Pickupable is already IApproachable but allows too much interaction range
 				__result.AddOrGet<Approachable>();
 

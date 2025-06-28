@@ -34,6 +34,8 @@ namespace Beached.Content.Defs
 					1000f,
 					2000f,
 					500f,
+					[],
+					null,
 					geyserTemperature: 263f),
 				true));
 
@@ -49,6 +51,8 @@ namespace Beached.Content.Defs
 					1000f,
 					2000f,
 					500f,
+					[],
+					null,
 					geyserTemperature: 263f),
 				true));
 
@@ -65,6 +69,8 @@ namespace Beached.Content.Defs
 					70f,
 					140f,
 					5f,
+					[],
+					null,
 					60f),
 				true));
 
@@ -81,6 +87,8 @@ namespace Beached.Content.Defs
 					70f,
 					140f,
 					5f,
+					[],
+					null,
 					60f),
 				true));
 
@@ -96,6 +104,8 @@ namespace Beached.Content.Defs
 					200f,
 					400f,
 					150f,
+					[],
+					null,
 					480f,
 					1080f,
 					1 / 60f,
@@ -119,7 +129,9 @@ namespace Beached.Content.Defs
 					GameUtil.GetTemperatureConvertedToKelvin(40, GameUtil.TemperatureUnit.Celsius),
 					1000f,
 					2000f,
-					4000f)
+					4000f,
+					[],
+					null)
 				.AddDisease(new SimUtil.DiseaseInfo
 				{
 					idx = Db.Get().Diseases.GetIndex(PlanktonGerms.ID),

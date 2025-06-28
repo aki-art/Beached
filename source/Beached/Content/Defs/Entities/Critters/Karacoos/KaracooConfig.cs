@@ -41,7 +41,6 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 		{
 			return base.ConfigureCritter(builder)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_1X2, 1f)
-				.Drops(MeatConfig.ID)
 				.Egg(BabyKaracooConfig.ID, "beached_egg_karacoo_kanim")
 					.Fertility(1f)
 					.Incubation(5f)

@@ -24,6 +24,21 @@ namespace Beached.Content.Scripts.Entities.AI.Jellyfish
 		{
 			base.OnSpawn();
 			Subscribe(ModHashes.medusaSignal, Pulse);
+			Subscribe((int)GameHashes.Butcher, OnButchered);
+		}
+
+		// drops bottled water, empty it here
+		private void OnButchered(object obj)
+		{
+			if (obj is GameObject[] drops)
+			{
+				for (var i = drops.Length - 1; i >= 0; i--)
+				{
+					var drop = drops[i];
+					if (drop.TryGetComponent(out Dumpable dumpable))
+						dumpable.Dump();
+				}
+			}
 		}
 
 		public void Pulse(object data)

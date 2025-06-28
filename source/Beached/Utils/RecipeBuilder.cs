@@ -17,6 +17,7 @@ namespace Beached.Utils
 
 		private List<RecipeElement> inputs;
 		private List<RecipeElement> outputs;
+		private string visualizerAnim;
 
 		public static RecipeBuilder Create(string fabricatorID, float time)
 		{
@@ -53,6 +54,26 @@ namespace Beached.Utils
 		public RecipeBuilder Input(Tag tag, float amount = 1f, bool inheritElement = true)
 		{
 			inputs.Add(new RecipeElement(tag, amount, inheritElement));
+			return this;
+		}
+
+		public RecipeBuilder Input(Tag[] tags, float[] amounts, bool inheritElement = true)
+		{
+			inputs.Add(new RecipeElement(tags, amounts)
+			{
+				inheritElement = inheritElement
+			});
+
+			return this;
+		}
+
+		public RecipeBuilder Input(Tag[] tags, float amount = 1f, bool inheritElement = true)
+		{
+			inputs.Add(new RecipeElement(tags, amount)
+			{
+				inheritElement = inheritElement
+			});
+
 			return this;
 		}
 
@@ -109,22 +130,30 @@ namespace Beached.Utils
 				requiredTech = requiredTech,
 			};
 
-			if (visualizerIdx > -1)
-			{
-				if (o.Length >= visualizerIdx)
-					Log.Warning($"Cannot set visualizer to idx {visualizerIdx}, there is only {o.Length} items.");
-				else
-				{
-					var prefab = Assets.GetPrefab(o[visualizerIdx].material);
+			if (!visualizerAnim.IsNullOrWhiteSpace())
+				recipe.SetFabricationAnim(visualizerAnim);
+			/*			if (visualizerIdx > -1)
+						{
+							if (o.Length >= visualizerIdx)
+								Log.Warning($"Cannot set visualizer to idx {visualizerIdx}, there is only {o.Length} items.");
+							else
+							{
+								var prefab = Assets.GetPrefab(o[visualizerIdx].material);
 
-					if (prefab != null)
-						recipe.FabricationVisualizer = MushBarConfig.CreateFabricationVisualizer(prefab);
-					else
-						Log.Debug($"No prefab with id {o[visualizerIdx].material}");
-				}
-			}
+								if (prefab != null)
+									recipe.FabricationVisualizer = MushBarConfig.CreateFabricationVisualizer(prefab);
+								else
+									Log.Debug($"No prefab with id {o[visualizerIdx].material}");
+							}
+						}*/
 
 			return recipe;
+		}
+
+		public RecipeBuilder Visualizer(string animFile)
+		{
+			this.visualizerAnim = animFile;
+			return this;
 		}
 	}
 }

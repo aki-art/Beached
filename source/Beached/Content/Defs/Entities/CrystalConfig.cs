@@ -18,6 +18,7 @@ namespace Beached.Content.Defs.Entities
 			AQUAMARINE = "Beached_AquamarineCrystal",
 			SUCROSE = "Beached_SucroseCrystal",
 			SALT = "Beached_SaltCrystal",
+			OXYROCK = "Beached_OxyRockCrystal",
 
 			// not implemented
 			SELENITE = "Beached_SeleniteCrystal",
@@ -25,6 +26,7 @@ namespace Beached.Content.Defs.Entities
 			NITRE = "Beached_NitreCrystal",
 			BORAX = "Beached_ChemicalProcessing_BoraxCrystal";
 
+		public static string GetClusterId(string crystal) => $"{crystal}Cluster";
 		public List<GameObject> CreatePrefabs()
 		{
 			var result = new List<GameObject>()
@@ -34,7 +36,8 @@ namespace Beached.Content.Defs.Entities
 				CreatePrefab(KARAIRITE, SimHashes.Katairite, "beached_katairite_crystal_kanim", null,  5, 10, 200),
 				CreatePrefab(SUCROSE, SimHashes.Sucrose, "beached_sucrose_crystal_kanim", null,  5, 30, 200),
 				CreatePrefab(SALT, SimHashes.Salt, "beached_salt_crystal_kanim", null,  5, 30, 200),
-				CreatePrefab(AQUAMARINE, Elements.aquamarine, "beached_aquamarine_crystal_kanim", null,  5, 30, 200),
+				CreatePrefab(AQUAMARINE, Elements.aquamarine, "beached_aquamarine_crystal_kanim", null,  5, 30, growthPercentPerCycle: 200),
+				CreatePrefab(OXYROCK, SimHashes.OxyRock, "beached_oxylite_crystal_kanim", null,  5, 30, 200),
 			};
 
 			if (Mod.integrations.IsModPresent(Integrations.CHEMICAL_PROCESSING))
@@ -53,9 +56,9 @@ namespace Beached.Content.Defs.Entities
 				return null;
 
 			var prefab = EntityTemplates.CreatePlacedEntity(
-				ID,
-				$"{element.tag.ProperName()} Crystal",
-				$"A large crystal composed of {element.tag.ProperName()}",
+			ID,
+				Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{ID.ToUpperInvariant()}.NAME"),
+				Strings.Get($"STRINGS.ENTITIES.BEACHED_CRYSTALS.{ID.ToUpperInvariant()}.DESCRIPTION"),
 				100f,
 				anim,
 				"growing",
@@ -66,14 +69,15 @@ namespace Beached.Content.Defs.Entities
 				default,
 				elementId);
 
-			//prefab.AddOrGet<GeoFormation>().allowDiagonalGrowth = true;
 			var modifiers = prefab.AddOrGet<Modifiers>();
 
 			modifiers.initialAmounts.Add(BAmounts.CrystalGrowth.Id);
 
 			prefab.AddOrGet<Effects>();
 			prefab.AddOrGet<Crystal>().growthDirection = growth;
-			prefab.AddOrGet<CrystalDebug>();
+
+			/*	if (Mod.debugMode)
+					prefab.AddOrGet<CrystalDebug>();*/
 			//prefab.AddOrGet<CrystalFoundationMonitor>().needsFoundation = false;
 
 			var growingCrystal = prefab.AddOrGet<GrowingCrystal>();
@@ -88,7 +92,7 @@ namespace Beached.Content.Defs.Entities
 			{
 				var clusterPrefab = BEntityTemplates.CreateAndRegisterClusterForCrystal(
 					prefab,
-					ID + "Cluster",
+					GetClusterId(ID),
 					Assets.GetAnim(itemKanim));
 
 				BEntityTemplates.CreateAndRegisterPreviewForCluster(
@@ -100,10 +104,7 @@ namespace Beached.Content.Defs.Entities
 			return prefab;
 		}
 
-		public string[] GetDlcIds()
-		{
-			return DlcManager.AVAILABLE_ALL_VERSIONS;
-		}
+		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
 
 		public void OnPrefabInit(GameObject inst)
 		{
@@ -111,7 +112,6 @@ namespace Beached.Content.Defs.Entities
 
 		public void OnSpawn(GameObject inst)
 		{
-			//inst.GetComponent<GeoFormation>();
 		}
 	}
 }
