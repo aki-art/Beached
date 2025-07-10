@@ -157,10 +157,11 @@ namespace Beached
 		/// <param name="mucusStorageCapacityKg"></param>
 		/// <param name="kgUsedEachTimeOrPerSecond"></param>
 		/// <param name="isTimedUse">Count down every 200ms while in use. Each time Mucus mass will be removed. Otherwise the gameobject will wait for a <see cref="ModHashes.usedBuilding"/> trigger.</param>
+		/// <param name="boostType">Type of boost to apply. <see cref="Lubricatable.BoostType"</param>
 		/// <returns>storage component for mucus</returns>
-		public static Storage ExtendPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, float kgUsedEachTimeOrPerSecond, bool isTimedUse)
+		public static Storage ExtendPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, float kgUsedEachTimeOrPerSecond, bool isTimedUse, int boostType)
 		{
-			return Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, kgUsedEachTimeOrPerSecond, isTimedUse).mucusStorage;
+			return Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, kgUsedEachTimeOrPerSecond, isTimedUse, boostType).mucusStorage;
 		}
 
 		/// <summary>
@@ -171,9 +172,9 @@ namespace Beached
 		/// <param name="maxUses"></param>
 		/// <param name="workableCompleteCheckFn">Every time a Workable is complete, this check will run. if returned true, the lubricant will be used. Fabrication orders and Doors opening are handled separately. The object is the Workable component. Recommend doing a type check on this for the specific Workable component.</param>
 		/// <returns></returns>
-		public static Storage ExtentPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, int maxUses, Func<object, bool> workableCompleteCheckFn)
+		public static Storage ExtentPrefabToLubricatable(GameObject prefab, float mucusStorageCapacityKg, int maxUses, Func<object, bool> workableCompleteCheckFn, int boostType)
 		{
-			var result = Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, mucusStorageCapacityKg / maxUses, false);
+			var result = Lubricatable.ConfigurePrefab(prefab, mucusStorageCapacityKg, mucusStorageCapacityKg / maxUses, false, boostType);
 
 			if (workableCompleteCheckFn != null)
 				result.consumeOnComplete += workableCompleteCheckFn;

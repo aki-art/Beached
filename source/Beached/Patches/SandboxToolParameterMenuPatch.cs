@@ -2,12 +2,12 @@
 using Beached.Content.Defs;
 using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Corals;
-using Beached.Content.Defs.Entities.Critters.Fuas;
 using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Entities.SetPieces;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Flora;
+using Beached.Content.Defs.Flora.Gnawica;
 using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
 using Beached.Content.ModDb.Germs;
@@ -81,7 +81,7 @@ namespace Beached.Patches
 			BrinePoolConfig.ID,
 			BambooSegmentConfig.ID,
 			LimpetRockConfig.ID,
-			FueNestConfig.ID,
+			FuaFuaNestConfig.ID,
 			FueFuzzWallConfig.ID,
 			SleepingMuffinsConfig.ID,
 			SkeletonChairConfig.ID,
@@ -90,6 +90,11 @@ namespace Beached.Patches
 			WreckageHabitatConfig.ID,
 			WreckageNoseConfig.ID,
 			OxylitePuftConfig.ID,
+		];
+
+		private static readonly HashSet<Tag> DEBUG =
+		[
+			GnawicaStemConfig.ID,
 		];
 
 		private static readonly HashSet<Tag> FOOD =
@@ -133,6 +138,8 @@ namespace Beached.Patches
 			PurpleHangerConfig.ID,
 			SpinorilaConfig.ID,
 			SidewaysPlantConfig.ID,
+			GnawicaMawConfig.ID,
+			GnawicaPlantConfig.ID
 		];
 
 		private static readonly HashSet<Tag> GEYSERS =
@@ -143,6 +150,9 @@ namespace Beached.Patches
 			"GeyserGeneric_" + GeyserConfigs.CORAL_REEF,
 			"GeyserGeneric_" + GeyserConfigs.HELIUM_VENT,
 			"GeyserGeneric_" + GeyserConfigs.SALT_VOLCANO,
+			"GeyserGeneric_" + GeyserConfigs.ZIRCONIUM,
+			"GeyserGeneric_" + GeyserConfigs.IRIDIUM,
+			"GeyserGeneric_" + GeyserConfigs.NITROGEN_COLD,
 		];
 
 		private static readonly HashSet<Tag> GEMS =
@@ -179,6 +189,7 @@ namespace Beached.Patches
 				var mods = SandboxUtil.AddModMenu(__instance, STRINGS.BEACHED_MOD_NAME, sprite, _ => false);
 
 				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.ALL, TAGS, JellyfishConfig.ID);
+				AddSubMenu(__instance, mods, "DEBUG", DEBUG, DatabankHelper.TAG.ToString());
 				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.FLORA, FLORA, WaterCupsConfig.ID);
 				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.FAUNA, FAUNA, JellyfishConfig.ID);
 				AddSubMenu(__instance, mods, STRINGS.UI.SANDBOX.GEYSERS, GEYSERS, "GeyserGeneric_" + GeyserConfigs.BISMUTH_VOLCANO);
@@ -203,6 +214,7 @@ namespace Beached.Patches
 
 				menu.entitySelector.filters = menu.entitySelector.filters.AddToArray(filter);
 			}
+
 
 			private static void AddSubMenu(SandboxToolParameterMenu menu, SearchFilter mods, string name, HashSet<Tag> set, string sprite)
 			{

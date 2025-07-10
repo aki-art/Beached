@@ -3,6 +3,7 @@ using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Foods;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Beached.Content.ModDb
 {
@@ -15,6 +16,11 @@ namespace Beached.Content.ModDb
 		public static BGeyserTraits geyserTraits;
 		public static LootTables lootTables;
 		public static BKaracooSkins karacooSkins;
+
+		public static class FoodTypes
+		{
+			public static Diet.Info.FoodType GermDiet = (Diet.Info.FoodType)Hash.SDBMLower("Beached_GermDiet");
+		}
 
 		public static void OnDbInit(Db db)
 		{
@@ -115,9 +121,10 @@ namespace Beached.Content.ModDb
 				"SpaceFood"
 				];
 
-			if (!Mod.settings.General.IsMealLiceMeat)
-			{
-			}
+			HashSet<Tag> mimilletFoods =
+				[
+				ButterflyFoodConfig.ID
+				];
 
 			foreach (var meat in meats)
 			{
@@ -126,14 +133,71 @@ namespace Beached.Content.ModDb
 					prefab.AddTag(BTags.meat);
 			}
 
-			var liceTag = Mod.settings.General.IsMealLiceMeat ? BTags.meat : BTags.nonVegetarian;
-
-			foreach (var lice in liceFoods)
+			if (Mod.settings.General.IsMealLiceMeat)
 			{
-				var prefab = Assets.TryGetPrefab(lice);
+				meats = [.. meats.Union(liceFoods)];
+			}
+
+			foreach (var recipe in ComplexRecipeManager.Get().recipes)
+			{
+				if (recipe.ingredients.Any(ingredient => IsMeat(ingredient, meats)))
+				{
+					foreach (var result in recipe.results)
+					{
+						if (meats.Contains(result.material))
+							continue;
+
+						var foodInfo = EdiblesManager.GetFoodInfo(result.material.name);
+						if (foodInfo != null && foodInfo.CaloriesPerUnit > 0)
+						{
+							Log.Debug($"Automatically added {result.material} to meaty items");
+							meats.Add(result.material);
+						}
+					}
+				}
+			}
+
+			if (!Mod.settings.General.IsMealLiceMeat)
+			{
+				foreach (var lice in liceFoods)
+				{
+					var prefab = Assets.TryGetPrefab(lice);
+					if (prefab != null)
+						prefab.AddTag(BTags.nonVegetarian);
+				}
+			}
+
+			if (!Mod.settings.General.IsMimilletVegetarian)
+			{
+				foreach (var food in mimilletFoods)
+				{
+					var prefab = Assets.TryGetPrefab(food);
+					if (prefab != null)
+						prefab.AddTag(BTags.nonVegetarian);
+				}
+			}
+
+			foreach (var food in nonVegetarians)
+			{
+				var prefab = Assets.TryGetPrefab(food);
 				if (prefab != null)
-					prefab.AddTag(liceTag);
+					prefab.AddTag(BTags.nonVegetarian);
 			}
 		}
+
+		private static bool IsMeat(ComplexRecipe.RecipeElement ingredient, HashSet<Tag> meats)
+		{
+			if (ingredient.possibleMaterials != null && ingredient.possibleMaterials.Length > 0)
+			{
+				foreach (var material in ingredient.possibleMaterials)
+				{
+					if (meats.Contains(material))
+						return true;
+				}
+			}
+
+			return meats.Contains(ingredient.material);
+		}
+
 	}
 }

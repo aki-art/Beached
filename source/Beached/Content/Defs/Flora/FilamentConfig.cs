@@ -33,7 +33,8 @@ namespace Beached.Content.Defs.Flora
 				POSITIVE_DECOR_EFFECT,
 				additionalTags:
 				[
-					BTags.aquaticPlant
+					BTags.aquaticPlant,
+					//BTags.smallAquariumSeed
 				],
 				defaultTemperature: MiscUtil.CelsiusToKelvin(32f));
 

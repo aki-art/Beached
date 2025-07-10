@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Beached.Content.DefBuilders;
+﻿using Beached.Content.DefBuilders;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters
 {
-    public abstract class BaseCritterConfig
+	public abstract class BaseCritterConfig
 	{
 		public virtual GameObject CreatePrefab(BaseCritterConfig config)
 		{
@@ -19,7 +19,7 @@ namespace Beached.Content.Defs.Entities.Critters
 
 		protected abstract string AnimFile { get; }
 
-		protected abstract string Id { get; }
+		protected virtual string Id => GetType().GetField("ID").GetValue(this) as string;
 
 		public virtual string EggId => $"{Id}Egg";
 

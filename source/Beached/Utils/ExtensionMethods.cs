@@ -228,6 +228,59 @@ namespace Beached.Utils
 				.Add(kPrefabID);
 		}
 
+		public static Direction RotateClockWise(this Direction direction)
+		{
+			return direction switch
+			{
+				Direction.Up => Direction.Right,
+				Direction.Right => Direction.Down,
+				Direction.Down => Direction.Left,
+				Direction.Left => Direction.Up,
+				_ => Direction.None,
+			};
+		}
+
+		public static Direction RotateCounterClockWise(this Direction direction)
+		{
+			return direction switch
+			{
+				Direction.Up => Direction.Left,
+				Direction.Right => Direction.Up,
+				Direction.Down => Direction.Right,
+				Direction.Left => Direction.Down,
+				_ => Direction.None,
+			};
+		}
+
+		public static CellOffset ToCellOffset(this Direction direction)
+		{
+			return direction switch
+			{
+				Direction.Up => CellOffset.up,
+				Direction.Right => CellOffset.right,
+				Direction.Down => CellOffset.down,
+				Direction.Left => CellOffset.left,
+				_ => CellOffset.none,
+			};
+		}
+
+		public static Direction ToDirection(this CellOffset offset)
+		{
+			if (offset.x == offset.y)
+				return Direction.None;
+
+			if (offset.x > offset.y)
+				return Direction.Right;
+
+			if (offset.x < offset.y)
+				return Direction.Left;
+
+			if (offset.y > offset.x)
+				return Direction.Up;
+
+			return Direction.Down;
+		}
+
 		public static void RemoveNaturePOI(this CavityInfo cavity, KPrefabID kPrefabID)
 		{
 			if (cavityInfoExtensions.TryGetValue(cavity, out var cavityInfoExtension))

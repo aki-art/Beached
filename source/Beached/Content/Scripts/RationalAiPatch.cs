@@ -10,6 +10,7 @@ namespace Beached.Content.Scripts
 			public static void Postfix(RationalAi __instance)
 			{
 				__instance.alive
+					.ToggleStateMachine(smi => new Beached_ElectricShockable.Instance(smi.master, new Beached_ElectricShockable.Def()))
 					.ToggleStateMachine(smi => new Beached_ScaredMonitor.Instance(smi.master, new Beached_ScaredMonitor.Def()
 					{
 						lightTreshold = 30

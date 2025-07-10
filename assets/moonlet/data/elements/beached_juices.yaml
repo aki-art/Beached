@@ -1,0 +1,97 @@
+# examples for liquids for the Water Cooler. 
+elements:
+  - elementId: Beached_GristleBerryJuice
+    name: Gristle Juice
+    descriptionText: Tasty and refreshing.
+    color: f20f66
+    waterCoolerEffect: Beached_SlushDrink
+    waterCoolerTooltip: A refreshing cold drink.
+    maxMass: 300
+    liquidCompression: 1.01
+    speed: 125
+    minHorizontalFlow: 0.01
+    minVerticalFlow: 0.01
+    specificHeatCapacity: 4.179
+    thermalConductivity: 0.58
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 25
+    gasSurfaceAreaMultiplier: 1
+    lowTemp: 0C
+    highTemp: 100C
+    lowTempTransitionTarget: Ice
+    highTempTransitionTarget: Steam
+    defaultTemperature: 20C
+    defaultMass: 1000
+    molarMass: 20
+    toxicity: 0.1
+    lightAbsorptionFactor: 0.7
+    radiationAbsorptionFactor: 0.8
+    radiationPer1000Mass: 10
+    tags:
+    - Mixture
+    state: Liquid
+
+  - elementId: Beached_GnawBerryJuice
+    name: Gnawberry Juice
+    descriptionText: Tasty and refreshing.
+    color: da72db
+    waterCoolerEffect: Beached_SlushDrink
+    waterCoolerTooltip: A refreshing cold drink.
+    maxMass: 300
+    liquidCompression: 1.01
+    speed: 125
+    minHorizontalFlow: 0.01
+    minVerticalFlow: 0.01
+    specificHeatCapacity: 4.179
+    thermalConductivity: 0.58
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 25
+    gasSurfaceAreaMultiplier: 1
+    lowTemp: 0C
+    highTemp: 100C
+    lowTempTransitionTarget: Ice
+    highTempTransitionTarget: Steam
+    defaultTemperature: 20C
+    defaultMass: 1000
+    molarMass: 20
+    toxicity: 0.1
+    lightAbsorptionFactor: 0.7
+    radiationAbsorptionFactor: 0.8
+    radiationPer1000Mass: 10
+    tags:
+    - Mixture
+    state: Liquid
+
+  - elementId: Beached_CactusJuice
+    name: Cactus Juice
+    descriptionText: Tasty and refreshing.
+    color: 076e01
+    conditions:
+      mods:
+        - test447.RollerSnake # this element will only load if Roller Snakes is also installed
+    waterCoolerEffect: Beached_SlushDrink
+    waterCoolerTooltip: It gives you power like nothing else! ... if you can stomach to drink it.
+    maxMass: 300
+    liquidCompression: 1.01
+    speed: 125
+    minHorizontalFlow: 0.01
+    minVerticalFlow: 0.01
+    specificHeatCapacity: 4.179
+    thermalConductivity: 0.58
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 25
+    gasSurfaceAreaMultiplier: 1
+    lowTemp: 0C
+    highTemp: 100C
+    lowTempTransitionTarget: Ice
+    highTempTransitionTarget: Steam
+    defaultTemperature: 20C
+    defaultMass: 1000
+    molarMass: 20
+    toxicity: 0.1
+    lightAbsorptionFactor: 0.7
+    radiationAbsorptionFactor: 0.8
+    radiationPer1000Mass: 10
+    tags:
+    - Mixture
+    state: Liquid

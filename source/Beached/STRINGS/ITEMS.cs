@@ -17,7 +17,7 @@ namespace Beached
 				public class BEACHED_SOAP
 				{
 					public static LocString NAME = Link("Soap", SoapConfig.ID);
-					public static LocString DESC = "An aromatic block of waxy soap.";
+					public static LocString DESC = $"An aromatic block of waxy soap.\n\nCan be delivered to a {Link("Shower", ShowerConfig.ID)} to increase the morale bonus from using it.";
 				}
 
 				public class BEACHED_SULFURGLAND
@@ -211,10 +211,17 @@ namespace Beached
 					public static LocString DESC = $"Edible tongue of a {Link("Mussel Sprout", MusselSproutConfig.ID)}. It has a somewhat bitter, green flavour, and the consistency of fresh clam.";
 				}
 
+				public class BEACHED_VEGGIEBURGER
+				{
+					public static LocString NAME = Link("Veggie Burger", VeggieBurgerConfig.ID);
+					public static LocString DESC = $"{Link("Fried Mushrooms", FriedMushroomConfig.ID)} and {Link("Lettuce", LettuceConfig.ID)} on a chilled {Link("Frost Bun", ColdWheatBreadConfig.ID)}.\n\nIt's the only other burger best served cold.";
+					public static LocString RECIPEDESC = ($"{Link("Fried Mushrooms", FriedMushroomConfig.ID)} and {Link("Lettuce", LettuceConfig.ID)} on a chilled {Link("Frost Bun", ColdWheatBreadConfig.ID)}.");
+				}
+
 				public class BEACHED_HIGHQUALITYMEAT
 				{
 					public static LocString NAME = Link("High Quality Meat", HighQualityMeatConfig.ID);
-					public static LocString DESC = "Soft fatty meat of an unfortunate creature.";
+					public static LocString DESC = $"Soft fatty meat of an unfortunate creature. \n\nExclusively dropped by normally {Link("Meat", MeatConfig.ID)} dropping critters who have the {Link("Meaty genetic trait", "GENETICS")}.";
 				}
 
 				public class BEACHED_FOULPOFF
@@ -249,14 +256,20 @@ namespace Beached
 
 				public class BEACHED_DRYAGEDMEAT
 				{
-					public static LocString NAME = Link("Dry Aged Meat", DryAgedMeatConfig.ID);
-					public static LocString DESC = "Soft fatty meat of an unfortunate creature.";
+					public static LocString NAME = Link("Dry-Aged Meat", DryAgedMeatConfig.ID);
+					public static LocString DESC = "Fatty Meat encrusted in thick Salt.";
 				}
 
 				public class BEACHED_DRYNOODLES
 				{
 					public static LocString NAME = Link("Dry Noodles", DryNoodlesConfig.ID);
 					public static LocString DESC = ".. they don't taste very good. Unfortunately there is no flavor packet included.";
+				}
+
+				public class BEACHED_GNAWICABERRY
+				{
+					public static LocString NAME = Link("Gnawberry", GnawicaBerryConfig.ID);
+					public static LocString DESC = "Fruit with a hard chewy skin that pops when punctured, spilling out the sweet fluid inside. At its center a hard seed floats.";
 				}
 
 				public class BEACHED_SALTRUBBEDJELLY

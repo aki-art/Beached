@@ -3,6 +3,7 @@ using Beached.Content;
 using Beached.Content.BWorldGen;
 using Beached.Content.Defs.StarmapEntities;
 using Beached.Content.ModDb;
+using Beached.Content.Overlays;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
 using FMOD.Studio;
@@ -92,6 +93,8 @@ namespace Beached.ModDevTools
 
 		public override void RenderTo(DevPanel panel)
 		{
+			ImGui.DragFloat("Flow Multipler", ref ElementInteractionsOverlayMode.flowMult, 1f, 1f, 2000f);
+
 			if (ImGui.CollapsingHeader("Mirrors"))
 			{
 				foreach (var info in Game.Instance.roomProber.cavityInfos)
@@ -105,6 +108,11 @@ namespace Beached.ModDevTools
 					}
 				}
 
+			}
+
+			if (ImGui.CollapsingHeader("Depths Veil"))
+			{
+				DepthsVeil.OnImguiDebug();
 			}
 
 			if (ImGui.Button("Spawn Drale"))
@@ -217,6 +225,8 @@ namespace Beached.ModDevTools
 			if (selectedObject == null)
 				return;
 
+			if (selectedObject.TryGetComponent(out Navigator navigator))
+				ImGui.Text($"Navigator current type: {navigator.CurrentNavType}");
 			var debugs = selectedObject.GetComponents<IImguiDebug>();
 			if (debugs != null)
 			{

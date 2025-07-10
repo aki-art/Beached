@@ -1,0 +1,23 @@
+title: Gnawica
+iconPrefabID: Beached_SlickShell
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        text: Slickshells
+        style: Title
+
+      - type: Text
+        text: Substitle
+        style: SubTitle
+
+      - type: DividerLine
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        text: | 
+          text
+

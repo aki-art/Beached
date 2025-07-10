@@ -1,5 +1,4 @@
-﻿using Beached.Content.Scripts;
-using Beached.Utils.GlobalEvents;
+﻿using Beached.Utils.GlobalEvents;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -25,6 +24,7 @@ namespace Beached.Content.BWorldGen
 			coralReef,
 			icy;
 
+
 		[Subscribe(GlobalEvent.WORLD_RELOADED)]
 		public static void OnWorldLoad()
 		{
@@ -46,8 +46,6 @@ namespace Beached.Content.BWorldGen
 			bone = zoneTypes["Beached_Bone"];
 
 			values = [.. zoneTypes.Values];
-
-			DepthsVeil.Instance.SetZoneType(depths);
 		}
 
 		private static void InitializeMoonletAPI()

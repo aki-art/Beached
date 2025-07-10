@@ -1,11 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Beached.Content.Overlays
 {
 	public class ConductionOverlayMode : OverlayModes.Mode
 	{
-		public const string ID = "Beached_ConductionOverlay";
+		// the game scrapes ID by reflection in devtools, do not change type or name
+		public static readonly HashedString ID = "Beached_ConductionOverlay";
 
 		public static Color GetColorForCell(SimDebugView _, int cell)
 		{

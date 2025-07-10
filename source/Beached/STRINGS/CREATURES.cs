@@ -1,4 +1,5 @@
 ﻿using Beached.Content;
+using Beached.Content.Defs;
 using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Corals;
 using Beached.Content.Defs.Entities.Critters.Dreckos;
@@ -12,6 +13,7 @@ using Beached.Content.Defs.Entities.Critters.Rotmongers;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Entities.Critters.Squirrels;
 using Beached.Content.Defs.Flora;
+using Beached.Content.Defs.Flora.Gnawica;
 using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb.Germs;
 using FUtility.FLocalization;
@@ -295,45 +297,55 @@ namespace Beached
 
 					public class BEACHED_AMMONIA
 					{
-						public static LocString NAME = "Ammonia Vent";
+						public static LocString NAME = Link("Ammonia Vent", GeyserConfigs.PrefabID(GeyserConfigs.AMMONIA_VENT));
 						public static LocString DESC = $"...";
 					}
 
-					public class BEACHED_CORAL_REEF
+					public class BEACHED_BISMUTH
 					{
-						public static LocString NAME = "Coral Reef";
-						public static LocString DESC = $"A geyser that periodically erupts with" +
-							$" {Link("Salt Water", SimHashes.SaltWater.ToString())} rich in " +
-							$"{Link("Plankton", PlanktonGerms.ID)}.";
+						public static LocString NAME = Link("Bismuth Volcano", GeyserConfigs.PrefabID(GeyserConfigs.BISMUTH_VOLCANO));
+						public static LocString DESC = $"A large volcano that periodically erupts with {Link("Molten Bismuth", "BEACHEDBISMUTHMOLTEN")}";
 					}
 
-					public class BEACHED_BISMUTH_VOLCANO
+					public class BEACHED_IRIDIUM
 					{
-						public static LocString NAME = "Bismuth Volcano";
-						public static LocString DESC = $"A large volcano that periodically erupts with {Link("Molten Bismuth", "BEACHEDBISMUTHMOLTEN")}";
+						public static LocString NAME = Link("Iridium Volcano", GeyserConfigs.PrefabID(GeyserConfigs.IRIDIUM));
+						public static LocString DESC = $"A large volcano that periodically erupts with {Link("Molten Iridium", Elements.moltenIridium)}";
+					}
+
+					public class BEACHED_ZIRCONIUM
+					{
+						public static LocString NAME = Link("Zirconium Volcano", GeyserConfigs.PrefabID(GeyserConfigs.ZIRCONIUM));
+						public static LocString DESC = $"A large volcano that periodically erupts with {Link("Molten Zieconium", Elements.zirconiumMolten)}";
+					}
+
+					public class BEACHED_NITROGENCOLD
+					{
+						public static LocString NAME = Link("Gelid Nitrogen Vent", GeyserConfigs.PrefabID(GeyserConfigs.NITROGEN_COLD));
+						public static LocString DESC = $"This vent periodically releases extremely cold {Link("Nitrogen", Elements.nitrogen)}";
 					}
 
 					public class BEACHED_SALT
 					{
-						public static LocString NAME = "Molten Salt Volcano";
+						public static LocString NAME = Link("Molten Salt Volcano", GeyserConfigs.PrefabID(GeyserConfigs.SALT_VOLCANO));
 						public static LocString DESC = $"A large volcano that periodically erupts with {Link("Molten Salt", "SALT")}";
 					}
 
 					public class BEACHED_HELIUM
 					{
-						public static LocString NAME = "Hot Helium Vent";
+						public static LocString NAME = Link("Hot Helium Vent", GeyserConfigs.PrefabID(GeyserConfigs.HELIUM_VENT));
 						public static LocString DESC = $"This vent periodically releases scorcing hot {Link("Helium", "HELIUM")}";
 					}
 
 					public class BEACHED_CORALREEF
 					{
-						public static LocString NAME = "Coral Reef";
+						public static LocString NAME = Link("Coral Reef", GeyserConfigs.PrefabID(GeyserConfigs.CORAL_REEF));
 						public static LocString DESC = $"This geyser peridocially emits a small amount of {Link("Salt Water", SimHashes.SaltWater.ToString())} rich in {Link("Plankton", PlanktonGerms.ID)}.";
 					}
 
 					public class BEACHED_PACU_GEYSER
 					{
-						public static LocString NAME = "Pacu Geyser";
+						public static LocString NAME = Link("Pacu Geyser", GeyserConfigs.PrefabID(GeyserConfigs.PACU_GEYSER));
 						public static LocString DESC = $"A geyser that periodically erupts with" +
 							$" {Link("Polluted Water", SimHashes.DirtyWater.ToString())} rich in " +
 							$"{Link("Pacus", PacuConfig.ID)}.";
@@ -353,6 +365,12 @@ namespace Beached
 
 				public class SEEDS
 				{
+					public class BEACHED_PURPLEHANGER
+					{
+						public static LocString NAME = Link("Purpicle Seed", PurpleHangerConfig.ID);
+						public static LocString DESC = $"Seed of a {Link("Purpicle", PurpleHangerConfig.ID)}. It can onlybe planted in a hanging pot.";
+					}
+
 					public class BEACHED_BONEWORM
 					{
 						public static LocString NAME = Link("Boneworm Bud", BonewormConfig.ID);
@@ -421,6 +439,12 @@ namespace Beached
 						public static LocString DESC = ($"The {Link("Seed", "PLANTS")} of a {NAME}.");
 					}
 
+					public class BEACHED_GNAWICASEED
+					{
+						public static LocString NAME = Link("Gnawica Seed", PipTailConfig.ID);
+						public static LocString DESC = ($"The {Link("Seed", "PLANTS")} of a {NAME}.");
+					}
+
 					public class BEACHED_LEAFLETCORAL
 					{
 						public static LocString NAME = Link("Leaflet Coral Frag", LeafletCoralConfig.ID);
@@ -450,6 +474,32 @@ namespace Beached
 					public static LocString DOMESTICATEDDESC = "...";
 				}
 
+
+				public class BEACHED_GNAWICAPLANT
+				{
+					public static LocString NAME = Link("Gnawica", GnawicaPlantConfig.ID);
+					public static LocString DESC = $"...";
+					public static LocString DOMESTICATEDDESC = "...";
+				}
+
+				public class BEACHED_GNAWICAMAW
+				{
+					public static LocString NAME = Link("Gnawica Maw", GnawicaMawConfig.ID);
+					public static LocString DESC = $"A blooming flower with a deceptively sweet and inviting smell. Gnawicas use these flowers to consume their calories. {Link("Fua Fuas", "BEACHEDFUAFUA")} habiting this plant will deliver it {Link("Bone", Elements.bone)} or themselves nearing the end of their lives.";
+				}
+
+				public class BEACHED_GNAWICAGARDEN
+				{
+					public static LocString NAME = Link("Gnawica Garden", GnawicaMawConfig.ID);
+					public static LocString DESC = $"Plentiful fruit stalk of a {Link("Gnawica", "BEACHEDGNAWICA")}, which can be harvested for tasty {Link("Gnawica Berries.", GnawicaBerryConfig.ID)}. {(Link("Fua Fuas", "BEACHEDFUAFUA"))} living on this plant will consume their nutrition here.";
+				}
+
+				public class BEACHED_GNAWICASTALK
+				{
+					public static LocString NAME = Link("Gnawica Stalk", GnawicaMawConfig.ID);
+					public static LocString DESC = $"Woody and coarse stalk of a {Link("Gnawica", "BEACHEDGNAWICA")}. {(Link("Fua Fuas", "BEACHEDFUAFUA"))} use these to climb around the plant and access it's vaious parts.";
+				}
+
 				public class BEACHED_JELLYFISHSTROBILA
 				{
 					public static LocString NAME = Link("Jellyfish Strobila", JellyfishStrobilaConfig.ID);
@@ -459,7 +509,7 @@ namespace Beached
 				public class BEACHED_CELLALGAE
 				{
 					public static LocString NAME = Link("Bubble Algae", AlgaeCellConfig.ID);
-					public static LocString DESCRIPTION = $"A transparent squisjy singular cell, which can be harvested for edible {Link("Jelly", JellyConfig.ID)}.";
+					public static LocString DESCRIPTION = $"A singular transparent, squishy cell, which can be harvested for edible {Link("Jelly", JellyConfig.ID)}.";
 					public static LocString DOMESTICATEDDESC = "...";
 				}
 
@@ -473,16 +523,16 @@ namespace Beached
 				public class BEACHED_SLICKSHELL
 				{
 					public static LocString NAME = Link("Slickshell", SlickShellConfig.ID);
-					public static LocString DESC = $"Slickshell are a slow, docile critters that excreted {Link("Dirt", SimHashes.Dirt)} when consuming {Link("Salt", SimHashes.Salt)}. Slickshells also produce {Link("Mucus", Elements.mucus)} to aid their movement.";
+					public static LocString DESC = $"Slickshell are a slow, docile critters that excrete {Link("Dirt", SimHashes.Dirt)} when consuming {Link("Salt", SimHashes.Salt)}. Slickshells also produce {Link("Mucus", Elements.mucus)} to aid their movement.";
 					public static LocString BABY_NAME = Link("Slickshelly", SlickShellConfig.ID);
-					public static LocString BABY_DESC = "...";
+					public static LocString BABY_DESC = $"A very small and fragile Slickshelly. It's body is still light enough where it does not need to produce Mucus for locomotion. Eventually, it will mature into an adult {Link("Slickshell", SlickShellConfig.ID)}.";
 					public static LocString EGG_NAME = Link("Slickshell Egg", SlickShellConfig.ID);
 				}
 
 				public class BEACHED_IRONSHELL
 				{
 					public static LocString NAME = Link("Ironshell", IronShellConfig.ID);
-					public static LocString DESC = $"Ironshell are a slow, docile critters that excreted {Link("Obsidian", SimHashes.Obsidian)} when consuming {Link("Sulfur", SimHashes.Sulfur)}, and grow {Link("Pyrite", SimHashes.FoolsGold)} scales which can be shorn. Ironshells also produce {Link("Mucus", Elements.mucus)} to aid their movement.";
+					public static LocString DESC = $"Ironshell are a slow, docile critters that excrete {Link("Obsidian", SimHashes.Obsidian)} when consuming {Link("Sulfur", SimHashes.Sulfur)}, and grow {Link("Pyrite", SimHashes.FoolsGold)} scales which can be shorn. Ironshells also produce {Link("Mucus", Elements.mucus)} to aid their movement.";
 					public static LocString BABY_NAME = Link("Ironshelly", IronShellConfig.ID);
 					public static LocString BABY_DESC = "...";
 					public static LocString EGG_NAME = Link("Ironshell Egg", IronShellConfig.ID);
@@ -493,7 +543,7 @@ namespace Beached
 					public static LocString NAME = Link("Fusty Puft", AmmoniaPuftConfig.ID);
 					public static LocString DESC = $"Fusty Pufts are non-aggressive critters who that excrete {Link("Rot", Elements.rot)} with each breath.";
 					public static LocString BABY_NAME = Link("Fusty Puftlet", AmmoniaPuftConfig.ID);
-					public static LocString BABY_DESC = "...";
+					public static LocString BABY_DESC = $"A tiny baby Puftlet, both fusty and fussy.\n\nIn time it will grow into an adult {Link("Fusty Puft", AmmoniaPuftConfig.ID)}.";
 					public static LocString EGG_NAME = Link("Fusty Puftlet Egg", AmmoniaPuftConfig.ID);
 				}
 
@@ -502,7 +552,7 @@ namespace Beached
 					public static LocString NAME = Link("Mer-Pip", MerpipConfig.ID);
 					public static LocString DESC = "Mer-Pips are an aquatic cousin to the common Pip. They can also plant coral frags to sea floors.";
 					public static LocString BABY_NAME = Link("Mer-Pipsqueak", MerpipConfig.ID);
-					public static LocString BABY_DESC = "...";
+					public static LocString BABY_DESC = $"A tiny Mer-Pip with tiny gills and tiny fins. Mer-Pips are aquatic cousins of the common Pip.\n\nOnce mature, it will become an adult {Link("Mer-Pip", MerpipConfig.ID)}, planting seeds underwater.";
 					public static LocString EGG_NAME = Link("Mer-Pip Egg", MerpipConfig.ID);
 				}
 
@@ -532,7 +582,9 @@ namespace Beached
 					public static LocString NAME = Link("Jellyfish", JellyfishConfig.ID);
 					public static LocString DESC = "...";
 					public static LocString BABY_NAME = Link("Jelly Ephyra", JellyfishConfig.ID);
-					public static LocString BABY_DESC = "...";
+					public static LocString BABY_DESC = "A small see-through jellyfish baby. Touching it causes a tingling feel in the fingers, but the electricity is not yet significant enough for industrial use.\n" +
+						"\n" +
+						$"It will mature into a {Link("Jellyfish", JellyfishConfig.ID)}.";
 					public static LocString EGG_NAME = Link("Jellyfish Egg", JellyfishConfig.ID);
 				}
 
@@ -543,6 +595,18 @@ namespace Beached
 					public static LocString BABY_NAME = "Angular Larvae";
 					public static LocString BABY_DESC = "...";
 					public static LocString EGG_NAME = "Angular Fish Egg";
+				}
+
+				public class BEACHED_FUAFUA
+				{
+					public static LocString NAME = Link("Fua Fua", FuaFuaNestConfig.ID);
+					public static LocString DESC = $"Fua Fuas are a kind of squishy and slimy nudibranch who live in a strong symbiotic relationship with {Link("Gnawica plants.")}. They nibble on the {Link("berries produced by their host plant", GnawicaBerryConfig.ID)}, chewing up the leftover seeds to produce an extremely soft material called {Link("Fua Fuzz", Elements.fuzz)}. They also actively maintain their home tree, and deliver {Link("Bones", Elements.bone)}, {Link("Slime Meat", RawSnailConfig.ID)} or themselves at the end of their lifespans to the maw of the Gnawica tree, perpetuating it's cycle.";
+				}
+
+				public class BEACHED_FUAFUANEST
+				{
+					public static LocString NAME = Link("Fua Nest", FuaFuaNestConfig.ID);
+					public static LocString DESC = $"Home of the adorable and squishy {(Link("Fua Fuas", FuaFuaNestConfig.ID))}, built atop a {Link("Gnawica plant", "BEACHEDGNAWICA")}. The nest is made of dense {Link("Fua Fuzz", Elements.fuzz)}, the excess of which can be periodically harvested and used in textile production.";
 				}
 
 				public class BEACHED_KARACOO

@@ -79,7 +79,7 @@ namespace Beached.Content.Defs.Buildings
 			Tinkerable.MakePowerTinkerable(go);
 			go.AddOrGetDef<PoweredActiveController.Def>();
 
-			Lubricatable.ConfigurePrefab(go, 10f, 10f / (CONSTS.CYCLE_LENGTH * 3f), true);
+			Lubricatable.ConfigurePrefab(go, 10f, 10f / (CONSTS.CYCLE_LENGTH * 3f), true, Lubricatable.BoostType.Generator);
 		}
 	}
 }

@@ -7,6 +7,7 @@ namespace Beached.Content.Defs.Entities.Corals
 	public class LeafletCoralConfig : IEntityConfig
 	{
 		public const string ID = "Beached_LeafletCoral";
+		public const string SEED_ID = "Beached_LeafletCoralSeed";
 		public const float CONVERSION_RATE = 0.5f;
 		public const float SUCC_RATE = 0.01f;
 

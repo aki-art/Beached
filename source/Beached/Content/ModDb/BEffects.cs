@@ -12,12 +12,16 @@
 			DAZED = "Beached_Dazed",
 			DIMWIT = "Beached_Dimwit",
 			FLUMMOXED = "Beached_Flummoxed",
+			GNAWBERRY_JUICE = "Beached_GnawberryJuice",
+			GRISTLE_JUICE = "Beached_GristleJuice",
 			ICEWRATH_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
 			KARACOO_HUG = "Beached_KaracooHug",
 			LIMPETHOST = "Beached_LimpetHost", // for critters, used for growing limpets
 			LIMPETHOST_RECOVERY = "Beached_LimpetHost_Recovery", // for critters, used for growing limpets
 			LIMPETS_DUPLICANT_RECOVERY = "Beached_Limpets_Duplicant_Recovery",
-			LUBRICATED = "Beached_Lubricated",
+			LUBRICATED_DOOR = "Beached_LubricatedDoor",
+			LUBRICATED_TUNEUP = "Beached_LubricatedTuneUp",
+			LUBRICATED_OPERATIONSPEED = "Beached_LubricatedOperationSpeed",
 			NICE_SCENT = "Beached_NiceScent", // shower with soap
 			OCEAN_BREEZE = "Beached_OceanBreeze", // -5% stress/cycle, -10g Oxygen
 			PLUSHIE_MUFFIN = "Beached_PlushieMuffin",
@@ -53,6 +57,18 @@
 
 			//var histamineSuppression = set.effects.Get("HistamineSuppression");
 
+			var cycle = CONSTS.CYCLE_LENGTH;
+
+			new EffectBuilder(GNAWBERRY_JUICE, cycle, false)
+				.Modifier(morale, 2, false)
+				.Modifier(stressDelta, -0.1f, true)
+				.Add(set);
+
+			new EffectBuilder(GRISTLE_JUICE, cycle, false)
+				.Modifier(morale, 2, false)
+				.Modifier(stressDelta, -0.1f, true)
+				.Add(set);
+
 			new EffectBuilder(SUPER_ALLERGY_MED, CONSTS.CYCLE_LENGTH * 7f, false)
 				.HideInUI()
 				.Add(set);
@@ -84,11 +100,19 @@
 				.Modifier(morale, 6, false)
 				.Add(set);
 
-			new EffectBuilder(LUBRICATED, PERSISTENT, false)
-				.Modifier(Db.Get().Attributes.GeneratorOutput.Id, 0.25f, true)
-				.Modifier(BAttributes.operatingSpeed.Id, 0.5f, true)
+			new EffectBuilder(LUBRICATED_DOOR, PERSISTENT, false)
 				.Modifier(BAttributes.doorOpeningSpeed.Id, 2f, true)
-				.HideInUI()
+				.Icon("status_item_plant_liquid")
+				.Add(set);
+
+			new EffectBuilder(LUBRICATED_OPERATIONSPEED, PERSISTENT, false)
+				.Modifier(BAttributes.operatingSpeed.Id, 0.5f, true)
+				.Icon("status_item_plant_liquid")
+				.Add(set);
+
+			new EffectBuilder(LUBRICATED_TUNEUP, PERSISTENT, false)
+				.Modifier(Db.Get().Attributes.GeneratorOutput.Id, 25f, false)
+				.Icon("status_item_plant_liquid")
 				.Add(set);
 
 			new EffectBuilder(DAMP_PLANTGROWTH, PERSISTENT, false)

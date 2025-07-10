@@ -587,7 +587,7 @@ namespace Coffee.UIExtensions
 				_particleSystem.GetParticles(particles, size);
 
 				// Resolution resolver:
-				// (psPos / scale) / (prevPsPos / prevScale) -> psPos * scale.inv * prevPsPos.inv * prevScale
+				// (psPos / _scale) / (prevPsPos / prevScale) -> psPos * _scale.inv * prevPsPos.inv * prevScale
 				var modifier = psPos.GetScaled(
 					scale.Inverse(),
 					_prevPsPos.Inverse(),

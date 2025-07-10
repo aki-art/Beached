@@ -1,22 +1,19 @@
 ﻿using Beached.Content.ModDb;
-using System;
-using System.Reflection;
+using HarmonyLib;
 
 namespace Beached.Patches
 {
 	public class DoorPatch
 	{
-		//[HarmonyPatch(typeof(Door), nameof(Door.UpdateAnimAndSoundParams))]
 		public class Door_UpdateAnimAndSoundParams_Patch
 		{
-			public static MethodInfo TargetMethod()
+			// manually patched because Door.OVERRIDE_ANIMS is a static reference to Assets.GetAnim, and directly patching crashes
+			public static void Patch(Harmony harmony)
 			{
-				var type = Type.GetType("Door");
-
-				Debug.Assert(type != null, "type is null");
-				return type.GetMethod("UpdateAnimAndSoundParams", [typeof(bool)]);
+				var method = AccessTools.Method("Door:UpdateAnimAndSoundParams", [typeof(bool)]);
+				var postfix = AccessTools.Method(typeof(Door_UpdateAnimAndSoundParams_Patch), "Postfix", [typeof(Door)]);
+				harmony.Patch(method, postfix: new HarmonyMethod(postfix));
 			}
-
 
 			public static void Postfix(Door __instance)
 			{

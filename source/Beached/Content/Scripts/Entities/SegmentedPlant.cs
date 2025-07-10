@@ -26,7 +26,7 @@ namespace Beached.Content.Scripts.Entities
 		public int baseCell;
 		private HashSet<int> cells = [];
 
-		private int debugPreviousLength; // to check if the length was set from debug window
+		private int debugPreviousLength; // to check if the finalLength was set from debug window
 
 		public HashSet<int> GetCells() => cells;
 

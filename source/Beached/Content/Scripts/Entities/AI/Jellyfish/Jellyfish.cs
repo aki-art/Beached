@@ -1,17 +1,17 @@
 ﻿
 using KSerialization;
-using System;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities.AI.Jellyfish
 {
 	[SerializationConfig(MemberSerialization.OptIn)]
-	public class Jellyfish : CritterGeneratorSpawner, ISim200ms, IImguiDebug
+	public class Jellyfish : CritterGeneratorSpawner, ISim200ms, IImguiDebug, ISim1000ms
 	{
 		[Serialize] public float ElapsedSinceLastPulse { get; private set; }
 		[Serialize] public bool isEnergized;
 
 		[MySmiReq] public PulseMonitor.Instance pulseMonitor;
+		[MyCmpReq] public ElectricEmitter emitter;
 
 		[SerializeField] public float pulseDurationSeconds;
 
@@ -72,7 +72,11 @@ namespace Beached.Content.Scripts.Entities.AI.Jellyfish
 
 		internal void EnableConnector()
 		{
-			throw new NotImplementedException();
+		}
+
+		public void Sim1000ms(float dt)
+		{
+			emitter.Pulse(-1f, 4f, 1);
 		}
 	}
 }

@@ -5,9 +5,10 @@ namespace Beached.Content.Scripts.Buildings
 {
 	public class WaterGenerator : Generator
 	{
+		private const float FLOW_MULTIPLIER = 20_000f;
 		private HandleVector<int>.Handle accumulator = HandleVector<int>.InvalidHandle;
 
-		[MyCmpReq] KSelectable kSelectable;
+		[MyCmpReq] private KSelectable kSelectable;
 
 		public override void OnSpawn()
 		{
@@ -39,16 +40,17 @@ namespace Beached.Content.Scripts.Buildings
 			var cell = Grid.PosToCell(this);
 			var isInLiquid = Grid.IsSubstantialLiquid(cell);
 
-			var currentFlow = isInLiquid ? Flow(cell) : 0f;
+			var currentFlow = isInLiquid ? (Flow(cell) * FLOW_MULTIPLIER) : 0f;
+			Game.Instance.accumulators.Accumulate(accumulator, currentFlow * dt);
 
 			operational.SetActive(currentFlow > 0f);
 
-			var powerGenerated = Mathf.Clamp(currentFlow * 2000f, 0f, 300f);
+			var averageFlow = Game.Instance.accumulators.GetAverageRate(this.accumulator);
 
-			Game.Instance.accumulators.Accumulate(accumulator, powerGenerated * dt);
+			var powerGenerated = Mathf.Clamp(averageFlow, 0f, 300f);
 
 			if (powerGenerated > 0f)
-				GenerateJoules(Mathf.Max(powerGenerated * dt, dt));
+				GenerateJoules(Mathf.Max(averageFlow * dt, dt));
 
 			//this.meter.SetPositionPercent(Game.Instance.accumulators.GetAverageRate(this.accumulator) / 380f);
 			//this.UpdateStatusItem();

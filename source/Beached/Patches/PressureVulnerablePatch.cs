@@ -20,5 +20,15 @@ namespace Beached.Patches
 				}
 			}
 		}
+
+		[HarmonyPatch(typeof(PressureVulnerable), "IsSafeElement")]
+		public class PressureVulnerable_IsSafeElement_Patch
+		{
+			public static void Postfix(PressureVulnerable __instance, ref bool __result)
+			{
+				if (__instance.HasTag(BTags.aquariumPlanted))
+					__result = true;
+			}
+		}
 	}
 }

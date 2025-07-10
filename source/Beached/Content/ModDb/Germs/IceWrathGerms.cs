@@ -53,7 +53,6 @@ namespace Beached.Content.ModDb.Germs
 		{
 			InitializeElemGrowthArray(ref elemGrowthInfo, DEFAULT_GROWTH_INFO);
 
-			var diffusion = 0.5f;
 			new GrowthInfoBuilder(this)
 				.DefaultBehavior(
 					DISEASE.UNDERPOPULATION_DEATH_RATE.NONE,
@@ -64,39 +63,12 @@ namespace Beached.Content.ModDb.Germs
 					500,
 					1f / 2000f,
 					1)
-				// still
-				.Rule(new TagGrowthRule(GameTags.IceOre)
-				{
-					populationHalfLife = DISEASE.GROWTH_FACTOR.NONE,
-					overPopulationHalfLife = DISEASE.GROWTH_FACTOR.NONE,
-					underPopulationDeathRate = 0,
-					minCountPerKG = 0,
-					maxCountPerKG = float.PositiveInfinity,
-					diffusionScale = 0,
-					minDiffusionCount = int.MaxValue
-				})
-				.Rule(new StateGrowthRule(Element.State.Liquid)
-				{
-					populationHalfLife = new float?(DISEASE.GROWTH_FACTOR.GROWTH_1),
-					overPopulationHalfLife = new float?(DISEASE.GROWTH_FACTOR.GROWTH_1),
-					underPopulationDeathRate = 0,
-					minCountPerKG = 0,
-					maxCountPerKG = float.PositiveInfinity,
-					diffusionScale = diffusion,
-					minDiffusionCount = new int?(1000),
-					minDiffusionInfestationTickCount = 0
-				})
-
+				.DiesIn(Element.State.Liquid)
 				.Rule(new StateGrowthRule(Element.State.Gas)
 				{
-					minCountPerKG = new float?(5f),
-					underPopulationDeathRate = new float?(2.66666675f),
-					populationHalfLife = new float?(10f),
-					overPopulationHalfLife = new float?(10f),
-					maxCountPerKG = 100_000f,
-					minDiffusionCount = 100,
-					diffusionScale = diffusion,
-					minDiffusionInfestationTickCount = 0
+					minCountPerKG = 200,
+					populationHalfLife = new float?(DISEASE.GROWTH_FACTOR.NONE),
+					overPopulationHalfLife = new float?(float.PositiveInfinity)
 				})
 				.StagnatesIn(Element.State.Solid)
 				.GrowsFastIn(Elements.nitrogen, SimHashes.Oxygen, SimHashes.ContaminatedOxygen, SimHashes.Hydrogen, SimHashes.Helium)
@@ -110,7 +82,18 @@ namespace Beached.Content.ModDb.Germs
 					SimHashes.Salt,
 					SimHashes.SaltWater,
 					SimHashes.Brine,
-					SimHashes.BrineIce);
+					SimHashes.BrineIce)
+				// still
+				.Rule(new TagGrowthRule(GameTags.IceOre)
+				{
+					populationHalfLife = DISEASE.GROWTH_FACTOR.NONE,
+					overPopulationHalfLife = DISEASE.GROWTH_FACTOR.NONE,
+					underPopulationDeathRate = 0,
+					minCountPerKG = 0,
+					maxCountPerKG = float.PositiveInfinity,
+					diffusionScale = 0,
+					minDiffusionCount = int.MaxValue
+				});
 
 			InitializeElemExposureArray(ref elemExposureInfo, DEFAULT_EXPOSURE_INFO);
 		}

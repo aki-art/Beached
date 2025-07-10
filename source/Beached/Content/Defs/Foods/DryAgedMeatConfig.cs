@@ -13,7 +13,7 @@ namespace Beached.Content.Defs.Foods
 			var foodInfo = new FoodInfo(
 				ID,
 				DlcManager.VANILLA_ID,
-				1200_000f,
+				18000_000f,
 				FOOD.FOOD_QUALITY_GOOD,
 				FOOD.HIGH_PRESERVE_TEMPERATURE,
 				FOOD.HIGH_ROT_TEMPERATURE,
@@ -22,7 +22,7 @@ namespace Beached.Content.Defs.Foods
 
 			var prefab = BEntityTemplates.CreateFood(
 				ID,
-				"beached_high_quality_meat_kanim",
+				"beached_dry_aged_meat_kanim",
 				0.9f,
 				0.55f,
 				foodInfo);

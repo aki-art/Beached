@@ -18,11 +18,18 @@ namespace Beached.Content.Defs.Buildings
 			ConfigureSoapHolder("SgtImalas_BathTub");
 			WoodGasGenerator();
 			FarmTile();
+			FlowerPot();
 
 			AddPOIUnlockable(IceCooledFanConfig.ID);
 			AddPOIUnlockable(IceMachineConfig.ID);
 			AddPOIUnlockable(BeachChairConfig.ID);
 			AddPOIUnlockable(WaterCoolerConfig.ID);
+		}
+
+		private static void FlowerPot()
+		{
+			var def = Assets.GetBuildingDef(FlowerVaseConfig.ID);
+			def.BuildingComplete.GetComponent<PlantablePlot>().AddAdditionalCriteria(go => !go.HasTag(BTags.decorSeedHanging));
 		}
 
 		private static void FarmTile()
@@ -119,21 +126,21 @@ namespace Beached.Content.Defs.Buildings
 		private static void ConfigureLubricatableBuildingPrefabs()
 		{
 			// generators
-			AddTimerLubricatable(HydrogenGeneratorConfig.ID);
-			AddTimerLubricatable(ManualGeneratorConfig.ID);
-			AddTimerLubricatable("StirlingEngine");
+			AddTimerLubricatable(HydrogenGeneratorConfig.ID, Lubricatable.BoostType.Generator);
+			AddTimerLubricatable(ManualGeneratorConfig.ID, Lubricatable.BoostType.Generator);
+			AddTimerLubricatable("StirlingEngine", Lubricatable.BoostType.Generator);
 
 			// fabricators
-			AddLubricatable(RockCrusherConfig.ID, ModTuning.standardLubricantUses);
-			AddLubricatable(SludgePressConfig.ID, ModTuning.standardLubricantUses);
-			AddLubricatable(MilkPressConfig.ID, ModTuning.standardLubricantUses);
-			AddLubricatable(UraniumCentrifugeConfig.ID, ModTuning.standardLubricantUses);
-			AddLubricatable(DiamondPressConfig.ID, ModTuning.standardLubricantUses);
-			AddLubricatable(SpinnerConfig.ID, ModTuning.standardLubricantUses);
+			AddLubricatable(RockCrusherConfig.ID, ModTuning.standardLubricantUses, Lubricatable.BoostType.OperationSpeed);
+			AddLubricatable(SludgePressConfig.ID, ModTuning.standardLubricantUses, Lubricatable.BoostType.OperationSpeed);
+			AddLubricatable(MilkPressConfig.ID, ModTuning.standardLubricantUses, Lubricatable.BoostType.OperationSpeed);
+			AddLubricatable(UraniumCentrifugeConfig.ID, ModTuning.standardLubricantUses, Lubricatable.BoostType.OperationSpeed);
+			AddLubricatable(DiamondPressConfig.ID, ModTuning.standardLubricantUses, Lubricatable.BoostType.OperationSpeed);
+			AddLubricatable(SpinnerConfig.ID, ModTuning.standardLubricantUses, Lubricatable.BoostType.OperationSpeed);
 
 			// other
-			AddLubricatable(OreScrubberConfig.ID, ModTuning.standardLubricantUses, workable => workable is OreScrubber);
-			AddLubricatable(LiquidPumpingStationConfig.ID, ModTuning.standardLubricantUses, workable => workable is LiquidPumpingStation);
+			AddLubricatable(OreScrubberConfig.ID, ModTuning.standardLubricantUses, workable => workable is OreScrubber, Lubricatable.BoostType.OperationSpeed);
+			AddLubricatable(LiquidPumpingStationConfig.ID, ModTuning.standardLubricantUses, workable => workable is LiquidPumpingStation, Lubricatable.BoostType.OperationSpeed);
 
 			// doors
 			foreach (var buildingDef in Assets.BuildingDefs)
@@ -143,25 +150,25 @@ namespace Beached.Content.Defs.Buildings
 
 				if (isDoor && modDidntPrevent)
 				{
-					AddLubricatable(buildingDef.PrefabID, ModTuning.standardLubricantUses);
+					AddLubricatable(buildingDef.PrefabID, ModTuning.standardLubricantUses, Lubricatable.BoostType.Door);
 					buildingDef.BuildingComplete.AddOrGet<Beached_DoorOpenTracker>();
 				}
 			}
 		}
 
-		private static Lubricatable AddTimerLubricatable(string prefabId, float time = CONSTS.CYCLE_LENGTH)
+		private static Lubricatable AddTimerLubricatable(string prefabId, int boostType, float time = CONSTS.CYCLE_LENGTH)
 		{
-			return AddLubricatable(prefabId, 10f, 10f / time, true);
+			return AddLubricatable(prefabId, 10f, 10f / time, true, boostType);
 		}
 
-		private static Lubricatable AddLubricatable(string prefabId, int times)
+		private static Lubricatable AddLubricatable(string prefabId, int times, int boostType)
 		{
-			return AddLubricatable(prefabId, 10f, 10f / times, false);
+			return AddLubricatable(prefabId, 10f, 10f / times, false, boostType);
 		}
 
-		private static Lubricatable AddLubricatable(string prefabId, int times, Func<object, bool> isUsedFn)
+		private static Lubricatable AddLubricatable(string prefabId, int times, Func<object, bool> isUsedFn, int boostType)
 		{
-			var result = AddLubricatable(prefabId, 10f, 10f / times, false);
+			var result = AddLubricatable(prefabId, 10f, 10f / times, false, boostType);
 			if (result == null)
 				return null;
 
@@ -169,14 +176,15 @@ namespace Beached.Content.Defs.Buildings
 			return result;
 		}
 
-		private static Lubricatable AddLubricatable(string prefabId, float capacity, float kgUsedEachTime, bool isTimedUse)
+		private static Lubricatable AddLubricatable(string prefabId, float capacity, float kgUsedEachTime, bool isTimedUse, int boostType)
 		{
 			var def = Assets.GetBuildingDef(prefabId);
 			if (def == null)
 				return null;
 
-			return Lubricatable.ConfigurePrefab(def.BuildingComplete, capacity, kgUsedEachTime, isTimedUse);
+			return Lubricatable.ConfigurePrefab(def.BuildingComplete, capacity, kgUsedEachTime, isTimedUse, boostType);
 		}
+
 		private static bool TryGetComplete(string id, out GameObject completePrefab)
 		{
 			var def = Assets.GetBuildingDef(id);

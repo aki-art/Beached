@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Buildings;
+﻿using Beached.Content.Overlays;
+using Beached.Content.Scripts.Buildings;
 using TUNING;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ namespace Beached.Content.Defs.Buildings
 				NOISE_POLLUTION.NOISY.TIER2);
 
 			def.PermittedRotations = PermittedRotations.FlipH;
+			def.ViewMode = ElementInteractionsOverlayMode.ID;
 
 			return def;
 		}

@@ -83,7 +83,8 @@ namespace Beached.Content.Defs.Entities
 				AddDietOptions(raptor, DinosaurMeatConfig.ID, [
 					RawSnailConfig.ID,
 					CracklingsConfig.ID,
-					GelatineConfig.ID
+					GelatineConfig.ID,
+					HighQualityMeatConfig.ID
 				]);
 
 				AddDietOptions(Assets.GetPrefab(PrehistoricPacuConfig.ID), PacuConfig.ID, [

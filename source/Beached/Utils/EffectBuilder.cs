@@ -82,6 +82,14 @@ namespace Beached.Utils
 			return this;
 		}
 
+		public EffectBuilder Icon(string icon)
+		{
+			customIcon = icon;
+
+			return this;
+		}
+
+
 		public Effect Add(ModifierSet set)
 		{
 			var effect = new Effect(ID, name, description, duration, showInUI, triggerFloatingText, isBad, emote, emoteCooldown, custom_icon: customIcon);

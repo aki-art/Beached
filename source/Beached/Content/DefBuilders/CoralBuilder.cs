@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Entities.Corals;
+using Beached.Content.Scripts.Entities.Plant;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -198,11 +199,14 @@ namespace Beached.Content.DefBuilders
 			prefab.AddOrGet<LoopingSounds>();
 			prefab.AddOrGet<Prioritizable>();
 
+			prefab.AddOrGet<AquariumPlantedMonitor>();
+
 			if (harvestable)
 			{
 				prefab.AddOrGet<Harvestable>();
 				prefab.AddOrGet<HarvestDesignatable>().defaultHarvestStateWhenPlanted = false;
 			}
+
 
 			if (seedAnimName != null)
 			{
@@ -212,6 +216,7 @@ namespace Beached.Content.DefBuilders
 
 				seedPrefab = EntityTemplates.CreateAndRegisterSeedForPlant(
 					prefab,
+					null,
 					SeedProducer.ProductionType.DigOnly,
 					ID + "Seed",
 					name,

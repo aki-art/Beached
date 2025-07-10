@@ -95,6 +95,16 @@ namespace Beached
 					public static LocString EFFECTS = "A trained duplicant can equip Collars to Muffins.";
 				}
 
+				public class BEACHED_DEVELECTRICEMITTER
+				{
+					public static LocString NAME = Link("Dev Electric Emitter", DevElectricEmitterConfig.ID);
+					public static LocString DESC = "Generated electricity. Developer use.";
+					public static LocString EFFECT = $".";
+					public static LocString POWER_LABEL = $"Power";
+					public static LocString INTERVAL_LABEL = $"Interval";
+					public static LocString STROKE_LABEL = $"Strokes";
+				}
+
 				public class BEACHED_GEMCUTTER
 				{
 					public static LocString NAME = Link("Gem Cutter", GemCutterConfig.ID);
@@ -359,6 +369,20 @@ namespace Beached
 					public static LocString EFFECT = "Produces Rubber." +
 						"\n" +
 						"\nDuplicants will not fabricate items unless recipes are queued.";
+				}
+
+				public class BEACHED_WATERBATTERY
+				{
+					public static LocString NAME = Link("Hydroelectric Power Storage", WaterGeneratorConfig.ID);
+					public static LocString DESC = "Stores power in times of excess, and provides access to it in times of scarcity. It accomplishes this by pumping Liquid to the top compartment when there is extra Power on the grid, and letting it fall down harvesting it's kinetic energy when Power levels are low. The advantage lies in there being no run-off while idle, making this an effective emergency power storage. The efficiency is dependent on the viscosity of the Liquid used.";
+					public static LocString EFFECT = $"Stores electrical {Link("Power", "POWER")} for long term or emergency use.";
+				}
+
+				public class BEACHED_WATERGENERATOR
+				{
+					public static LocString NAME = Link("Water Mill", WaterGeneratorConfig.ID);
+					public static LocString DESC = "Water Mills utilize the power of liquid flow to generate energy.";
+					public static LocString EFFECT = $"Converts Liquid Flow into electrical {Link("Power", "POWER")}. Flow is calculated based on the pressure delta of elements. For example, if something were to consume a liquid, it would create a small vortex that travels upwards.";
 				}
 
 				public class BEACHED_WOODCARVING

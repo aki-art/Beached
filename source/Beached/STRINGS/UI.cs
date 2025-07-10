@@ -207,6 +207,22 @@
 			{
 				public static LocString GUIDES = "Beached Guides";
 
+				public class BEACHED_DIETS
+				{
+					public static LocString TITLE = "Diets";
+					public static LocString CONTENT = "";
+					public static LocString VEGETARIAN_TITLE = "Vegetarian";
+					public static LocString VEGETARIAN_CONTENT = "Vegetarian duplicants are particularly picky about their food choices, even when stranded on an Asteroid with limited food options. These duplicants will consume meat but only if there are no other options available. Should this happen, they will have a 30% stress/cycle increase.\n" +
+						"\n" +
+						"<b>Eggs and Brackene</b>\n" +
+						"Luckily the duplicants consider these items vegetarian.\n" +
+						"\n" +
+						"<b>New food items</b>\n" +
+						"To accomodate my duplicants, several new recipes were revised, and are available as an alternative:";
+					public static LocString CARNIVORE_TITLE = "Carnivore";
+					public static LocString CARNIVORE_CONTENT = "";
+				}
+
 				public class SPORES
 				{
 					public static LocString TITLE = "So about those 'shrooms...";

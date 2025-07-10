@@ -7,7 +7,7 @@ namespace Beached.Content.Scripts.Buildings
 		[SerializeField] public float minimumWaterLevel;
 
 		[MyCmpReq] private PlantablePlot plantablePlot;
-		[MyCmpReq] private Storage storage;
+		[SerializeField] public Storage storage;
 
 		public override void OnSpawn()
 		{
@@ -15,16 +15,13 @@ namespace Beached.Content.Scripts.Buildings
 			smi.StartSM();
 		}
 
-		public class SMInstance : GameStateMachine<States, SMInstance, SmallAquarium, object>.GameInstance
+		public class SMInstance(SmallAquarium master) : GameStateMachine<States, SMInstance, SmallAquarium, object>.GameInstance(master)
 		{
-			public SMInstance(SmallAquarium master) : base(master)
-			{
-			}
+			public KBatchedAnimController kbac = master.GetComponent<KBatchedAnimController>();
 
 			public bool HasWater()
 			{
-				var water = master.storage.FindPrimaryElement(SimHashes.Water);
-				return water != null && water.Mass > master.minimumWaterLevel;
+				return master.storage.MassStored() > master.minimumWaterLevel;
 			}
 		}
 
@@ -38,6 +35,7 @@ namespace Beached.Content.Scripts.Buildings
 				default_state = empty;
 
 				empty
+					.PlayAnim("off")
 					.EventTransition(GameHashes.OccupantChanged, full, smi => smi.master.plantablePlot.Occupant != null);
 
 				empty.wet
@@ -47,6 +45,8 @@ namespace Beached.Content.Scripts.Buildings
 					.EventTransition(GameHashes.OnStorageChange, empty.wet, smi => !smi.HasWater());
 
 				full
+					.PlayAnim("on")
+					.ScheduleActionNextFrame("tint liquid", TintLiquid)
 					.EventTransition(GameHashes.OccupantChanged, empty, smi => smi.master.plantablePlot.Occupant == null);
 
 				full.wet
@@ -54,6 +54,20 @@ namespace Beached.Content.Scripts.Buildings
 
 				full.dry
 					.EventTransition(GameHashes.OnStorageChange, full.wet, smi => !smi.HasWater());
+			}
+
+			private void TintLiquid(SMInstance smi)
+			{
+				if (smi.master.storage.items == null || smi.master.storage.items.Count == 0)
+					return;
+
+				var item = smi.master.storage.items[0];
+
+				if (item.TryGetComponent(out PrimaryElement primary) && primary.Element != null && smi.kbac.layering != null)
+				{
+					var color = primary.Element.substance.colour with { a = byte.MaxValue };
+					smi.kbac.layering.foregroundController.GetComponent<KBatchedAnimController>().SetSymbolTint("liquid_middle_fg", color);
+				}
 			}
 
 			public class FarmStates : State

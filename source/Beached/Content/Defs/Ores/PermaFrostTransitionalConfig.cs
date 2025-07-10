@@ -31,7 +31,7 @@ namespace Beached.Content.Defs.Ores
 			return prefab;
 		}
 
-		private static IEnumerator SplitNextFrame(GameObject go)
+		private static IEnumerator SplitNextFrame(GameObject go, int disease)
 		{
 			yield return SequenceUtil.WaitForNextFrame;
 
@@ -39,9 +39,12 @@ namespace Beached.Content.Defs.Ores
 				yield return null;
 
 			var fossil = ElementLoader.FindElementByHash(SimHashes.Fossil);
+			var worldIdx = go.GetMyWorldId();
+
 			if (go.TryGetComponent(out PrimaryElement primaryElement))
 			{
 				var disaseCount = (int)(primaryElement.DiseaseCount * disasePartition);
+
 				var origin = Grid.PosToCell(go);
 				var cellsToGo = disaseEmissionOffsets.Count + 1;
 
@@ -53,7 +56,7 @@ namespace Beached.Content.Defs.Ores
 					var partialCount = disaseCount / cellsToGo;
 					cellsToGo--;
 
-					if (Grid.IsValidCellInWorld(cell, go.GetMyWorldId()))
+					if (!Grid.IsValidCellInWorld(cell, worldIdx))
 						continue;
 
 					if (existingDisease != byte.MaxValue && existingDisease != IceWrathGerms.cachedRunTimeIndex)
@@ -61,11 +64,12 @@ namespace Beached.Content.Defs.Ores
 						continue;
 					}
 
-					if (!(Grid.IsGas(cell) || Grid.IsLiquid(cell)))
-						continue;
+					if (Grid.IsGas(cell) || Grid.IsLiquid(cell))
+					{
+						SimMessages.ModifyDiseaseOnCell(cell, IceWrathGerms.cachedRunTimeIndex, partialCount + Grid.DiseaseCount[cell]);
 
-					SimMessages.ModifyDiseaseOnCell(cell, IceWrathGerms.cachedRunTimeIndex, partialCount + Grid.DiseaseCount[cell]);
-					disaseCount -= partialCount;
+						disaseCount -= partialCount;
+					}
 				}
 
 				fossil.substance.SpawnResource(
@@ -83,7 +87,8 @@ namespace Beached.Content.Defs.Ores
 
 		private void OnPrefabSpawn(GameObject go)
 		{
-			go.GetComponent<KPrefabID>().StartCoroutine(SplitNextFrame(go));
+			var disease = Grid.DiseaseCount[Grid.PosToCell(go)];
+			go.GetComponent<KPrefabID>().StartCoroutine(SplitNextFrame(go, disease));
 		}
 	}
 }

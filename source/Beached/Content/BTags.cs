@@ -11,45 +11,43 @@ namespace Beached.Content
 	{
 		public static class Groups
 		{
-			public static Tag[] jellies =
-			[
-				JellyConfig.ID
-			];
+			public static Tag[] berries = [
+				PrickleFruitConfig.ID,
+				HardSkinBerryConfig.ID,
+				GnawicaBerryConfig.ID];
 
-			public static Tag[] mosses =
-			[
+			public static Tag[] jellies = [
+				JellyConfig.ID];
+
+			public static Tag[] mosses = [
 				Elements.moss.CreateTag(),
-				Elements.fireMoss.CreateTag()
-			];
+				Elements.fireMoss.CreateTag()];
 
-			public static Tag[] grains =
-			[
+			public static Tag[] grains = [
 				ColdWheatConfig.SEED_ID,
-				FernFoodConfig.ID
-			];
+				FernFoodConfig.ID];
 
-			public static Tag[] elastomers =
-			[
+			public static Tag[] elastomers = [
 				Elements.mucus.CreateTag(),
-				SimHashes.Petroleum.CreateTag()
-			];
+				SimHashes.Petroleum.CreateTag()];
 
-			public static Tag[] sulfurs =
-			[
-				SulfurGlandConfig.ID,
-				SimHashes.Sulfur.CreateTag()
-			];
-
-			public static float[] sulfurAmounts =
-			[
-				1f,
-				5f
-			];
+			public static Dictionary<Tag, float> sulfurs = new()
+			{
+				{SulfurGlandConfig.ID, 1f },
+				{SimHashes.Sulfur.CreateTag(), 5f }
+			};
 		}
+
+		public static TagSet eggs =
+		[
+			GameTags.IncubatableEgg
+		];
 
 		public static readonly Tag
 			// ======= The ones potentially interesting for other mods ===========
 			aquaticSeed = TagManager.Create("Beached_AquaticSeed"),
+			// used with pressurevulnerable to alter behavior
+			aquariumPlanted = TagManager.Create("Beached_AquariumPlanted"),
 			// any buildig where foods are queued. meats will be scanned here, and Chef Makis can operate them
 			cookingStation = TagManager.Create("Beached_CookingStation"),
 			// triggers comfort seeker trait morale bonus when on a clothing item
@@ -87,6 +85,11 @@ namespace Beached.Content
 			userNamedCritter = TagManager.Create("Beached_UserNamedCritter"),
 			dnaAnalyzable = TagManager.Create("Beached_DNAAnalyzable"),
 			markedForDNAAnalysis = TagManager.Create("Beached_MarkedForDNAAnalysis"),
+			// seeds only allowed in "flat" planters, like farm tiles, but not in planter boxes
+			flatFloorSeed = TagManager.Create("Beached_FlatFloorSeed"),
+			// critters which eat germs
+			germDiet = TagManager.Create("Beached_GermDiet"),
+			decorSeedHanging = TagManager.Create("Beached_DecorSeedHanging"),
 
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),
@@ -120,12 +123,10 @@ namespace Beached.Content
 			vegetarian = TagManager.Create("Beached_Vegetarian"),
 			buildingAttachmentSmoker = TagManager.Create("Beached_BuildingAttachmentSmoker"),
 			// used on events that should trigger the wishing star effect on dupes
-			wishingStars = TagManager.Create("Beached_WishingStars");
+			wishingStars = TagManager.Create("Beached_WishingStars"),
+			uiGerm = TagManager.Create("Beached_EdibleGerm");
 
-		public static TagSet eggs =
-		[
-			GameTags.IncubatableEgg
-		];
+
 
 		public class Creatures
 		{
@@ -212,6 +213,9 @@ namespace Beached.Content
 			Filterable.filterableCategories.Add(aquaticSeed);
 
 			GameTags.Fabrics = GameTags.Fabrics.AddToArray(Elements.fuzz.CreateTag());
+
+			GameTags.UnitCategories.Add(uiGerm);
+			GameTags.DisplayAsUnits.Add(uiGerm);
 
 			//GameTags.AllCategories.Add(PalmLeafConfig.ID);
 			//GameTags.AllCategories.Add(BioFuelConfig.ID);

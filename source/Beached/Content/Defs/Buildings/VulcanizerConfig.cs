@@ -89,7 +89,7 @@ namespace Beached.Content.Defs.Buildings
 		{
 			RecipeBuilder.Create(ID, Strings.Get("STRINGS.ELEMENTS.BEACHED_RUBBER.DESCRIPTION"), 60f)
 			.Input(BTags.Groups.elastomers, 50f)
-			.Input(BTags.Groups.sulfurs, BTags.Groups.sulfurAmounts)
+			.Input(BTags.Groups.sulfurs)
 			.Output(Elements.rubber.CreateTag(), 50f, ComplexRecipe.RecipeElement.TemperatureOperation.Heated, true)
 			.SortOrder(0)
 			.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
