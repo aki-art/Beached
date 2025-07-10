@@ -24,11 +24,11 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 			var diet = new Diet(BEntityTemplates.SimpleDiet(
 				[Elements.moss.CreateTag(), Elements.fireMoss.CreateTag(), SimHashes.Algae.CreateTag()],
 				SimHashes.Sucrose.CreateTag(),
-				ModTuning.Karacoo.CALORIES_PER_KG_OF_ORE));
+				KaracooTuning.CALORIES_PER_KG_OF_ORE));
 
 			var def = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
 			def.diet = diet;
-			def.minConsumedCaloriesBeforePooping = ModTuning.Karacoo.CALORIES_PER_KG_OF_ORE * ModTuning.Karacoo.MIN_POOP_SIZE_IN_KG;
+			def.minConsumedCaloriesBeforePooping = KaracooTuning.CALORIES_PER_KG_OF_ORE * KaracooTuning.MIN_POOP_SIZE_IN_KG;
 
 			prefab.AddOrGetDef<SolidConsumerMonitor.Def>().diet = diet;
 
