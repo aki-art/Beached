@@ -14,17 +14,17 @@ namespace Beached.Content.Defs.Entities
 				STRINGS.DUPLICANTS.DISEASES.BEACHED_LIMPETEGG.NAME,
 				STRINGS.DUPLICANTS.DISEASES.BEACHED_LIMPETEGG.DESC,
 				1f,
-				false,
+				true,
 				Assets.GetAnim("beached_limpetegg_ui_kanim"),
 				"ui",
 				Grid.SceneLayer.Creatures,
-				additionalTags: [BTags.OniTwitch_surpriseBoxForceDisabled]);
+				additionalTags: [BTags.OniTwitch_surpriseBoxForceDisabled, BTags.uiGerm]);
 
 			return prefab;
 		}
 
 		[Obsolete]
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst) { }
 

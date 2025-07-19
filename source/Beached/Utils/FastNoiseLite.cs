@@ -334,8 +334,8 @@ namespace Beached.Utils
 		/// </summary>
 		/// <example>
 		/// Example usage with GetNoise
-		/// <code>DomainWarp(ref x, ref y)
-		/// noise = GetNoise(x, y)</code>
+		/// <code>DomainWarp(ref x, ref _y)
+		/// noise = GetNoise(x, _y)</code>
 		/// </example>
 		[MethodImpl(OPTIMISE)]
 		public void DomainWarp(ref FNLfloat x, ref FNLfloat y)
@@ -359,8 +359,8 @@ namespace Beached.Utils
 		/// </summary>
 		/// <example>
 		/// Example usage with GetNoise
-		/// <code>DomainWarp(ref x, ref y, ref z)
-		/// noise = GetNoise(x, y, z)</code>
+		/// <code>DomainWarp(ref x, ref _y, ref z)
+		/// noise = GetNoise(x, _y, z)</code>
 		/// </example>
 		[MethodImpl(OPTIMISE)]
 		public void DomainWarp(ref FNLfloat x, ref FNLfloat y, ref FNLfloat z)
@@ -1060,8 +1060,8 @@ namespace Beached.Utils
 			/*
              * --- Skew moved to TransformNoiseCoordinate method ---
              * const FNfloat F2 = 0.5f * (SQRT3 - 1);
-             * FNfloat s = (x + y) * F2;
-             * x += s; y += s;
+             * FNfloat s = (x + _y) * F2;
+             * x += s; _y += s;
             */
 
 			int i = FastFloor(x);
@@ -1127,8 +1127,8 @@ namespace Beached.Utils
 			/*
              * --- Rotation moved to TransformNoiseCoordinate method ---
              * const FNfloat R3 = (FNfloat)(2.0 / 3.0);
-             * FNfloat r = (x + y + z) * R3; // Rotation, not skew
-             * x = r - x; y = r - y; z = r - z;
+             * FNfloat _r = (x + _y + z) * R3; // Rotation, not skew
+             * x = _r - x; _y = _r - _y; z = _r - z;
             */
 
 			int i = FastRound(x);
@@ -1227,8 +1227,8 @@ namespace Beached.Utils
 			/*
              * --- Skew moved to TransformNoiseCoordinate method ---
              * const FNfloat F2 = 0.5f * (SQRT3 - 1);
-             * FNfloat s = (x + y) * F2;
-             * x += s; y += s;
+             * FNfloat s = (x + _y) * F2;
+             * x += s; _y += s;
             */
 
 			int i = FastFloor(x);
@@ -1354,8 +1354,8 @@ namespace Beached.Utils
 			/*
              * --- Rotation moved to TransformNoiseCoordinate method ---
              * const FNfloat R3 = (FNfloat)(2.0 / 3.0);
-             * FNfloat r = (x + y + z) * R3; // Rotation, not skew
-             * x = r - x; y = r - y; z = r - z;
+             * FNfloat _r = (x + _y + z) * R3; // Rotation, not skew
+             * x = _r - x; _y = _r - _y; z = _r - z;
             */
 
 			int i = FastFloor(x);
@@ -2279,8 +2279,8 @@ namespace Beached.Utils
 			/*
              * --- Skew moved to TransformNoiseCoordinate method ---
              * const FNfloat F2 = 0.5f * (SQRT3 - 1);
-             * FNfloat s = (x + y) * F2;
-             * x += s; y += s;
+             * FNfloat s = (x + _y) * F2;
+             * x += s; _y += s;
             */
 
 			int i = FastFloor(x);
@@ -2374,8 +2374,8 @@ namespace Beached.Utils
 			/*
              * --- Rotation moved to TransformDomainWarpCoordinate method ---
              * const FNfloat R3 = (FNfloat)(2.0 / 3.0);
-             * FNfloat r = (x + y + z) * R3; // Rotation, not skew
-             * x = r - x; y = r - y; z = r - z;
+             * FNfloat _r = (x + _y + z) * R3; // Rotation, not skew
+             * x = _r - x; _y = _r - _y; z = _r - z;
             */
 
 			int i = FastRound(x);

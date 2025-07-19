@@ -67,9 +67,9 @@ namespace Beached.Patches.DatabasePatches
 					if (requirement is EatXCaloriesFromY foodRequirement)
 					{
 						var meats = Assets.GetPrefabsWithTag(BTags.meat);
+
 						foreach (var item in foodRequirement.fromFoodType)
 						{
-							// collect meats from other mods
 							if (Assets.TryGetPrefab(item) is GameObject prefab)
 								prefab.AddTag(BTags.meat);
 						}
@@ -81,20 +81,10 @@ namespace Beached.Patches.DatabasePatches
 								foodRequirement.fromFoodType.Add(prefabId);
 						}
 
-						/*
-												foodRequirement.fromFoodType.AddRange(
-												[
-													SmokedMeatConfig.ID,
-													SmokedFishConfig.ID,
-													HighQualityMeatConfig.ID,
-													LegendarySteakConfig.ID,
-												]);*/
-
 						break;
 					}
 				}
 			}
-
 		}
 	}
 }

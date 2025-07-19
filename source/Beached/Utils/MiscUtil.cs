@@ -24,6 +24,30 @@ namespace Beached.Utils
 			};
 		}
 
+
+		public static int OffsetCell(int cell, CellOffset offset, int times)
+		{
+			return Grid.OffsetCell(cell, offset.x * times, offset.y * times);
+		}
+
+		public static int OffsetCell(int cell, Direction direction, int times)
+		{
+			var offset = direction.ToCellOffset();
+			return Grid.OffsetCell(cell, offset.x * times, offset.y * times);
+		}
+
+		public static string DirectionToString(Direction direction)
+		{
+			return direction switch
+			{
+				Direction.Up => "↑",
+				Direction.Right => "→",
+				Direction.Down => "↓",
+				Direction.Left => "→",
+				_ => "X",
+			};
+		}
+
 		public static int GetLocalIndex(CodeInstruction instruction)
 		{
 			if (instruction.operand is LocalBuilder local)
@@ -117,10 +141,10 @@ namespace Beached.Utils
 			var yCenter = 0;
 			var result = new List<CellOffset>();
 
-			for (int y = 0; y < pattern.Length; y++)
+			for (var y = 0; y < pattern.Length; y++)
 			{
 				var line = pattern[y];
-				for (int x = 0; x < line.Length; x++)
+				for (var x = 0; x < line.Length; x++)
 				{
 					if (line[x] == CENTER)
 					{
@@ -132,10 +156,10 @@ namespace Beached.Utils
 				}
 			}
 
-			for (int y = 0; y < pattern.Length; y++)
+			for (var y = 0; y < pattern.Length; y++)
 			{
 				var line = pattern[y];
-				for (int x = 0; x < line.Length; x++)
+				for (var x = 0; x < line.Length; x++)
 				{
 					if (line[x] == FILLED
 						|| (fillCenter && line[x] == CENTER))

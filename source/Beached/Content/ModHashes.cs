@@ -32,6 +32,9 @@
 			coralConsumptionEnabled = new("CoralStatusChanged"),
 			extraTelepadDelivery = new("ExtraTelepadDelivery"),
 
+			multiPartPlant_Joined = new("MultiPartPlant_Joined"),
+			multiPartPlant_Removed = new("MultiPartPlant_Removed"),
+
 			segmentedEntityUpdate = new("SegmentedEntityUpdate"),
 			critterTraitAdded = new("CritterTraitAdded");
 

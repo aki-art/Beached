@@ -14,10 +14,19 @@ namespace Beached.Content.Scripts.Buildings
 		[SerializeField] public ManualDeliveryKG delivery;
 		[SerializeField] public bool consumeOnFabricationOrderComplete;
 		[SerializeField] public event Func<object, bool> consumeOnComplete;
+		[SerializeField] public int boost;
 
 		[MyCmpGet] public Operational operational;
 
 		[Serialize] public bool mucusRequested;
+
+		public static class BoostType
+		{
+			public static readonly int
+				OperationSpeed = Hash.SDBMLower("OperationSpeed"),
+				Door = Hash.SDBMLower("Door"),
+				Generator = Hash.SDBMLower("Generator");
+		}
 
 		public Func<Operational, bool> isInUse = operational => operational.IsActive;
 
@@ -31,15 +40,28 @@ namespace Beached.Content.Scripts.Buildings
 			base.OnPrefabInit();
 
 			var attributes = gameObject.GetAttributes();
-			attributes.Add(BAttributes.doorOpeningSpeed);
-			attributes.Add(BAttributes.operatingSpeed);
-			//attributes.Add(Db.Get().Attributes.GeneratorOutput);
+
+			if (boost == BoostType.Door)
+				attributes.Add(BAttributes.doorOpeningSpeed);
+
+			else if (boost == BoostType.OperationSpeed)
+				attributes.Add(BAttributes.operatingSpeed);
 		}
 
 		public override void OnSpawn()
 		{
 			Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenu);
 			smi.StartSM();
+
+			if (boost == 0)
+			{
+				if (GetComponent<Door>() != null)
+					boost = BoostType.Door;
+				else if (GetComponent<Workable>() != null)
+					boost = BoostType.OperationSpeed;
+				else
+					Log.Warning($"{this.PrefabID()} is configured to accept lubrication, but wasn't told what to do with it.");
+			}
 
 			if (delivery == null)
 				delivery = GetComponent<ManualDeliveryKG>();
@@ -68,6 +90,7 @@ namespace Beached.Content.Scripts.Buildings
 
 		private void UpdateDelivery()
 		{
+			Log.Debug($"update delivery: {mucusRequested}");
 			var shouldAcceptDelivery = mucusRequested && !mucusStorage.IsFull();
 			delivery.Pause(!shouldAcceptDelivery, "user toggle");
 
@@ -103,8 +126,7 @@ namespace Beached.Content.Scripts.Buildings
 					.EventHandler(ModHashes.usedBuilding, OnBuildingUsed)
 					.EventHandler(GameHashes.FabricatorOrderCompleted, OnFabricationComplete)
 					.EventHandler(GameHashes.WorkableCompleteWork, OnWorkComplete)
-					.ToggleStatusItem(BStatusItems.lubricated, smi => smi.master)
-					.ToggleEffect(BEffects.LUBRICATED);
+					.ToggleEffect(GetEffect);
 
 				lubricated.periodicResting
 					.EventHandlerTransition(GameHashes.OperationalChanged, lubricated.periodicInUse, (smi, data) => smi.master.IsInUse());
@@ -114,10 +136,19 @@ namespace Beached.Content.Scripts.Buildings
 					.Update(UseLubricant, UpdateRate.RENDER_200ms);
 			}
 
+			private Effect GetEffect(StatesInstance smi)
+			{
+				if (smi.master.boost == BoostType.Door)
+					return Db.Get().effects.Get(BEffects.LUBRICATED_DOOR);
+
+				if (smi.master.boost == BoostType.Generator)
+					return Db.Get().effects.Get(BEffects.LUBRICATED_TUNEUP);
+
+				return Db.Get().effects.Get(BEffects.LUBRICATED_OPERATIONSPEED);
+			}
+
 			private void OnWorkComplete(StatesInstance smi, object data)
 			{
-				Log.Debug("work complete check. " + smi.master.name);
-				Log.Debug(smi.master.consumeOnComplete != null);
 				if (smi.master.consumeOnComplete != null
 					&& data is Workable workable
 					&& smi.master.consumeOnComplete(workable))
@@ -166,13 +197,14 @@ namespace Beached.Content.Scripts.Buildings
 			}
 		}
 
-		public static Lubricatable ConfigurePrefab(GameObject prefab, float capacityKg, float massUsedEachTime, bool isTimedUse)
+		public static Lubricatable ConfigurePrefab(GameObject prefab, float capacityKg, float massUsedEachTime, bool isTimedUse, int boostType)
 		{
 			if (prefab.TryGetComponent(out Lubricatable existingLubricatable))
 			{
 				existingLubricatable.mucusStorage.capacityKg = capacityKg;
 				existingLubricatable.delivery.MinimumMass = massUsedEachTime;
 				existingLubricatable.delivery.refillMass = massUsedEachTime;
+				existingLubricatable.boost = boostType;
 
 				return existingLubricatable;
 			}
@@ -197,40 +229,11 @@ namespace Beached.Content.Scripts.Buildings
 			lubricatable.mucusStorage = storage;
 			lubricatable.massPerUseOrPerSecond = massUsedEachTime;
 			lubricatable.isTimedUse = isTimedUse;
+			lubricatable.boost = boostType;
 
 			prefab.AddOrGet<Effects>();
 
 			return lubricatable;
-		}
-
-		public static string ResolveStatusItemTooltipString(string str, object data)
-		{
-			if (data is not Lubricatable lubricatable)
-				return str;
-
-			var maxUses = lubricatable.mucusStorage.capacityKg / lubricatable.massPerUseOrPerSecond;
-			var usesRemaining = lubricatable.mucusStorage.GetMassAvailable(Elements.mucus) / lubricatable.massPerUseOrPerSecond;
-
-			str = lubricatable.isTimedUse
-				? string.Format(str, GameUtil.GetFormattedTime(usesRemaining))
-				: string.Format(str, $"{Mathf.FloorToInt(usesRemaining)}/{maxUses} uses"); // TODO: string entry
-
-			var effect = Db.Get().effects.Get(BEffects.LUBRICATED);
-			foreach (var modifier in effect.SelfModifiers)
-			{
-				var isDoor = lubricatable.smi.door != null;
-				var hasDoor = modifier.AttributeId == BAttributes.doorOpeningSpeed.Id && isDoor;
-				var hasGenerator = modifier.AttributeId == Db.Get().Attributes.GeneratorOutput.Id && lubricatable.TryGetComponent(out Tinkerable _);
-				var hasWorkable = modifier.AttributeId == BAttributes.operatingSpeed.Id && (!isDoor && lubricatable.TryGetComponent(out Workable workable));
-
-				if (hasDoor || hasGenerator || hasWorkable)
-				{
-					var modifierStr = string.Format(global::STRINGS.DUPLICANTS.MODIFIERS.MODIFIER_FORMAT, modifier.GetName(), modifier.GetFormattedString());
-					str += $"{CONSTS.DOT_PREFIX}{modifierStr}\n";
-				}
-			}
-
-			return str;
 		}
 	}
 }

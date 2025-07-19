@@ -1,4 +1,4 @@
-﻿using Beached.Content.Scripts.Entities;
+﻿using System;
 using TUNING;
 using UnityEngine;
 
@@ -7,6 +7,12 @@ namespace Beached.Content.Defs.Flora
 	public class PurpleHangerConfig : IEntityConfig
 	{
 		public const string ID = "Beached_PurpleHanger";
+		public const string SEED_ID = "Beached_PurpleHangerSeed";
+		public const string BASETRAIT_ID = "Beached_PurpleHangerOriginal";
+		public const string PREVIEW_ID = "Beached_PurpleHangerPreview";
+
+		public static readonly EffectorValues POSITIVE_DECOR_EFFECT = DECOR.BONUS.TIER3;
+		public static readonly EffectorValues NEGATIVE_DECOR_EFFECT = DECOR.PENALTY.TIER3;
 
 		public GameObject CreatePrefab()
 		{
@@ -15,49 +21,61 @@ namespace Beached.Content.Defs.Flora
 				STRINGS.CREATURES.SPECIES.BEACHED_PURPLEHANGER.NAME,
 				STRINGS.CREATURES.SPECIES.BEACHED_PURPLEHANGER.DESC,
 				100f,
-				Assets.GetAnim("beached_purplehanger_kanim"),
-				"idle_bottom",
+				Assets.GetAnim("beached_purplehanger2_kanim"),
+				"idle_loop",
 				Grid.SceneLayer.BuildingBack,
 				1,
-				1,
+				3,
 				DECOR.BONUS.TIER1);
 
-			prefab.AddOrGet<SimTemperatureTransfer>();
-			prefab.AddOrGet<OccupyArea>().objectLayers =
-			[
-				ObjectLayer.Building
-			];
+			EntityTemplates.MakeHangingOffsets(prefab, 1, 3);
 
-			prefab.AddOrGet<EntombVulnerable>();
-			prefab.AddOrGet<DrowningMonitor>();
-			prefab.AddOrGet<Prioritizable>();
-			prefab.AddOrGet<Uprootable>();
+			EntityTemplates.ExtendEntityToBasicPlant(
+				prefab,
+				288.15f,
+				293.15f,
+				323.15f,
+				373.15f,
+				[
+					SimHashes.Oxygen,
+					Elements.saltyOxygen,
+					SimHashes.ContaminatedOxygen,
+					SimHashes.CarbonDioxide,
+					Elements.ammonia,
+					SimHashes.Hydrogen,
+					SimHashes.Helium
+				],
+				can_tinker: false,
+				baseTraitId: BASETRAIT_ID,
+				baseTraitName: STRINGS.CREATURES.SPECIES.BEACHED_PURPLEHANGER.NAME);
 
-			/*            var toppleMonitor = prefab.AddOrGet<ToppleMonitor>();
-						toppleMonitor.validFoundationTag = BTags.StackablePlant;
-						toppleMonitor.objectLayer = ObjectLayer.Building;
-			*/
-			prefab.AddOrGet<Harvestable>();
-			prefab.AddOrGet<HarvestDesignatable>();
-			prefab.AddOrGet<SeedProducer>().Configure("BasicForagePlant", SeedProducer.ProductionType.DigOnly, 1);
+			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
+				prefab,
+				null,
+				SeedProducer.ProductionType.Hidden,
+				SEED_ID,
+				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_PURPLEHANGER.NAME,
+				STRINGS.CREATURES.SPECIES.SEEDS.WATERCUPS.DESC,
+				Assets.GetAnim("beached_watercups_seed_kanim"),
+				"object",
+				additionalTags: [GameTags.DecorSeed, BTags.decorSeedHanging],
+				sortOrder: 12,
+				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_WATERCUPS.DOMESTICATEDDESC);
 
-			prefab.AddOrGet<Updatable>();
+			EntityTemplates.CreateAndRegisterPreviewForPlant(
+				seed,
+				PREVIEW_ID,
+				Assets.GetAnim("beached_watercups_kanim"),
+				"place",
+				1,
+				1);
 
-			//prefab.AddOrGet<StackablePlant>().validFoundationTag = ID;
-
-			prefab.AddOrGet<PurpleHanger>().maxInitialLength = 12;
-			//prefab.AddOrGet<BambooStalkPiece>().leafVariationCount = 11;
-
-			var kbac = prefab.AddOrGet<KBatchedAnimController>();
-			kbac.randomiseLoopedOffset = true;
-			//kbac.animWidth = 0.75f;
-
-			prefab.AddTag(BTags.bamboo);
 
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst) { }
 

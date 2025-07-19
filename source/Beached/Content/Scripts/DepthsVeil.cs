@@ -1,4 +1,6 @@
 ﻿using HarmonyLib;
+using ImGuiNET;
+using System.Collections;
 using UnityEngine;
 using static ProcGen.SubWorld;
 
@@ -53,7 +55,14 @@ namespace Beached.Content.Scripts
 			OnShadersReloaded();
 			ShaderReloader.Register(OnShadersReloaded);
 
+			StartCoroutine(SetIndexNextFrame());
 			veil.SetActive(true);
+		}
+
+		private IEnumerator SetIndexNextFrame()
+		{
+			yield return SequenceUtil.waitForEndOfFrame;
+			SetZoneType(BWorldGen.ZoneTypes.depths);
 		}
 
 		public void OnShadersReloaded()
@@ -65,9 +74,8 @@ namespace Beached.Content.Scripts
 
 			material.renderQueue = RenderQueues.WorldTransparent;
 			material.SetTexture("_ZoneTypes", renderTexture);
-			material.SetColor("_OverlayColor", Util.ColorFromHex("161722"));
 			material.SetTexture("_LightBuffer", LightBuffer.Instance.Texture);
-			material.SetFloat("_ScrollSpeed", -0.008f);
+			material.SetFloat("_LightFuzziness", 0.3f);
 
 			SetZoneType(BWorldGen.ZoneTypes.depths);
 		}
@@ -76,6 +84,31 @@ namespace Beached.Content.Scripts
 		{
 			if (renderTexture != null && zoneTypeMaterial != null)
 				Graphics.Blit(World.Instance.zoneRenderData.indexTex, renderTexture, zoneTypeMaterial, 0);
+		}
+
+		private static int debugZoneIndex = -1;
+		private static float lightFuzzyness = 1.06f;
+		private static float lightRange = 1f;
+		private static float strength = 1f;
+
+		public static void OnImguiDebug()
+		{
+			if (ImGui.InputInt("Zone Type Index", ref debugZoneIndex) && debugZoneIndex != -1)
+			{
+				Instance.material.SetInt("_DepthsIndex", debugZoneIndex);
+				Instance.zoneTypeMaterial.SetInt("_DepthsIndex", debugZoneIndex);
+			}
+
+			//0.3f
+			if (ImGui.DragFloat("LightFuzziness###DetphsVeilFuzzy", ref lightFuzzyness))
+				Instance.material.SetFloat("_LightFuzziness", lightFuzzyness);
+
+			if (ImGui.DragFloat("LightRange###DetphsVeilLightRange", ref lightRange))
+				Instance.material.SetFloat("_LightRange", lightRange);
+
+			if (ImGui.DragFloat("Strenth###DetphsVeil", ref strength))
+				Instance.material.SetFloat("_Strength", strength);
+
 		}
 
 		public void SetZoneType(ZoneType zoneType)
@@ -89,6 +122,7 @@ namespace Beached.Content.Scripts
 				return;
 			}
 
+			Log.Debug($"setting index to : zone: {(int)zoneType}  index: {indices[zone]}");
 			material.SetInt("_DepthsIndex", indices[zone]);
 			zoneTypeMaterial.SetInt("_DepthsIndex", indices[zone]);
 		}

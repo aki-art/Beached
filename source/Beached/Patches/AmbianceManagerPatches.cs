@@ -1,6 +1,7 @@
 ﻿using Beached.Content;
 using FMODUnity;
 using HarmonyLib;
+using ProcGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,30 @@ namespace Beached.Patches
 
 				return codes;
 			}
+			[HarmonyPatch(typeof(CodexEntryGenerator), "GenerateBiomeEntries")]
+			public class CodexEntryGenerator_GenerateBiomeEntries_Patch
+			{
+				public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
+				{
+					var codes = orig.ToList();
+					var m_name = AccessTools.PropertyGetter(typeof(SubWorld), "name");
+
+					var m_InjectedMethod = AccessTools.DeclaredMethod(typeof(CodexEntryGenerator_GenerateBiomeEntries_Patch), nameof(GetName));
+
+					for (var i = 0; i < codes.Count; i++)
+					{
+						var code = codes[i];
+						if (code.Calls(m_name))
+							codes[i + 1] = new CodeInstruction(OpCodes.Call, m_InjectedMethod);
+					}
+					return codes;
+				}
+
+				private static string GetName(string subWorldName)
+				{
+					return subWorldName;
+				}
+			}
 
 			private static bool padForNumTypes;
 
@@ -73,7 +98,7 @@ namespace Beached.Patches
 			{
 				var additionalLayers = 1; // amount of elements i add
 
-				// padding for NumTypes, but only if no other mod has done so yet, just need to skip specifically 19 (or the original hardcoded length of solidLayers)
+				// padding for NumTypes, but only if no other mod has done so yet, just need to skip specifically 19 (or the original hardcoded finalLength of solidLayers)
 				if (instance.solidLayers.Length == 19 || padForNumTypes)
 				{
 					padForNumTypes = true; // caching this so on game reload we remember

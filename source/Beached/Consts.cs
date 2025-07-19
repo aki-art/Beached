@@ -6,6 +6,7 @@ namespace Beached
 	public class CONSTS
 	{
 		public const float CYCLE_LENGTH = 600f;
+		public const float ANIM_SCALE = 0.005f;
 
 		public const string DOT_PREFIX = "\n    • ";
 		public const string BEACHED_CLUSTER_SETTING_ID = "clusters/AstropelagosMoonlets";
@@ -18,14 +19,15 @@ namespace Beached
 		}
 
 		// referencing the classes static will load some stuff early, this is safer
-		public static class COOKING_STATIONS
+		public static class PREFAB_IDS
 		{
 			public const string
 				MICROBE_MUSHER = "MicrobeMusher",
 				DEEP_FRIER = "Deepfryer",
 				GRILL = "CookingStation",
 				GAS_RANGE = "GourmetCookingStation",
-				DEHYDRATOR = "FoodDehydrator";
+				DEHYDRATOR = "FoodDehydrator",
+				MOO = "Moo";
 		}
 
 		// weirdly off named things
@@ -98,11 +100,6 @@ namespace Beached
 					URBANITE_COOKING_BOTANIST = "BionicBug6",
 					ERRORPRONE_CARING_LEARNING = "BionicBug7";
 			}
-		}
-
-		public static class TEMPLATE_VALUES
-		{
-			public const string BIOME_OVERRIDE = "beached_biome_override";
 		}
 
 		public static class ACID_VULNERABILITY

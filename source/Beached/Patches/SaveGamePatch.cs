@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 
 namespace Beached.Patches
@@ -13,6 +14,7 @@ namespace Beached.Patches
 				__instance.gameObject.AddOrGet<Beached_Mod>();
 				__instance.gameObject.AddOrGet<Beached_Grid>();
 				__instance.gameObject.AddOrGet<DepthsVeil>();
+				__instance.gameObject.AddOrGet<Beached_ElectricityRenderer>();
 			}
 		}
 	}

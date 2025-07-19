@@ -1,4 +1,5 @@
-﻿using Beached.Content.Defs.Entities.Critters.Jellies;
+﻿using Beached.Content.BWorldGen;
+using Beached.Content.Defs.Entities.Critters.Jellies;
 using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.ModDb.Germs;
@@ -51,6 +52,8 @@ namespace Beached.Content.Scripts
 				Log.Info("Loaded Astropelagos world, initializing Beached settings.");
 
 			onWorldReloaded?.Invoke(IsBeachedContentActive);
+
+			ZoneTypes.OnWorldLoad();
 
 			var tameCrittersAchievement = Db.Get().ColonyAchievements.TameAllBasicCritters;
 			foreach (var item in tameCrittersAchievement.requirementChecklist)

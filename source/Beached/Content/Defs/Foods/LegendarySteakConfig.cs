@@ -13,7 +13,7 @@ namespace Beached.Content.Defs.Foods
 			var foodInfo = new FoodInfo(
 				ID,
 				DlcManager.VANILLA_ID,
-				4800_000f,
+				24000_000f,
 				FOOD.FOOD_QUALITY_MORE_WONDERFUL,
 				FOOD.HIGH_PRESERVE_TEMPERATURE,
 				FOOD.DEFAULT_ROT_TEMPERATURE,

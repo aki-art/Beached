@@ -44,8 +44,8 @@ namespace Beached
 		{
 
 			Mod.harmony = harmony;
-			Log.Debug($"loading assembly from {Path.Combine(Mod.folder, "lib", "BeachedUnityBridge.dll")}");
-			Assembly.LoadFrom(Path.Combine(folder, "lib", "BeachedUnityBridge.dll"));
+			//Log.Debug($"loading assembly from {Path.Combine(Mod.folder, "lib", "BeachedUnityBridge.dll")}");
+			//Assembly.LoadFrom(Path.Combine(folder, "lib", "BeachedUnityBridge.dll"));
 
 			base.OnLoad(harmony);
 
@@ -72,7 +72,7 @@ namespace Beached
 			{
 				foreach (var methodInfo in type.GetMethods())
 				{
-					foreach (Attribute attr in Attribute.GetCustomAttributes(methodInfo))
+					foreach (var attr in Attribute.GetCustomAttributes(methodInfo))
 					{
 						var attributeType = attr.GetType();
 

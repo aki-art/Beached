@@ -8,6 +8,8 @@ namespace Beached.Content.Scripts.Entities
 		[MyCmpReq] private ElementConsumer elementConsumer;
 		[MyCmpReq] private ElementConverter elementConverter;
 		[MyCmpReq] private WiltCondition wiltCondition;
+		[MyCmpReq] private PressureVulnerable pressureVulnerable;
+		[MyCmpReq] private KPrefabID kPrefabId;
 
 		[SerializeField] public Tag emitTag;
 		[SerializeField] public Tag filter;
@@ -39,6 +41,12 @@ namespace Beached.Content.Scripts.Entities
 		private void OnReplanted(object _)
 		{
 			RefreshConsumptionRate();
+
+			if (receptacleMonitor.Replanted)
+				kPrefabId.AddTag(BTags.aquariumPlanted);
+			else
+				kPrefabId.RemoveTag(BTags.aquariumPlanted);
+
 		}
 
 		public void RefreshConsumptionRate()

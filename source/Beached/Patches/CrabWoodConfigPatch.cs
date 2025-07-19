@@ -14,6 +14,9 @@ namespace Beached.Patches
 		{
 			public static void Postfix(GameObject __result)
 			{
+				if (!Mod.settings.General.WoodCrabLimpets)
+					return;
+
 				var crabLimpetHost = __result.AddOrGetDef<LimpetHost.Def>();
 				crabLimpetHost.maxLevel = 3;
 				crabLimpetHost.defaultGrowthRate = LimpetHost.GROWTH_RATE_6_CYCLES;

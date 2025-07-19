@@ -116,7 +116,7 @@ namespace Beached.Content.Scripts.UI
 			}
 
 			/*if (filteredTagOptions.Count != filteredOptions.Count)
-				Log.Warning("Mismatched Options length");*/
+				Log.Warning("Mismatched Options finalLength");*/
 
 			dropDown.options.Clear();
 			dropDown.AddOptions(filteredOptions);

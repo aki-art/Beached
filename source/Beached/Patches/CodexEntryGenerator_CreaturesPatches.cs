@@ -13,19 +13,14 @@ namespace Beached.Patches
 		{
 			public static void Postfix(GameObject creature, List<ContentContainer> containers)
 			{
+				AdditionalPoops(creature, containers);
+			}
+
+			private static void AdditionalPoops(GameObject creature, List<ContentContainer> containers)
+			{
 				if (creature.TryGetComponent(out AdditionalPoopTags additionalPoopTags))
 				{
-					var dietEntriesContainer = containers.Find(container => container.content != null
-						&& container.content.Count >= 2
-						&& container.content[1] is CodexCollapsibleHeader header
-						&& header.label == (string)global::STRINGS.CODEX.HEADERS.DIET);
-
-					if (dietEntriesContainer == null)
-						return;
-
-					var contents = (dietEntriesContainer.content[1] as CodexCollapsibleHeader).contents;
-
-					if (contents == null)
+					if (!GetDietEntriesContainer(containers, out var dietEntriesContainer, out var contents))
 						return;
 
 					foreach (var content in contents.content)
@@ -43,6 +38,22 @@ namespace Beached.Patches
 						}
 					}
 				}
+			}
+
+			private static bool GetDietEntriesContainer(List<ContentContainer> containers, out ContentContainer dietEntriesContainer, out ContentContainer contents)
+			{
+				contents = null;
+				dietEntriesContainer = containers.Find(container => container.content != null
+						&& container.content.Count >= 2
+						&& container.content[1] is CodexCollapsibleHeader header
+						&& header.label == (string)global::STRINGS.CODEX.HEADERS.DIET);
+
+				if (dietEntriesContainer == null)
+					return false;
+
+				contents = (dietEntriesContainer.content[1] as CodexCollapsibleHeader).contents;
+
+				return contents != null;
 			}
 		}
 

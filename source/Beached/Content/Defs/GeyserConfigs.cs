@@ -11,16 +11,19 @@ namespace Beached.Content.Defs
 			BISMUTH_VOLCANO = "Beached_Bismuth",
 			CORAL_REEF = "Beached_CoralReef",
 			HELIUM_VENT = "Beached_Helium",
+			IRIDIUM = "Beached_Iridium",
 			SALT_VOLCANO = "Beached_Salt",
-			MURKY_BRINE_GEYSER = "Beached_MurkyBrine";
+			MURKY_BRINE_GEYSER = "Beached_MurkyBrine",
+			PACU_GEYSER = "Beached_PacuGeyser",
+			ZIRCONIUM = "Beached_Zirconium",
+			NITROGEN_COLD = "Beached_NitrogenCold";
+
+		public static string PrefabID(string id) => $"GeyserGeneric_{id}";
 
 		public static void GenerateConfigs(List<GeyserGenericConfig.GeyserPrefabParams> list)
 		{
 			if (list == null)
-			{
-				Log.Warning("geyser configs list is null");
 				return;
-			}
 
 			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
 				"beached_salt_volcano_kanim",
@@ -93,6 +96,21 @@ namespace Beached.Content.Defs
 				true));
 
 			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
+				"beached_nitrogen_geyser_kanim",
+				4,
+				2,
+				new GeyserConfigurator.GeyserType(
+					NITROGEN_COLD,
+					Elements.nitrogenLiquid,
+					GeyserConfigurator.GeyserShape.Liquid,
+					MiscUtil.CelsiusToKelvin(-65f),
+					100f,
+					200f,
+					50f,
+					null,
+					geyserTemperature: 218f), true));
+
+			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
 				"beached_bismuth_volcano_kanim",
 				3,
 				3,
@@ -112,10 +130,45 @@ namespace Beached.Content.Defs
 					0.1f),
 				true));
 
-			if (Db.Get().Diseases.TryGet(BDiseases.plankton.id) == null)
-			{
-				Log.Warning("no plankton germs");
-			}
+			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
+				"beached_zirconium_volcano_kanim",
+				3,
+				3,
+				new GeyserConfigurator.GeyserType(
+					ZIRCONIUM,
+					Elements.zirconiumMolten,
+					GeyserConfigurator.GeyserShape.Molten,
+					MiscUtil.CelsiusToKelvin(2200),
+					200f,
+					400f,
+					150f,
+					[],
+					null,
+					480f,
+					1080f,
+					1 / 60f,
+					0.1f),
+				true));
+
+			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
+				"beached_iridium_volcano_kanim",
+				3,
+				3,
+				new GeyserConfigurator.GeyserType(
+					ZIRCONIUM,
+					SimHashes.MoltenIridium,
+					GeyserConfigurator.GeyserShape.Molten,
+					3000,
+					200f,
+					400f,
+					150f,
+					[],
+					null,
+					480f,
+					1080f,
+					1 / 60f,
+					0.1f),
+				true));
 
 			// coral reef, emits planktonous salt water. it's high max pressure allows it to function under water.
 			list.Add(new GeyserGenericConfig.GeyserPrefabParams(

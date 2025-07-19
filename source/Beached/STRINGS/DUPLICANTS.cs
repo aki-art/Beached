@@ -205,7 +205,7 @@ namespace Beached
 				public class BEACHED_CLUMSY
 				{
 					public static LocString NAME = "Clumsy";
-					public static LocString DESC = "This duplicant is not very precise in dexterous with their movements and cannot to Precision Work errands.";
+					public static LocString DESC = "This duplicant is not very precise with their movements and cannot to Precision Work errands.";
 				}
 
 				public class BEACHED_COMFORTSEEKER

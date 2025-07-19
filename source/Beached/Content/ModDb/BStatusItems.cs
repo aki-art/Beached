@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Scripts;
-using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.Entities.Plant;
@@ -20,7 +19,6 @@ namespace Beached.Content.ModDb
 			collectingRubberHalted,
 			collectingRubberFull,
 			geneticallyMofidied,
-			lubricated,
 			thawing,
 			gunked,
 			plushed,
@@ -51,18 +49,6 @@ namespace Beached.Content.ModDb
 				false,
 				OverlayModes.None.ID,
 				false));
-
-			lubricated = __instance.Add(new StatusItem(
-				"Beached_Lubricated",
-				BUILDINGS,
-				"status_item_plant_liquid",
-				StatusItem.IconType.Custom,
-				NotificationType.Neutral,
-				false,
-				OverlayModes.None.ID,
-				false));
-
-			lubricated.resolveTooltipCallback += Lubricatable.ResolveStatusItemTooltipString;
 
 			sandboxCrumble = __instance.Add(new StatusItem(
 				"Beached_SandBoxCrumble",

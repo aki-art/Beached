@@ -1,16 +1,19 @@
 ﻿using Beached.Content;
+using Beached.Content.Scripts.Entities;
+using HarmonyLib;
 using KSerialization;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static ProcGen.SubWorld;
+using static PropertyTextures;
 
 namespace Beached
 {
 	[SerializationConfig(MemberSerialization.OptIn)]
 	[DefaultExecutionOrder(1)]
 	[DisallowMultipleComponent]
-	public class Beached_Grid : KMonoBehaviour
+	public class Beached_Grid : KMonoBehaviour, ISim200ms, IRender200ms
 	{
 		public const int INVALID_FORCEFIELD_OFFSET = -1;
 
@@ -19,6 +22,8 @@ namespace Beached
 		[Serialize] private bool initialized;
 
 		public float[] electricity;
+		public Color[] lightColors;
+		public static bool[] hasClimbable;
 
 		public static Dictionary<Vector2I, ZoneType> worldgenZoneTypes;
 		public static Dictionary<int, int> forceFieldLevelPerWorld = [];
@@ -26,10 +31,94 @@ namespace Beached
 		public static Beached_Grid Instance;
 
 		public delegate void OnElectricChargeAddedEventHandler(int cell, float power);
-
 		public OnElectricChargeAddedEventHandler OnElectricChargeAdded;
+		public bool electricityDirty;
+		private static TextureBuffer electricityBuffer;
+		public static Texture electricityTexture;
 
-		public override void OnPrefabInit() => Instance = this;
+		[HarmonyPatch(typeof(PropertyTextures), "UpdateProperty")]
+		public class PropertyTextures_UpdateProperty_Patch
+		{
+			public static void Postfix()
+			{
+			}
+		}
+
+		public void Render200ms(float dt)
+		{
+			UpdateTextures();
+		}
+
+
+
+		private static void UpdateTextures()
+		{
+			if (!Grid.IsInitialized())
+				return;
+
+			if (Game.Instance == null || Game.Instance.IsLoading())
+				return;
+
+			// TODO: transpile in so this isnt double called
+			instance.GetVisibleCellRange(out var x0, out var y0, out var x1, out var y1);
+
+			var texture_region = electricityBuffer.Lock(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
+			UpdateElectricTexture(texture_region, x0, y0, x1, y1);
+			texture_region.Unlock();
+		}
+
+		[HarmonyPatch(typeof(PropertyTextures), "OnReset")]
+		public class PropertyTextures_OnReset_Patch
+		{
+			public static void Postfix(PropertyTextures __instance)
+			{
+				//var grid = Beached_Grid.Instance;
+
+				electricityBuffer = new TextureBuffer(
+					"Beached_Electricity",
+					Grid.WidthInCells,
+					Grid.HeightInCells,
+					TextureFormat.RGB24,
+					FilterMode.Bilinear,
+					__instance.texturePagePool);
+
+				electricityTexture = electricityBuffer.texture;
+
+				if (Beached_ElectricityRenderer.Instance != null && Beached_ElectricityRenderer.Instance.material != null)
+					Beached_ElectricityRenderer.Instance.material.SetTexture("_Electricity", electricityTexture);
+			}
+		}
+
+
+		[HarmonyPatch(typeof(PropertyTextures), "OnShadersReloaded")]
+		public class PropertyTextures_OnShadersReloaded_Patch
+		{
+			public static void Postfix()
+			{
+				Beached_ElectricityRenderer.Instance.material.SetTexture("_Electricity", electricityTexture);
+			}
+		}
+
+		private static void UpdateElectricTexture(TextureRegion region, int x0, int y0, int x1, int y1)
+		{
+			for (var y3 = y0; y3 <= y1; ++y3)
+			{
+				for (var x = x0; x <= x1; ++x)
+				{
+					var cell = Grid.XYToCell(x, y3);
+					if (Grid.IsValidCell(cell) && Grid.IsActiveWorld(cell))
+					{
+						var test = Instance.electricity[cell];
+						region.SetBytes(x, y3, (byte)(test * byte.MaxValue));
+					}
+				}
+			}
+		}
+
+		public override void OnPrefabInit()
+		{
+			Instance = this;
+		}
 
 		public void AddElectricCharge(int cell, float power)
 		{
@@ -131,7 +220,7 @@ namespace Beached
 		{
 			if (!initialized)
 			{
-				for (int cell = 0; cell < Grid.CellCount; cell++)
+				for (var cell = 0; cell < Grid.CellCount; cell++)
 				{
 					var element = Grid.Element[cell];
 					if (element.IsSolid && element.id != SimHashes.Unobtanium)
@@ -146,6 +235,13 @@ namespace Beached
 
 				initialized = true;
 			}
+		}
+
+		public void Sim200ms(float dt)
+		{
+			// TODO: inefficient AH
+			for (var i = 0; i < Grid.CellCount; i++)
+				electricity[i] *= 0.95f;
 		}
 
 		[Serializable]

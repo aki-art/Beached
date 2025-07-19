@@ -42,6 +42,8 @@ namespace Beached.Content
 			fireMoss = ToHash("FireMoss"),
 			fuzz = ToHash("Fuzz"),
 			galena = ToHash("Galena"),
+			gnawBerryJuice = ToHash("GnawBerryJuice"),
+			gristleBerryJuice = ToHash("GristleBerryJuice"),
 			gravel = ToHash("Gravel"),
 			iridium = ToHash("Iridium"),
 			moltenIridium = ToHash("MoltenIridium"),
@@ -295,6 +297,10 @@ namespace Beached.Content
 			];
 		}
 
+
+		public static string Name(SimHashes element) => Strings.Get($"STRINGS.ELEMENTS.{element.ToString().ToUpperInvariant()}.NAME");
+
+		public static string Description(SimHashes element) => Strings.Get($"STRINGS.ELEMENTS.{element.ToString().ToUpperInvariant()}.DESCRIPTION");
 
 		public static void AfterLoad()
 		{

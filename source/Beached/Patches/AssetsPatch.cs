@@ -31,6 +31,7 @@ namespace Beached.Patches
 
 				EdiblePatch.Edible_AddOnConsumeEffects_Patch.Patch(Mod.harmonyInstance);
 				EdiblePatch.Edible_OnSpawn_Patch.Patch(Mod.harmonyInstance);
+				DoorPatch.Door_UpdateAnimAndSoundParams_Patch.Patch(Mod.harmonyInstance);
 
 				foreach (var geyser in Assets.GetPrefabsWithComponent<Geyser>())
 				{

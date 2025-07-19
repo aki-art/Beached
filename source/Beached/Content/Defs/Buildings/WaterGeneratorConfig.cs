@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Buildings;
+﻿using Beached.Content.Overlays;
+using Beached.Content.Scripts.Buildings;
 using TUNING;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace Beached.Content.Defs.Buildings
 			def.ExhaustKilowattsWhenActive = 2f;
 			def.SelfHeatKilowattsWhenActive = 2f;
 
-			def.ViewMode = OverlayModes.Power.ID;
+			def.ViewMode = ElementInteractionsOverlayMode.ID;
 			def.Floodable = false;
 			def.AudioCategory = AUDIO.CATEGORY.HOLLOW_METAL;
 			def.RequiresPowerOutput = true;

@@ -81,7 +81,8 @@ namespace Beached.Content.DefBuilders
 				SLICKSTER = "FloaterNavGrid",
 				SWIMMER = "SwimmerNavGrid",
 				PIP = "SquirrelNavGrid",
-				FLOOR_NOJUMP_1X1 = BNavGrids.WALKER_NOJUMP_1X1;
+				FLOOR_NOJUMP_1X1 = BNavGrids.WALKER_NOJUMP_1X1,
+				FUAFUA = BNavGrids.FUAFUA;
 		}
 
 		public CritterBuilder Baby(string parentId, int growUpOnCycle = 5, string dropOnGrowUp = null, bool forceNavType = false)

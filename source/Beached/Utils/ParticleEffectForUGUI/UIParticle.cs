@@ -202,7 +202,7 @@ namespace Coffee.UIExtensions
 		}
 
 		/// <summary>
-		/// Prevents the root-Canvas scale from affecting the hierarchy-scaled ParticleSystem.
+		/// Prevents the root-Canvas _scale from affecting the hierarchy-scaled ParticleSystem.
 		/// </summary>
 		[Obsolete("The autoScaling is now obsolete. Please use the autoScalingMode instead.", false)]
 		public bool autoScaling
@@ -212,13 +212,13 @@ namespace Coffee.UIExtensions
 		}
 
 		/// <summary>
-		/// How to automatically adjust when the Canvas scale is changed by the screen size or reference resolution.
+		/// How to automatically adjust when the Canvas _scale is changed by the screen size or reference resolution.
 		/// <para/>
 		/// None: Do nothing.
 		/// <para/>
-		/// Transform: Transform.lossyScale (=world scale) will be set to (1, 1, 1).
+		/// Transform: Transform.lossyScale (=world _scale) will be set to (1, 1, 1).
 		/// <para/>
-		/// UIParticle: UIParticle.scale will be adjusted.
+		/// UIParticle: UIParticle._scale will be adjusted.
 		/// </summary>
 		public AutoScalingMode autoScalingMode
 		{
@@ -275,7 +275,7 @@ namespace Coffee.UIExtensions
 			|| m_MeshSharing == MeshSharing.Replica;
 
 		/// <summary>
-		/// Particle effect scale.
+		/// Particle effect _scale.
 		/// </summary>
 		public float scale
 		{
@@ -284,7 +284,7 @@ namespace Coffee.UIExtensions
 		}
 
 		/// <summary>
-		/// Particle effect scale.
+		/// Particle effect _scale.
 		/// </summary>
 		public Vector3 scale3D
 		{
@@ -293,7 +293,7 @@ namespace Coffee.UIExtensions
 		}
 
 		/// <summary>
-		/// Particle effect scale.
+		/// Particle effect _scale.
 		/// </summary>
 		public Vector3 scale3DForCalc => autoScalingMode == AutoScalingMode.Transform
 			? m_Scale3D

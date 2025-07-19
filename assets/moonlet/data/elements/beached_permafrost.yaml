@@ -35,14 +35,18 @@ elements:
       copyElement: Snow
 
   # used to spawn germs when Permafrost melts. drops equal mass fossil and distributes the germs into air in a 1 radius area
+  # hidden in codex transition
   - elementId: Beached_PermaFrost_Transitional 
-    name: Fossil and Disease
-    descriptionText: This material will release a puff of disease in a short range area.
+    name: STRINGS.ELEMENTS.BEACHED_PERMAFROST.NAME
+    debrisAnim: beached_permafrost_kanim
+    descriptionText: STRINGS.ELEMENTS.BEACHED_PERMAFROST.DESC
     specificHeatCapacity: 10
     thermalConductivity: 1
     strength: 1
-    highTemp: 9999
+    highTemp: -0.65C
     highTempTransitionTarget: Water
+    highTempTransitionOreId: Fossil
+    highTempTransitionOreMassConversion: 70%
     defaultTemperature: -40C
     defaultMass: 500
     maxMass: 1400

@@ -34,7 +34,7 @@ namespace Beached.ModDevTools
 						var col = new Color32((byte)Grid.ElementIdx[sampleCell], 0, 0, 255);
 						tex.SetPixel(x, y, col);
 						/*
-												var idx = (int)(y + 0.05f) * sampleAreaMarker.width + x;
+												var idx = (int)(_y + 0.05f) * sampleAreaMarker.width + x;
 
 												data[idx] = Grid.ElementIdx[sampleCell];*/
 					}

@@ -18,6 +18,18 @@ namespace Beached
 				public static LocString DESC = $"This Duplicant is super cozy wearing this outfit.";
 			}
 
+			public class BEACHED_GNAWBERRYJUICE
+			{
+				public static LocString NAME = "Tipsy";
+				public static LocString DESC = $"This Duplicant has had a really tasty drink.";
+			}
+
+			public class BEACHED_GRISTLEJUICE
+			{
+				public static LocString NAME = "Tipsy";
+				public static LocString DESC = $"This Duplicant has had a really tasty drink.";
+			}
+
 			public class BEACHED_SUPERALLERGEMED
 			{
 				public static LocString NAME = "Extended Antihistamines";
@@ -42,10 +54,22 @@ namespace Beached
 				public static LocString DESC = $"This creature woke up from a long hybernation, and needs some time to readjust their metabolism.";
 			}
 
-			public class BEACHED_LUBRICATED
+			public class BEACHED_LUBRICATEDDOOR
 			{
 				public static LocString NAME = "Lubricated";
-				public static LocString DESC = $"";
+				public static LocString DESC = $"This door has been well lubricated and it opens much faster.";
+			}
+
+			public class BEACHED_LUBRICATEDTUNEUP
+			{
+				public static LocString NAME = "Lubricated";
+				public static LocString DESC = $"Well lubcirated mechanical parts allow for higher efficiency.";
+			}
+
+			public class BEACHED_LUBRICATEDOPERATIONSPEED
+			{
+				public static LocString NAME = "Lubricated";
+				public static LocString DESC = $"Increased operating speed.";
 			}
 
 			public class BEACHED_FLUMMOXED

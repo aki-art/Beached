@@ -3,11 +3,11 @@ using KSerialization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities
 {
+	[SerializationConfig(MemberSerialization.OptIn)]
 	public class ElectricEmitter : KMonoBehaviour, IImguiDebug
 	{
 		[SerializeField] public int maxCells;
@@ -16,7 +16,7 @@ namespace Beached.Content.Scripts.Entities
 		[Serialize] public bool changesPath;
 		[Serialize] public float minPathSecs, maxPathSecs;
 		[Serialize] public List<int> targetCells = [];
-		private readonly List<int> affectedCells = [];
+		private readonly Dictionary<int, float> affectedCells = [];
 		private float remainingPower;
 		public static List<CellOffset> offsets = [.. MiscUtil.MakeCellOffsetsFromMap(false,
 			"XXX",
@@ -25,7 +25,6 @@ namespace Beached.Content.Scripts.Entities
 
 		private List<NeighborEntry> neighborCells;
 		private int currentCell;
-		private List<LineRenderer> lineRenderers;
 		private float debugStartPower = 10f;
 		private int debugStrokeCount;
 
@@ -40,30 +39,19 @@ namespace Beached.Content.Scripts.Entities
 		{
 			base.OnSpawn();
 			neighborCells = [];
-			lineRenderers = [];
 		}
 
 		public void Pulse(float duration, float power, int strokeCount)
 		{
-			foreach (var renderer in lineRenderers)
-				Util.KDestroyGameObject(renderer.gameObject);
-
-			lineRenderers.Clear();
-
 			for (var i = 0; i < strokeCount; i++)
 			{
 				affectedCells.Clear();
 				GenerateStroke(power);
 				var lineRenderer = AddSimpleLineRenderer(transform, Color.white, Color.blue, 0.05f, 0);
 
-				if (affectedCells.Count > 0)
-					DrawDebugStroke(lineRenderer);
-
-				lineRenderers.Add(lineRenderer);
-
 				foreach (var cell in affectedCells)
 				{
-
+					Beached_Grid.Instance.electricity[cell.Key] = Mathf.Max(Beached_Grid.Instance.electricity[cell.Key], cell.Value);
 				}
 			}
 		}
@@ -105,18 +93,6 @@ namespace Beached.Content.Scripts.Entities
 			}
 		}
 
-		private void DrawDebugStroke(LineRenderer lineRenderer)
-		{
-			lineRenderer.positionCount = affectedCells.Count;
-			lineRenderer.SetPositions(affectedCells.Select(c =>
-			{
-				var pos = Grid.CellToPos(c);
-				pos += new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, Grid.GetLayerZ(Grid.SceneLayer.SceneMAX));
-
-				return pos;//Grid.CellToPosCCC(c, Grid.SceneLayer.FXFront2);
-			}).ToArray());
-		}
-
 		private bool Step()
 		{
 			neighborCells.Clear();
@@ -127,7 +103,7 @@ namespace Beached.Content.Scripts.Entities
 				var cell = Grid.OffsetCell(currentCell, offset);
 				var conduction = Beached_Grid.GetElectricConduction(cell);
 
-				if (conduction > 0 && !affectedCells.Contains(cell))
+				if (conduction > 0 && !affectedCells.ContainsKey(cell))
 					neighborCells.Add(new NeighborEntry()
 					{
 						cell = cell,
@@ -141,9 +117,15 @@ namespace Beached.Content.Scripts.Entities
 			neighborCells.Sort();
 
 			var bestCell = neighborCells[0];
-			affectedCells.Add(bestCell.cell);
+
+			// TODO: this is a very dumb was to make electicity spread
+			var power = bestCell.conduction * powerLossMultiplier;
+			power = Mathf.Min(remainingPower, 1f);
+
+			affectedCells[bestCell.cell] = power;
+
 			currentCell = bestCell.cell;
-			remainingPower -= bestCell.conduction * powerLossMultiplier;
+			remainingPower -= power;
 
 			return true;
 		}
@@ -164,7 +146,7 @@ namespace Beached.Content.Scripts.Entities
 		public void OnImguiDraw()
 		{
 			ImGui.DragFloat("Power", ref debugStartPower);
-			ImGui.InputInt("Stokes", ref debugStrokeCount);
+			ImGui.InputInt("Strokes", ref debugStrokeCount);
 
 			if (ImGui.Button("Pulse"))
 				Pulse(-1, debugStartPower, debugStrokeCount);

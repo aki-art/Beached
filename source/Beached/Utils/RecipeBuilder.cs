@@ -13,7 +13,6 @@ namespace Beached.Utils
 		private string requiredTech;
 		private int sortOrder;
 		private int visualizerIdx = -1;
-		private bool inheritElement;
 
 		private List<RecipeElement> inputs;
 		private List<RecipeElement> outputs;
@@ -48,6 +47,12 @@ namespace Beached.Utils
 		public RecipeBuilder NameDisplay(RecipeNameDisplay nameDisplay)
 		{
 			this.nameDisplay = nameDisplay;
+			return this;
+		}
+
+		public RecipeBuilder Input(Dictionary<Tag, float> ins, bool inheritElement = true)
+		{
+			Input([.. ins.Keys], [.. ins.Values], inheritElement);
 			return this;
 		}
 
@@ -132,20 +137,6 @@ namespace Beached.Utils
 
 			if (!visualizerAnim.IsNullOrWhiteSpace())
 				recipe.SetFabricationAnim(visualizerAnim);
-			/*			if (visualizerIdx > -1)
-						{
-							if (o.Length >= visualizerIdx)
-								Log.Warning($"Cannot set visualizer to idx {visualizerIdx}, there is only {o.Length} items.");
-							else
-							{
-								var prefab = Assets.GetPrefab(o[visualizerIdx].material);
-
-								if (prefab != null)
-									recipe.FabricationVisualizer = MushBarConfig.CreateFabricationVisualizer(prefab);
-								else
-									Log.Debug($"No prefab with id {o[visualizerIdx].material}");
-							}
-						}*/
 
 			return recipe;
 		}

@@ -1,5 +1,4 @@
 ﻿using Beached.Content.DefBuilders;
-using Beached.Content.Defs.Entities.Critters.Muffins;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.Entities.AI.Jellyfish;
@@ -19,8 +18,10 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 
 			var planktonDiet = new Diet(new Diet.Info(
 				[PlanktonGerms.ID],
-				null,
-				100f));
+				SimHashes.SlimeMold.ToString(),
+				JellyfishTuning.CALORIES_PER_GERM,
+				JellyfishTuning.CONVERSION_RATE,
+				food_type: Diet.Info.FoodType.EatSolid));//BDb.FoodTypes.GermDiet));
 
 			var creatureCalorieMonitor = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
 			creatureCalorieMonitor.diet = planktonDiet;
@@ -54,10 +55,11 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 				.Brain(BTags.Species.jellyfish)
 					.Configure(ConfigureAI)
 				.Tag(GameTags.Creatures.CrabFriend)
+				.Tag(BTags.germDiet)
 				.Traits()
 					.HP(25)
 					.MaxAge(200)
-					.Stomach(MuffinTuning.KCAL_PER_CYCLE * 10, MuffinTuning.KCAL_PER_CYCLE)
+					.Stomach(JellyfishTuning.STANDARD_STOMACH_SIZE, JellyfishTuning.STANDARD_CALORIES_PER_CYCLE)
 					.Done();
 		}
 

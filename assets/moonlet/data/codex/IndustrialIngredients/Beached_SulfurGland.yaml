@@ -1,0 +1,24 @@
+id: Beached_SulfurGland
+title: Stinky Gland
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.MISC.BEACHED_SULFURGLAND.NAME
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.MISC.BEACHED_SULFURGLAND.DESC
+          
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_SulfurGland
+        preferredWidth: 128
+        preferredHeight: 128
+        
+contentMadeAndUsed:
+  - tag: Beached_SulfurGland

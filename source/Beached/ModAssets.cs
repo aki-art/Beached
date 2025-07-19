@@ -111,6 +111,7 @@ namespace Beached
 			public static Material darkVeilPostFxMaterial;
 			public static GameObject darkVeilOverlay;
 			public static GameObject test;
+			public static GameObject electricOverlay;
 
 			public struct ParticleFxSet
 			{
@@ -363,6 +364,7 @@ namespace Beached
 
 			Materials.darkVeil = shadersBundle.LoadAsset<Material>("Assets/Materials/Shader Graphs_DarkVeilShaderv2.mat");
 			Fx.darkVeilOverlay = bundle2.LoadAsset<GameObject>("Assets/Prefabs/DarkVeilQuad.prefab");
+			Fx.electricOverlay = bundle2.LoadAsset<GameObject>("Assets/Prefabs/ElectricityQuad.prefab");
 
 			sw.Stop();
 			Log.Info($"Finished loading assets. It took {sw.ElapsedMilliseconds} ms");

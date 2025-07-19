@@ -9,7 +9,7 @@ namespace Beached
 			public class BEACHED_LIMPETROCK
 			{
 				public static LocString NAME = "Limpet Rock";
-				public static LocString DESCRIPTION = "This boulder has been completely overtaken by a colony of Limpets. The inhabitants wil perioically release a small amount of gas saturated with Limpet Eggs.";
+				public static LocString DESCRIPTION = "This boulder has been completely overtaken by a colony of Limpets. The inhabitants wil periodically release a small amount of gas saturated with Limpet Eggs.";
 			}
 
 			public class BEACHED_CRYSTALS

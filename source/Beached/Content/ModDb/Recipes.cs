@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Buildings;
+using Beached.Content.Defs.Entities;
 using Beached.Content.Defs.Entities.Corals;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Defs.Flora;
@@ -29,6 +30,18 @@ namespace Beached.Content.ModDb
 				.Input([Elements.ambergris.CreateTag(), SimHashes.Tallow.CreateTag()], 25f)
 				.Input(Elements.ash.CreateTag(), 25f)
 				.Output(SoapConfig.ID, 5f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+			RecipeBuilder.Create(MilkPressConfig.ID, Elements.Description(Elements.gnawBerryJuice), 40f)
+				.Input([GnawicaBerryConfig.ID], 10f)
+				.Output(Elements.gnawBerryJuice.CreateTag(), 100f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+			RecipeBuilder.Create(MilkPressConfig.ID, Elements.Description(Elements.gristleBerryJuice), 40f)
+				.Input([PrickleFruitConfig.ID], 10f)
+				.Output(Elements.gristleBerryJuice.CreateTag(), 100f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
@@ -144,20 +157,10 @@ namespace Beached.Content.ModDb
 
 			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, 40f)
 				.Input(BTags.Groups.jellies, 1f)
-				.Input(PrickleFruitConfig.ID, 1f)
+				.Input(BTags.Groups.berries, 1f)
 				.Output(BerryJellyConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
-
-			if (DlcManager.IsContentSubscribed(DlcManager.DLC2_ID))
-			{
-				RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, 40f)
-					.Input(BTags.Groups.jellies, 1f)
-					.Input(HardSkinBerryConfig.ID, 0.5f)
-					.Output(BerryJellyConfig.ID, 1f)
-					.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
-					.Build();
-			}
 
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SALTRUBBEDJELLY.DESC, 40f)
 				.Input(BTags.Groups.jellies, 1f)
@@ -256,9 +259,15 @@ namespace Beached.Content.ModDb
 				.Build();
 
 			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_LEGENDARYSTEAK.DESC, 40f)
-				.Input(HighQualityMeatConfig.ID, 1f)
-				.Input(TableSaltConfig.ID, 1f)
+				.Input(DryAgedMeatConfig.ID, 1f)
 				.Output(LegendarySteakConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+			RecipeBuilder.Create(BrinePoolConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_DRYAGEDMEAT.DESC, 600f * 10f)
+				.Input(HighQualityMeatConfig.ID, 12)
+				.Output(DryAgedMeatConfig.ID, 1)
+				.SortOrder(0)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
@@ -268,9 +277,18 @@ namespace Beached.Content.ModDb
 			// manually add this one
 			RecipeBuilder.Create(EggCrackerConfig.ID, eggDescription, 5f)
 				.Input(InfertileEggConfig.ID, 2f)
-				.Input(RawEggConfig.ID, 1f)
+				.Output(RawEggConfig.ID, 1f)
 				.Output(EggShellConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Ingredient)
+				.Build();
+
+			// manually add this one
+			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_VEGGIEBURGER.RECIPEDESC, TUNING.FOOD.RECIPES.STANDARD_COOK_TIME)
+				.Input(ColdWheatBreadConfig.ID, 1f)
+				.Input(LettuceConfig.ID, 1f)
+				.Input(FriedMushroomConfig.ID, 1.5f)
+				.Output(VeggieBurgerConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
 			if (DlcManager.IsExpansion1Active())
