@@ -1,20 +1,21 @@
 ﻿using Beached.Content.Scripts.Entities;
+using System;
 using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities
 {
-	public class SmokerConfig : IEntityConfig
+	public class SmokerVentConfig : IEntityConfig
 	{
-		public const string ID = "Beached_Smoker";
+		public const string ID = "Beached_SmokerVent";
 
 
 		public GameObject CreatePrefab()
 		{
 			var prefab = EntityTemplates.CreatePlacedEntity(
 				ID,
-				"Smoker",
-				"Continously emits hot Carbon Dioxide.",
+				STRINGS.CREATURES.SPECIES.BEACHED_SMOKERVENT.NAME,
+				STRINGS.CREATURES.SPECIES.BEACHED_SMOKERVENT.DESCRIPTION,
 				100f,
 				Assets.GetAnim("beached_smoker_kanim"),
 				"idle",
@@ -39,7 +40,7 @@ namespace Beached.Content.Defs.Entities
 			emitter.emitRange = 1;
 			emitter.maxPressure = 10f;
 
-			prefab.AddComponent<Smoker>();
+			prefab.AddComponent<Beached_Smoker>();
 			prefab.AddComponent<Demolishable>();
 			prefab.AddOrGet<BuildingAttachPoint>().points =
 			[
@@ -53,6 +54,7 @@ namespace Beached.Content.Defs.Entities
 
 		public void OnSpawn(GameObject inst) { }
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 	}
 }

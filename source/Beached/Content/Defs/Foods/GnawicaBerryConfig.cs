@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using System;
+using TUNING;
 using UnityEngine;
 using static EdiblesManager;
 
@@ -22,7 +23,7 @@ namespace Beached.Content.Defs.Foods
 
 			var prefab = BEntityTemplates.CreateFood(
 				ID,
-				"beached_astrobar_kanim", // TODO
+				"beached_gnawberry_kanim",
 				0.8f,
 				0.5f,
 				foodInfo);
@@ -30,7 +31,8 @@ namespace Beached.Content.Defs.Foods
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject _) { }
 

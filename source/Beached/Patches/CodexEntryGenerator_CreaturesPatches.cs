@@ -57,6 +57,19 @@ namespace Beached.Patches
 			}
 		}
 
+
+		[HarmonyPatch(typeof(CodexEntryGenerator_Creatures), "GenerateCritterEntry")]
+		public class CodexEntryGenerator_Creatures_GenerateCritterEntry_Patch
+		{
+			public static void Prefix(ref string name)
+			{
+				if (name.Contains("<Link=\"BEACHED"))
+				{
+					name = Util.StripTextFormatting(name);
+				}
+			}
+		}
+
 		[HarmonyPatch(typeof(CodexEntryGenerator_Creatures), "GenerateEntries")]
 		public class CodexEntryGenerator_Creatures_GenerateEntries_Patch
 		{

@@ -1,4 +1,6 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Items;
+using System;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
@@ -18,11 +20,13 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		{
 			return base.ConfigureCritter(builder)
 				.Baby(IronShellConfig.ID)
+				.Drops(IronShellShellConfig.ID, 0.25f)
 				.Mass(25f)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_BABY, .75f);
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject prefab) { }
 

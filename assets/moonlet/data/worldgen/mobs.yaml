@@ -1,6 +1,36 @@
 MobLookupTable:
   remove: [] 
   add:
+    GlacierA:
+      prefabName: Beached_Glacier_VariantA
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.01
+        max: 0.02
+      width: 2
+      height: 2
+
+    GlacierB:
+      prefabName: Beached_Glacier_VariantB
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.01
+        max: 0.02
+      width: 2
+      height: 2
+
+    GlacierC:
+      prefabName: Beached_Glacier_VariantC
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.01
+        max: 0.02
+      width: 2
+      height: 2
+
     Beached_Oxybloon:
       prefabName: Beached_Oxybloon
       location: Floor

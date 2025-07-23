@@ -15,7 +15,7 @@ namespace Beached.Content.Defs.Buildings
 				ID,
 				1,
 				1,
-				"farmtile_kanim",
+				"beached_watermill_kanim",
 				BUILDINGS.HITPOINTS.TIER2,
 				BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER3,
 				BUILDINGS.CONSTRUCTION_MASS_KG.TIER3,
@@ -25,7 +25,7 @@ namespace Beached.Content.Defs.Buildings
 				DECOR.PENALTY.TIER2,
 				NOISE_POLLUTION.NOISY.TIER1);
 
-			def.GeneratorWattageRating = 300f;
+			def.GeneratorWattageRating = 90f;
 			def.GeneratorBaseCapacity = 1000f;
 			def.ExhaustKilowattsWhenActive = 2f;
 			def.SelfHeatKilowattsWhenActive = 2f;

@@ -506,6 +506,12 @@ namespace Beached
 					public static LocString DESCRIPTION = "A bunch of neatly stacked Jellyfish babies waiting to be released and drift away.";
 				}
 
+				public class BEACHED_SMOKERVENT
+				{
+					public static LocString NAME = Link("Smoker", SmokerConfig.ID);
+					public static LocString DESCRIPTION = "Continously emits hot Carbon Dioxide.";
+				}
+
 				public class BEACHED_CELLALGAE
 				{
 					public static LocString NAME = Link("Bubble Algae", AlgaeCellConfig.ID);

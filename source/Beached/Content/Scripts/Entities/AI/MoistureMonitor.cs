@@ -149,7 +149,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 			public void AddCodexEntries(CodexEntryGenerator_Elements.ElementEntryContext context, KPrefabID prefab)
 			{
-				var conversionEntry = CodexUtil.SimpleConversionBase(context, prefab.gameObject);
+				var conversionEntry = CodexUtil.SimpleConversionBase(context, prefab.gameObject, $"Passively excreted by {prefab.GetProperName()}");
 				var use = CodexUtil.UsageMassPerCycle(lubricant.CreateTag(), defaultMucusRate);
 
 				conversionEntry.outSet.Add(use);

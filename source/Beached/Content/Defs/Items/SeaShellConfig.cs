@@ -12,7 +12,7 @@ namespace Beached.Content.Defs.Items
 				ID,
 				STRINGS.ITEMS.MISC.BEACHED_SEASHELL.NAME,
 				STRINGS.ITEMS.MISC.BEACHED_SEASHELL.DESC,
-				1f,
+				30f,
 				true,
 				Assets.GetAnim("beached_seashell_kanim"),
 				"object",
@@ -31,7 +31,7 @@ namespace Beached.Content.Defs.Items
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst) { }
 

@@ -13,6 +13,7 @@ namespace Beached.Integration
 			DECOR_PACK_I = "DecorPackA",
 			FAST_TRACK = "PeterHan.FastTrack",
 			ROCKETRY_EXPANDED = "Rocketry Expanded",
+			ROLLER_SNAKES = "test447.RollerSnake",
 			PIP_MORPHS = "ONIPipMorphsELU",
 			PACU_MORPHS = ""; // TODO
 

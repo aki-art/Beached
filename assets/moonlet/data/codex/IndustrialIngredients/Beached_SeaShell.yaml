@@ -1,0 +1,24 @@
+id: Beached_SeaShell
+title: Spiral Shell
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.MISC.BEACHED_SEASHELL.NAME
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.MISC.BEACHED_SEASHELL.DESC
+          
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_SeaShell
+        preferredWidth: 128
+        preferredHeight: 128
+        
+contentMadeAndUsed:
+  - tag: Beached_SeaShell

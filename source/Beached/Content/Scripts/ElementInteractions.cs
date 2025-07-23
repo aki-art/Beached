@@ -33,7 +33,7 @@ namespace Beached.Content.Scripts
 		private static ushort oxygenIdx;
 		private static ushort saltWaterIdx;
 		private static ushort brineIdx;
-		private static ushort acidIdx;
+		private static readonly HashSet<ushort> acids = [];
 		private static ushort coralliumIdx;
 		private static ushort hydrogenIdx;
 		private static Element saltyOxygen;
@@ -75,9 +75,9 @@ namespace Beached.Content.Scripts
 					var min = worldContainer.worldOffset;
 					var max = worldContainer.worldOffset + worldContainer.worldSize;
 
-					for (int x = min.x; x <= max.x; x += CHUNK_EDGE)
+					for (var x = min.x; x <= max.x; x += CHUNK_EDGE)
 					{
-						for (int y = min.y; y <= max.y; y += CHUNK_EDGE)
+						for (var y = min.y; y <= max.y; y += CHUNK_EDGE)
 						{
 							var chunkIdx = WorldXYToChunkIdx(x, y);
 							simActiveChunks.Add(chunkIdx);
@@ -122,7 +122,7 @@ namespace Beached.Content.Scripts
 			{
 				UpdateSaltWater(cell, element, elementIdx);
 
-				if (elementIdx == acidIdx)
+				if (acids.Contains(elementIdx))
 					UpdateAcid(cell);
 			}
 			else if (element.IsGas)
@@ -304,9 +304,15 @@ namespace Beached.Content.Scripts
 			saltWaterIdx = ElementLoader.GetElementIndex(SimHashes.SaltWater);
 			brineIdx = ElementLoader.GetElementIndex(SimHashes.Brine);
 			saltyOxygen = ElementLoader.FindElementByHash(Elements.saltyOxygen);
-			acidIdx = ElementLoader.GetElementIndex(Elements.sulfurousWater);
 			hydrogenIdx = ElementLoader.GetElementIndex(SimHashes.Hydrogen);
 			coralliumIdx = ElementLoader.GetElementIndex(Elements.corallium);
+
+			acids.Clear();
+			foreach (var element in ElementLoader.elements)
+			{
+				if (element.HasTag(BTags.veryCorrosive))
+					acids.Add(element.idx);
+			}
 		}
 
 		private int GetRandomCellInChunk(int chunk)

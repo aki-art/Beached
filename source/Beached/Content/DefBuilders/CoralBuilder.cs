@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Entities.Corals;
+using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities.Plant;
 using System.Collections.Generic;
 using UnityEngine;
@@ -207,6 +208,12 @@ namespace Beached.Content.DefBuilders
 				prefab.AddOrGet<HarvestDesignatable>().defaultHarvestStateWhenPlanted = false;
 			}
 
+			var flowOverride = prefab.AddOrGet<FlowModifier>();
+			flowOverride.overrides = [
+				(CellOffset.up, 1f),
+				(CellOffset.none, 0.33f),
+				(new CellOffset(0, 2), 0.33f),
+				];
 
 			if (seedAnimName != null)
 			{

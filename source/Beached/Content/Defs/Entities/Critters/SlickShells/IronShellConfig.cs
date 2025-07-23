@@ -1,7 +1,9 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Items;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
+using System;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
@@ -22,6 +24,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		{
 			return base.ConfigureCritter(builder)
 				.TemperatureCelsius(50, 70, 270, 310)
+				.Drops(IronShellShellConfig.ID, 1f)
 				.SymbolPrefix("iron_")
 				.Traits()
 					.Add(BAmounts.Moisture.maxAttribute.Id, 100f)
@@ -61,10 +64,17 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			host.metabolismModifier = 1.2f;
 			host.glandMass = 5f;
 
+
+			var moltDropper = prefab.AddOrGetDef<MoltDropperMonitor.Def>();
+			moltDropper.onGrowDropID = IronShellShellConfig.ID;
+			moltDropper.massToDrop = 30f;
+			moltDropper.isReadyToMolt = IsReadyToMolt;
+
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public static Diet.Info[] SulfurDiet()
 		{

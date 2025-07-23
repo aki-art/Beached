@@ -1,6 +1,5 @@
 ﻿using Beached.Content.DefBuilders;
 using Beached.Content.Defs.Foods;
-using Beached.Content.Defs.Items;
 using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
 using TUNING;
@@ -26,7 +25,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		{
 			return builder
 				.TemperatureCelsius(10, 20, 40, 50)
-				.Drops(SeaShellConfig.ID, RawSnailConfig.ID)
+				.Drops(RawSnailConfig.ID, 1f)
 				.Size(1, 1)
 				.Mass(50f)
 				.Trappable()
@@ -74,6 +73,36 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.Add(new CritterCondoStates.Def(), isAdult)
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());
+		}
+
+		public static bool IsValidDropCell(MoltDropperMonitor.Instance smi)
+		{
+			return Grid.IsValidCell(Grid.PosToCell(smi.transform.GetPosition()));
+		}
+
+		public static bool IsReadyToMolt(MoltDropperMonitor.Instance smi)
+		{
+			if (IsValidTimeToDrop(smi) && IsValidDropCell(smi) && !smi.prefabID.HasTag(GameTags.Creatures.Hungry))
+			{
+				return smi.prefabID.HasTag(GameTags.Creatures.Happy);
+			}
+
+			return false;
+		}
+
+		public static bool IsValidTimeToDrop(MoltDropperMonitor.Instance smi)
+		{
+			if (!smi.spawnedThisCycle)
+			{
+				if (!(smi.timeOfLastDrop <= 0f))
+				{
+					return GameClock.Instance.GetTime() - smi.timeOfLastDrop > 600f;
+				}
+
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

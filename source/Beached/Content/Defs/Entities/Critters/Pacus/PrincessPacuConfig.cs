@@ -65,6 +65,6 @@ namespace Beached.Content.Defs.Entities.Critters.Pacus
 		public void OnSpawn(GameObject inst) { }
 
 		[Obsolete]
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 	}
 }

@@ -11,16 +11,24 @@ namespace Beached.Utils
 		private RecipeNameDisplay nameDisplay;
 		private string description;
 		private string requiredTech;
+		private string iconPrefabOverride;
 		private int sortOrder;
 		private int visualizerIdx = -1;
 
 		private List<RecipeElement> inputs;
 		private List<RecipeElement> outputs;
 		private string visualizerAnim;
+		private string customName;
 
 		public static RecipeBuilder Create(string fabricatorID, float time)
 		{
 			return Create(fabricatorID, null, time);
+		}
+
+		public RecipeBuilder IconPrefab(string iconPrefabOverride)
+		{
+			this.iconPrefabOverride = iconPrefabOverride;
+			return this;
 		}
 
 		public static RecipeBuilder Create(string fabricatorID, string description, float time)
@@ -138,12 +146,30 @@ namespace Beached.Utils
 			if (!visualizerAnim.IsNullOrWhiteSpace())
 				recipe.SetFabricationAnim(visualizerAnim);
 
+			if (!customName.IsNullOrWhiteSpace())
+				recipe.customName = customName;
+
+			if (!iconPrefabOverride.IsNullOrWhiteSpace())
+			{
+				recipe.customSpritePrefabID = iconPrefabOverride;
+				if (nameDisplay != RecipeNameDisplay.Custom)
+					Log.Warning("Custom recipe icon needs RecipeNameDisplay.Custom");
+			}
+
 			return recipe;
 		}
 
 		public RecipeBuilder Visualizer(string animFile)
 		{
-			this.visualizerAnim = animFile;
+			visualizerAnim = animFile;
+
+			return this;
+		}
+
+		public RecipeBuilder CustomName(string customName)
+		{
+			this.customName = customName;
+
 			return this;
 		}
 	}

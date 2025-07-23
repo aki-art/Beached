@@ -19,7 +19,7 @@ namespace Beached.Content.Overlays
 			//var color = ElementInteractions.simActiveChunks.Contains(chunkIdx) ? Color.green : Color.red;
 			//Color.Lerp(Color.black, color, Mathf.Max(0.1f, chunkIdx % 4 / 4f));
 
-			var flow = Flow(cell) * flowMult;
+			var flow = Beached_Grid.GetFlowVector(cell) * flowMult;
 
 			var isGas = Grid.IsGas(cell);
 

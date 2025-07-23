@@ -1,5 +1,6 @@
 ﻿using Beached.Content.Defs.Items;
 using Beached.Content.Scripts.Entities.Comets;
+using System;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Comets
@@ -39,7 +40,8 @@ namespace Beached.Content.Defs.Comets
 			return go;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst) { }
 

@@ -5,6 +5,7 @@ using KSerialization;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static Beached.Content.Scripts.Buildings.Chime;
 using static ProcGen.SubWorld;
 using static PropertyTextures;
 
@@ -27,6 +28,7 @@ namespace Beached
 
 		public static Dictionary<Vector2I, ZoneType> worldgenZoneTypes;
 		public static Dictionary<int, int> forceFieldLevelPerWorld = [];
+		public static Dictionary<int, float> flowOverrides = [];
 
 		public static Beached_Grid Instance;
 
@@ -126,11 +128,53 @@ namespace Beached
 			OnElectricChargeAdded?.Invoke(cell, power);
 		}
 
+		unsafe static public float GetFlowSq(int cell)
+		{
+			var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
+			var flowTexVec = vecPtr[cell];
+			var flowVec = new Vector2f(flowTexVec.X, flowTexVec.Y);
+
+			return flowVec.sqrMagnitude;
+		}
+
+		unsafe static public Vector2f GetFlowVector(int cell)
+		{
+			var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
+			var flowTexVec = vecPtr[cell];
+			var flowVec = new Vector2f(flowTexVec.X, flowTexVec.Y);
+
+			var baseValue = flowVec;
+
+			if (flowOverrides.TryGetValue(cell, out var modifier))
+			{
+				baseValue.X += modifier;
+				baseValue.Y += modifier;
+			}
+
+			return baseValue;
+		}
+
+
+		unsafe static public float GetFlow(int cell)
+		{
+			var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
+			var flowTexVec = vecPtr[cell];
+			var flowVec = new Vector2f(flowTexVec.X, flowTexVec.Y);
+
+			var baseValue = flowVec.magnitude;
+
+			if (flowOverrides.TryGetValue(cell, out var modifier))
+				baseValue += modifier;
+
+			return baseValue;
+		}
+
 		public override void OnCleanUp() => Instance = null;
 
 		public override void OnSpawn()
 		{
 			electricity = new float[Grid.CellCount];
+			flowOverrides = [];
 
 			if (worldgenZoneTypes != null)
 			{

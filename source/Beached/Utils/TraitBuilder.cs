@@ -14,13 +14,13 @@ namespace Beached.Utils
 
 		public class TraitValBuilder
 		{
-			string id;
-			int rarity = DUPLICANTSTATS.RARITY_COMMON;
-			int impact = 0;
-			int statBonus = 0;
-			string dlcId = DlcManager.VANILLA_ID;
-			List<string> mutuallyExclusiveTraits;
-			List<HashedString> mutuallyExclusiveAptitudes;
+			private string id;
+			private int rarity = DUPLICANTSTATS.RARITY_COMMON;
+			private int impact = 0;
+			private int statBonus = 0;
+			private string dlcId = DlcManager.VANILLA_ID;
+			private List<string> mutuallyExclusiveTraits;
+			private List<HashedString> mutuallyExclusiveAptitudes;
 
 			public TraitValBuilder(string id)
 			{
@@ -162,6 +162,12 @@ namespace Beached.Utils
 		public TraitBuilder DisableChoreGroups(params ChoreGroup[] choreGroups)
 		{
 			trait.disabledChoreGroups = choreGroups;
+			return this;
+		}
+
+		public TraitBuilder IgnoreEffects(string[] effects)
+		{
+			trait.AddIgnoredEffects(effects);
 			return this;
 		}
 	}

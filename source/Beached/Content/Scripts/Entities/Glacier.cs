@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using KSerialization;
+using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities
 {
@@ -6,26 +7,95 @@ namespace Beached.Content.Scripts.Entities
 	{
 		[SerializeField] public Tag[] rewards;
 		[SerializeField] public Vector3 offset;
+		[SerializeField] public bool showRewardSilhouette;
+		[SerializeField] public string initialAnim;
+
+		[Serialize] public Tag selectedReward;
 
 		[MyCmpReq] private PrimaryElement primaryElement;
+
 		private float meltTemperature;
 
 		private const float MARGIN = 1.0f;
+		private static readonly HashedString DISPLAY_TARGET = "item";
+
+		private KBatchedAnimTracker tracker;
+		private KBatchedAnimController displayKbac;
+
+		public Glacier()
+		{
+			initialAnim = "object";
+			showRewardSilhouette = true;
+		}
 
 		public override void OnSpawn()
 		{
 			base.OnSpawn();
 			GetComponent<PrimaryElement>().SetTemperature(GameUtil.GetTemperatureConvertedToKelvin(-30, GameUtil.TemperatureUnit.Celsius));
 			meltTemperature = primaryElement.Element.highTemp - MARGIN;
+
+			if (selectedReward == Tag.Invalid)
+				selectedReward = rewards.GetRandom();
+
+			UpdateRewardDisplay();
+		}
+
+		private void UpdateRewardDisplay()
+		{
+			if (!showRewardSilhouette)
+				return;
+
+			var kbac = GetComponent<KBatchedAnimController>();
+
+			var reward = Assets.GetPrefab(selectedReward);
+			if (reward == null || !reward.TryGetComponent(out KBatchedAnimController prefabKbac))
+				return;
+
+			var gameObject = new GameObject("Beached_GlacierRewardDisplay");
+			gameObject.SetActive(false);
+
+			var column = (Vector3)kbac
+				.GetSymbolTransform(DISPLAY_TARGET, out var _)
+				.GetColumn(3) with
+			{
+				z = Grid.GetLayerZ(Grid.SceneLayer.Building)
+			};
+
+
+			gameObject.transform.SetPosition(column);
+
+			displayKbac = gameObject.AddComponent<KBatchedAnimController>();
+			displayKbac.AnimFiles = [.. prefabKbac.animFiles];
+			displayKbac.SetSceneLayer(Grid.SceneLayer.Building);
+
+			tracker = gameObject.AddComponent<KBatchedAnimTracker>();
+			tracker.symbol = DISPLAY_TARGET;
+			tracker.forceAlwaysVisible = true;
+
+			tracker.SetAnimControllers(displayKbac, kbac);
+
+			displayKbac.initialAnim = prefabKbac.initialAnim;
+			displayKbac.TintColour = Color.black;
+
+			kbac.SetSymbolVisiblity((KAnimHashedString)DISPLAY_TARGET, false);
+
+			gameObject.SetActive(true);
 		}
 
 		public override void OnCleanUp()
 		{
 			if (primaryElement.Temperature > meltTemperature)
 			{
-				foreach (var item in rewards)
-					FUtility.Utils.Spawn(item, gameObject.transform.position + offset);
+				if (selectedReward != Tag.Invalid)
+				{
+					var go = FUtility.Utils.Spawn(selectedReward, gameObject.transform.position + offset);
+					if (go.TryGetComponent(out PrimaryElement pe))
+						pe.Temperature = primaryElement.Temperature;
+				}
 			}
+
+			if (!displayKbac.IsNullOrDestroyed())
+				Util.KDestroyGameObject(displayKbac.gameObject);
 		}
 	}
 }

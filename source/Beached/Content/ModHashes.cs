@@ -31,6 +31,7 @@
 			crystalHarvested = new("CrystalHarvested"),
 			coralConsumptionEnabled = new("CoralStatusChanged"),
 			extraTelepadDelivery = new("ExtraTelepadDelivery"),
+			enteredZoneType = new("EnteredZoneType"), // ZoneType zoneType
 
 			multiPartPlant_Joined = new("MultiPartPlant_Joined"),
 			multiPartPlant_Removed = new("MultiPartPlant_Removed"),

@@ -19,11 +19,17 @@ biomes:
     tags:
       - ColdBreather
       - Beached:Beached_Slagmite
+      - Beached:GlacierA
+      - Beached:GlacierB
+      - Beached:GlacierC
   - name: Beached:biomes/Beach/SnowyCarbon
     weight: 1
     tags:
       - ColdBreather
       - Beached:Beached_Slagmite
+      - Beached:GlacierA
+      - Beached:GlacierB
+      - Beached:GlacierC
 tags:
   - IgnoreCaveOverride
 
@@ -40,4 +46,13 @@ subworldTemplateRules:
       - beached/worldgen/snowy/slagmite_cave_1
     listRule: TrySome
     someCount: 10
+    allowDuplicates: true
+
+  - names:
+      - beached/worldgen/snowy/glaciers_a
+      - beached/worldgen/snowy/glaciers_b
+      - beached/worldgen/snowy/glaciers_c
+      - beached/worldgen/snowy/glaciers_d
+    listRule: TrySome
+    someCount: 12
     allowDuplicates: true

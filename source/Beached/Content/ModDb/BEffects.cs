@@ -37,6 +37,7 @@
 			SCARED = "Beached_Scared", // +10% Stress/cycle, +5% Bladder delta
 			SCARED_SIREN = "Beached_Scared_Siren", // +10% Stress/cycle, +5% Bladder delta
 			SUBMERGED_IN_MUCUS = "Beached_SubmergedInMucus",
+			THALASSOPHILE_BONUS = "Beached_ThalassophileBonus",
 			UNSAVORY_MEAL = "Beached_Unsavory_Meal",
 			SUPER_ALLERGY_MED = "Beached_SuperAllergeMed",
 			WISHING_STAR = "Beached_WishingStar"; // applied when they see shooting stars
@@ -58,6 +59,11 @@
 			//var histamineSuppression = set.effects.Get("HistamineSuppression");
 
 			var cycle = CONSTS.CYCLE_LENGTH;
+
+			new EffectBuilder(THALASSOPHILE_BONUS, 0, false)
+				.Modifier(morale, 2, false)
+				.Modifier(BAttributes.operatingSpeed.Id, 0.1f, true)
+				.Add(set);
 
 			new EffectBuilder(GNAWBERRY_JUICE, cycle, false)
 				.Modifier(morale, 2, false)

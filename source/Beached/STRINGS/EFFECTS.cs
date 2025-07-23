@@ -6,6 +6,12 @@ namespace Beached
 	{
 		public class EFFECTS
 		{
+			public class BEACHED_THALASSOPHILEBONUS
+			{
+				public static LocString NAME = "Thalassophile";
+				public static LocString DESC = $"This Duplicant is enjoying the ocean vibes.";
+			}
+
 			public class BEACHED_SANDBOX
 			{
 				public static LocString NAME = "Built a Sand Castle";

@@ -48,6 +48,12 @@ namespace Beached
 					public static LocString NAME = "Trapped Creatures";
 					public static LocString DESCRIPTION = "Two unknown critters are trapped in this ice. Based on their large teeth and claws, if I want to thaw them I should prepare for accomodations fit for a carnivore with a big appetite. It appears these are the only two speciments left in existence.";
 				}
+
+				public class BEACHED_GLACIER_SMALL_GENERIC
+				{
+					public static LocString NAME = "Small Glacier";
+					public static LocString DESCRIPTION = "A chunk of ice. There is something inside of it.";
+				}
 			}
 
 			public class SET_PIECES

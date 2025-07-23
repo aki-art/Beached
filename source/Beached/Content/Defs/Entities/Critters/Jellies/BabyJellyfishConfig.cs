@@ -22,7 +22,7 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 				.Speed(0.15f);
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject prefab) { }
 

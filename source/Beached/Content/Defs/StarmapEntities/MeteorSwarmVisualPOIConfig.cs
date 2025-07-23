@@ -20,7 +20,11 @@ namespace Beached.Content.Defs.StarmapEntities
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_EXPANSION1_ONLY;
+		public string[] GetDlcIds() => null;
+
+		public string[] GetForbiddenDlcIds() => null;
+
+		public string[] GetRequiredDlcIds() => DlcManager.EXPANSION1;
 
 		public void OnPrefabInit(GameObject inst) { }
 

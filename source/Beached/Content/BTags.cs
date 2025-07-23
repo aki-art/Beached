@@ -11,6 +11,10 @@ namespace Beached.Content
 	{
 		public static class Groups
 		{
+			public static Tag[] berryJuices = [
+				Elements.gnawBerryJuice.CreateTag(),
+				Elements.gristleBerryJuice.CreateTag()];
+
 			public static Tag[] berries = [
 				PrickleFruitConfig.ID,
 				HardSkinBerryConfig.ID,
@@ -30,6 +34,10 @@ namespace Beached.Content
 			public static Tag[] elastomers = [
 				Elements.mucus.CreateTag(),
 				SimHashes.Petroleum.CreateTag()];
+
+			public static Tag[] snailShells = [
+				SlickShellShellConfig.ID,
+				IronShellShellConfig.ID];
 
 			public static Dictionary<Tag, float> sulfurs = new()
 			{
@@ -90,7 +98,10 @@ namespace Beached.Content
 			// critters which eat germs
 			germDiet = TagManager.Create("Beached_GermDiet"),
 			decorSeedHanging = TagManager.Create("Beached_DecorSeedHanging"),
-
+			// elements with this tag will burn through the world, and explode metals into hydrogen and debris
+			veryCorrosive = TagManager.Create("Beached_VeryCorrosive"),
+			// joy and stress reactions trigger at only 90%
+			easilyTriggers = TagManager.Create("Beached_EasilyTriggered"),
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),
 			MaterialColor_noPaint = TagManager.Create("NoPaint"),

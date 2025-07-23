@@ -28,6 +28,7 @@ elements:
       radiationPer1000Mass: 0
       tags:
       - AnyWater
+      - Beached_VeryCorrosive
       state: Liquid
         
     - elementId: Beached_SulfurousIce

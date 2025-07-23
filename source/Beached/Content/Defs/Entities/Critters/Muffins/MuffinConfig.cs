@@ -1,6 +1,7 @@
 ﻿using Beached.Content.DefBuilders;
 using Beached.Content.Defs.Foods;
 using Beached.Content.Scripts.Entities;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +30,8 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 					.Damage(2f, 3f)
 					.Done()
 				.ShedFur(0.25f, Util.ColorFromHex("d7dfed"))
-				.Tag(GameTags.OriginalCreature);
+				.Tag(GameTags.OriginalCreature)
+				.Tag(BTags.Creatures.doNotTargetMeByCarnivores);
 		}
 
 		public override GameObject CreatePrefab(BaseCritterConfig config)
@@ -42,7 +44,6 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 
 		public static void OnPostEntitiesLoaded()
 		{
-			//Assets.GetPrefab(EGG_ID).AddTag(BTags.Creatures.doNotTargetMeByCarnivores);
 			ConfigureDiet(Assets.GetPrefab(ID));
 		}
 
@@ -83,7 +84,8 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 			return diet;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst) { }
 

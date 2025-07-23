@@ -71,6 +71,6 @@ namespace Beached.Content.Defs.Entities.Critters.Squirrels
 
 		public void OnSpawn(GameObject inst) { }
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 	}
 }

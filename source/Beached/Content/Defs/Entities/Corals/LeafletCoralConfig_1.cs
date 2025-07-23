@@ -1,5 +1,6 @@
 ﻿using Beached.Content.DefBuilders;
 using Beached.Content.Scripts.Entities;
+using System;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Corals
@@ -48,12 +49,11 @@ namespace Beached.Content.Defs.Entities.Corals
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst) { }
 
-		public void OnSpawn(GameObject inst)
-		{
-		}
+		public void OnSpawn(GameObject inst) { }
 	}
 }

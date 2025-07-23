@@ -2,6 +2,7 @@
 using Beached.Content.Defs.Foods;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities.AI;
+using System;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Karacoos
@@ -50,7 +51,8 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 					.Done();
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst)
 		{
@@ -59,6 +61,5 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 		public void OnSpawn(GameObject inst)
 		{
 		}
-
 	}
 }

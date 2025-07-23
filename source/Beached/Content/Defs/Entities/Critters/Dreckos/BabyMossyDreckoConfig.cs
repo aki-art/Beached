@@ -29,7 +29,7 @@ namespace Beached.Content.Defs.Entities.Critters.Dreckos
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{

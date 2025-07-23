@@ -32,6 +32,7 @@ namespace Beached.Content
 			brass = ToHash("Brass"),
 			brassMolten = ToHash("BrassMolten"),
 			brassGas = ToHash("BrassGas"),
+			cactusJuice = ToHash("CactusJuice"),
 			calcium = ToHash("Calcium"),
 			moltenCalcium = ToHash("MoltenCalcium"),
 			calciumGas = ToHash("CalciumGas"),

@@ -69,7 +69,7 @@ namespace Beached.Content.Defs.Entities.Corals
 			converter.storage = storage;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst) { }
 
