@@ -1,9 +1,11 @@
-﻿using Beached.Content.Defs;
+﻿using Beached.Content.BWorldGen;
+using Beached.Content.Defs;
 using Beached.Content.Defs.Equipment;
 using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.LifeGoals;
 using Klei.AI;
+using ProcGen;
 using System;
 using System.Collections.Generic;
 using TUNING;
@@ -17,6 +19,9 @@ namespace Beached.Content.ModDb
 			// intrinsic trait of Vahano
 			CARNIVOROUS = "Beached_Carnivorous",
 
+			// trait only for dupes who met Drales i space
+			HOPEFUL = "Beached_Hopeful",
+
 			//intrinsic trait of Minnow
 			GILLS = "Beached_Gills",
 			// Minnow joy trait
@@ -28,10 +33,16 @@ namespace Beached.Content.ModDb
 			CLUMSY = "Beached_Clumsy",
 			FUR_ALLERGY = "Beached_FurAllergy",
 			VEGETARIAN = "Beached_Vegetarian",
+			// sweaty
 
 			// Good traits
 			COMFORT_SEEKER = "Beached_ComfortSeeker",
-			DEXTEROUS = "Beached_Dexterous";
+			DEXTEROUS = "Beached_Dexterous",
+			THALASSOPHILE = "Beached_Thalassophile",
+			HOT_BLOODED = "Beached_HotBlooded",
+
+			// Bionic upgrade
+			PRECISION_BOOSTER = "";
 
 		public class LIFE_GOAL_IDS
 		{
@@ -124,6 +135,9 @@ namespace Beached.Content.ModDb
 		{
 			var db = Db.Get();
 
+			new TraitBuilder(HOPEFUL, true)
+				.Modifier(db.Amounts.Stress.deltaAttribute.Id, MiscUtil.PerCycle(-5f));
+
 			new TraitBuilder(PLUSHIE_MAKER, true)
 				.OnAdd(OnAddPlushieMaker)
 				.AddToTraits()
@@ -156,10 +170,37 @@ namespace Beached.Content.ModDb
 					.Rarity(DUPLICANTSTATS.RARITY_COMMON)
 					.Build(DUPLICANTSTATS.GOODTRAITS);
 
+			new TraitBuilder(HOT_BLOODED, true)
+				.Modifier(BAttributes.HEAT_RESISTANCE_ID, 1f, true)
+				.Tag(BTags.easilyTriggers)
+				.ExtendedTooltip(() => "Stress response triggers at 90% Stress")
+				.AddToTraits()
+					.ExclusiveWithTraits("FrostProof")
+					.Rarity(DUPLICANTSTATS.RARITY_UNCOMMON)
+					.Build(DUPLICANTSTATS.GOODTRAITS);
+
+			/*			for (var i = 0; i < DUPLICANTSTATS.GOODTRAITS.Count; i++)
+						{
+							var traitVal = DUPLICANTSTATS.GOODTRAITS[i];
+							if (traitVal.id == "FrostProof")
+							{
+								traitVal.mutuallyExclusiveTraits ??= [];
+								traitVal.mutuallyExclusiveTraits.Add(HOT_BLOODED);
+							}
+						}*/
+
 			new TraitBuilder(GILLS, true)
 				.OnAdd(go => AddTag(go, BTags.amphibious))
 				.Modifier(db.Attributes.AirConsumptionRate.Id, -0.005f)
 				.ExtendedTooltip(GetGillsTooltip);
+
+			new TraitBuilder(THALASSOPHILE, true)
+				.OnAdd(OnAddThalassophile)
+				.ExtendedTooltip(GetThalassophileTooltip)
+				.AddToTraits()
+					//.ExclusiveWithTraits(CLUMSY)
+					.Rarity(DUPLICANTSTATS.RARITY_COMMON)
+					.Build(DUPLICANTSTATS.GOODTRAITS);
 
 			new TraitBuilder(CARNIVOROUS, true)
 				.OnAdd(go => AddTag(go, BTags.carnivorous));
@@ -223,7 +264,21 @@ namespace Beached.Content.ModDb
 				STRINGS.DUPLICANTS.TRAITS.LIFE_GOALS.BEACHED_MINNOW.DESCRIPTION,
 				MechanicalSurfboardConfig.ID);
 
-			DUPLICANTSTATS.ARCHETYPE_BIONIC_TRAIT_COMPATIBILITY[BSkillGroups.PRECISION_ID] = [ExtraBionicUpgradeComponentConfig.PRECISION_ID];
+			DUPLICANTSTATS.ARCHETYPE_BIONIC_TRAIT_COMPATIBILITY[BSkillGroups.PRECISION_ID] = [
+				ExtraBionicUpgradeComponentConfig.PRECISION1_ID,
+				ExtraBionicUpgradeComponentConfig.PRECISION2_ID
+				];
+		}
+
+		private static string GetThalassophileTooltip()
+		{
+			var effect = Db.Get().effects?.Get(BEffects.THALASSOPHILE_BONUS);
+
+			// fail safe
+			if (effect == null)
+				return $"{STRINGS.DUPLICANTS.TRAITS.BEACHED_THALASSOPHILE.DESC_EXTENDED}\n    • Morale +2\n    • Operating Speed: +10%";
+
+			return $"{STRINGS.DUPLICANTS.TRAITS.BEACHED_THALASSOPHILE.DESC_EXTENDED}{Effect.CreateTooltip(effect, false, showHeader: false)}";
 		}
 
 		private static void OnAddSiren(GameObject go)
@@ -259,6 +314,16 @@ namespace Beached.Content.ModDb
 		{
 			if (go.TryGetComponent(out KPrefabID kPrefabID))
 				kPrefabID.AddTag(tag, true);
+		}
+
+		private static void OnAddThalassophile(GameObject go)
+		{
+			var component = go.GetComponent<KMonoBehaviour>();
+			new Beached_ThalassoTraitMonitor.Instance(component, new Beached_ThalassoTraitMonitor.Def()
+			{
+				seaBiomes = [ZoneTypes.depths, ZoneTypes.beach, ZoneTypes.sea, ZoneTypes.coralReef, SubWorld.ZoneType.Ocean],
+				effectId = BEffects.THALASSOPHILE_BONUS
+			}).StartSM();
 		}
 
 		private static void OnAddPlushieMaker(GameObject go)

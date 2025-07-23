@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using Beached.Content.ModDb;
+using HarmonyLib;
+using Klei.AI;
 
 namespace Beached.Patches
 {
@@ -6,6 +8,18 @@ namespace Beached.Patches
 	{
 		private const float DEFAULT_WARM_AIR = 298.15f; // 25C
 		private const float DEFAULT_WARM_LIQUID = 308.15f; // 35C
+		private const float DEFAULT_HEAT_RESISTANCE = 0.008f;
+
+
+		[HarmonyPatch(typeof(ExternalTemperatureMonitor), "GetExternalWarmThreshold")]
+		public class ExternalTemperatureMonitor_GetExternalWarmThreshold_Patch
+		{
+			public static void Postfix(Attributes affected_attributes, ref float __result)
+			{
+				var heatRes = affected_attributes.Get(BAttributes.HEAT_RESISTANCE_ID);
+				__result = heatRes.GetTotalValue() * DEFAULT_HEAT_RESISTANCE;
+			}
+		}
 
 		// do not set a duplicant in warm weather feeling like they are too cold
 		[HarmonyPatch(typeof(ExternalTemperatureMonitor.Instance), "IsTooCold")]

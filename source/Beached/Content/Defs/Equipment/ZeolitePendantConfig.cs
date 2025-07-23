@@ -37,6 +37,6 @@ namespace Beached.Content.Defs.Equipment
 
 		public void DoPostConfigure(GameObject go) { }
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 	}
 }

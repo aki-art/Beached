@@ -1,4 +1,5 @@
 ﻿using Beached.Content.DefBuilders;
+using Beached.Content.Defs.Items;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
@@ -17,12 +18,13 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
+				.Drops(SlickShellShellConfig.ID, 0.25f)
 				.Baby(SlickShellConfig.ID)
 				.Mass(25f)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_BABY, .75f);
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject prefab) { }
 

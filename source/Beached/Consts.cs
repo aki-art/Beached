@@ -42,6 +42,8 @@ namespace Beached
 
 		public static class DUPLICANTS
 		{
+			public const float EASILY_TRIGGERED_THRESHOLD = 0.9f;
+
 			public static class LIFEGOALS
 			{
 				public const int MORALBONUS = 2;

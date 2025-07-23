@@ -8,6 +8,14 @@ namespace Beached
 	{
 		public class DUPLICANTS
 		{
+			public class SKILLGROUPS
+			{
+				public class BEACHED_SKILLGROUP_PRECISION
+				{
+					public static LocString NAME = "Precision";
+				}
+			}
+
 			public class STATUSITEMS
 			{
 				public class BEACHED_THAWING
@@ -37,6 +45,12 @@ namespace Beached
 					public static LocString DESC = "...";
 				}
 
+
+				public class BEACHED_HEATRESISTANCE
+				{
+					public static LocString NAME = "Heat Tolerance";
+					public static LocString DESC = "This Duplicant can take heat a little better.";
+				}
 
 				// Building attributes
 				// The game expects them under DUPLICANT
@@ -181,10 +195,32 @@ namespace Beached
 					}
 				}
 
+				public class STARTWITHBEACHED_BOOSTER_PRECISION1
+				{
+					public static LocString NAME = ITEMS.BIONIC_BOOSTERS.BEACHED_BOOSTER_PRECISION1.NAME;
+					public static LocString DESC = ITEMS.BIONIC_BOOSTERS.BEACHED_BOOSTER_PRECISION1.DESC;
+					public static LocString SHORT_DESC = $"Starts with a preinstalled <b>{(string)ITEMS.BIONIC_BOOSTERS.BEACHED_BOOSTER_PRECISION1.NAME}</b>";
+					public static LocString SHORT_DESC_TOOLTIP = global::STRINGS.DUPLICANTS.TRAITS.STARTING_BIONIC_BOOSTER_SHARED_DESC_TOOLTIP;
+				}
+
+				public class STARTWITHBEACHED_BOOSTER_PRECISION2
+				{
+					public static LocString NAME = ITEMS.BIONIC_BOOSTERS.BEACHED_BOOSTER_PRECISION2.NAME;
+					public static LocString DESC = ITEMS.BIONIC_BOOSTERS.BEACHED_BOOSTER_PRECISION2.DESC;
+					public static LocString SHORT_DESC = $"Starts with a preinstalled <b>{(string)ITEMS.BIONIC_BOOSTERS.BEACHED_BOOSTER_PRECISION2.NAME}</b>";
+					public static LocString SHORT_DESC_TOOLTIP = global::STRINGS.DUPLICANTS.TRAITS.STARTING_BIONIC_BOOSTER_SHARED_DESC_TOOLTIP;
+				}
+
 				public class BEACHED_CARNIVOROUS
 				{
 					public static LocString NAME = "Carnivorous";
 					public static LocString DESC = "This duplicant can only digest Meats.";
+				}
+
+				public class BEACHED_HOTBLOODED
+				{
+					public static LocString NAME = "Hot Blooded";
+					public static LocString DESC = "This duplicant runs hot, they can withstand heat a little better than others.";
 				}
 
 				public class BEACHED_VEGETARIAN
@@ -214,6 +250,12 @@ namespace Beached
 					public static LocString DESC = "This duplicant gains a moral bonus from wearing comfortable clothing.";
 				}
 
+				public class BEACHED_HOPEFUL
+				{
+					public static LocString NAME = "Hopeful";
+					public static LocString DESC = "Knowing there are such gentle giant creatures out there, this Duplicant is filled with hope.";
+				}
+
 				public class BEACHED_PLUSHIEMAKER
 				{
 					public static LocString NAME = "Plushie Gifter";
@@ -224,6 +266,13 @@ namespace Beached
 				{
 					public static LocString NAME = "Scary Scales";
 					public static LocString DESC = "...";
+				}
+
+				public class BEACHED_THALASSOPHILE
+				{
+					public static LocString NAME = "Thalassophile";
+					public static LocString DESC = "Gains bonus while in any Sea, Beach of Ocean type biome.";
+					public static LocString DESC_EXTENDED = "<b>Effects while active:</b>";
 				}
 
 				public class BEACHED_DEXTEROUS

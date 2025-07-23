@@ -30,7 +30,7 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_BABY, .75f);
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst) { }
 

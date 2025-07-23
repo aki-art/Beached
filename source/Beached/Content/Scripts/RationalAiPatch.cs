@@ -11,6 +11,7 @@ namespace Beached.Content.Scripts
 			{
 				__instance.alive
 					.ToggleStateMachine(smi => new Beached_ElectricShockable.Instance(smi.master, new Beached_ElectricShockable.Def()))
+					.ToggleStateMachine(smi => new Beached_BiomeMonitor.Instance(smi.master))
 					.ToggleStateMachine(smi => new Beached_ScaredMonitor.Instance(smi.master, new Beached_ScaredMonitor.Def()
 					{
 						lightTreshold = 30

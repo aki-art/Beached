@@ -1,6 +1,7 @@
 ﻿using Beached.Content.Defs.Entities.Corals;
 using Beached.Content.Scripts.Entities.AI.Strobila;
 using Klei.AI;
+using System;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities
@@ -27,7 +28,6 @@ namespace Beached.Content.Defs.Entities
 				default,
 				SimHashes.Creature);
 
-			// survival
 			prefab.AddOrGet<EntombVulnerable>();
 			prefab.AddOrGet<SubmersionMonitor>();
 			prefab.AddOrGet<UprootedMonitor>();
@@ -70,7 +70,8 @@ namespace Beached.Content.Defs.Entities
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst) { }
 

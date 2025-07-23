@@ -1,5 +1,6 @@
 ﻿using Beached.Content.Defs.Foods;
 using Beached.Content.ModDb;
+using ImGuiNET;
 using Klei.AI;
 using KSerialization;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using UnityEngine;
 namespace Beached.Content.Scripts
 {
 	[SerializationConfig(MemberSerialization.OptIn)]
-	public class Beached_MinionStorage : KMonoBehaviour
+	public class Beached_MinionStorage : KMonoBehaviour, IImguiDebug
 	{
 		[Serialize] public string hat;
 		[Serialize] public Dictionary<string, float> serializedFlummoxModifiers;
@@ -94,7 +95,7 @@ namespace Beached.Content.Scripts
 
 		private void OnUnEquip(object obj)
 		{
-			bool hasComfortableClothing = false;
+			var hasComfortableClothing = false;
 			var equipment = resume.identity.GetEquipment();
 
 			if (equipment != null)
@@ -204,6 +205,18 @@ namespace Beached.Content.Scripts
 		public void OnUnsavoryMealConsumed()
 		{
 			effects.Add(BEffects.UNSAVORY_MEAL, true);
+		}
+
+		public void OnImguiDraw()
+		{
+			if (ImGui.Button("Meet Drale buff"))
+			{
+				GetComponent<Traits>().Add(Db.Get().traits.Get(BTraits.HOPEFUL));
+				GetComponent<Notifier>().Add(new Notification($"{gameObject.GetProperName()} has gained the Hopeful trait", NotificationType.MessageImportant, expires: false, clear_on_click: true)
+				{
+					clickFocus = transform
+				});
+			}
 		}
 	}
 }

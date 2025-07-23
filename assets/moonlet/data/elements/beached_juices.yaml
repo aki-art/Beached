@@ -3,6 +3,7 @@ elements:
   - elementId: Beached_GristleBerryJuice
     name: Gristle Juice
     descriptionText: Tasty and refreshing.
+    debrisAnim: beached_gristleberryjuice_kanim
     color: f20f66
     waterCoolerEffect: Beached_SlushDrink
     waterCoolerTooltip: A refreshing cold drink.
@@ -32,8 +33,12 @@ elements:
     state: Liquid
 
   - elementId: Beached_GnawBerryJuice
-    name: Gnawberry Juice
-    descriptionText: Tasty and refreshing.
+    name: Gnawberry Must
+    descriptionText: |
+      "Freshy squeezed juice of <link=\"BEACHED_GNAWBERRY\">Gnawberries</link>, a very tasty and refreshing drink. 
+      
+      Gnawberry Must can be drank in <link=\"WATERCOOLER\">Water Coolers</link>, or used as a sweetener in certain recipes."
+    debrisAnim: beached_gnawberryjuice_kanim
     color: da72db
     waterCoolerEffect: Beached_SlushDrink
     waterCoolerTooltip: A refreshing cold drink.
@@ -64,11 +69,12 @@ elements:
 
   - elementId: Beached_CactusJuice
     name: Cactus Juice
+    debrisAnim: beached_cactusjuice_kanim
     descriptionText: Tasty and refreshing.
     color: 076e01
-    conditions:
-      mods:
-        - test447.RollerSnake # this element will only load if Roller Snakes is also installed
+    # conditions:
+    #    mods:
+    #      - test447.RollerSnake # this element will only load if Roller Snakes is also installed
     waterCoolerEffect: Beached_SlushDrink
     waterCoolerTooltip: It gives you power like nothing else! ... if you can stomach to drink it.
     maxMass: 300

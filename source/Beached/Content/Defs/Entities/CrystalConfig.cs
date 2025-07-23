@@ -3,6 +3,7 @@ using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Integration;
 using Klei.AI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -104,7 +105,8 @@ namespace Beached.Content.Defs.Entities
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst)
 		{

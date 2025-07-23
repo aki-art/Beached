@@ -1,0 +1,24 @@
+id: Beached_SlickShellShell
+title: Spiral Shell
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.MISC.BEACHED_SLICKSHELLSHELL.NAME
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.MISC.BEACHED_SLICKSHELLSHELL.DESC
+          
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_SlickShellShell
+        preferredWidth: 128
+        preferredHeight: 128
+        
+contentMadeAndUsed:
+  - tag: Beached_SlickShellShell

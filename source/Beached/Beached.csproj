@@ -21,7 +21,7 @@
 		<PackageId>Beached</PackageId>
 		<Version>0.2.1.0</Version>
 		<Authors>Aki</Authors>
-		<Copyright>2021-2024 Aki</Copyright>
+		<Copyright>2021-2025 Aki</Copyright>
 		<RepositoryUrl>https://github.com/aki-art/ONI-Mods</RepositoryUrl>
 	</PropertyGroup>
 
@@ -34,12 +34,6 @@
 		<APIVersion>2</APIVersion>
 	</PropertyGroup>
 	
-	<ItemGroup>
-	  <Compile Remove="Assets\**" />
-	  <EmbeddedResource Remove="Assets\**" />
-	  <None Remove="Assets\**" />
-	</ItemGroup>
-
 	<ItemGroup>
 
 		<Reference Include="FMODUnity">
@@ -126,10 +120,6 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="WorldGen\ComplexFeatures\" />
 	</ItemGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

@@ -1,5 +1,6 @@
 ﻿using Beached.Content.DefBuilders;
 using Beached.Content.Defs.Entities.Corals;
+using Beached.Content.Defs.Items;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
@@ -22,6 +23,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
+				.Drops(SlickShellShellConfig.ID, 1f)
 				.Traits()
 					.Add(BAmounts.Moisture.maxAttribute.Id, 100f)
 					.Add(BAmounts.Moisture.deltaAttribute.Id, -1000f / CONSTS.CYCLE_LENGTH)
@@ -61,10 +63,15 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			host.metabolismModifier = 1.2f;
 			host.glandMass = 5f;
 
+			var moltDropper = prefab.AddOrGetDef<MoltDropperMonitor.Def>();
+			moltDropper.onGrowDropID = SlickShellShellConfig.ID;
+			moltDropper.massToDrop = 30f;
+			moltDropper.isReadyToMolt = IsReadyToMolt;
+
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 
 		public static Diet.Info[] SaltDiet()
 		{

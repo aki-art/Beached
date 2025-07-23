@@ -1,21 +1,21 @@
 ﻿namespace Beached.Content.Scripts.Entities
 {
-	public class Smoker : StateMachineComponent<Smoker.StatesInstance>
+	public class Beached_Smoker : StateMachineComponent<Beached_Smoker.StatesInstance>
 	{
 		public override void OnSpawn() => smi.StartSM();
 
-		public class StatesInstance : GameStateMachine<States, StatesInstance, Smoker, object>.GameInstance
+		public class StatesInstance : GameStateMachine<States, StatesInstance, Beached_Smoker, object>.GameInstance
 		{
 			public ElementEmitter emitter;
 
-			public StatesInstance(Smoker master) : base(master)
+			public StatesInstance(Beached_Smoker master) : base(master)
 			{
 				master.TryGetComponent(out emitter);
 				emitter.SetEmitting(true);
 			}
 		}
 
-		public class States : GameStateMachine<States, StatesInstance, Smoker>
+		public class States : GameStateMachine<States, StatesInstance, Beached_Smoker>
 		{
 			public State idle;
 			public State eruptingPre;

@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.AI;
 using Beached.Content.Scripts.Entities.Plant;
@@ -29,7 +30,8 @@ namespace Beached.Content.ModDb
 			mirror,
 			nonVega,
 			iceWrathLashOut,
-			sandboxCrumble;
+			sandboxCrumble,
+			waterMillWattage;
 
 		public const string
 			ITEMS = "ITEMS",
@@ -149,6 +151,22 @@ namespace Beached.Content.ModDb
 
 			collectingRubberHalted = SimpleBuildingStatus(__instance, "Beached_CollectingRubberHalted", NotificationType.BadMinor);
 			collectingRubberFull = SimpleBuildingStatus(__instance, "Beached_CollectingRubberFull");
+
+			waterMillWattage = __instance.CreateStatusItem(
+				"Beached_WaterMillWattage",
+				BUILDINGS,
+				string.Empty,
+				StatusItem.IconType.Info,
+				NotificationType.Neutral,
+				allow_multiples: false,
+				OverlayModes.Power.ID);
+
+			waterMillWattage.resolveStringCallback = (str, data) =>
+			{
+				return data is WaterGenerator generator
+					? str.Replace("{Wattage}", GameUtil.GetFormattedWattage(generator.GetPower()))
+					: str;
+			};
 
 			plushed = new(
 				"Beached_Plushed",

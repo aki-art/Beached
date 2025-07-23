@@ -30,7 +30,7 @@ namespace Beached.Content.Defs.Foods
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject _) { }
 

@@ -5,11 +5,14 @@ namespace Beached.Content.ModDb
 {
 	public class BAttributes
 	{
-		public const string PRECISION_ID = "Beached_Precision";
+		public const string
+			PRECISION_ID = "Beached_Precision",
+			HEAT_RESISTANCE_ID = "Beached_HeatResistance";
 
 		public static Attribute handSteadiness;
 		public static Attribute operatingSpeed;
 		public static Attribute doorOpeningSpeed;
+		public static Attribute heatResistance;
 
 		public static class Critters
 		{
@@ -64,7 +67,6 @@ namespace Beached.Content.ModDb
 
 			handSteadiness.SetFormatter(new StandardAttributeFormatter(GameUtil.UnitClass.SimpleInteger, GameUtil.TimeSlice.None));
 
-
 			operatingSpeed = __instance.Add(new Attribute(
 				"Beached_Building_OperatingSpeed",
 				true,
@@ -79,7 +81,15 @@ namespace Beached.Content.ModDb
 				false,
 				1f));
 
+			heatResistance = __instance.Add(new Attribute(
+				"Beached_HeatResistance",
+				false,
+				Attribute.Display.Normal,
+				false,
+				1f));
+
 			MiscUtil.AddToStaticReadonlyArray<string, DUPLICANTSTATS>(nameof(DUPLICANTSTATS.ALL_ATTRIBUTES), PRECISION_ID);
+			MiscUtil.AddToStaticReadonlyArray<string, DUPLICANTSTATS>(nameof(DUPLICANTSTATS.ALL_ATTRIBUTES), HEAT_RESISTANCE_ID);
 		}
 	}
 }

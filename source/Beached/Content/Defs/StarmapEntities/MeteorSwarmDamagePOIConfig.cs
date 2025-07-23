@@ -8,7 +8,7 @@ namespace Beached.Content.Defs.StarmapEntities
 	/// it is either invisible or marks the hex with a warning symbol
 	/// rockets that sit on the same tile will receive damage if no shield module is constructed
 	/// </summary>
-	public class MeteorSwarmDamagePOIConfig : IEntityConfig
+	public class MeteorSwarmDamagePOIConfig : IEntityConfig, IHasDlcRestrictions
 	{
 		public static string ID = "Beached_ClusterSwarmDamagePOI";
 
@@ -23,7 +23,11 @@ namespace Beached.Content.Defs.StarmapEntities
 			return prefab;
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_EXPANSION1_ONLY;
+		public string[] GetDlcIds() => null;
+
+		public string[] GetForbiddenDlcIds() => null;
+
+		public string[] GetRequiredDlcIds() => DlcManager.EXPANSION1;
 
 		public void OnPrefabInit(GameObject inst) { }
 

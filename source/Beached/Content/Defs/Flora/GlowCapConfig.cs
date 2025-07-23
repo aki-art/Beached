@@ -59,10 +59,7 @@ namespace Beached.Content.Defs.Flora
 			return prefab;
 		}
 
-		public string[] GetDlcIds()
-		{
-			return DlcManager.AVAILABLE_ALL_VERSIONS;
-		}
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst)
 		{

@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using System;
+using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities
@@ -63,7 +64,8 @@ namespace Beached.Content.Defs.Entities
 			];
 		}
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		public void OnSpawn(GameObject inst)
 		{

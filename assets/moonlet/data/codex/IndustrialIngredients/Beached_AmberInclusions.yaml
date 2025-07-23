@@ -1,0 +1,58 @@
+id: Beached_AmberInclusions
+title: Amber Inclusions
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        text: Amber Inclusions
+
+# centipede
+      - type: Text
+        style: SubTitle
+        stringKey: STRINGS.ITEMS.AMBER_INCLUSIONS.BEACHED_AMBERINCLUSION_FLYINGCENTIPEDE.DESCRIPTION
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_AmberInclusion_FlyingCentipede
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        stringKey: STRINGS.ITEMS.AMBER_INCLUSIONS.BEACHED_AMBERINCLUSION_FLYINGCENTIPEDE.DESCRIPTION
+          
+      - type: DividerLine
+
+# strange hatch
+      - type: Text
+        style: SubTitle
+        stringKey: STRINGS.ITEMS.AMBER_INCLUSIONS.BEACHED_AMBERINCLUSION_STRANGEHATCH.DESCRIPTION
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_AmberInclusion_StrangeHatch
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        stringKey: STRINGS.ITEMS.AMBER_INCLUSIONS.BEACHED_AMBERINCLUSION_STRANGEHATCH.DESCRIPTION
+          
+      - type: DividerLine
+
+# feather
+      - type: Text
+        style: SubTitle
+        stringKey: STRINGS.ITEMS.AMBER_INCLUSIONS.BEACHED_AMBERINCLUSION_FEATHER.DESCRIPTION
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_AmberInclusion_Feather
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        stringKey: STRINGS.ITEMS.AMBER_INCLUSIONS.BEACHED_AMBERINCLUSION_FEATHER.DESCRIPTION
+          
+      - type: DividerLine
+        
+contentMadeAndUsed:
+  - tag: Beached_SeaShell

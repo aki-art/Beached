@@ -32,7 +32,76 @@ namespace Beached.Patches
 				AddLubricatableEntries(__result);
 				AddSlagmiteMiningResults(__result, SlagmiteConfig.ID);
 				AddSlagmiteMiningResults(__result, GleamiteConfig.ID);
+				Molt(__result);
 				AdditionalEntries(__result);
+			}
+
+			[HarmonyPostfix]
+			[HarmonyPriority(Priority.Last)]
+			public static void LatePostfix(ref CodexEntryGenerator_Elements.ElementEntryContext __result)
+			{
+				FixDeathEntries(__result);
+			}
+
+			// changes codex header from critter name to "Drops", making it clearer where the items come from.
+			// transpiler was highly impractical as it is in a nested local function inside another giant method, so instead a best guess is made to which entry needs to be modified
+			private static void FixDeathEntries(CodexEntryGenerator_Elements.ElementEntryContext context)
+			{
+				foreach (var butcherable in Assets.GetPrefabsWithComponentAsListOfComponents<Butcherable>())
+				{
+					if (context.usedMap.map.TryGetValue(butcherable.PrefabID(), out var entries))
+					{
+						var drops = butcherable.drops.Keys.ToHashSet();
+						var prefabId = butcherable.PrefabID();
+
+						foreach (var entry in entries)
+						{
+							if (!entry.prefab.IsPrefabID(prefabId))
+								continue;
+
+							if (entry.title != butcherable.GetProperName())
+								continue;
+
+							var hasNoInputs = entry.inSet == null || entry.inSet.Count == 0;
+							if (hasNoInputs)
+							{
+								if (drops.SetEquals(entry.outSet.Select(e => e.tag.ToString()).ToHashSet()))
+									entry.title = $"Dropped by {prefabId.ProperNameStripLink()}"; // TODO str
+							}
+						}
+					}
+				}
+			}
+
+			private static void Molt(CodexEntryGenerator_Elements.ElementEntryContext context)
+			{
+				foreach (var prefab in Assets.Prefabs)
+				{
+					var def = prefab.GetDef<MoltDropperMonitor.Def>();
+					if (def != null)
+					{
+						var conversionEntry = new CodexEntryGenerator_Elements.ConversionEntry()
+						{
+							title = $"Molted by {prefab.GetProperName()}",  // TODO str
+							prefab = prefab.gameObject,
+							inSet = []
+						};
+
+						context.usedMap.Add(prefab.PrefabID(), conversionEntry);
+
+						var applyTo = new HashSet<ElementUsage>();
+						var use = new ElementUsage(def.onGrowDropID, def.massToDrop / CONSTS.CYCLE_LENGTH, true)
+						{
+							customFormating = (tag, amount, continous) =>
+							{
+								return GameUtil.GetFormattedMass(amount, GameUtil.TimeSlice.PerCycle) + "\n<size=66%>while happy</size>";
+							}
+						};
+
+						conversionEntry.outSet.Add(use);
+						context.madeMap.Add(def.onGrowDropID, conversionEntry);
+					}
+				}
 			}
 
 			private static void AdditionalEntries(CodexEntryGenerator_Elements.ElementEntryContext context)

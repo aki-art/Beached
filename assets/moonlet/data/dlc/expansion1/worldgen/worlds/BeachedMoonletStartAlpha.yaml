@@ -38,6 +38,17 @@ worldTraitRules:
       - StartChange
       - Geodes # i add my own variety
 
+subworldMixingRules:
+ - name: (Mixing1)
+   minCount: 2
+   maxCount: 3
+ - name: (Mixing2)
+   minCount: 2
+   maxCount: 3
+ - name: (Mixing3)
+   minCount: 2
+   maxCount: 3
+
 defaultsOverrides:
   data:
     DrawWorldBorder: true
@@ -119,6 +130,9 @@ unknownCellsAllowedSubworlds:
       - *RotMain
       - *Snowy
       - *CoralReefs
+      - (Mixing1)
+      - (Mixing2)
+      - (Mixing3)
 # start
   - tagcommand: AtTag
     tag: AtStart

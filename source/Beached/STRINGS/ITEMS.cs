@@ -1,4 +1,5 @@
 ﻿using Beached.Content;
+using Beached.Content.Defs;
 using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
@@ -12,6 +13,21 @@ namespace Beached
 	{
 		public class ITEMS
 		{
+			public class BIONIC_BOOSTERS
+			{
+				public class BEACHED_BOOSTER_PRECISION1
+				{
+					public static LocString NAME = Link("Precision Booster", ExtraBionicUpgradeComponentConfig.PRECISION1_ID);
+					public static LocString DESC = "Grants a Bionic Duplicant the skill required to carefully extract items from dug materials.";
+				}
+
+				public class BEACHED_BOOSTER_PRECISION2
+				{
+					public static LocString NAME = Link("Extreme Precision Booster", ExtraBionicUpgradeComponentConfig.PRECISION2_ID);
+					public static LocString DESC = "Grants a Bionic Duplicant the precision skill to handle crystals and gemstones.";
+				}
+			}
+
 			public class MISC
 			{
 				public class BEACHED_SOAP
@@ -48,6 +64,18 @@ namespace Beached
 				{
 					public static LocString NAME = "Palate Cleanser";
 					public static LocString DESC = "...";
+				}
+
+				public class BEACHED_SLICKSHELLSHELL
+				{
+					public static LocString NAME = Link("Spiral Shell", SlickShellShellConfig.ID);
+					public static LocString DESC = "Lime rich empty shell left behind by a Slickshell.";
+				}
+
+				public class BEACHED_IRONSHELLSHELL
+				{
+					public static LocString NAME = Link("Gilded Spiral Shell", IronShellShellConfig.ID);
+					public static LocString DESC = "Pyrite lined empty shell left behind by a Slickshell.";
 				}
 
 				public class BEACHED_SEASHELL
@@ -147,12 +175,12 @@ namespace Beached
 				public class BEACHED_RAWSNAIL
 				{
 					public static LocString NAME = Link("Slimy Meat", RawSnailConfig.ID);
-					public static LocString DESC = "Chewy meat of a Slickshell dripping with mucus.";
+					public static LocString DESC = "Chewy meat of a creature dripping with mucus.";
 				}
 
 				public class BEACHED_COOKEDSNAIL
 				{
-					public static LocString NAME = Link("Seared Snail", SlickShellConfig.ID);
+					public static LocString NAME = Link("Seared Slimy Meat", SlickShellConfig.ID);
 					public static LocString DESC = "A still chewy slab of meat, with a somewhat pleasant crispy outside.";
 				}
 
@@ -164,21 +192,21 @@ namespace Beached
 
 				public class BEACHED_SCRAMBLEDSNAIL
 				{
-					public static LocString NAME = Link("Snail Scramble", SlickShellConfig.ID);
+					public static LocString NAME = Link("Slimy Scramble", SlickShellConfig.ID);
 					public static LocString DESC = "A still chewy slab of meat, with a somewhat pleasant crispy outside.";
 				}
 
 				public class BEACHED_STUFFEDSNAILS
 				{
 					public static LocString NAME = Link("Stuffed Snail", StuffedSnailsConfig.ID);
-					public static LocString DESC = "...";
+					public static LocString DESC = $"Chewy meat jammed into the shells of {Link("Slickshells", SlickShellShellConfig.ID)}. The crunch is part of the experience.";
 				}
 
 
 				public class BEACHED_CRACKLINGS
 				{
 					public static LocString NAME = Link("Cracklings", CracklingsConfig.ID);
-					public static LocString DESC = "Extremely crunchy.";
+					public static LocString DESC = "Extremely crunchy bites, with fatty juices flowing out when bitten into. Has a distinctly metallic aftertaste.";
 				}
 
 				public class BEACHED_NUTTYDELIGHT

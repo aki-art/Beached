@@ -311,6 +311,11 @@ namespace Beached.Content.Scripts.Entities
 
 				gameObject.SetActive(true);
 			}
+
+			public Tuple<Tag, float> GetItemDroppedOnShear()
+			{
+				return new Tuple<Tag, float>(def.itemDroppedOnShear, def.massDropped);
+			}
 		}
 	}
 }

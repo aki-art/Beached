@@ -1,6 +1,7 @@
 ﻿using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using Klei.AI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,6 +45,7 @@ namespace Beached.Content.Defs.Equipment
 
 		public void DoPostConfigure(GameObject go) { }
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 	}
 }

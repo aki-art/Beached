@@ -14,6 +14,8 @@ namespace Beached.Content.ModDb
 	{
 		public static string jellyBarRecipeID;
 
+		private const float TIME_STANDARD = 40f;
+
 		public static void AddRecipes()
 		{
 			CreateFoodRecipes();
@@ -26,39 +28,78 @@ namespace Beached.Content.ModDb
 			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.BLACK);
 			AddBeachShirtCostumeRecipe(BEquippableFacades.BEACHSHIRTS.RETRO);
 
-			RecipeBuilder.Create(MudStomperConfig.ID, STRINGS.ITEMS.MISC.BEACHED_SOAP.DESC, 40f)
+			RecipeBuilder.Create(MudStomperConfig.ID, STRINGS.ITEMS.MISC.BEACHED_SOAP.DESC, TIME_STANDARD)
 				.Input([Elements.ambergris.CreateTag(), SimHashes.Tallow.CreateTag()], 25f)
 				.Input(Elements.ash.CreateTag(), 25f)
 				.Output(SoapConfig.ID, 5f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(MilkPressConfig.ID, Elements.Description(Elements.gnawBerryJuice), 40f)
-				.Input([GnawicaBerryConfig.ID], 10f)
-				.Output(Elements.gnawBerryJuice.CreateTag(), 100f)
-				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
-				.Build();
 
-			RecipeBuilder.Create(MilkPressConfig.ID, Elements.Description(Elements.gristleBerryJuice), 40f)
-				.Input([PrickleFruitConfig.ID], 10f)
-				.Output(Elements.gristleBerryJuice.CreateTag(), 100f)
-				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
-				.Build();
+			JuiceRecipe(Elements.gnawBerryJuice, GnawicaBerryConfig.ID, 10f);
+			JuiceRecipe(Elements.gristleBerryJuice, PrickleFruitConfig.ID, 12f / 16f);
+			if (Mod.integrations.IsModPresent(Integration.Integrations.ROLLER_SNAKES))
+				JuiceRecipe(Elements.cactusJuice, "CactusFlesh", 10f);
 
-			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, 40f)
+			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, TIME_STANDARD)
 				.Input(Elements.aquamarine.CreateTag(), 100f)
 				.Output(Elements.beryllium.CreateTag(), 100f, ComplexRecipe.RecipeElement.TemperatureOperation.AverageTemperature)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
 				.Build();
 
-			RecipeBuilder.Create(RockCrusherConfig.ID, global::STRINGS.BUILDINGS.PREFABS.ROCKCRUSHER.METAL_RECIPE_DESCRIPTION, 40f)
+			ZincAndCopperToBrass();
+			BoneToCalcium();
+			RockCrusher();
+			Kiln();
+		}
+
+		private static void Kiln()
+		{
+			RecipeBuilder.Create(KilnConfig.ID, global::STRINGS.ELEMENTS.SULFUR.DESC, TIME_STANDARD)
+				.Input(SulfurGlandConfig.ID, 20f)
+				.Output(SimHashes.Sulfur.CreateTag(), 100f, ComplexRecipe.RecipeElement.TemperatureOperation.Heated)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
+				.Build();
+		}
+
+		private static void RockCrusher()
+		{
+			RecipeBuilder.Create(RockCrusherConfig.ID, global::STRINGS.BUILDINGS.PREFABS.ROCKCRUSHER.METAL_RECIPE_DESCRIPTION, TIME_STANDARD)
 				.Input(Elements.aquamarine.CreateTag(), 100f)
 				.Output(Elements.beryllium.CreateTag(), 50f, ComplexRecipe.RecipeElement.TemperatureOperation.AverageTemperature)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
 				.Build();
 
-			ZincAndCopperToBrass();
-			BoneToCalcium();
+			RecipeBuilder.Create(RockCrusherConfig.ID, global::STRINGS.ELEMENTS.LIME.DESC, TIME_STANDARD)
+				.Input(SlickShellShellConfig.ID, 1)
+				.Output(SimHashes.Lime.CreateTag(), 30f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
+				.Build();
+
+			RecipeBuilder.Create(RockCrusherConfig.ID, global::STRINGS.ELEMENTS.FOOLSGOLD.DESC, TIME_STANDARD)
+				.Input(IronShellShellConfig.ID, 1)
+				.Output(SimHashes.FoolsGold.CreateTag(), 30f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
+				.Build();
+
+			RecipeBuilder.Create(RockCrusherConfig.ID, global::STRINGS.ELEMENTS.LIME.DESC, TIME_STANDARD)
+				.Input(SeaShellConfig.ID, 1)
+				.Output(SimHashes.Lime.CreateTag(), 30f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
+				.Build();
+		}
+
+		private static void JuiceRecipe(SimHashes element, Tag material, float amount)
+		{
+			var tag = element.CreateTag();
+
+			RecipeBuilder.Create(MilkPressConfig.ID, Elements.Description(element), TIME_STANDARD)
+				.Input([material], amount)
+				.Output(tag, 100f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Custom)
+				.CustomName(tag.ProperNameStripLink())
+				.IconPrefab(tag.name)
+				.Build();
 		}
 
 		private static void AddBismuthToLeadSuit()
@@ -115,7 +156,7 @@ namespace Beached.Content.ModDb
 
 		private static void BoneToCalcium()
 		{
-			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, 40f)
+			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, TIME_STANDARD)
 				.Input(Elements.bone.CreateTag(), 100f)
 				.Output(Elements.moltenCalcium.CreateTag(), 50f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
@@ -124,7 +165,7 @@ namespace Beached.Content.ModDb
 
 		private static void ZincAndCopperToBrass()
 		{
-			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, 40f)
+			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, TIME_STANDARD)
 				.Input(Elements.zinc.CreateTag(), 50f)
 				.Input(SimHashes.Copper.CreateTag(), 100f)
 				.Output(Elements.brass.CreateTag(), 150f)
@@ -147,7 +188,7 @@ namespace Beached.Content.ModDb
 
 		private static void CreateFoodRecipes()
 		{
-			jellyBarRecipeID = RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_JELLYBAR.DESC, 40f)
+			jellyBarRecipeID = RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_JELLYBAR.DESC, TIME_STANDARD)
 				.Input(BTags.Groups.jellies, 1f)
 				.Output(JellyBarConfig.ID, 1f)
 				.Visualizer("beached_jellybar_kanim")
@@ -155,28 +196,28 @@ namespace Beached.Content.ModDb
 				.Build()
 				.id;
 
-			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, 40f)
+			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, TIME_STANDARD)
 				.Input(BTags.Groups.jellies, 1f)
 				.Input(BTags.Groups.berries, 1f)
 				.Output(BerryJellyConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SALTRUBBEDJELLY.DESC, 40f)
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SALTRUBBEDJELLY.DESC, TIME_STANDARD)
 				.Input(BTags.Groups.jellies, 1f)
 				.Input(SimHashes.Salt.CreateTag(), 5f)
 				.Output(SaltRubbedJellyConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_DRYNOODLES.DESC, 40f)
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_DRYNOODLES.DESC, TIME_STANDARD)
 				.Input(BTags.Groups.grains, 4f)
 				.Input(RawEggConfig.ID, 1f)
 				.Output(DryNoodlesConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPAGHETTI.DESC, 40f)
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPAGHETTI.DESC, TIME_STANDARD)
 				.Input(SpiceNutConfig.ID, 4f)
 				// maybe deep grass? or some other herb
 				.Input(DryNoodlesConfig.ID, 1f)
@@ -184,14 +225,14 @@ namespace Beached.Content.ModDb
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SCRAMBLEDSNAILS.DESC, 40f)
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SCRAMBLEDSNAILS.DESC, TIME_STANDARD)
 				.Input(RawSnailConfig.ID, 3f)
 				.Input(RawEggConfig.ID, 0.5f)
 				.Output(ScrambledSnailsConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPICYCRACKLINGS.DESC, 40f)
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPICYCRACKLINGS.DESC, TIME_STANDARD)
 				.Input(CracklingsConfig.ID, 1f)
 				.Input(SpiceNutConfig.ID, 3f)
 				.Output(SpicyCracklingsConfig.ID, 1f)
@@ -200,7 +241,7 @@ namespace Beached.Content.ModDb
 
 			if (DlcManager.IsContentSubscribed(DlcManager.DLC2_ID))
 			{
-				RecipeBuilder.Create(DeepfryerConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_CRABCAKES.DESC, 40f)
+				RecipeBuilder.Create(DeepfryerConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_CRABCAKES.DESC, TIME_STANDARD)
 					.Input(ShellfishMeatConfig.ID, 1f)
 					.Input(BTags.Groups.grains, 3f)
 					.Input(RawEggConfig.ID, 3f)
@@ -211,7 +252,7 @@ namespace Beached.Content.ModDb
 			}
 			else
 			{
-				RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_CRABCAKES.DESC, 40f)
+				RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_CRABCAKES.DESC, TIME_STANDARD)
 					.Input(ShellfishMeatConfig.ID, 1f)
 					.Input(BTags.Groups.grains, 3f)
 					.Input(RawEggConfig.ID, 3f)
@@ -220,21 +261,22 @@ namespace Beached.Content.ModDb
 					.Build();
 			}
 
-			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_GLAZEDDEWNUT.DESC, 40f)
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_GLAZEDDEWNUT.DESC, TIME_STANDARD)
 				.Input(DewPalmConfig.SEED_ID, 3f)
 				.Input(SimHashes.Sucrose.CreateTag(), 3f)
+				.Input(BTags.Groups.berryJuices, 5f)
 				.Output(GlazedDewnutConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_ASPICLICE.DESC, 40f)
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_ASPICLICE.DESC, TIME_STANDARD)
 				.Input(BTags.Groups.jellies, 1f)
 				.Input(BasicPlantFoodConfig.ID, 1f)
 				.Output(AspicLiceConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SEAFOODPASTA.DESC, 40f)
+			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SEAFOODPASTA.DESC, TIME_STANDARD)
 				.Input(FishMeatConfig.ID, 1f)
 				.Input(RawKelpConfig.ID, 1f)
 				.Input(DryNoodlesConfig.ID, 1f)
@@ -242,15 +284,15 @@ namespace Beached.Content.ModDb
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_STUFFEDSNAILS.DESC, 40f)
+			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_STUFFEDSNAILS.DESC, TIME_STANDARD)
 				.Input(RawSnailConfig.ID, 2f)
 				.Input(RawKelpConfig.ID, 1f)
-				.Input(SimHashes.MilkFat.CreateTag(), 10f)
+				.Input(BTags.Groups.snailShells, 1f)
 				.Output(StuffedSnailsConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_ASTROBAR.DESC, 40f)
+			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_ASTROBAR.DESC, TIME_STANDARD)
 				.Input(SpongeCakeConfig.ID, 1f) // 1900 KCal
 				.Input(SpiceNutConfig.ID, 4f)
 				.Input(SimHashes.Sucrose.CreateTag(), 15f)
@@ -258,7 +300,7 @@ namespace Beached.Content.ModDb
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
-			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_LEGENDARYSTEAK.DESC, 40f)
+			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_LEGENDARYSTEAK.DESC, TIME_STANDARD)
 				.Input(DryAgedMeatConfig.ID, 1f)
 				.Output(LegendarySteakConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
@@ -293,7 +335,7 @@ namespace Beached.Content.ModDb
 
 			if (DlcManager.IsExpansion1Active())
 			{
-				RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPONGECAKE.DESC, 40f)
+				RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPONGECAKE.DESC, TIME_STANDARD)
 					.Input(WashuSpongeConfig.SEED_ID, 3f)
 					.Input(SimHashes.Sucrose.CreateTag(), 50f)
 					.Output(SpongeCakeConfig.ID, 1f)
@@ -303,7 +345,7 @@ namespace Beached.Content.ModDb
 			}
 			else
 			{
-				RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPONGECAKE.DESC, 40f)
+				RecipeBuilder.Create(MicrobeMusherConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SPONGECAKE.DESC, TIME_STANDARD)
 					.Input(WashuSpongeConfig.SEED_ID, 3f)
 					.Input(SimHashes.Sucrose.CreateTag(), 30f)
 					.Output(SpongeCakeConfig.ID, 1f)

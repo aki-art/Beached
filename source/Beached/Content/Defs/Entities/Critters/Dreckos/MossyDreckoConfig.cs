@@ -1,4 +1,5 @@
 ﻿using Beached.Content.DefBuilders;
+using System;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Dreckos
@@ -17,7 +18,8 @@ namespace Beached.Content.Defs.Entities.Critters.Dreckos
 
 		public GameObject CreatePrefab() => CreatePrefab(this);
 
-		public string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+		[Obsolete]
+		public string[] GetDlcIds() => null;
 
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{

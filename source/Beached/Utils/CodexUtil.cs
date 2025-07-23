@@ -5,11 +5,11 @@ namespace Beached.Utils
 {
 	public static class CodexUtil
 	{
-		public static ConversionEntry SimpleConversionBase(ElementEntryContext context, GameObject prefab)
+		public static ConversionEntry SimpleConversionBase(ElementEntryContext context, GameObject prefab, string title = null)
 		{
 			var conversionEntry = new ConversionEntry()
 			{
-				title = prefab.GetProperName(),
+				title = title ?? prefab.GetProperName(),
 				prefab = prefab,
 				inSet = []
 			};
