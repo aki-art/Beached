@@ -1,41 +1,26 @@
-﻿using HarmonyLib;
-
-namespace Beached.Content.Scripts.Entities.Comets
+﻿namespace Beached.Content.Scripts.Entities.Comets
 {
 	public class Shrapnel : Comet
 	{
 		[MyCmpReq]
-		private LoopingSounds loopingSounds;
+		private LoopingSounds loopingSound;
 
-		private HashedString FLYING_SOUND_ID_PARAMETER = "meteorType";
-
-		private static AccessTools.FieldRef<Comet, float> explosionMass;
-
-		public override void OnPrefabInit()
-		{
-			base.OnPrefabInit();
-
-			if (explosionMass == null)
-			{
-				var f_explosionMass = AccessTools.Field(typeof(Comet), "explosionMass");
-				explosionMass = AccessTools.FieldRefAccess<Comet, float>(f_explosionMass);
-			}
-		}
+		private HashedString FLYING_SOUND_PARAMETER = "meteorType";
 
 		public void SetExplosionMass(float value)
 		{
-			explosionMass(this) = value;
+			explosionMass = value;
 		}
 
 		public override void OnSpawn()
 		{
-			StartLoopingSound();
+			StartLoopingSound2();
 		}
 
-		private void StartLoopingSound()
+		private void StartLoopingSound2()
 		{
-			loopingSounds.StartSound(flyingSound);
-			loopingSounds.UpdateFirstParameter(flyingSound, FLYING_SOUND_ID_PARAMETER, flyingSoundID);
+			loopingSound.StartSound(flyingSound);
+			loopingSound.UpdateFirstParameter(flyingSound, FLYING_SOUND_PARAMETER, flyingSoundID);
 		}
 	}
 }

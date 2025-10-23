@@ -13,6 +13,7 @@ namespace Beached.Content.ModDb
 
 		private static void RegisterSandboxes(ArtableStages stages)
 		{
+			Log.Debug("sandboxes");
 			var great = Db.Get().ArtableStatuses.LookingGreat;
 
 			Add(stages, SandBoxConfig.ID, "castle", "beached_sandbox_castle_kanim", great, 5);
@@ -23,6 +24,7 @@ namespace Beached.Content.ModDb
 
 		private static void RegisterWoodenCarvings(ArtableStages stages)
 		{
+			Log.Debug("wood carvings");
 			Great(stages, WoodCarvingConfig.ID, "owl", "beached_woodcarving_owl_kanim");
 		}
 
@@ -58,7 +60,8 @@ namespace Beached.Content.ModDb
 				status,
 				buildingId,
 				string.Empty,
-				DlcManager.AVAILABLE_ALL_VERSIONS));
+				null,
+				null));
 		}
 	}
 }

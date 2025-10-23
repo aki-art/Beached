@@ -110,7 +110,6 @@ namespace Beached
 			public static Material testMaterial;
 			public static Material darkVeilPostFxMaterial;
 			public static GameObject darkVeilOverlay;
-			public static GameObject test;
 			public static GameObject electricOverlay;
 
 			public struct ParticleFxSet
@@ -149,6 +148,7 @@ namespace Beached
 					};
 
 					var laserGo = new GameObject(laserEffect.id);
+					Log.Debug("setting laser parebt");
 					laserGo.transform.parent = kbatchedAnimEventToggler.transform;
 					laserGo.AddOrGet<KPrefabID>().PrefabTag = new Tag(laserEffect.id);
 
@@ -349,14 +349,6 @@ namespace Beached
 
 			LoadAsteroidBelt(bundle2, sharedAssetsBundle);
 
-			Log.Debug("loading liquid shader");
-			Materials.liquidRefractionMat = bundle2.LoadAsset<Material>("Assets/Materials/Beached_LiquidRefraction.mat");
-			Materials.liquidRefractionMat.SetFloat("_WaveFrequency", 850f);
-			Materials.liquidRefractionMat.SetFloat("_WaveAmplitude", 0.001f);
-			Materials.liquidRefractionMat.SetFloat("_EdgeSize", 0.55f);
-			Materials.liquidRefractionMat.SetFloat("_EdgeMultiplier", 2f);
-			Materials.liquidRefractionMat.SetFloat("_ZoomMagicNumber", 20f);
-
 			Materials.zoneTypeMaskMaterial = shadersBundle.LoadAsset<Material>("Assets/Shaders/BiomeMaskMaterial.mat");
 
 			if (Materials.zoneTypeMaskMaterial == null)
@@ -364,7 +356,9 @@ namespace Beached
 
 			Materials.darkVeil = shadersBundle.LoadAsset<Material>("Assets/Materials/Shader Graphs_DarkVeilShaderv2.mat");
 			Fx.darkVeilOverlay = bundle2.LoadAsset<GameObject>("Assets/Prefabs/DarkVeilQuad.prefab");
+			Object.DontDestroyOnLoad(Fx.darkVeilOverlay);
 			Fx.electricOverlay = bundle2.LoadAsset<GameObject>("Assets/Prefabs/ElectricityQuad.prefab");
+			Object.DontDestroyOnLoad(Fx.electricOverlay);
 
 			sw.Stop();
 			Log.Info($"Finished loading assets. It took {sw.ElapsedMilliseconds} ms");

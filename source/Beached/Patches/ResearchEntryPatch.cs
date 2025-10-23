@@ -1,14 +1,8 @@
-﻿using HarmonyLib;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using UnityEngine;
-
-namespace Beached.Patches
+﻿namespace Beached.Patches
 {
 	public class ResearchEntryPatch
 	{
-		[HarmonyPatch(typeof(ResearchEntry), "SetTech")]
+		/*[HarmonyPatch(typeof(ResearchEntry), "SetTech")]
 		public class ResearchEntry_SetTech_Patch
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
@@ -65,8 +59,45 @@ namespace Beached.Patches
 
 				return codes;
 			}
+*/
+		// TODO
+		//[HarmonyPatch(typeof(ResearchEntry), nameof(ResearchEntry.SetTech))]
+		public class ResearchEntry_SetTech_Patch
+		{
+			public static void Postfix(ResearchEntry __instance)
+			{
+				var index = 1; //child 0 is the icon prefab
 
-			private static void ModifyDLCIcon(ToolTip toolTip, TechItem techItem)
+				var container = __instance.iconPanel.transform;
+				foreach (var unlockedItem in __instance.targetTech.unlockedItems)
+				{
+					if (!Game.IsCorrectDlcActiveForCurrentSave(unlockedItem))
+						continue;
+					var child = container.GetChild(index++);
+					if (child == null)
+						continue;
+					if (!unlockedItem.Id.StartsWith("Beached_"))
+						continue;
+
+					if (!child.TryGetComponent<HierarchyReferences>(out var hr))
+						continue;
+
+					var dlcOverlay = hr.GetReference<KImage>("DLCOverlay");
+					dlcOverlay.gameObject.SetActive(true);
+					//dlcOverlay.sprite = Assets.GetSprite("beached_tech_banner");
+					dlcOverlay.color = ModAssets.Colors.beached;
+
+					if (child.TryGetComponent<ToolTip>(out var tt))
+					{
+						tt.toolTip = $"{unlockedItem.Name}\n{unlockedItem.description}\n\n{"This Content is added by Beached"}";
+					}
+				}
+			}
+		}
+	}
+}
+/*
+	private static void ModifyDLCIcon(ToolTip toolTip, TechItem techItem)
 			{
 				if (toolTip == null)
 				{
@@ -88,3 +119,4 @@ namespace Beached.Patches
 		}
 	}
 }
+*/

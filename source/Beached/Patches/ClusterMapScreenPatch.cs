@@ -1,12 +1,11 @@
 ﻿using Beached.Content.Defs.StarmapEntities;
 using Beached.Content.Scripts.Entities;
-using HarmonyLib;
 
 namespace Beached.Patches
 {
 	public class ClusterMapScreenPatch
 	{
-		[HarmonyPatch(typeof(ClusterMapScreen), "SetupVisGameObjects")]
+		//[HarmonyPatch(typeof(ClusterMapScreen), "SetupVisGameObjects")]
 		public class ClusterMapScreen_SetupVisGameObjects_Patch
 		{
 			public static void Postfix(ClusterMapScreen __instance)

@@ -7,6 +7,7 @@ using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using Klei.AI;
 using PeterHan.PLib.Core;
+using UnityEngine;
 
 namespace Beached.Patches
 {
@@ -25,6 +26,11 @@ namespace Beached.Patches
 			[HarmonyPriority(Priority.Last)]
 			public static void LatePostfix()
 			{
+				Log.Debug("assets postfix");
+				var gridVis = Object.FindObjectsByType<GridVisualizer>(FindObjectsSortMode.None);
+				Log.Debug($"{gridVis.Length}");
+				if (gridVis.Length > 0)
+					Log.Debug(gridVis[0].GetProperName());
 				BDb.SetMeatTags();
 
 				DNAInjector.InitializeOptions();

@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using UnityEngine;
 using static Beached.Patches.DebugPatches.DebugPatches;
 
 namespace Beached
@@ -40,6 +41,89 @@ namespace Beached
 		public static Harmony harmonyInstance;
 		internal static bool drawDebugGuides;
 
+
+
+		//	[HarmonyPatch(typeof(UnityEngine.Object), "name", MethodType.Getter)]
+		public class MonoBehaviour_GetName_Patch
+		{
+			public static bool Prefix(UnityEngine.Object __instance, ref string __result)
+			{
+				if (__instance is GameObject go)
+				{
+					if (go.TryGetComponent(out GridVisualizer vis))
+					{
+						Log.Debug("GridVisualizer name");
+						//FUtility.FUI.Helper.ListComponents(go);
+						//FUtility.FUI.Helper.ListChildren(go.transform);
+						return false;
+					}
+				}
+
+				return true;
+				/*				Log.Debug("name");
+								try
+								{
+
+									Log.Debug("getting " + __instance.GetType());
+									if (__instance is GameObject go)
+									{
+										foreach (var comp in go.GetComponents<Component>())
+										{
+											Debug.Log(comp.GetType());
+										}
+									}
+									else if (__instance.GetType().IsAssignableFrom(typeof(Component)))
+									{
+										var cm = __instance as Component;
+										foreach (var comp in cm.GetComponents<Component>())
+										{
+											Debug.Log(comp.GetType());
+										}
+									}
+									else
+										Debug.Log("neither");
+								}
+								catch (Exception e)
+								{
+									Log.Debug(e.Message);
+								}*/
+			}
+		}
+		[HarmonyPatch(typeof(Transform), "parent", MethodType.Setter)]
+		public class TargetType_TargetMethod_Patch
+		{
+			public static void Prefix(Transform __instance)
+			{
+				try
+				{
+					Log.Debug("setting parent of " + __instance.name);
+				}
+				catch (Exception e)
+				{
+					Log.Debug(e.Message);
+				}
+			}
+		}
+		/*
+
+				[HarmonyPatch(typeof(UnityEngine.Object), "Destroy", [typeof(UnityEngine.Object), typeof(float)])]
+				public class Object_Destroy_Patch
+				{
+					public static void Prefix(UnityEngine.Object obj)
+					{
+						Log.Debug("destroying " + obj.name);
+					}
+				}
+
+				[HarmonyPatch(typeof(UnityEngine.Object), "DestroyImmediate", [typeof(UnityEngine.Object), typeof(bool)])]
+				public class Object_DestroyImmediate_Patch
+				{
+					public static void Prefix(UnityEngine.Object obj)
+					{
+						Log.Debug("destroying " + obj.name);
+					}
+				}
+		*/
 		public override void OnLoad(Harmony harmony)
 		{
 

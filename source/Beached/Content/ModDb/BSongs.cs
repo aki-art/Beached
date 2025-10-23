@@ -8,7 +8,7 @@ namespace Beached.Content.ModDb
 	{
 		public static void OnConfigureSongsPre(MusicManager manager)
 		{
-			EventReference oceanPalace = RuntimeManager.PathToEventReference("event:/beached/Music/ocean_palace");
+			var oceanPalace = RuntimeManager.PathToEventReference("event:/beached/Music/ocean_palace");
 
 			var result = RuntimeManager.StudioSystem.getEventByID(oceanPalace.Guid, out var ev2);
 
@@ -22,6 +22,9 @@ namespace Beached.Content.ModDb
 				fmodEvent = oceanPalace,
 				requiredDlcId = DlcManager.VANILLA_ID
 			});
+
+			Log.Debug($"past");
+
 		}
 	}
 }
