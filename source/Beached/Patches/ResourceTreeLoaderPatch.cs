@@ -1,5 +1,4 @@
 ﻿using Beached.Content.ModDb;
-using HarmonyLib;
 using UnityEngine;
 using static FUtility.CONSTS.TECH;
 
@@ -9,7 +8,8 @@ namespace Beached.Patches
 	{
 		private const float X = 350, Y = 250;
 
-		[HarmonyPatch(typeof(ResourceTreeLoader<ResourceTreeNode>), MethodType.Constructor, typeof(TextAsset))]
+		// CRASH TEST
+		//	[HarmonyPatch(typeof(ResourceTreeLoader<ResourceTreeNode>), MethodType.Constructor, typeof(TextAsset))]
 		public class ResourceTreeLoader_Load_Patch
 		{
 			public static void Postfix(ResourceTreeLoader<ResourceTreeNode> __instance, TextAsset file)

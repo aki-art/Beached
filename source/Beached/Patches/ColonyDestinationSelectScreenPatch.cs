@@ -43,12 +43,14 @@ namespace Beached.Patches
 
 			private static void SetDim(GameObject gameObject, bool dim)
 			{
+				Log.Debug("set dim pre");
 				if (gameObject.TryGetComponent(out HierarchyReferences hierarchyReferences))
 				{
 					var icon = hierarchyReferences.GetReference<Image>("Icon");
 
 					hierarchyReferences.GetReference<MultiToggle>("checkbox").gameObject.SetActive(!dim);
 
+					Log.Debug("beached_lockicon");
 					if (!hierarchyReferences.TryGetReference<Image>("beached_lockicon", out var lockIcon) && dim)
 					{
 						var go = Object.Instantiate(icon);
@@ -59,7 +61,9 @@ namespace Beached.Patches
 
 						rect.pivot = new Vector2(0.5f, 0.5f);
 
-						go.transform.parent = icon.transform.parent;
+						Log.Debug("setting parent");
+						go.transform.SetParent(icon.transform.parent, false);
+						Log.Debug("set parent");
 #if DEVTOOLS
 
 						TempDevTool.lockIcon = go.transform;

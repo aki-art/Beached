@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs.Buildings;
-using Database;
+﻿using Database;
 
 namespace Beached.Content.ModDb
 {
@@ -18,27 +17,30 @@ namespace Beached.Content.ModDb
 								CollarDispenserConfig.ID,
 							],
 							techs);*/
+			// CRASH TEST
+			/*			var hydro = new Tech(
+							HYDRO_ELECTRONICS,
+							[
+								WaterGeneratorConfig.ID,
+								ChimeConfig.ID
+							],
+							techs)
+						{
+							//requiredTech = [techs.Get(FUtility.CONSTS.RESEARCH.POWER.POWER_REGULATION)],
+							tier = 2
+						};
 
-			var hydro = new Tech(
-				HYDRO_ELECTRONICS,
-				[
-					WaterGeneratorConfig.ID,
-					ChimeConfig.ID
-				],
-				techs)
-			{
-				//requiredTech = [techs.Get(FUtility.CONSTS.RESEARCH.POWER.POWER_REGULATION)],
-				tier = 2
-			};
-
-			hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.POWER);
-			hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.GENERATOR);
-			hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.WATER);
+						hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.POWER);
+						hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.GENERATOR);
+						hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.WATER);*/
 
 		}
 
 		internal static void PostInit(Techs techs)
 		{
+			// CRASH TEST
+			return;
+
 			var advancedPower = techs.Get(FUtility.CONSTS.TECH.POWER.ADVANCED_POWER_REGULATION);
 			var hydro = techs.Get(HYDRO_ELECTRONICS);
 

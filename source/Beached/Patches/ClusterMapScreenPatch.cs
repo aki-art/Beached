@@ -9,7 +9,7 @@ namespace Beached.Patches
 {
 	public class ClusterMapScreenPatch
 	{
-		[HarmonyPatch(typeof(ClusterMapScreen), "SetupVisGameObjects")]
+		//[HarmonyPatch(typeof(ClusterMapScreen), "SetupVisGameObjects")]
 		public class ClusterMapScreen_SetupVisGameObjects_Patch
 		{
 			[HarmonyPrepare]
