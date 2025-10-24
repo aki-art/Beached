@@ -1,5 +1,4 @@
 ﻿using Beached.Content.Defs.StarmapEntities;
-using Beached.Content.Scripts.Entities;
 
 namespace Beached.Patches
 {
@@ -15,7 +14,7 @@ namespace Beached.Patches
 					if (vis.Key.IsPrefabID(MeteorSwarmVisualPOIConfig.ID))
 					{
 						Log.Debug("ADDED ASTEROID BELT VIS");
-						vis.Value.gameObject.AddOrGet<AsteroidBeltVisualizer>();
+						//vis.Value.gameObject.AddOrGet<AsteroidBeltVisualizer>();
 					}
 				}
 			}

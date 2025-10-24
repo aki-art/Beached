@@ -5,7 +5,6 @@ using Beached.Content.Defs.StarmapEntities;
 using Beached.Content.ModDb;
 using Beached.Content.Overlays;
 using Beached.Content.Scripts;
-using Beached.Content.Scripts.Entities;
 using FMOD.Studio;
 using FMODUnity;
 using ImGuiNET;
@@ -195,7 +194,7 @@ namespace Beached.ModDevTools
 
 			if (ImGui.CollapsingHeader("Asteroid Field Settings"))
 			{
-				AsteroidBeltVisualizer.TestingInstance.OnImguiDebug();
+				//AsteroidBeltVisualizer.TestingInstance.OnImguiDebug();
 			}
 
 			if (ImGui.CollapsingHeader("FMOD Tests"))

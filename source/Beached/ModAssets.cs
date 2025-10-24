@@ -1,14 +1,11 @@
 ﻿using Beached.Content.BWorldGen;
 using Beached.Content.Scripts;
-using FUtility.FUI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using static ProcGen.SubWorld;
 using Object = UnityEngine.Object;
 
@@ -299,30 +296,33 @@ namespace Beached
 			}
 
 			Log.Debug("loading UI");
-			Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
-			Prefabs.critterIdentitySidescreen = bundle2.LoadAsset<GameObject>("Assets/UI/CritterIdentityScreen.prefab");
-			Prefabs.critterIdentitySidescreen.gameObject.SetActive(false);
-			Prefabs.critterIdentitySidescreen.AddOrGet<RectTransform>();
+			//Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
+			//Prefabs.critterIdentitySidescreen = bundle2.LoadAsset<GameObject>("Assets/UI/CritterIdentityScreen.prefab");
+			//Prefabs.critterIdentitySidescreen.gameObject.SetActive(false);
+			//Prefabs.critterIdentitySidescreen.AddOrGet<RectTransform>();
 			Prefabs.muffinSideScreen = bundle2.LoadAsset<GameObject>("Assets/UI/MuffinSideScreen_tmpconverted.prefab");
 
-			TMPConverter.ReplaceAllText(Prefabs.universalSidescreen);
-			TMPConverter.ReplaceAllText(Prefabs.critterIdentitySidescreen);
-			TMPConverter.ReplaceAllText(Prefabs.muffinSideScreen);
+			//TMPConverter.ReplaceAllText(Prefabs.universalSidescreen);
+			Prefabs.universalSidescreen = new GameObject();
+			//TMPConverter.ReplaceAllText(Prefabs.critterIdentitySidescreen);
+			//TMPConverter.ReplaceAllText(Prefabs.muffinSideScreen);
 
 			// very important to do this as early as possible, if these references are not found Unity will CTD (native crash), with no log.
 			var dropDownGo = Prefabs.muffinSideScreen.transform.Find("Scroll View/Viewport/Contents/FilterCategory/CritterFilterPrefab/Dropdown").gameObject;
 			dropDownGo.SetActive(true);
-			var dropdown = dropDownGo.AddComponent<TMP_Dropdown>();
+			// CRASH
+			/*			var dropdown = dropDownGo.AddComponent<TMP_Dropdown>();
 
-			// when converting to LocText these references were lost, so they need to be rebound
-			var item = dropdown.transform.Find("Template/Viewport/Content/Item");
-			dropdown.itemText = item.Find("Item Label").GetComponent<LocText>();
-			dropdown.itemImage = item.transform.Find("UIImage").GetComponent<Image>();
-			dropdown.captionText = dropdown.transform.Find("Label").GetComponent<LocText>();
-			dropdown.captionImage = dropdown.transform.Find("UIImage").GetComponent<Image>();
-			dropdown.template = dropdown.transform.Find("Template").GetComponent<RectTransform>();
-			dropdown.options = [];
+						// when converting to LocText these references were lost, so they need to be rebound
+						var item = dropdown.transform.Find("Template/Viewport/Content/Item");
+						dropdown.itemText = item.Find("Item Label").GetComponent<LocText>();
+						dropdown.itemImage = item.transform.Find("UIImage").GetComponent<Image>();
+						dropdown.captionText = dropdown.transform.Find("Label").GetComponent<LocText>();
+						dropdown.captionImage = dropdown.transform.Find("UIImage").GetComponent<Image>();
+						dropdown.template = dropdown.transform.Find("Template").GetComponent<RectTransform>();
+						dropdown.options = [];*/
 
+			Object.DontDestroyOnLoad(dropDownGo);
 			/*            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
                         Materials.forceField = new(bundle.LoadAsset<Shader>("Assets/Beached/ForceField.shader"))
                         {
@@ -339,6 +339,7 @@ namespace Beached
 
 			Log.Debug("loading particle systems");
 			Prefabs.cometTrailFx = bundle.LoadAsset<GameObject>("Assets/Beached/fx/CometSparkles.prefab");
+			Log.AssertNotNull(Prefabs.cometTrailFx, "cometTrailFx");
 			var renderer = Prefabs.cometTrailFx.GetComponent<ParticleSystemRenderer>();
 			var texture = renderer.material.mainTexture;
 			renderer.material = new Material(Shader.Find("Klei/BloomedParticleShader"))
@@ -346,8 +347,8 @@ namespace Beached
 				renderQueue = RenderQueues.Liquid,
 				mainTexture = texture
 			};
-
-			LoadAsteroidBelt(bundle2, sharedAssetsBundle);
+			// CRASH
+			//LoadAsteroidBelt(bundle2, sharedAssetsBundle);
 
 			Materials.zoneTypeMaskMaterial = shadersBundle.LoadAsset<Material>("Assets/Shaders/BiomeMaskMaterial.mat");
 
