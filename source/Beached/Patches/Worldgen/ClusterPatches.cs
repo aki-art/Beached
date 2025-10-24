@@ -47,6 +47,10 @@ namespace Beached.Patches.Worldgen
 			{
 				Log.Debug($"cluster init id: {__instance.Id}");
 				Log.Debug($"cluster init id: {__instance.clusterLayout.name}");
+
+				if (!DlcManager.IsExpansion1Active())
+					return;
+
 				if (!WorldgenUtil.IsBeachedWorld(__instance.clusterLayout.name))
 					return;
 
@@ -54,10 +58,10 @@ namespace Beached.Patches.Worldgen
 
 				HashSet<AxialI> worldLocations = [];
 
-				foreach (WorldGen world in __instance.worlds)
+				foreach (var world in __instance.worlds)
 					worldLocations.Add(world.data.clusterLocation);
 
-				foreach (AxialI swarmLocation in swarmLocations)
+				foreach (var swarmLocation in swarmLocations)
 				{
 					if (!worldLocations.Contains(swarmLocation))
 						__instance.poiPlacements.Add(swarmLocation, MeteorSwarmDamagePOIConfig.ID);
@@ -86,21 +90,21 @@ namespace Beached.Patches.Worldgen
 				innerLocations = [];
 				outerLocations = [];
 
-				int rings = __instance.numRings - 1;
+				var rings = __instance.numRings - 1;
 				swarmOriginLocation = GetAsteroidSwarmOrigin(__instance.seed, rings);
 
-				AxialI center = new AxialI(0, 0);
-				Vector3 swarmOriginPos = AxialUtil.AxialToWorld(swarmOriginLocation.R, swarmOriginLocation.Q);
-				Vector3 centerPos = AxialUtil.AxialToWorld(0, 0);
-				float worldRadius = Vector3.Distance(centerPos, swarmOriginPos); //grid radius in world coordinates
+				var center = new AxialI(0, 0);
+				var swarmOriginPos = AxialUtil.AxialToWorld(swarmOriginLocation.R, swarmOriginLocation.Q);
+				var centerPos = AxialUtil.AxialToWorld(0, 0);
+				var worldRadius = Vector3.Distance(centerPos, swarmOriginPos); //grid radius in world coordinates
 
 				// iterate all hexes of the cluster and assign them to one of the 3 belt location types
-				foreach (AxialI location in AxialUtil.GetAllPointsWithinRadius(center, rings))
+				foreach (var location in AxialUtil.GetAllPointsWithinRadius(center, rings))
 				{
-					Vector3 locationPoint = AxialUtil.AxialToWorld(location.R, location.Q);
-					float distanceF = Vector3.Distance(swarmOriginPos, locationPoint);
+					var locationPoint = AxialUtil.AxialToWorld(location.R, location.Q);
+					var distanceF = Vector3.Distance(swarmOriginPos, locationPoint);
 
-					int distance = Mathf.RoundToInt(distanceF);
+					var distance = Mathf.RoundToInt(distanceF);
 
 					if (distance > Mathf.RoundToInt(worldRadius * 1.5f) + 1)
 					{
@@ -119,7 +123,7 @@ namespace Beached.Patches.Worldgen
 
 				swarmLocationsWithBuffer = [];
 
-				foreach (AxialI location in swarmLocations)
+				foreach (var location in swarmLocations)
 					swarmLocationsWithBuffer.UnionWith(AxialUtil.GetAllPointsWithinRadius(location, 1));
 
 				swarmLocationsWithBuffer = new(swarmLocationsWithBuffer.Distinct());
@@ -129,7 +133,7 @@ namespace Beached.Patches.Worldgen
 			{
 				Debug.Log("world index: " + index);
 
-				WorldPlacement worldPlacement = SettingsCache.clusterLayouts.clusterCache[instance.Id].worldPlacements[index];
+				var worldPlacement = SettingsCache.clusterLayouts.clusterCache[instance.Id].worldPlacements[index];
 				Debug.Log("World locationType to int: " + worldPlacement.locationType);
 
 				specialWorldPosition = worldPlacement.locationType;
@@ -172,11 +176,11 @@ namespace Beached.Patches.Worldgen
 
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
 			{
-				List<CodeInstruction> codes = orig.ToList();
+				var codes = orig.ToList();
 
-				System.Reflection.FieldInfo cluster_worlds = AccessTools.Field(typeof(Cluster), nameof(Cluster.worlds));
-				System.Type worldGenList = typeof(List<WorldGen>);
-				int getWorldsIndex = codes.FindIndex(ci => ci.LoadsField(cluster_worlds));
+				var cluster_worlds = AccessTools.Field(typeof(Cluster), nameof(Cluster.worlds));
+				var worldGenList = typeof(List<WorldGen>);
+				var getWorldsIndex = codes.FindIndex(ci => ci.LoadsField(cluster_worlds));
 
 				if (getWorldsIndex == -1)
 				{
@@ -185,7 +189,7 @@ namespace Beached.Patches.Worldgen
 				}
 
 				//grab the worlds iterator current index
-				int grabWorldIndex_insertAt = codes.FindIndex(getWorldsIndex, ci => ci.IsLdloc());
+				var grabWorldIndex_insertAt = codes.FindIndex(getWorldsIndex, ci => ci.IsLdloc());
 
 				if (grabWorldIndex_insertAt == -1)
 				{
@@ -193,7 +197,7 @@ namespace Beached.Patches.Worldgen
 					return codes;
 				}
 
-				System.Reflection.MethodInfo m_GetWorldByIndex = AccessTools.Method(typeof(Cluster_AssignClusterLocations_Patch), "GetWorldByIndex");
+				var m_GetWorldByIndex = AccessTools.Method(typeof(Cluster_AssignClusterLocations_Patch), "GetWorldByIndex");
 
 				//grabbing the current world index and determine if any special placement rules apply
 				codes.InsertRange(grabWorldIndex_insertAt + 1,
@@ -202,10 +206,10 @@ namespace Beached.Patches.Worldgen
 					new CodeInstruction(OpCodes.Call, m_GetWorldByIndex)
 				]);
 
-				System.Reflection.MethodInfo m_AddSwarmBlockedLocations = AccessTools.Method(typeof(Cluster_AssignClusterLocations_Patch), nameof(InsertSwarmBlockings));
+				var m_AddSwarmBlockedLocations = AccessTools.Method(typeof(Cluster_AssignClusterLocations_Patch), nameof(InsertSwarmBlockings));
 
 				//regular asteroid placement rules: insert extra blocking locations
-				int antiBuffer_stfld_index = codes.FindIndex(ci => ci.opcode == OpCodes.Stfld && ci.operand.ToString().Contains("antiBuffer"));
+				var antiBuffer_stfld_index = codes.FindIndex(ci => ci.opcode == OpCodes.Stfld && ci.operand.ToString().Contains("antiBuffer"));
 
 				if (antiBuffer_stfld_index == -1)
 				{
@@ -216,7 +220,7 @@ namespace Beached.Patches.Worldgen
 				codes.Insert(antiBuffer_stfld_index, new(OpCodes.Call, m_AddSwarmBlockedLocations));
 
 				//reduced asteroid placement rules: insert extra blocking locations
-				int minBuffers_stfld_index = codes.FindIndex(ci => ci.opcode == OpCodes.Stfld && ci.operand.ToString().Contains("minBuffers"));
+				var minBuffers_stfld_index = codes.FindIndex(ci => ci.opcode == OpCodes.Stfld && ci.operand.ToString().Contains("minBuffers"));
 
 				if (minBuffers_stfld_index == -1)
 				{
@@ -227,10 +231,10 @@ namespace Beached.Patches.Worldgen
 				codes.Insert(minBuffers_stfld_index, new(OpCodes.Call, m_AddSwarmBlockedLocations));
 
 
-				System.Reflection.MethodInfo m_FeatureClusterSpaceEnabled = AccessTools.Method(typeof(DlcManager), "FeatureClusterSpaceEnabled");
-				System.Reflection.MethodInfo m_StartPOIGeneration = AccessTools.Method(typeof(Cluster_AssignClusterLocations_Patch), "StartPOIGeneration");
+				var m_FeatureClusterSpaceEnabled = AccessTools.Method(typeof(DlcManager), "FeatureClusterSpaceEnabled");
+				var m_StartPOIGeneration = AccessTools.Method(typeof(Cluster_AssignClusterLocations_Patch), "StartPOIGeneration");
 
-				int clusterSpaceEnabledIndex = codes.FindIndex(ci => ci.Calls(m_FeatureClusterSpaceEnabled));
+				var clusterSpaceEnabledIndex = codes.FindIndex(ci => ci.Calls(m_FeatureClusterSpaceEnabled));
 
 				if (clusterSpaceEnabledIndex == -1)
 				{
@@ -242,7 +246,7 @@ namespace Beached.Patches.Worldgen
 
 
 				//spacePOI add extra blocking locations, use poiWorldAvoidance because thats used in all 3 poi placement checks
-				int poiWorldAvoidance_stfld_index = codes.FindIndex(ci => ci.opcode == OpCodes.Stfld && ci.operand.ToString().Contains("poiWorldAvoidance"));
+				var poiWorldAvoidance_stfld_index = codes.FindIndex(ci => ci.opcode == OpCodes.Stfld && ci.operand.ToString().Contains("poiWorldAvoidance"));
 
 				if (poiWorldAvoidance_stfld_index == -1)
 				{

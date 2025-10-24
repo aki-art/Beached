@@ -67,6 +67,7 @@ elements:
       materialCategory: RefinedMetal
       tags:
       - BuildableAny
+      - RTB_RadiationShieldingRocketConstructionMaterial 
       buildMenuSort: 3
       state: Solid
       

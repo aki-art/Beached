@@ -42,21 +42,53 @@ namespace Beached
 		internal static bool drawDebugGuides;
 
 
+		[HarmonyPatch(typeof(Util), "KInstantiate",
+			[typeof(GameObject), typeof(Vector3), typeof(Quaternion), typeof(GameObject), typeof(string), typeof(bool), typeof(int)])]
+		public class Util_KInstantiate_Patch
+		{
+			public static void Prefix(GameObject original)
+			{
+				Log.Debug("instantiating " + original.name);
+			}
 
-		//	[HarmonyPatch(typeof(UnityEngine.Object), "name", MethodType.Getter)]
+			public static void Postfix(ref GameObject __result)
+			{
+				Log.Debug("\t success: " + __result.name);
+			}
+
+
+
+		}
+
+		[HarmonyPatch(typeof(UnityEngine.Object), "name", MethodType.Getter)]
 		public class MonoBehaviour_GetName_Patch
 		{
+			private static void LogStuff(GameObject go, string type)
+			{
+				if (!go.TryGetComponent(out GridVisualizer _))
+					return;
+
+				Log.Debug("go NAME: " + go.GetProperName());
+				var stackTrace = new StackTrace();
+				Log.Debug(stackTrace.ToString());
+			}
+
 			public static bool Prefix(UnityEngine.Object __instance, ref string __result)
 			{
+				if (__instance.IsNullOrDestroyed())
+				{
+					Log.Debug("trying to call name on a null object");
+					return false;
+				}
 				if (__instance is GameObject go)
 				{
-					if (go.TryGetComponent(out GridVisualizer vis))
-					{
-						Log.Debug("GridVisualizer name");
-						//FUtility.FUI.Helper.ListComponents(go);
-						//FUtility.FUI.Helper.ListChildren(go.transform);
-						return false;
-					}
+					LogStuff(go, __instance.GetType().ToString());
+				}
+				else if (__instance.GetType().IsAssignableFrom(typeof(Component)))
+				{
+					var cm = __instance as Component;
+					LogStuff(cm.gameObject, cm.GetType().ToString());
+
 				}
 
 				return true;

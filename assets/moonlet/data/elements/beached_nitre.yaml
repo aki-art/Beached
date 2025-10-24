@@ -24,6 +24,7 @@ elements:
     materialCategory: Agriculture
     tags:
       - Oxidizer
+      # add tag: https://github.com/Sgt-Imalas/Sgt_Imalas-Oni-Mods/blob/3464c0552f56914ce6a3c25190c7c32d2134a24b/Rockets-TinyYetBig/ModAssets.cs#L570
     buildMenuSort: 2
     state: Solid
     audio:

@@ -489,15 +489,15 @@ cells:
   temperature: 212.912155
   location_x: 4
   location_y: -2
-buildings:
-- id: IceSculpture
-  location_y: -2
-  element: Ice
-  temperature: 218.117981
-- id: IceSculpture
-  location_x: 3
-  element: Ice
-  temperature: 219.123123
+# buildings:
+# - id: IceSculpture
+#   location_y: -2
+#   element: Ice
+#   temperature: 218.117981
+# - id: IceSculpture
+#   location_x: 3
+#   element: Ice
+#   temperature: 219.123123
 otherEntities:
 - id: ColdWheat
   location_x: -3

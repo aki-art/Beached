@@ -1,4 +1,4 @@
-﻿using Coffee.UIExtensions;
+﻿/*using Coffee.UIExtensions;
 using ImGuiNET;
 using System;
 using UnityEngine;
@@ -89,7 +89,7 @@ namespace Beached.Content.Scripts.Entities
 				Log.Warning("Could not initialize Asteroid Belt visualizer.");
 		}
 
-		/*		public void FixedUpdate()
+		*//*		public void FixedUpdate()
 				{
 					//if (StarmapScreen.Instance.IsActive())
 					//{
@@ -101,7 +101,7 @@ namespace Beached.Content.Scripts.Entities
 					visualizer.Simulate(Time.fixedDeltaTime, true, false);
 					//}
 				}
-		*/
+		*//*
 		private static float scale;
 		private static float particleScale;
 		private static float x, y, z;
@@ -177,3 +177,4 @@ namespace Beached.Content.Scripts.Entities
 		}
 	}
 }
+*/

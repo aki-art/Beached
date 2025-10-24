@@ -3,7 +3,6 @@ using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
 using Beached.ModDevTools;
-using Database;
 using HarmonyLib;
 using Klei;
 using Klei.AI;
@@ -31,7 +30,7 @@ namespace Beached.Patches
 				return false;
 
 			Log.Debug("not placing template");
-			var error = __instance.GetError(cursor_pos, out Story story, out TemplateContainer stampTemplate);
+			var error = __instance.GetError(cursor_pos, out var story, out var stampTemplate);
 			if (error != null)
 			{
 				Log.Debug($"error: {error}");
@@ -39,18 +38,18 @@ namespace Beached.Patches
 			}
 
 			__instance.isPlacingTemplate = true;
-			SandboxStoryTraitTool.Stamp((Vector2)cursor_pos, stampTemplate, (System.Action)(() =>
+			SandboxStoryTraitTool.Stamp((Vector2)cursor_pos, stampTemplate, () =>
 			{
 				__instance.isPlacingTemplate = false;
-				StoryInstance storyInstance = StoryManager.Instance.GetStoryInstance(story);
+				var storyInstance = StoryManager.Instance.GetStoryInstance(story);
 
 				Log.AssertNotNull(storyInstance, "storyInstance");
 
-				StoryInstance.State currentState = storyInstance.CurrentState;
+				var currentState = storyInstance.CurrentState;
 				storyInstance.CurrentState = StoryInstance.State.RETROFITTED;
 				storyInstance.CurrentState = currentState;
 				Log.Debug("steamp complete");
-			}));
+			});
 
 			Log.Debug("OnLeftClickDown pst");
 
@@ -196,8 +195,9 @@ namespace Beached.Patches
 			}
 		}
 #endif
+		// CRASH
 
-		[HarmonyPatch(typeof(TileRenderer), "LateUpdate")]
+		//[HarmonyPatch(typeof(TileRenderer), "LateUpdate")]
 		public class TileRenderer_LateUpdate_Patch
 		{
 			public static void Postfix(TileRenderer __instance)
@@ -213,8 +213,8 @@ namespace Beached.Patches
 				{
 					Log.Debug("rendering " + brush.Id);
 
-					int mWidth = Screen.width;
-					int mHeight = Screen.height;
+					var mWidth = Screen.width;
+					var mHeight = Screen.height;
 
 					Rect rect = new(0, 0, mWidth, mHeight);
 					RenderTexture renderTexture = new(mWidth, mHeight, 24);

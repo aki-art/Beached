@@ -13,7 +13,7 @@ internalMobs:
     count:
       min: 2
       max: 4
-  - type: Cylindrica
+  - type: Beached:Beached_BambooForest_Cylindrica
     count:
       min: 0
       max: 2

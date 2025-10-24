@@ -15,7 +15,7 @@ namespace Beached.Content.Defs.Buildings
 				ID,
 				1,
 				1,
-				"egg_caterpillar_kanim",
+				"barbeque_kanim",
 				1000,
 				10f,
 				BUILDINGS.CONSTRUCTION_MASS_KG.TIER3,
@@ -43,7 +43,7 @@ namespace Beached.Content.Defs.Buildings
 			return def;
 		}
 
-		public override string[] GetRequiredDlcIds() => DlcManager.EXPANSION1;
+		public override string[] GetRequiredDlcIds() => null;
 
 		public override void ConfigureBuildingTemplate(GameObject go, Tag prefabTag)
 		{
