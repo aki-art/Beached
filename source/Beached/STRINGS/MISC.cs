@@ -48,6 +48,10 @@
 				public static LocString BEACHED_CRYSTAL = "Crystal";
 				public static LocString BEACHED_MEAT = "Meat";
 				public static LocString BEACHED_MOSSMATERIAL = "Moss";
+				public static LocString BEACHED_RUBBERMATERIAL = "Rubber";
+				public static LocString BEACHED_SANDMATERIAL = "Sand";
+				public static LocString BEACHED_SLAGMATERIAL = "Slag";
+				public static LocString BEACHED_CHIMEMATERIAL = "Acoustic Medium";
 			}
 		}
 	}

@@ -22,8 +22,6 @@ namespace Beached.Content
 			beryllium = ToHash("Beryllium"),
 			berylliumGas = ToHash("BerylliumGas"),
 			berylliumMolten = ToHash("BerylliumMolten"),
-			bioFuel = ToHash("BioFuel"),
-			bioFuelFrozen = ToHash("SolidBioFuel"),
 			bismuth = ToHash("Bismuth"),
 			bismuthGas = ToHash("BismuthGas"),
 			bismuthMolten = ToHash("BismuthMolten"),
@@ -311,6 +309,7 @@ namespace Beached.Content
 			ElementLoader.FindElementByHash(rot).sublimateFX = ModAssets.Fx.ammoniaBubbles;
 
 			ElementLoader.FindElementByHash(SimHashes.Sand).AddTag(BTags.BuildingMaterials.sand);
+			ElementLoader.FindElementByHash(SimHashes.Isoresin).AddTag(BTags.BuildingMaterials.rubber);
 
 			foreach (var kvp in acidVulnerabilities)
 				ElementLoader.FindElementByHash(kvp.Key)?.AddTag(BTags.corrodable);
@@ -332,9 +331,7 @@ namespace Beached.Content
 		{
 			foreach (var element in ElementLoader.elements)
 			{
-				float conduction = 0;
-
-				if (!electricConductiviy.ContainsKey(element.id))
+				if (!electricConductiviy.TryGetValue(element.id, out var conduction))
 				{
 					if (element.hardness == byte.MaxValue)
 						conduction = 0f;

@@ -178,6 +178,8 @@ namespace Beached.Content
 			public static Tag sand = TagManager.Create("Beached_SandMaterial");
 			public static Tag slag = TagManager.Create("Beached_SlagMaterial");
 			public static Tag moss = TagManager.Create("Beached_MossMaterial");
+			public static Tag rubber = TagManager.Create("Beached_RubberMaterial");
+
 		}
 
 		public static class TagCollections

@@ -66,20 +66,6 @@ namespace Beached
 					public static LocString EFFECT = "Shields the surface of an asteroid from incoming Meteors. Does not allow rockets to pass.";
 				}
 
-				public class BEACHED_BIOFUELGENERATOR
-				{
-					public static LocString NAME = Link("Bio-Fuel Generator", BioFuelGeneratorConfig.ID);
-					public static LocString DESC = "Generates a small amount of power by burning Bio-Fuel.";
-					public static LocString EFFECT = $"Burns {Link("Bio-Fuel", Elements.bioFuel)}, producing electrical {Link("Power", "POWER")} and {Link("Nitrogen", "BEACHEDNITROGEN")}.";
-				}
-
-				public class BEACHED_BIOFUELMAKER
-				{
-					public static LocString NAME = Link("Bio-Fuel Reactor", BioFuelMakerConfig.ID);
-					public static LocString DESC = "Processes organic material into Bio-Fuel.";
-					public static LocString EFFECT = $"Converts organics into {Link("Bio-Fuel", Elements.bioFuel)}, which can be burnt in a {Link("Bio-Fuel Generator", BioFuelGeneratorConfig.ID)}.";
-				}
-
 				public class BEACHED_CRYSTALSYNTHETIZER
 				{
 					public static LocString NAME = Link("Crystal Synthetizer", CrystalSynthetizerConfig.ID);
@@ -260,11 +246,16 @@ namespace Beached
 					public static LocString EFFECT = "...";
 				}
 
+				public class BEACHED_MEDIUMWATTAGEWIRE
+				{
+					public static LocString NAME = Link("Medium Wattage Wire", MediumWattageWireConfig.ID);
+					public static LocString DESC = "Makes power grids a little simpler to design, at the cost of dealing with decor penalty.";
+				}
+
 				public class BEACHED_MINIFRIDGE
 				{
 					public static LocString NAME = Link("Mini-Fridge", MiniFridgeConfig.ID);
 					public static LocString DESC = "A tiny fridge to store a tiny bit of food for the tiny dupes.";
-					public static LocString EFFECT = "TRANSLATION NOT NEEDED - gets copied from regular fridge";
 				}
 
 				public class BEACHED_MIRROR
@@ -277,7 +268,7 @@ namespace Beached
 				public class BEACHED_MOSSBED
 				{
 					public static LocString NAME = Link("Moss Frame", MossBedConfig.ID);
-					public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a once time delivery of water; once grown the moss is converted to a natural tile.";
+					public static LocString DESC = "Grows a single tile of moss over a period of time. Requires a one time delivery of water; once grown the moss is converted to a natural tile.";
 					public static LocString EFFECT = "Natural tiles can be used as walls and floors or for wild planting.";
 				}
 
