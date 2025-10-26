@@ -167,6 +167,7 @@ namespace Beached.Content.Scripts.Entities
 					{
 						primaryElement.Mass -= emitMass;
 						BubbleManager.instance.SpawnBubble(smi.transform.position, smi.master.initialVelocity, primaryElement.ElementID, emitMass, primaryElement.Temperature);
+
 						if (smi.master.spawnFX != SpawnFXHashes.None)
 							Game.Instance.SpawnFX(smi.master.spawnFX, smi.transform.position, 0);
 					}

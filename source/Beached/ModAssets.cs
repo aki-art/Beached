@@ -1,11 +1,14 @@
 ﻿using Beached.Content.BWorldGen;
 using Beached.Content.Scripts;
+using FUtility.FUI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static ProcGen.SubWorld;
 using Object = UnityEngine.Object;
 
@@ -273,10 +276,10 @@ namespace Beached
 			var bundle2 = LoadAssetBundle(NEW_ASSETBUNDLE, platformSpecific: true);
 			var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
 
-			var up = bundle2.LoadAsset<GameObject>("Assets/Prefabs/AmmoniaBubbles/AmmoniaBubbles.prefab");
-			Fx.ParticleFxSet.ammoniaBubblesUp = up.AddComponent<ParticleSystemPlayer>();
-			Fx.ParticleFxSet.ammoniaBubblesUp.duration = 1f;
-
+			/*	var up = bundle2.LoadAsset<GameObject>("Assets/Prefabs/AmmoniaBubbles/AmmoniaBubbles.prefab");
+				Fx.ParticleFxSet.ammoniaBubblesUp = up.AddComponent<ParticleSystemPlayer>();
+				Fx.ParticleFxSet.ammoniaBubblesUp.duration = 1f;
+	*/
 			Log.Debug("loading sounds");
 			LoadSounds(Path.Combine(assets, "sounds"));
 
@@ -285,7 +288,6 @@ namespace Beached
 			Textures.LUTDay = LoadTexture(Path.Combine(assets, "textures", "cc_day_bright_and_saturated.png"));
 			Textures.dirtLigher = LoadTexture(Path.Combine(assets, "textures", "dirt_lighter.png"));
 
-			//var shadersBundle = LoadAssetBundle("beached_shaders", platformSpecific: true);
 			Log.Debug("loading set pieces");
 			LoadSetpieces(bundle2, sharedAssetsBundle);
 			Prefabs.forceFieldDome = bundle2.LoadAsset<GameObject>("Assets/Prefabs/Smaller Wider Dome.prefab");
@@ -296,31 +298,30 @@ namespace Beached
 			}
 
 			Log.Debug("loading UI");
-			//Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
-			//Prefabs.critterIdentitySidescreen = bundle2.LoadAsset<GameObject>("Assets/UI/CritterIdentityScreen.prefab");
-			//Prefabs.critterIdentitySidescreen.gameObject.SetActive(false);
-			//Prefabs.critterIdentitySidescreen.AddOrGet<RectTransform>();
+			Prefabs.universalSidescreen = bundle.LoadAsset<GameObject>("Assets/Beached/UI/UniversalSidescreen_tmpconverted.prefab");
+			Prefabs.critterIdentitySidescreen = bundle2.LoadAsset<GameObject>("Assets/UI/CritterIdentityScreen.prefab");
+			Prefabs.critterIdentitySidescreen.gameObject.SetActive(false);
+			Prefabs.critterIdentitySidescreen.AddOrGet<RectTransform>();
 			Prefabs.muffinSideScreen = bundle2.LoadAsset<GameObject>("Assets/UI/MuffinSideScreen_tmpconverted.prefab");
 
-			//TMPConverter.ReplaceAllText(Prefabs.universalSidescreen);
-			Prefabs.universalSidescreen = new GameObject();
-			//TMPConverter.ReplaceAllText(Prefabs.critterIdentitySidescreen);
-			//TMPConverter.ReplaceAllText(Prefabs.muffinSideScreen);
+			TMPConverter.ReplaceAllText(Prefabs.universalSidescreen);
+			TMPConverter.ReplaceAllText(Prefabs.critterIdentitySidescreen);
+			TMPConverter.ReplaceAllText(Prefabs.muffinSideScreen);
 
 			// very important to do this as early as possible, if these references are not found Unity will CTD (native crash), with no log.
 			var dropDownGo = Prefabs.muffinSideScreen.transform.Find("Scroll View/Viewport/Contents/FilterCategory/CritterFilterPrefab/Dropdown").gameObject;
 			dropDownGo.SetActive(true);
-			// CRASH
-			/*			var dropdown = dropDownGo.AddComponent<TMP_Dropdown>();
 
-						// when converting to LocText these references were lost, so they need to be rebound
-						var item = dropdown.transform.Find("Template/Viewport/Content/Item");
-						dropdown.itemText = item.Find("Item Label").GetComponent<LocText>();
-						dropdown.itemImage = item.transform.Find("UIImage").GetComponent<Image>();
-						dropdown.captionText = dropdown.transform.Find("Label").GetComponent<LocText>();
-						dropdown.captionImage = dropdown.transform.Find("UIImage").GetComponent<Image>();
-						dropdown.template = dropdown.transform.Find("Template").GetComponent<RectTransform>();
-						dropdown.options = [];*/
+			var dropdown = dropDownGo.AddComponent<TMP_Dropdown>();
+
+			// when converting to LocText these references were lost, so they need to be rebound
+			var item = dropdown.transform.Find("Template/Viewport/Content/Item");
+			dropdown.itemText = item.Find("Item Label").GetComponent<LocText>();
+			dropdown.itemImage = item.transform.Find("UIImage").GetComponent<Image>();
+			dropdown.captionText = dropdown.transform.Find("Label").GetComponent<LocText>();
+			dropdown.captionImage = dropdown.transform.Find("UIImage").GetComponent<Image>();
+			dropdown.template = dropdown.transform.Find("Template").GetComponent<RectTransform>();
+			dropdown.options = [];
 
 			Object.DontDestroyOnLoad(dropDownGo);
 			/*            Materials.germOverlayReplacer = new Material(bundle.LoadAsset<Shader>("Assets/Beached/D_GermOverlay.shader"));
@@ -333,8 +334,8 @@ namespace Beached
 
 			//Textures.germOverlays = bundle.LoadAsset<Texture2DArray>("Assets/Beached/Images/combined.png");
 
-			//Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid_b.png");
-			// Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
+			Textures.forceFieldGrid = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/grid_b.png");
+			Textures.forceFieldBlurMap = bundle.LoadAsset<Texture2D>("Assets/Beached/Images/blurmap.png");
 			// LoadSetpieces(bundle);
 
 			Log.Debug("loading particle systems");
@@ -347,19 +348,17 @@ namespace Beached
 				renderQueue = RenderQueues.Liquid,
 				mainTexture = texture
 			};
-			// CRASH
-			//LoadAsteroidBelt(bundle2, sharedAssetsBundle);
+
+			LoadAsteroidBelt(bundle2, sharedAssetsBundle);
 
 			Materials.zoneTypeMaskMaterial = shadersBundle.LoadAsset<Material>("Assets/Shaders/BiomeMaskMaterial.mat");
 
 			if (Materials.zoneTypeMaskMaterial == null)
 				Log.Warning("zone type mat null");
 
-			Materials.darkVeil = shadersBundle.LoadAsset<Material>("Assets/Materials/Shader Graphs_DarkVeilShaderv2.mat");
+			//Materials.darkVeil = shadersBundle.LoadAsset<Material>("Assets/Materials/Shader Graphs_DarkVeilShaderv2.mat");
 			Fx.darkVeilOverlay = bundle2.LoadAsset<GameObject>("Assets/Prefabs/DarkVeilQuad.prefab");
-			Object.DontDestroyOnLoad(Fx.darkVeilOverlay);
 			Fx.electricOverlay = bundle2.LoadAsset<GameObject>("Assets/Prefabs/ElectricityQuad.prefab");
-			Object.DontDestroyOnLoad(Fx.electricOverlay);
 
 			sw.Stop();
 			Log.Info($"Finished loading assets. It took {sw.ElapsedMilliseconds} ms");

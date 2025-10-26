@@ -28,7 +28,7 @@ namespace Beached.Content.Defs.Entities.Critters.Fuas
 			SetupBasicSolidDiet(
 				prefab,
 				GnawicaBerryDiet(),
-				RotmongerTuning.BASE.CALORIES_PER_KG_OF_ORE,
+				RotmongerTuning.BASE.CALORIES_PER_KG_OF_ORE * 1000.0f,
 				RotmongerTuning.BASE.MIN_POOP_SIZE_IN_KG);
 
 			return prefab;
@@ -38,7 +38,7 @@ namespace Beached.Content.Defs.Entities.Critters.Fuas
 				new(
 					[GnawicaBerryConfig.ID],
 					SimHashes.Phosphorite.CreateTag(),
-					RotmongerTuning.BASE.CALORIES_PER_KG_OF_ORE,
+					RotmongerTuning.BASE.CALORIES_PER_KG_OF_ORE * 1000.0f,
 					CREATURES.CONVERSION_EFFICIENCY.NORMAL)
 
 			//TODO. tuning

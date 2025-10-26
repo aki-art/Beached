@@ -1,4 +1,6 @@
 ﻿using Beached.Content.ModDb;
+using HarmonyLib;
+using System.Collections.Generic;
 using UnityEngine;
 using static FUtility.CONSTS.TECH;
 
@@ -8,18 +10,28 @@ namespace Beached.Patches
 	{
 		private const float X = 350, Y = 250;
 
-		// CRASH TEST
-		//	[HarmonyPatch(typeof(ResourceTreeLoader<ResourceTreeNode>), MethodType.Constructor, typeof(TextAsset))]
+		[HarmonyPatch(typeof(ResourceTreeLoader<ResourceTreeNode>), MethodType.Constructor, typeof(TextAsset))]
 		public class ResourceTreeLoader_Load_Patch
 		{
+			private static readonly HashSet<string> fileNames = [
+				"TechTree_Generated",
+				"TechTree_Expansion1_Generated"
+				];
+
 			public static void Postfix(ResourceTreeLoader<ResourceTreeNode> __instance, TextAsset file)
 			{
 				Log.Debug("loading resource tree: " + file.name);
-				if (file.name != "TechTree_Expansion1_Generated")
+				if (!fileNames.Contains(file.name))
 					return;
 
 				// SLag insulation
 				//AddNode(__instance, BTechs.ADVANCED_INSULATION_ID, GASES.TEMPERATURE_MODULATION, GASES.DIRECTED_AIR_STREAMS, GASES.HVAC);
+
+				foreach (var item in __instance)
+				{
+					if (item.Id == BTechs.HYDRO_ELECTRONICS)
+						return;
+				}
 
 				AddNode(
 					__instance,
@@ -63,6 +75,8 @@ namespace Beached.Patches
 
 				tempModNode.references.Add(node);
 				nodes.resources.Add(node);
+
+				Log.Debug("added hydro node");
 			}
 		}
 	}

@@ -1,4 +1,5 @@
-﻿using Database;
+﻿using Beached.Content.Defs.Buildings;
+using Database;
 
 namespace Beached.Content.ModDb
 {
@@ -10,39 +11,37 @@ namespace Beached.Content.ModDb
 
 		public static void Register(Techs techs)
 		{
-			/*			new Tech(
-							HIDDEN,
-							[
-								ForceFieldGeneratorConfig.ID,
-								CollarDispenserConfig.ID,
-							],
-							techs);*/
-			// CRASH TEST
-			/*			var hydro = new Tech(
-							HYDRO_ELECTRONICS,
-							[
-								WaterGeneratorConfig.ID,
-								ChimeConfig.ID
-							],
-							techs)
-						{
-							//requiredTech = [techs.Get(FUtility.CONSTS.RESEARCH.POWER.POWER_REGULATION)],
-							tier = 2
-						};
+			new Tech(
+				HIDDEN,
+				[
+					ForceFieldGeneratorConfig.ID,
+					CollarDispenserConfig.ID,
+				],
+				techs);
 
-						hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.POWER);
-						hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.GENERATOR);
-						hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.WATER);*/
+			var hydro = new Tech(
+					HYDRO_ELECTRONICS,
+					[
+						WaterGeneratorConfig.ID,
+						ChimeConfig.ID
+					],
+					techs)
+			{
+				//requiredTech = [techs.Get(FUtility.CONSTS.RESEARCH.POWER.POWER_REGULATION)],
+				tier = 2
+			};
+
+			hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.POWER);
+			hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.GENERATOR);
+			hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.WATER);
 
 		}
 
-		internal static void PostInit(Techs techs)
+		public static void PostInit(Techs techs)
 		{
-			// CRASH TEST
-			return;
+			var hydro = techs.Get(HYDRO_ELECTRONICS);
 
 			var advancedPower = techs.Get(FUtility.CONSTS.TECH.POWER.ADVANCED_POWER_REGULATION);
-			var hydro = techs.Get(HYDRO_ELECTRONICS);
 
 			advancedPower.requiredTech ??= [];
 			advancedPower.requiredTech.Add(hydro);

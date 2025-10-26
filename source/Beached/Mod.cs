@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using UnityEngine;
 using static Beached.Patches.DebugPatches.DebugPatches;
 
 namespace Beached
@@ -41,121 +40,6 @@ namespace Beached
 		public static Harmony harmonyInstance;
 		internal static bool drawDebugGuides;
 
-
-		[HarmonyPatch(typeof(Util), "KInstantiate",
-			[typeof(GameObject), typeof(Vector3), typeof(Quaternion), typeof(GameObject), typeof(string), typeof(bool), typeof(int)])]
-		public class Util_KInstantiate_Patch
-		{
-			public static void Prefix(GameObject original)
-			{
-				Log.Debug("instantiating " + original.name);
-			}
-
-			public static void Postfix(ref GameObject __result)
-			{
-				Log.Debug("\t success: " + __result.name);
-			}
-
-
-
-		}
-
-		[HarmonyPatch(typeof(UnityEngine.Object), "name", MethodType.Getter)]
-		public class MonoBehaviour_GetName_Patch
-		{
-			private static void LogStuff(GameObject go, string type)
-			{
-				if (!go.TryGetComponent(out GridVisualizer _))
-					return;
-
-				Log.Debug("go NAME: " + go.GetProperName());
-				var stackTrace = new StackTrace();
-				Log.Debug(stackTrace.ToString());
-			}
-
-			public static bool Prefix(UnityEngine.Object __instance, ref string __result)
-			{
-				if (__instance.IsNullOrDestroyed())
-				{
-					Log.Debug("trying to call name on a null object");
-					return false;
-				}
-				if (__instance is GameObject go)
-				{
-					LogStuff(go, __instance.GetType().ToString());
-				}
-				else if (__instance.GetType().IsAssignableFrom(typeof(Component)))
-				{
-					var cm = __instance as Component;
-					LogStuff(cm.gameObject, cm.GetType().ToString());
-
-				}
-
-				return true;
-				/*				Log.Debug("name");
-								try
-								{
-
-									Log.Debug("getting " + __instance.GetType());
-									if (__instance is GameObject go)
-									{
-										foreach (var comp in go.GetComponents<Component>())
-										{
-											Debug.Log(comp.GetType());
-										}
-									}
-									else if (__instance.GetType().IsAssignableFrom(typeof(Component)))
-									{
-										var cm = __instance as Component;
-										foreach (var comp in cm.GetComponents<Component>())
-										{
-											Debug.Log(comp.GetType());
-										}
-									}
-									else
-										Debug.Log("neither");
-								}
-								catch (Exception e)
-								{
-									Log.Debug(e.Message);
-								}*/
-			}
-		}
-		[HarmonyPatch(typeof(Transform), "parent", MethodType.Setter)]
-		public class TargetType_TargetMethod_Patch
-		{
-			public static void Prefix(Transform __instance)
-			{
-				try
-				{
-					Log.Debug("setting parent of " + __instance.name);
-				}
-				catch (Exception e)
-				{
-					Log.Debug(e.Message);
-				}
-			}
-		}
-		/*
-
-				[HarmonyPatch(typeof(UnityEngine.Object), "Destroy", [typeof(UnityEngine.Object), typeof(float)])]
-				public class Object_Destroy_Patch
-				{
-					public static void Prefix(UnityEngine.Object obj)
-					{
-						Log.Debug("destroying " + obj.name);
-					}
-				}
-
-				[HarmonyPatch(typeof(UnityEngine.Object), "DestroyImmediate", [typeof(UnityEngine.Object), typeof(bool)])]
-				public class Object_DestroyImmediate_Patch
-				{
-					public static void Prefix(UnityEngine.Object obj)
-					{
-						Log.Debug("destroying " + obj.name);
-					}
-				}
-		*/
 		public override void OnLoad(Harmony harmony)
 		{
 

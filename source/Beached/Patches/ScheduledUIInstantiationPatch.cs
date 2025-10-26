@@ -9,8 +9,8 @@ namespace Beached.Patches
 	public class ScheduledUIInstantiationPatch
 	{
 		private static GameObject critterIdentityScreen;
-		// CRASH
-		//[HarmonyPatch(typeof(ScheduledUIInstantiation), "OnPrefabInit")]
+
+		[HarmonyPatch(typeof(ScheduledUIInstantiation), "OnPrefabInit")]
 		public class ScheduledUIInstantiation_OnPrefabInit_Patch
 		{
 			public static void Prefix(ScheduledUIInstantiation __instance)

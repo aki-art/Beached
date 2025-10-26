@@ -508,8 +508,8 @@ namespace Beached
 
 				public class BEACHED_SMOKERVENT
 				{
-					public static LocString NAME = Link("Smoker", SmokerConfig.ID);
-					public static LocString DESCRIPTION = "Continously emits hot Carbon Dioxide.";
+					public static LocString NAME = Link("Smoking Vent", SmokerVentConfig.ID);
+					public static LocString DESCRIPTION = "Continously emits hot Carbon Dioxide. This vent has no dormant period.";
 				}
 
 				public class BEACHED_CELLALGAE
@@ -529,7 +529,7 @@ namespace Beached
 				public class BEACHED_SLICKSHELL
 				{
 					public static LocString NAME = Link("Slickshell", SlickShellConfig.ID);
-					public static LocString DESC = $"Slickshell are a slow, docile critters that excrete {Link("Dirt", SimHashes.Dirt)} when consuming {Link("Salt", SimHashes.Salt)}. Slickshells also produce {Link("Mucus", Elements.mucus)} to aid their movement.";
+					public static LocString DESC = $"Slickshell are slow, docile critters that excrete {Link("Dirt", SimHashes.Dirt)} when consuming {Link("Salt", SimHashes.Salt)}. Slickshells also produce {Link("Mucus", Elements.mucus)} to aid their movement.";
 					public static LocString BABY_NAME = Link("Slickshelly", SlickShellConfig.ID);
 					public static LocString BABY_DESC = $"A very small and fragile Slickshelly. It's body is still light enough where it does not need to produce Mucus for locomotion. Eventually, it will mature into an adult {Link("Slickshell", SlickShellConfig.ID)}.";
 					public static LocString EGG_NAME = Link("Slickshell Egg", SlickShellConfig.ID);

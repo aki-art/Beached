@@ -164,19 +164,20 @@ namespace Beached
 					public class BEACHED_MINNOW
 					{
 						public static LocString NAME = "Surfin' and Snoozin'";
-						public static LocString DESCRIPTION = $"This duplicant cannot stop talking about how cool it would be to have a {Link("Mechanical Surfboard", MechanicalSurfboardConfig.ID)} in their bedroom.";
+						public static LocString DESCRIPTION = $"This duplicant cannot stop talking about how cool it would be to have a {Link("Mechanical Surfboard", MechanicalSurfboardConfig.ID)} in their bedroom.\n" +
+							$"\n<b>Objective:</b> Have a functional {Link("Mechanical Surfboard", MechanicalSurfboardConfig.ID)} placed in the same room the Duplicant's assigned bed is in.";
 					}
 
 					public class FASHION_IDOL
 					{
 						public static LocString NAME = "Fashion Idol";
-						public static LocString DESCRIPTION = "This duplicant's dream is to be as slick as it can get. Achieve 50 additional decor with equipment to achieve their life goal.";
+						public static LocString DESCRIPTION = "This duplicant's dream is to be as slick as it can get. \n\n<b>Objective:</b> Achieve 50 additional decor with equipment.";
 					}
 
 					public class GOLDEN_LAVATORY
 					{
 						public static LocString NAME = "Golden Lavatory";
-						public static LocString DESCRIPTION = $"This duplicant wishes to own their very own golden {Link("Lavatory", FlushToiletConfig.ID)} assigned.";
+						public static LocString DESCRIPTION = $"This duplicant wishes to own their very own golden {Link("Lavatory", FlushToiletConfig.ID)} assigned. \n\n<b>Objective:</b> Assign a personal lavatory made of {Link("Gold Amalgam", SimHashes.GoldAmalgam)} Amalgam or {Link("Gold", SimHashes.Gold)} to this Duplicant.";
 					}
 
 					public class MAXIXE_PENDANT

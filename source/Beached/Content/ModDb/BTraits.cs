@@ -172,6 +172,7 @@ namespace Beached.Content.ModDb
 
 			new TraitBuilder(HOT_BLOODED, true)
 				.Modifier(BAttributes.HEAT_RESISTANCE_ID, 1f, true)
+				.Modifier(db.Attributes.Athletics.Id, 2f, false)
 				.Tag(BTags.easilyTriggers)
 				.ExtendedTooltip(() => "Stress response triggers at 90% Stress")
 				.AddToTraits()
