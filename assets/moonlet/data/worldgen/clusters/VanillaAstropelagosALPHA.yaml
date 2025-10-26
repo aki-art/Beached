@@ -8,6 +8,16 @@ clusterCategory: Vanilla
 difficulty: Moderate
 menuOrder: 10
 
+# custom links are not supported by Moonlet
+welcomeMessage: |
+  Do not panic!
+
+  Beached is in early access, bugs and strange things are ahead! 
+  I hope you will enjoy testing out the mod, while I work to finish the rest of it.
+
+  If you have any feedback, or need any help, join my <b><style="KLink"><link="BEACHED_DISCORDURL">Discord</link></style></b> or open a ticket on <b><style="KLink"><link="BEACHED_GITHUBTRACKERURL">Github</link></style></b>.
+
+  Have fun!
 # extraTags:
 #   variables:
 #     top: rand(0.3, 0.7)

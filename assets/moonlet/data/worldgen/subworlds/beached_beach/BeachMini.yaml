@@ -35,6 +35,7 @@ features:
   - type: Beached:features/beach/TinyFreshWaterLake
   - type: Beached:features/beach/SnailPocket
   - type: Beached:features/beach/PalmyShore
+  - type: Beached:features/beach/OxyliteCave
 
 tags:
   - IgnoreCaveOverride
