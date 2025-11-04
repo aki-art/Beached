@@ -178,11 +178,7 @@ namespace Beached.Content.ModDb
 			RecipeBuilder.Create(CraftingTableConfig.ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_RUBBERBOOTS.DESCRIPTION, 60f)
 				.Input(Elements.rubber.CreateTag(), 30f)
 				.Output(RubberBootsConfig.ID, 1f)
-				.Build();
-
-			RecipeBuilder.Create(CraftingTableConfig.ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_ZEOLITEPENDANT.DESCRIPTION, 60f)
-				.Input(Elements.zeolite.CreateTag(), 30f)
-				.Output(ZeolitePendantConfig.ID, 1f)
+				.RequireTech(BTechs.MATERIALS1)
 				.Build();
 		}
 

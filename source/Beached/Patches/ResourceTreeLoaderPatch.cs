@@ -33,50 +33,155 @@ namespace Beached.Patches
 						return;
 				}
 
+				foreach (var item in __instance)
+				{
+					if (item.Id == SOLIDS.BASIC_REFINEMENT)
+					{
+						Log.Debug($"basic refinement data");
+						Log.Debug($"edges");
+						foreach (var edge in item.edges)
+						{
+							Log.Debug($"edgeType: {edge.edgeType} \n" +
+								$"\t\tsource: {edge.source?.Name} offset: {edge.sourceOffset} " +
+								$"\t\ttarget: {edge.target?.Name} offset: {edge.targetOffset}");
+						}
+						Log.Debug(item.edges);
+						break;
+					}
+				}
+;
+				// Add Power Regulation → Kinetics → Power Regulation
 				AddNode(
 					__instance,
 					BTechs.HYDRO_ELECTRONICS,
 					POWER.POWER_REGULATION,
 					1,
-					-1);
+					-1,
+					POWER.POWER_REGULATION,
+					[POWER.ADVANCED_POWER_REGULATION]);
+
+				// Add Materials I → Brute-Force Refinement
+				AddNode(
+					__instance,
+					BTechs.MATERIALS1,
+					COLONY_DEVELOPMENT.JOBS,
+					0,
+					0,
+					null,
+					[SOLIDS.BASIC_REFINEMENT],
+			SOLIDS.BASIC_REFINEMENT);
+
+				// remove Jobs → Brute-Force Refinement
+				RemoveRequirement(__instance, COLONY_DEVELOPMENT.JOBS, SOLIDS.BASIC_REFINEMENT);
 			}
 
-			private static void AddNode(ResourceTreeLoader<ResourceTreeNode> nodes, string techId, string previousNode, int xOffset, int yOffset)
+			private static void RemoveRequirement(ResourceTreeLoader<ResourceTreeNode> instance, string parentId, string childId)
 			{
-				ResourceTreeNode tempModNode = null;
+				var parent = GetNode(instance, parentId);
+				var child = GetNode(instance, childId);
+
+				parent.references.Remove(child);
+				parent.edges.RemoveAll(node => node.target?.Id == childId);
+				child.edges.RemoveAll(node => node.source?.Id == parentId);
+			}
+
+			private static ResourceTreeNode GetNode(ResourceTreeLoader<ResourceTreeNode> nodes, string id)
+			{
+				foreach (var node in nodes)
+				{
+					if (node.Id == id)
+						return node;
+				}
+
+				return null;
+			}
+
+			private static ResourceTreeNode AddNode(
+				ResourceTreeLoader<ResourceTreeNode> nodes,
+				string techId,
+				string xRefNodeId,
+				int xOffset,
+				int yOffset,
+				string requiredTech = null,
+				string[] unlockedTechs = null,
+				string yRefNodeId = null)
+			{
 				float x = 0, y = 0;
 
-				foreach (var item in nodes)
+				var xRefNode = GetNode(nodes, xRefNodeId);
+
+				if (xRefNode != null)
 				{
-					if (item.Id == previousNode)
+					x = xRefNode.nodeX + (X * xOffset);
+					y = xRefNode.nodeY + (Y * yOffset);
+					Log.Debug($"found {xRefNodeId} y is now at {y}");
+				}
+
+				if (xRefNode == null)
+					return null;
+
+				if (yRefNodeId != null)
+				{
+					var yRefNode = GetNode(nodes, yRefNodeId);
+
+					if (yRefNode != null)
 					{
-						tempModNode = item;
-						x = tempModNode.nodeX + (X * xOffset);
-						y = tempModNode.nodeY + (Y * yOffset);
+						y = yRefNode.nodeY + (Y * yOffset);
+						Log.Debug($"found {yRefNodeId} y is now at {y}");
 					}
 				}
-;
-				if (tempModNode == null)
-					return;
+
+				var references = new List<ResourceTreeNode>();
+
+				if (unlockedTechs != null)
+				{
+					foreach (var tech in unlockedTechs)
+					{
+						// references only want children
+						references.Add(GetNode(nodes, tech));
+					}
+				}
 
 				var node = new ResourceTreeNode
 				{
-					height = tempModNode.height,
-					width = tempModNode.width,
+					height = xRefNode.height,
+					width = xRefNode.width,
 					nodeX = x,
 					nodeY = y,
-					edges = [.. tempModNode.edges],
-					references = [],
+					edges = [], // edfes need to reference the node itself, so we create this list later
+					references = references,
 					Disabled = false,
 					Id = techId,
 					Name = techId
 				};
 
+				var edges = new List<ResourceTreeNode.Edge>();
 
-				tempModNode.references.Add(node);
+				if (unlockedTechs != null)
+				{
+					foreach (var tech in unlockedTechs)
+					{
+						// edges are ONE WAY, parent → child
+						edges.Add(new ResourceTreeNode.Edge(node, GetNode(nodes, tech), ResourceTreeNode.Edge.EdgeType.PolyLineEdge));
+					}
+				}
+
+				node.edges = edges;
+
+				// modifying the parent of this tech
+				if (requiredTech != null)
+				{
+					var required = GetNode(nodes, requiredTech);
+					// references only want to know their children
+					required.references.Add(node);
+					// edges want a one way parent → child connection
+					required.edges.Add(new ResourceTreeNode.Edge(required, node, ResourceTreeNode.Edge.EdgeType.PolyLineEdge));
+				}
+
 				nodes.resources.Add(node);
 
-				Log.Debug("added hydro node");
+				Log.Debug($"added {techId} node");
+				return node;
 			}
 		}
 	}

@@ -58,6 +58,7 @@ namespace Beached.Patches
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, CrystalSynthetizerConfig.ID, Refining.ADVANCED);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, VulcanizerConfig.ID, Refining.MATERIALS, PolymerizerConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, MediumWattageWireConfig.ID, Power.WIRES, WireRefinedConfig.ID, ModUtil.BuildingOrdering.After);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, SealedStorageConfig.ID, Base.STORAGE, StorageLockerConfig.ID, ModUtil.BuildingOrdering.After);
 			}
 
 			private static void AddTechs()

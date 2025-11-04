@@ -332,6 +332,12 @@ namespace Beached
 					}
 				}
 
+				public class BEACHED_SEALEDSTORAGE
+				{
+					public static LocString NAME = Link("Sealed Storage Compactor", SealedStorageConfig.ID);
+					public static LocString DESC = "An elastic lining prevents gases and liquids from leaking.";
+					public static LocString EFFECT = $"Stores the {Link("Solid Materials", "ELEMENTS_SOLID")} of your choosing.";
+				}
 
 				public class BEACHED_SMOKINGRACK
 				{
