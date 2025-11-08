@@ -1,6 +1,4 @@
-﻿using Beached.Content.ModDb;
-using Beached.Content.Scripts;
-using Klei.AI;
+﻿using Klei.AI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,34 +13,24 @@ namespace Beached.Content.Defs.Equipment
 		{
 			var attributeModifiers = new List<AttributeModifier>
 			{
-				new(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME),
-				new(Db.Get().Attributes.Strength.Id, 2, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.NAME),
+				new(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_HADEANZIRCONAMULET.NAME),
+				new(Db.Get().Attributes.Strength.Id, 2, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_HADEANZIRCONAMULET.NAME),
 			};
 
-			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
+			var equipmentDef = BEntityTemplates.Necklace(
 				ID,
-				BAssignableSlots.JEWELLERY_ID,
-				Elements.zirconiumOre,
-				30f,
-				TUNING.EQUIPMENT.VESTS.WARM_VEST_ICON0,
-				CONSTS.SNAPONS.JEWELLERIES.ZIRCON,
 				"beached_zircon_necklace_kanim",
-				4,
-				attributeModifiers,
-				additional_tags:
-				[
-					GameTags.PedestalDisplayable
-				]);
-
-			equipmentDef.OnEquipCallBack += eq =>
-			{
-				Beached_Mod.Instance.rareJewelleryObjectiveComplete = true;
-			};
+				CONSTS.SNAPONS.JEWELLERIES.ZIRCON,
+				Elements.zirconiumOre,
+				attributeModifiers);
 
 			return equipmentDef;
 		}
 
-		public void DoPostConfigure(GameObject go) { }
+		public void DoPostConfigure(GameObject go)
+		{
+			BEntityTemplates.SetupJewelleryPost(go);
+		}
 
 		[Obsolete]
 		public string[] GetDlcIds() => null;

@@ -1,5 +1,4 @@
-﻿using Beached.Content.Scripts;
-using HarmonyLib;
+﻿using HarmonyLib;
 
 namespace Beached.Patches
 {
@@ -10,8 +9,22 @@ namespace Beached.Patches
 		{
 			public static void Prefix(Diggable __instance)
 			{
-				__instance.gameObject.AddOrGet<TreasureHolder>();
 			}
+
+			/*
+						[HarmonyPatch(typeof(Diggable), "DoDigTick")]
+						public class Diggable_DoDigTick_Patch
+						{
+							public static void Prefix(Diggable __instance, int cell, float dt, WorldDamage.DamageType damageType)
+							{
+								if (Grid.Damage[cell] > 1.0f)
+								{
+									if (__instance.worker != null)
+									{
+									}
+								}
+							}
+						}*/
 		}
 	}
 }

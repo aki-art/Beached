@@ -13,6 +13,9 @@ namespace Beached.Content.Defs.StarmapEntities
 		public GameObject CreatePrefab()
 		{
 			var name = "Space Drale";
+			// The older members of their pod appear to wear a sturdy armor, primarily constructed from Brass alloy and Gold. It is unclear what purpose this serves, as there are no natural predators around to require protection from, and even more perplexingly, this plating appears to be manufactured rather than a natural shell formation.
+			// When an old drale falls, calves reaching adulthood will inherit their armor and wear them for the rest of their lives.
+
 			var prefab = EntityTemplates.CreateEntity(ID, name, true);
 
 			prefab.AddOrGet<SaveLoadRoot>();

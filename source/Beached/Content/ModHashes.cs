@@ -36,6 +36,9 @@
 			multiPartPlant_Joined = new("MultiPartPlant_Joined"),
 			multiPartPlant_Removed = new("MultiPartPlant_Removed"),
 
+			onDigtoolActivated = new("DigToolActivated"),
+			onDigtoolDeActivated = new("DigToolDeActivated"),
+
 			segmentedEntityUpdate = new("SegmentedEntityUpdate"),
 			critterTraitAdded = new("CritterTraitAdded");
 

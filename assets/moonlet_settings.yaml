@@ -2,7 +2,7 @@
 
 # log additional information to the game log.
 # recommended to enable while developing, but disable when releasing to Steam Workshop
-debugLogging: true
+debugLogging: false
 
 # Generate a template.pot file in mods/strings_templates
 generateTranslationsTemplate: true

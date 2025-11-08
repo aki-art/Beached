@@ -1,0 +1,24 @@
+id: Beached_Item_Flawless_Diamond
+title: Beached.STRINGS.ITEMS.GEMS.FLAWLESS_DIAMOND.NAME
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.GEMS.FLAWLESS_DIAMOND.NAME
+
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_Item_Flawless_Diamond
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.GEMS.FLAWLESS_DIAMOND.DESCRIPTION
+        
+contentMadeAndUsed:
+  - tag: Beached_Item_Flawless_Diamond

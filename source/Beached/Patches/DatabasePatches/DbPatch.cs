@@ -37,6 +37,9 @@ namespace Beached.Patches.DatabasePatches
 					resolveStringCallback = (str, data) => str
 				};
 
+				__instance.BuildingStatusItems.ColonyLacksRequiredSkillPerk.allowMultiples = true;
+				__instance.BuildingStatusItems.ClusterColonyLacksRequiredSkillPerk.allowMultiples = true;
+
 				BDb.OnDbInit(__instance);
 				BTags.OnDbInit();
 

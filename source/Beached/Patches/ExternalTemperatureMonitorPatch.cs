@@ -4,7 +4,7 @@ using Klei.AI;
 
 namespace Beached.Patches
 {
-	internal class ExternalTemperatureMonitorPatch
+	public class ExternalTemperatureMonitorPatch
 	{
 		private const float DEFAULT_WARM_AIR = 298.15f; // 25C
 		private const float DEFAULT_WARM_LIQUID = 308.15f; // 35C

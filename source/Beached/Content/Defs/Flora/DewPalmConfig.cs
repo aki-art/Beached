@@ -29,10 +29,10 @@ namespace Beached.Content.Defs.Flora
 
 			EntityTemplates.ExtendEntityToBasicPlant(
 				prefab,
-				CREATURES.TEMPERATURE.FREEZING_10,
-				CREATURES.TEMPERATURE.FREEZING_9,
-				CREATURES.TEMPERATURE.HOT_2,
-				CREATURES.TEMPERATURE.HOT_3,
+				MiscUtil.CelsiusToKelvin(26),
+				MiscUtil.CelsiusToKelvin(34),
+				MiscUtil.CelsiusToKelvin(56),
+				MiscUtil.CelsiusToKelvin(60),
 				null,
 				true,
 				0f,

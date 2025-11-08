@@ -34,7 +34,6 @@ namespace Beached.Content.Scripts
 					OnStartWork();
 					break;
 				case Workable.WorkableEvent.WorkCompleted:
-					Log.Debug("work complete");
 					break;
 				case Workable.WorkableEvent.WorkStopped:
 					OnStopWork();
@@ -45,7 +44,10 @@ namespace Beached.Content.Scripts
 		private void OnStartWork()
 		{
 			if (diggable.worker != null)
+			{
 				Treasury.diggers[cachedCell] = diggable.worker;
+				Log.Debug($"cached digger on cell {cachedCell} {diggable.worker.GetProperName()}");
+			}
 
 			temperature = Grid.Temperature[cachedCell];
 		}

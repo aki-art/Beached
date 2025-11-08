@@ -26,7 +26,7 @@ elements:
     lightAbsorptionFactor: 1
     radiationAbsorptionFactor: 0.7
     radiationPer1000Mass: 0
-    materialCategory: Beached_Crystal
+    materialCategory: Beached_Category_Crystal
     tags:
     - Plumbable
     - Crushable

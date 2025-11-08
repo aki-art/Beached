@@ -26,6 +26,7 @@ elements:
       hardness: 2
       molarMass: 196.966569
       lightAbsorptionFactor: 1
+      refinedMetalTarget: Beached_Bismuth
       radiationAbsorptionFactor: 0.35
       radiationPer1000Mass: 0.000001
       materialCategory: Metal

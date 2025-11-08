@@ -1,6 +1,4 @@
-﻿using Beached.Content.ModDb;
-using Beached.Content.Scripts;
-using Klei.AI;
+﻿using Klei.AI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,31 +17,20 @@ namespace Beached.Content.Defs.Equipment
 				new(Db.Get().Attributes.AirConsumptionRate.Id, -0.05f),
 			};
 
-			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
+			var equipmentDef = BEntityTemplates.Necklace(
 				ID,
-				BAssignableSlots.JEWELLERY_ID,
-				Elements.pearl,
-				30f,
 				"beached_maxixe_necklace_kanim",
 				CONSTS.SNAPONS.JEWELLERIES.MAXIXE,
-				"beached_maxixe_necklace_kanim",
-				4,
-				attributeModifiers,
-				height: 0.25f,
-				additional_tags:
-				[
-					GameTags.PedestalDisplayable
-				]);
-
-			equipmentDef.OnEquipCallBack += eq =>
-			{
-				Beached_Mod.Instance.rareJewelleryObjectiveComplete = true;
-			};
+				Elements.aquamarine,
+				attributeModifiers);
 
 			return equipmentDef;
 		}
 
-		public void DoPostConfigure(GameObject go) { }
+		public void DoPostConfigure(GameObject go)
+		{
+			BEntityTemplates.SetupJewelleryPost(go);
+		}
 
 		[Obsolete]
 		public string[] GetDlcIds() => null;

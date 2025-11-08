@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class LootTable(string id, ResourceSet parent) : Resource(id, parent) { }
+public class LootTable(string id, ResourceSet parent) : Resource(id, parent)
+{
+}
 
 public class LootTable<LootType>(string id, ResourceSet parent) : LootTable(id, parent)
 {

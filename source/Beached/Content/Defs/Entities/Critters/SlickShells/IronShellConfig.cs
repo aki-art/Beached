@@ -23,7 +23,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
-				.TemperatureCelsius(50, 70, 270, 310)
+				.TemperatureCelsius(100, 110, 320, 350)
 				.Drops(IronShellShellConfig.ID, 1f)
 				.SymbolPrefix("iron_")
 				.Traits()
@@ -35,6 +35,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 					.Fertility(10)
 					.Incubation(20)
 					.EggChance(EggId, 100f)
+					.EggChance(SlickShellConfig.EGG_ID, 0f)
 					.Done();
 		}
 
@@ -62,7 +63,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			host.targetSymbol = "beached_limpetgrowth";
 			host.limpetKanim = "beached_ironshell_limpetgrowth_kanim";
 			host.metabolismModifier = 1.2f;
-			host.glandMass = 5f;
+			//host.glandMass = 5f;
 
 
 			var moltDropper = prefab.AddOrGetDef<MoltDropperMonitor.Def>();

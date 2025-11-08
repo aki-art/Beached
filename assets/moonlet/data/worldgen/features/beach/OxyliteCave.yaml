@@ -22,9 +22,9 @@ ElementChoiceGroups:
       - element: Salt
         weight: 2.0
   RoomBorderChoices0:
-    selectionMethod: HorizontalSlice
+    selectionMethod: WeightedResample
     choices:
       - element: OxyRock
         weight: 1.0
       - element: Beached_SiltStone
-        weight: 1.0
+        weight: 2.0

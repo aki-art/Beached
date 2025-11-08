@@ -22,7 +22,7 @@ namespace Beached.Content.Defs.Flora
 				Grid.SceneLayer.BuildingBack,
 				1,
 				1,
-				DECOR.PENALTY.TIER1);
+				DECOR.BONUS.TIER1);
 
 			prefab.AddOrGet<SimTemperatureTransfer>();
 			prefab.AddOrGet<OccupyArea>().objectLayers = [ObjectLayer.Building];
@@ -44,6 +44,7 @@ namespace Beached.Content.Defs.Flora
 			var storage = prefab.AddComponent<Storage>();
 			storage.storageFilters = STORAGEFILTERS.GASES;
 			storage.showInUI = true;
+			storage.capacityKg = 100.0f;
 
 			prefab.AddOrGet<KBatchedAnimController>().randomiseLoopedOffset = true;
 

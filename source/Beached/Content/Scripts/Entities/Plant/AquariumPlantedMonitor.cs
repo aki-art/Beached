@@ -86,13 +86,13 @@ namespace Beached.Content.Scripts.Entities.Plant
 			{
 				if (smi.master.selfStorage == null)
 				{
-					Log.Warning("self storage null");
+					// Log.Warning("self storage null");
 					return false;
 				}
 
 				if (smi.master.targetStorage == null)
 				{
-					Log.Warning("target storage null");
+					// Log.Warning("target storage null");
 					return false;
 				}
 

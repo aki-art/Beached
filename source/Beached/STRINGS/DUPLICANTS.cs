@@ -42,7 +42,9 @@ namespace Beached
 				public class BEACHED_PRECISION
 				{
 					public static LocString NAME = "Precision";
-					public static LocString DESC = "...";
+					public static LocString DESC = "Determines the hand skill of a duplicant, affecting how much material they can retrieve when digging, as well as completing hihg precision requiring tasks.";
+					public static LocString SPEEDMODIFIER = "{0} Crafting Speed";
+					public static LocString AMOUNTMODIFIER = "{0} Material Recovered";
 				}
 
 
@@ -108,36 +110,36 @@ namespace Beached
 				public class ARCHEOLOGY
 				{
 					public static LocString NAME = Link("Careful Excavation", BSkills.ARCHEOLOGY_ID);
-					public static LocString DESCRIPTION = "Allows a Duplicant to find hidden treasures while digging around in soft materials.";
+					public static LocString DESCRIPTION = "Find hidden treasures while digging";
 				}
 
 				public class ARCHEOLOGY2
 				{
 					public static LocString NAME = Link("Archeology", BSkills.ARCHEOLOGY2_ID);
-					public static LocString DESCRIPTION = "Improves a Duplican't ability to find hidden treasures while digging around, and they can now find items in hard materials.";
+					public static LocString DESCRIPTION = "Twice as likely to find hidden treasures";
 				}
 
 				public class AQUACULTURE1
 				{
 					public static LocString NAME = Link("Aquaculture I", BSkills.AQUACULTURE1_ID);
-					public static LocString DESCRIPTION = "Better harvesting gof aquatic plants, such as corals or algaes.";
+					public static LocString DESCRIPTION = "Better harvesting of aquatic plants";
 				}
 
 				public class AQUACULTURE2
 				{
 					public static LocString NAME = Link("Aquaculture II", BSkills.AQUACULTURE1_ID);
-					public static LocString DESCRIPTION = "Better harvesting gof aquatic plants, such as corals or algaes.";
+					public static LocString DESCRIPTION = "Better harvesting of aquatic plants,";
 				}
 
 				public class MAKITRAINER1
 				{
-					public static LocString NAME = Link("Novice Maki Trainer", BSkills.MAKITRAINING1_ID);
-					public static LocString DESCRIPTION = "Can train level 1 skills to Makis.";
+					public static LocString NAME = Link("Trainer I", BSkills.MAKITRAINING1_ID);
+					public static LocString DESCRIPTION = "Can train Muffins at a Muffin Training Platform.";
 				}
 
 				public class MAKITRAINER2
 				{
-					public static LocString NAME = Link("Master Maki Trainer", BSkills.MAKITRAINING2_ID);
+					public static LocString NAME = Link("Trainer II", BSkills.MAKITRAINING2_ID);
 					public static LocString DESCRIPTION = "Can train level 2 skills to Makis.";
 				}
 
@@ -152,6 +154,7 @@ namespace Beached
 				{
 					public static LocString NAME = Link("Geo-Chemistry", BSkills.GEOCHEMISTRY_ID);
 					public static LocString DESCRIPTION = "Enables a Duplicant to analyze crystals, allowing for synthesis of new Crystal Clusters.";
+					public static LocString CAN_SYNTHETIZE_CLUSTERS = "Usage of Crystal Synthetizer.";
 				}
 			}
 

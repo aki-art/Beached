@@ -45,8 +45,10 @@
 			public class TAGS
 			{
 				public static LocString BEACHED_CORAL = "Coral";
-				public static LocString BEACHED_CRYSTAL = "Crystal";
+				public static LocString BEACHED_CATEGORY_CRYSTAL = Link("Crystal", "BEACHEDCATEGORYCRYSTAL");
 				public static LocString BEACHED_MEAT = "Meat";
+				public static LocString BEACHED_PRECIOUSCONTAINING = "Has Precious Inclusions";
+				public static LocString BEACHED_INCLUSIONCONTAINING = "Has Inclusions";
 				public static LocString BEACHED_MOSSMATERIAL = "Moss";
 				public static LocString BEACHED_RUBBERMATERIAL = "Rubber";
 				public static LocString BEACHED_SANDMATERIAL = "Sand";

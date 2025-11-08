@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Defs.Entities.Critters.Karacoos;
+using Beached.Content.Defs.Entities.Critters.SlickShells;
 using Beached.Content.Defs.Entities.Critters.Squirrels;
 using Beached.Content.Scripts.Entities;
 using System;
@@ -11,6 +12,8 @@ namespace Beached.Content.ModDb
 		public const string
 			MERPIP_FROM_PIP = "Beached_Merpip_From_Pip",
 			PIP_FROM_MERPIP = "Beached_Pip_From_MerPip",
+			SLICKSHELL_FROM_IRONSHELL_COLD = "Beached_Slickshell_From_Ironshell_Cold",
+			IRONSHELL_FROM_SLICKSHELL_HEAT = "Beached_Ironshell_From_Slickshell_Heat",
 			AGING_KARACOO = "Beached_Aging_Karacoo",
 			PIP_FROM_MERPIP_LANDCHECK = "Beached_Pip_From_MerPip_LandCheck";
 
@@ -19,6 +22,14 @@ namespace Beached.Content.ModDb
 			var standardModifier = 0.00025f;
 
 			var creators = CREATURES.EGG_CHANCE_MODIFIERS.MODIFIER_CREATORS;
+
+			creators.Add(CREATURES.EGG_CHANCE_MODIFIERS.CreateTemperatureModifier(
+				IRONSHELL_FROM_SLICKSHELL_HEAT,
+				IronShellConfig.EGG_ID,
+				MiscUtil.CelsiusToKelvin(90.0f),
+				MiscUtil.CelsiusToKelvin(130.0f),
+				0.05f / 600f,
+				true));
 
 			/// manually overriding based on land access: <see cref="FertilityMonitor_InstancePatch"/>
 			creators.Add(() => RegisterNearbyPlantWithTagModifier(
@@ -118,7 +129,7 @@ namespace Beached.Content.ModDb
 				instance.OnUpdateNearbyPlants += (dt, plants, eggs) =>
 				{
 					var hasRequirement = false;
-					foreach (KPrefabID creature in plants)
+					foreach (var creature in plants)
 					{
 						if (creature.HasTag(nearbyRequiredTag))
 						{

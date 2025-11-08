@@ -1,0 +1,24 @@
+id: Beached_Soap
+title: Beached.STRINGS.ITEMS.MISC.BEACHED_SOAP.NAME
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.MISC.BEACHED_SOAP.NAME
+
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_Soap
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.MISC.BEACHED_SOAP.DESC
+        
+contentMadeAndUsed:
+  - tag: Beached_Soap

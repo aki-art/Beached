@@ -29,7 +29,6 @@ namespace Beached.Patches
 
 				TUNING.BUILDINGS.PLANORDER.Add(planInfo);
 				ModifyVanillaBuildings.Run();
-				Recipes.AddRecipes();
 			}
 
 			private static void AddMenus()
@@ -57,7 +56,7 @@ namespace Beached.Patches
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, GemCutterConfig.ID, Refining.ADVANCED);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, CrystalSynthetizerConfig.ID, Refining.ADVANCED);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, VulcanizerConfig.ID, Refining.MATERIALS, PolymerizerConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, MediumWattageWireConfig.ID, Power.WIRES, WireRefinedConfig.ID, ModUtil.BuildingOrdering.After);
+				//ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, MediumWattageWireConfig.ID, Power.WIRES, WireRefinedConfig.ID, ModUtil.BuildingOrdering.After);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, SealedStorageConfig.ID, Base.STORAGE, StorageLockerConfig.ID, ModUtil.BuildingOrdering.After);
 			}
 
@@ -70,7 +69,7 @@ namespace Beached.Patches
 				BuildingUtil.AddToResearch(AquaticFarmTileConfig.ID, TECH.FOOD.AGRICULTURE);
 				BuildingUtil.AddToResearch(DeconstructableRocketTileConfig.ID, TECH.SOLIDS.REFINED_OBJECTS);
 				BuildingUtil.AddToResearch(MossBedConfig.ID, TECH.FOOD.FARMING_TECH);
-				BuildingUtil.AddToResearch(MediumWattageWireConfig.ID, TECH.POWER.PLASTICS);
+				//BuildingUtil.AddToResearch(MediumWattageWireConfig.ID, TECH.POWER.PLASTICS);
 			}
 		}
 	}

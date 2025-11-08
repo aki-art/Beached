@@ -1,5 +1,5 @@
-﻿using Beached.Content.ModDb;
-using Klei.AI;
+﻿using Klei.AI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,26 +17,22 @@ namespace Beached.Content.Defs.Equipment
 				new(Db.Get().Amounts.Stress.deltaAttribute.Id, -2f / CONSTS.CYCLE_LENGTH),
 			};
 
-			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
+			var equipmentDef = BEntityTemplates.Necklace(
 				ID,
-				BAssignableSlots.JEWELLERY_ID,
-				Elements.zeolite,
-				30f,
-				TUNING.EQUIPMENT.VESTS.WARM_VEST_ICON0,
-				"necklace",
 				"beached_zeolite_necklace_kanim",
-				4,
-				attributeModifiers,
-				additional_tags:
-				[
-					GameTags.PedestalDisplayable
-				]);
+				CONSTS.SNAPONS.JEWELLERIES.ZEOLITE,
+				Elements.zeolite,
+				attributeModifiers);
 
 			return equipmentDef;
 		}
 
-		public void DoPostConfigure(GameObject go) { }
+		public void DoPostConfigure(GameObject go)
+		{
+			BEntityTemplates.SetupJewelleryPost(go);
+		}
 
+		[Obsolete]
 		public string[] GetDlcIds() => null;
 	}
 }

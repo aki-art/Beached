@@ -1,6 +1,8 @@
-﻿using Beached.Content.Scripts;
+﻿using Beached.Content.ModDb;
+using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities;
 using Beached.Content.Scripts.Entities.Comets;
+using Klei.AI;
 using System.Collections.Generic;
 using UnityEngine;
 using static EdiblesManager;
@@ -17,6 +19,42 @@ namespace Beached.Content.Defs
 			var desc = Strings.Get($"STRINGS.ITEMS.MISC.{ID.ToUpperInvariant()}.DESC");
 
 			return CreateSimpleItem(ID, name, desc, anim, decor, element, width, height, loop);
+		}
+
+		public static EquipmentDef Necklace(string ID, string anim, string snapOn, SimHashes element, List<AttributeModifier> attributeModifiers = null)
+		{
+
+			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
+				ID,
+				BAssignableSlots.JEWELLERY_ID,
+				element,
+				30f,
+				anim,
+				snapOn,
+				anim,
+				4,
+				attributeModifiers,
+				width: 0.7f,
+				height: 0.27f,
+				CollisionShape: EntityTemplates.CollisionShape.RECTANGLE,
+				additional_tags:
+				[
+					GameTags.PedestalDisplayable
+				]);
+
+			equipmentDef.OnEquipCallBack += eq =>
+			{
+				Beached_Mod.Instance.rareJewelleryObjectiveComplete = true;
+			};
+
+			return equipmentDef;
+		}
+
+		public static void SetupJewelleryPost(GameObject go)
+		{
+			go.GetComponent<KPrefabID>().AddTag(GameTags.Clothes);
+			go.AddOrGet<Equippable>().SetQuality(QualityLevel.Good);
+			go.GetComponent<KBatchedAnimController>().sceneLayer = Grid.SceneLayer.BuildingBack;
 		}
 
 		public static Diet.Info[] SimpleDiet(Tag from, Tag to, float kcalPerKg, float rate = 0.5f)

@@ -1,4 +1,5 @@
 ﻿using Beached.Content;
+using Beached.Content.Codex;
 using Beached.Content.Defs.Entities.Critters.Mites;
 using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
@@ -15,6 +16,26 @@ namespace Beached.Patches
 {
 	public class CodexEntryGenerator_ElementsPatch
 	{
+		[HarmonyPatch(typeof(CodexEntryGenerator_Elements), "GenerateMadeAndUsedContainers")]
+		public class CodexEntryGenerator_Elements_GenerateMadeAndUsedContainers_Patch
+		{
+			public static void Postfix(Tag tag, List<ContentContainer> containers)
+			{
+				if (!Beached_Mod.Instance.treasury.chances.TryGetSource(tag, out var source))
+					return;
+
+				var contents = new ContentContainer([Beached_ArcheologyCodexWidget.Generate(tag, source)], ContentContainer.ContentLayout.Vertical);
+
+				containers.Add(new ContentContainer(
+				[
+					new CodexSpacer(),
+					new CodexCollapsibleHeader(STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.NAME, contents)
+				], ContentContainer.ContentLayout.Vertical));
+
+				containers.Add(contents);
+			}
+		}
+
 		[HarmonyPatch(typeof(CodexEntryGenerator_Elements), "GetElementEntryContext")]
 		public class CodexEntryGenerator_Elements_GetElementEntryContext_Patch
 		{

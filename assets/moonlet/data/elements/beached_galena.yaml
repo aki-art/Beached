@@ -15,6 +15,7 @@ elements:
     hardness: 2.5
     molarMass: 196.966569
     lightAbsorptionFactor: 100%
+    refinedMetalTarget: Lead
     radiationAbsorptionFactor: 80%
     materialCategory: Metal
     tags:

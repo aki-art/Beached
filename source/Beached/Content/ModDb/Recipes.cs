@@ -18,6 +18,14 @@ namespace Beached.Content.ModDb
 
 		public static void AddRecipes()
 		{
+			if (Assets.TryGetPrefab(Elements.fuzz.CreateTag()))
+			{
+				Log.Debug($"PREFAB NOT FOUND: {Elements.fuzz.CreateTag()}");
+			}
+			if (Assets.TryGetPrefab(Elements.zeolite.CreateTag()))
+			{
+				Log.Debug($"PREFAB NOT FOUND: {Elements.zeolite.CreateTag()}");
+			}
 			CreateFoodRecipes();
 			CreateMedicineRecipes();
 			CreateEquipmentRecipes();
@@ -55,11 +63,11 @@ namespace Beached.Content.ModDb
 
 		private static void Kiln()
 		{
-			RecipeBuilder.Create(KilnConfig.ID, global::STRINGS.ELEMENTS.SULFUR.DESC, TIME_STANDARD)
-				.Input(SulfurGlandConfig.ID, 20f)
-				.Output(SimHashes.Sulfur.CreateTag(), 100f, ComplexRecipe.RecipeElement.TemperatureOperation.Heated)
-				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
-				.Build();
+			/*			RecipeBuilder.Create(KilnConfig.ID, global::STRINGS.ELEMENTS.SULFUR.DESC, TIME_STANDARD)
+							.Input(SulfurGlandConfig.ID, 20f)
+							.Output(SimHashes.Sulfur.CreateTag(), 100f, ComplexRecipe.RecipeElement.TemperatureOperation.Heated)
+							.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
+							.Build();*/
 		}
 
 		private static void RockCrusher()
@@ -274,7 +282,7 @@ namespace Beached.Content.ModDb
 
 			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_SEAFOODPASTA.DESC, TIME_STANDARD)
 				.Input(FishMeatConfig.ID, 1f)
-				.Input(RawKelpConfig.ID, 1f)
+				.Input(BTags.Groups.kelps, 1f)
 				.Input(DryNoodlesConfig.ID, 1f)
 				.Output(SeafoodPastaConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
@@ -282,7 +290,7 @@ namespace Beached.Content.ModDb
 
 			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_STUFFEDSNAILS.DESC, TIME_STANDARD)
 				.Input(RawSnailConfig.ID, 2f)
-				.Input(RawKelpConfig.ID, 1f)
+				.Input(BTags.Groups.kelps, 1f)
 				.Input(BTags.Groups.snailShells, 1f)
 				.Output(StuffedSnailsConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)

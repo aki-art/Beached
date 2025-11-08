@@ -245,12 +245,12 @@ namespace Beached
 					public static LocString DESC = "...";
 					public static LocString EFFECT = "...";
 				}
-
-				public class BEACHED_MEDIUMWATTAGEWIRE
-				{
-					public static LocString NAME = Link("Medium Wattage Wire", MediumWattageWireConfig.ID);
-					public static LocString DESC = "Makes power grids a little simpler to design, at the cost of dealing with decor penalty.";
-				}
+				/*
+								public class BEACHED_MEDIUMWATTAGEWIRE
+								{
+									public static LocString NAME = Link("Medium Wattage Wire", MediumWattageWireConfig.ID);
+									public static LocString DESC = "Makes power grids a little simpler to design, at the cost of dealing with decor penalty.";
+								}*/
 
 				public class BEACHED_MINIFRIDGE
 				{

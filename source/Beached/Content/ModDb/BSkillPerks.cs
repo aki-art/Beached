@@ -12,6 +12,7 @@ namespace Beached.Content.ModDb
 			CanFindMoreTreasures,
 			CanSafelyHarvestClusters,
 			CanAnalyzeClusters,
+			CanSynthetizeClusters,
 			CanCutGems,
 			AquaCulture1,
 			AquaCulture2,
@@ -27,6 +28,7 @@ namespace Beached.Content.ModDb
 			CAN_FIND_MORE_TREASURES_ID = "Beached_SkillPerk_CanFindMoreTreasures",
 			CAN_SAFELY_HARVEST_CLUSTERS_ID = "Beached_SkillPerk_CanSafelyHarvestClusters",
 			CAN_ANALYZE_CLUSTERS_ID = "Beached_SkillPerk_CanAnalyzeClusters",
+			CAN_SYNTHETIZE_CLUSTERS_ID = "Beached_SkillPerk_CanSynthetizeClusters",
 			CAN_CUT_GEMS_ID = "Beached_SkillPerk_CanCutGems",
 			ANIMAL_HANDLING_ID = "Beached_SkillPerk_AnimalHandling",
 			AQUACULTURE1_ID = "Beached_SkillPerk_AquaCulture1",
@@ -80,11 +82,13 @@ namespace Beached.Content.ModDb
 				2,
 				STRINGS.DUPLICANTS.ROLES.GEOCHEMISTRY.NAME));
 
+			CanSynthetizeClusters = __instance.Add(new SimpleSkillPerk(CAN_SYNTHETIZE_CLUSTERS_ID, STRINGS.DUPLICANTS.ROLES.GEOCHEMISTRY.CAN_SYNTHETIZE_CLUSTERS));
+
 			AquaCulture1 = __instance.Add(new SkillAttributePerk(
 				AQUACULTURE1_ID,
 				Db.Get().Attributes.Botanist.Id,
 				2,
-				STRINGS.DUPLICANTS.ROLES.AQUACULTURE1.NAME));
+				STRINGS.DUPLICANTS.ROLES.AQUACULTURE1.DESCRIPTION));
 
 			AquaCulture2 = __instance.Add(new SkillAttributePerk(
 				AQUACULTURE2_ID,
@@ -100,11 +104,11 @@ namespace Beached.Content.ModDb
 
 			MakiTrainer1 = __instance.Add(new SimpleSkillPerk(
 				AQUACULTURE1_ID,
-				STRINGS.DUPLICANTS.ROLES.MAKITRAINER1.NAME));
+				STRINGS.DUPLICANTS.ROLES.MAKITRAINER1.DESCRIPTION));
 
 			MakiTrainer2 = __instance.Add(new SimpleSkillPerk(
 				AQUACULTURE1_ID,
-				STRINGS.DUPLICANTS.ROLES.MAKITRAINER2.NAME));
+				STRINGS.DUPLICANTS.ROLES.MAKITRAINER2.DESCRIPTION));
 		}
 	}
 }

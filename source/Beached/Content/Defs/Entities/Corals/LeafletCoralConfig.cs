@@ -19,7 +19,7 @@ namespace Beached.Content.Defs.Entities.Corals
 			var prefab = new CoralBuilder(ID, "beached_leaflet_coral_kanim")
 				.Harvestable()
 				.Age(6 * CONSTS.CYCLE_LENGTH)
-				.SafeTemperaturesCelsius(0, 5, 42, 50)
+				.SafeTemperaturesCelsius(30, 35, 62, 75)
 				.InitialAnim("idle_grown")
 				.Frag("beached_leaflet_coral_frag_kanim", additionalTags: [GameTags.WaterSeed])
 				.Build().entityPrefab;
