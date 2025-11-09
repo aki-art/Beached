@@ -1,0 +1,24 @@
+id: Beached_Item_HadeanZircon
+title: Beached.STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.NAME
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.NAME
+
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_Item_HadeanZircon
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.GEMS.HADEAN_ZIRCON.DESCRIPTION
+        
+contentMadeAndUsed:
+  - tag: Beached_Item_HadeanZircon

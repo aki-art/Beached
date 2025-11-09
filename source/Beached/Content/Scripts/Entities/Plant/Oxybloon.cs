@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities.Plant
 {
+	[SerializationConfig(MemberSerialization.OptIn)]
 	public class Oxybloon : StateMachineComponent<Oxybloon.StatesInstance>
 	{
 		[MyCmpReq] public Harvestable harvestable;

@@ -13,11 +13,6 @@ namespace Beached.Patches
 			{
 				BTechs.Register(__instance);
 			}
-
-			public static void Postfix(Techs __instance)
-			{
-				BTechs.PostInit(__instance);
-			}
 		}
 	}
 }

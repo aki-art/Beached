@@ -8,6 +8,7 @@
 		{
 			public static class UI
 			{
+
 				public static class SKELETON_POI_POPUP
 				{
 					public static LocString TITLE = "Gift from the past";
@@ -88,6 +89,30 @@
 			{
 				public static LocString EXTRA_PRODUCE = "    • Additional excretion: {tag}";
 				public static LocString EXTRA_PRODUCE_TOOLTIP = "This critter will also \"produce\" {tag}, for {percent} of consumed mass.";
+			}
+
+			public static class TOOLS
+			{
+				public static class FILTERLAYERS
+				{
+					public static class BEACHED_DIG
+					{
+						public static LocString NAME = "Dig";
+						public static LocString TOOLTIP = "Anyone who can dig at all can dig this tile.";
+					}
+
+					public static class BEACHED_PRECISION
+					{
+						public static LocString NAME = "Precision";
+						public static LocString TOOLTIP = "Only Duplicants with the \'Careful Excavation\' skill are allowed to dig this tile.";
+					}
+
+					public static class BEACHED_PRECIOUSONLY
+					{
+						public static LocString NAME = "Auto";
+						public static LocString TOOLTIP = "Precious yielding materials, such as gemstones, will require a 'Careful Excavation' skilled duplicant. Otherwise any duplicant is allowed to dig this tile.";
+					}
+				}
 			}
 
 			public static class MINEABLE

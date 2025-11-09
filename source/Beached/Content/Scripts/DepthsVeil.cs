@@ -45,6 +45,8 @@ namespace Beached.Content.Scripts
 		{
 			base.OnSpawn();
 
+			return;
+
 			veil = Instantiate(ModAssets.Fx.darkVeilOverlay);
 			zoneTypeMaterial = ModAssets.Materials.zoneTypeMaskMaterial;
 			material = veil.GetComponent<MeshRenderer>().material;

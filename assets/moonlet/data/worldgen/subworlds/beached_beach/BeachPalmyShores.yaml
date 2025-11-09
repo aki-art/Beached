@@ -31,6 +31,7 @@ features:
   - type: Beached:features/beach/MetalCavern
   - type: Beached:features/beach/MediumFreshwaterLake
   - type: Beached:features/beach/TinyFreshWaterLake
+#  - type: Beached:features/beach/OxyliteCave
   
 tags:
   - IgnoreCaveOverride

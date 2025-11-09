@@ -92,7 +92,7 @@ namespace Beached.Content.Scripts
 
 				if (smi.master.targetStorage == null)
 				{
-					Log.Warning("target storage null");
+					// Log.Warning("target storage null");
 					return;
 				}
 

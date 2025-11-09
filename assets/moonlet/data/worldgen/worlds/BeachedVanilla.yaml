@@ -108,7 +108,7 @@ subworldFiles:
     overridePower: 0.6
 
 startSubworldName: *Start
-startingBaseTemplate: beached/bases/beach_startingbaseC
+startingBaseTemplate: beached/bases/base_e_oxylite_and_reinforced
 startingBasePositionHorizontal:
   min: 0.5
   max: 0.5

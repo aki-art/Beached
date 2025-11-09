@@ -43,8 +43,6 @@ namespace Beached.Content.Defs.Buildings
 			def.ViewMode = OverlayModes.Power.ID;
 			def.AudioCategory = AUDIO.CATEGORY.METAL;
 
-			Log.Debug("creating minifridge config");
-
 			return def;
 		}
 

@@ -14,9 +14,9 @@ namespace Beached.Content.Defs.Buildings
 		{
 			var def = BuildingTemplates.CreateBuildingDef(
 				ID,
+				3,
 				2,
-				2,
-				"craftingStation_kanim",
+				"beached_gemcutter_kanim",
 				BUILDINGS.HITPOINTS.TIER2,
 				BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER3,
 				BUILDINGS.CONSTRUCTION_MASS_KG.TIER2,
@@ -57,7 +57,7 @@ namespace Beached.Content.Defs.Buildings
 
 		private void ConfigureRecipes()
 		{
-			float standardTime = 60f;
+			var standardTime = 60f;
 
 			// tier 1
 			RecipeBuilder.Create(ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_HEMATITENECKLACE.DESCRIPTION, standardTime)
@@ -77,14 +77,14 @@ namespace Beached.Content.Defs.Buildings
 			// tier 2
 			RecipeBuilder.Create(ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_HADEANZIRCONAMULET.DESCRIPTION, standardTime)
 				.Input(RareGemsConfig.HADEAN_ZIRCON, 1f)
-				.Input(SimHashes.Gold.CreateTag(), 50f)
+				.Input(BTags.Groups.preciousMetals, 50f)
 				.Output(HadeanZirconAmuletConfig.ID, 1)
 				.SortOrder(100)
 				.Build();
 
 			RecipeBuilder.Create(ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_MAXIXEPENDANT.DESCRIPTION, standardTime)
 				.Input(RareGemsConfig.MAXIXE, 1f)
-				.Input(SimHashes.Gold.CreateTag(), 50f)
+				.Input(BTags.Groups.preciousMetals, 50f)
 				.Output(MaxixePendantConfig.ID, 1)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.SortOrder(100)
@@ -92,7 +92,7 @@ namespace Beached.Content.Defs.Buildings
 
 			RecipeBuilder.Create(ID, STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_STRANGEMATTERAMULET.DESCRIPTION, standardTime)
 				.Input(RareGemsConfig.STRANGE_MATTER, 1f)
-				.Input(SimHashes.Niobium.CreateTag(), 50f)
+				.Input(BTags.Groups.preciousMetals, 50f)
 				.Output(StrangeMatterAmuletConfig.ID, 1)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.SortOrder(110)
@@ -113,9 +113,9 @@ namespace Beached.Content.Defs.Buildings
 			{
 				var workable = game_object.GetComponent<ComplexFabricatorWorkable>();
 				workable.WorkerStatusItem = Db.Get().DuplicantStatusItems.Fabricating;
-				workable.AttributeConverter = Db.Get().AttributeConverters.MachinerySpeed;
+				workable.AttributeConverter = BAttributeConverters.precisionSpeed;
 				workable.AttributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.PART_DAY_EXPERIENCE;
-				workable.SkillExperienceSkillGroup = Db.Get().SkillGroups.Technicals.Id;
+				workable.SkillExperienceSkillGroup = BSkillGroups.PRECISION_ID;
 				workable.SkillExperienceMultiplier = SKILLS.PART_DAY_EXPERIENCE;
 				workable.requiredSkillPerk = BSkillPerks.CAN_CUT_GEMS_ID;
 			};

@@ -25,7 +25,7 @@ namespace Beached.Patches.Worldgen
 			{
 				var voronoiTree = __instance.voronoiTree;
 
-				// TODO: move this out to some class to handle
+				// TODO: move this out to some class to skillsUpdated
 				if (!initialized)
 				{
 					bottomLeftEdge = new(

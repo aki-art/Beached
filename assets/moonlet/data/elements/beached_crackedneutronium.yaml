@@ -2,7 +2,7 @@ elements:
   - elementId: Beached_CrackedNeutronium
     name: Cracked Neutronium
     color: 000000
-    descriptionText: This Neutronium has been shattered loose by unknown forces. It is highly unstable, and attempting to mine it will yield nothing.
+    descriptionText: This Neutronium has been shattered loose by unknown forces. It is highly unstable, and attempting to mine it will yield no mass. Occasionally, a <link="BEACHED_STRANGEMATTER">Strange Matter</link> can be uncovered by a Duplicant with the Archeology skill.
     specificHeatCapacity: 0
     thermalConductivity: 0
     mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_crackedneutronium.png

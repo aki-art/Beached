@@ -1,0 +1,24 @@
+id: Beached_Item_Maxixe
+title: Beached.STRINGS.ITEMS.GEMS.MAXIXE.NAME
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.GEMS.MAXIXE.NAME
+
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_Item_Maxixe
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.GEMS.MAXIXE.DESCRIPTION
+        
+contentMadeAndUsed:
+  - tag: Beached_Item_Maxixe

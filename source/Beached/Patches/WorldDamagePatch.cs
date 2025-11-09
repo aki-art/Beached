@@ -16,13 +16,13 @@ namespace Beached.Patches
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
 			{
-				List<CodeInstruction> codes = orig.ToList();
+				var codes = orig.ToList();
 
-				int index = codes.FindIndex(ci => ci.LoadsConstant(0.5f));
+				var index = codes.FindIndex(ci => ci.LoadsConstant(0.5f));
 
 				if (index == -1) return codes;
 
-				System.Reflection.MethodInfo m_getActualMassMultiplier = AccessTools.DeclaredMethod(typeof(WorldDamage_OnDigComplete_Patch),
+				var m_getActualMassMultiplier = AccessTools.DeclaredMethod(typeof(WorldDamage_OnDigComplete_Patch),
 					nameof(GetActualMassMultiplier));
 
 				// inject right after the found index
@@ -38,17 +38,14 @@ namespace Beached.Patches
 			// TODO: Dwarf digging integration
 			private static float GetActualMassMultiplier(float originalValue, int cell)
 			{
-				float multiplier = originalValue;
+				var multiplier = originalValue;
 
-				if (Treasury.diggers.TryGetValue(cell, out WorkerBase worker))
+				if (Treasury.diggers.TryGetValue(cell, out var worker))
 				{
-					if (worker.TryGetComponent(out MinionResume resume))
+					var converter = BAttributeConverters.digAmount.Lookup(worker.gameObject);
+					if (converter != null)
 					{
-						if (resume.AptitudeBySkillGroup.TryGetValue(BSkillGroups.PRECISION_ID, out float mineralogySkill))
-						{
-							multiplier += mineralogySkill * 0.025f;
-							multiplier = Mathf.Clamp01(multiplier);
-						}
+						multiplier = Mathf.Clamp01(multiplier + (converter.Evaluate() - 0.5f));
 					}
 				}
 

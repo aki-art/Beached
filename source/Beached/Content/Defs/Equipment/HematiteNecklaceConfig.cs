@@ -1,5 +1,5 @@
-﻿using Beached.Content.ModDb;
-using Klei.AI;
+﻿using Klei.AI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,26 +17,22 @@ namespace Beached.Content.Defs.Equipment
 				new(Db.Get().Attributes.CarryAmount.Id, 100f),
 			};
 
-			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
+			var equipmentDef = BEntityTemplates.Necklace(
 				ID,
-				BAssignableSlots.JEWELLERY_ID,
-				Elements.zeolite,
-				30f,
 				"beached_hematite_necklace_kanim",
 				CONSTS.SNAPONS.JEWELLERIES.HEMATITE,
-				"beached_hematite_necklace_kanim",
-				99,
-				attributeModifiers,
-				additional_tags:
-				[
-					GameTags.PedestalDisplayable
-				]);
+				SimHashes.IronOre,
+				attributeModifiers);
 
 			return equipmentDef;
 		}
 
-		public void DoPostConfigure(GameObject go) { }
+		public void DoPostConfigure(GameObject go)
+		{
+			BEntityTemplates.SetupJewelleryPost(go);
+		}
 
+		[Obsolete]
 		public string[] GetDlcIds() => null;
 	}
 }

@@ -29,7 +29,6 @@ namespace Beached.Patches
 
 				TUNING.BUILDINGS.PLANORDER.Add(planInfo);
 				ModifyVanillaBuildings.Run();
-				Recipes.AddRecipes();
 			}
 
 			private static void AddMenus()
@@ -48,9 +47,7 @@ namespace Beached.Patches
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, MudStomperConfig.ID, Refining.MATERIALS);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, SmokingRackConfig.ID, Food.COOKING);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, SpinnerConfig.ID, Refining.MATERIALS, RockCrusherConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, BioFuelGeneratorConfig.ID, Power.GENERATORS, GeneratorConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, DevElectricEmitterConfig.ID, Power.GENERATORS, GeneratorConfig.ID);
-				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, BioFuelMakerConfig.ID, Refining.MATERIALS, EthanolDistilleryConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, MossTerrariumConfig.ID, Utilities.OTHER_UTILITIES);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, AquaticFarmTileConfig.ID, Food.FARMING);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, MirrorConfig.ID, Food.RANCHING, UnderwaterCritterCondoConfig.ID);
@@ -59,6 +56,8 @@ namespace Beached.Patches
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, GemCutterConfig.ID, Refining.ADVANCED);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, CrystalSynthetizerConfig.ID, Refining.ADVANCED);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, VulcanizerConfig.ID, Refining.MATERIALS, PolymerizerConfig.ID);
+				//ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, MediumWattageWireConfig.ID, Power.WIRES, WireRefinedConfig.ID, ModUtil.BuildingOrdering.After);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, SealedStorageConfig.ID, Base.STORAGE, StorageLockerConfig.ID, ModUtil.BuildingOrdering.After);
 			}
 
 			private static void AddTechs()
@@ -67,10 +66,10 @@ namespace Beached.Patches
 				BuildingUtil.AddToResearch(SmokingRackConfig.ID, TECH.FOOD.RANCHING);
 				BuildingUtil.AddToResearch(SpinnerConfig.ID, TECH.SOLIDS.SMELTING);
 				BuildingUtil.AddToResearch(CollarDispenserConfig.ID, TECH.SOLIDS.SMELTING);
-				BuildingUtil.AddToResearch(BioFuelGeneratorConfig.ID, TECH.POWER.COMBUSTION);
 				BuildingUtil.AddToResearch(AquaticFarmTileConfig.ID, TECH.FOOD.AGRICULTURE);
 				BuildingUtil.AddToResearch(DeconstructableRocketTileConfig.ID, TECH.SOLIDS.REFINED_OBJECTS);
 				BuildingUtil.AddToResearch(MossBedConfig.ID, TECH.FOOD.FARMING_TECH);
+				//BuildingUtil.AddToResearch(MediumWattageWireConfig.ID, TECH.POWER.PLASTICS);
 			}
 		}
 	}

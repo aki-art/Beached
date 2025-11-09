@@ -28,5 +28,6 @@ elements:
     tags:
     - BuildableAny
     - Plastic
+    - Beached_RubberMaterial
     buildMenuSort: 1
     state: Solid

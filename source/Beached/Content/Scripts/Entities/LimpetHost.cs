@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs.Items;
-using Beached.Content.ModDb;
+﻿using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Klei.AI;
 using UnityEngine;
@@ -120,7 +119,7 @@ namespace Beached.Content.Scripts.Entities
 			public Tag itemDroppedOnShear;
 			public float metabolismModifier = 0.25f;
 			public float massDropped;
-			public float glandMass = 10f;
+			//public float glandMass = 10f;
 			public int diseaseCount;
 			public byte diseaseIdx;
 			public float germPuffCooldown = CONSTS.CYCLE_LENGTH;
@@ -155,16 +154,16 @@ namespace Beached.Content.Scripts.Entities
 					customFormating = (tag, amount, continous) => GameUtil.GetFormattedMass(amount)
 				});
 
-				if (glandMass > 0)
-				{
-					conversionEntry.outSet.Add(new ElementUsage(SulfurGlandConfig.ID, glandMass, false)
-					{
-						customFormating = (tag, amount, continous) => GameUtil.GetFormattedMass(amount)
-					});
-				}
+				/*				if (glandMass > 0)
+								{
+									conversionEntry.outSet.Add(new ElementUsage(SulfurGlandConfig.ID, glandMass, false)
+									{
+										customFormating = (tag, amount, continous) => GameUtil.GetFormattedMass(amount)
+									});
+								}*/
 
 				context.madeMap.Add(itemDroppedOnShear, conversionEntry);
-				context.madeMap.Add(SulfurGlandConfig.ID, conversionEntry);
+				//context.madeMap.Add(SulfurGlandConfig.ID, conversionEntry);
 			}
 
 			public int CodexEntrySortOrder() => 10;
@@ -293,8 +292,8 @@ namespace Beached.Content.Scripts.Entities
 
 				SpawnItem(pe, def.itemDroppedOnShear, def.massDropped);
 
-				if (def.glandMass > 0)
-					SpawnItem(pe, SulfurGlandConfig.ID, def.glandMass);
+				/*				if (def.glandMass > 0)
+									SpawnItem(pe, SulfurGlandConfig.ID, def.glandMass);*/
 			}
 
 			private void SpawnItem(PrimaryElement pe, Tag tag, float mass)

@@ -25,6 +25,7 @@ elements:
     defaultMass: 870
     maxMass: 9970
     hardness: 2
+    refinedMetalTarget: Beached_Zinc
     molarMass: 196.966569
     lightAbsorptionFactor: 1
     radiationAbsorptionFactor: 0.35

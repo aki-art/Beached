@@ -24,7 +24,7 @@ namespace Beached.Patches
 		private static readonly HashSet<Tag> TAGS =
 		[
 			BeachShirtConfig.ID,
-			SulfurGlandConfig.ID,
+			//SulfurGlandConfig.ID,
 
 			CrystalConfig.TEST_ID,
 			CrystalConfig.ZEOLITE,
@@ -40,6 +40,7 @@ namespace Beached.Patches
 			RareGemsConfig.HADEAN_ZIRCON,
 			RareGemsConfig.MAXIXE,
 			RareGemsConfig.STRANGE_MATTER,
+			RareGemsConfig.MOTHER_PEARL,
 
 			// Equipment
 			MaxixePendantConfig.ID,

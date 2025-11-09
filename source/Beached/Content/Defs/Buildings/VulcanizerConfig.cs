@@ -68,7 +68,7 @@ namespace Beached.Content.Defs.Buildings
 
 			var dispenser = go.AddOrGet<ConduitDispenser>();
 			dispenser.conduitType = ConduitType.Liquid;
-			dispenser.elementFilter = [Elements.bioFuel];
+			dispenser.elementFilter = [Elements.rubber];
 			dispenser.storage = complexFabricator.outStorage;
 			dispenser.alwaysDispense = true;
 

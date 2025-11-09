@@ -22,6 +22,7 @@ elements:
       highTemp: &meltingPoint 1852C
       highTempTransitionTarget: Beached_ZirconiumMolten
       defaultTemperature: 300
+      refinedMetalTarget: Beached_Zirconium
       defaultMass: 870
       maxMass: 9970
       hardness: 2

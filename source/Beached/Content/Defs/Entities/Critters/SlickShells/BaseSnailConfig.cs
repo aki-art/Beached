@@ -24,7 +24,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return builder
-				.TemperatureCelsius(10, 20, 40, 50)
+				.TemperatureCelsius(30, 60, 100, 120)
 				.Drops(RawSnailConfig.ID, 1f)
 				.Size(1, 1)
 				.Mass(50f)

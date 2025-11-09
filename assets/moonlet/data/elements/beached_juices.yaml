@@ -35,9 +35,9 @@ elements:
   - elementId: Beached_GnawBerryJuice
     name: Gnawberry Must
     descriptionText: |
-      "Freshy squeezed juice of <link=\"BEACHED_GNAWBERRY\">Gnawberries</link>, a very tasty and refreshing drink. 
+      Freshy squeezed juice of <link=\"BEACHED_GNAWBERRY\">Gnawberries</link>, a very tasty and refreshing drink. 
       
-      Gnawberry Must can be drank in <link=\"WATERCOOLER\">Water Coolers</link>, or used as a sweetener in certain recipes."
+      Gnawberry Must can be drank in <link=\"WATERCOOLER\">Water Coolers</link>, or used as a sweetener in certain recipes.
     debrisAnim: beached_gnawberryjuice_kanim
     color: da72db
     waterCoolerEffect: Beached_SlushDrink

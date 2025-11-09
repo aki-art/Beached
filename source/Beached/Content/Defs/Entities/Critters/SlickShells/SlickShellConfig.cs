@@ -1,5 +1,4 @@
 ﻿using Beached.Content.DefBuilders;
-using Beached.Content.Defs.Entities.Corals;
 using Beached.Content.Defs.Items;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts.Entities;
@@ -31,9 +30,10 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.Tag(GameTags.OriginalCreature)
 				.Egg(BabySlickShellConfig.ID, "beached_egg_slickshell_kanim")
 					.Mass(0.3f)
-					.Fertility(10)
+					.Fertility(15)
 					.Incubation(20)
 					.EggChance(EggId, 100f)
+					.EggChance(IronShellConfig.EGG_ID, 0f)
 					.Done();
 		}
 
@@ -61,7 +61,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			host.targetSymbol = "beached_limpetgrowth";
 			host.limpetKanim = "beached_slickshell_limpetgrowth_kanim";
 			host.metabolismModifier = 1.2f;
-			host.glandMass = 5f;
+			//host.glandMass = 5f;
 
 			var moltDropper = prefab.AddOrGetDef<MoltDropperMonitor.Def>();
 			moltDropper.onGrowDropID = SlickShellShellConfig.ID;
@@ -86,7 +86,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 					0),
 
 				new (
-					[SaltyStickConfig.ID],
+					[CrystalConfig.SALT],
 					SimHashes.Dirt.CreateTag(),
 					SlickShellTuning.CALORIES_PER_KG_OF_ORE,
 					TUNING.CREATURES.CONVERSION_EFFICIENCY.NORMAL,

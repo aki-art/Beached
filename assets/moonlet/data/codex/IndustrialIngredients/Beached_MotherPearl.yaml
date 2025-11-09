@@ -1,0 +1,24 @@
+id: Beached_Item_MotherPearl
+title: Beached.STRINGS.ITEMS.GEMS.MOTHER_PEARL.NAME
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.GEMS.MOTHER_PEARL.NAME
+
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_Item_MotherPearl
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.GEMS.MOTHER_PEARL.DESCRIPTION
+        
+contentMadeAndUsed:
+  - tag: Beached_Item_MotherPearl

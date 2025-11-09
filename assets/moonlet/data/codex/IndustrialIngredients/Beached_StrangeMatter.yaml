@@ -1,0 +1,24 @@
+id: Beached_Item_StrangeMatter
+title: Beached.STRINGS.ITEMS.GEMS.STRANGE_MATTER.NAME
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.GEMS.STRANGE_MATTER.NAME
+
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_Item_StrangeMatter
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.GEMS.STRANGE_MATTER.DESCRIPTION
+        
+contentMadeAndUsed:
+  - tag: Beached_Item_StrangeMatter

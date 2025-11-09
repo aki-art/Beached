@@ -20,6 +20,19 @@ namespace Beached.Content
 				HardSkinBerryConfig.ID,
 				GnawicaBerryConfig.ID];
 
+			public static Tag[] kelps = [
+				RawKelpConfig.ID,
+				KelpConfig.ID];
+
+			public static Tag[] preciousMetals = [
+				SimHashes.Gold.CreateTag(),
+				SimHashes.Iridium.CreateTag(),
+				SimHashes.Niobium.CreateTag(),
+				SimHashes.Copper.CreateTag(),
+				Elements.brass.CreateTag(),
+				Elements.ChemicalProcessing.solidSilver.CreateTag(),
+				];
+
 			public static Tag[] jellies = [
 				JellyConfig.ID];
 
@@ -41,7 +54,7 @@ namespace Beached.Content
 
 			public static Dictionary<Tag, float> sulfurs = new()
 			{
-				{SulfurGlandConfig.ID, 1f },
+				//{SulfurGlandConfig.ID, 1f },
 				{SimHashes.Sulfur.CreateTag(), 5f }
 			};
 		}
@@ -95,6 +108,10 @@ namespace Beached.Content
 			markedForDNAAnalysis = TagManager.Create("Beached_MarkedForDNAAnalysis"),
 			// seeds only allowed in "flat" planters, like farm tiles, but not in planter boxes
 			flatFloorSeed = TagManager.Create("Beached_FlatFloorSeed"),
+			// elements which will require precision skill when the dig tool is set to "precious only"
+			preciousContaining = TagManager.Create("Beached_PreciousContaining"),
+			// elements whichany inclusions
+			inclusionContaining = TagManager.Create("Beached_InclusionContaining"),
 			// critters which eat germs
 			germDiet = TagManager.Create("Beached_GermDiet"),
 			decorSeedHanging = TagManager.Create("Beached_DecorSeedHanging"),
@@ -169,7 +186,7 @@ namespace Beached.Content
 
 		public static class MaterialCategories
 		{
-			public static Tag crystal = TagManager.Create("Beached_Crystal");
+			public static Tag crystal = TagManager.Create("Beached_Category_Crystal");
 		}
 
 		public static class BuildingMaterials
@@ -178,6 +195,8 @@ namespace Beached.Content
 			public static Tag sand = TagManager.Create("Beached_SandMaterial");
 			public static Tag slag = TagManager.Create("Beached_SlagMaterial");
 			public static Tag moss = TagManager.Create("Beached_MossMaterial");
+			public static Tag rubber = TagManager.Create("Beached_RubberMaterial");
+
 		}
 
 		public static class TagCollections
@@ -223,7 +242,7 @@ namespace Beached.Content
 			Filterable.filterableCategories.Add(coralFrag);
 			Filterable.filterableCategories.Add(aquaticSeed);
 
-			GameTags.Fabrics = GameTags.Fabrics.AddToArray(Elements.fuzz.CreateTag());
+			GameTags.Fabrics = GameTags.Fabrics.Append(Elements.fuzz.CreateTag());
 
 			GameTags.UnitCategories.Add(uiGerm);
 			GameTags.DisplayAsUnits.Add(uiGerm);

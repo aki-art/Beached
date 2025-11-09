@@ -66,6 +66,18 @@ namespace Beached.Content.Scripts.Entities
 
 		public void ModifyCalorieDescriptors(ref List<Descriptor> descriptors)
 		{
+			if (descriptors == null)
+			{
+				Log.Debug("descriptors were null??");
+				descriptors = [];
+			}
+
+			if (entries == null)
+			{
+				Log.Debug("entries were null??");
+				return;
+			}
+
 			foreach (var entry in entries)
 			{
 				var slag = entry.tag.ProperName();

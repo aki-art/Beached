@@ -28,15 +28,6 @@ namespace Beached.Content.Defs.Entities
 
 		public void OnPrefabInit(GameObject inst) { }
 
-		public void OnSpawn(GameObject inst)
-		{
-			inst.GetComponent<InfoDescription>().description = "I'm just a humble placeholder prefab, I shouldn't be spawned";
-
-			var testQuad = UnityEngine.Object.Instantiate(ModAssets.Prefabs.testQuad);
-			testQuad.SetActive(true);
-			testQuad.transform.position = inst.transform.position;
-			testQuad.transform.parent = inst.transform;
-			testQuad.GetComponent<MeshRenderer>().material.renderQueue = RenderQueues.Liquid;
-		}
+		public void OnSpawn(GameObject inst) { }
 	}
 }

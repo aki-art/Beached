@@ -1,4 +1,6 @@
-﻿using Database;
+﻿using Beached.Content.Defs.Buildings;
+using Beached.Content.Defs.Equipment;
+using Database;
 
 namespace Beached.Content.ModDb
 {
@@ -6,46 +8,46 @@ namespace Beached.Content.ModDb
 	{
 		public const string
 			HIDDEN = "Beached_Tech_Hidden",
-			HYDRO_ELECTRONICS = "Beached_Currents";
+			HYDRO_ELECTRONICS = "Beached_Currents",
+			MATERIALS1 = "Bached_MaterialsI";
 
 		public static void Register(Techs techs)
 		{
-			/*			new Tech(
-							HIDDEN,
-							[
-								ForceFieldGeneratorConfig.ID,
-								CollarDispenserConfig.ID,
-							],
-							techs);*/
-			// CRASH TEST
-			/*			var hydro = new Tech(
-							HYDRO_ELECTRONICS,
-							[
-								WaterGeneratorConfig.ID,
-								ChimeConfig.ID
-							],
-							techs)
-						{
-							//requiredTech = [techs.Get(FUtility.CONSTS.RESEARCH.POWER.POWER_REGULATION)],
-							tier = 2
-						};
+			new Tech(
+				HIDDEN,
+				[
+					ForceFieldGeneratorConfig.ID,
+					CollarDispenserConfig.ID,
+				],
+				techs);
 
-						hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.POWER);
-						hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.GENERATOR);
-						hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.WATER);*/
+			var hydro = new Tech(
+					HYDRO_ELECTRONICS,
+					[
+						WaterGeneratorConfig.ID,
+						ChimeConfig.ID
+					],
+					techs)
+			{
+				tier = 2
+			};
 
-		}
 
-		internal static void PostInit(Techs techs)
-		{
-			// CRASH TEST
-			return;
+			hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.POWER);
+			hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.GENERATOR);
+			hydro.AddSearchTerms(global::STRINGS.SEARCH_TERMS.WATER);
 
-			var advancedPower = techs.Get(FUtility.CONSTS.TECH.POWER.ADVANCED_POWER_REGULATION);
-			var hydro = techs.Get(HYDRO_ELECTRONICS);
+			var mats1 = new Tech(
+					MATERIALS1,
+					[
+						RubberBootsConfig.ID,
+						SealedStorageConfig.ID,
+						Elements.rubber.CreateTag().ToString()
+					],
+					techs);
 
-			advancedPower.requiredTech ??= [];
-			advancedPower.requiredTech.Add(hydro);
+			mats1.AddSearchTerms(global::STRINGS.SEARCH_TERMS.STORAGE);
+			mats1.AddSearchTerms(STRINGS.MISC.TAGS.BEACHED_RUBBERMATERIAL);
 		}
 	}
 }

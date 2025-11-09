@@ -1,0 +1,23 @@
+id: Beached_SlagWool
+title: Beached.STRINGS.ITEMS.INDUSTRIAL_INGREDIENTS.BEACHED_SLAGWOOL.NAME
+
+contentContainers:
+
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        style: Title
+        stringKey: Beached.STRINGS.ITEMS.INDUSTRIAL_INGREDIENTS.BEACHED_SLAGWOOL.NAME
+
+      - type: DividerLine
+
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_SlagWool
+        preferredWidth: 128
+        preferredHeight: 128
+
+      - type: Text
+        style: SubTitle
+        stringKey: Beached.STRINGS.ITEMS.INDUSTRIAL_INGREDIENTS.BEACHED_SLAGWOOL.DESC
+contentMadeAndUsed:
+  - tag: Beached_SlagWool

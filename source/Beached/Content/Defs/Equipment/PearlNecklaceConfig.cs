@@ -1,5 +1,5 @@
-﻿using Beached.Content.ModDb;
-using Klei.AI;
+﻿using Klei.AI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,26 +16,22 @@ namespace Beached.Content.Defs.Equipment
 				new(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 30)
 			};
 
-			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
+			var equipmentDef = BEntityTemplates.Necklace(
 				ID,
-				BAssignableSlots.JEWELLERY_ID,
-				Elements.aquamarine,
-				30f,
-				TUNING.EQUIPMENT.VESTS.WARM_VEST_ICON0,
-				CONSTS.SNAPONS.JEWELLERIES.PEARL,
 				"beached_pearl_necklace_kanim",
-				4,
-				attributeModifiers,
-				additional_tags:
-				[
-					GameTags.PedestalDisplayable
-				]);
+				CONSTS.SNAPONS.JEWELLERIES.PEARL,
+				Elements.pearl,
+				attributeModifiers);
 
 			return equipmentDef;
 		}
 
-		public void DoPostConfigure(GameObject go) { }
+		public void DoPostConfigure(GameObject go)
+		{
+			BEntityTemplates.SetupJewelleryPost(go);
+		}
 
+		[Obsolete]
 		public string[] GetDlcIds() => null;
 	}
 }

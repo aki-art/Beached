@@ -8,8 +8,7 @@ namespace Beached.Patches
 	public class CameraControllerPatch
 	{
 		// replaces the LUT with a more vibrant, colorful overlay
-		// CRASH
-		//[HarmonyPatch(typeof(CameraController), nameof(CameraController.OnPrefabInit))]
+		[HarmonyPatch(typeof(CameraController), nameof(CameraController.OnPrefabInit))]
 		public class CameraController_OnPrefabInit_Patch
 		{
 			[HarmonyPriority(Priority.High)]
