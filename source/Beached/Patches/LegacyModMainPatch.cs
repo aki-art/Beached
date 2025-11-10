@@ -14,25 +14,4 @@ namespace Beached.Patches
 			}
 		}
 	}
-
-
-	[HarmonyPatch(typeof(ComplexRecipeManager), "DeriveRecipiesFromSource")]
-	public class ComplexRecipeManager_DeriveRecipiesFromSource_Patch
-	{
-		public static void Postfix(ComplexRecipe sourceRecipe)
-		{
-			Log.Debug("-----------------------------------------------");
-			Log.Debug($"RECIPE: {sourceRecipe.id}");
-			if (sourceRecipe.ingredients != null)
-			{
-				foreach (var ingredient in sourceRecipe.ingredients)
-				{
-					for (var index = 0; index < ingredient.possibleMaterials.Length; ++index)
-					{
-						Log.Debug($"\t- {ingredient.possibleMaterials[index]}, exists: {(Assets.TryGetPrefab(ingredient.possibleMaterials[index]) != null)}");
-					}
-				}
-			}
-		}
-	}
 }

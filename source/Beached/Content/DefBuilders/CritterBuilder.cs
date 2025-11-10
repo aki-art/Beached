@@ -632,9 +632,9 @@ namespace Beached.Content.DefBuilders
 				trait = db.CreateTrait(instance.id + "BaseTrait", name, name, null, false, null, true, true);
 			}
 
-			public TraitsBuilder Add(string modifier, float value, bool multiplier = false)
+			public TraitsBuilder Add(string modifier, float value, bool multiplier = false, string description = null)
 			{
-				trait.Add(new AttributeModifier(modifier, value, is_multiplier: multiplier));
+				trait.Add(new AttributeModifier(modifier, value, description, multiplier));
 				return this;
 			}
 

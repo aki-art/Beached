@@ -1,4 +1,5 @@
-﻿using Beached.Content.ModDb;
+﻿using Beached.Content.Defs.Buildings;
+using Beached.Content.ModDb;
 using Beached.Content.ModDb.Germs;
 using Beached.Content.ModDb.Sicknesses;
 
@@ -105,18 +106,21 @@ namespace Beached
 				{
 					public static LocString NAME = Link("Animal Handling Basics", BSkills.ANIMALHANDLING_ID);
 					public static LocString DESCRIPTION = "";
+					public static LocString CAN_MOVE_CRITTERS = "Move Critters";
 				}
 
 				public class ARCHEOLOGY
 				{
 					public static LocString NAME = Link("Careful Excavation", BSkills.ARCHEOLOGY_ID);
-					public static LocString DESCRIPTION = "Find hidden treasures while digging";
+					public static LocString DESCRIPTION = "Find hidden treasures while digging around in naturally spawned materials.";
+					public static LocString CAN_FIND_TREASURES = "Treasure Hunting";
 				}
 
 				public class ARCHEOLOGY2
 				{
 					public static LocString NAME = Link("Archeology", BSkills.ARCHEOLOGY2_ID);
-					public static LocString DESCRIPTION = "Twice as likely to find hidden treasures";
+					public static LocString DESCRIPTION = "Twice as likely to find hidden treasures when digging up materials.";
+					public static LocString CAN_FIND_MORE_TREASURES = "Better Treasure Hunting";
 				}
 
 				public class AQUACULTURE1
@@ -147,14 +151,15 @@ namespace Beached
 				{
 					public static LocString NAME = Link("Crystallography", BSkills.CRYSTALLOGRAPHY_ID);
 					public static LocString DESCRIPTION = "Allows a Duplicant to harvest a Crystal Cluster without breaking it.";
-					public static LocString CAN_CUT_GEMS = "Usage of Gem Cutter.";
+					public static LocString CAN_CUT_GEMS = $"Usage of {Link("Gem Cutter", GemCutterConfig.ID)}.";
+					public static LocString HARVEST_CLUSTERS = "Cluster Harvesting.";
 				}
 
 				public class GEOCHEMISTRY
 				{
 					public static LocString NAME = Link("Geo-Chemistry", BSkills.GEOCHEMISTRY_ID);
 					public static LocString DESCRIPTION = "Enables a Duplicant to analyze crystals, allowing for synthesis of new Crystal Clusters.";
-					public static LocString CAN_SYNTHETIZE_CLUSTERS = "Usage of Crystal Synthetizer.";
+					public static LocString CAN_SYNTHETIZE_CLUSTERS = $"Usage of  {Link("Crystal Synthetizer", CrystalSynthetizerConfig.ID)}.";
 				}
 			}
 

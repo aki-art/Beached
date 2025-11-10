@@ -95,6 +95,7 @@
 			new EffectBuilder(RECENTLY_PRODUCED_LUBRICANT, 10f, false)
 				.Modifier(BAmounts.Mucus.deltaAttribute.Id, 1, true)
 				.HideInUI()
+				.HideFloatingText()
 				.Add(set);
 
 			new EffectBuilder(NICE_SCENT, CONSTS.CYCLE_LENGTH, false)

@@ -9,7 +9,7 @@ namespace Beached.Content.Defs.Entities
 	{
 		public const float WEIGHT_PER_TILE = 30;
 
-		// dry glacier
+		// dying glacier
 		public const string
 			MUFFINS = "Beached_Glacier_Muffins",
 			VARIANT_A = "Beached_Glacier_VariantA",

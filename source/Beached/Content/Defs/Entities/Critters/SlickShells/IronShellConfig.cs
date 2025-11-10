@@ -27,8 +27,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.Drops(IronShellShellConfig.ID, 1f)
 				.SymbolPrefix("iron_")
 				.Traits()
-					.Add(BAmounts.Moisture.maxAttribute.Id, 100f)
-					.Add(BAmounts.Moisture.deltaAttribute.Id, -1000f / CONSTS.CYCLE_LENGTH)
+					.Add(BAmounts.Moisture.deltaAttribute.Id, -100f / CONSTS.CYCLE_LENGTH, false, STRINGS.CREATURES.SPECIES.BEACHED_IRONSHELL.NAME)
 					.Done()
 				.Egg(BabyIronShellConfig.ID, "beached_egg_slickshell_kanim")
 					.Mass(0.3f)
@@ -42,6 +41,8 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		public override GameObject CreatePrefab(BaseCritterConfig config)
 		{
 			var prefab = base.CreatePrefab(config);
+
+			var wetMonitor = prefab.AddOrGetDef<WetMonitor.Def>();
 
 			var moistureMonitor = prefab.AddOrGetDef<MoistureMonitor.Def>();
 			moistureMonitor.lubricant = Elements.mucus;

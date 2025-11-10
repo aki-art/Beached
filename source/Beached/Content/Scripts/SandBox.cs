@@ -37,9 +37,9 @@ namespace Beached.Content.Scripts
 		{
 			base.OnPrefabInit();
 			workerStatusItem = Db.Get().DuplicantStatusItems.Arting;
-			attributeConverter = Db.Get().AttributeConverters.ArtSpeed;
+			attributeConverter = BAttributeConverters.precisionSpeed; //Db.Get().AttributeConverters.ArtSpeed;
 			attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
-			skillExperienceSkillGroup = Db.Get().SkillGroups.Art.Id;
+			skillExperienceSkillGroup = BSkillGroups.PRECISION_ID; //Db.Get().SkillGroups.Art.Id;
 			skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
 			multitoolContext = ModAssets.CONTEXTS.SAND;
 			multitoolHitEffectTag = BEffectConfigs.SAND;

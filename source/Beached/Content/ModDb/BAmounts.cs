@@ -33,7 +33,7 @@ namespace Beached.Content.ModDb
 				"Beached_Moisture",
 				0f,
 				100f,
-				false,
+				true,
 				Units.Flat,
 				0.35f,
 				true,

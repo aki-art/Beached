@@ -151,7 +151,8 @@ namespace Beached.Content.ModDb
 					"beached_skillbadge_role_pets1",
 					Db.Get().SkillGroups.Ranching.Id,
 					[
-						BSkillPerks.AnimalHandling
+						BSkillPerks.AnimalHandling,
+						//BSkillPerks.CanMoveCritters
 					],
 					null,
 					BaseMinionConfig.GetMinionIDForModel(GameTags.Minions.Models.Standard),

@@ -18,7 +18,8 @@ namespace Beached.Content.ModDb
 			AquaCulture2,
 			AnimalHandling,
 			MakiTrainer1,
-			MakiTrainer2;
+			MakiTrainer2,
+			CanMoveCritters;
 
 		public const string
 			INCREASE_PRECISION_SMALL_ID = "Beached_SkillPerk_IncreasePrecisionSmall",
@@ -34,16 +35,19 @@ namespace Beached.Content.ModDb
 			AQUACULTURE1_ID = "Beached_SkillPerk_AquaCulture1",
 			AQUACULTURE2_ID = "Beached_SkillPerk_AquaCulture2",
 			MAKITRAINER1_ID = "Beached_SkillPerk_MakiTrainer1",
-			MAKITRAINER2_ID = "Beached_SkillPerk_MakiTrainer2";
+			MAKITRAINER2_ID = "Beached_SkillPerk_MakiTrainer2",
+			CAN_MOVE_CRITTERS_ID = "Beached_SkillPerk_CanMoveCritters";
 
 		[DbEntry]
 		public static void Register(SkillPerks __instance)
 		{
-			CanFindTreasures = __instance.Add(new SimpleSkillPerk(CAN_FIND_TREASURES_ID, STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.DESCRIPTION));
+			CanMoveCritters = __instance.Add(new SimpleSkillPerk(CAN_MOVE_CRITTERS_ID, STRINGS.DUPLICANTS.ROLES.ANIMALHANDLING.CAN_MOVE_CRITTERS));
+
+			CanFindTreasures = __instance.Add(new SimpleSkillPerk(CAN_FIND_TREASURES_ID, STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.CAN_FIND_TREASURES));
 
 			CanFindMoreTreasures = __instance.Add(new SimpleSkillPerk(
 				CAN_FIND_MORE_TREASURES_ID,
-				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY2.DESCRIPTION));
+				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY2.CAN_FIND_MORE_TREASURES));
 
 			CanCutGems = __instance.Add(new SimpleSkillPerk(
 				CAN_CUT_GEMS_ID,
@@ -61,20 +65,13 @@ namespace Beached.Content.ModDb
 				2,
 				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY2.NAME));
 
-			IncreasePrecisionMedium = __instance.Add(new SkillAttributePerk(
-				INCREASE_PRECISION_MEDIUM_ID,
-				BAttributes.PRECISION_ID,
-				2,
-				STRINGS.DUPLICANTS.ROLES.GEOCHEMISTRY.NAME));
-
-
 			IncreasePrecisionLarge = __instance.Add(new SkillAttributePerk(
 				INCREASE_PRECISION_LARGE_ID,
 				BAttributes.PRECISION_ID,
 				2,
 				STRINGS.DUPLICANTS.ROLES.ARCHEOLOGY.NAME));
 
-			CanSafelyHarvestClusters = __instance.Add(new SimpleSkillPerk(CAN_SAFELY_HARVEST_CLUSTERS_ID, STRINGS.DUPLICANTS.ROLES.CRYSTALLOGRAPHY.DESCRIPTION));
+			CanSafelyHarvestClusters = __instance.Add(new SimpleSkillPerk(CAN_SAFELY_HARVEST_CLUSTERS_ID, STRINGS.DUPLICANTS.ROLES.CRYSTALLOGRAPHY.HARVEST_CLUSTERS));
 
 			CanAnalyzeClusters = __instance.Add(new SkillAttributePerk(
 				CAN_ANALYZE_CLUSTERS_ID,

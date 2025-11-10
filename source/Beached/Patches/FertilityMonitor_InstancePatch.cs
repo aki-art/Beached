@@ -20,7 +20,7 @@ namespace Beached.Patches
 				if (__instance.master.gameObject.TryGetComponent(out Beached_HatchlingCanReachLandChecker checker))
 					checker.UpdateChances();
 
-				// remove chance for laying a pip egg if there is no dry land nearby. the baby squirrel can be stuck but
+				// remove chance for laying a pip egg if there is no dying land nearby. the baby squirrel can be stuck but
 				// we just assume merpips are dumb like a fish
 				/*	if (__instance.gameObject.PrefabID() == MerpipConfig.ID)
 					{

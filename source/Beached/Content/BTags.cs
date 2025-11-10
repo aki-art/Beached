@@ -242,7 +242,7 @@ namespace Beached.Content
 			Filterable.filterableCategories.Add(coralFrag);
 			Filterable.filterableCategories.Add(aquaticSeed);
 
-			GameTags.Fabrics = GameTags.Fabrics.Append(Elements.fuzz.CreateTag());
+			GameTags.Fabrics = GameTags.Fabrics.Append("Beached_Fuzz");
 
 			GameTags.UnitCategories.Add(uiGerm);
 			GameTags.DisplayAsUnits.Add(uiGerm);

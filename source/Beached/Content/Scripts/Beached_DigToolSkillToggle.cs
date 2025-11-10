@@ -17,13 +17,13 @@ namespace Beached.Content.Scripts
 		public override void OnPrefabInit()
 		{
 			ResetFilter(filterTargets);
+			Subscribe(ModHashes.onDigtoolActivated, _ => OnActivateTool());
+			Subscribe(ModHashes.onDigtoolDeActivated, _ => OnDeactivateTool());
 			Instance = this;
 		}
 
 		public override void OnSpawn()
 		{
-			Subscribe(ModHashes.onDigtoolActivated, _ => OnActivateTool());
-			Subscribe(ModHashes.onDigtoolDeActivated, _ => OnDeactivateTool());
 		}
 
 		public override void OnCleanUp()

@@ -138,6 +138,11 @@ namespace Beached
 					public static LocString NAME = "Not in liquid";
 				}
 
+				public class MOISTURE_GAIN_RATE
+				{
+					public static LocString NAME = "In liquid";
+				}
+
 				public class MOVEMENT_MOISTURE_LOSS
 				{
 					public static LocString NAME = "Moving";
@@ -269,6 +274,12 @@ namespace Beached
 					public static LocString NAME = "Moisture";
 					public static LocString TOOLTIP = "When a Critter reaches 0% Moisture, they will desiccate and die.\n" +
 						"Moisture can be replenished by submerging the critter in any liquid.";
+				}
+
+				public class BEACHED_MUCUS
+				{
+					public static LocString NAME = "Mucus";
+					public static LocString TOOLTIP = "";
 				}
 
 				public class BEACHED_LIMPETGROWTH
