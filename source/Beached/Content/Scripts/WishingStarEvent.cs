@@ -25,20 +25,23 @@ namespace Beached.Content.Scripts
 
 		private void OnBombardmentStart(object data)
 		{
-			if (data is int worldId)
-			{
-				RunIfWishingStarsActive(id => activeWorlds.Add(id), worldId);
-				BoxingTrigger(ModHashes.wishingStarEvent, worldId);
-			}
+			if (data is not Boxed<int>)
+				return;
+
+			int worldId = ((Boxed<int>)data).value;
+			RunIfWishingStarsActive(id => activeWorlds.Add(id), worldId);
+			BoxingTrigger(ModHashes.wishingStarEvent, worldId);
+
 		}
 
 		private void OnBombardmentEnd(object data)
 		{
-			if (data is int worldId)
-			{
-				RunIfWishingStarsActive(id => activeWorlds.Remove(id), worldId);
-				BoxingTrigger(ModHashes.wishingStarEvent, worldId);
-			}
+			if (data is not Boxed<int>)
+				return;
+
+			int worldId = ((Boxed<int>)data).value;
+			RunIfWishingStarsActive(id => activeWorlds.Remove(id), worldId);
+			BoxingTrigger(ModHashes.wishingStarEvent, worldId);
 		}
 
 		public static void RunIfWishingStarsActive(System.Action<int> fn, int worldId)
