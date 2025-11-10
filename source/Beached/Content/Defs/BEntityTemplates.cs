@@ -241,7 +241,7 @@ namespace Beached.Content.Defs
 					kprefabId.AddTag(additionalTag);
 			}
 
-			kprefabId.requiredDlcIds = dlcIds ?? DlcManager.AVAILABLE_ALL_VERSIONS;
+			kprefabId.requiredDlcIds = dlcIds ?? null;
 			kprefabId.AddTag(BTags.crystalCluster);
 			kprefabId.AddTag(GameTags.PedestalDisplayable);
 

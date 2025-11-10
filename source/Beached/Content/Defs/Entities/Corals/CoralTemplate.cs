@@ -76,6 +76,7 @@ namespace Beached.Content.Defs.Entities.Corals
 
 			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
 				prefab,
+				null,
 				SeedProducer.ProductionType.DigOnly,
 				ID + "Seed",
 				seedName,

@@ -32,5 +32,11 @@ namespace Beached.Content.Defs.StarmapEntities
 		public void OnPrefabInit(GameObject inst) { }
 
 		public void OnSpawn(GameObject inst) { }
+
+		public string[] GetAnyRequiredDlcIds()
+		{
+			return null;
+		}
+
 	}
 }
