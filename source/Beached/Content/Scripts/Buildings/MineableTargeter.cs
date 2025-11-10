@@ -12,7 +12,8 @@ namespace Beached.Content.Scripts.Buildings
 			target = null;
 
 			var collision_entries = ListPool<ScenePartitionerEntry, SelectTool>.Allocate();
-			GameScenePartitioner.Instance.GatherEntries(Extents.OneCell(cell), GameScenePartitioner.Instance.pickupablesLayer, collision_entries);
+			var extends = Extents.OneCell(cell);
+			GameScenePartitioner.Instance.GatherEntries(extends.x, extends.y, extends.width, extends.height, GameScenePartitioner.Instance.pickupablesLayer, collision_entries);
 
 			foreach (var entry in collision_entries)
 			{

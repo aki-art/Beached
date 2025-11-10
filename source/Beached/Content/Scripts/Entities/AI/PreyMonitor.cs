@@ -109,7 +109,9 @@ namespace Beached.Content.Scripts.Entities.AI
 				threats.Clear();
 
 				var gathered_entries = ListPool<ScenePartitionerEntry, ThreatMonitor>.Allocate();
-				GameScenePartitioner.Instance.GatherEntries(new Extents(Grid.PosToCell(this), maxThreatDistance), GameScenePartitioner.Instance.attackableEntitiesLayer, gathered_entries);
+				var extends = new Extents(Grid.PosToCell(this), maxThreatDistance);
+
+				GameScenePartitioner.Instance.GatherEntries(extends.x, extends.y, extends.width, extends.height, GameScenePartitioner.Instance.attackableEntitiesLayer, gathered_entries);
 
 				for (int index = 0; index < gathered_entries.Count; ++index)
 				{
