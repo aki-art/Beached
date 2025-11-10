@@ -28,7 +28,7 @@ namespace Beached.Content.Scripts
 			if (data is int worldId)
 			{
 				RunIfWishingStarsActive(id => activeWorlds.Add(id), worldId);
-				Trigger(ModHashes.wishingStarEvent, worldId);
+				BoxingTrigger(ModHashes.wishingStarEvent, worldId);
 			}
 		}
 
@@ -37,7 +37,7 @@ namespace Beached.Content.Scripts
 			if (data is int worldId)
 			{
 				RunIfWishingStarsActive(id => activeWorlds.Remove(id), worldId);
-				Trigger(ModHashes.wishingStarEvent, worldId);
+				BoxingTrigger(ModHashes.wishingStarEvent, worldId);
 			}
 		}
 

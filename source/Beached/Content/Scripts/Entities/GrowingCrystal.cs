@@ -60,12 +60,14 @@ namespace Beached.Content.Scripts.Entities
 			SetAngle(crystal.angleDeg);
 			UpdateShaftLengthAndMass();
 
-			Subscribe(ModHashes.crystalRotated, data => SetAngle((float)data));
+			Subscribe(ModHashes.crystalRotated, SetAngle);
 			smi.StartSM();
 		}
 
-		public void SetAngle(float angle)
+		public void SetAngle(object data)
 		{
+			float angle = Boxed<float>.Unbox(data);
+
 			angle -= 180f;
 			angle %= 360f;
 			if (angle < 0f) angle += 360f;

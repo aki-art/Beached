@@ -23,7 +23,8 @@ namespace Beached.Content.Scripts
 
 		private void OnWishingStarEvent(object data)
 		{
-			if (data is int worldId && worldId == this.worldId)
+			int worldId = Boxed<int>.Unbox(data);
+			if (worldId == this.worldId)
 			{
 				UpdateWishingStarEvent();
 			};
