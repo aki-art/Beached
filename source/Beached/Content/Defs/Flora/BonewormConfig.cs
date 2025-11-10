@@ -56,7 +56,7 @@ namespace Beached.Content.Defs.Flora
 
 			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
 				gameObject,
-				this as IHasDlcRestrictions,
+				null,
 				SeedProducer.ProductionType.Hidden,
 				SEED_ID,
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_BONEWORM.NAME,

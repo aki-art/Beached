@@ -58,6 +58,7 @@ namespace Beached.Content.Defs.Flora
 
 			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
 				prefab,
+				null,
 				SeedProducer.ProductionType.DigOnly,
 				SEED_ID,
 				"Poffshroom Spore",
@@ -78,10 +79,7 @@ namespace Beached.Content.Defs.Flora
 			return prefab;
 		}
 
-		public string[] GetDlcIds()
-		{
-			return DlcManager.AVAILABLE_ALL_VERSIONS;
-		}
+		public string[] GetDlcIds() => null;
 
 		public void OnPrefabInit(GameObject inst)
 		{

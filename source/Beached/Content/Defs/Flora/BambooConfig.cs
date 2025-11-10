@@ -27,6 +27,7 @@ namespace Beached.Content.Defs.Flora
 
 			var seedPrefab = EntityTemplates.CreateAndRegisterSeedForPlant(
 				prefab,
+				null,
 				SeedProducer.ProductionType.DigOnly,
 				SEED_ID,
 				STRINGS.CREATURES.SPECIES.SEEDS.BEACHED_BAMBOO.NAME,
