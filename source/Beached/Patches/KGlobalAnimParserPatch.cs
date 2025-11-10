@@ -8,10 +8,18 @@ namespace Beached.Patches
 	// Todo: make the texture empty
 	public class KGlobalAnimParserPatch
 	{
-		private static readonly Dictionary<KAnimHashedString, CloneSymbolInfo> cloneSymbols = new()
+		private static readonly Dictionary<KAnimHashedString, KAnimHashedString> animsWithClonedSymbolsInBuild = new()
 		{
 			{
 				new KAnimHashedString("pincher_kanim"),
+				new KAnimHashedString("pincher_build_kanim")
+			},
+		};
+		private static readonly Dictionary<KAnimHashedString, CloneSymbolInfo> cloneSymbols = new()
+		{
+			{
+				///build symbols got split into this new kanim;
+				new KAnimHashedString("pincher_build_kanim"),
 				new CloneSymbolInfo()
 				{
 					targetSymbol = new KAnimHashedString("body"),
@@ -104,7 +112,7 @@ namespace Beached.Patches
 			public static void Postfix(KBatchGroupData data, HashedString fileNameHash, FastReader reader, KAnimFileData animFile)
 			{
 				// TODO: check by batchtag to apply to grouped animations
-				if (cloneSymbols.TryGetValue(fileNameHash, out CloneSymbolInfo cloneSymbol))
+				if (animsWithClonedSymbolsInBuild.TryGetValue(fileNameHash, out var cloneAnim) && cloneSymbols.TryGetValue(cloneAnim, out CloneSymbolInfo cloneSymbol))
 				{
 					CopyAnimation(data, animFile, cloneSymbol);
 					return;
