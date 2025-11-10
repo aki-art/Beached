@@ -22,7 +22,8 @@ namespace Beached.Patches
 						"beached_shower_diamond_kanim",
 						"idle_loop",
 						"ui",
-						DlcManager.AVAILABLE_EXPANSION1_ONLY,
+						DlcManager.EXPANSION1,
+						null,
 						SimHashes.Unobtanium));
 
 					__result.Add(ClusterMapMeteorShowerConfig.CreateClusterMeteor(
@@ -33,7 +34,8 @@ namespace Beached.Patches
 						"shower_cluster_biological_kanim",
 						"idle_loop",
 						"ui",
-						DlcManager.AVAILABLE_EXPANSION1_ONLY,
+						DlcManager.EXPANSION1,
+						null,
 						SimHashes.Unobtanium));
 				}
 			}

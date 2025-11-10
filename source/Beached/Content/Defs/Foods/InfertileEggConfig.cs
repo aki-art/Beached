@@ -19,7 +19,8 @@ namespace Beached.Content.Defs.Foods
 				DEFAULT_MASS,
 				9999,
 				0,
-				DlcManager.AVAILABLE_ALL_VERSIONS);
+				null,
+				null);
 
 			prefab.RemoveTag(GameTags.IncubatableEgg);
 			prefab.RemoveTag(GameTags.Egg);

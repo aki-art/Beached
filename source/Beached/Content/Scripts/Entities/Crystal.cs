@@ -52,7 +52,7 @@ namespace Beached.Content.Scripts.Entities
 				angle -= 360f;
 
 			kbac.Rotation = oppositeAngle;
-			Trigger(ModHashes.crystalRotated, angle);
+			BoxingTrigger(ModHashes.crystalRotated, angle);
 		}
 
 		private void SnapToTerrain()

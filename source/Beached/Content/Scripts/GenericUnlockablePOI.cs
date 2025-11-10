@@ -134,7 +134,7 @@ namespace Beached.Content.Scripts
 
 			public void OnBuildingSelect(object obj)
 			{
-				if (!(bool)obj || sm.seenNotification.Get(this) || notificationReference == null)
+				if (!((Boxed<bool>)obj).value || sm.seenNotification.Get(this) || notificationReference == null)
 					return;
 
 				notificationReference.customClickCallback(notificationReference.customClickData);

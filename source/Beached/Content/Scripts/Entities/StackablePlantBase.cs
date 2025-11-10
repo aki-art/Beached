@@ -53,7 +53,7 @@ namespace Beached.Content.Scripts.Entities
 				segmentAbove.Trigger(ModHashes.stackableChanged);
 		}
 
-		private void OnStackableChanged(object data)
+		private void OnStackableChanged(object _)
 		{
 			if (!CanSurvive(cell))
 			{

@@ -44,12 +44,12 @@ namespace Beached.Content.Scripts
 		private void UpdateNeighbors()
 		{
 			if (GetSegment(CellTowards(tipDirection)) is Stackable ahead)
-				ahead.Trigger(
+				ahead.BoxingTrigger(
 					ModHashes.stackableChanged,
 					new UpdateData(tipDirection, this, true));
 
 			if (GetSegment(CellTowards(tipDirection.Opposite())) is Stackable below)
-				below.Trigger(
+				below.BoxingTrigger(
 					ModHashes.stackableChanged,
 					new UpdateData(tipDirection.Opposite(), this, false));
 		}
@@ -72,7 +72,7 @@ namespace Beached.Content.Scripts
 				if (updated.propagate)
 				{
 					if (GetSegment(CellTowards(updated.direction)) is Stackable ahead)
-						ahead.Trigger(
+						ahead.BoxingTrigger(
 							ModHashes.stackableChanged,
 							new UpdateData(updated.direction, updated.stackable, true));
 				}

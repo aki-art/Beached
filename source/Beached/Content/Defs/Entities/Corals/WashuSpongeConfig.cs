@@ -19,7 +19,6 @@ namespace Beached.Content.Defs.Entities.Corals
 
 			var foodInfo = new EdiblesManager.FoodInfo(
 				SEED_ID,
-				DlcManager.VANILLA_ID,
 				0,
 				FOOD.FOOD_QUALITY_TERRIBLE,
 				FOOD.HIGH_PRESERVE_TEMPERATURE,

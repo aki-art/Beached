@@ -12,7 +12,6 @@ namespace Beached.Content.Defs.Foods
 		{
 			var foodInfo = new FoodInfo(
 				ID,
-				DlcManager.VANILLA_ID,
 				0f,
 				FOOD.FOOD_QUALITY_TERRIBLE,
 				FOOD.DEFAULT_PRESERVE_TEMPERATURE,

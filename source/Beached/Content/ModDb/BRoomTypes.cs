@@ -7,9 +7,8 @@ namespace Beached.Content.ModDb
 	{
 		public static RoomType NatureVista;
 
-		public static RoomConstraints.Constraint MAXIMUM_SIZE_256 = new(
-			null,
-			room => room.cavity.numCells <= 256,
+		public static RoomConstraints.Constraint MAXIMUM_SIZE_256 = new (null,
+			(Room room) => room.cavity.NumCells <= 256,
 			1,
 			string.Format(global::STRINGS.ROOMS.CRITERIA.MAXIMUM_SIZE.NAME, "256"),
 			string.Format(global::STRINGS.ROOMS.CRITERIA.MAXIMUM_SIZE.DESCRIPTION, "256"));

@@ -51,6 +51,7 @@ namespace Beached.Content.Defs.Flora
 
 			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
 				prefab,
+				null,
 				SeedProducer.ProductionType.Hidden,
 				SEED_ID,
 				STRINGS.CREATURES.SPECIES.SEEDS.WATERCUPS.NAME,

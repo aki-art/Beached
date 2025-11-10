@@ -19,7 +19,7 @@ namespace Beached.Content.Defs.Duplicants
 					BTraits.SIREN,
 					BTraits.PLUSHIE_MAKER,
 					"",
-					BTraits.GILLS, // doesn't seem to work as expected, Gills is added manually later
+					BTraits.GILLS,
 					HASH,
 					HASH,
 					1,
@@ -32,8 +32,14 @@ namespace Beached.Content.Defs.Duplicants
 					0,
 					0,
 					0,
+					0,
+					0,
 					STRINGS.DUPLICANTS.PERSONALITIES.BEACHED_MINNOW.DESC,
-					true);
+					true,
+					"beached_minnow", //TODO?: custom gravestone
+					GameTags.Minions.Models.Standard,
+					0 //TODO? custom speech mouth);
+					);
 		}
 
 		public void OnSpawn(MinionIdentity identity) { }

@@ -30,8 +30,14 @@ namespace Beached.Content.Defs.Duplicants
 					0,
 					0,
 					0,
+					0, //TODO?: Custom arm skin color?
+					0, //TODO?: Custom leg skin color)
 					STRINGS.DUPLICANTS.PERSONALITIES.BEACHED_VAHANO.DESC,
-					false);
+					false,
+					"beached_vahano", //TODO?: custom gravestone
+					GameTags.Minions.Models.Standard,
+					0 //TODO? custom speech mouth
+					);
 		}
 
 		public string GetHeadAnim() => "beached_vahano_head_kanim";

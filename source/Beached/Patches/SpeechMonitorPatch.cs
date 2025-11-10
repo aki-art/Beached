@@ -4,8 +4,8 @@ namespace Beached.Patches
 {
 	public class SpeechMonitorPatch
 	{
-		[HarmonyPatch(typeof(SpeechMonitor), nameof(SpeechMonitor.BeginTalking))]
-		public class SpeechMonitor_BeginTalking_Patch
+		[HarmonyPatch(typeof(SpeechMonitor), nameof(SpeechMonitor.StartAudio))]
+		public class SpeechMonitor_StartAudio_Patch
 		{
 			public static void Postfix(SpeechMonitor.Instance smi)
 			{

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <Import Condition=" !Exists('Directory.Build.props.user') " Project="Directory.Build.props.default" />
-  <Import Condition=" Exists('Directory.Build.props.user') " Project="Directory.Build.props.user" />
-  
-  <PropertyGroup>    
-    <ClearOutputDirectory>True</ClearOutputDirectory>
-    <Optimize>true</Optimize>
+	<Import Condition=" !Exists('Directory.Build.props.user') " Project="Directory.Build.props.default" />
+	<Import Condition=" Exists('Directory.Build.props.user') " Project="Directory.Build.props.user" />
+
+	<PropertyGroup>
+		<ClearOutputDirectory>True</ClearOutputDirectory>
+		<Optimize>true</Optimize>
   </PropertyGroup>
 	
 	<ItemGroup>

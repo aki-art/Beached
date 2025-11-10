@@ -13,7 +13,6 @@ namespace Beached.Content.Defs.Foods
 		{
 			var foodInfo = new FoodInfo(
 				ID,
-				DlcManager.VANILLA_ID,
 				3200_000f,
 				FOOD.FOOD_QUALITY_AMAZING,
 				FOOD.DEFAULT_PRESERVE_TEMPERATURE,
@@ -21,7 +20,7 @@ namespace Beached.Content.Defs.Foods
 				FOOD.SPOIL_TIME.DEFAULT,
 				true);
 
-			foodInfo.AddEffects([BEffects.VANILLA.SEAFOOD_RADIATION_RESISTANCE], DlcManager.AVAILABLE_EXPANSION1_ONLY);
+			foodInfo.AddEffects([BEffects.VANILLA.SEAFOOD_RADIATION_RESISTANCE], DlcManager.EXPANSION1);
 
 			var prefab = BEntityTemplates.CreateFood(
 				ID,

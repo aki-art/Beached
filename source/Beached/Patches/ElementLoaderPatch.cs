@@ -41,7 +41,7 @@ namespace Beached.Patches
 					var elementId = elem.elementId;
 
 					// change Amber's melting target based on DLC
-					if (elementId == Elements.amber.ToString() && DlcManager.IsDlcListValidForCurrentContent(DlcManager.AVAILABLE_EXPANSION1_ONLY))
+					if (elementId == Elements.amber.ToString() && DlcManager.IsContentSubscribed(DlcManager.EXPANSION1_ID))
 					{
 						elem.highTempTransitionTarget = SimHashes.Resin.ToString();
 					}

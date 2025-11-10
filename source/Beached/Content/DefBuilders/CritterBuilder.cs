@@ -48,6 +48,7 @@ namespace Beached.Content.DefBuilders
 		private bool condoRequiresCavity = true;
 		private bool isFish = false;
 		private string symbolPrefix = null;
+		protected bool affectFishCrowding = true;
 
 		public string GetName()
 		{
@@ -534,7 +535,7 @@ namespace Beached.Content.DefBuilders
 			private bool ranchable = true;
 			private float fertilityCycles = 50f;
 			private float incubationCycles = 20f;
-			private string[] dlcIds = DlcManager.AVAILABLE_ALL_VERSIONS;
+			private string[] dlcIds = null;
 			private int eggSortOrder = 10;
 			private List<FertilityMonitor.BreedingChance> breedingChances = [];
 			private readonly CritterBuilder parent = parent;
@@ -596,6 +597,7 @@ namespace Beached.Content.DefBuilders
 
 				EntityTemplates.ExtendEntityToFertileCreature(
 					prefab,
+					DlcRestrictionsUtil.GetTransientHelperObjectFromAllowList(dlcIds),
 					$"{parentId}Egg",
 					Strings.Get($"STRINGS.CREATURES.SPECIES.{parentId.ToUpperInvariant()}.EGG_NAME"),
 					parent.GetDescription(),
@@ -605,9 +607,10 @@ namespace Beached.Content.DefBuilders
 					fertilityCycles,
 					incubationCycles,
 					breedingChances,
-					dlcIds,
 					eggSortOrder,
-					is_ranchable: ranchable);
+					is_ranchable: ranchable,
+					add_fish_overcrowding_monitor: parent.affectFishCrowding
+					);
 			}
 
 			public CritterBuilder Done()

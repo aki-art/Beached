@@ -28,7 +28,7 @@ namespace Beached.Content.Scripts.Entities
 			{
 				var root = Root();
 				if (root != null)
-					root.Trigger(ModHashes.stackableSegmentDestroyed, Grid.PosToCell(this));
+					root.BoxingTrigger(ModHashes.stackableSegmentDestroyed, Grid.PosToCell(this));
 
 			}
 

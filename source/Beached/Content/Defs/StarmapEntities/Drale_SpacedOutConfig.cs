@@ -80,6 +80,11 @@ namespace Beached.Content.Defs.StarmapEntities
 		{
 		}
 
+		public string[] GetAnyRequiredDlcIds()
+		{
+			return null;
+		}
+
 		[Obsolete]
 		public string[] GetDlcIds() => null;
 	}
