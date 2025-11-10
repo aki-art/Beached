@@ -44,11 +44,11 @@ namespace Beached.Content.ModDb
 			astropelagosMoonletMeteorShowers = __instance.Add(new MeteorShowerSeason(
 				VANILLA_ASTROPELAGOS,
 				GameplaySeason.Type.World,
-				DlcManager.VANILLA_ID,
 				20f,
 				false,
 				-1f,
-				true)
+				true,
+				forbiddenDlcIds: DlcManager.EXPANSION1)
 				.AddEvent(BGameplayEvents.VanillaDiamondShower));
 		}
 
@@ -57,7 +57,6 @@ namespace Beached.Content.ModDb
 			astropelagosMoonletMeteorShowers = __instance.Add(new MeteorShowerSeason(
 				ASTROPELAGOS,
 				GameplaySeason.Type.World,
-				DlcManager.EXPANSION1_ID,
 				20f,
 				false,
 				-1f,
@@ -67,7 +66,8 @@ namespace Beached.Content.ModDb
 				float.PositiveInfinity,
 				1,
 				true,
-				300f)
+				300f,
+				requiredDlcIds: DlcManager.EXPANSION1)
 				.AddEvent(BGameplayEvents.ClusterDiamondShower));
 		}
 	}

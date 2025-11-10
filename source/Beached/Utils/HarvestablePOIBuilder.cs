@@ -26,7 +26,7 @@ namespace Beached.Utils
 				true,
 				HarvestablePOIConfig.AsteroidFieldOrbit,
 				20,
-				DlcManager.EXPANSION1_ID);
+				DlcManager.EXPANSION1);
 		}
 
 		public HarvestablePOIBuilder Element(SimHashes element, float weight)
