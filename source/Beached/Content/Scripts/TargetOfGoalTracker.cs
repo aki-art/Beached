@@ -111,7 +111,7 @@ namespace Beached.Content.Scripts
 		{
 			if (assignable.assignee != null)
 			{
-				assignable.assignee.GetSoleOwner()?.Trigger(ModHashes.lifeGoalTrackerUpdate, (target, this));
+				assignable.assignee.GetSoleOwner()?.BoxingTrigger(ModHashes.lifeGoalTrackerUpdate, (target, this));
 			}
 		}
 	}

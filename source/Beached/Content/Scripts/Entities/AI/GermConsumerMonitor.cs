@@ -160,7 +160,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 						var calories = dietInfo.ConvertConsumptionMassToCalories(diseaseCount);
 						Beached.Log.Debug($"finished consuming, result: {calories} calories");
-						Trigger((int)GameHashes.CaloriesConsumed, new CreatureCalorieMonitor.CaloriesConsumedEvent()
+						BoxingTrigger((int)GameHashes.CaloriesConsumed, new CreatureCalorieMonitor.CaloriesConsumedEvent()
 						{
 							tag = germTag,
 							calories = calories

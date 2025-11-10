@@ -64,7 +64,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 			}
 		}
 
-		private void OnChanged(object obj)
+		private void OnChanged(object _)
 		{
 			UpdateAnimation();
 		}
