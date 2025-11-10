@@ -97,16 +97,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 			if (!hasFilledUp && smi.master.storage.IsEmpty())
 			{
 				var element = ElementLoader.FindElementByHash(smi.master.elementId);
-
-				var material = element.substance.SpawnResource(
-					smi.transform.position,
-					100f,
-					element.defaultValues.temperature,
-					byte.MaxValue,
-					0,
-					true);
-
-				smi.master.storage.Store(material, true, true);
+				smi.master.storage.AddGasChunk(smi.master.elementId, 100f, element.defaultValues.temperature, byte.MaxValue, 0, false);
 				hasFilledUp = true;
 			}
 		}
