@@ -12,7 +12,6 @@ namespace Beached.Content.Defs.Foods
 		{
 			var foodInfo = new FoodInfo(
 				ID,
-				DlcManager.VANILLA_ID,
 				1800_000f,
 				FOOD.FOOD_QUALITY_GREAT,
 				FOOD.HIGH_PRESERVE_TEMPERATURE,

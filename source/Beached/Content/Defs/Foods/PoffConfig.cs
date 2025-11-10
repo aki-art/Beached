@@ -32,14 +32,14 @@ namespace Beached.Content.Defs.Foods
 				caloriesRaw = 700f,
 				qualityCooked = 0,
 				caloriesCooked = 900f
-			}.Effects(DlcManager.AVAILABLE_ALL_VERSIONS, BEffects.POFF_CLEANEDTASTEBUDS),
+			}.Effects(null, BEffects.POFF_CLEANEDTASTEBUDS),
 			new PoffInfo(SimHashes.Helium)
 			{
 				qualityRaw = 1,
 				caloriesRaw = 900f,
 				qualityCooked = 3,
 				caloriesCooked = 1100f
-			}.Effects(DlcManager.AVAILABLE_ALL_VERSIONS, BEffects.POFF_HELIUM),
+			}.Effects(null, BEffects.POFF_HELIUM),
 			new PoffInfo(Elements.ammonia)
 			{
 				qualityRaw = 0,
@@ -81,7 +81,7 @@ namespace Beached.Content.Defs.Foods
 
 			public PoffInfo Effects(string[] dlcIds, params string[] effects)
 			{
-				if (DlcManager.IsDlcListValidForCurrentContent(dlcIds))
+				if (DlcManager.IsAllContentSubscribed(dlcIds))
 				{
 					effectRaw ??= [];
 					effectRaw.AddRange(effects);
@@ -112,13 +112,13 @@ namespace Beached.Content.Defs.Foods
 
 				var foodInfoRaw = new FoodInfo(
 					config.rawID,
-					config.dlcId,
 					config.caloriesRaw,
 					config.qualityRaw,
 					config.preserveTemperature,
 					config.rotTemperature,
 					config.spoilTime,
-					config.canRot);
+					config.canRot,
+					[config.dlcId]);
 
 				var rawPrefab = BEntityTemplates.CreateFood(
 					config.rawID,
@@ -129,7 +129,7 @@ namespace Beached.Content.Defs.Foods
 
 				if (config.effectRaw != null)
 				{
-					foodInfoRaw.AddEffects(config.effectRaw, DlcManager.AVAILABLE_ALL_VERSIONS); // already filtered by DLC
+					foodInfoRaw.AddEffects(config.effectRaw, null); // already filtered by DLC
 				}
 
 				prefabs.Add(rawPrefab);
@@ -141,13 +141,13 @@ namespace Beached.Content.Defs.Foods
 				{
 					var foodInfoCooked = new FoodInfo(
 						config.cookedID,
-						config.dlcId,
 						config.caloriesCooked,
 						config.qualityCooked,
 						config.preserveTemperatureCooked == -1 ? config.preserveTemperature : config.preserveTemperatureCooked,
 						config.rotTemperatureCooked == -1 ? config.rotTemperature : config.rotTemperatureCooked,
 						config.spoilTimeCooked == -1 ? config.spoilTime : config.spoilTimeCooked,
-						config.canRot);
+						config.canRot,
+						[config.dlcId]);
 
 					var cookedPrefab = BEntityTemplates.CreateFood(
 						config.cookedID,
@@ -158,7 +158,7 @@ namespace Beached.Content.Defs.Foods
 
 					if (config.effectCooked != null)
 					{
-						foodInfoCooked.AddEffects(config.effectCooked, DlcManager.AVAILABLE_ALL_VERSIONS); // already filtered by DLC
+						foodInfoCooked.AddEffects(config.effectCooked, null); // already filtered by DLC
 					}
 
 					if (element.id == Elements.nitrogen)
