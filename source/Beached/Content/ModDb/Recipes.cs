@@ -18,14 +18,6 @@ namespace Beached.Content.ModDb
 
 		public static void AddRecipes()
 		{
-			if (Assets.TryGetPrefab(Elements.fuzz.CreateTag()))
-			{
-				Log.Debug($"PREFAB NOT FOUND: {Elements.fuzz.CreateTag()}");
-			}
-			if (Assets.TryGetPrefab(Elements.zeolite.CreateTag()))
-			{
-				Log.Debug($"PREFAB NOT FOUND: {Elements.zeolite.CreateTag()}");
-			}
 			CreateFoodRecipes();
 			CreateMedicineRecipes();
 			CreateEquipmentRecipes();
@@ -79,7 +71,7 @@ namespace Beached.Content.ModDb
 				.Build();
 
 			RecipeBuilder.Create(RockCrusherConfig.ID, global::STRINGS.ELEMENTS.LIME.DESC, TIME_STANDARD)
-				.Input(SlickShellShellConfig.ID, 1)
+				.Input(SlickShellShellConfig.ID, 0.5f)
 				.Output(SimHashes.Lime.CreateTag(), 30f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)
 				.Build();

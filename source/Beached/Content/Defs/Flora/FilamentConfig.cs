@@ -40,10 +40,10 @@ namespace Beached.Content.Defs.Flora
 
 			EntityTemplates.ExtendEntityToBasicPlant(
 				prefab,
-				MiscUtil.CelsiusToKelvin(20f),
-				MiscUtil.CelsiusToKelvin(24f),
-				MiscUtil.CelsiusToKelvin(34f),
-				MiscUtil.CelsiusToKelvin(45f),
+				MiscUtil.CelsiusToKelvin(22f),
+				MiscUtil.CelsiusToKelvin(26f),
+				MiscUtil.CelsiusToKelvin(38f),
+				MiscUtil.CelsiusToKelvin(42f),
 				CoralTemplate.ALL_WATERS.Union([SimHashes.Ethanol, SimHashes.Petroleum]).ToArray(),
 				false,
 				0f,

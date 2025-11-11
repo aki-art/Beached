@@ -65,8 +65,8 @@ namespace Beached.Content.Defs.Buildings
 
 			var plantablePlot = go.AddOrGet<PlantablePlot>();
 			plantablePlot.occupyingObjectRelativePosition = new Vector3(0.0f, 1f, 0.0f);
-			plantablePlot.AddDepositTag(BTags.aquaticSeed);
-			plantablePlot.AddDepositTag(BTags.coralFrag);
+			//plantablePlot.AddDepositTag(BTags.aquaticSeed);
+			//plantablePlot.AddDepositTag(BTags.coralFrag);
 			plantablePlot.AddDepositTag(GameTags.WaterSeed);
 			plantablePlot.SetFertilizationFlags(true, false);
 

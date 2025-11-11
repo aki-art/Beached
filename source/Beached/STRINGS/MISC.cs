@@ -54,6 +54,7 @@
 				public static LocString BEACHED_SANDMATERIAL = "Sand";
 				public static LocString BEACHED_SLAGMATERIAL = "Slag";
 				public static LocString BEACHED_CHIMEMATERIAL = "Acoustic Medium";
+				public static LocString BEACHED_SMALLAQUARIUMSEED = "Aquarium Seed";
 			}
 		}
 	}

@@ -169,7 +169,7 @@ namespace Beached
 				public class BEACHED_SMALLAQUARIUM
 				{
 					public static LocString NAME = Link("Glass Bowl", SmallAquariumConfig.ID);
-					public static LocString DESC = "A tiny round fishbowl for corals.";
+					public static LocString DESC = "A tiny round fishbowl for corals. Due to the lack of optical sensing organs, corals do not suffer from the disorienting effects of a round glass container, and it is a safe housing option for them.";
 					public static LocString EFFECT = "Houses a single Coral for decorative purposes.";
 				}
 
@@ -345,7 +345,7 @@ namespace Beached
 					public static LocString DESC = "Help imbuing various meals with the flavor of smoke.";
 
 					public static LocString EFFECT =
-						"Uses Carbon Dioxide from Smokers to smoke food, extending their shelf life and improving quality.\n\n" +
+						"A simpler, cruder smoker. Uses Carbon Dioxide from Smokers to smoke food, extending their shelf life and improving quality.\n\n" +
 						$"Can also use ambient Carbon Dioxide if it's hot enough.";
 				}
 

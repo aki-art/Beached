@@ -73,7 +73,7 @@ namespace Beached.Patches
 			GeneticSamplesConfig.MEATY,
 
 			// misc
-			SmokerConfig.ID,
+			SmokerVentConfig.ID,
 			SandySeashellsConfig.SEASHELL,
 			SandySeashellsConfig.SLICKSHELL,
 			SeaShellConfig.ID,

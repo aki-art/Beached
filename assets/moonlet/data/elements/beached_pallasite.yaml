@@ -1,0 +1,37 @@
+elements:
+  - elementId: Beached_Pallasite
+    name: Pallasite
+    descriptionText: Lots of Pallasite meteorites clumped together. Pallasites are primarily composed of <link=\"Iron\">Iron</link> and stone, with large Olivine crystal inclusions inside them.
+    color: bd9f20
+    uiColor: 4c4218
+    modifiers:
+      - id: Decor
+        value: 20%
+        isMultiplier: true
+    mainTexture: beached_pallasite.png
+    specularTexture: beached_pallasite_spec.png
+    specularColor: caba77
+    specificHeatCapacity: 0.386
+    thermalConductivity: 80
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.7
+    highTemp: 1808
+    highTempTransitionTarget: MoltenIron
+    refinedMetalTarget: Iron
+    defaultTemperature: 300
+    defaultMass: 870
+    maxMass: 9970
+    hardness: 2
+    molarMass: 196.966569
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.35
+    radiationPer1000Mass: 0
+    materialCategory: Metal
+    tags:
+    - BuildableAny
+    - Ore
+    buildMenuSort: 3
+    state: Solid
+    

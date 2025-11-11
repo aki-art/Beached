@@ -464,7 +464,7 @@ namespace Beached
 
 					public class BEACHED_FIRECORAL
 					{
-						public static LocString NAME = "Fire Coral Frag";
+						public static LocString NAME = Link("Fire Coral Frag", FireCoralConfig.ID);
 						public static LocString DESC = ($"The {Link("Frag", "CORALS")} of a {Link("Fire Coral", FireCoralConfig.ID)}.");
 					}
 				}

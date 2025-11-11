@@ -20,6 +20,7 @@ namespace Beached.Content.Defs.Entities.Corals
 				.Harvestable()
 				.Age(6 * CONSTS.CYCLE_LENGTH)
 				.SafeTemperaturesCelsius(30, 35, 62, 75)
+				.DefaultTemperatureCelsius(42)
 				.InitialAnim("idle_grown")
 				.Frag("beached_leaflet_coral_frag_kanim", additionalTags: [GameTags.WaterSeed])
 				.Build().entityPrefab;
@@ -45,6 +46,15 @@ namespace Beached.Content.Defs.Entities.Corals
 			coral.initialVelocity = new Vector2f(0, 1);
 			coral.consumptionRate = 0.05f * RATE_MULT;
 			coral.spawnFX = SpawnFXHashes.OxygenEmissionBubbles;
+
+			EntityTemplates.ExtendPlantToFertilizable(prefab,
+			[
+				new PlantElementAbsorber.ConsumeInfo()
+				{
+					tag = SimHashes.Lime.CreateTag(),
+					massConsumptionRate = MiscUtil.PerCycle(4.0f)
+			  }
+			]);
 
 			prefab.AddComponent<LeafletCoral>();
 
