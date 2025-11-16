@@ -66,7 +66,7 @@
 		     - it only identifies a mapping between input and output if `Outputs` is a transform, and
 		     - it filters the `Inputs` list implicitly inside itself when incremental.
 		-->
-		<Touch Files="@(PubliciseAssembliesInputs->'$(PublicisedFolder)\%(Filename)_public%(Extension)')" />
+		<!--<Touch Files="@(PubliciseAssembliesInputs->'$(PublicisedFolder)\%(Filename)_public%(Extension)')" Condition="'$(PubliciseTouch)' == 'true'"/>-->
 	</Target>
 
 </Project>

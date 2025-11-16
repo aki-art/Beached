@@ -9,17 +9,18 @@ namespace Beached.Patches
 	{
 		[HarmonyPatch(typeof(EggConfig), nameof(EggConfig.CreateEgg),
 		[
-			typeof(string),
-			typeof(string),
-			typeof(string),
-			typeof(Tag),
-			typeof(string),
-			typeof(float),
-			typeof(int),
-			typeof(float),
-			typeof(string[]),
-			typeof(string[]),
-			typeof(bool),
+			typeof(string),		// id
+			typeof(string),		// name
+			typeof(string),		// desc
+			typeof(Tag),		// creature_id
+			typeof(string),		// anim
+			typeof(float),		// mass
+			typeof(int),		// egg_sort_order
+			typeof(float),		// base_incubation_rate
+			typeof(string[]),	// requiredDlcIds
+			typeof(string[]),	// forbiddenDlcIds
+			typeof(bool),		// preventEggDrops
+			typeof(float),		// eggMassToDrop
 		])]
 		public class EggConfig_CreateEgg_Patch
 		{

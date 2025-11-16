@@ -9,371 +9,371 @@ info:
 cells:
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 1
   location_y: -5
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 2
   location_y: -5
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 3
   location_y: -5
 - element: Sand
   mass: 1000
-  temperature: 301.124176
+  temperature: 311.124176
   location_x: 1
   location_y: -4
 - element: Sand
   mass: 1000
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 2
   location_y: -4
 - element: Sand
   mass: 1000
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 3
   location_y: -4
 - element: Sand
   mass: 1000
-  temperature: 300.692749
+  temperature: 310.692749
   location_x: 1
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.140259
+  temperature: 311.140259
   location_x: 2
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.147736
+  temperature: 311.147736
   location_x: 3
   location_y: -3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 1
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 2
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 3
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 1
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 2
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 3
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 1
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 2
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 3
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 1
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 2
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 3
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 1
   location_y: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 2
   location_y: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 3
   location_y: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 1
   location_y: 4
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 2
   location_y: 4
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 3
   location_y: 4
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 1
   location_y: 5
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 2
   location_y: 5
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 3
   location_y: 5
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 1
   location_y: 6
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 2
   location_y: 6
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 3
   location_y: 6
 - element: Beached_SiltStone
   mass: 991.418396
-  temperature: 301.361816
+  temperature: 311.361816
   location_x: 1
   location_y: 7
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.252075
+  temperature: 311.252075
   location_x: 2
   location_y: 7
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.702606
+  temperature: 311.702606
   location_x: 3
   location_y: 7
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 1
   location_y: 8
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 2
   location_y: 8
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 3
   location_y: 8
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 4
   location_y: -5
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 4
   location_y: -4
 - element: Sand
   mass: 1000
-  temperature: 301.149475
+  temperature: 311.149475
   location_x: 4
   location_y: -3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 4
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 4
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 4
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 4
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 4
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 4
   location_y: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 4
   location_y: 4
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 4
   location_y: 5
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_x: 4
   location_y: 6
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 303.384674
+  temperature: 313.384674
   location_x: 4
   location_y: 7
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 5
   location_y: -4
 - element: Sand
   mass: 1000
-  temperature: 301.148499
+  temperature: 311.148499
   location_x: 5
   location_y: -3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 5
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 5
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 5
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 5
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 5
   location_y: 2
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.380707
+  temperature: 311.380707
   location_x: 5
   location_y: 3
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 302.838379
+  temperature: 312.838379
   location_x: 5
   location_y: 4
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_x: 5
   location_y: 5
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_x: 5
   location_y: 6
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 5
   location_y: 7
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_x: -4
   location_y: -4
 - element: Dirt
   mass: 1138.56995
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -3
   location_y: -4
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -2
   location_y: -4
 - element: Sand
   mass: 1000
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -1
   location_y: -4
 - element: Sand
   mass: 1000
-  temperature: 301.149994
+  temperature: 311.149994
   location_y: -4
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 6
   location_y: -4
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 7
   location_y: -4
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.325623
+  temperature: 311.325623
   location_x: 8
   location_y: -4
 - element: Water
@@ -383,335 +383,335 @@ cells:
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.148041
+  temperature: 311.148041
   location_x: -3
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.127686
+  temperature: 311.127686
   location_x: -2
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.139038
+  temperature: 311.139038
   location_x: -1
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.139832
+  temperature: 311.139832
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.121399
+  temperature: 311.121399
   location_x: 6
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.149384
+  temperature: 311.149384
   location_x: 7
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 8
   location_y: -3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -4
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -3
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -2
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -1
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 6
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 7
   location_y: -2
 - element: Sand
   mass: 1000
-  temperature: 300.73288
+  temperature: 310.73288
   location_x: 8
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -4
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -3
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -2
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -1
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 6
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 7
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 8
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -4
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 6
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 7
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 8
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 300.880005
+  temperature: 310.880005
   location_x: -4
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -3
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -2
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -1
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 6
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 7
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 8
   location_y: 1
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.000519
+  temperature: 311.000519
   location_x: -4
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -3
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -2
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -1
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 6
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 7
   location_y: 2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 8
   location_y: 2
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.458282
+  temperature: 311.458282
   location_x: -4
   location_y: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -3
   location_y: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -2
   location_y: 3
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.53537
+  temperature: 311.53537
   location_x: -1
   location_y: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_y: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 6
   location_y: 3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 7
   location_y: 3
 - element: Salt
   mass: 480.609985
-  temperature: 301
+  temperature: 311
   location_x: 8
   location_y: 3
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 302.711151
+  temperature: 312.711151
   location_x: -4
   location_y: 4
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -3
   location_y: 4
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_x: -2
   location_y: 4
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 302.949493
+  temperature: 312.949493
   location_x: -1
   location_y: 4
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_y: 4
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.371796
+  temperature: 311.371796
   location_x: 6
   location_y: 4
 - element: Salt
   mass: 480.609985
-  temperature: 301.515106
+  temperature: 311.515106
   location_x: 7
   location_y: 4
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 8
   location_y: 4
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_x: -4
   location_y: 5
 - element: Beached_SiltStone
   mass: 1015.13684
-  temperature: 303.032898
+  temperature: 313.032898
   location_x: -3
   location_y: 5
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 303.547211
+  temperature: 313.547211
   location_x: -2
   location_y: 5
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_x: -1
   location_y: 5
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_y: 5
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 6
   location_y: 5
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 7
   location_y: 5
 - element: Vacuum
@@ -719,40 +719,40 @@ cells:
   location_y: 5
 - element: Sand
   mass: 924.085693
-  temperature: 304.164124
+  temperature: 314.164124
   location_x: -1
   location_y: 6
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_y: 6
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -1
   location_y: 7
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_y: 7
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -4
   location_y: 6
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -3
   location_y: 6
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -2
   location_y: 6
 - element: Dirt
   mass: 1138.56995
-  temperature: 301.202545
+  temperature: 311.202545
   location_x: -5
   location_y: -4
 - element: Water
@@ -762,41 +762,41 @@ cells:
   location_y: -3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -5
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -5
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -5
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -5
   location_y: 1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -5
   location_y: 2
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.581787
+  temperature: 311.581787
   location_x: -5
   location_y: 3
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -5
   location_y: 4
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_x: -6
   location_y: -5
 - element: Water
@@ -811,36 +811,36 @@ cells:
   location_y: -3
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -6
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -6
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -6
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 300.99823
+  temperature: 310.99823
   location_x: -6
   location_y: 1
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.314453
+  temperature: 311.314453
   location_x: -6
   location_y: 2
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -6
   location_y: 3
 - element: Beached_SiltStone
   mass: 984.950012
-  temperature: 302.352295
+  temperature: 312.352295
   location_x: -9
   location_y: -4
 - element: Water
@@ -855,7 +855,7 @@ cells:
   location_y: -4
 - element: Beached_ZincOre
   mass: 814.640015
-  temperature: 302.191437
+  temperature: 312.191437
   location_x: -9
   location_y: -3
 - element: Water
@@ -870,7 +870,7 @@ cells:
   location_y: -3
 - element: OxyRock
   mass: 200
-  temperature: 306.149994
+  temperature: 316.149994
   location_x: -8
   location_y: -5
 - element: Water
@@ -880,118 +880,118 @@ cells:
   location_y: -5
 - element: Dirt
   mass: 1138.56995
-  temperature: 301.383789
+  temperature: 311.383789
   location_x: -7
   location_y: -6
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.408905
+  temperature: 311.408905
   location_x: -8
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -7
   location_y: -2
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.406647
+  temperature: 311.406647
   location_x: -8
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -7
   location_y: -1
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.483215
+  temperature: 311.483215
   location_x: -8
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: -7
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -8
   location_y: 1
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.279816
+  temperature: 311.279816
   location_x: -7
   location_y: 1
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: -7
   location_y: 2
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.946106
+  temperature: 311.946106
   location_x: 9
   location_y: -3
 - element: Sand
   mass: 1000
-  temperature: 301.020996
+  temperature: 311.020996
   location_x: 9
   location_y: -2
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 9
   location_y: -1
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 9
 - element: Beached_SaltyOxygen
   mass: 2
-  temperature: 309.149994
+  temperature: 319.149994
   location_x: 9
   location_y: 1
 - element: Salt
   mass: 482.29538
-  temperature: 300.991852
+  temperature: 310.991852
   location_x: 9
   location_y: 2
 - element: Salt
   mass: 480.609985
-  temperature: 301.476135
+  temperature: 311.476135
   location_x: 9
   location_y: 3
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 9
   location_y: 4
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 302.020966
+  temperature: 312.020966
   location_x: 10
   location_y: -2
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.626129
+  temperature: 311.626129
   location_x: 10
   location_y: -1
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.630463
+  temperature: 311.630463
   location_x: 10
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.678314
+  temperature: 311.678314
   location_x: 10
   location_y: 1
 - element: Salt
   mass: 480.605438
-  temperature: 301.56662
+  temperature: 311.56662
   location_x: 10
   location_y: 2
 - element: Beached_SiltStone
   mass: 961.679993
-  temperature: 301.149994
+  temperature: 311.149994
   location_x: 10
   location_y: 3
 buildings:

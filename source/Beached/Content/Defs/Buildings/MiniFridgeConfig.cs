@@ -1,4 +1,5 @@
 ﻿using Beached.Content.Scripts;
+using Beached.Content.Scripts.Buildings;
 using Beached.Content.Scripts.Entities;
 using TUNING;
 using UnityEngine;
@@ -49,7 +50,11 @@ namespace Beached.Content.Defs.Buildings
 		public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
 		{
 			base.ConfigureBuildingTemplate(go, prefab_tag);
-			//LoreBearerUtil.AddLoreTo(go, LoreBearerUtil.UnlockSpecificEntry("pod_evacuation", "Inspect"));
+
+			LoreBearerUtil.AddLoreTo(go, LoreBearerUtil.UnlockSpecificEntry("beached_lockid_minifridge", "There was a sticky note on the glass door, with a note written on it in cursive handwriting."));
+
+			go.AddComponent<WorldgenOnlyLoreBearer>();
+
 			var storage = go.AddOrGet<Storage>();
 			storage.showInUI = true;
 			storage.showDescriptor = true;

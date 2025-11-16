@@ -1,0 +1,18 @@
+id: "BEACHEDMINIFRIDGENOTICE"
+title: Notice from HR
+
+contentContainers:
+#-----------------------------
+  - contentLayout: Vertical
+    lockID: beached_lockid_minifridge
+    content:
+      - type: Text
+        text: Notice from HR
+        style: Title
+        
+      - type: Text
+        text: |
+          Stop using the Petri Dish fridge to store your snacks! I'm confiscating these and next time I'm reporting you!
+          
+          - M.
+     
