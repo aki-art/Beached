@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Beached.Content.ModDb;
+using Klei.AI;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static ClothingWearer;
 
@@ -10,11 +13,17 @@ namespace Beached.Content.Defs.Equipment
 		public static ClothingInfo clothingInfo = new(
 			STRINGS.EQUIPMENT.PREFABS.BEACHED_BEACHSHIRT.NAME,
 			10,
-			0.0005f,
+			0f,
 			0f);
 
 		public EquipmentDef CreateEquipmentDef()
 		{
+			var attributeModifiers = new List<AttributeModifier>
+			{
+				new(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20),
+				new(BAttributes.HEAT_RESISTANCE_ID, 0.9f, is_multiplier: true),
+			};
+
 			var equipmentDef = EquipmentTemplates.CreateEquipmentDef(
 				ID,
 				TUNING.EQUIPMENT.CLOTHING.SLOT,
@@ -24,7 +33,7 @@ namespace Beached.Content.Defs.Equipment
 				TUNING.EQUIPMENT.VESTS.SNAPON0,
 				"beached_beachshirt_green_kanim",
 				4,
-				[],
+				attributeModifiers,
 				TUNING.EQUIPMENT.VESTS.SNAPON1,
 				true,
 				EntityTemplates.CollisionShape.RECTANGLE,
@@ -32,7 +41,7 @@ namespace Beached.Content.Defs.Equipment
 				0.4f,
 				additional_tags: [BTags.comfortableClothing]);
 
-			string DESC = "{0}: {1}";
+			var DESC = "{0}: {1}";
 
 			var thermal = string.Format(DESC, global::STRINGS.DUPLICANTS.ATTRIBUTES.THERMALCONDUCTIVITYBARRIER.NAME,
 				GameUtil.GetFormattedDistance(clothingInfo.conductivityMod));

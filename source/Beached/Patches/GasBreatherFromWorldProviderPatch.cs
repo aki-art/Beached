@@ -28,9 +28,9 @@ namespace Beached.Patches
 		{
 			public static IEnumerable<CodeInstruction> Transpiler(ILGenerator gen, IEnumerable<CodeInstruction> orig)
 			{
-				List<CodeInstruction> codes = orig.ToList();
+				var codes = orig.ToList();
 
-				System.Reflection.MethodInfo m_GetBreathableCellMass = AccessTools.DeclaredMethod(typeof(GasBreatherFromWorldProvider), nameof(GasBreatherFromWorldProvider.GetBreathableCellMass));
+				var m_GetBreathableCellMass = AccessTools.DeclaredMethod(typeof(GasBreatherFromWorldProvider), nameof(GasBreatherFromWorldProvider.GetBreathableCellMass));
 
 				if (m_GetBreathableCellMass == null)
 				{
@@ -38,7 +38,7 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				int index = codes.FindIndex(ci => ci.Calls(m_GetBreathableCellMass));
+				var index = codes.FindIndex(ci => ci.Calls(m_GetBreathableCellMass));
 
 				if (index == -1)
 				{
@@ -46,7 +46,7 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				System.Reflection.MethodInfo m_IsAmphibious = AccessTools.DeclaredMethod(
+				var m_IsAmphibious = AccessTools.DeclaredMethod(
 					typeof(GasBreatherFromWorldProvider_GetBestBreathableCellAroundSpecificCell_Patch),
 					nameof(IsAmphibious),
 					[typeof(OxygenBreather)]);
@@ -57,7 +57,7 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				System.Reflection.MethodInfo m_AmphibiousCheck = AccessTools.DeclaredMethod(
+				var m_AmphibiousCheck = AccessTools.DeclaredMethod(
 					typeof(AmphibiousOxygenBreatherProvider),
 					nameof(AmphibiousOxygenBreatherProvider.GetBreathableCellMass));
 
@@ -67,13 +67,13 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				Label afterCheck = gen.DefineLabel();
-				Label originalCheck = gen.DefineLabel();
+				var afterCheck = gen.DefineLabel();
+				var originalCheck = gen.DefineLabel();
 
 				codes[index].labels.Add(originalCheck); // original O2 check
 				codes[index + 1].labels.Add(afterCheck);
 
-				System.Reflection.MethodInfo m_Original = AccessTools.DeclaredMethod(
+				var m_Original = AccessTools.DeclaredMethod(
 					typeof(GasBreatherFromWorldProvider),
 					nameof(GasBreatherFromWorldProvider.GetBestBreathableCellAroundSpecificCell),
 					[
@@ -86,7 +86,7 @@ namespace Beached.Patches
 					return codes;
 				}
 
-				int breatherParamIdx = m_Original.GetParameters().ToList().FindIndex(p => p.ParameterType == typeof(OxygenBreather));
+				var breatherParamIdx = m_Original.GetParameters().ToList().FindIndex(p => p.ParameterType == typeof(OxygenBreather));
 
 				if (breatherParamIdx == -1)
 				{
@@ -111,22 +111,25 @@ namespace Beached.Patches
 			private static bool IsAmphibious(OxygenBreather breather) => breather != null && breather.HasTag(BTags.amphibious);
 		}
 
-		/*		[HarmonyPatch(typeof(GasBreatherFromWorldProvider), nameof(GasBreatherFromWorldProvider.OnSimConsume))]
-				public class GasBreatherFromWorldProvider_OnSimConsume_Patch
-				{
-					// Trigger events for atmospheres
-					// liquids are included for Minnow's waterbreathing ability
-					public static void Postfix(Sim.MassConsumedCallback mass_cb_info, OxygenBreather ___oxygenBreather)
-					{
-						var id = ElementLoader.elements[mass_cb_info.elemIdx].id;
-
-						if (id == Elements.saltyOxygen || id == SimHashes.SaltWater)
-							___oxygenBreather.Trigger((int)ModHashes.greatAirQuality, mass_cb_info);
-						else if (id == SimHashes.DirtyWater || id == Elements.murkyBrine)
-							___oxygenBreather.Trigger((int)GameHashes.PoorAirQuality, mass_cb_info);
-					}
-				}
-	}*/
-#endif
+		[HarmonyPatch(typeof(OxygenBreather), nameof(OxygenBreather.BreathableGasConsumed), [
+			typeof(SimHashes),
+			typeof(float),
+			typeof(float),
+			typeof(byte),
+			typeof(int),
+			])]
+		public class OxygenBreather_BreathableGasConsumed_Patch
+		{
+			// Trigger events for atmospheres
+			// liquids are included for Minnow's waterbreathing ability
+			public static void Postfix(OxygenBreather __instance, SimHashes elementConsumed, float massConsumed)
+			{
+				if (elementConsumed == Elements.saltyOxygen || elementConsumed == SimHashes.SaltWater)
+					__instance.Trigger((int)ModHashes.greatAirQuality, (object)elementConsumed);
+				else if (elementConsumed == SimHashes.DirtyWater || elementConsumed == Elements.murkyBrine)
+					__instance.BoxingTrigger((int)GameHashes.PoorAirQuality, massConsumed);
+			}
+		}
 	}
+#endif
 }

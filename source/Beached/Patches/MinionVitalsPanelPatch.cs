@@ -16,7 +16,10 @@ namespace Beached.Patches
 				__instance.AddAmountLine(BAmounts.Moisture);
 
 				if (Mod.debugMode)
+				{
 					__instance.AddAmountLine(BAmounts.Mucus);
+					__instance.AddAttributeLine(BAttributes.heatResistance);
+				}
 			}
 		}
 	}
