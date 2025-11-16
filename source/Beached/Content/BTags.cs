@@ -24,6 +24,10 @@ namespace Beached.Content
 				RawKelpConfig.ID,
 				KelpConfig.ID];
 
+			public static Tag[] zincs = [
+					Elements.zinc.CreateTag(),
+					Elements.ChemicalProcessing.solidZinc.CreateTag()];
+
 			public static Tag[] preciousMetals = [
 				SimHashes.Gold.CreateTag(),
 				SimHashes.Iridium.CreateTag(),
@@ -67,6 +71,8 @@ namespace Beached.Content
 		public static readonly Tag
 			// ======= The ones potentially interesting for other mods ===========
 			aquaticSeed = TagManager.Create("Beached_AquaticSeed"),
+			// gold and gold like metals
+			anyGold = TagManager.Create("Beached_AnyGold"),
 			// used with pressurevulnerable to alter behavior
 			aquariumPlanted = TagManager.Create("Beached_AquariumPlanted"),
 			// any buildig where foods are queued. meats will be scanned here, and Chef Makis can operate them

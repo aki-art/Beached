@@ -48,7 +48,7 @@ namespace Beached.Content.Scripts.Entities.AI
 			desiccating
 				.Enter(smi => SetSpeedModifier(smi, 0.33f))
 				.ToggleStatusItem(BStatusItems.desiccation, smi => smi)
-				.UpdateTransition(dry.secreting, (smi, dt) => CanProduceLubricant(smi))
+				//.UpdateTransition(dry.secreting, (smi, dt) => CanProduceLubricant(smi))
 				.Update(CheckDying, UpdateRate.SIM_4000ms);
 
 			dead
@@ -133,7 +133,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 				var use = new ElementUsage(lubricant.CreateTag(), defaultMucusRate, true)
 				{
-					customFormating = (tag, amount, continous) => $"<size=40%>max.</size>{GameUtil.GetFormattedMass(amount, GameUtil.TimeSlice.PerCycle)}"
+					customFormating = (tag, amount, continous) => $"<size=70%>max.</size>{GameUtil.GetFormattedMass(amount, GameUtil.TimeSlice.PerCycle)}" // TODO STRING
 				};
 
 				conversionEntry.outSet.Add(use);

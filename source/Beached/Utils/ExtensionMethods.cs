@@ -16,6 +16,27 @@ namespace Beached.Utils
 			return component.gameObject.GetDefs<InterfaceType>();
 		}
 
+		public static void StopSMI<SMIType>(this GameObject go, string reason = null) where SMIType : StateMachine.Instance
+		{
+			if (go.TryGetComponent<StateMachineController>(out var smc))
+			{
+				foreach (var traitSMI in smc.stateMachines)
+				{
+					if (traitSMI.GetType() == typeof(SMIType))
+						traitSMI.StopSM(reason ?? "stopped by Beached");
+				}
+			}
+		}
+
+		// GameObject.RemoveDef by Klei only removes FertilityMonitor
+		public static void ActuallyRemoveDef<DefType>(this GameObject go) where DefType : StateMachine.BaseDef
+		{
+			if (go.TryGetComponent<StateMachineController>(out var smc))
+			{
+				smc.cmpdef.defs.RemoveAll(def => def is DefType);
+			}
+		}
+
 		public static List<InterfaceType> GetDefs<InterfaceType>(this GameObject gameObject) where InterfaceType : class
 		{
 			List<InterfaceType> result = [];

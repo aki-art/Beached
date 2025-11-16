@@ -124,15 +124,27 @@ namespace Beached.Utils
 			return this;
 		}
 
+		public TraitBuilder OnDSSRemove(Action<GameObject> action)
+		{
+			if (Mod.integrations.IsModPresent(Integration.Integrations.SET_START_DUPES))
+				Integration.SetStartDupes.AddTraitRemovalAction(trait.Id, action);
+
+			return this;
+		}
+
 		public TraitBuilder OnAdd(Action<GameObject> action)
 		{
 			trait.OnAddTrait += action;
 			return this;
 		}
 
-		public TraitBuilder Tag(Tag tag)
+		public TraitBuilder Tag(Tag tag, bool removeOnDss = true)
 		{
 			trait.OnAddTrait += go => go.AddTag(tag);
+
+			if (removeOnDss)
+				OnDSSRemove(go => go.RemoveTag(tag));
+
 			return this;
 		}
 

@@ -7,6 +7,7 @@ namespace Beached.Integration
 	public class Integrations
 	{
 		public const string
+			SET_START_DUPES = "SetStartDupes",
 			MOONLET = "Moonlet",
 			CHEMICAL_PROCESSING = "Ronivan.ChemProcessing",
 			CRITTER_TRAITS_REBORN = "CritterTraitsReborn",

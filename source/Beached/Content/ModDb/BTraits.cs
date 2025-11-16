@@ -39,10 +39,9 @@ namespace Beached.Content.ModDb
 			COMFORT_SEEKER = "Beached_ComfortSeeker",
 			DEXTEROUS = "Beached_Dexterous",
 			THALASSOPHILE = "Beached_Thalassophile",
-			HOT_BLOODED = "Beached_HotBlooded",
+			HOT_BLOODED = "Beached_HotBlooded";
 
-			// Bionic upgrade
-			PRECISION_BOOSTER = "";
+
 
 		public class LIFE_GOAL_IDS
 		{
@@ -180,23 +179,18 @@ namespace Beached.Content.ModDb
 					.Rarity(DUPLICANTSTATS.RARITY_UNCOMMON)
 					.Build(DUPLICANTSTATS.GOODTRAITS);
 
-			/*			for (var i = 0; i < DUPLICANTSTATS.GOODTRAITS.Count; i++)
-						{
-							var traitVal = DUPLICANTSTATS.GOODTRAITS[i];
-							if (traitVal.id == "FrostProof")
-							{
-								traitVal.mutuallyExclusiveTraits ??= [];
-								traitVal.mutuallyExclusiveTraits.Add(HOT_BLOODED);
-							}
-						}*/
-
 			new TraitBuilder(GILLS, true)
-				.OnAdd(go => AddTag(go, BTags.amphibious))
-				.Modifier(db.Attributes.AirConsumptionRate.Id, -0.005f)
+				.Tag(BTags.amphibious)
+				.Modifier(db.Attributes.AirConsumptionRate.Id, -0.015f)
 				.ExtendedTooltip(GetGillsTooltip);
 
 			new TraitBuilder(THALASSOPHILE, true)
 				.OnAdd(OnAddThalassophile)
+				.OnDSSRemove(go =>
+				{
+					go.StopSMI<Beached_ThalassoTraitMonitor.Instance>();
+					go.ActuallyRemoveDef<Beached_ThalassoTraitMonitor.Def>();
+				})
 				.ExtendedTooltip(GetThalassophileTooltip)
 				.AddToTraits()
 					//.ExclusiveWithTraits(CLUMSY)
@@ -204,10 +198,10 @@ namespace Beached.Content.ModDb
 					.Build(DUPLICANTSTATS.GOODTRAITS);
 
 			new TraitBuilder(CARNIVOROUS, true)
-				.OnAdd(go => AddTag(go, BTags.carnivorous));
+				.Tag(BTags.carnivorous);
 
 			new TraitBuilder(VEGETARIAN, false)
-				.OnAdd(go => AddTag(go, BTags.vegetarian))
+				.Tag(BTags.vegetarian)
 				.AddToTraits()
 					.Rarity(DUPLICANTSTATS.RARITY_COMMON)
 					.ExclusiveWithTraits(CARNIVOROUS)
@@ -245,7 +239,7 @@ namespace Beached.Content.ModDb
 				slot => slot.assignable != null
 					&& slot.assignable.PrefabID() == FlushToiletConfig.ID
 					&& slot.assignable.TryGetComponent(out PrimaryElement pe)
-					&& (pe.ElementID == SimHashes.GoldAmalgam || pe.ElementID == SimHashes.Gold));
+					&& (pe.HasTag(BTags.anyGold)));
 
 			AddAssignableTrait(
 				LIFE_GOAL_IDS.HAS_50_DECOR,

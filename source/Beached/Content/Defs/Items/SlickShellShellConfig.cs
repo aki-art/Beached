@@ -12,7 +12,7 @@ namespace Beached.Content.Defs.Items
 				ID,
 				STRINGS.ITEMS.MISC.BEACHED_SLICKSHELLSHELL.NAME,
 				STRINGS.ITEMS.MISC.BEACHED_SLICKSHELLSHELL.DESC,
-				30f,
+				10f,
 				true,
 				Assets.GetAnim("beached_slickshellshell_kanim"),
 				"object",
