@@ -10,8 +10,8 @@ namePrefixes: [Oca,Salt,Marin,Deep,Brin,Blu,Salin,Coral,Aq,Pelag,Naut,Nav,Astro,
 
 worldTraitScale: 1 # Adjust with worldSize. Traits are tuned to base game world sizes.
 worldsize:
-  X: 304
-  Y: 304
+  X: 256
+  Y: 256
 layoutMethod: PowerTree
 
 seasons:
@@ -92,7 +92,7 @@ subworldFiles:
 
   # core
   - name: &Sulfur Beached:subworlds/beached_sulfur/ThermalVentsMain
-    overridePower: 0.9
+    overridePower: 1.2
   
   - name: &Depths Beached:subworlds/beached_depths/DepthsMain
     overridePower: 0.9
@@ -113,7 +113,7 @@ subworldFiles:
     overridePower: 0.6
 
 startSubworldName: *Start
-startingBaseTemplate: beached/bases/startingBaseCCenteredB
+startingBaseTemplate: beached/bases/base_e_oxylite_and_reinforced
 startingBasePositionHorizontal:
   min: 0.5
   max: 0.5
@@ -196,6 +196,18 @@ unknownCellsAllowedSubworlds:
       - *Surface
 
 worldTemplateRules:
+  # skeleton POI
+  - names: 
+      - beached/worldgen/beach/skeleton_research
+    listRule: GuaranteeAll
+    priority: 100
+    allowNearStart: true
+    useRelaxedFiltering: false # not recommended to use with allowNearStart unless features are non-critical
+    allowedCellsFilter:
+      - command: Replace
+        subworldNames:
+          - *Start
+
   # limpet cave
   - names:
       - beached/worldgen/beach/limpet_rock_cave

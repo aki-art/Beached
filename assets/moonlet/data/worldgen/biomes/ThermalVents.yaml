@@ -18,6 +18,23 @@ TerrainBiomeLookupTable:
       bandSize: 1
       overrides:
         massOverride: 1000
+    CO2:
+    - content: Beached_Basalt
+      bandSize: 2
+    - content: Obsidian
+      bandSize: 1
+    - content: Fossil
+      bandSize: 1
+    - content: FoolsGold
+      bandSize: 1
+    - content: Beached_Ash
+      bandSize: 1
+    - content: CarbonDioxide
+      bandSize: 1
+    - content: LiquidSulfur
+      bandSize: 0.1
+      overrides:
+        massOverride: 1000
     Lush:
     - content: Beached_Basalt
       bandSize: 2

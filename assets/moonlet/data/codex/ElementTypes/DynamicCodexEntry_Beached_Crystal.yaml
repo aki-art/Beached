@@ -1,0 +1,33 @@
+id: "BEACHEDCATEGORYCRYSTAL"
+title: Crystals
+category: "ELEMENTTYPES"
+parentId: "ELEMENTTYPES"
+
+contentContainers:
+#-----------------------------
+  - contentLayout: Vertical
+    lockID:
+
+    content:
+      - type: Text
+        text: Crystals
+        style: Title
+
+      - type: DividerLine
+      
+      - type: Image
+        batchedAnimPrefabSourceID: Beached_Item_Flawless_Diamond
+        preferredWidth: 128
+        preferredHeight: 128
+        
+#-----------------------------
+  - contentLayout: Vertical
+    content:
+      - type: Text
+        text: Description here
+
+      - type: CodexElementCategoryList
+        categoryTag: Beached_Category_Crystal
+
+contentMadeAndUsed:
+  - tag: Beached_Category_Crystal

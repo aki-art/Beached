@@ -14,15 +14,22 @@ borderOverridePriority: 9999
 
 biomes:
   - name: Beached:biomes/ThermalVents/Default
+    weight: 1
+  - name: Beached:biomes/ThermalVents/CO2
+    weight: 1
+    tags:
+      - Beached:Beached_DeepIronShell
 
 tags:
   - IgnoreCaveOverride
 
-# subworldTemplateRules:
-#   - names:
-#       - beached/worldgen/sulfur/smoker_single_a
-#     listRule: TrySome
-#     someCount: 3
-#     allowDuplicates: true
+subworldTemplateRules:
+  - names:
+      - beached/worldgen/sulfur/bone_smoker
+      - beached/worldgen/sulfur/double_vent_cave
+      - beached/worldgen/sulfur/iron_shell_v2
+    listRule: TrySome
+    someCount: 9
+    allowDuplicates: true
 
 zoneType: Beached_Sulfur
