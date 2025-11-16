@@ -7,7 +7,7 @@ namespace Beached.Content.Defs.Entities.Critters.Pufts
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabyAmmoniaPuftConfig : BasePuftConfig, IEntityConfig
 	{
-		public const string ID = "Beached_BabyAmmoniaPuft";
+		public const string ID = "Beached_AmmoniaPuftBaby";
 
 		protected override string AnimFile => "baby_puft_kanim";
 

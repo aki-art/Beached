@@ -7,7 +7,7 @@ namespace Beached.Content.Defs.Entities.Critters.Rotmongers
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabyRotmongerConfig : BaseRotmongerConfig, IEntityConfig
 	{
-		public const string ID = "Beached_BabyRotmonger";
+		public const string ID = "Beached_RotmongerBaby";
 
 		protected override string AnimFile => "beached_rotmonger_kanim";
 

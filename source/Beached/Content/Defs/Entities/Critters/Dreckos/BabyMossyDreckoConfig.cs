@@ -6,7 +6,7 @@ namespace Beached.Content.Defs.Entities.Critters.Dreckos
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	internal class BabyMossyDreckoConfig : BaseDreckoConfig, IEntityConfig
 	{
-		public const string ID = "Beached_MossyDrecko_Baby";
+		public const string ID = "Beached_MossyDreckoBaby";
 
 		protected override string AnimFile => "beached_baby_mossy_drecko_kanim";
 

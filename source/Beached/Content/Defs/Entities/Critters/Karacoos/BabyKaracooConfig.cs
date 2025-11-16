@@ -7,7 +7,7 @@ namespace Beached.Content.Defs.Entities.Critters.Karacoos
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabyKaracooConfig : BaseKaracooConfig, IEntityConfig
 	{
-		public const string ID = "Beached_BabyKaracoo";
+		public const string ID = "Beached_KaracooBaby";
 
 		protected override string AnimFile => "beached_baby_karacoo_kanim";
 

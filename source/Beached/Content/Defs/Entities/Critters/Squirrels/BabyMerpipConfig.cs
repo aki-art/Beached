@@ -7,7 +7,7 @@ namespace Beached.Content.Defs.Entities.Critters.Squirrels
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabyMerpipConfig : BaseMerpipConfig, IEntityConfig
 	{
-		public const string ID = "Beached_BabyMerpip";
+		public const string ID = "Beached_MerpipBaby";
 
 		protected override string AnimFile => "baby_squirrel_kanim";
 

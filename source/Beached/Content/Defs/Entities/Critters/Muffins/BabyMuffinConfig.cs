@@ -6,7 +6,7 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabyMuffinConfig : BaseMuffinConfig, IEntityConfig
 	{
-		public const string ID = "Beached_BabyMuffin";
+		public const string ID = "Beached_MuffinBaby";
 
 		protected override string AnimFile => "beached_muffin_kanim";
 

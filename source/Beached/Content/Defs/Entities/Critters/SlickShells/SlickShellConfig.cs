@@ -59,7 +59,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 			host.maxLevel = 3;
 			host.defaultGrowthRate = LimpetHost.GROWTH_RATE_4_CYCLES;
 			host.itemDroppedOnShear = SimHashes.Lime.CreateTag();
-			host.massDropped = 30f;
+			host.massDropped = 10f;
 			host.targetSymbol = "beached_limpetgrowth";
 			host.limpetKanim = "beached_slickshell_limpetgrowth_kanim";
 			host.metabolismModifier = 1.2f;
@@ -67,7 +67,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 
 			var moltDropper = prefab.AddOrGetDef<MoltDropperMonitor.Def>();
 			moltDropper.onGrowDropID = SlickShellShellConfig.ID;
-			moltDropper.massToDrop = 30f;
+			moltDropper.massToDrop = 10f;
 			moltDropper.isReadyToMolt = IsReadyToMolt;
 
 			return prefab;

@@ -2,7 +2,6 @@
 using Beached.Content.Defs.Foods;
 using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
-using TUNING;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.SlickShells
@@ -24,7 +23,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return builder
-				.TemperatureCelsius(30, 60, 100, 120)
+				.TemperatureCelsius(30, 35, 100, 120)
 				.Drops(RawSnailConfig.ID, 1f)
 				.Size(1, 1)
 				.Mass(50f)
@@ -32,7 +31,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.Baggable()
 				.CanNotDrown()
 				.SortAfter(CrabConfig.ID)
-				.CritterDensityTolerance(CREATURES.SPACE_REQUIREMENTS.TIER3)
+				.CritterDensityTolerance(TUNING.CREATURES.SPACE_REQUIREMENTS.TIER3)
 				.Navigator(CritterBuilder.NAVIGATION.FLOOR_NOJUMP_1X1, NavType.Floor, 0.25f, 16)
 				.Brain(BTags.Species.snail)
 					.Configure(ConfigureAI)

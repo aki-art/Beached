@@ -8,7 +8,7 @@ namespace Beached.Content.Defs.Entities.Critters.Mites
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabySlagmiteConfig : BaseMiteConfig, IEntityConfig
 	{
-		public const string ID = "Beached_BabySlagmite";
+		public const string ID = "Beached_SlagmiteBaby";
 
 		protected override string AnimFile => "beached_baby_slagmite_kanim";
 

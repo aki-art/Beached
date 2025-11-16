@@ -7,7 +7,7 @@ namespace Beached.Content.Defs.Entities.Critters.Pacus
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabyPrincessPacuConfig : BasePrincessPacuConfig, IEntityConfig
 	{
-		public const string ID = "Beached_BabyPrincessPacu";
+		public const string ID = "Beached_PrincessPacuBaby";
 
 		protected override string AnimFile => "baby_pacu_kanim";
 

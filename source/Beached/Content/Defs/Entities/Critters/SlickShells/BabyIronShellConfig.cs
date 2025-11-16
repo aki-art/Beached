@@ -8,7 +8,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 	[EntityConfigOrder(CONSTS.CRITTER_LOAD_ORDER.BABY)]
 	public class BabyIronShellConfig : BaseSnailConfig, IEntityConfig
 	{
-		public const string ID = "Beached_IronShell_Baby";
+		public const string ID = "Beached_IronShellBaby";
 
 		protected override string AnimFile => "beached_baby_slickshell_kanim";
 
