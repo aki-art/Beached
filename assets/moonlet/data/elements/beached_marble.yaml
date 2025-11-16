@@ -1,0 +1,34 @@
+elements:
+  - elementId: Beached_Marble
+    name: Marble
+    descriptionText: ...
+    color: d9c396
+    uiColor: 453e30
+    modifiers:
+      - id: Decor
+        value: 10%
+        isMultiplier: true
+    audio:
+      copyElement: Granite
+    specificHeatCapacity: 0.834
+    thermalConductivity: 8
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.2
+    highTemp: 1700
+    highTempTransitionTarget: Magma
+    defaultTemperature: 290
+    defaultMass: 1000
+    maxMass: 1840
+    hardness: 50
+    molarMass: 25
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.7
+    radiationPer1000Mass: 0
+    materialCategory: BuildableRaw
+    tags:
+    - Plumbable
+    - BuildableAny
+    buildMenuSort: 4
+    state: Solid
