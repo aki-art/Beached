@@ -88,6 +88,8 @@ namespace Beached.Content.ModDb
 				false,
 				1f));
 
+			heatResistance.SetFormatter(new PercentAttributeFormatter());
+
 			MiscUtil.AddToStaticReadonlyArray<string, DUPLICANTSTATS>(nameof(DUPLICANTSTATS.ALL_ATTRIBUTES), PRECISION_ID);
 			MiscUtil.AddToStaticReadonlyArray<string, DUPLICANTSTATS>(nameof(DUPLICANTSTATS.ALL_ATTRIBUTES), HEAT_RESISTANCE_ID);
 		}

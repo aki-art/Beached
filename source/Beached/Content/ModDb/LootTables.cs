@@ -36,6 +36,10 @@ namespace Beached.Content.ModDb
 				slagmiteShellDrops
 					.Add(new MaterialReward(SimHashes.Cinnabar, defaultMass));
 
+			if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
+				slagmiteShellDrops
+					.Add(new MaterialReward(SimHashes.NickelOre, defaultMass));
+
 			if (DlcManager.IsContentSubscribed(DlcManager.EXPANSION1_ID))
 				slagmiteShellDrops
 					.Add(new MaterialReward(SimHashes.UraniumOre, defaultMass));
@@ -85,6 +89,15 @@ namespace Beached.Content.ModDb
 						if (DlcManager.IsContentSubscribed(DlcManager.DLC2_ID))
 							gleamiteShellDrops
 								.Add(new MaterialReward(SimHashes.Mercury, defaultMass));*/
+
+
+			if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
+				gleamiteShellDrops
+					.Add(new MaterialReward(SimHashes.Nickel, defaultMass))
+					.Add(
+					new MaterialReward(SimHashes.Iridium, defaultMass),
+					rare,
+					critter => HighTierMetalCondition(critter, SimHashes.Iridium));
 
 			if (Mod.integrations.IsModPresent(Integrations.CHEMICAL_PROCESSING))
 			{

@@ -343,9 +343,9 @@ namespace Beached
 				public class BEACHED_LIMPETEGG
 				{
 					public static LocString NAME = Link("Limpet Eggs", LimpetEggGerms.ID);
-					public static LocString DESC = $"Very small eggs of a Limpet colony. Limpets can latch onto various shells and carapaces, and the adult limpets will form shells of their surrounding material around themselves. When infecting a critters, these materials can be shorn off later at a {Link("Shearing Station", ShearingStationConfig.ID)}.\n" +
+					public static LocString DESC = $"Very small eggs of a Limpet colony. Limpets can latch onto various shells and carapaces, and the adult limpets will form shells of their surrounding material around themselves. When infecting critters, these materials can be shorn off later at a {Link("Shearing Station", ShearingStationConfig.ID)}.\n" +
 						$"\n" +
-						$"When a Duplicant is infected, no useful material is produced, symptoms will include increased hunger and case of unsightlyness. The affliction can be cured at a {Link("Shearing Station", ShearingStationConfig.ID)} which duplicants will visit on their own as long as the building has \"Duplicant Shaving\" enabled.";
+						$"When a Duplicant is infected, no useful material is produced, symptoms will include increased hunger and a case of unsightlyness. The affliction can be cured at a {Link("Shearing Station", ShearingStationConfig.ID)} which duplicants will visit on their own as long as the building has \"Duplicant Shaving\" enabled.";
 				}
 
 				public class BEACHED_CAPSPORE

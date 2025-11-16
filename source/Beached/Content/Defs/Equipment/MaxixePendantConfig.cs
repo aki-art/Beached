@@ -14,7 +14,7 @@ namespace Beached.Content.Defs.Equipment
 			var attributeModifiers = new List<AttributeModifier>
 			{
 				new(TUNING.EQUIPMENT.ATTRIBUTE_MOD_IDS.DECOR, 20),
-				new(Db.Get().Attributes.AirConsumptionRate.Id, -0.05f),
+				new(Db.Get().Attributes.AirConsumptionRate.Id, -0.005f),
 			};
 
 			var equipmentDef = BEntityTemplates.Necklace(
