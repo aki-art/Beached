@@ -167,6 +167,11 @@ namespace Beached.Content.Scripts.Entities
 				BREATH_RADIUS,
 				handle.index);
 
+			if (data.elementId == Elements.saltyOxygen || data.elementId == SimHashes.SaltWater)
+				oxygenBreather.Trigger(ModHashes.greatAirQuality);
+			else if (data.elementId == SimHashes.ContaminatedOxygen || data.elementId == SimHashes.DirtyWater || data.elementId == Elements.murkyBrine)
+				oxygenBreather.BoxingTrigger((int)GameHashes.PoorAirQuality, massToConsume);
+
 			return true;
 		}
 

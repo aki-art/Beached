@@ -166,7 +166,7 @@ namespace Beached.Content.ModDb
 		private static void ZincAndCopperToBrass()
 		{
 			RecipeBuilder.Create(MetalRefineryConfig.ID, global::STRINGS.BUILDINGS.PREFABS.METALREFINERY.RECIPE_DESCRIPTION, TIME_STANDARD)
-				.Input(Elements.zinc.CreateTag(), 50f)
+				.Input(BTags.Groups.zincs, 50f)
 				.Input(SimHashes.Copper.CreateTag(), 100f)
 				.Output(Elements.brass.CreateTag(), 150f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.IngredientToResult)

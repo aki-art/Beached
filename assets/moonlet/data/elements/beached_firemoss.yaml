@@ -13,7 +13,7 @@ elements:
     gasSurfaceAreaMultiplier: 1
     strength: 0.2
     highTemp: 500C
-    highTempTransitionTarget: Carbon
+    highTempTransitionTarget: Beached_Ash
     defaultTemperature: 290
     defaultMass: 200
     maxMass: 300

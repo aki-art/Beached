@@ -1,4 +1,4 @@
-﻿using ImGuiNET;
+﻿/*using ImGuiNET;
 using KSerialization;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace Beached.Content.Scripts.Entities
 		[SerializeField] public Storage storage;
 		[SerializeField] public float exchangeRatePerTile;
 		[SerializeField] public SimHashes element;
-		[SerializeField] public float initialStoredAmount;
+		[SerializeField] public float howManyCycles;
 		[SerializeField] public int depth;
 		[SerializeField] public List<CellOffset> emissionShape;
 		[SerializeField] public CellOffset offset;
@@ -30,7 +30,13 @@ namespace Beached.Content.Scripts.Entities
 		private int[] cells;
 
 		private static readonly CellModifyMassEvent cellModifyEvent = new CellModifyMassEvent("Beached_VistaExchance", "Vista elmeent exchange");
-		private static readonly List<CellOffset> defaultEmissionShape = [CellOffset.none];
+
+		private static readonly List<CellOffset> defaultEmissionShape = MiscUtil.MakeCellOffsetsFromMap(true, "",
+				"  X  ",
+				" XXX ",
+				"XXOXX",
+				" XXX ",
+				"  X  ");
 
 		public ElementSourceVista()
 		{
@@ -41,7 +47,7 @@ namespace Beached.Content.Scripts.Entities
 		public override void OnSpawn()
 		{
 			var element = ElementLoader.FindElementByHash(this.element);
-			if (element == null || (!element.IsLiquid && !element.IsGas))
+			if (element == null)
 			{
 				isValid = false;
 			}
@@ -67,7 +73,7 @@ namespace Beached.Content.Scripts.Entities
 
 		private void Initialize(Element element)
 		{
-			var starterAmount = element.substance.SpawnResource(transform.position, initialStoredAmount, element.defaultValues.temperature, byte.MaxValue, 0, true);
+			var starterAmount = element.substance.SpawnResource(transform.position, howManyCycles, element.defaultValues.temperature, byte.MaxValue, 0, true);
 
 			storage.Store(starterAmount);
 
@@ -84,17 +90,27 @@ namespace Beached.Content.Scripts.Entities
 
 			massPerCell = storage.MassStored() / volume;
 
+			Log.Debug("masspercell" + massPerCell);
+
 			foreach (var cell in cells)
 			{
-				var mass = Grid.Mass[cell];
+				if (!Grid.IsValidCell(cell))
+					continue;
 
-				if (mass != 0 && Grid.ElementIdx[cell] != elementIdx)
-					return;
+				var mass = Grid.Mass[cell];
+				var elementOnPosition = Grid.Element[cell].tag;
+
+				Log.Debug($"checking cell {cell} - {mass}");
 
 				if (Mathf.Approximately(mass, massPerCell))
+				{
+					Log.Debug("presure equal");
 					return;
+				}
 
-				var deltaMass = (massPerCell - mass) * exchangeRatePerTile * elementViscosity;
+				var deltaMass = (massPerCell - mass) * exchangeRatePerTile * elementViscosity * dt;
+
+				Log.Debug($"deltaMass: {deltaMass}");
 
 				if (Mathf.Abs(deltaMass) < PICKUPABLETUNING.MINIMUM_PICKABLE_AMOUNT)
 					continue;
@@ -109,11 +125,13 @@ namespace Beached.Content.Scripts.Entities
 
 				if (deltaMass > 0)
 				{
+					Log.Debug($"dropping: {deltaMass}");
 					storage.DropSome(element.CreateTag(), deltaMass);
 				}
 				else
 				{
-					storage.ForceStore(element.CreateTag(), deltaMass);
+					Log.Debug($"storing: {deltaMass}");
+					storage.ForceStore(elementOnPosition, deltaMass);
 				}
 			}
 		}
@@ -155,3 +173,4 @@ namespace Beached.Content.Scripts.Entities
 		}
 	}
 }
+*/

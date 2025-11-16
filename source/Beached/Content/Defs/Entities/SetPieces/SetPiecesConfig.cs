@@ -33,30 +33,33 @@ namespace Beached.Content.Defs.Entities.SetPieces
 		private GameObject ConfigureBeachSetPiece()
 		{
 			var beach = CreateSetPiece(BEACH, "farmtile_kanim", 17, 10, "beach");
+			/*
+						var emitter = beach.AddComponent<ElementEmitter>();
+						emitter.outputElement = new ElementConverter.OutputElement(0.2f, Elements.saltyOxygen, MiscUtil.CelsiusToKelvin(29));
+						emitter.emitRange = 3;
+						emitter.SetEmitting(true);
+						emitter.maxPressure = 2.0f;*/
 
-			var emitter = beach.AddComponent<ElementEmitter>();
-			emitter.outputElement = new ElementConverter.OutputElement(0.2f, Elements.saltyOxygen, MiscUtil.CelsiusToKelvin(29));
-			emitter.emitRange = 3;
-			emitter.SetEmitting(true);
-			emitter.maxPressure = 2.0f;
+			var oxygenStorage = beach.AddComponent<Storage>();
+			oxygenStorage.SetDefaultStoredItemModifiers(Storage.StandardSealedStorage);
+			oxygenStorage.capacityKg = 100_000;
+			oxygenStorage.storageFilters = [Elements.saltyOxygen.CreateTag()];
 
-			/*			var oxygenStorage = beach.AddComponent<Storage>();
-						oxygenStorage.SetDefaultStoredItemModifiers(Storage.StandardSealedStorage);
-						oxygenStorage.capacityKg = 100000;
-						oxygenStorage.storageFilters = [Elements.saltyOxygen.CreateTag()];
+			var yOffset = 3;
+			int startX = -2, startY = -2 + yOffset, endX = 3, endY = 3 + yOffset;
 
-						var elementSource = beach.AddComponent<ElementSourceVista>();
-						elementSource.element = Elements.saltyOxygen;
-						elementSource.initialStoredAmount = 100;
-						elementSource.exchangeRatePerTile = 100;
-						elementSource.depth = 5;
-						elementSource.storage = oxygenStorage;
-						elementSource.emissionShape = MiscUtil.MakeCellOffsetsFromMap(true, "",
-							"  X  ",
-							" XXX ",
-							"XXOXX",
-							" XXX ",
-							"  X  ");*/
+			var rangeVisualizer = beach.AddOrGet<RangeVisualizer>();
+			rangeVisualizer.RangeMax = new Vector2I(startX, startY);
+			rangeVisualizer.RangeMin = new Vector2I(endX, endY);
+			rangeVisualizer.BlockingTileVisible = false;
+
+			var vista = beach.AddComponent<BeachVista>();
+			vista.storage = oxygenStorage;
+			vista.element = Elements.saltyOxygen;
+			vista.howManyCycles = 20;
+			vista.maxPressure = 2.0f;
+			vista.emitPerSecond = 0.6f;
+			vista.emissionShape = MiscUtil.CellOffsets(startX, startY, endX, endY);
 
 			return beach;
 		}

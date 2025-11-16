@@ -19,6 +19,10 @@ namespace Beached.Content.Scripts
 
 		public static byte iceWraithIndex;
 
+		public static HashSet<Tag> disabledPrinterceptorTags = [
+			HatchConfig.EGG_ID
+			];
+
 		public override void OnPrefabInit()
 		{
 			Instance = this;
@@ -72,6 +76,14 @@ namespace Beached.Content.Scripts
 
 			iceWraithIndex = Db.Get().Diseases.GetIndex(BDiseases.iceWrath.id);
 
+		}
+
+		public bool PrinterceptorDisabled(Tag id)
+		{
+			if (!IsBeachedContentActive)
+				return false;
+
+			return disabledPrinterceptorTags.Contains(id) && !DiscoveredResources.Instance.IsDiscovered(id);
 		}
 	}
 }

@@ -15,7 +15,7 @@ elements:
     gasSurfaceAreaMultiplier: 1
     strength: 0.2
     highTemp: 177C
-    highTempTransitionTarget: Carbon
+    highTempTransitionTarget: CarbonDioxide
     defaultTemperature: 24C
     defaultMass: 1840
     maxMass: 1840

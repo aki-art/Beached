@@ -49,12 +49,13 @@
 				public static LocString BEACHED_MEAT = "Meat";
 				public static LocString BEACHED_PRECIOUSCONTAINING = "Has Precious Inclusions";
 				public static LocString BEACHED_INCLUSIONCONTAINING = "Has Inclusions";
-				public static LocString BEACHED_MOSSMATERIAL = "Moss";
-				public static LocString BEACHED_RUBBERMATERIAL = "Rubber";
-				public static LocString BEACHED_SANDMATERIAL = "Sand";
-				public static LocString BEACHED_SLAGMATERIAL = "Slag";
-				public static LocString BEACHED_CHIMEMATERIAL = "Acoustic Medium";
+				public static LocString BEACHED_MOSSMATERIAL = Link("Moss", "BEACHEDMOSSMATERIAL");
+				public static LocString BEACHED_RUBBERMATERIAL = Link("Rubber", "BEACHEDRUBBERMATERIAL");
+				public static LocString BEACHED_SANDMATERIAL = Link("Sand", "BEACHEDSANDMATERIAL");
+				public static LocString BEACHED_SLAGMATERIAL = Link("Slag", "BEACHEDSLAGMATERIAL");
+				public static LocString BEACHED_CHIMEMATERIAL = Link("Acoustic Medium", "BEACHEDCHIMEMATERIAL");
 				public static LocString BEACHED_SMALLAQUARIUMSEED = "Aquarium Seed";
+				public static LocString BEACHED_ANYGOLD = "Any Gold";
 			}
 		}
 	}

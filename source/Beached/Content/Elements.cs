@@ -302,6 +302,16 @@ namespace Beached.Content
 
 		public static string Description(SimHashes element) => Strings.Get($"STRINGS.ELEMENTS.{element.ToString().ToUpperInvariant()}.DESCRIPTION");
 
+		private static void AddTag(SimHashes elementId, Tag tag)
+		{
+			var element = ElementLoader.FindElementByHash(elementId);
+
+			if (element == null)
+				return;
+
+			element.AddTag(tag);
+		}
+
 		public static void AfterLoad()
 		{
 			SetAcidCorrosions();
@@ -309,11 +319,13 @@ namespace Beached.Content
 
 			ElementLoader.FindElementByHash(rot).sublimateFX = ModAssets.Fx.ammoniaBubbles;
 
-			ElementLoader.FindElementByHash(SimHashes.Sand).AddTag(BTags.BuildingMaterials.sand);
-			ElementLoader.FindElementByHash(SimHashes.Isoresin).AddTag(BTags.BuildingMaterials.rubber);
+			AddTag(SimHashes.Gold, BTags.anyGold);
+			AddTag(SimHashes.GoldAmalgam, BTags.anyGold);
+			AddTag(SimHashes.Isoresin, BTags.BuildingMaterials.rubber);
+			AddTag(SimHashes.Sand, BTags.BuildingMaterials.sand);
 
 			foreach (var kvp in acidVulnerabilities)
-				ElementLoader.FindElementByHash(kvp.Key)?.AddTag(BTags.corrodable);
+				AddTag(kvp.Key, BTags.corrodable);
 
 			if (ElementLoader.FindElementByHash(ChaosEvents.inverseWater) != null)
 			{

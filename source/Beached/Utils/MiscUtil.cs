@@ -135,6 +135,20 @@ namespace Beached.Utils
 		public const char CENTER = 'O';
 		public const char FILLED = 'X';
 
+		public static List<CellOffset> CellOffsets(int x1, int y1, int x2, int y2)
+		{
+			var result = new List<CellOffset>();
+			for (var x = x1; x <= x2; x++)
+			{
+				for (var y = y1; y <= y2; y++)
+				{
+					result.Add(new CellOffset(x, y));
+				}
+			}
+
+			return result;
+		}
+
 		public static List<CellOffset> MakeCellOffsetsFromMap(bool fillCenter, params string[] pattern)
 		{
 			var xCenter = 0;

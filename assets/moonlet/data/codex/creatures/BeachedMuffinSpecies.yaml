@@ -10,7 +10,7 @@ contentContainers:
         style: Title
 
       - type: Text
-        textKey: STRINGS.CREATURES.CRITTER_SPECIES
+        textKey: STRINGS.CODEX.SEAL.SUBTITLE
         style: SubTitle
 
       - type: DividerLine

@@ -4,6 +4,8 @@
 	public class ModHashes
 	{
 		public static readonly ModHashes
+			/// <summary>triggers when a game i loaded first, after dupes already spawned.</summary>
+			gameStartedForFirstTime = new("GameStartedForFirstTime"),
 			onBeachedWorldLoaded = new("OnBeachedWorldLoaded"),
 			onBeachedWorldUnLoaded = new("OnBeachedWorldUnLoaded"),
 			usedBuilding = new("UsedBuilding"),
