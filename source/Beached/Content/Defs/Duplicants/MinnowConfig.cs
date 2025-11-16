@@ -46,8 +46,7 @@ namespace Beached.Content.Defs.Duplicants
 
 		public void OnTraitRoll(MinionStartingStats stats)
 		{
-			//var trait = Db.Get().traits.Get(BTraits.GILLS);
-			//stats.Traits.Add(trait);
+			stats.voiceIdx = 3;
 		}
 
 		public void ModifyBodyData(ref KCompBuilder.BodyData bodyData)

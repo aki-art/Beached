@@ -69,6 +69,15 @@ namespace Beached.Patches
 				BuildingUtil.AddToResearch(AquaticFarmTileConfig.ID, TECH.FOOD.AGRICULTURE);
 				BuildingUtil.AddToResearch(DeconstructableRocketTileConfig.ID, TECH.SOLIDS.REFINED_OBJECTS);
 				BuildingUtil.AddToResearch(MossBedConfig.ID, TECH.FOOD.FARMING_TECH);
+				BuildingUtil.AddToResearch(AmmoniaGeneratorConfig.ID, TECH.POWER.ADVANCED_POWER_REGULATION);
+				BuildingUtil.AddToResearch(SmallAquariumConfig.ID, TECH.DECOR.GLASS_FURNISHINGS);
+				BuildingUtil.AddToResearch(WoodCarvingConfig.ID, TECH.DECOR.REFRACTIVE_DECOR);
+				BuildingUtil.AddToResearch(MudStomperConfig.ID, BTechs.MATERIALS1);
+				BuildingUtil.AddToResearch(VulcanizerConfig.ID, TECH.SOLIDS.BASIC_REFINEMENT);
+				BuildingUtil.AddToResearch(MirrorConfig.ID, TECH.FOOD.ANIMAL_CONTROL);
+				BuildingUtil.AddToResearch(DNAExtractorConfig.ID, TECH.FOOD.BIOENGINEERING);
+				BuildingUtil.AddToResearch(DNAInjectorConfig.ID, TECH.FOOD.BIOENGINEERING);
+				BuildingUtil.AddToResearch(MiniFridgeConfig.ID, TECH.FOOD.AGRICULTURE);
 				//BuildingUtil.AddToResearch(MediumWattageWireConfig.ID, TECH.POWER.PLASTICS);
 			}
 		}

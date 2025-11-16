@@ -1,5 +1,6 @@
 ﻿using Beached.Content.Defs.Items;
 using Beached.Content.ModDb;
+using Beached.Content.Scripts;
 using Beached.Content.Scripts.Buildings;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,22 @@ namespace Beached.Content.Defs.Buildings
 			WoodGasGenerator();
 			FarmTile();
 			FlowerPot();
+			Grave();
 
 			AddPOIUnlockable(IceCooledFanConfig.ID);
 			AddPOIUnlockable(IceMachineConfig.ID);
 			AddPOIUnlockable(BeachChairConfig.ID);
 			AddPOIUnlockable(WaterCoolerConfig.ID);
+		}
+
+		private static void Grave()
+		{
+			var def = Assets.GetBuildingDef(GraveConfig.ID);
+
+			if (!def.BuildingComplete.TryGetComponent(out SymbolOverrideController _))
+				SymbolOverrideControllerUtil.AddToPrefab(def.BuildingComplete);
+
+			def.BuildingComplete.AddComponent<Beached_Grave>();
 		}
 
 		private static void FlowerPot()
