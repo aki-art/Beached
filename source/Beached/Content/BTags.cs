@@ -172,6 +172,7 @@ namespace Beached.Content
 				// muffins will not hunt critters with this tag, regardless of collar settings
 				doNotTargetMeByCarnivores = TagManager.Create("Beached_DoNotTargetMeByCarnivores"),
 				muffinThreat = TagManager.Create("Beached_MuffinThreat"),
+				dry = TagManager.Create("Beached_Dry"),
 
 				beingMined = TagManager.Create("Beached_BeingMined"),
 				grownShell = TagManager.Create("Beached_GrownShell");

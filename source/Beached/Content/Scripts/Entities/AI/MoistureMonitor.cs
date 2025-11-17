@@ -6,19 +6,19 @@ namespace Beached.Content.Scripts.Entities.AI
 {
 	public class MoistureMonitor : GameStateMachine<MoistureMonitor, MoistureMonitor.Instance, IStateMachineTarget, MoistureMonitor.Def>
 	{
-		private State wet;
-		private DryStates dry;
-		public State desiccating;
+		private State onDryLand;
+		private State inLiquid;
+		private State secreting;
 		public State dead;
 
 		public override void InitializeStates(out BaseState default_state)
 		{
-			default_state = wet;
+			default_state = onDryLand;
 
 			root
+				.ToggleStateMachine(smi => new LubricatedMovementMonitor.Instance(smi.master))
 				.EventHandler(GameHashes.Happy, smi => ToggleUnhappyModifier(smi, true))
 				.EventHandler(GameHashes.Unhappy, smi => ToggleUnhappyModifier(smi, false))
-				.ToggleStateMachine(smi => new LubricatedMovementMonitor.Instance(smi.master))
 				.EventHandler(GameHashes.TagsChanged, UpdateTags)
 				.EventTransition(GameHashes.Died, dead)
 				.Enter(smi =>
@@ -27,41 +27,31 @@ namespace Beached.Content.Scripts.Entities.AI
 						smi.attributes.Add(smi.wildMucusModifier);
 				});
 
-			wet
-				.Enter(smi => SetSpeedModifier(smi, 1.0f))
-				.UpdateTransition(dry.damp, Dry);
+			// not in liquid currently. produce mucus if gland is full or frying out
+			onDryLand
+				.UpdateTransition(inLiquid, IsInLiquid)
+				.ToggleAttributeModifier("dry", smi => smi.baseMoistureModifier)
+				.UpdateTransition(secreting, IsMucusEnough);
 
-			dry
-				.DefaultState(dry.damp)
-				.UpdateTransition(wet, NotDry, UpdateRate.SIM_1000ms)
-				.UpdateTransition(desiccating, IsCompletelyDry, UpdateRate.SIM_1000ms)
-				.EventTransition(ModHashes.producedLubricant, dry.damp);
+			// in liquid, happy and satisfied. do not make mucus
+			inLiquid
+				.UpdateTransition(onDryLand, (smi, dt) => !IsInLiquid(smi, dt))
+				.ToggleAttributeModifier("wet", smi => smi.wetMoistureModifier);
 
-			dry.damp
-				.Enter(smi => SetSpeedModifier(smi, 0.66f))
-				.UpdateTransition(dry.secreting, Dry);
-
-			dry.secreting
-				.ToggleBehaviour(BTags.Creatures.secretingMucus, CanProduceLubricant);
-
-			//TODO add back the "dry for" tracker, because if the liquid is immediately removed now a loop forms here
-			desiccating
-				.Enter(smi => SetSpeedModifier(smi, 0.33f))
-				.ToggleStatusItem(BStatusItems.desiccation, smi => smi)
-				//.UpdateTransition(dry.secreting, (smi, dt) => CanProduceLubricant(smi))
-				.Update(CheckDying, UpdateRate.SIM_4000ms);
+			secreting
+				.ToggleBehaviour(BTags.Creatures.secretingMucus, CanProduceLubricant, smi => smi.GoTo(onDryLand));
 
 			dead
 				.DoNothing();
 		}
 
-		private static bool IsMoisturized(Instance smi, float moistureTreshold) => smi.moisture.value > moistureTreshold;
+		private static bool IsInLiquid(Instance smi, float _) => Grid.IsSubstantialLiquid(Grid.PosToCell(smi), 0.05f);
 
-		private static bool NotDry(Instance smi, float _) => IsMoisturized(smi, 30.0f);
-
-		private static bool Dry(Instance smi, float _) => !IsMoisturized(smi, 30.0f);
-
-		private static bool IsCompletelyDry(Instance smi, float _) => smi.moisture.value <= 0;
+		private bool IsMucusEnough(Instance smi, float _)
+		{
+			var treshold = smi.HasTag(BTags.Creatures.dry) ? 1f : 10.0f;
+			return smi.mucusAmount.value >= treshold;
+		}
 
 		private void UpdateTags(Instance smi, object data)
 		{
@@ -82,41 +72,14 @@ namespace Beached.Content.Scripts.Entities.AI
 				smi.attributes.Remove(smi.unhappyMucusModifier);
 		}
 
-		private static void CheckDying(Instance smi, float dt)
-		{
-			var health = smi.GetComponent<Health>();
-
-			health.Damage(smi.def.desiccationDamagePerSecond * dt);
-
-			if (health.IsDefeated())
-			{
-				smi.Trigger((int)ModHashes.desiccated);
-			}
-		}
-
 		private static bool CanProduceLubricant(Instance smi)
 		{
 			if (smi.effects.HasEffect(BEffects.RECENTLY_PRODUCED_LUBRICANT))
 				return false;
 
-			if (smi.mucusAmount.value < 5f)
-				return false;
-
 			var cell = Grid.CellBelow(Grid.PosToCell(smi));
 
 			return Grid.IsValidCell(cell) && Grid.IsSolidCell(cell);
-		}
-
-		public class DryStates : State
-		{
-			public State damp;
-			public State secreting;
-		}
-
-
-		private static void SetSpeedModifier(Instance smi, float amount)
-		{
-			smi.navigator.defaultSpeed = smi.originalSpeed * amount;
 		}
 
 		public class Def : BaseDef, ICodexEntry//, IGameObjectEffectDescriptor
@@ -125,7 +88,8 @@ namespace Beached.Content.Scripts.Entities.AI
 			public SimHashes lubricant;
 			public float lubricantTemperatureKelvin;
 			public float sufficientMoistureTreshold = 10f;
-			public float desiccationDamagePerSecond = 0.1f;
+			public float defaultDryRate = -30f / CONSTS.CYCLE_LENGTH;
+			public float defaultSoakRate = 6000f / CONSTS.CYCLE_LENGTH;
 
 			public void AddCodexEntries(CodexEntryGenerator_Elements.ElementEntryContext context, KPrefabID prefab)
 			{
@@ -152,28 +116,33 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		public new class Instance : GameInstance
 		{
-			public AmountInstance moisture;
-			public float originalSpeed;
-			public Navigator navigator;
 			[MyCmpReq] public Effects effects;
 			public AmountInstance mucusAmount;
 			public AttributeModifier wildMucusModifier;
 			public AttributeModifier unhappyMucusModifier;
 			public Attributes attributes;
 			public WildnessMonitor.Instance wildnessMonitor;
-			private Health health;
 
-			public float GetEstimatedTimeUntilDeath()
-			{
-				return smi.IsInsideState(smi.sm.desiccating) ? health.hitPoints / def.desiccationDamagePerSecond : float.NaN;
-			}
+			public AmountInstance moisture;
+			public AttributeModifier baseMoistureModifier;
+			public AttributeModifier wetMoistureModifier;
 
 			public Instance(IStateMachineTarget master, Def def) : base(master, def)
 			{
-				health = master.GetComponent<Health>();
-				attributes = master.gameObject.GetAttributes();
-
 				moisture = BAmounts.Moisture.Lookup(gameObject);
+				moisture.value = moisture.GetMax();
+
+				baseMoistureModifier = new AttributeModifier(
+					moisture.amount.deltaAttribute.Id,
+					def.defaultDryRate,
+					STRINGS.CREATURES.MODIFIERS.MOISTURE_LOSS_RATE.NAME);
+
+				wetMoistureModifier = new AttributeModifier(
+					moisture.amount.deltaAttribute.Id,
+					def.defaultSoakRate,
+					STRINGS.CREATURES.MODIFIERS.MOISTURE_GAIN_RATE.NAME);
+
+				attributes = master.gameObject.GetAttributes();
 
 				mucusAmount = BAmounts.Mucus.Lookup(gameObject);
 				mucusAmount.value = mucusAmount.GetMax();
@@ -189,9 +158,6 @@ namespace Beached.Content.Scripts.Entities.AI
 					-0.75f,
 					"Wild Mucus Accumulation",
 					true);
-
-				navigator = smi.GetComponent<Navigator>();
-				originalSpeed = navigator.defaultSpeed;
 			}
 
 			public void ProduceLubricant()

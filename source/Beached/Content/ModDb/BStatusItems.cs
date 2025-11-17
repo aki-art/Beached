@@ -194,7 +194,7 @@ namespace Beached.Content.ModDb
 				false,
 				OverlayModes.None.ID);
 
-			desiccation.SetResolveStringCallback((str, data) => data is MoistureMonitor.Instance moistureMonitor ? string.Format(str, moistureMonitor.GetEstimatedTimeUntilDeath()) : str);
+			desiccation.SetResolveStringCallback((str, data) => data is DesiccationMonitor.Instance monitor ? string.Format(str, monitor.GetEstimatedTimeUntilDeath()) : str);
 
 			__instance.Add(desiccation);
 

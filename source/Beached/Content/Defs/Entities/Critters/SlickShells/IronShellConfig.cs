@@ -28,6 +28,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.SymbolPrefix("iron_")
 				.Traits()
 					.Add(BAmounts.Moisture.deltaAttribute.Id, -100f / CONSTS.CYCLE_LENGTH, false, STRINGS.CREATURES.SPECIES.BEACHED_IRONSHELL.NAME)
+					.Add(BAmounts.Mucus.deltaAttribute.Id, SlickShellTuning.MUCUS_PER_CYCLE / CONSTS.CYCLE_LENGTH, false, STRINGS.CREATURES.SPECIES.BEACHED_SLICKSHELL.NAME)
 					.Done()
 				.Egg(BabyIronShellConfig.ID, "beached_egg_slickshell_kanim")
 					.Mass(0.3f)
@@ -42,12 +43,12 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		{
 			var prefab = base.CreatePrefab(config);
 
-			var wetMonitor = prefab.AddOrGetDef<WetMonitor.Def>();
-
 			var moistureMonitor = prefab.AddOrGetDef<MoistureMonitor.Def>();
 			moistureMonitor.lubricant = Elements.mucus;
-			moistureMonitor.defaultMucusRate = 300f / 600f;
-			moistureMonitor.lubricantTemperatureKelvin = 300;
+			moistureMonitor.defaultMucusRate = 150f / 600f;
+			moistureMonitor.lubricantTemperatureKelvin = MiscUtil.CelsiusToKelvin(38.0f);
+
+			prefab.AddOrGetDef<DesiccationMonitor.Def>();
 
 			var diet = new Diet(SulfurDiet());
 			var def = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();

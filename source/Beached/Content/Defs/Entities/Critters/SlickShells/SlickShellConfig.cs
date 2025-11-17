@@ -25,7 +25,7 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 				.Drops(SlickShellShellConfig.ID, 1f)
 				.Traits()
 					.Add(BAmounts.Moisture.deltaAttribute.Id, -100f / CONSTS.CYCLE_LENGTH, false, STRINGS.CREATURES.SPECIES.BEACHED_SLICKSHELL.NAME)
-					.Add(BAmounts.Mucus.deltaAttribute.Id, 150f / CONSTS.CYCLE_LENGTH, false, STRINGS.CREATURES.SPECIES.BEACHED_SLICKSHELL.NAME)
+					.Add(BAmounts.Mucus.deltaAttribute.Id, SlickShellTuning.MUCUS_PER_CYCLE / CONSTS.CYCLE_LENGTH, false, STRINGS.CREATURES.SPECIES.BEACHED_SLICKSHELL.NAME)
 					.Done()
 				.Tag(GameTags.OriginalCreature)
 				.Egg(BabySlickShellConfig.ID, "beached_egg_slickshell_kanim")
@@ -41,12 +41,12 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		{
 			var prefab = base.CreatePrefab(config);
 
-			var wetMonitor = prefab.AddOrGetDef<WetMonitor.Def>();
-
 			var moistureMonitor = prefab.AddOrGetDef<MoistureMonitor.Def>();
 			moistureMonitor.lubricant = Elements.mucus;
 			moistureMonitor.defaultMucusRate = 150f / 600f;
 			moistureMonitor.lubricantTemperatureKelvin = MiscUtil.CelsiusToKelvin(38.0f);
+
+			prefab.AddOrGetDef<DesiccationMonitor.Def>();
 
 			var diet = new Diet(SaltDiet());
 			var def = prefab.AddOrGetDef<CreatureCalorieMonitor.Def>();
