@@ -17,6 +17,16 @@ using UnityEngine;
 namespace Beached.Patches
 {
 
+	[HarmonyPatch(typeof(Database.PermitResource), "IsUnlocked")]
+	// used to test if Minnows plushies align well with various skins, like the pip bed
+	public class TargetType_TargetMethod_Patch
+	{
+		public static void Postfix(ref bool __result)
+		{
+			__result |= Mod.debugMode;
+		}
+	}
+
 	[HarmonyPatch(typeof(SandboxStoryTraitTool), "OnLeftClickDown")]
 	public class SandboxStoryTraitTool_OnLeftClickDown_Patch
 	{

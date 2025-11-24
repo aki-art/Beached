@@ -14,11 +14,7 @@ namespace Beached.Content.Scripts.Entities.AI
 
 		private static bool HasBed(ref Precondition.Context context, object data)
 		{
-			Log.Debug("checking bed condition");
-
-			var result = data is Chore<StatesInstance> chore && chore.smi.HasTargetCell();
-			Log.Debug(result);
-			return result;
+			return data is Chore<StatesInstance> chore && chore.smi.HasTargetCell();
 		}
 
 		public PlushieGifterChore(IStateMachineTarget target) : base(
@@ -32,9 +28,9 @@ namespace Beached.Content.Scripts.Entities.AI
 			showAvailabilityInHoverText = false;
 			smi = new StatesInstance(this, target.gameObject);
 
-			AddPrecondition(HasBedCondition, this);
 			AddPrecondition(ChorePreconditions.instance.IsNotRedAlert);
 			AddPrecondition(ChorePreconditions.instance.IsScheduledTime, Db.Get().ScheduleBlockTypes.Recreation);
+			AddPrecondition(HasBedCondition, this);
 			AddPrecondition(ChorePreconditions.instance.CanDoWorkerPrioritizable, this);
 		}
 
@@ -91,18 +87,13 @@ namespace Beached.Content.Scripts.Entities.AI
 
 			private bool FindBed(StatesInstance smi, float dt)
 			{
-				Log.Debug("looking for bed");
 				foreach (var plushiePlaceable in ModCmps.plushiePlaceables.items)
 				{
-					Log.Debug($"\tbed: {plushiePlaceable.name}");
 					if (IsBedEligible(plushiePlaceable, smi))
 					{
-						Log.Debug($"\tyes");
 						smi.targetBed = plushiePlaceable;
 						return true;
 					}
-					else
-						Log.Debug($"\no");
 				}
 
 				return false;
@@ -110,7 +101,6 @@ namespace Beached.Content.Scripts.Entities.AI
 
 			private bool IsBedEligible(Beached_PlushiePlaceable bed, StatesInstance smi)
 			{
-				Log.Debug($"\t\thasPlushie: {bed.HasPlushie()}, isOp: {bed.GetComponent<Operational>().IsOperational} nav cost: {smi.navigator.GetNavigationCost(bed.NaturalBuildingCell())}");
 				return !bed.HasPlushie()
 					&& bed.GetComponent<Operational>().IsOperational
 					&& smi.navigator.GetNavigationCost(bed.NaturalBuildingCell()) != -1;
@@ -120,30 +110,43 @@ namespace Beached.Content.Scripts.Entities.AI
 		public class StatesInstance : GameStateMachine<States, StatesInstance, PlushieGifterChore, object>.GameInstance
 		{
 			public Beached_PlushiePlaceable targetBed;
-			public PlushPlacebleBedSensor bedSensor;
+			private PlushPlacebleBedSensor bedSensor;
 			public Navigator navigator;
 			private GameObject plushieGifter;
+
+			public PlushPlacebleBedSensor BedSensor
+			{
+				get
+				{
+					if (bedSensor == null)
+						bedSensor = smi.master.GetComponent<Sensors>().GetSensor<PlushPlacebleBedSensor>();
+
+					if (bedSensor == null)
+						Beached.Log.Debug("BED SENSOR NULL");
+
+					return bedSensor;
+				}
+			}
 
 			public StatesInstance(PlushieGifterChore master, GameObject plushieGifter) : base(master)
 			{
 				this.plushieGifter = plushieGifter;
 				navigator = master.GetComponent<Navigator>();
 				sm.artist.Set(plushieGifter, smi);
-				bedSensor = GetComponent<Sensors>().GetSensor<PlushPlacebleBedSensor>();
 			}
 
-			public bool HasTargetCell() => bedSensor.placeable != null;
+			public bool HasTargetCell() => bedSensor != null && bedSensor.placeable != null;
 
 			public bool IsRecTime() => master.GetComponent<Schedulable>().IsAllowed(Db.Get().ScheduleBlockTypes.Recreation);
 
-			public int GetTargetCell() => bedSensor.GetCell();
+			public int GetTargetCell() => BedSensor.GetCell();
 
 			public void PlacePlushie()
 			{
-				if (bedSensor.placeable != null)
-					plushieGifter.GetSMI<PlushieGifter.Instance>().PlacePlushie(bedSensor.GetCell());
+				if (BedSensor.placeable != null)
+					plushieGifter.GetSMI<PlushieGifter.Instance>().PlacePlushie(BedSensor.GetCell());
 
-				bedSensor.Clear();
+				BedSensor.Clear();
 			}
 		}
 	}

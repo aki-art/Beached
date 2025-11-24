@@ -13,8 +13,6 @@ namespace Beached.Patches
 		{
 			public static void Postfix(GameObject go)
 			{
-				var sensors = go.GetComponent<Sensors>();
-				sensors.Add(new PlushPlacebleBedSensor(sensors));
 #if !NO_MINNOW && BIONIC
 				if (go.GetComponent<MinionIdentity>().nameStringKey == MinnowConfig.ID)
 				{
@@ -23,6 +21,17 @@ namespace Beached.Patches
 					breather.AddGasProvider(new AmphibiousOxygenBreatherProvider());
 				}
 #endif
+			}
+		}
+
+		[HarmonyPatch(typeof(BaseMinionConfig), "BaseOnSpawn")]
+		public class BaseMinionConfig_BaseOnSpawn_Patch
+		{
+			public static void Prefix(GameObject go)
+			{
+				var sensors = go.GetComponent<Sensors>();
+				Log.Debug($"adding sensor here! {go.GetProperName()}");
+				sensors.Add(new PlushPlacebleBedSensor(sensors));
 			}
 		}
 

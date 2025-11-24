@@ -157,7 +157,9 @@
 			public class BEACHED_MISC
 			{
 				public static LocString CAPPED = "Capped {0}";
-				public static LocString BEACHED_CONTENT = "Content added by <color=d6926d><i>Beached</i></color>";
+				public static LocString BEACHED_CONTENT = "Content added by <color=#d6926d><i>Beached</i></color>";
+				public static LocString DUPE_BEACHED = "This Duplicant is part of <color=#d6926d><i>Beached</i></color> mod";
+				public static LocString DESIGN_BY_BEACHED = "Design added by <color=#d6926d><i>Beached</i></color>";
 				public static LocString POI_UNLOCK_TITLE = "Gift from the past";
 			}
 

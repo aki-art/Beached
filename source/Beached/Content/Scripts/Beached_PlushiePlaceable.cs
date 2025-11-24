@@ -2,6 +2,7 @@
 using ImGuiNET;
 using Klei.AI;
 using KSerialization;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Beached.Content.Scripts
@@ -20,6 +21,11 @@ namespace Beached.Content.Scripts
 
 		[SerializeField] public float plushieWornThreshold;
 		[SerializeField] public float plushieLifeSpan;
+
+		private static Dictionary<string, Vector3> offsetBySkins = new Dictionary<string, Vector3>()
+		{
+
+		};
 
 		private int debugCurrentlySelectedPlushie;
 		private KBatchedAnimController plushie;

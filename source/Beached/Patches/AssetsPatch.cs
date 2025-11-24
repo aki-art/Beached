@@ -7,6 +7,7 @@ using Beached.Content.Scripts.Entities;
 using HarmonyLib;
 using Klei.AI;
 using PeterHan.PLib.Core;
+using UnityEngine;
 
 namespace Beached.Patches
 {
@@ -21,10 +22,45 @@ namespace Beached.Patches
 				Assets.RegisterOnAddPrefab(AcidVulnerableCreature.OnAddPrefab);
 			}
 
+
+			private static Color Premultiply(Color color)
+			{
+				var a = color.a;
+				return new Color(color.r * a, color.g * a, color.b * a, a);
+			}
+
+
+			public static void OnPostprocessTexture(UnityEngine.Texture2D texture)
+			{
+
+				var width = texture.width;
+				var height = texture.height;
+				for (var x = 0; x < width; ++x)
+				{
+					for (var y = 0; y < height; ++y)
+					{
+						var color = texture.GetPixel(x, y);
+						texture.SetPixel(x, y, Premultiply(color));
+					}
+				}
+
+				texture.Apply();
+			}
+
 			[HarmonyPostfix]
 			[HarmonyPriority(Priority.Last)]
 			public static void LatePostfix()
 			{
+
+				var wall = Assets.GetAnim("beached_wall_skin_aqua_water_kanim");
+				foreach (var texture in wall.textureList)
+				{
+					Log.Debug($"texture {texture.name} {texture.wrapMode}");
+					texture.wrapMode = UnityEngine.TextureWrapMode.Repeat;
+
+					OnPostprocessTexture(texture);
+
+				}
 				BDb.SetMeatTags();
 
 				DNAInjector.InitializeOptions();

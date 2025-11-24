@@ -37,7 +37,7 @@ namespace Beached.Patches
 
 					if (child.TryGetComponent<ToolTip>(out var toolTip))
 						// TODO STRING
-						toolTip.toolTip = $"{unlockedItem.Name}\n{unlockedItem.description}\n\n{"This Content is added by Beached"}";
+						toolTip.toolTip = $"{unlockedItem.Name}\n{unlockedItem.description}\n\n{STRINGS.UI.BEACHED_MISC.BEACHED_CONTENT}";
 				}
 			}
 		}

@@ -9,7 +9,7 @@
 		<RootNamespace>Beached</RootNamespace>
 		<IsMod>true</IsMod>
 		<IsPacked>true</IsPacked>
-		<DefineConstants>ALPHA_EXCLUDE,TRANSPILERS, DEVTOOLS, NO_WIKI, MINNOW, NO_VAHANO, BIONIC</DefineConstants>
+		<DefineConstants>TRANSPILERS, DEVTOOLS, NO_WIKI, MINNOW, NO_VAHANO, BIONIC</DefineConstants>
 		<Publicised>true</Publicised>
 		<CopyFiles>true</CopyFiles>
 		<DebugType>Portable</DebugType>
