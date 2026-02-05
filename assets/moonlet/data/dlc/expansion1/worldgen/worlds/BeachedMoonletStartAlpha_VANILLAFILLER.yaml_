@@ -1,0 +1,338 @@
+name: "[DEMO] Astropelagos Asteroid"
+description: > 
+  A favored holiday destination, these shores feature all things 
+  desirable! Sandy beaches, warm oceans, caves glimmering with crystals, 
+  carnivorous predators, ancient deadly diseases, and so much more!
+disableWorldTraits: false
+asteroidIcon: beached_asteroid_astropelagos_kanim
+iconScale: 1
+namePrefixes: [Oca,Salt,Marin,Deep,Brin,Blu,Salin,Coral,Aq,Pelag,Naut,Nav,Astro,Pela]
+
+worldTraitScale: 1 # Adjust with worldSize. Traits are tuned to base game world sizes.
+worldsize:
+  X: 256
+  Y: 256
+layoutMethod: PowerTree
+
+seasons:
+  - Beached_AstropelagosMoonletMeteorShowers # Diamond and gemstones
+
+worldTags:
+  - Beached_FrozenSulfurAltCore
+
+worldTraitRules:
+  - min: 1
+    max: 4
+    # replace these trait with custom variants on this world
+    alternativeTraits:
+      traits/FrozenCore: Beached:traits/Alt_Sulfur_FrozenCore 
+
+    forbiddenTags:
+      - Germs # slime molds
+      - Oil
+      - LargeWorld
+      - Surface
+      - Crust
+      - Challenge
+      - GenericGeysers
+      - StartChange
+      - Geodes # i add my own variety
+
+subworldMixingRules:
+ - name: (Mixing1)
+   minCount: 2
+   maxCount: 3
+ - name: (Mixing2)
+   minCount: 2
+   maxCount: 3
+ - name: (Mixing3)
+   minCount: 2
+   maxCount: 3
+
+defaultsOverrides:
+  data:
+    DrawWorldBorder: true
+    DrawWorldBorderForce: false
+    WorldBorderThickness: 6
+    WorldBorderRange: 3
+    OverworldDensityMin: 17
+    OverworldDensityMax: 17
+    OverworldSampleBehaviour: PoissonDisk
+    OverworldMinNodes: 1
+    IsBeachedWorld: true
+
+# List all the subworld files to load
+# root and reefs are added from features
+subworldFiles:
+  # beach
+  - name: &Start Beached:subworlds/beached_beach/BeachStart 
+    overridePower: 3
+  - name: &BeachMini Beached:subworlds/beached_beach/BeachMini
+    overridePower: 1
+  - name: &BeachPalms Beached:subworlds/beached_beach/BeachPalmyShores
+    overridePower: 1
+  - name: subworlds/space/Space
+  - name: subworlds/magma/Bottom
+  - name: subworlds/marsh/HotMarsh
+    minCount: 3
+  - name: expansion1::subworlds/jungle/JungleSteamy 
+    minCount: 2
+  - name: subworlds/jungle/Jungle
+    minCount: 3
+  - name: expansion1::subworlds/sandstone/SandstoneStart
+    overridePower: 4
+  - name: expansion1::subworlds/space/IcySurface
+    overridePower: 1.3
+  - name: expansion1::subworlds/barren/CoalyGranite
+    overridePower: 1 # Reset their pdWeight
+  - name: expansion1::subworlds/wasteland/WastelandBeetle
+    minCount: 2
+  - name: expansion1::subworlds/wasteland/WastelandWorm
+    minCount: 1
+    maxCount: 2
+  - name: expansion1::subworlds/frozen/FrozenSlush
+    minCount: 2
+    maxCount: 3
+ 
+
+startSubworldName: *Start
+startingBaseTemplate: beached/bases/base_e_oxylite_and_reinforced
+startingBasePositionHorizontal:
+  min: 0.5
+  max: 0.5
+startingBasePositionVertical:
+  min: 0.45
+  max: 0.45
+
+unknownCellsAllowedSubworlds: 
+  # World Fill
+  - tagcommand: DistanceFromTag
+    tag: AtSurface
+    minDistance: 3
+    maxDistance: 99
+    command: Replace
+    subworldNames:
+      - subworlds/jungle/Jungle # Cool Steam Geyser
+      - subworlds/marsh/HotMarsh
+      - expansion1::subworlds/wasteland/WastelandBeetle
+      - expansion1::subworlds/wasteland/WastelandWorm
+      - (Mixing1)
+      - (Mixing2)
+      - (Mixing3)
+  # Ring-1/expanded start
+  - tagcommand: DistanceFromTag
+    tag: AtStart
+    minDistance: 1
+    maxDistance: 1
+    command: Replace
+    subworldNames:    
+      - subworlds/marsh/HotMarsh
+      - expansion1::subworlds/jungle/JungleSteamy
+      - *BeachMini
+      - *BeachPalms
+  # Core
+  - tagcommand: DistanceFromTag
+    tag: AtDepths
+    minDistance: 0
+    maxDistance: 0
+    command: Replace
+    subworldNames:
+      - subworlds/magma/Bottom
+  # Above Core
+  - tagcommand: DistanceFromTag
+    tag: AtDepths
+    minDistance: 1
+    maxDistance: 1
+    command: Replace
+    subworldNames:
+      - expansion1::subworlds/barren/CoalyGranite
+      - (Mixing1)
+      - (Mixing2)
+      - (Mixing3)
+  # Space
+  - tagcommand: AtTag
+    tag: AtSurface
+    command: Replace
+    subworldNames:
+      - subworlds/space/Space
+  - tagcommand: DistanceFromTag
+    tag: AtSurface
+    minDistance: 1
+    maxDistance: 1
+    command: Replace
+    subworldNames:
+      - subworlds/space/Space
+  # Surface
+  - tagcommand: DistanceFromTag
+    tag: AtSurface
+    minDistance: 2
+    maxDistance: 2
+    command: Replace
+    subworldNames:
+      - expansion1::subworlds/space/IcySurface
+      - (Mixing1)
+      - (Mixing2)
+      - (Mixing3)
+  # Below surface
+  - tagcommand: DistanceFromTag
+    tag: AtSurface
+    minDistance: 3
+    maxDistance: 3
+    command: Replace
+    subworldNames:
+      - expansion1::subworlds/frozen/FrozenSlush
+      - (Mixing1)
+      - (Mixing2)
+      - (Mixing3)
+
+worldTemplateRules:
+  # skeleton POI
+  - names: 
+      - beached/worldgen/beach/skeleton_research
+    listRule: GuaranteeAll
+    priority: 100
+    allowNearStart: true
+    useRelaxedFiltering: false # not recommended to use with allowNearStart unless features are non-critical
+    allowedCellsFilter:
+      - command: Replace
+        subworldNames:
+          - *Start
+
+  # limpet cave
+  - names:
+      - beached/worldgen/beach/limpet_rock_cave
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Beached_Beach]
+
+  # forcefield gen
+  - names:
+      - beached/pois/forcefield_generator_room
+    listRule: GuaranteeOne
+    priority: 700
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [Barren]
+        
+  # Jungle
+  - names:
+      - poi/jungle/geyser_steam
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        subworldNames:
+          - subworlds/jungle/Jungle
+  # FrozenSlush (no heatsink)
+  - names:
+    - expansion1::poi/poi_geyser_dirty_slush
+    - expansion1::poi/poi_frozen_salt_water_geyser
+    listRule: GuaranteeAll
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [FrozenWastes]
+  # Marsh (no guaranteed steam)
+  - names:
+      - poi/hotmarsh/geyser_methane
+    listRule: GuaranteeOne
+    priority: 100
+    allowedCellsFilter:
+      - command: Replace
+        zoneTypes: [BoggyMarsh]
+  # Geysers
+  - names:
+    - expansion1::poi/poi_geyser_magma
+    - expansion1::poi/poi_geyser_magma_2
+    - expansion1::poi/poi_geyser_magma_3
+    listRule: TryAll
+    priority: 50
+    allowedCellsFilter:
+      - command: Replace
+        tagcommand: DistanceFromTag
+        tag: AtDepths
+        minDistance: 1
+        maxDistance: 1
+      - command: IntersectWith
+        zoneTypes: [ Barren, MagmaCore ]
+  # Curated Geysers
+  - names: 
+    - geysers/steam
+    - geysers/chlorine_gas
+    - geysers/hot_po2
+    - geysers/methane
+    - geysers/filthy_water
+    - geysers/liquid_co2
+    - geysers/hot_hydrogen
+    - geysers/big_volcano
+    listRule: TryOne
+    times: 3
+    allowDuplicates: true
+    priority: 50
+    allowedCellsFilter:
+      - command: Replace
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 2
+        maxDistance: 10
+      - command: ExceptWith
+        zoneTypes: [ Space ]
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGlobalFeatureSpawning
+  # Gravitas
+  - names:
+    - expansion1::poi/warp/sender
+    - expansion1::poi/warp/receiver
+    - expansion1::poi/warp/teleporter
+    listRule: GuaranteeAll
+    priority: 90
+    allowedCellsFilter:
+      - command: Replace
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 1
+        maxDistance: 2
+      - command: IntersectWith
+        zoneTypes: [ Wasteland, BoggyMarsh, ToxicJungle ]
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGravitasFeatures
+  - names:
+    - expansion1::poi/genericGravitas/poi_office
+    listRule: GuaranteeAll
+    priority: 90
+    allowedCellsFilter:
+      - command: Replace
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 2
+        maxDistance: 99
+      - command: ExceptWith
+        tagcommand: AtTag
+        tag: NoGravitasFeatures
+      - command: ExceptWith
+        tagcommand: DistanceFromTag
+        tag: AtDepths
+        minDistance: 0
+        maxDistance: 2
+      - command: ExceptWith
+        tagcommand: DistanceFromTag
+        tag: AtSurface
+        minDistance: 0
+        maxDistance: 2
+  # Uranium Geode
+  - names:
+    - expansion1::poi/radioactive/uranium_geode1
+    listRule: GuaranteeOne
+    useRelaxedFiltering: true
+    allowExtremeTemperatureOverlap: true # has Abyssalite border
+    priority: 200
+    allowedCellsFilter:
+      - command: Replace
+        tagcommand: DistanceFromTag
+        tag: AtStart
+        minDistance: 1
+        maxDistance: 1

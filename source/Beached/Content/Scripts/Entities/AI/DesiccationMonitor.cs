@@ -1,5 +1,6 @@
 ﻿using Beached.Content.ModDb;
 using Klei.AI;
+using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities.AI
 {
@@ -27,7 +28,12 @@ namespace Beached.Content.Scripts.Entities.AI
 
 			// not in liquid and dying
 			desiccating
-				.Enter(smi => SetSpeedModifier(smi, 0.33f))
+				.Enter(smi =>
+				{
+					SetSpeedModifier(smi, 0.33f);
+					smi.ApplySadLook();
+				})
+				.Exit(smi => smi.RemoveSadLook())
 				.UpdateTransition(wet, (smi, dt) => !IsCompletelyDry(smi, dt), UpdateRate.SIM_200ms)
 				.ToggleStatusItem(BStatusItems.desiccation, smi => smi)
 				.ToggleTag(BTags.Creatures.dry)
@@ -66,11 +72,37 @@ namespace Beached.Content.Scripts.Entities.AI
 			public Navigator navigator;
 			public AmountInstance moisture;
 			public Health health;
+			private static readonly Color32 dryColorDiff = new(45, 45, 45, 0);
+			private KBatchedAnimController kbac;
+
+			public void ApplySadLook()
+			{
+				kbac.TintColour = new Color32()
+				{
+					r = (byte)Mathf.Clamp((kbac.TintColour.r - dryColorDiff.r), 0, byte.MaxValue),
+					g = (byte)Mathf.Clamp((kbac.TintColour.g - dryColorDiff.g), 0, byte.MaxValue),
+					b = (byte)Mathf.Clamp((kbac.TintColour.b - dryColorDiff.b), 0, byte.MaxValue),
+					a = kbac.TintColour.a
+				};
+			}
+
+			public void RemoveSadLook()
+			{
+				kbac.TintColour = new Color32()
+				{
+					r = (byte)Mathf.Clamp((kbac.TintColour.r + dryColorDiff.r), 0, byte.MaxValue),
+					g = (byte)Mathf.Clamp((kbac.TintColour.g + dryColorDiff.g), 0, byte.MaxValue),
+					b = (byte)Mathf.Clamp((kbac.TintColour.b + dryColorDiff.b), 0, byte.MaxValue),
+					a = kbac.TintColour.a
+				};
+			}
 
 			public float GetEstimatedTimeUntilDeath()
 			{
 				return smi.IsInsideState(smi.sm.desiccating) ? health.hitPoints / def.desiccationDamagePerSecond : float.NaN;
 			}
+
+			public bool IsDesiccating() => smi.IsInsideState(smi.sm.desiccating);
 
 			public Instance(IStateMachineTarget master, Def def) : base(master, def)
 			{
@@ -79,6 +111,8 @@ namespace Beached.Content.Scripts.Entities.AI
 				health = master.GetComponent<Health>();
 
 				navigator = smi.GetComponent<Navigator>();
+				kbac = master.GetComponent<KBatchedAnimController>();
+
 				originalSpeed = navigator.defaultSpeed;
 			}
 		}

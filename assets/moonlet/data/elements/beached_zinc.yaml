@@ -65,6 +65,7 @@ elements:
     tags:
     - BuildableAny
     - StartingRefinedMetal
+    - Beached_ZincMaterial
     buildMenuSort: 3
     state: Solid
     

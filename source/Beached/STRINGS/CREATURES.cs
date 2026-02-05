@@ -318,6 +318,12 @@ namespace Beached
 						public static LocString DESC = $"A large volcano that periodically erupts with {Link("Molten Bismuth", "BEACHEDBISMUTHMOLTEN")}";
 					}
 
+					public class BEACHED_HOT_SULFUR
+					{
+						public static LocString NAME = "Hot Sulfur Geyser";
+						public static LocString DESC = $"A geyser that periodically erupts with hot {Link("Sulfur", SimHashes.LiquidSulfur.ToString())}.";
+					}
+
 					public class BEACHED_IRIDIUM
 					{
 						public static LocString NAME = Link("Iridium Volcano", GeyserConfigs.PrefabID(GeyserConfigs.IRIDIUM));
@@ -334,6 +340,12 @@ namespace Beached
 					{
 						public static LocString NAME = Link("Gelid Nitrogen Vent", GeyserConfigs.PrefabID(GeyserConfigs.NITROGEN_COLD));
 						public static LocString DESC = $"This vent periodically releases extremely cold {Link("Nitrogen", Elements.nitrogen)}";
+					}
+
+					public class BEACHED_PERPLEXIUM
+					{
+						public static LocString NAME = "Perplexium Vent";
+						public static LocString DESC = $"A vent that periodically erupts with {Link("Perplexium", Elements.perplexium.ToString())}.";
 					}
 
 					public class BEACHED_SALT

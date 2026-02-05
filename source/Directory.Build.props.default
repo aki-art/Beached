@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <!--Steam Folder-->
-    <SteamFolder>D:\Programs\Steam</SteamFolder>
+    <SteamFolder>C:\Program Files (x86)\Steam</SteamFolder>
     <!--Publicised Assembly Folder-->
     <PublicisedFolder>D:\Modding\OxygenNotIncluded\PublicisedLib</PublicisedFolder>
     <!--Gamedata Folder, adjust to your own ONI installation-->

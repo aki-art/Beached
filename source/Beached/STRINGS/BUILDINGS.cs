@@ -188,6 +188,13 @@ namespace Beached
 					public static LocString EFFECT = "Provides floor for Duplicants to walk on. Does not prevent gas or liquid flow.";
 				}
 
+				public class BEACHED_STARRYSTICKER
+				{
+					public static LocString NAME = Link("Star Sticker", StarryStickerConfig.ID);
+					public static LocString DESC = "Starry stickers to drive out the darkness of the night.";
+					public static LocString EFFECT = $"Emits a small amount of Light during nighttime.";
+				}
+
 				public class BEACHED_CHIME
 				{
 					public static LocString NAME = Link("Wind Chime", ChimeConfig.ID);

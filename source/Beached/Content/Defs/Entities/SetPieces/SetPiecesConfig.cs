@@ -58,7 +58,7 @@ namespace Beached.Content.Defs.Entities.SetPieces
 			vista.element = Elements.saltyOxygen;
 			vista.howManyCycles = 20;
 			vista.maxPressure = 2.0f;
-			vista.emitPerSecond = 0.6f;
+			vista.emitPerSecond = 0.2f;
 			vista.emissionShape = MiscUtil.CellOffsets(startX, startY, endX, endY);
 
 			return beach;

@@ -45,12 +45,11 @@ namespace Beached.Content.Scripts.Entities.AI
 				.DoNothing();
 		}
 
-		private static bool IsInLiquid(Instance smi, float _) => Grid.IsSubstantialLiquid(Grid.PosToCell(smi), 0.05f);
+		private static bool IsInLiquid(Instance smi, float _) => Grid.IsSubstantialLiquid(Grid.PosToCell(smi), 0.02f);
 
 		private bool IsMucusEnough(Instance smi, float _)
 		{
-			var treshold = smi.HasTag(BTags.Creatures.dry) ? 1f : 10.0f;
-			return smi.mucusAmount.value >= treshold;
+			return smi.mucusAmount.value >= (float)(smi.HasTag(BTags.Creatures.dry) ? 2.0f : 10.0f);
 		}
 
 		private void UpdateTags(Instance smi, object data)

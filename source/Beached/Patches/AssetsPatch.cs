@@ -51,7 +51,9 @@ namespace Beached.Patches
 			[HarmonyPriority(Priority.Last)]
 			public static void LatePostfix()
 			{
-
+				var group = Assets.GetPrefab(DreckoConfig.ID).GetComponent<KBatchedAnimController>().batchGroupID;
+				Log.Debug("DRECKO ANIM");
+				Log.Debug($"{group: D}");
 				var wall = Assets.GetAnim("beached_wall_skin_aqua_water_kanim");
 				foreach (var texture in wall.textureList)
 				{

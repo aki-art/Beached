@@ -21,6 +21,7 @@ namespace Beached.Patches
 			typeof(string[]),	// forbiddenDlcIds
 			typeof(bool),		// preventEggDrops
 			typeof(float),		// eggMassToDrop
+			typeof(bool)		// allowCrackerRecipeCreation
 		])]
 		public class EggConfig_CreateEgg_Patch
 		{

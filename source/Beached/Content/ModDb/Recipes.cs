@@ -288,6 +288,32 @@ namespace Beached.Content.ModDb
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
+			var baseMeats = new Dictionary<Tag, float>()
+			{
+				{ MeatConfig.ID, 2f },
+			};
+
+			if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
+				baseMeats.Add(DinosaurMeatConfig.ID, 2f);
+
+			var seaFoods = new Dictionary<Tag, float>()
+			{
+				{ FishMeatConfig.ID, 1f },
+				{ ShellfishMeatConfig.ID, 1f },
+				{ RawSnailConfig.ID, 1f },
+				{ CracklingsConfig.ID, 1f },
+			};
+
+			var meatPlatter = RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_MEATPLATTER.DESC, TIME_STANDARD)
+				.Input(HighQualityMeatConfig.ID, 1f)
+				.Input(baseMeats)
+				.Input(seaFoods)
+				.Output(MeatPlatterConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result);
+
+			meatPlatter
+				.Build();
+
 			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_ASTROBAR.DESC, TIME_STANDARD)
 				.Input(SpongeCakeConfig.ID, 1f) // 1900 KCal
 				.Input(SpiceNutConfig.ID, 4f)
@@ -325,6 +351,7 @@ namespace Beached.Content.ModDb
 				.Input(ColdWheatBreadConfig.ID, 1f)
 				.Input(LettuceConfig.ID, 1f)
 				.Input(FriedMushroomConfig.ID, 1.5f)
+				.Input(PickleConfig.ID, 1f)
 				.Output(VeggieBurgerConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();

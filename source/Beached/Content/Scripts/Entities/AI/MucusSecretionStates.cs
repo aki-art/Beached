@@ -5,7 +5,6 @@ namespace Beached.Content.Scripts.Entities.AI
 	public class MucusSecretionStates : GameStateMachine<MucusSecretionStates, MucusSecretionStates.Instance, IStateMachineTarget, MucusSecretionStates.Def>
 	{
 		public State secretePre;
-		public State secretePost;
 		public State behaviourComplete;
 
 		public override void InitializeStates(out BaseState default_state)
@@ -13,12 +12,8 @@ namespace Beached.Content.Scripts.Entities.AI
 			default_state = secretePre;
 
 			secretePre
-				.Enter(Secrete)
-				.QueueAnim("lay_egg_pre")
-				.OnAnimQueueComplete(secretePost);
-
-			secretePost
-				.QueueAnim("lay_egg_pst")
+				.QueueAnim("poop")
+				.Exit(Secrete)
 				.OnAnimQueueComplete(behaviourComplete);
 
 			behaviourComplete

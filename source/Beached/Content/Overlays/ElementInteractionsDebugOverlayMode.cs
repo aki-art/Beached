@@ -6,7 +6,7 @@ namespace Beached.Content.Overlays
 {
 	public class ElementInteractionsOverlayMode : OverlayModes.Mode
 	{
-		// the game scrapes ID by reflection in devtools, do not change type or name
+		[Tooltip("the game scrapes ID by reflection in devtools, do not change type or name")]
 		public static readonly HashedString ID = "Beached_ElementInteractionsOverlay";
 
 		// todo: pin overlay to overlays menu

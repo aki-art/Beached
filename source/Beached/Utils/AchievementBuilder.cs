@@ -19,6 +19,12 @@ namespace Beached.Utils
 				clusterTag: clusterTag);
 		}
 
+		public AchievementBuilder ClusterTag(Tag tag)
+		{
+			achievement.clusterTag = tag.ToString();
+			return this;
+		}
+
 		public AchievementBuilder Requirement(ColonyAchievementRequirement requirement)
 		{
 			achievement.requirementChecklist.Add(requirement);

@@ -23,7 +23,8 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		protected override CritterBuilder ConfigureCritter(CritterBuilder builder)
 		{
 			return base.ConfigureCritter(builder)
-				.TemperatureCelsius(100, 110, 320, 350)
+				.TemperatureCelsius(150, 240, 340, 410)
+				.DefaultTemperatureC(200)
 				.Drops(IronShellShellConfig.ID, 1f)
 				.SymbolPrefix("iron_")
 				.Traits()

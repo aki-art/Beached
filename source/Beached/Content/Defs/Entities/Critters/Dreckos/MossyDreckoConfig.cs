@@ -12,7 +12,7 @@ namespace Beached.Content.Defs.Entities.Critters.Dreckos
 		public static float mossPerCycle = 100f;
 		public static float scaleGrowthCycles = 3f;
 
-		protected override string AnimFile => "beached_mossy_drecko_kanim";
+		protected override string AnimFile => "beached_test_morph_kanim";
 
 		protected override string Id => ID;
 
@@ -71,9 +71,15 @@ namespace Beached.Content.Defs.Entities.Critters.Dreckos
 			if (!prefab.TryGetComponent(out SymbolOverrideController controller))
 				controller = SymbolOverrideControllerUtil.AddToPrefab(prefab);
 
-			controller.ApplySymbolOverridesByAffix(Assets.GetAnim(AnimFile), "fbr_");
+/*			var kbac = prefab.AddOrGet<KBatchedAnimController>();
+			kbac.AnimFiles = [
+				Assets.GetAnim(AnimFile),
+				kbac.animFiles[1]
+				];*/
 
-			prefab.AddOrGet<CreatureBrain>().symbolPrefix = "fbr_";
+			controller.ApplySymbolOverridesByAffix(Assets.GetAnim(AnimFile), "beached_mossy_");
+
+			prefab.AddOrGet<CreatureBrain>().symbolPrefix = "beached_mossy_";
 
 			return prefab;
 		}

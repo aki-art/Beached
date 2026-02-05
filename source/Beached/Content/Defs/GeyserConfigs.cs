@@ -1,6 +1,7 @@
 ﻿using Beached.Content.ModDb.Germs;
 using Klei;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Beached.Content.Defs
 {
@@ -16,14 +17,41 @@ namespace Beached.Content.Defs
 			MURKY_BRINE_GEYSER = "Beached_MurkyBrine",
 			PACU_GEYSER = "Beached_PacuGeyser",
 			ZIRCONIUM = "Beached_Zirconium",
+			HOT_SULFUR = "Beached_HotSulfur",
+			PERPLEXIUM = "Beached_Perplexium",
 			NITROGEN_COLD = "Beached_NitrogenCold";
 
 		public static string PrefabID(string id) => $"GeyserGeneric_{id}";
+
+		public static void ConfigureGeyserPrefab(string id, GameObject prefab)
+		{
+			if (id == PERPLEXIUM)
+			{
+				prefab.AddOrGet<Geyser>().outputOffset = new Vector2I(0, 2);
+			}
+		}
 
 		public static void GenerateConfigs(List<GeyserGenericConfig.GeyserPrefabParams> list)
 		{
 			if (list == null)
 				return;
+
+			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
+				"beached_perplexium_kanim",
+				2,
+				4,
+				new GeyserConfigurator.GeyserType(
+					PERPLEXIUM,
+					Elements.perplexium,
+					GeyserConfigurator.GeyserShape.Gas,
+					MiscUtil.CelsiusToKelvin(120),
+					70f,
+					140f,
+					5f,
+					[],
+					null,
+					60f),
+				false));
 
 			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
 				"beached_salt_volcano_kanim",
@@ -59,6 +87,20 @@ namespace Beached.Content.Defs
 					geyserTemperature: 263f),
 				true));
 
+			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
+				"geyser_liquid_sulfur_kanim",
+				4,
+				2,
+				new GeyserConfigurator.GeyserType(
+					HOT_SULFUR,
+					SimHashes.LiquidSulfur,
+					GeyserConfigurator.GeyserShape.Liquid,
+					MiscUtil.CelsiusToKelvin(400),
+					1000f,
+					2000f,
+					500f,
+					DlcManager.EXPANSION1),
+				true));
 
 			list.Add(new GeyserGenericConfig.GeyserPrefabParams(
 				"beached_helium_vent_kanim",

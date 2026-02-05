@@ -154,6 +154,8 @@ namespace Beached.Patches
 			"GeyserGeneric_" + GeyserConfigs.ZIRCONIUM,
 			"GeyserGeneric_" + GeyserConfigs.IRIDIUM,
 			"GeyserGeneric_" + GeyserConfigs.NITROGEN_COLD,
+			"GeyserGeneric_" + GeyserConfigs.HOT_SULFUR,
+			"GeyserGeneric_" + GeyserConfigs.PERPLEXIUM,
 		];
 
 		private static readonly HashSet<Tag> GEMS =

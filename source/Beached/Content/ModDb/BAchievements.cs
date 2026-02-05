@@ -14,14 +14,17 @@ namespace Beached.Content.ModDb
 		{
 			new AchievementBuilder("Beached_TallBamboo")
 				.Requirement(new TallBambooAchievementRequirement(128))
+				.ClusterTag(BWorldGen.BWorldGenTags.BeachedCluster)
 				.Build(__instance);
 
 			new AchievementBuilder("Beached_Blinged")
 				.Requirement(new RareJewelleryAchievementRequirement())
+				.ClusterTag(BWorldGen.BWorldGenTags.BeachedCluster)
 				.Build(__instance);
 
 			new AchievementBuilder("Beached_LegendarySteak")
 				.Requirement(new EatXCaloriesFromY(1, [LegendarySteakConfig.ID]))
+				.ClusterTag(BWorldGen.BWorldGenTags.BeachedCluster)
 				.Build(__instance);
 		}
 	}

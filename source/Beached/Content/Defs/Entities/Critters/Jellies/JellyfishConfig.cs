@@ -45,7 +45,7 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 			electricEmitter.maxPathSecs = 2f;
 
 			var nesting = prefab.AddOrGetDef<NestingFertilityMonitor.Def>();
-			nesting.baseFertileCycles = 0.5f;
+			nesting.baseFertileCycles = 10f;
 
 			var jellyFish = prefab.AddOrGet<Jellyfish>();
 			jellyFish.connectorDefId = JellyfishGeneratorConfig.ID;

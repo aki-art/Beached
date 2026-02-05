@@ -26,8 +26,8 @@ namespace Beached.Content.ModDb
 			creators.Add(CREATURES.EGG_CHANCE_MODIFIERS.CreateTemperatureModifier(
 				IRONSHELL_FROM_SLICKSHELL_HEAT,
 				IronShellConfig.EGG_ID,
-				MiscUtil.CelsiusToKelvin(90.0f),
-				MiscUtil.CelsiusToKelvin(130.0f),
+				MiscUtil.CelsiusToKelvin(150f),
+				MiscUtil.CelsiusToKelvin(340f),
 				0.05f / 600f,
 				true));
 

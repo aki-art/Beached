@@ -323,6 +323,7 @@ namespace Beached.Content
 			AddTag(SimHashes.GoldAmalgam, BTags.anyGold);
 			AddTag(SimHashes.Isoresin, BTags.BuildingMaterials.rubber);
 			AddTag(SimHashes.Sand, BTags.BuildingMaterials.sand);
+			AddTag(ChemicalProcessing.solidZinc, BTags.BuildingMaterials.zinc);
 
 			foreach (var kvp in acidVulnerabilities)
 				AddTag(kvp.Key, BTags.corrodable);

@@ -160,6 +160,12 @@ namespace Beached
 					public static LocString DESC = "Baking the Dewnut causes it to form bubbles of air inside, giving it an unexpectedly soft texture. Topped with colored sugar frosting and sprinkles, this is delightfully sweet treat.";
 				}
 
+				public class BEACHED_MEATPLATTER
+				{
+					public static LocString NAME = Link("Meatlover's Platter", MeatPlatterConfig.ID);
+					public static LocString DESC = "An assortment of high quality meats, fit for a feast.";
+				}
+
 				public class BEACHED_SUFFEDSNAILS
 				{
 					public static LocString NAME = Link("Stuffed Snails", StuffedSnailsConfig.ID);

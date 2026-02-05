@@ -40,6 +40,7 @@
 			THALASSOPHILE_BONUS = "Beached_ThalassophileBonus",
 			UNSAVORY_MEAL = "Beached_Unsavory_Meal",
 			SUPER_ALLERGY_MED = "Beached_SuperAllergeMed",
+			MEAT_PLATTER = "Beached_MeatPlatterEffect",
 			WISHING_STAR = "Beached_WishingStar"; // applied when they see shooting stars
 
 		public class VANILLA
@@ -50,11 +51,14 @@
 
 		public static void Register(ModifierSet set)
 		{
-			var stressDelta = Db.Get().Amounts.Stress.deltaAttribute.Id;
-			var peeDelta = Db.Get().Amounts.Bladder.deltaAttribute.Id;
-			var carryCapacity = Db.Get().Attributes.CarryAmount.Id;
-			var airConsumptionRate = Db.Get().Attributes.AirConsumptionRate.Id;
-			var morale = Db.Get().Attributes.QualityOfLife.Id;
+			var db = Db.Get();
+			var stressDelta = db.Amounts.Stress.deltaAttribute.Id;
+			var peeDelta = db.Amounts.Bladder.deltaAttribute.Id;
+			var carryCapacity = db.Attributes.CarryAmount.Id;
+			var strength = db.Attributes.Strength.Id;
+			var athletics = db.Attributes.Athletics.Id;
+			var airConsumptionRate = db.Attributes.AirConsumptionRate.Id;
+			var morale = db.Attributes.QualityOfLife.Id;
 
 			//var histamineSuppression = set.effects.Get("HistamineSuppression");
 
@@ -63,6 +67,11 @@
 			new EffectBuilder(THALASSOPHILE_BONUS, 0, false)
 				.Modifier(morale, 2, false)
 				.Modifier(BAttributes.operatingSpeed.Id, 0.1f, true)
+				.Add(set);
+
+			new EffectBuilder(MEAT_PLATTER, cycle, false)
+				.Modifier(strength, 5, false)
+				.Modifier(athletics, 5, false)
 				.Add(set);
 
 			new EffectBuilder(GNAWBERRY_JUICE, cycle, false)

@@ -20,6 +20,8 @@ namespace Beached.Content.Defs.Entities.Critters.SlickShells
 		{
 			return base.ConfigureCritter(builder)
 				.Baby(IronShellConfig.ID)
+				.TemperatureCelsius(150, 240, 340, 410)
+				.DefaultTemperatureC(200)
 				.Drops(IronShellShellConfig.ID, 0.25f)
 				.Mass(25f)
 				.Navigator(CritterBuilder.NAVIGATION.WALKER_BABY, .75f);

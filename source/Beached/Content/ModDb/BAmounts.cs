@@ -33,14 +33,14 @@ namespace Beached.Content.ModDb
 				"Beached_Moisture",
 				0f,
 				100f,
-				true,
+				false,
 				Units.Flat,
 				0.35f,
 				true,
 				"STRINGS.CREATURES",
-				"ui_icon_stamina",
-				"attribute_stamina",
-				"mod_stamina");
+				"beached_amount_wet",
+				null,
+				null);
 
 			Moisture.SetDisplayer(new StandardAmountDisplayer(GameUtil.UnitClass.Percent, GameUtil.TimeSlice.PerCycle, null));
 

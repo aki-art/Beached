@@ -88,7 +88,7 @@ namespace Beached.Content.Defs.Entities.Critters.Jellies
 				.Add(new StrobilaLayingStates.Def(), isAdult)
 				.Add(new GermSuckStates.Def())
 				.Add(new PlayAnimsStates.Def(GameTags.Creatures.Poop, false, "poop", global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.NAME, global::STRINGS.CREATURES.STATUSITEMS.EXPELLING_SOLID.TOOLTIP))
-				.Add(new EnergizedStates.Def(), isAdult)
+				//.Add(new EnergizedStates.Def(), isAdult)
 				.Add(new CallAdultStates.Def(), !isAdult)
 				.PopInterruptGroup()
 				.Add(new IdleStates.Def());
