@@ -1,5 +1,4 @@
-﻿using Beached.Content.Defs.Items;
-using Beached.Content.Scripts.Entities.Plant;
+﻿using Beached.Content.Scripts.Entities.Plant;
 using TUNING;
 using UnityEngine;
 
@@ -37,7 +36,7 @@ namespace Beached.Content.Defs.Flora
 				true,
 				0f,
 				0.15f,
-				PalmLeafConfig.ID,
+				Elements.palmWood.ToString(),
 				true,
 				true,
 				true,
@@ -48,9 +47,9 @@ namespace Beached.Content.Defs.Flora
 				BASE_TRAIT_ID,
 				STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.NAME);
 
-			var ediblePlant = prefab.AddOrGet<DirectlyEdiblePlant_TreeBranches>();
-			ediblePlant.overrideCropID = PalmLeafConfig.ID;
-			ediblePlant.MinimumEdibleMaturity = 1f;
+			/*			var ediblePlant = prefab.AddOrGet<DirectlyEdiblePlant_TreeBranches>();
+						ediblePlant.overrideCropID = PalmLeafConfig.ID;
+						ediblePlant.MinimumEdibleMaturity = 1f;
 
 			prefab.UpdateComponentRequirement<Harvestable>(false);
 
@@ -64,6 +63,7 @@ namespace Beached.Content.Defs.Flora
 			branchGrower.MAX_BRANCH_COUNT = leafs.Count;
 
 			prefab.AddOrGet<BuddingTrunk>();
+			*/
 
 			var dirt = new PlantElementAbsorber.ConsumeInfo()
 			{
@@ -75,7 +75,7 @@ namespace Beached.Content.Defs.Flora
 
 			prefab.AddOrGet<StandardCropPlant>();
 
-			var seed = EntityTemplates.CreateAndRegisterSeedForPlant(
+			var seedPrefab = EntityTemplates.CreateAndRegisterSeedForPlant(
 				prefab,
 				null,
 				SeedProducer.ProductionType.Harvest,
@@ -87,11 +87,25 @@ namespace Beached.Content.Defs.Flora
 				additionalTags: [GameTags.CropSeed],
 				sortOrder: 3,
 				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.DOMESTICATEDDESC,
-				width: 0.33f,
-				height: 0.33f);
+				width: 0.45f,
+				height: 0.45f);
+
+			var foodInfo = new EdiblesManager.FoodInfo(
+				SEED_ID,
+				0f,
+				FOOD.FOOD_QUALITY_TERRIBLE,
+				FOOD.DEFAULT_PRESERVE_TEMPERATURE,
+				FOOD.DEFAULT_ROT_TEMPERATURE,
+				FOOD.SPOIL_TIME.VERYSLOW,
+				false);
+
+
+			prefab.AddOrGet<DirectlyEdiblePlant_Growth>();
+
+			EntityTemplates.ExtendEntityToFood(seedPrefab, foodInfo);
 
 			EntityTemplates.CreateAndRegisterPreviewForPlant(
-				seed,
+				seedPrefab,
 				PREVIEW_ID,
 				Assets.GetAnim("beached_small_cell_kanim"),
 				"place",
@@ -116,6 +130,9 @@ namespace Beached.Content.Defs.Flora
 			tap.metalStorage = metalStorage;
 			tap.materialPerCycle = 20;
 			tap.element = Elements.rubber;
+
+			var cropval = TUNING.CROPS.CROP_TYPES.Find((m => m.cropId == Elements.palmWood.CreateTag()));
+			prefab.AddOrGet<Crop>().Configure(cropval);
 
 			return prefab;
 		}

@@ -1,7 +1,7 @@
 elements:
   - elementId: Beached_Rubber
-    name: Rubber
-    descriptionText: Natural rubber composed of the polymers of Isoprene. Rubber has a number of uses in manufacturing protective gear as well as in electronics.
+    name: Latex
+    descriptionText: Natural material composed of the polymers of Isoprene. Latex has a number of uses in manufacturing protective gear as well as in electronics.
     color: d07538
     mainTexture: beached_shared_assets::Assets/moonlet/elements/beached_rubber.png
     modifiers:

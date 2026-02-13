@@ -4,26 +4,26 @@ using static EdiblesManager;
 
 namespace Beached.Content.Defs.Foods
 {
-	public class DewNutConfig : IEntityConfig
+	public class DBAndJConfig : IEntityConfig
 	{
-		public const string ID = "Beached_DewNut";
+		public const string ID = "Beached_DBAndJ";
 
 		public GameObject CreatePrefab()
 		{
 			var foodInfo = new FoodInfo(
 				ID,
-				0f,
-				FOOD.FOOD_QUALITY_TERRIBLE,
+				2400_000f,
+				FOOD.FOOD_QUALITY_AMAZING,
 				FOOD.DEFAULT_PRESERVE_TEMPERATURE,
 				FOOD.DEFAULT_ROT_TEMPERATURE,
-				FOOD.SPOIL_TIME.VERYSLOW,
-				false);
+				FOOD.SPOIL_TIME.DEFAULT,
+				true);
 
 			var prefab = BEntityTemplates.CreateFood(
 				ID,
-				"beached_dewnut_kanim",
-				0.55f,
-				0.55f,
+				"beached_dbandj_kanim",
+				0.8f,
+				0.4f,
 				foodInfo);
 
 			return prefab;

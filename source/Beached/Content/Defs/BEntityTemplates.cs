@@ -80,7 +80,7 @@ namespace Beached.Content.Defs
 		{
 			EntityTemplates.ExtendPlantToIrrigated(prefab, [consumeInfo]);
 
-			prefab.AddOrGet<SelfIrrigator>();
+			prefab.AddOrGet<SelfIrrigator>().targetTag = GameTags.Water;
 
 			var passiveElementConsumer = prefab.AddOrGet<PassiveElementConsumer>();
 			passiveElementConsumer.elementToConsume = ElementLoader.GetElementID(consumeInfo.tag);

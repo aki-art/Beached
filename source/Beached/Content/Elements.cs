@@ -57,6 +57,7 @@ namespace Beached.Content
 			pearl = ToHash("Pearl"),
 			rubber = ToHash("Rubber"),
 			pallasite = ToHash("Pallasite"),
+			palmWood = ToHash("PalmWood"),
 			perplexium = ToHash("Perplexium"),
 			permaFrost = ToHash("PermaFrost"),
 			permaFrost_Transitional = ToHash("PermaFrost_Transitional"),

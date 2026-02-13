@@ -1,0 +1,31 @@
+elements:
+  - elementId: Beached_PalmWood
+    name: Palm Wood
+    descriptionText: TODO
+    mainTexture: beached_palmwood.png
+    color: bc8172
+    audio:
+      copyElement: WoodLog
+    specificHeatCapacity: 2.3
+    thermalConductivity: 0.22 
+    solidSurfaceAreaMultiplier: 1
+    liquidSurfaceAreaMultiplier: 1
+    gasSurfaceAreaMultiplier: 1
+    strength: 0.7
+    highTemp: 600C
+    highTempTransitionTarget: Beached_Ash
+    defaultTemperature: 300
+    defaultMass: 1000
+    maxMass: 1840
+    hardness: 18
+    molarMass: 217.8529
+    lightAbsorptionFactor: 1
+    radiationAbsorptionFactor: 0.6
+    radiationPer1000Mass: 0
+    materialCategory: Organics
+    tags:
+    - BuildingWood
+    - IndustrialIngredient
+    buildMenuSort: 1
+    isDisabled: false
+    state: Solid
