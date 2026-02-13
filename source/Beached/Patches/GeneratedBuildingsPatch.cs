@@ -36,6 +36,7 @@ namespace Beached.Patches
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, LaboratoryTileConfig.ID, Base.TILES, PlasticTileConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, DeconstructableRocketTileConfig.ID, Base.TILES, RocketWallTileConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, SealedStorageConfig.ID, Base.STORAGE, StorageLockerConfig.ID, ModUtil.BuildingOrdering.After);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.BASE, ShutterTileConfig.ID, Base.TILES, TileConfig.ID, ModUtil.BuildingOrdering.Before);
 
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, MiniFridgeConfig.ID, Food.STORAGE, ExteriorWallConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FOOD, DNAInjectorConfig.ID, Food.RANCHING, EggIncubatorConfig.ID);

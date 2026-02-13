@@ -42,6 +42,16 @@ namespace Beached
 
 			public class PREFABS
 			{
+				public class HEADQUARTERS
+				{
+					public class FACADES
+					{
+						public static LocString NAME = Link("Fouled Printing Pod", HeadquartersConfig.ID);
+						public static LocString DESC = "TODO";
+
+					}
+				}
+
 				public class BEACHED_AMMONIAGENERATOR
 				{
 					[Note("Generates power from ammonia")]
@@ -52,8 +62,10 @@ namespace Beached
 
 				public class BEACHED_AQUATICFARMTILE
 				{
-					public static LocString NAME = Link("Aquatic Farm Tile", AquaticFarmTileConfig.ID);
-					public static LocString DESC = "Duplicants can deliver fertilizer to farm aquatic tiles, accelerating plant growth. Required liquids will be soaked up by the tile as needed.";
+					public static LocString NAME = Link("Reinforced Farm Tile", AquaticFarmTileConfig.ID);
+					public static LocString DESC = "Duplicants can deliver fertilizer to farm aquatic tiles, accelerating plant growth.\n" +
+						"\n" +
+						"The reinforcements of this tile allow it to withstand the weight of liquid reservoirs required for farming aquatic plants, without further support below the tile. This resistance is not infinite, and the tile will break under immense over pressure.";
 					public static LocString EFFECT = $"Grows one {Link("Plant", "PLANTS")} from a {Link("Seed", "PLANTS")}.\n" +
 						$"\n" +
 						$"Can be used as floor tile and rotated before construction.";
@@ -188,6 +200,12 @@ namespace Beached
 					public static LocString EFFECT = "Provides floor for Duplicants to walk on. Does not prevent gas or liquid flow.";
 				}
 
+				public class BEACHED_SHUTTERTILE
+				{
+					public static LocString NAME = Link("Plug Tile", ShutterTileConfig.ID);
+					public static LocString DESC = "Can be toggled by automation signal to act as a Mesh Tile or as a solid Tile.";
+					public static LocString EFFECT = "Prevents gas and liquid flow while not receiving an automation signal.";
+				}
 				public class BEACHED_STARRYSTICKER
 				{
 					public static LocString NAME = Link("Star Sticker", StarryStickerConfig.ID);
