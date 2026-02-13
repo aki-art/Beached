@@ -13,6 +13,7 @@ namespace Beached.Content.ModDb
 		// StatusItem.ALL_OVERLAYS
 
 		public static StatusItem
+			awaitingMaterial,
 			desiccation,
 			secretingMucus,
 			smoking,
@@ -180,6 +181,31 @@ namespace Beached.Content.ModDb
 			plushed.SetResolveStringCallback(Beached_PlushiePlaceable.GetStatusItemTooltip);
 
 			__instance.Add(plushed);
+
+			awaitingMaterial = new StatusItem(
+				"Beached_AwaitingMaterial",
+				"BUILDING",
+				string.Empty,
+				StatusItem.IconType.Exclamation,
+				NotificationType.BadMinor,
+				false,
+				OverlayModes.None.ID,
+				false);
+
+			awaitingMaterial.SetResolveStringCallback((str, obj) =>
+			{
+				if (obj is HybridDelivery delivery)
+				{
+					var fuel = delivery.consumedTag.ProperName();
+					var formattedMass = GameUtil.GetFormattedMass(delivery.consumedPerSecond, GameUtil.TimeSlice.PerSecond, GameUtil.MetricMassFormat.UseThreshold, true, "{0:0.#}");
+
+					return string.Format(str, fuel, formattedMass);
+				}
+
+				return str;
+			});
+
+			__instance.Add(awaitingMaterial);
 		}
 
 		[DbEntry]

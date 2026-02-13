@@ -234,7 +234,9 @@ namespace Beached
 				iceWrath = Util.ColorFromHex("80b5ff"),
 				fur = new Color32(210, 40, 180, 255),
 
-				electricBlue = Util.ColorFromHex("0090ff");
+				electricBlue = Util.ColorFromHex("0090ff"),
+				liquidOverlayBlue = Util.ColorFromHex("3dc8ff"),
+				gasOverlayPurple = Util.ColorFromHex("bc85ff");
 
 			public class Zones
 			{

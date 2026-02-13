@@ -1,23 +1,27 @@
-﻿using Beached.Content.ModDb;
-using ImGuiNET;
+﻿using ImGuiNET;
 using Klei.AI;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using static Beached.Content.Scripts.Buildings.Chime;
 
 namespace Beached.Content.Scripts.Buildings
 {
-	public class WaterGenerator : Generator, IImguiDebug, ISim33ms
+	public class WaterGenerator : Generator, IImguiDebug, ISim33ms, IGameObjectEffectDescriptor, ISingleSliderControl, ISliderControl
 	{
-		private static float FLOW_MULTIPLIER = 400_000f;
+		private static float FLOW_MULTIPLIER = 40f;
 		private HandleVector<int>.Handle accumulator = HandleVector<int>.InvalidHandle;
 
 		[MyCmpReq] private KSelectable kSelectable;
 		[MyCmpReq] private KBatchedAnimController kbac;
+		[MyCmpGet] private ManualDeliveryKG delivery;
 
+		[SerializeField] public float windDownSpeed = 0.01f;
+		[SerializeField] public Storage storage;
+		[SerializeField] public EnergyGenerator.Formula formula;
+
+		private float batteryRefillPercent = 0.5f;
 		private float _power01;
 		private bool _animDirty;
-		private int _lastFanState;
 		private Guid statusHandle;
 
 		private AttributeModifier modifier = new AttributeModifier(Db.Get().Attributes.GeneratorOutput.Id, -100f, "modifier");
@@ -27,7 +31,6 @@ namespace Beached.Content.Scripts.Buildings
 		public WaterGenerator()
 		{
 			_forceOverrideFlow = -1f;
-			_lastFanState = -1;
 			_animDirty = true;
 		}
 
@@ -44,6 +47,40 @@ namespace Beached.Content.Scripts.Buildings
 			Game.Instance.accumulators.Remove(accumulator);
 			base.OnCleanUp();
 		}
+		public string SliderTitleKey => "STRINGS.UI.UISIDESCREENS.MANUALDELIVERYGENERATORSIDESCREEN.TITLE";
+
+		public string SliderUnits => global::STRINGS.UI.UNITSUFFIXES.PERCENT;
+
+		public int SliderDecimalPlaces(int _) => 0;
+
+		public float GetSliderMin(int _) => 0.0f;
+
+		public float GetSliderMax(int _) => 100f;
+
+		public float GetSliderValue(int _) => this.batteryRefillPercent * 100f;
+
+		public void SetSliderValue(float value, int _) => this.batteryRefillPercent = value / 100f;
+
+		string ISliderControl.GetSliderTooltip(int _)
+		{
+			return string.Format(Strings.Get("STRINGS.UI.UISIDESCREENS.MANUALDELIVERYGENERATORSIDESCREEN.TOOLTIP"), delivery.RequestedItemTag.ProperName(), batteryRefillPercent * 100.0f);
+		}
+
+		public string GetSliderTooltipKey(int _) => "STRINGS.UI.UISIDESCREENS.MANUALDELIVERYGENERATORSIDESCREEN.TOOLTIP";
+
+		private bool IsConvertible(float dt)
+		{
+			foreach (var input in formula.inputs)
+			{
+				var massAvailable = storage.GetMassAvailable(input.tag);
+				var wantsToConsume = input.consumptionRate * dt;
+
+				if (massAvailable < wantsToConsume)
+					return false;
+			}
+
+			return true;
+		}
 
 		protected void OnActiveChanged(object data)
 		{
@@ -51,8 +88,29 @@ namespace Beached.Content.Scripts.Buildings
 			kSelectable.SetStatusItem(Db.Get().StatusItemCategories.Power, status_item, this);
 		}
 
+		private void UpdateAnimation()
+		{
+			if (kbac.currentAnim == "on")
+			{
+				if (_power01 > 0.99f)
+				{
+					kbac.Play("on_fast", KAnim.PlayMode.Loop);
+					return;
+				}
+			}
+			else if (_power01 < 0.99f)
+			{
+				kbac.Play("on", KAnim.PlayMode.Loop);
+				return;
+			}
+
+			kbac.Play(kbac.currentAnim, KAnim.PlayMode.Loop);
+		}
+
 		private void UpdateStatusItem()
 		{
+			/*
+
 			var statusItem = BStatusItems.waterMillWattage;
 			//	selectable.RemoveStatusItem(Db.Get().BuildingStatusItems.Wattage);
 
@@ -60,7 +118,11 @@ namespace Beached.Content.Scripts.Buildings
 				statusHandle = selectable.AddStatusItem(statusItem, this);
 			else
 				GetComponent<KSelectable>().ReplaceStatusItem(statusHandle, statusItem, this);
+			*/
 		}
+
+		private float previousFlow = 0.0f;
+		private bool wasWorkingPreviousUpdate;
 
 		public override void EnergySim200ms(float dt)
 		{
@@ -68,26 +130,74 @@ namespace Beached.Content.Scripts.Buildings
 			operational.SetFlag(wireConnectedFlag, CircuitID != ushort.MaxValue);
 
 			if (!operational.IsOperational)
-				return;
+			{
+				if (wasWorkingPreviousUpdate)
+				{
+					_power01 = 0;
+					_animDirty = true;
+					UpdateStatusItem();
 
+					wasWorkingPreviousUpdate = false;
+				}
+
+				return;
+			}
+
+
+			var batteriesOnCircuit = Game.Instance.circuitManager.GetBatteriesOnCircuit(CircuitID);
+			var sufficientlyFull = false;
+
+			foreach (var battery in batteriesOnCircuit)
+			{
+				if (batteryRefillPercent <= 0.0f && battery.PercentFull <= 0.0f)
+				{
+					sufficientlyFull = true;
+					break;
+				}
+
+				if (battery.PercentFull < batteryRefillPercent)
+				{
+					sufficientlyFull = true;
+					break;
+				}
+			}
+
+			// todo
+			//selectable.ToggleStatusItem(EnergyGenerator.batteriesSufficientlyFull, !sufficientlyFull);
+
+			if (delivery != null)
+				delivery.Pause(!sufficientlyFull, "Circuit has sufficient energy");
 
 			var cell = Grid.PosToCell(this);
 			var isInLiquid = Grid.IsSubstantialLiquid(cell);
 
 			var currentFlow = isInLiquid ? (Flow(cell) * FLOW_MULTIPLIER) : 0f;
+
 			Game.Instance.accumulators.Accumulate(accumulator, currentFlow * dt);
 
+			foreach (var input in formula.inputs)
+			{
+				var amount = input.consumptionRate * dt;
+				storage.ConsumeIgnoringDisease(input.tag, amount);
+			}
 
 			var averageFlow = Game.Instance.accumulators.GetAverageRate(accumulator);
 
-			averageFlow = Mathf.Clamp(averageFlow, 0, 1f / 3f) * 3f;
+			var flow = averageFlow;
+			averageFlow = Mathf.Max(averageFlow, previousFlow);
+
+			previousFlow = flow;
+
+			//averageFlow = Mathf.Clamp(averageFlow, 0, 1f / 3f) * 3f;
+			averageFlow = Mathf.Clamp(averageFlow, 0, 1f);
 
 			if (_forceOverrideFlow != -1)
 			{
 				averageFlow = _forceOverrideFlow;
 			}
 
-			modifier.SetValue((-1f + averageFlow) * 100f);
+			var modifierValue = (-1f + averageFlow) * 100f;
+			modifier.SetValue(modifierValue);
 
 			if (averageFlow <= 0)
 			{
@@ -106,34 +216,54 @@ namespace Beached.Content.Scripts.Buildings
 				// Mathf.Max(averageFlow * dt, dt);
 				var power = powerGenerated * dt;
 				GenerateJoules(power);
-				var power01 = Mathf.Clamp01(power / building.Def.GeneratorWattageRating);
+				var power01 = Mathf.Clamp01(powerGenerated / building.Def.GeneratorWattageRating);
+				power01 *= (1f / dt);
+
 				_animDirty = power01 != 0;
 				_power01 = power01;
 			}
 
-			this.UpdateStatusItem();
+			UpdateStatusItem();
+			wasWorkingPreviousUpdate = true;
 		}
 
 		public void Sim33ms(float dt)
 		{
 			if (_animDirty)
 			{
+				var position = kbac.GetPositionPercent();
+				position %= 1.0f;
+
 				kbac.PlaySpeedMultiplier = Mathf.Clamp01(_power01);
-				kbac.SetDirty();
-				kbac.UpdateAnim(0);
+				UpdateAnimation();
+				kbac.SetPositionPercent(position);
+
 				_animDirty = false;
 			}
 		}
 
+		public List<Descriptor> GetDescriptors(GameObject go)
+		{
+			var descriptorList = new List<Descriptor>();
+
+			if (formula.inputs == null || formula.inputs.Length == 0)
+				return descriptorList;
+
+			foreach (var input in formula.inputs)
+			{
+				var str = input.tag.ProperName();
+				var descriptor = new Descriptor();
+				descriptor.SetupDescriptor(string.Format((string)global::STRINGS.UI.BUILDINGEFFECTS.ELEMENTCONSUMED, str, GameUtil.GetFormattedMass(input.consumptionRate, GameUtil.TimeSlice.PerSecond, floatFormat: "{0:0.##}")), string.Format((string)global::STRINGS.UI.BUILDINGEFFECTS.TOOLTIPS.ELEMENTCONSUMED, str, GameUtil.GetFormattedMass(input.consumptionRate, GameUtil.TimeSlice.PerSecond, floatFormat: "{0:0.##}")), Descriptor.DescriptorType.Requirement);
+				descriptorList.Add(descriptor);
+			}
+
+			return descriptorList;
+		}
+
+
 		unsafe public float Flow(int cell)
 		{
 			return Beached_Grid.GetFlow(cell);
-
-			var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
-			var flowTexVec = vecPtr[cell];
-			var flowVec = new Vector2f(flowTexVec.X, flowTexVec.Y);
-
-			return flowVec.magnitude;
 		}
 
 		public void OnImguiDraw()
@@ -146,5 +276,6 @@ namespace Beached.Content.Scripts.Buildings
 		}
 
 		public float GetPower() => _power01;
+
 	}
 }

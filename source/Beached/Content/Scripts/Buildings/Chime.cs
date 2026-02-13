@@ -23,7 +23,7 @@ namespace Beached.Content.Scripts.Buildings
 		private static float strength = 0f;
 		public void OnImguiDraw()
 		{
-			ImGui.Text($"Chime Power: {smi.sm.ChimePower(smi.cell)}");
+			ImGui.Text($"Chime Power: {Beached_Grid.GetFlow(smi.cell)}");
 
 			if (ImGui.DragFloat("Chime", ref strength, 0.01f, 0f, 1f))
 			{
@@ -133,7 +133,7 @@ namespace Beached.Content.Scripts.Buildings
 
 			private void UpdateFlow(StatesInstance smi, float _)
 			{
-				var flow = ChimePower(smi.cell);
+				var flow = Beached_Grid.GetFlow(smi.cell);
 
 				Log.Debug("updating gas flow: " + flow);
 				switch (flow)
@@ -154,16 +154,6 @@ namespace Beached.Content.Scripts.Buildings
 
 				smi.flow = flow;
 				smi.master.flowTest = flow;
-			}
-
-			// credit: Asquared
-			unsafe public float ChimePower(int cell)
-			{
-				var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
-				var flowTexVec = vecPtr[cell];
-				var flowVec = new Vector2f(flowTexVec.X, flowTexVec.Y);
-
-				return flowVec.sqrMagnitude;
 			}
 
 			private bool IsOperational(StatesInstance smi, object _) => smi.operational.IsOperational;

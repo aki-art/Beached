@@ -1,6 +1,5 @@
 ﻿using Beached.Content.Overlays;
 using HarmonyLib;
-using UnityEngine;
 
 namespace Beached.Patches
 {
@@ -13,17 +12,10 @@ namespace Beached.Patches
 			{
 				__instance.overlayInfoList.Add(new OverlayLegend.OverlayInfo()
 				{
-					infoUnits =
-					[
-						new OverlayLegend.OverlayInfoUnit(
-							Assets.GetSprite("unknown"),
-							"STRINGS.UI.OVERLAYS.PIPPLANTING.DESCRIPTION",
-							Color.white,
-							Color.white)
-					],
+					infoUnits = [],
 					isProgrammaticallyPopulated = true,
-					mode = ElementInteractionsOverlayMode.ID,
-					name = "STRINGS.UI.OVERLAYS.PIPPLANTING.NAME",
+					mode = Beached_FlowOverlayMode.ID,
+					name = "Beached.STRINGS.UI.OVERLAY.BEACHED_FLOWOVERLAY.NAME",
 				});
 			}
 		}

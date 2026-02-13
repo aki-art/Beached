@@ -95,6 +95,24 @@
 			{
 				public static class FILTERLAYERS
 				{
+					public static class BEACHED_ALL
+					{
+						public static LocString NAME = "All";
+						public static LocString TOOLTIP = "Show both liquid and gas flow.";
+					}
+
+					public static class BEACHED_LIQUID
+					{
+						public static LocString NAME = "Liquids";
+						public static LocString TOOLTIP = "Show liquid flow.";
+					}
+
+					public static class BEACHED_GAS
+					{
+						public static LocString NAME = "Gases";
+						public static LocString TOOLTIP = "Show gas flow.";
+					}
+
 					public static class BEACHED_DIG
 					{
 						public static LocString NAME = "Dig";
@@ -181,12 +199,21 @@
 					public static LocString BUTTON = "Electric Conduction Overlay";
 					public static LocString TOOLTIP = "Displays the relative electrical conductivity of materials.";
 				}
+
 				public class BEACHED_GENETICOVERLAY
 				{
 					public static LocString NAME = "GENETICS OVERLAY";
 					public static LocString HOVERTITLE = "GENETICS";
 					public static LocString BUTTON = "Genetics Overlay";
 					public static LocString TOOLTIP = "Displays the Genetic modifications and DNA capacity of critters on screen.";
+				}
+
+				public class BEACHED_FLOWOVERLAY
+				{
+					public static LocString NAME = "FLOW OVERLAY";
+					public static LocString HOVERTITLE = "FLOW";
+					public static LocString BUTTON = "Flow Overlay";
+					public static LocString TOOLTIP = "Displays the kinetic energy of the tile.";
 				}
 			}
 

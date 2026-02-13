@@ -1,19 +1,29 @@
-﻿using UnityEngine;
+﻿using KSerialization;
+using UnityEngine;
 
 namespace Beached.Content.Scripts
 {
-	/// <see cref="Patches.IrrigationMonitorPatch.IrrigationMonitor_InitializeStates_Patch"/>
-	public class SelfIrrigator : StateMachineComponent<SelfIrrigator.StatesInstance>
+	public class FilterElementConsumer : StateMachineComponent<FilterElementConsumer.StatesInstance>
 	{
 		[SerializeField] public Storage targetStorage;
 		[SerializeField] public Tag targetTag;
 		[MyCmpGet] public Storage selfStorage;
 		public ElementConsumer[] elementConsumers;
 
+		[Serialize] public bool consumptionEnabled;
+
 		public override void OnSpawn()
 		{
 			elementConsumers = gameObject.GetComponents<ElementConsumer>();
 			smi.StartSM();
+
+			Toggle(consumptionEnabled);
+		}
+
+		public void Toggle(bool on)
+		{
+			smi.GoTo(on ? smi.sm.consuming : smi.sm.idle);
+			consumptionEnabled = on;
 		}
 
 		public void SetStorage(Storage storage)
@@ -28,59 +38,37 @@ namespace Beached.Content.Scripts
 			}
 		}
 
-		public class StatesInstance : GameStateMachine<States, StatesInstance, SelfIrrigator, object>.GameInstance
+		public class StatesInstance : GameStateMachine<States, StatesInstance, FilterElementConsumer, object>.GameInstance
 		{
 			public Storage storage;
-			public IrrigationMonitor.Instance irrigationMonitor;
 			public Tag targetTag;
 
-			public StatesInstance(SelfIrrigator master) : base(master)
+			public StatesInstance(FilterElementConsumer master) : base(master)
 			{
-				irrigationMonitor = gameObject.GetSMI<IrrigationMonitor.Instance>();
-
-				var def = gameObject.GetDef<IrrigationMonitor.Def>();
-
 				targetTag = master.targetTag;
-
-				foreach (var elements in def.consumedElements)
-				{
-					var element = ElementLoader.GetElement(elements.tag);
-					if (element.IsLiquid)
-					{
-						targetTag = elements.tag;
-						break;
-					}
-				}
 			}
 		}
 
-		public class States : GameStateMachine<States, StatesInstance, SelfIrrigator>
+		public class States : GameStateMachine<States, StatesInstance, FilterElementConsumer>
 		{
 			public State idle;
-			public State irrigated;
-			public State dead;
+			public State consuming;
 
 			public override void InitializeStates(out BaseState default_state)
 			{
 				default_state = idle;
 
 				idle
-					.EventHandlerTransition(GameHashes.ReceptacleMonitorChange, irrigated, (smi, dt) => IsPlanted(smi))
-					.EnterTransition(irrigated, IsPlanted)
+					.EnterTransition(consuming, IsEnabled)
 					.Enter(smi => ToggleConsumers(smi, false));
 
-				irrigated
+				consuming
 					.Enter(smi =>
 					{
 						ToggleConsumers(smi, true);
-						smi.irrigationMonitor.UpdateIrrigation(1f / 30f);
 					})
 					.ToggleStatusItem("Self Irrigating", "")
-					.Update(TransferWater, UpdateRate.SIM_1000ms)
-					.EventTransition(GameHashes.Died, dead);
-
-				dead
-					.DoNothing();
+					.Update(TransferWater, UpdateRate.SIM_1000ms);
 			}
 
 			private void TransferWater(StatesInstance smi, float _)
@@ -102,9 +90,9 @@ namespace Beached.Content.Scripts
 					smi.master.selfStorage.Transfer(water, smi.master.targetStorage, false, true);
 			}
 
-			private bool IsPlanted(StatesInstance smi)
+			private bool IsEnabled(StatesInstance smi)
 			{
-				return smi.gameObject.TryGetComponent(out ReceptacleMonitor receptacleMonitor) && receptacleMonitor.Replanted;
+				return smi.master.consumptionEnabled;
 			}
 
 			private void ToggleConsumers(StatesInstance smi, bool enabled)

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Beached.Content.Scripts.Buildings.Chime;
 using static ProcGen.SubWorld;
-using static PropertyTextures;
 
 namespace Beached
 {
@@ -24,6 +23,7 @@ namespace Beached
 
 		public float[] electricity;
 		public Color[] lightColors;
+		public static float[] flowSquaredCache;
 		public static bool[] hasClimbable;
 
 		public static Dictionary<Vector2I, ZoneType> worldgenZoneTypes;
@@ -43,6 +43,7 @@ namespace Beached
 		{
 			public static void Postfix()
 			{
+
 			}
 		}
 
@@ -61,12 +62,20 @@ namespace Beached
 			if (Game.Instance == null || Game.Instance.IsLoading())
 				return;
 
+			if (Game.Instance.IsPaused)
+				return;
+
 			// TODO: transpile in so this isnt double called
-			instance.GetVisibleCellRange(out var x0, out var y0, out var x1, out var y1);
+			PropertyTextures.instance.GetVisibleCellRange(out var x0, out var y0, out var x1, out var y1);
 
 			var texture_region = electricityBuffer.Lock(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 			UpdateElectricTexture(texture_region, x0, y0, x1, y1);
 			texture_region.Unlock();
+
+			for (var i = 0; i < Grid.CellCount; i++)
+			{
+				flowSquaredCache[i] = GetFlowSqDirectly(i);
+			}
 		}
 
 		[HarmonyPatch(typeof(PropertyTextures), "OnReset")]
@@ -128,7 +137,7 @@ namespace Beached
 			OnElectricChargeAdded?.Invoke(cell, power);
 		}
 
-		unsafe static public float GetFlowSq(int cell)
+		unsafe static public float GetFlowSqDirectly(int cell)
 		{
 			var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
 			var flowTexVec = vecPtr[cell];
@@ -137,31 +146,37 @@ namespace Beached
 			return flowVec.sqrMagnitude;
 		}
 
-		unsafe static public Vector2f GetFlowVector(int cell)
-		{
-			var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
-			var flowTexVec = vecPtr[cell];
-			var flowVec = new Vector2f(flowTexVec.X, flowTexVec.Y);
+		/*		unsafe static public Vector2f GetFlowVector(int cell)
+				{
+					var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
+					var flowTexVec = vecPtr[cell];
+					var flowVec = new Vector2f(flowTexVec.X, flowTexVec.Y);
 
-			var baseValue = flowVec;
+					var baseValue = flowVec;
 
-			if (flowOverrides.TryGetValue(cell, out var modifier))
-			{
-				baseValue.X += modifier;
-				baseValue.Y += modifier;
-			}
+					if (flowOverrides.TryGetValue(cell, out var modifier))
+					{
+						baseValue.X += modifier;
+						baseValue.Y += modifier;
+					}
 
-			return baseValue;
-		}
+					return baseValue;
+				}*/
 
 
 		unsafe static public float GetFlow(int cell)
 		{
-			var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
-			var flowTexVec = vecPtr[cell];
-			var flowVec = new Vector2f(flowTexVec.X, flowTexVec.Y);
+			/*			var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
+						var flowTexVec = vecPtr[cell];
+						var flowVec = new Vector2f(flowTexVec.X, flowTexVec.Y);
 
-			var baseValue = flowVec.magnitude;
+						var baseValue = flowVec.magnitude;*/
+
+			if (flowSquaredCache == null)
+				return 0;
+
+			var value = flowSquaredCache[cell];
+			var baseValue = Mathf.Sqrt(value);
 
 			if (flowOverrides.TryGetValue(cell, out var modifier))
 				baseValue += modifier;
@@ -174,6 +189,8 @@ namespace Beached
 		public override void OnSpawn()
 		{
 			electricity = new float[Grid.CellCount];
+			flowSquaredCache = new float[Grid.CellCount];
+
 			flowOverrides = [];
 
 			if (worldgenZoneTypes != null)

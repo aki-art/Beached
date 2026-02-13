@@ -5,6 +5,8 @@ namespace Beached.Content.ModDb
 {
 	public class BTechItems
 	{
+		public const string FLOW_OVERLAY_TECH = "Beached_FlowOverlayTech";
+
 		public static void OnInit(TechItems techItems)
 		{
 			techItems.AddTechItem(
@@ -21,6 +23,15 @@ namespace Beached.Content.ModDb
 				STRINGS.RESEARCH.TECHITEMS.BEACHED_RUBBER.NAME,
 				STRINGS.RESEARCH.TECHITEMS.BEACHED_RUBBER.DESC,
 				techItems.GetPrefabSpriteFnBuilder(Elements.rubber.CreateTag()),
+				null,
+				null,
+				false);
+
+			techItems.AddTechItem(
+				FLOW_OVERLAY_TECH,
+				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_RUBBERBOOTS.NAME,
+				STRINGS.EQUIPMENT.PREFABS.BEACHED_EQUIPMENT_RUBBERBOOTS.DESCRIPTION,
+				techItems.GetSpriteFnBuilder("overlay_beached_flow"),
 				null,
 				null,
 				false);

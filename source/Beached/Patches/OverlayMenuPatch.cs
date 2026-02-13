@@ -1,4 +1,5 @@
-﻿using Beached.Content.Overlays;
+﻿using Beached.Content.ModDb;
+using Beached.Content.Overlays;
 using HarmonyLib;
 using System.Collections.Generic;
 
@@ -22,19 +23,16 @@ namespace Beached.Patches
 
 				___overlayToggleInfos.Add(menu);
 
-				if (Mod.debugMode)
-				{
-					var debugMenu = new OverlayMenu.OverlayToggleInfo(
-						"Chunks",
-						"icon_errand_research",
-						ElementInteractionsOverlayMode.ID,
-						"",
-						Action.NumActions,
-						"Debug mode"
-					);
+				var debugMenu = new OverlayMenu.OverlayToggleInfo(
+					$"<b>{STRINGS.UI.OVERLAY.BEACHED_FLOWOVERLAY.BUTTON}</b>",
+					"overlay_beached_flow",
+					Beached_FlowOverlayMode.ID,
+					BTechItems.FLOW_OVERLAY_TECH,
+					Action.NumActions,
+					STRINGS.UI.OVERLAY.BEACHED_FLOWOVERLAY.TOOLTIP
+				);
 
-					___overlayToggleInfos.Add(debugMenu);
-				}
+				___overlayToggleInfos.Add(debugMenu);
 			}
 		}
 	}

@@ -14,8 +14,8 @@ namespace Beached.Patches
 				if (!___overlayBitfieldMap.ContainsKey(ConductionOverlayMode.ID))
 					___overlayBitfieldMap.Add(ConductionOverlayMode.ID, StatusItem.StatusItemOverlays.None);
 
-				if (!___overlayBitfieldMap.ContainsKey(ElementInteractionsOverlayMode.ID))
-					___overlayBitfieldMap.Add(ElementInteractionsOverlayMode.ID, StatusItem.StatusItemOverlays.None);
+				if (!___overlayBitfieldMap.ContainsKey(Beached_FlowOverlayMode.ID))
+					___overlayBitfieldMap.Add(Beached_FlowOverlayMode.ID, StatusItem.StatusItemOverlays.None);
 			}
 		}
 	}

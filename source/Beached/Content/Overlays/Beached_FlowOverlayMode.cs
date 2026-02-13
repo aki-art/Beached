@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using static Beached.Content.Scripts.Buildings.Chime;
 
 namespace Beached.Content.Overlays
 {
-	public class ElementInteractionsOverlayMode : OverlayModes.Mode
+	public class Beached_FlowOverlayMode : OverlayModes.Mode
 	{
 		[Tooltip("the game scrapes ID by reflection in devtools, do not change type or name")]
-		public static readonly HashedString ID = "Beached_ElementInteractionsOverlay";
+		public static readonly HashedString ID = nameof(Beached_FlowOverlayMode).Replace("Mode", "");
 
 		// todo: pin overlay to overlays menu
 
@@ -19,7 +18,7 @@ namespace Beached.Content.Overlays
 			//var color = ElementInteractions.simActiveChunks.Contains(chunkIdx) ? Color.green : Color.red;
 			//Color.Lerp(Color.black, color, Mathf.Max(0.1f, chunkIdx % 4 / 4f));
 
-			var flow = Beached_Grid.GetFlowVector(cell) * flowMult;
+			var flow = Beached_Grid.GetFlow(cell) * flowMult;
 
 			var isGas = Grid.IsGas(cell);
 
@@ -29,12 +28,11 @@ namespace Beached.Content.Overlays
 			if (!isGas && !showLiquids && !showAll)
 				return Color.black;
 
-			var targetColor = isGas ? Color.magenta : Color.green;
+			var targetColor = isGas ? ModAssets.Colors.liquidOverlayBlue : ModAssets.Colors.gasOverlayPurple;
 
-			var x = Color.Lerp(Color.black, Color.red, Mathf.Abs(flow.x));
-			var y = Color.Lerp(Color.black, Color.green, Mathf.Abs(flow.y));
+			var x = Color.Lerp(Color.black, targetColor, Mathf.Abs(flow));
 
-			return x + y;
+			return x;
 			//return Color.Lerp(Color.black, x + _y, flow.magnitude);
 		}
 
@@ -42,18 +40,23 @@ namespace Beached.Content.Overlays
 		private static bool showGases;
 		private static bool showLiquids;
 
-		public ElementInteractionsOverlayMode()
+		public Beached_FlowOverlayMode()
 		{
 			legendFilters = CreateDefaultFilters();
 		}
+
+		public const string
+			ALL = "BEACHED_ALL",
+			GAS = "BEACHED_GAS",
+			LIQUID = "BEACHED_LIQUID";
 
 		public override Dictionary<string, ToolParameterMenu.ToggleState> CreateDefaultFilters()
 		{
 			var filters = new Dictionary<string, ToolParameterMenu.ToggleState>
 			{
-				{ "All", ToolParameterMenu.ToggleState.On },
-				{ "Gas", ToolParameterMenu.ToggleState.On },
-				{ "Liquids", ToolParameterMenu.ToggleState.On }
+				{ ALL, ToolParameterMenu.ToggleState.On },
+				{ GAS, ToolParameterMenu.ToggleState.On },
+				{ LIQUID, ToolParameterMenu.ToggleState.On }
 			};
 
 			return filters;
@@ -61,25 +64,17 @@ namespace Beached.Content.Overlays
 
 		public override void OnFiltersChanged()
 		{
-			showAll = InFilter("All", legendFilters);
-			showGases = InFilter("Gas", legendFilters);
-			showLiquids = InFilter("Liquids", legendFilters);
+			showAll = InFilter(ALL, legendFilters);
+			showGases = InFilter(GAS, legendFilters);
+			showLiquids = InFilter(LIQUID, legendFilters);
 		}
 
 		public override List<LegendEntry> GetCustomLegendData()
 		{
 			return [
-				new LegendEntry("Flow", "", Color.gray),
-				new LegendEntry("Gas Flow", "", Color.magenta),
-				new LegendEntry("Liquid Flow", "", Color.green)
+				new LegendEntry("Gas Flow", "", ModAssets.Colors.gasOverlayPurple),
+				new LegendEntry("Liquid Flow", "",  ModAssets.Colors.liquidOverlayBlue)
 				];
-		}
-
-		unsafe static public Vector2f Flow(int cell)
-		{
-			var vecPtr = (FlowTexVec2*)PropertyTextures.externalFlowTex;
-			var flowTexVec = vecPtr[cell];
-			return new Vector2f(flowTexVec.X, flowTexVec.Y);
 		}
 
 		public override string GetSoundName() => "Decor";

@@ -11,7 +11,7 @@ namespace Beached.Patches
 			public static void Postfix()
 			{
 				OverlayScreen.Instance.RegisterMode(new ConductionOverlayMode());
-				OverlayScreen.Instance.RegisterMode(new ElementInteractionsOverlayMode());
+				OverlayScreen.Instance.RegisterMode(new Beached_FlowOverlayMode());
 			}
 		}
 	}

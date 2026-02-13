@@ -24,10 +24,13 @@ namespace Beached.ModDevTools
 		private static Vector4 previousZoneTypeColor;
 		private static int selectedZoneType;
 		private static string audioFile = "";
+		private static string targetElement = "SandStone";
 		private static Dictionary<string, ShaderPropertyInfo> liquidShaderProperties;
 		private static Material mat;
 		public static bool renderLiquidTexture;
 		private static float uvScale = 10f;
+
+		private static Vector4 gasOverlay, liquidOverlay;
 
 		private string[] zoneTypes;
 		private EventInstance instance;
@@ -92,8 +95,11 @@ namespace Beached.ModDevTools
 
 		public override void RenderTo(DevPanel panel)
 		{
-			ImGui.DragFloat("Flow Multipler", ref ElementInteractionsOverlayMode.flowMult, 1f, 1f, 2000f);
+			ImGui.DragFloat("Flow Multipler", ref Beached_FlowOverlayMode.flowMult, 1f, 1f, 2000f);
 
+			if (ImGui.CollapsingHeader("Overlay colors"))
+			{
+			}
 			if (ImGui.CollapsingHeader("Mirrors"))
 			{
 				foreach (var info in Game.Instance.roomProber.cavityInfos)
@@ -190,6 +196,24 @@ namespace Beached.ModDevTools
 				var materials = World.Instance.groundRenderer.elementMaterials[Elements.permaFrost];
 				materials.opaque.SetFloat("_WorldUVScale", uvScale);
 				materials.alpha.SetFloat("_WorldUVScale", uvScale);
+			}
+
+			if (ImGui.InputText("Element", ref targetElement, 255))
+			{
+
+			}
+
+			if (ImGui.DragFloat("UV Scale", ref uvScale))
+			{
+				var element = ElementLoader.GetElement(targetElement);
+				if (element != null)
+				{
+					//ElementLoader.GetElement(Elements.permaFrost.Tag).substance.material.SetFloat("_WorldUVScale", uvScale);
+					var materials = World.Instance.groundRenderer.elementMaterials[element.id];
+					materials.opaque.SetFloat("_WorldUVScale", uvScale);
+					materials.alpha.SetFloat("_WorldUVScale", uvScale);
+				}
+
 			}
 
 			if (ImGui.CollapsingHeader("Asteroid Field Settings"))

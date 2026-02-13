@@ -32,7 +32,7 @@ namespace Beached.Content.Defs.Buildings
 				NOISE_POLLUTION.NOISY.TIER2);
 
 			def.PermittedRotations = PermittedRotations.FlipH;
-			def.ViewMode = ElementInteractionsOverlayMode.ID;
+			def.ViewMode = Beached_FlowOverlayMode.ID;
 
 			return def;
 		}

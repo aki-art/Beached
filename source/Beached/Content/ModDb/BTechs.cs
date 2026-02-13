@@ -25,7 +25,8 @@ namespace Beached.Content.ModDb
 					HYDRO_ELECTRONICS,
 					[
 						WaterGeneratorConfig.ID,
-						ChimeConfig.ID
+						ChimeConfig.ID,
+						BTechItems.FLOW_OVERLAY_TECH
 					],
 					techs)
 			{
