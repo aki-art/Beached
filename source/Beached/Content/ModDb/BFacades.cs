@@ -10,6 +10,12 @@ namespace Beached.Content.ModDb
 
 		public static HashSet<string> myFacades = new();
 
+		public class HEADQUARTERS
+		{
+			public const string
+				BEACHED_HEADQUARTERS_SKIN_CORAL = "beached_headquarters_skin_coral";
+		}
+
 		public class SUB_CATEGORIES
 		{
 			public const string
@@ -111,6 +117,8 @@ namespace Beached.Content.ModDb
 			{
 				AddFacade(resource, ExteriorWallConfig.ID, wall, $"{wall}_kanim");
 			}
+
+			AddFacade(resource, HeadquartersConfig.ID, HEADQUARTERS.BEACHED_HEADQUARTERS_SKIN_CORAL, "beached_hqbase_coral_kanim");
 		}
 
 		private static List<string> GetOrCreateSubCategory(string subCategory, string mainCategory, Sprite icon)
@@ -142,7 +150,6 @@ namespace Beached.Content.ModDb
 				buildingId,
 				anim);
 
-			Log.Debug($"adding facade {id}");
 			myFacades.Add(id);
 		}
 
