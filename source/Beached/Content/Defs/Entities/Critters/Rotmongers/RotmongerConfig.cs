@@ -34,8 +34,7 @@ namespace Beached.Content.Defs.Entities.Critters.Rotmongers
 				.Size(1, 1)
 				.Tag(GameTags.OriginalCreature)
 				.Egg(BabyRotmongerConfig.ID, "beached_egg_slagmite_kanim")
-					.Fertility(10f)
-					.Incubation(1)
+					.StandardFertility(50f)
 					.Mass(1f)
 					.EggChance(EGG_ID, 1f)
 					.Done();

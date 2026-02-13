@@ -152,6 +152,15 @@ namespace Beached.Content.ModDb
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
 
+			RecipeBuilder.Create(ApothecaryConfig.ID, STRINGS.ITEMS.PILLS.BEACHED_GUMMYPIPS.RECIPEDESC, 100f)
+				.Input(JellyConfig.ID, 0.25f)
+				.Input(BTags.Groups.berryJuices, 0.5f)
+				.Input(BasicBoosterConfig.ID, 1f)
+				.Output(GummyPipsConfig.ID, 1f, ComplexRecipe.RecipeElement.TemperatureOperation.AverageTemperature)
+				.SortOrder(11)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
 		}
 
 		private static void BoneToCalcium()
@@ -194,7 +203,7 @@ namespace Beached.Content.ModDb
 
 			RecipeBuilder.Create(GourmetCookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_BERRYJELLY.DESC, TIME_STANDARD)
 				.Input(BTags.Groups.jellies, 1f)
-				.Input(BTags.Groups.berries, 1f)
+				.Input(BTags.Groups.berryJuices, 1f)
 				.Output(BerryJellyConfig.ID, 1f)
 				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 				.Build();
@@ -256,6 +265,21 @@ namespace Beached.Content.ModDb
 					.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
 					.Build();
 			}
+
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_KIBBLE.DESC, TIME_STANDARD * 2.0f)
+				.Input(BTags.Groups.meats, 5f)
+				.Input(BTags.Groups.grains, 5f)
+				.Output(KibbleConfig.ID, 15f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
+
+			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_DBANDJ.DESC, TIME_STANDARD)
+				.Input(DewPalmConfig.SEED_ID, 2f)
+				.Input(JellyConfig.ID, 1f)
+				.Input(ColdWheatBreadConfig.ID, 1f)
+				.Output(DBAndJConfig.ID, 1f)
+				.NameDisplay(ComplexRecipe.RecipeNameDisplay.Result)
+				.Build();
 
 			RecipeBuilder.Create(CookingStationConfig.ID, STRINGS.ITEMS.FOOD.BEACHED_GLAZEDDEWNUT.DESC, TIME_STANDARD)
 				.Input(DewPalmConfig.SEED_ID, 3f)

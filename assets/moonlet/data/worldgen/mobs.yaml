@@ -81,6 +81,36 @@ MobLookupTable:
       width: 1
       height: 1
 
+    Beached_Rot_RotMongler:
+      prefabName: Beached_Rotmonger
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.1
+        max: 0.3
+      width: 2
+      height: 1
+
+    Beached_Rot_Boneworm:
+      prefabName: Beached_Boneworm
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.05
+        max: 0.3
+      width: 1
+      height: 1
+
+    FossilBitsSmall:
+      prefabName: FossilBitsSmall
+      location: Floor
+      selectMethod: Centroid
+      density:
+        min: 0.02
+        max: 0.1
+      width: 1
+      height: 2
+
     Beached_Seas_TropicalPacu:
       prefabName: PacuTropical
       location: Water

@@ -540,6 +540,15 @@ namespace Beached.Content.DefBuilders
 			private List<FertilityMonitor.BreedingChance> breedingChances = [];
 			private readonly CritterBuilder parent = parent;
 
+			public BabyCritterBuilder StandardFertility(float maxAge)
+			{
+				fertilityCycles = Mathf.Max(1.0f, Mathf.Round(maxAge * (3f / 5f)));
+				incubationCycles = Mathf.Max(1.0f, Mathf.Round(maxAge / 5f));
+
+				return this;
+			}
+
+
 			public BabyCritterBuilder Fertility(float cycles)
 			{
 				fertilityCycles = cycles;

@@ -29,6 +29,7 @@ namespace Beached.Content.Scripts
 
 		[Serialize] public int tallestBambooGrown;
 		[Serialize] public bool rareJewelleryObjectiveComplete;
+		[Serialize] public bool hasAtLeastOnceMealwoodGlacier;
 
 		private Gradient overlayGradient;
 

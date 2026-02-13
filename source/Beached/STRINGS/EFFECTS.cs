@@ -42,6 +42,12 @@ namespace Beached
 				public static LocString DESC = $"This Duplicant's allergic reactions have been suppressed by medication";
 			}
 
+			public class BEACHED_GUMMYPIPSBUFF
+			{
+				public static LocString NAME = "Vitamin Boosted";
+				public static LocString DESC = $"This Duplicant has had a fill of extra vitamins and feels extra healthy.";
+			}
+
 			public class BEACHED_DAMP_PLANTGROWTHBOOST
 			{
 				public static LocString NAME = "Damp Environment";

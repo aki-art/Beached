@@ -15,6 +15,18 @@ namespace Beached.Content
 				Elements.gnawBerryJuice.CreateTag(),
 				Elements.gristleBerryJuice.CreateTag()];
 
+			public static Tag[] meats = [
+			MeatConfig.ID,
+				CookedMeatConfig.ID,
+				FishMeatConfig.ID,
+				SmokedFishConfig.ID,
+				RawSnailConfig.ID,
+				SmokedSnailConfig.ID,
+				DinosaurMeatConfig.ID,
+				SmokedDinosaurMeatConfig.ID,
+				PrehistoricPacuFilletConfig.ID,
+				SmokedFish.ID];
+
 			public static Tag[] berries = [
 				PrickleFruitConfig.ID,
 				HardSkinBerryConfig.ID,

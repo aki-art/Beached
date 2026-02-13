@@ -40,6 +40,7 @@
 			THALASSOPHILE_BONUS = "Beached_ThalassophileBonus",
 			UNSAVORY_MEAL = "Beached_Unsavory_Meal",
 			SUPER_ALLERGY_MED = "Beached_SuperAllergeMed",
+			GUMMY_PIPS_BUFF = "Beached_GummyPipsBuff",
 			MEAT_PLATTER = "Beached_MeatPlatterEffect",
 			WISHING_STAR = "Beached_WishingStar"; // applied when they see shooting stars
 
@@ -86,6 +87,12 @@
 
 			new EffectBuilder(SUPER_ALLERGY_MED, CONSTS.CYCLE_LENGTH * 7f, false)
 				.HideInUI()
+				.Add(set);
+
+			new EffectBuilder(GUMMY_PIPS_BUFF, CONSTS.CYCLE_LENGTH, false)
+				.Modifier(athletics, 2, false)
+				.Modifier(Db.Get().Attributes.Immunity.Id, 0.5f, true)
+				.Modifier(Db.Get().Attributes.GermResistance.Id, 2f, false)
 				.Add(set);
 
 			new EffectBuilder(SANDBOX, 2370, false)

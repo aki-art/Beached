@@ -4,9 +4,10 @@ elements:
     descriptionText: ...
     color: d9c396
     uiColor: 453e30
+    textureUVScale: 6
     modifiers:
       - id: Decor
-        value: 10%
+        value: 30%
         isMultiplier: true
     audio:
       copyElement: Granite
@@ -29,6 +30,7 @@ elements:
     materialCategory: BuildableRaw
     tags:
     - Plumbable
+    - Crushable
     - BuildableAny
     buildMenuSort: 4
     state: Solid

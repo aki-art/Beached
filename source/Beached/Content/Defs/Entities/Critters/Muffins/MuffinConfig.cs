@@ -2,7 +2,7 @@
 using Beached.Content.Defs.Foods;
 using Beached.Content.Scripts.Entities;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.Defs.Entities.Critters.Muffins
@@ -49,27 +49,18 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 
 		private static Diet ConfigureDiet(GameObject prefab)
 		{
-			HashSet<Tag> meats = [
-				MeatConfig.ID,
-				CookedMeatConfig.ID,
-				FishMeatConfig.ID,
-				SmokedFishConfig.ID,
-				RawSnailConfig.ID,
-				SmokedSnailConfig.ID
-			];
-
-			if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
-			{
-				meats.Add(DinosaurMeatConfig.ID);
-				meats.Add(SmokedDinosaurMeatConfig.ID);
-				meats.Add(PrehistoricPacuFilletConfig.ID);
-				meats.Add(SmokedFish.ID);
-			}
+			var meats = BTags.Groups.meats.Where(tag => Assets.GetPrefab(tag) != null).ToHashSet();
 
 			var diet = new Diet(
+				// meats
 				new Diet.Info(
 					meats,
 					Elements.bone.CreateTag(),
+					400_000f),
+				//kibbles
+				new Diet.Info(
+					[KibbleConfig.ID],
+					null,
 					400_000f),
 				new Diet.Info(
 					[RawEggConfig.ID, CookedEggConfig.ID, QuicheConfig.ID],

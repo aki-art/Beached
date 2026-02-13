@@ -1,4 +1,5 @@
 ﻿using KSerialization;
+using System.Linq;
 using UnityEngine;
 
 namespace Beached.Content.Scripts.Entities
@@ -35,7 +36,15 @@ namespace Beached.Content.Scripts.Entities
 			meltTemperature = primaryElement.Element.highTemp - MARGIN;
 
 			if (selectedReward == Tag.Invalid)
-				selectedReward = rewards.GetRandom();
+			{
+				if (rewards.Contains(BasicSingleHarvestPlantConfig.SEED_ID) && !Beached_Mod.Instance.hasAtLeastOnceMealwoodGlacier)
+				{
+					selectedReward = BasicSingleHarvestPlantConfig.SEED_ID;
+					Beached_Mod.Instance.hasAtLeastOnceMealwoodGlacier = true;
+				}
+				else
+					selectedReward = rewards.GetRandom();
+			}
 
 			UpdateRewardDisplay();
 		}

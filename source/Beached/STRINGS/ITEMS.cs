@@ -103,6 +103,13 @@ namespace Beached
 					public static LocString DESC = "Suppresses and prevents allergic reactions.";
 					public static LocString RECIPEDESC = $"An even stronger antihistamine Duplicants can take to alleviate allergic reactions. Lasts 7 cycles.";
 				}
+
+				public class BEACHED_GUMMYPIPS
+				{
+					public static LocString NAME = Link("Gummy Pips", GummyPipsConfig.ID);
+					public static LocString DESC = "Boosts Duplicant immune system and health.";
+					public static LocString RECIPEDESC = $"A tasty gummy candy masking the flavor of a basic booster, with additional vitamins that will support a Duplican't general well being.";
+				}
 			}
 
 			public class FOOD
@@ -258,6 +265,12 @@ namespace Beached
 					public static LocString DESC = $"Soft fatty meat of an unfortunate creature. \n\nExclusively dropped by normally {Link("Meat", MeatConfig.ID)} dropping critters who have the {Link("Meaty genetic trait", "GENETICS")}.";
 				}
 
+				public class BEACHED_DBANDJ
+				{
+					public static LocString NAME = Link("DB&J Sandwich", DBAndJConfig.ID);
+					public static LocString DESC = "A layer of crunchy dewnut butter and jelly between two soft frostbun slices.";
+				}
+
 				public class BEACHED_FOULPOFF
 				{
 					public static LocString NAME = Link("Foul Poff", FoulPoffConfig.ID);
@@ -276,12 +289,6 @@ namespace Beached
 					public static LocString DESC = ".";
 				}
 
-				public class BEACHEDDEWNUT
-				{
-					public static LocString NAME = Link("Dew Nut", DewNutConfig.ID);
-					public static LocString DESC = "An oddly round seed of Dew Palms.";
-				}
-
 				public class BEACHED_SCRAMBLEDSNAILS
 				{
 					public static LocString NAME = Link("Snail Scramble", ScrambledSnailsConfig.ID);
@@ -298,6 +305,12 @@ namespace Beached
 				{
 					public static LocString NAME = Link("Dry Noodles", DryNoodlesConfig.ID);
 					public static LocString DESC = ".. they don't taste very good. Unfortunately there is no flavor packet included.";
+				}
+
+				public class BEACHED_KIBBLE
+				{
+					public static LocString NAME = Link("Kibbles", KibbleConfig.ID);
+					public static LocString DESC = "Bland and dry biscuits with an extremely long shelf life, edible by certain critters with an appetite for meat, and even by Duplicants in times of scarcity.";
 				}
 
 				public class BEACHED_GNAWICABERRY

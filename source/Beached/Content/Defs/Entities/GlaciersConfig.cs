@@ -22,7 +22,7 @@ namespace Beached.Content.Defs.Entities
 			{
 				BasicForagePlantConfig.ID,
 				BasicSingleHarvestPlantConfig.SEED_ID,
-				SquirrelConfig.EGG_ID,
+				ColdBreatherConfig.SEED_ID,
 				DatabankHelper.TAG
 			};
 

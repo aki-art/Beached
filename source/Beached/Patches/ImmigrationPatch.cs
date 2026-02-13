@@ -14,6 +14,7 @@ using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Flora.Gnawica;
 using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
+using Beached.Content.Defs.Medicines;
 using Beached.Content.ModDb;
 using Beached.Content.Scripts;
 using HarmonyLib;
@@ -60,6 +61,9 @@ namespace Beached.Patches
 				AddPackage(AstrobarConfig.ID, 3);
 				AddPackage(GlazedDewnutConfig.ID, 3);
 				AddPackage(SpaghettiConfig.ID, 3);
+
+				// meds
+				AddPackage(GummyPipsConfig.ID, 5);
 
 				// seeds
 				AddPackage(LeafletCoralConfig.SEED_ID, 2);

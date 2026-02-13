@@ -13,12 +13,27 @@ borderOverride: hardToDig
 
 biomes:
   - name: Beached:biomes/Rot/Default
+    tags:
+      - Beached:Beached_Rot_RotMongler
+      - Beached:Beached_Rot_Boneworm
+      - Beached:FossilBitsSmall
 
 tags:
   - IgnoreCaveOverride
 
 features:
   - type: Beached:features/rot/RotPocket
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
+  - type: Beached:features/rot/SimpleCave
   - type: Beached:features/rot/SimpleCave
   - type: Beached:features/rot/SimpleCave
   - type: Beached:features/rot/SimpleCave
@@ -45,6 +60,13 @@ subworldTemplateRules:
 
   - names:
       - beached/worldgen/rot/whale_skeleton
+    listRule: TrySome
+    someCount: 5
+    priority: 700
+    allowDuplicates: true
+
+  - names:
+      - beached/worldgen/rot/boneworm_cave_e
     listRule: TrySome
     someCount: 1
     priority: 700
