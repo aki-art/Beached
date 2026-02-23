@@ -53,6 +53,7 @@ namespace Beached.Patches
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, MossTerrariumConfig.ID, Utilities.OTHER_UTILITIES);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.UTILITIES, CrystalGrowerConfig.ID, Utilities.OTHER_UTILITIES);
 
+
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FURNITURE, WoodCarvingConfig.ID, Furniture.DISPALY, MarbleSculptureConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FURNITURE, SandBoxConfig.ID, Furniture.DISPALY, WoodCarvingConfig.ID);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.FURNITURE, ChimeConfig.ID, Furniture.RECREATION, FlowerVaseConfig.ID);
@@ -64,6 +65,7 @@ namespace Beached.Patches
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, GemCutterConfig.ID, Refining.ADVANCED);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, CrystalSynthetizerConfig.ID, Refining.ADVANCED);
 				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, VulcanizerConfig.ID, Refining.MATERIALS, PolymerizerConfig.ID);
+				ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.REFINING, FiltrationTileConfig.ID, Refining.MATERIALS, WaterPurifierConfig.ID);
 
 				//ModUtil.AddBuildingToPlanScreen(BUILD_CATEGORY.POWER, MediumWattageWireConfig.ID, Power.WIRES, WireRefinedConfig.ID, ModUtil.BuildingOrdering.After);
 			}

@@ -55,6 +55,7 @@
 				public static LocString BEACHED_SLAGMATERIAL = Link("Slag", "BEACHEDSLAGMATERIAL");
 				public static LocString BEACHED_ZINCMATERIAL = Link("Zinc", "BEACHEDZINCMATERIAL");
 				public static LocString BEACHED_CHIMEMATERIAL = Link("Acoustic Medium", "BEACHEDCHIMEMATERIAL");
+				public static LocString BEACHED_MINERALWOOLMATERIAL = Link("Mineral Wool", "BEACHEDMINERALWOOLMATERIAL");
 				public static LocString BEACHED_SMALLAQUARIUMSEED = "Aquarium Seed";
 				public static LocString BEACHED_ANYGOLD = "Any Gold";
 			}

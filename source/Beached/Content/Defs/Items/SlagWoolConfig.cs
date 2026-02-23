@@ -1,5 +1,6 @@
 ﻿using Klei.AI;
 using UnityEngine;
+using static Beached.Content.BTags;
 
 namespace Beached.Content.Defs.Items
 {
@@ -26,7 +27,8 @@ namespace Beached.Content.Defs.Items
 				Elements.slag,
 				[
 					GameTags.IndustrialIngredient,
-					BTags.BuildingMaterials.slag
+					BTags.BuildingMaterials.slag,
+					BuildingMaterials.mineralWool
 				]);
 
 			prefab.AddOrGet<EntitySplitter>();

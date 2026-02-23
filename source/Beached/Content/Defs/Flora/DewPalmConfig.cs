@@ -1,4 +1,5 @@
-﻿using Beached.Content.Scripts.Entities.Plant;
+﻿using Beached.Content.Scripts.Buildings;
+using Beached.Content.Scripts.Entities.Plant;
 using TUNING;
 using UnityEngine;
 
@@ -88,7 +89,7 @@ namespace Beached.Content.Defs.Flora
 				sortOrder: 3,
 				domesticatedDescription: STRINGS.CREATURES.SPECIES.BEACHED_DEWPALM.DOMESTICATEDDESC,
 				width: 0.45f,
-				height: 0.45f);
+				height: 0.33f);
 
 			var foodInfo = new EdiblesManager.FoodInfo(
 				SEED_ID,
@@ -123,6 +124,8 @@ namespace Beached.Content.Defs.Flora
 			metalStorage.storageFilters = STORAGEFILTERS.NOT_EDIBLE_SOLIDS;
 			metalStorage.capacityKg = 50;
 			metalStorage.allowItemRemoval = false;
+
+			prefab.AddOrGet<RubberTapCleanWorkable>();
 
 			var tap = prefab.AddComponent<RubberTappable>();
 			tap.trackSymbol = "bucket";

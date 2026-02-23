@@ -16,9 +16,11 @@ namespace Beached.Patches
 {
 	public class CodexEntryGenerator_ElementsPatch
 	{
-		[HarmonyPatch(typeof(CodexEntryGenerator_Elements), "GenerateMadeAndUsedContainers")]
+		//[HarmonyPatch(typeof(CodexEntryGenerator_Elements), "GenerateMadeAndUsedContainers")]
 		public class CodexEntryGenerator_Elements_GenerateMadeAndUsedContainers_Patch
 		{
+			private static HashSet<string> processedRecipes;
+
 			public static void Postfix(Tag tag, List<ContentContainer> containers)
 			{
 				if (!Beached_Mod.Instance.treasury.chances.TryGetSource(tag, out var source))
@@ -33,7 +35,138 @@ namespace Beached.Patches
 				], ContentContainer.ContentLayout.Vertical));
 
 				containers.Add(contents);
+
+				processedRecipes = [];
+
+				foreach (var container in containers)
+				{
+					if (container.content == null || container.content.Count < 2)
+						continue;
+
+					var inputs = container.content[0];
+
+					var recipePanels = new List<CodexRecipePanel>();
+
+					if (inputs is ContentContainer ingredientsContainer)
+					{
+						foreach (var content in ingredientsContainer.content)
+						{
+							if (content is CodexRecipePanel recipePanel)
+							{
+								if (recipePanel.complexRecipe != null)
+								{
+									if (recipePanel.complexRecipe.ingredients != null)
+									{
+										foreach (var ingredient in recipePanel.complexRecipe.ingredients)
+										{
+											if (ingredient.possibleMaterials != null && ingredient.possibleMaterials.Length > 1)
+											{
+												Log.Debug($"RECIPE WITH MULTI INPUT: {recipePanel.complexRecipe.id}");
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
+
+			// TEMPORARY
+			public static bool Prefix(Tag tag, List<ContentContainer> containers)
+			{
+				var recipeCache = new HashSet<string>();
+
+				var content1 = new List<ICodexWidget>();
+				var content2 = new List<ICodexWidget>();
+
+				foreach (var recipe in ComplexRecipeManager.Get().recipes)
+				{
+					if (recipeCache.Contains(recipe.results.Join(r => r.material.ToString())))
+						continue;
+
+					if (Game.IsCorrectDlcActiveForCurrentSave(recipe) && !recipe.IsAnyProductDeprecated())
+					{
+						if ((recipe.ingredients).Any(i => i.material == tag))
+							content1.Add(new CodexRecipePanel(recipe));
+
+						if ((recipe.results).Any((i => i.material == tag)))
+							content2.Add(new CodexRecipePanel(recipe, true));
+
+						recipeCache.Add(recipe.results.Join(r => r.material.ToString()));
+
+						Log.Debug("added cache: " + recipe.results.Join(r => r.material.ToString()));
+					}
+				}
+
+
+
+
+
+				// -------------------
+				List<CodexEntryGenerator_Elements.ConversionEntry> conversionEntryList1;
+				if (CodexEntryGenerator_Elements.GetElementEntryContext().usedMap.map.TryGetValue(tag, out conversionEntryList1))
+				{
+					foreach (var conversionEntry in conversionEntryList1)
+						content1.Add(new CodexConversionPanel(conversionEntry.title, conversionEntry.inSet.ToArray<ElementUsage>(), conversionEntry.outSet.ToArray<ElementUsage>(), conversionEntry.prefab, conversionEntry.aidIcon1));
+				}
+
+				List<CodexEntryGenerator_Elements.ConversionEntry> conversionEntryList2;
+				if (CodexEntryGenerator_Elements.GetElementEntryContext().madeMap.map.TryGetValue(tag, out conversionEntryList2))
+				{
+					foreach (var conversionEntry in conversionEntryList2)
+						content2.Add(new CodexConversionPanel(conversionEntry.title, conversionEntry.inSet.ToArray<ElementUsage>(), conversionEntry.outSet.ToArray<ElementUsage>(), conversionEntry.prefab, conversionEntry.aidIcon1));
+				}
+
+				var contents1 = new ContentContainer(content1, ContentContainer.ContentLayout.Vertical);
+				var contents2 = new ContentContainer(content2, ContentContainer.ContentLayout.Vertical);
+				if (content1.Count > 0)
+				{
+					containers.Add(new ContentContainer(new List<ICodexWidget>()
+				  {
+					 new CodexSpacer(),
+					 new CodexCollapsibleHeader((string) global::STRINGS.CODEX.HEADERS.ELEMENTCONSUMEDBY, contents1)
+				  }, ContentContainer.ContentLayout.Vertical));
+					containers.Add(contents1);
+				}
+
+				if (content2.Count > 0)
+				{
+					containers.Add(new ContentContainer(new List<ICodexWidget>()
+					{
+					   new CodexSpacer(),
+					   new CodexCollapsibleHeader((string)  global::STRINGS.CODEX.HEADERS.ELEMENTPRODUCEDBY, contents2)
+					}, ContentContainer.ContentLayout.Vertical));
+					containers.Add(contents2);
+				}
+
+				return false;
+			}
+			/*	public static IEnumerable<CodeInstruction> Transpiler(ILGenerator _, IEnumerable<CodeInstruction> orig)
+				{
+					var codes = orig.ToList();
+
+					var f_recipes = AccessTools.DeclaredField(typeof(ComplexRecipeManager), nameof(ComplexRecipeManager.recipes));
+
+					var index = codes.FindIndex(ci => ci.LoadsField(f_recipes));
+
+					if (index == -1)
+					{
+						Log.Warning("Could not patch CodexEntryGenerator_Elements_GenerateMadeAndUsedContainers");
+						return codes;
+					}
+
+					var m_AddNewLayers = AccessTools.DeclaredMethod(typeof(AmbienceManager_Quadrant_Ctor_Patch), nameof(AddNewLayers));
+
+					codes.InsertRange(index + 1,
+						[
+							new CodeInstruction(OpCodes.Ldarg_0),
+							new CodeInstruction(OpCodes.Call, m_AddNewLayers)
+						]);
+
+					return codes;
+				}*/
+
 		}
 
 		[HarmonyPatch(typeof(CodexEntryGenerator_Elements), "GetElementEntryContext")]

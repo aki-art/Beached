@@ -26,7 +26,7 @@ namespace Beached.Content.Defs.Entities.Critters.Muffins
 					.MaxAge(150)
 					.Stomach(MuffinTuning.KCAL_PER_CYCLE * 10, MuffinTuning.KCAL_PER_CYCLE)
 					.Done()
-				.Tag(BTags.Creatures.doNotTargetMeByCarnivores);
+				.Tags([BTags.Creatures.doNotTargetMeByCarnivores, BTags.furry]);
 		}
 
 		public override GameObject CreatePrefab(BaseCritterConfig config)

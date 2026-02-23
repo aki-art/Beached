@@ -60,7 +60,10 @@ namespace Beached.Content.Scripts.UI
 		private void InitializeScreen()
 		{
 			if (button != null)
+			{
+				transform.Find("Contents/ButtonGroupPrefab").gameObject.SetActive(false);
 				return;
+			}
 
 			transform.Find("Scroll View").gameObject.SetActive(true);
 			container = transform.Find("Scroll View/Viewport/Contents");
@@ -69,10 +72,9 @@ namespace Beached.Content.Scripts.UI
 			var buttonGroup = Instantiate(buttonGroupPrefab);
 			buttonGroup.transform.SetParent(container);
 
-			var buttonPrefab = buttonGroup.Find("ButtonPrefab").gameObject.AddOrGet<BButton>();
+			buttonGroupPrefab.gameObject.SetActive(false);
 
-
-			button = Instantiate(buttonPrefab);
+			button = buttonGroup.Find("ButtonPrefab").gameObject.AddOrGet<BButton>();
 			button.transform.SetParent(buttonGroup);
 			button.SetLabel(STRINGS.UI.BEACHED_USERMENUACTIONS.TAPPABLE.TAP);
 			button.name = "ToggleTapButton";
@@ -83,8 +85,6 @@ namespace Beached.Content.Scripts.UI
 			buttonGroup.gameObject.SetActive(true);
 			button.gameObject.SetActive(true);
 
-			buttonPrefab.gameObject.SetActive(false);
-			buttonGroupPrefab.gameObject.SetActive(false);
 
 			button.OnClick += UpdateTapOrder;
 		}

@@ -7,6 +7,7 @@ using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
 using Beached.Content.Defs.Medicines;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Beached.Content.ModDb
 {
@@ -15,6 +16,22 @@ namespace Beached.Content.ModDb
 		public static string jellyBarRecipeID;
 
 		private const float TIME_STANDARD = 40f;
+
+		public static Dictionary<HashedString, AdditionalRecipeData> recipeExtensions;
+
+
+		public class AdditionalRecipeData
+		{
+			public List<CompoundIngredient> compoundIngredients;
+
+		}
+
+		public class CompoundIngredient
+		{
+			public Tag tag;
+			public Sprite iconOverride;
+			public Sprite[] icons;
+		}
 
 		public static void AddRecipes()
 		{

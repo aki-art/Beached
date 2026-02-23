@@ -14,7 +14,10 @@ namespace Beached.Patches
 				SideScreenUtil.AddClonedSideScreen<Beached_SampleSelectorSidesScreen>("BeachedDNAInjectorSideScreen", typeof(ConfigureConsumerSideScreen));
 				SideScreenUtil.AddCustomSideScreen<Beached_SimplifiedFilterSideScreen>("BeachedSimplifiedFilterableSideScreen", Object.Instantiate(ModAssets.Prefabs.universalSidescreen));
 				SideScreenUtil.AddCustomSideScreen<Beached_CollarDispenserSidescreen>("BeachedCollarDispenserSideScreen", Object.Instantiate(ModAssets.Prefabs.universalSidescreen));
-				SideScreenUtil.AddCustomSideScreen<Beached_RubberTappableSidescreen>("BeachedRubberTappableSideScreen", Object.Instantiate(ModAssets.Prefabs.universalSidescreen));
+
+				var universal3 = Object.Instantiate(ModAssets.Prefabs.universalSidescreen);
+				universal3.name = "Beached_RubberTappableSidescreenPrefab";
+				SideScreenUtil.AddCustomSideScreen<Beached_RubberTappableSidescreen>("BeachedRubberTappableSideScreen", universal3);
 				SideScreenUtil.AddClonedSideScreen<Beached_CrystalClusterSideScreen>("BeachedCrystalClusterSideScreen", typeof(ReceptacleSideScreen), true);
 				SideScreenUtil.AddCustomSideScreen<Beached_MuffinSideScreen>("BeachedMuffinSideScreen", Object.Instantiate(ModAssets.Prefabs.muffinSideScreen));
 			}

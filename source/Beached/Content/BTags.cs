@@ -137,6 +137,10 @@ namespace Beached.Content
 			veryCorrosive = TagManager.Create("Beached_VeryCorrosive"),
 			// joy and stress reactions trigger at only 90%
 			easilyTriggers = TagManager.Create("Beached_EasilyTriggered"),
+			furry = TagManager.Create("Beached_Furry"), // for hypoallergenic dupes
+
+
+
 			// ========= Other Mods ==============================================
 			BackWalls_noBackwall = TagManager.Create("NoBackwall"),
 			MaterialColor_noPaint = TagManager.Create("NoPaint"),
@@ -216,6 +220,7 @@ namespace Beached.Content
 			public static Tag moss = TagManager.Create("Beached_MossMaterial");
 			public static Tag zinc = TagManager.Create("Beached_ZincMaterial");
 			public static Tag rubber = TagManager.Create("Beached_RubberMaterial");
+			public static Tag mineralWool = TagManager.Create("Beached_MineralWoolMaterial");
 
 		}
 
@@ -240,6 +245,7 @@ namespace Beached.Content
 		public static void OnModLoad()
 		{
 			GameTags.MaterialBuildingElements.Add(BuildingMaterials.chime);
+			GameTags.MaterialBuildingElements.Add(BuildingMaterials.mineralWool);
 
 			GameTags.MaterialCategories.Add(MaterialCategories.crystal);
 

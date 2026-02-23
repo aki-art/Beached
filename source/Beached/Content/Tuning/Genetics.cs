@@ -32,15 +32,7 @@ namespace Beached.Content.Tuning
 			},
 			{
 				RULE_FURRY,
-				go =>
-				{
-					if(go.TryGetComponent(out CreatureBrain brain))
-					{
-						return brain.species == GameTags.Creatures.Species.SquirrelSpecies; // TODO: Maki
-					}
-
-					return false;
-				}
+				go => go.HasTag(BTags.furry)
 			}
 		};
 	}

@@ -9,6 +9,7 @@ using Beached.Content.Defs.Entities.Critters.Squirrels;
 using Beached.Content.Defs.Flora;
 using Beached.Content.Defs.Foods;
 using Beached.Content.Defs.Items;
+using Beached.Content.Scripts;
 using Beached.Content.Scripts.Entities.AI;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +60,36 @@ namespace Beached.Content.Defs.Entities
 		public static void OnPostEntitiesLoaded()
 		{
 			MerpipConfig.ConfigureEggChancesToMerpip();
+
+			var critters = Assets.GetPrefabsWithTag(GameTags.Creature);
+
+			HashSet<Tag> furrySpecies = [
+				GameTags.Creatures.Species.SquirrelSpecies,
+				GameTags.Creatures.Species.DeerSpecies,
+				GameTags.Creatures.Species.BellySpecies,
+				];
+
+			HashSet<Tag> furryCritters = [
+				DreckoConfig.ID,
+				BabyDreckoConfig.ID
+				];
+
+			foreach (var critter in critters)
+			{
+				var tag = critter.PrefabID();
+
+				if (tag == MerpipConfig.ID || tag == BabyMerpipConfig.ID)
+					continue;
+
+				if (critter.TryGetComponent(out CreatureBrain brain))
+				{
+					if (furrySpecies.Contains(brain.species) || furryCritters.Contains(tag))
+					{
+						critter.AddTag(BTags.furry);
+						critter.AddOrGet<FurSource>();
+					}
+				}
+			}
 
 			if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
 			{

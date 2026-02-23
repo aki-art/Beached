@@ -20,34 +20,36 @@ namespace Beached.Content.Scripts
 		}
 
 		public override void InternalBegin()
-		{
-			KAnimControllerBase component = reactor.GetComponent<KAnimControllerBase>();
+		{/*
+			var component = reactor.GetComponent<KAnimControllerBase>();
 			component.AddAnimOverrides(Assets.GetAnim("anim_react_pip_kanim"));
 			component.Play("hug_dupe_pre");
 			component.Queue("hug_dupe_loop");
 			component.Queue("hug_dupe_pst");
 
 			component.onAnimComplete += Finish;
-			gameObject.GetSMI<AnimInterruptMonitor.Instance>().PlayAnimSequence(
-			[
-			   "hug_dupe_pre",
-			   "hug_dupe_loop",
-			   "hug_dupe_pst"
-			]);
+						gameObject.GetSMI<AnimInterruptMonitor.Instance>().PlayAnimSequence(
+						[
+						   "hug_dupe_pre",
+						   "hug_dupe_loop",
+						   "hug_dupe_pst"
+						]);*/
+
+			Finish("hug_dupe_pst");
 		}
 
 		private void Finish(HashedString anim)
 		{
-			if (!(anim == "hug_dupe_pst"))
+			if (anim != "hug_dupe_pst")
 				return;
 
 			if (reactor != null)
 			{
-				reactor.GetComponent<KAnimControllerBase>().onAnimComplete -= Finish;
+				//reactor.GetComponent<KAnimControllerBase>().onAnimComplete -= Finish;
 				ApplyAllergy();
 			}
 			else
-				DebugUtil.DevLogError("HugMinionReactable finishing without adding a Hugged effect.");
+				Log.Warning("Could not do Fur Allergy reaction");
 
 			End();
 		}
@@ -56,7 +58,8 @@ namespace Beached.Content.Scripts
 		{
 			var sourceStr = STRINGS.DUPLICANTS.DISEASES.BEACHED_FUR_ALLERGY.SOURCE.Replace("{Critter}", gameObject.GetProperName());
 			reactor
-				.GetComponent<Sicknesses>()
+				.GetComponent<MinionModifiers>()
+				.sicknesses
 				.Infect(new SicknessExposureInfo(Db.Get().Sicknesses.Allergies.Id, sourceStr));
 		}
 
@@ -64,8 +67,9 @@ namespace Beached.Content.Scripts
 		  GameObject newReactor,
 		  Navigator.ActiveTransition transition)
 		{
-			if (reactor != null)
-				return false;
+			//if (reactor != null)
+			//	return false;
+
 			return
 				newReactor.HasTag(BTags.furAllergic)
 				&& newReactor.TryGetComponent(out Effects effects) && !effects.HasEffect(CONSTS.DUPLICANTS.HISTAMINE_SUPPRESSION)

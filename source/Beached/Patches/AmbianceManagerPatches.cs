@@ -67,6 +67,7 @@ namespace Beached.Patches
 
 				return codes;
 			}
+
 			[HarmonyPatch(typeof(CodexEntryGenerator), "GenerateBiomeEntries")]
 			public class CodexEntryGenerator_GenerateBiomeEntries_Patch
 			{

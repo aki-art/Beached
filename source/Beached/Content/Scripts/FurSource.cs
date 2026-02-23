@@ -14,7 +14,7 @@ namespace Beached.Content.Scripts
 			SquirrelHugConfig.ID
 		];
 
-		public bool CanTriggerReaction() => GetComponent<Traits>().HasTrait(BCritterTraits.HYPOALLERGENIC);
+		public bool CanTriggerReaction() => !GetComponent<Traits>().HasTrait(BCritterTraits.HYPOALLERGENIC);
 
 		public override void OnSpawn()
 		{

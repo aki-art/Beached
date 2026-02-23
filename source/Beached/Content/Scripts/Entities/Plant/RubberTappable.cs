@@ -1,4 +1,5 @@
 ﻿using Beached.Content.ModDb;
+using Beached.Content.Scripts.Buildings;
 using KSerialization;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace Beached.Content.Scripts.Entities.Plant
 {
 	public class RubberTappable : StateMachineComponent<RubberTappable.StatesInstance>
 	{
+		[MyCmpReq] private RubberTapCleanWorkable workable;
+
 		[SerializeField] public string trackSymbol;
 		[SerializeField] public float materialPerCycle;
 		[SerializeField] public Storage materialStorage;
@@ -14,6 +17,9 @@ namespace Beached.Content.Scripts.Entities.Plant
 
 		[Serialize] public bool isTapped;
 		[Serialize] public bool tapOrdered;
+
+		public Chore cleanChore;
+		private Vector3 emitOffset = Vector3.up;
 
 		public string SidescreenButtonText
 		{
@@ -71,6 +77,41 @@ namespace Beached.Content.Scripts.Entities.Plant
 			smi.GoTo(smi.sm.notTapped);
 		}
 
+		private void OnCleanComplete(Chore chore)
+		{
+			if (materialStorage == null)
+				return;
+
+			materialStorage.DropAll(emitOffset, true);
+
+			//base.master.meter.SetPositionPercent((float)base.master.FlushesUsed / (float)base.master.maxFlushes);
+		}
+
+		public void CancelCleanChore()
+		{
+			if (cleanChore != null)
+			{
+				cleanChore.Cancel("Cancelled");
+				cleanChore = null;
+			}
+		}
+
+		public void CreateCleanChore()
+		{
+			if (cleanChore != null)
+				cleanChore.Cancel("dupe");
+
+			cleanChore = new WorkChore<RubberTapCleanWorkable>(
+				Db.Get().ChoreTypes.EmptyStorage,
+				workable,
+				null,
+				true,
+				OnCleanComplete,
+				only_when_operational: false,
+				override_anims: workable.overrideAnims[0],
+				ignore_building_assignment: true);
+		}
+
 		public override void OnSpawn()
 		{
 			smi.StartSM();
@@ -78,7 +119,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 			if (tapOrdered)
 				smi.GoTo(smi.sm.tapOrdered);
 			else if (isTapped)
-				smi.GoTo(smi.sm.growing);
+				smi.GoTo(smi.sm.collecting);
 
 			Trigger(ModHashes.sidesSreenRefresh);
 		}
@@ -129,7 +170,7 @@ namespace Beached.Content.Scripts.Entities.Plant
 				gameObject.SetActive(false);
 
 				var column = (Vector3)kbac
-					.GetSymbolTransform(trackSymbol, out bool _)
+					.GetSymbolTransform(trackSymbol, out var _)
 					.GetColumn(3) with
 				{
 					z = Grid.GetLayerZ(Grid.SceneLayer.BuildingFront)
@@ -200,7 +241,15 @@ namespace Beached.Content.Scripts.Entities.Plant
 				collecting.full
 					.EventHandlerTransition(GameHashes.OnStorageChange, collecting.running, (smi, _) => !smi.latexStorage.IsFull())
 					// todo: toggle clear chore
-					.ToggleStatusItem(BStatusItems.collectingRubberFull);
+					.ToggleStatusItem(
+						name: "Needs emptying",
+						tooltip: "tooltip",
+						icon: "status_item_need_supply_out",
+						icon_type: StatusItem.IconType.Custom,
+						notification_type: NotificationType.BadMinor)
+					.Enter(smi => smi.master.CreateCleanChore())
+					.ToggleStatusItem(BStatusItems.collectingRubberFull)
+					.Exit(smi => smi.master.CancelCleanChore());
 
 				untapping
 					.TriggerOnEnter(ModHashes.sidesSreenRefresh)

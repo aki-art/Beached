@@ -1,5 +1,6 @@
 ﻿using Beached.Content;
 using Beached.Content.Defs.Buildings;
+using Beached.Content.Defs.Entities.Critters.SlickShells;
 using FUtility.FLocalization;
 using KLEISTRINGS = STRINGS;
 
@@ -232,6 +233,13 @@ namespace Beached
 					public static LocString NAME = Link("DNA Injector", DNAInjectorConfig.ID);
 					public static LocString DESC = "The Power to alter Nature.";
 					public static LocString EFFECTS = "Allows administering DNA samples to Eggs or Critters, applying traits to newborn critters.";
+				}
+
+				public class BEACHED_FILTRATIONTILE
+				{
+					public static LocString NAME = Link("Filtration Tile", FiltrationTileConfig.ID);
+					public static LocString DESC = $"Filters various liquids. Critters can directly eat the gunk build up and keep it clean.";
+					public static LocString EFFECTS = $"Passively sieves liquids to remove contaminants such as dirt or salt, storing the debris, which must be periodically cleaned by a Duplicant or a Critter like {Link("Pokeshells", CrabConfig.ID)} or {Link("Slickshells", SlickShellConfig.ID)}.";
 				}
 
 				public class BEACHED_INTERPLANETARYPOWEROUTLET
